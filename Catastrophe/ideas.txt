@@ -1,0 +1,14 @@
+Catastrophe
+
+The view of the game is similar to pokemon. (Birds eye view)
+
+Set in the future. There are robots and laser weapons (possibly aliens)
+
+Make money doing missions for people.
+Missions include
+    Killing people
+    Stealing things
+
+Use money to buy guns, ammo and gadgets
+
+There is an underlying story to the missions. (Possibly a catastrophe)
