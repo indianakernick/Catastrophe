@@ -12,7 +12,7 @@
 #include <Simpleton/Event/event.hpp>
 #include <Simpleton/Math/dir.hpp>
 
-class PlayerMoveEvent final : public Game::StaticEvent<PlayerMoveEvent> {
+class PlayerMoveEvent final : public Game::EventImpl<PlayerMoveEvent> {
 public:
   explicit PlayerMoveEvent(Math::Dir);
   

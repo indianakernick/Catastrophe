@@ -9,22 +9,21 @@
 #include "app impl.hpp"
 
 #include "constants.hpp"
+#include <Simpleton/Platform/system info.hpp>
 #include <Simpleton/Event/manager.hpp>
-#include "player input component.hpp"
-#include "handle input.hpp"
-#include <iostream>
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
   evtMan = std::make_unique<Game::EventManager>();
-  actor.addComponent(std::make_shared<PlayerInputComponent>());
-  actor.initComponents();
+  view.init(renderer.get(), Platform::getResDir() + SPRITE_SHEET_PATH);
+  logic.init();
   
   return true;
 }
 
 void AppImpl::quit() {
-  actor.quitComponents();
+  logic.quit();
+  view.quit();
   evtMan.reset();
   SDLApp::quitWindow();
 }
@@ -35,21 +34,20 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      handleGameInput(e);
+      logic.handleInput(e);
     }
   }
+  evtMan->update();
   return true;
 }
 
 bool AppImpl::update(const uint64_t delta) {
+  logic.update(delta);
+  
   evtMan->update();
-  actor.updateComponents(delta);
-  
-  std::cout << "Player position is " << actor.pos.x << ", " << actor.pos.y << '\n';
-  
   return true;
 }
 
-void AppImpl::render(uint64_t) {
-  
+void AppImpl::render(const uint64_t delta) {
+  view.render(delta);
 }

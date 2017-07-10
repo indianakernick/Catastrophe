@@ -17,4 +17,6 @@ const Platform::Window::Desc WINDOW_DESC = {
   true
 };
 
+const std::string SPRITE_SHEET_PATH = "sprites";
+
 #endif
