@@ -7,3 +7,11 @@
 //
 
 #include "input component.hpp"
+
+void InputComponent::setMoveSpeed(const float newMoveSpeed) {
+  moveSpeed = newMoveSpeed;
+}
+
+float InputComponent::getMoveSpeed() const {
+  return moveSpeed;
+}

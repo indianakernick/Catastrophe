@@ -9,15 +9,18 @@
 #ifndef actor_hpp
 #define actor_hpp
 
+#include "actor id.hpp"
 #include <glm/vec2.hpp>
+#include <Simpleton/Math/dir.hpp>
 #include <Simpleton/Game Logic/actor.hpp>
 
 class Actor : public Game::Actor {
 public:
-  Actor() = default;
+  explicit Actor(ActorID);
   
-  glm::ivec2 pos;
-  glm::ivec2 size = {1, 1};
+  glm::vec2 pos;
+  glm::vec2 size = {1.0f, 1.0f};
+  ActorID id;
 };
 
 #endif

@@ -7,3 +7,6 @@
 //
 
 #include "actor.hpp"
+
+Actor::Actor(const ActorID id)
+  : id(id) {}

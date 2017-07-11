@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <Unpacker/unpacker.hpp>
 #include "actor id.hpp"
+#include <Simpleton/Platform/sdl object.hpp>
+#include "camera.hpp"
 
 class GameView {
 public:
@@ -21,16 +23,22 @@ public:
   void init(SDL_Renderer *, const std::string &);
   void quit();
   void render(uint64_t);
+  
+  void createSprite(ActorID, const std::string &, glm::vec2, glm::vec2);
+  void destroySprite(ActorID);
+  void moveSprite(ActorID, glm::vec2);
 
 private:
   struct Sprite {
     std::string name;
-    glm::ivec2 pos;
-    glm::ivec2 size;
+    glm::vec2 pos;
+    glm::vec2 size;
   };
 
   SDL_Renderer *renderer = nullptr;
   Unpack::Spritesheet sheet;
+  SDL_OBJECT_DESTROY(Texture) texture = {nullptr, &SDL_DestroyTexture};
+  Camera camera;
   
   std::unordered_map<ActorID, Sprite> sprites;
 };

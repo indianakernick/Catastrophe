@@ -9,22 +9,23 @@
 #include "player input component.hpp"
 
 #include "actor.hpp"
-#include <iostream>
+#include "render component.hpp"
 
 void PlayerInputComponent::init() {
-  playerMoveId = evtMan->addListener(Utils::memFunWrap(this, &PlayerInputComponent::onPlayerMove));
+
 }
 
 void PlayerInputComponent::quit() {
-  evtMan->remListener(playerMoveId);
+
 }
 
 void PlayerInputComponent::update(uint64_t) {
   
 }
 
-void PlayerInputComponent::onPlayerMove(const PlayerMoveEvent::Ptr event) {
-  std::cout << "onPlayerMove\n";
-  using ToVec = Math::ToVec<int, Math::Dir::RIGHT, Math::Dir::DOWN>;
-  static_cast<Actor *>(actor)->pos += ToVec::conv(event->dir);
+void PlayerInputComponent::move(const Math::Dir dir) {
+  using ToVec = Math::ToVec<float, Math::Dir::RIGHT, Math::Dir::DOWN>;
+  const glm::vec2 motion = ToVec::conv(dir, moveSpeed);
+  static_cast<Actor *>(actor)->pos += motion;
+  actor->getComponentRef<RenderComponent>().onActorMove();
 }

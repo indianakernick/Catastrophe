@@ -9,10 +9,14 @@
 #include "game logic.hpp"
 
 #include "player input component.hpp"
-#include "handle input.hpp"
+#include "player render component.hpp"
+
+GameLogic::GameLogic()
+  : player(1) {}
 
 void GameLogic::init() {
-  player.addComponent(std::make_shared<PlayerInputComponent>());
+  player.addComponent<InputComponent>(std::make_shared<PlayerInputComponent>());
+  player.addComponent<RenderComponent>(std::make_shared<PlayerRenderComponent>());
   player.initComponents();
 }
 
@@ -20,8 +24,8 @@ void GameLogic::quit() {
   player.quitComponents();
 }
 
-void GameLogic::handleInput(const SDL_Event &event) {
-  handleGameInput(event);
+void GameLogic::handleCommand(InputCommand::Ptr command) {
+  command->execute(player);
 }
 
 void GameLogic::update(const uint64_t delta) {

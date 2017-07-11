@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451FA2721F13430300C43BE9 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA2701F13430300C43BE9 /* camera.cpp */; };
+		451FA27B1F148CBE00C43BE9 /* input manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA2791F148CBE00C43BE9 /* input manager.cpp */; };
+		451FA27E1F148CDC00C43BE9 /* input command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA27C1F148CDC00C43BE9 /* input command.cpp */; };
+		451FA2811F148DBB00C43BE9 /* input commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA27F1F148DBB00C43BE9 /* input commands.cpp */; };
+		451FA2841F1494C000C43BE9 /* player render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA2821F1494C000C43BE9 /* player render component.cpp */; };
+		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
+		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAE41F11B51400D1640D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
@@ -15,16 +22,28 @@
 		4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAFB1F11D84300D1640D /* app impl.cpp */; };
 		4592BB151F120BEF00D1640D /* input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB131F120BEF00D1640D /* input component.cpp */; };
 		4592BB181F120C7400D1640D /* player input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB161F120C7400D1640D /* player input component.cpp */; };
-		4592BB1B1F120E0900D1640D /* player move event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB191F120E0900D1640D /* player move event.cpp */; };
 		4592BB211F12195000D1640D /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB1F1F12195000D1640D /* actor.cpp */; };
-		4592BB241F121F0100D1640D /* handle input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB221F121F0100D1640D /* handle input.cpp */; };
 		4592BB271F13156E00D1640D /* game logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB251F13156E00D1640D /* game logic.cpp */; };
 		4592BB2A1F13166100D1640D /* game view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB281F13166100D1640D /* game view.cpp */; };
 		4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BB2B1F1319D400D1640D /* libUnpacker.dylib */; };
-		4592BB311F131D1C00D1640D /* sprite move event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB2F1F131D1C00D1640D /* sprite move event.cpp */; };
+		4592BB351F13255B00D1640D /* render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB331F13255B00D1640D /* render component.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		451FA2701F13430300C43BE9 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		451FA2711F13430300C43BE9 /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		451FA2791F148CBE00C43BE9 /* input manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input manager.cpp"; sourceTree = "<group>"; };
+		451FA27A1F148CBE00C43BE9 /* input manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input manager.hpp"; sourceTree = "<group>"; };
+		451FA27C1F148CDC00C43BE9 /* input command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input command.cpp"; sourceTree = "<group>"; };
+		451FA27D1F148CDC00C43BE9 /* input command.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input command.hpp"; sourceTree = "<group>"; };
+		451FA27F1F148DBB00C43BE9 /* input commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input commands.cpp"; sourceTree = "<group>"; };
+		451FA2801F148DBB00C43BE9 /* input commands.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input commands.hpp"; sourceTree = "<group>"; };
+		451FA2821F1494C000C43BE9 /* player render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player render component.cpp"; sourceTree = "<group>"; };
+		451FA2831F1494C000C43BE9 /* player render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player render component.hpp"; sourceTree = "<group>"; };
+		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
+		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
+		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
+		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,20 +59,16 @@
 		4592BB141F120BEF00D1640D /* input component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input component.hpp"; sourceTree = "<group>"; };
 		4592BB161F120C7400D1640D /* player input component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player input component.cpp"; sourceTree = "<group>"; };
 		4592BB171F120C7400D1640D /* player input component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player input component.hpp"; sourceTree = "<group>"; };
-		4592BB191F120E0900D1640D /* player move event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player move event.cpp"; sourceTree = "<group>"; };
-		4592BB1A1F120E0900D1640D /* player move event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player move event.hpp"; sourceTree = "<group>"; };
 		4592BB1F1F12195000D1640D /* actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor.cpp; sourceTree = "<group>"; };
 		4592BB201F12195000D1640D /* actor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor.hpp; sourceTree = "<group>"; };
-		4592BB221F121F0100D1640D /* handle input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "handle input.cpp"; sourceTree = "<group>"; };
-		4592BB231F121F0100D1640D /* handle input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "handle input.hpp"; sourceTree = "<group>"; };
 		4592BB251F13156E00D1640D /* game logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "game logic.cpp"; sourceTree = "<group>"; };
 		4592BB261F13156E00D1640D /* game logic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "game logic.hpp"; sourceTree = "<group>"; };
 		4592BB281F13166100D1640D /* game view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "game view.cpp"; sourceTree = "<group>"; };
 		4592BB291F13166100D1640D /* game view.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "game view.hpp"; sourceTree = "<group>"; };
 		4592BB2B1F1319D400D1640D /* libUnpacker.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUnpacker.dylib; path = ../../../../../../../usr/local/lib/libUnpacker.dylib; sourceTree = "<group>"; };
-		4592BB2F1F131D1C00D1640D /* sprite move event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "sprite move event.cpp"; sourceTree = "<group>"; };
-		4592BB301F131D1C00D1640D /* sprite move event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "sprite move event.hpp"; sourceTree = "<group>"; };
 		4592BB321F1320FE00D1640D /* actor id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "actor id.hpp"; sourceTree = "<group>"; };
+		4592BB331F13255B00D1640D /* render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render component.cpp"; sourceTree = "<group>"; };
+		4592BB341F13255B00D1640D /* render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render component.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451FA2851F1499CC00C43BE9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				451FA2871F149B2200C43BE9 /* config.yaml */,
+				451FA2881F149B2200C43BE9 /* rat.png */,
+				451FA2891F149B2200C43BE9 /* sprites.atlas */,
+				451FA28A1F149B2200C43BE9 /* sprites.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		4592BAC81F11B48F00D1640D = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +117,7 @@
 		4592BAD31F11B48F00D1640D /* Catastrophe */ = {
 			isa = PBXGroup;
 			children = (
+				451FA2851F1499CC00C43BE9 /* Resources */,
 				4592BAF31F11D6D300D1640D /* game */,
 				4592BAD81F11B48F00D1640D /* Assets.xcassets */,
 				4592BADD1F11B48F00D1640D /* Info.plist */,
@@ -107,16 +134,21 @@
 				4592BAFC1F11D84300D1640D /* app impl.hpp */,
 				4592BAFE1F11D85700D1640D /* constants.hpp */,
 				4592BB2D1F131CFE00D1640D /* components */,
-				4592BB2E1F131D0900D1640D /* events */,
 				4592BB321F1320FE00D1640D /* actor id.hpp */,
 				4592BB1F1F12195000D1640D /* actor.cpp */,
 				4592BB201F12195000D1640D /* actor.hpp */,
-				4592BB221F121F0100D1640D /* handle input.cpp */,
-				4592BB231F121F0100D1640D /* handle input.hpp */,
 				4592BB251F13156E00D1640D /* game logic.cpp */,
 				4592BB261F13156E00D1640D /* game logic.hpp */,
 				4592BB281F13166100D1640D /* game view.cpp */,
 				4592BB291F13166100D1640D /* game view.hpp */,
+				451FA2701F13430300C43BE9 /* camera.cpp */,
+				451FA2711F13430300C43BE9 /* camera.hpp */,
+				451FA2791F148CBE00C43BE9 /* input manager.cpp */,
+				451FA27A1F148CBE00C43BE9 /* input manager.hpp */,
+				451FA27C1F148CDC00C43BE9 /* input command.cpp */,
+				451FA27D1F148CDC00C43BE9 /* input command.hpp */,
+				451FA27F1F148DBB00C43BE9 /* input commands.cpp */,
+				451FA2801F148DBB00C43BE9 /* input commands.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -139,19 +171,12 @@
 				4592BB141F120BEF00D1640D /* input component.hpp */,
 				4592BB161F120C7400D1640D /* player input component.cpp */,
 				4592BB171F120C7400D1640D /* player input component.hpp */,
+				4592BB331F13255B00D1640D /* render component.cpp */,
+				4592BB341F13255B00D1640D /* render component.hpp */,
+				451FA2821F1494C000C43BE9 /* player render component.cpp */,
+				451FA2831F1494C000C43BE9 /* player render component.hpp */,
 			);
 			name = components;
-			sourceTree = "<group>";
-		};
-		4592BB2E1F131D0900D1640D /* events */ = {
-			isa = PBXGroup;
-			children = (
-				4592BB191F120E0900D1640D /* player move event.cpp */,
-				4592BB1A1F120E0900D1640D /* player move event.hpp */,
-				4592BB2F1F131D1C00D1640D /* sprite move event.cpp */,
-				4592BB301F131D1C00D1640D /* sprite move event.hpp */,
-			);
-			name = events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +189,7 @@
 				4592BACD1F11B48F00D1640D /* Sources */,
 				4592BACE1F11B48F00D1640D /* Frameworks */,
 				4592BACF1F11B48F00D1640D /* Resources */,
+				451FA2861F149A7300C43BE9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,27 +239,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451FA28E1F149B2200C43BE9 /* sprites.png in Resources */,
+				451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		451FA2861F149A7300C43BE9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd Catastrophe/Resources\npacker --silent config.yaml";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4592BACD1F11B48F00D1640D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4592BB311F131D1C00D1640D /* sprite move event.cpp in Sources */,
 				4592BB2A1F13166100D1640D /* game view.cpp in Sources */,
-				4592BB1B1F120E0900D1640D /* player move event.cpp in Sources */,
+				451FA27E1F148CDC00C43BE9 /* input command.cpp in Sources */,
 				4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */,
+				451FA2841F1494C000C43BE9 /* player render component.cpp in Sources */,
+				451FA2721F13430300C43BE9 /* camera.cpp in Sources */,
 				4592BAE41F11B51400D1640D /* main.cpp in Sources */,
+				451FA2811F148DBB00C43BE9 /* input commands.cpp in Sources */,
 				4592BB151F120BEF00D1640D /* input component.cpp in Sources */,
 				4592BB211F12195000D1640D /* actor.cpp in Sources */,
 				4592BB181F120C7400D1640D /* player input component.cpp in Sources */,
-				4592BB241F121F0100D1640D /* handle input.cpp in Sources */,
+				4592BB351F13255B00D1640D /* render component.cpp in Sources */,
 				4592BB271F13156E00D1640D /* game logic.cpp in Sources */,
+				451FA27B1F148CBE00C43BE9 /* input manager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +405,7 @@
 					"-Weffc++",
 					"-Wpedantic",
 					"-Wextra-semi",
+					"-Wno-documentation",
 					"-std=c++1z",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Indi-Kernick.Catastrophe";
@@ -392,6 +440,7 @@
 					"-Weffc++",
 					"-Wpedantic",
 					"-Wextra-semi",
+					"-Wno-documentation",
 					"-std=c++1z",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Indi-Kernick.Catastrophe";
@@ -419,6 +468,7 @@
 				4592BAE21F11B48F00D1640D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

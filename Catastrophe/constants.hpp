@@ -18,5 +18,7 @@ const Platform::Window::Desc WINDOW_DESC = {
 };
 
 const std::string SPRITE_SHEET_PATH = "sprites";
+const glm::ivec2 PIXELS_PER_TILE = {16, 16};
+const glm::ivec2 WINDOW_PIXEL_SIZE = {320, 180};
 
 #endif

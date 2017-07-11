@@ -12,6 +12,8 @@
 #include <Simpleton/Platform/system info.hpp>
 #include <Simpleton/Event/manager.hpp>
 
+std::unique_ptr<AppImpl> app = nullptr;
+
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
   evtMan = std::make_unique<Game::EventManager>();
@@ -34,7 +36,10 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      logic.handleInput(e);
+      InputCommand::Ptr command = inputMan.handleInput(e);
+      if (command) {
+        logic.handleCommand(command);
+      }
     }
   }
   evtMan->update();
@@ -49,5 +54,7 @@ bool AppImpl::update(const uint64_t delta) {
 }
 
 void AppImpl::render(const uint64_t delta) {
+  renderer.clear();
   view.render(delta);
+  renderer.present();
 }

@@ -9,7 +9,7 @@
 #include "app impl.hpp"
 
 int main(int, char **) {
-  AppImpl app;
-  app.mainLoop<std::chrono::milliseconds>(16, 4);
+  app = std::make_unique<AppImpl>();
+  app->mainLoop<std::chrono::milliseconds>(16, 4);
   return 0;
 }

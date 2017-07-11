@@ -10,7 +10,6 @@
 #define player_input_component_hpp
 
 #include "input component.hpp"
-#include "player move event.hpp"
 #include <Simpleton/Event/manager.hpp>
 
 class PlayerInputComponent final : public InputComponent {
@@ -20,11 +19,8 @@ public:
   void init() override;
   void quit() override;
   void update(uint64_t) override;
-
-private:
-  Game::EventManager::ListenerID playerMoveId;
   
-  void onPlayerMove(PlayerMoveEvent::Ptr);
+  void move(Math::Dir) override;
 };
 
 #endif

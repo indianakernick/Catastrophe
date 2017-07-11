@@ -10,14 +10,15 @@
 #define game_logic_hpp
 
 #include "actor.hpp"
-#include <SDL2/SDL_events.h>
+#include "input command.hpp"
 
 class GameLogic {
 public:
+  GameLogic();
   
   void init();
   void quit();
-  void handleInput(const SDL_Event &);
+  void handleCommand(InputCommand::Ptr);
   void update(uint64_t);
   
 private:

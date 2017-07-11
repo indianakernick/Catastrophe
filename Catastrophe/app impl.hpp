@@ -11,15 +11,18 @@
 
 #include "game logic.hpp"
 #include "game view.hpp"
+#include "input manager.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
 public:
   AppImpl() = default;
   
-private:
   GameLogic logic;
   GameView view;
+
+private:
+  InputManager inputMan;
 
   bool init() override;
   void quit() override;
@@ -27,5 +30,7 @@ private:
   bool update(uint64_t) override;
   void render(uint64_t) override;
 };
+
+extern std::unique_ptr<AppImpl> app;
 
 #endif
