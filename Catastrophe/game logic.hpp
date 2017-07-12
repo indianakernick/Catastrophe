@@ -9,20 +9,19 @@
 #ifndef game_logic_hpp
 #define game_logic_hpp
 
-#include "actor.hpp"
-#include "input command.hpp"
+#include "entity.hpp"
+#include <memory>
 
 class GameLogic {
 public:
-  GameLogic();
+  GameLogic() = default;
   
   void init();
   void quit();
-  void handleCommand(InputCommand::Ptr);
   void update(uint64_t);
   
 private:
-  Actor player;
+  std::unique_ptr<Entity> player;
 };
 
 #endif

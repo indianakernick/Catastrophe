@@ -8,27 +8,16 @@
 
 #include "game logic.hpp"
 
-#include "player input component.hpp"
-#include "player render component.hpp"
-
-GameLogic::GameLogic()
-  : player(1) {}
+#include "simple entity.hpp"
 
 void GameLogic::init() {
-  player.addComponent<InputComponent>(std::make_shared<PlayerInputComponent>());
-  player.addComponent<RenderComponent>(std::make_shared<PlayerRenderComponent>());
-  player.initComponents();
+  player = std::make_unique<SimpleEntity>(1, Rect({0, 0}, {1, 1}), 1);
 }
 
 void GameLogic::quit() {
-  player.quitComponents();
-}
-
-void GameLogic::handleCommand(InputCommand::Ptr command) {
-  command->execute(player);
+  player.reset();
 }
 
 void GameLogic::update(const uint64_t delta) {
-  player.updateComponents(delta);
-  player.flushMessages();
+  player->update(delta);
 }

@@ -14,11 +14,11 @@ void Camera::setPos(const glm::vec2 newPos) {
   pos = newPos;
 }
 
-SDL_Rect Camera::transform(const glm::vec2 spritePos, const glm::vec2 spriteSize) const {
+RectPx Camera::transform(const Rect rect) const {
   return {
-    static_cast<int>((spritePos.x + pos.x) * PIXELS_PER_TILE),
-    static_cast<int>((spritePos.y + pos.y) * PIXELS_PER_TILE),
-    static_cast<int>(spriteSize.x * PIXELS_PER_TILE),
-    static_cast<int>(spriteSize.y * PIXELS_PER_TILE)
+    static_cast<int>((rect.p.x + pos.x) * PIXELS_PER_TILE),
+    static_cast<int>((rect.p.y + pos.y) * PIXELS_PER_TILE),
+    static_cast<int>(rect.s.x * PIXELS_PER_TILE),
+    static_cast<int>(rect.s.y * PIXELS_PER_TILE)
   };
 }
