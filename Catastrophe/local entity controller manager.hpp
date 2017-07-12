@@ -9,7 +9,7 @@
 #ifndef local_entity_controller_manager_hpp
 #define local_entity_controller_manager_hpp
 
-#include <vector>
+#include <unordered_map>
 #include <SDL2/SDL_events.h>
 #include "local entity controller.hpp"
 
@@ -22,10 +22,11 @@ public:
   
   bool handleEvent(SDL_Event);
   
-  void addController(std::shared_ptr<LocalEntityController>);
+  void addController(EntityID, std::shared_ptr<LocalEntityController>);
+  void remController(EntityID);
   
 private:
-  std::vector<std::shared_ptr<LocalEntityController>> controllers;
+  std::unordered_map<EntityID, std::shared_ptr<LocalEntityController>> controllers;
 };
 
 #endif

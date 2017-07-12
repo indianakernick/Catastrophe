@@ -15,6 +15,8 @@ EntityView::EntityView(Entity *entity)
   assert(entity);
 }
 
+EntityView::~EntityView() {}
+
 void EntityView::setEntity(Entity *newEntity) {
   assert(newEntity);
   entity = newEntity;

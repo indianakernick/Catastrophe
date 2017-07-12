@@ -13,7 +13,12 @@
 
 class Camera {
 public:
+  Camera() = default;
+  explicit Camera(glm::vec2);
+  ~Camera() = default;
+
   void setPos(glm::vec2);
+  glm::vec2 getSize() const;
   
   RectPx transform(Rect) const;
 

@@ -15,9 +15,7 @@
 class EntityView {
 public:
   explicit EntityView(Entity *);
-  virtual ~EntityView() = default;
-  
-  virtual void render(RenderingContext &, uint64_t) = 0;
+  virtual ~EntityView() = 0;
   
   void setEntity(Entity *);
   inline Entity &getEntity() {

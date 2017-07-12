@@ -19,7 +19,6 @@
 		4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAFB1F11D84300D1640D /* app impl.cpp */; };
 		4592BB211F12195000D1640D /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB1F1F12195000D1640D /* entity.cpp */; };
 		4592BB271F13156E00D1640D /* game logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB251F13156E00D1640D /* game logic.cpp */; };
-		4592BB2A1F13166100D1640D /* game view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BB281F13166100D1640D /* game view.cpp */; };
 		4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BB2B1F1319D400D1640D /* libUnpacker.dylib */; };
 		45F3DB211F15DBB50058D36B /* entity view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB1F1F15DBB50058D36B /* entity view.cpp */; };
 		45F3DB241F15DCA00058D36B /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB221F15DC9F0058D36B /* rendering context.cpp */; };
@@ -28,6 +27,8 @@
 		45F3DB311F15EA670058D36B /* local entity controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB2F1F15EA670058D36B /* local entity controller.cpp */; };
 		45F3DB341F15EF490058D36B /* local entity controller manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB321F15EF490058D36B /* local entity controller manager.cpp */; };
 		45F3DB371F15EF640058D36B /* simple entity controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB351F15EF640058D36B /* simple entity controller.cpp */; };
+		45F3DB3A1F15F84A0058D36B /* local entity view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB381F15F84A0058D36B /* local entity view.cpp */; };
+		45F3DB3D1F15F9A00058D36B /* local entity view manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB3B1F15F9A00058D36B /* local entity view manager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,8 +56,6 @@
 		4592BB201F12195000D1640D /* entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
 		4592BB251F13156E00D1640D /* game logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "game logic.cpp"; sourceTree = "<group>"; };
 		4592BB261F13156E00D1640D /* game logic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "game logic.hpp"; sourceTree = "<group>"; };
-		4592BB281F13166100D1640D /* game view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "game view.cpp"; sourceTree = "<group>"; };
-		4592BB291F13166100D1640D /* game view.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "game view.hpp"; sourceTree = "<group>"; };
 		4592BB2B1F1319D400D1640D /* libUnpacker.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUnpacker.dylib; path = ../../../../../../../usr/local/lib/libUnpacker.dylib; sourceTree = "<group>"; };
 		4592BB321F1320FE00D1640D /* entity id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
 		45F3DB1F1F15DBB50058D36B /* entity view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity view.cpp"; sourceTree = "<group>"; };
@@ -73,6 +72,10 @@
 		45F3DB331F15EF490058D36B /* local entity controller manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "local entity controller manager.hpp"; sourceTree = "<group>"; };
 		45F3DB351F15EF640058D36B /* simple entity controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple entity controller.cpp"; sourceTree = "<group>"; };
 		45F3DB361F15EF640058D36B /* simple entity controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple entity controller.hpp"; sourceTree = "<group>"; };
+		45F3DB381F15F84A0058D36B /* local entity view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "local entity view.cpp"; sourceTree = "<group>"; };
+		45F3DB391F15F84A0058D36B /* local entity view.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "local entity view.hpp"; sourceTree = "<group>"; };
+		45F3DB3B1F15F9A00058D36B /* local entity view manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "local entity view manager.cpp"; sourceTree = "<group>"; };
+		45F3DB3C1F15F9A00058D36B /* local entity view manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "local entity view manager.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,16 +176,18 @@
 		45F3DB2D1F15E9690058D36B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				4592BB281F13166100D1640D /* game view.cpp */,
-				4592BB291F13166100D1640D /* game view.hpp */,
 				451FA2701F13430300C43BE9 /* camera.cpp */,
 				451FA2711F13430300C43BE9 /* camera.hpp */,
-				45F3DB1F1F15DBB50058D36B /* entity view.cpp */,
-				45F3DB201F15DBB50058D36B /* entity view.hpp */,
 				45F3DB221F15DC9F0058D36B /* rendering context.cpp */,
 				45F3DB231F15DCA00058D36B /* rendering context.hpp */,
+				45F3DB1F1F15DBB50058D36B /* entity view.cpp */,
+				45F3DB201F15DBB50058D36B /* entity view.hpp */,
+				45F3DB381F15F84A0058D36B /* local entity view.cpp */,
+				45F3DB391F15F84A0058D36B /* local entity view.hpp */,
 				45F3DB281F15E8930058D36B /* simple entity view.cpp */,
 				45F3DB291F15E8930058D36B /* simple entity view.hpp */,
+				45F3DB3B1F15F9A00058D36B /* local entity view manager.cpp */,
+				45F3DB3C1F15F9A00058D36B /* local entity view manager.hpp */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -292,8 +297,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45F3DB311F15EA670058D36B /* local entity controller.cpp in Sources */,
-				4592BB2A1F13166100D1640D /* game view.cpp in Sources */,
 				45F3DB371F15EF640058D36B /* simple entity controller.cpp in Sources */,
+				45F3DB3A1F15F84A0058D36B /* local entity view.cpp in Sources */,
 				451FA2911F15D0AD00C43BE9 /* simple entity.cpp in Sources */,
 				45F3DB341F15EF490058D36B /* local entity controller manager.cpp in Sources */,
 				4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */,
@@ -302,6 +307,7 @@
 				45F3DB2A1F15E8930058D36B /* simple entity view.cpp in Sources */,
 				451FA2721F13430300C43BE9 /* camera.cpp in Sources */,
 				4592BAE41F11B51400D1640D /* main.cpp in Sources */,
+				45F3DB3D1F15F9A00058D36B /* local entity view manager.cpp in Sources */,
 				4592BB211F12195000D1640D /* entity.cpp in Sources */,
 				45F3DB211F15DBB50058D36B /* entity view.cpp in Sources */,
 				4592BB271F13156E00D1640D /* game logic.cpp in Sources */,

@@ -7,3 +7,10 @@
 //
 
 #include "simple entity view.hpp"
+
+SimpleEntityView::SimpleEntityView(Entity *entity, const std::string &name)
+  : LocalEntityView(entity), spriteName(name) {}
+
+void SimpleEntityView::render(RenderingContext &ctx, uint64_t) {
+  ctx.renderSprite(spriteName, getEntity().getRect());
+}

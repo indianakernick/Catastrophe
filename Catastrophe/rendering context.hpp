@@ -27,7 +27,7 @@ public:
   RenderingContext(SDL_Renderer *, const std::string &, Camera &);
   ~RenderingContext() = default;
   
-  //interface for EntityView
+  //interface for LocalEntityView
   void renderSprite(const std::string &, Rect);
   void renderSprite(const std::string &, Rect, double);
   void renderSprite(const std::string &, Rect, double, glm::ivec2, Flip);

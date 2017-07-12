@@ -11,7 +11,7 @@
 bool LocalEntityControllerManager::handleEvent(const SDL_Event event) {
   #define DISPATCH_EVENT(METHOD, MEMBER)                                          \
     for (auto c = controllers.cbegin(); c != controllers.cend(); ++c) {         \
-      if ((*c)->on##METHOD(event.MEMBER)) {                                     \
+      if (c->second->on##METHOD(event.MEMBER)) {                                     \
         return true;                                                            \
       }                                                                         \
     } do{}while(0)
@@ -39,6 +39,13 @@ bool LocalEntityControllerManager::handleEvent(const SDL_Event event) {
   return false;
 }
 
-void LocalEntityControllerManager::addController(std::shared_ptr<LocalEntityController> controller) {
-  controllers.push_back(controller);
+void LocalEntityControllerManager::addController(
+  const EntityID id,
+  std::shared_ptr<LocalEntityController> controller
+) {
+  controllers.emplace(id, controller);
+}
+
+void LocalEntityControllerManager::remController(const EntityID id) {
+  controllers.erase(id);
 }

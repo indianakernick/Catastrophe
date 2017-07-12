@@ -8,10 +8,20 @@
 
 #include "camera.hpp"
 
-#include <glm/gtx/matrix_transform_2d.hpp>
+#include "constants.hpp"
+
+Camera::Camera(const glm::vec2 pos)
+  : pos(pos) {}
 
 void Camera::setPos(const glm::vec2 newPos) {
   pos = newPos;
+}
+
+glm::vec2 Camera::getSize() const {
+  return {
+    WINDOW_PIXEL_SIZE.x / PIXELS_PER_TILE,
+    WINDOW_PIXEL_SIZE.y / PIXELS_PER_TILE
+  };
 }
 
 RectPx Camera::transform(const Rect rect) const {
