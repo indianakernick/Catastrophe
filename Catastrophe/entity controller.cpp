@@ -21,11 +21,3 @@ void EntityController::setEntity(Entity *newEntity) {
   assert(newEntity);
   entity = newEntity;
 }
-
-Entity &EntityController::getEntity() {
-  return *entity;
-}
-
-const Entity &EntityController::getEntity() const {
-  return *entity;
-}

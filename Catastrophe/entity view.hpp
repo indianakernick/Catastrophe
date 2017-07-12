@@ -20,8 +20,12 @@ public:
   virtual void render(RenderingContext &, uint64_t) = 0;
   
   void setEntity(Entity *);
-  Entity &getEntity();
-  const Entity &getEntity() const;
+  inline Entity &getEntity() {
+    return *entity;
+  }
+  inline const Entity &getEntity() const {
+    return *entity;
+  }
   
 private:
   Entity *entity;

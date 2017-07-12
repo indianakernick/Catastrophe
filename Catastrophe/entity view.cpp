@@ -19,11 +19,3 @@ void EntityView::setEntity(Entity *newEntity) {
   assert(newEntity);
   entity = newEntity;
 }
-
-Entity &EntityView::getEntity() {
-  return *entity;
-}
-
-const Entity &EntityView::getEntity() const {
-  return *entity;
-}

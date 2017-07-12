@@ -11,9 +11,13 @@
 
 #include "local entity controller.hpp"
 
-class SimpleEntityController : public LocalEntityController {
+class SimpleEntityController final : public LocalEntityController {
 public:
+  explicit SimpleEntityController(Entity *);
+  ~SimpleEntityController() = default;
   
+  bool onKeyDown(const SDL_KeyboardEvent &) override;
+  bool onKeyUp(const SDL_KeyboardEvent &) override;
 };
 
 #endif

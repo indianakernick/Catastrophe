@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		451FA2721F13430300C43BE9 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA2701F13430300C43BE9 /* camera.cpp */; };
-		451FA27B1F148CBE00C43BE9 /* input manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA2791F148CBE00C43BE9 /* input manager.cpp */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		451FA2911F15D0AD00C43BE9 /* simple entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451FA28F1F15D0AD00C43BE9 /* simple entity.cpp */; };
@@ -34,8 +33,6 @@
 /* Begin PBXFileReference section */
 		451FA2701F13430300C43BE9 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		451FA2711F13430300C43BE9 /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
-		451FA2791F148CBE00C43BE9 /* input manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input manager.cpp"; sourceTree = "<group>"; };
-		451FA27A1F148CBE00C43BE9 /* input manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input manager.hpp"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 				45F3DB2C1F15E9550058D36B /* model */,
 				45F3DB2D1F15E9690058D36B /* view */,
 				45F3DB2E1F15E9750058D36B /* controller */,
-				451FA2791F148CBE00C43BE9 /* input manager.cpp */,
-				451FA27A1F148CBE00C43BE9 /* input manager.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
 			);
 			name = game;
@@ -310,7 +305,6 @@
 				4592BB211F12195000D1640D /* entity.cpp in Sources */,
 				45F3DB211F15DBB50058D36B /* entity view.cpp in Sources */,
 				4592BB271F13156E00D1640D /* game logic.cpp in Sources */,
-				451FA27B1F148CBE00C43BE9 /* input manager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
