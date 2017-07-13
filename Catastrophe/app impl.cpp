@@ -16,7 +16,11 @@
 std::unique_ptr<AppImpl> app = nullptr;
 
 AppImpl::AppImpl()
-  : factory(entityMan, localViewMan, localControllerMan) {}
+  : entityMan(),
+    localViewMan(),
+    localControllerMan(),
+    factory(entityMan, localViewMan, localControllerMan),
+    world(factory, entityMan) {}
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
@@ -24,13 +28,13 @@ bool AppImpl::init() {
   
   registerFactoryFunctions(factory);
   
-  playerID = factory.make("player", {});
+  world.init();
   
   return true;
 }
 
 void AppImpl::quit() {
-  factory.destroy(playerID);
+  world.quit();
 
   localViewMan.quit();
   SDLApp::quitWindow();
@@ -50,6 +54,7 @@ bool AppImpl::input(uint64_t) {
 
 bool AppImpl::update(const uint64_t delta) {
   entityMan.update(delta);
+  world.update(delta);
   
   return true;
 }

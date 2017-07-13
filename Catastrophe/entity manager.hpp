@@ -21,6 +21,10 @@ public:
   
   void addEntity(std::shared_ptr<Entity>);
   void remEntity(EntityID);
+  std::shared_ptr<Entity> getEntity(EntityID);
+  
+  bool entityCanMoveTo(Entity *, Rect) const;
+  void onEntityMove(Entity *);
 
 private:
   std::unordered_map<EntityID, std::shared_ptr<Entity>> entities;

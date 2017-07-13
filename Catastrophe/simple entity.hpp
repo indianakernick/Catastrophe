@@ -25,7 +25,10 @@ public:
   Math::Dir getMotionDir() const override;
   float getMotionProgress() const override;
   
-  void update(uint64_t) override;
+  void update(EntityManager &, uint64_t) override;
+  bool entityCanCollide(Entity *) override;
+  void onEntityCollision(Entity *) override;
+  void onCollisionWithEntity(Entity *) override;
 
 private:
   Time::DeltaFreqLimiter<uint64_t> freqLimiter;

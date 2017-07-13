@@ -9,6 +9,7 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
+#include "world.hpp"
 #include "entity manager.hpp"
 #include "entity factory.hpp"
 #include "local entity view manager.hpp"
@@ -24,8 +25,8 @@ public:
   LocalEntityControllerManager localControllerMan;
   //factory depends on the above members
   EntityFactory factory;
-  
-  EntityID playerID;
+  //world depends on factory and entityMan
+  World world;
 
 private:
   bool init() override;

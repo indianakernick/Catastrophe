@@ -33,6 +33,7 @@
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45F3DB471F1715CC0058D36B /* player.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45F3DB461F1715CC0058D36B /* player.yaml */; };
 		45F3DB4A1F1716B00058D36B /* register factory functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB481F1716B00058D36B /* register factory functions.cpp */; };
+		45F3DB4D1F17337B0058D36B /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB4B1F17337B0058D36B /* world.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,9 @@
 		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
 		45F3DB481F1716B00058D36B /* register factory functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "register factory functions.cpp"; sourceTree = "<group>"; };
 		45F3DB491F1716B00058D36B /* register factory functions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "register factory functions.hpp"; sourceTree = "<group>"; };
+		45F3DB4B1F17337B0058D36B /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
+		45F3DB4C1F17337B0058D36B /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
+		45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "dir to vec.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,9 @@
 				45F3DB491F1716B00058D36B /* register factory functions.hpp */,
 				45F3DB411F1608A00058D36B /* entity factory.cpp */,
 				45F3DB421F1608A00058D36B /* entity factory.hpp */,
+				45F3DB4B1F17337B0058D36B /* world.cpp */,
+				45F3DB4C1F17337B0058D36B /* world.hpp */,
+				45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */,
 				45F3DB2C1F15E9550058D36B /* model */,
 				45F3DB2D1F15E9690058D36B /* view */,
 				45F3DB2E1F15E9750058D36B /* controller */,
@@ -318,6 +325,7 @@
 				45F3DB371F15EF640058D36B /* simple entity controller.cpp in Sources */,
 				45F3DB3A1F15F84A0058D36B /* local entity view.cpp in Sources */,
 				451FA2911F15D0AD00C43BE9 /* simple entity.cpp in Sources */,
+				45F3DB4D1F17337B0058D36B /* world.cpp in Sources */,
 				45F3DB341F15EF490058D36B /* local entity controller manager.cpp in Sources */,
 				4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */,
 				45F3DB271F15E84A0058D36B /* entity controller.cpp in Sources */,

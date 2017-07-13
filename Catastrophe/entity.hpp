@@ -1,17 +1,19 @@
 //
-//  actor.hpp
+//  entity.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 9/7/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef actor_hpp
-#define actor_hpp
+#ifndef entity_hpp
+#define entity_hpp
 
 #include "rect.hpp"
 #include "entity id.hpp"
 #include <Simpleton/Math/dir.hpp>
+
+class EntityManager;
 
 class Entity {
 public:
@@ -28,8 +30,14 @@ public:
   virtual Math::Dir getMotionDir() const = 0;
   virtual float getMotionProgress() const = 0;
 
-  //interface for model manager (game logic)
-  virtual void update(uint64_t) = 0;
+  //interface for EntityManager
+  virtual void update(EntityManager &, uint64_t) = 0;
+  ///Can an entity collide with this entity?
+  virtual bool entityCanCollide(Entity *) = 0;
+  ///An entity has collided with this entity
+  virtual void onEntityCollision(Entity *) = 0;
+  ///This entity has collided with another entity
+  virtual void onCollisionWithEntity(Entity *) = 0;
 
   //interface for model
   EntityID getID() const;
