@@ -24,8 +24,11 @@ enum class Flip {
 
 class RenderingContext {
 public:
-  RenderingContext(SDL_Renderer *, const std::string &, Camera &);
+  explicit RenderingContext(const Camera &);
   ~RenderingContext() = default;
+  
+  void init(SDL_Renderer *, const std::string &);
+  void quit();
   
   //interface for LocalEntityView
   void renderSprite(const std::string &, Rect);
@@ -33,10 +36,10 @@ public:
   void renderSprite(const std::string &, Rect, double, glm::ivec2, Flip);
   
 private:
-  SDL_Renderer *renderer;
+  SDL_Renderer *renderer = nullptr;
   Unpack::Spritesheet sheet;
   SDL_OBJECT_DESTROY(Texture) texture;
-  Camera &camera;
+  const Camera &camera;
 };
 
 #endif

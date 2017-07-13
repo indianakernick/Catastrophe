@@ -9,24 +9,30 @@
 #include "app impl.hpp"
 
 #include "constants.hpp"
-#include <Simpleton/Platform/system info.hpp>
 #include <Simpleton/Event/manager.hpp>
+#include "register factory functions.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<AppImpl> app = nullptr;
 
+AppImpl::AppImpl()
+  : factory(entityMan, localViewMan, localControllerMan) {}
+
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
-  evtMan = std::make_unique<Game::EventManager>();
-  view.init(renderer.get(), Platform::getResDir() + SPRITE_SHEET_PATH);
-  logic.init();
+  localViewMan.init(renderer.get(), SPRITE_SHEET_PATH);
+  
+  registerFactoryFunctions(factory);
+  
+  playerID = factory.make("player", {});
   
   return true;
 }
 
 void AppImpl::quit() {
-  logic.quit();
-  view.quit();
-  evtMan.reset();
+  factory.destroy(playerID);
+
+  localViewMan.quit();
   SDLApp::quitWindow();
 }
 
@@ -36,25 +42,20 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      InputCommand::Ptr command = inputMan.handleInput(e);
-      if (command) {
-        logic.handleCommand(command);
-      }
+      localControllerMan.handleEvent(e);
     }
   }
-  evtMan->update();
   return true;
 }
 
 bool AppImpl::update(const uint64_t delta) {
-  logic.update(delta);
+  entityMan.update(delta);
   
-  evtMan->update();
   return true;
 }
 
 void AppImpl::render(const uint64_t delta) {
   renderer.clear();
-  view.render(delta);
+  localViewMan.render(delta);
   renderer.present();
 }

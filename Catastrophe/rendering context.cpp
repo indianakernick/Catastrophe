@@ -9,18 +9,20 @@
 #include "rendering context.hpp"
 
 #include "constants.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 RenderingContext::RenderingContext(
-  SDL_Renderer *renderer,
-  const std::string &spriteSheetPath,
-  Camera &camera
-) : renderer(renderer),
-    sheet(Unpack::makeSpritesheet(
-      spriteSheetPath + ".atlas",
-      spriteSheetPath + ".png"
-    )),
-    texture(nullptr, &SDL_DestroyTexture),
-    camera(camera) {
+  const Camera &camera
+) : texture(nullptr, &SDL_DestroyTexture),
+    camera(camera) {}
+
+void RenderingContext::init(SDL_Renderer *newRenderer, const std::string &spriteSheetPath) {
+  renderer = newRenderer;
+  sheet = Unpack::makeSpritesheet(
+    Platform::getResDir() + spriteSheetPath + ".atlas",
+    Platform::getResDir() + spriteSheetPath + ".png"
+  );
+  
   const Unpack::Image &image = sheet.getImage();
   texture.reset(SDL_CreateTexture(
     renderer,
@@ -33,6 +35,11 @@ RenderingContext::RenderingContext(
   SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND);
   
   SDL_RenderSetLogicalSize(renderer, WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
+}
+
+void RenderingContext::quit() {
+  texture.reset();
+  renderer = nullptr;
 }
 
 namespace {

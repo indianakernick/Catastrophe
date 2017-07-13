@@ -14,6 +14,7 @@
 
 class LocalEntityController : public EntityController {
 public:
+  LocalEntityController() = default;
   explicit LocalEntityController(Entity *);
   virtual ~LocalEntityController() = 0;
   

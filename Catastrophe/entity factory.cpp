@@ -28,7 +28,7 @@ EntityFactory::EntityFactory(
     localViewMan(localViewMan),
     localControllerMan(localControllerMan) {}
 
-EntityID EntityFactory::make(const std::string &name) try {
+EntityID EntityFactory::make(const std::string &name, const Rect rect) try {
   const YAML::Node file = YAML::LoadFile(Platform::getResDir() + name + ".yaml");
   const EntityID id = idGen.make();
   
@@ -52,10 +52,10 @@ EntityID EntityFactory::make(const std::string &name) try {
       if (iter == modelFactories.cend()) {
         throw EntityCreationError("Failed to find model factory");
       } else {
-        entity = iter->second(id, params);
-      }
-      if (entity != nullptr) {
-        throw EntityCreationError("There cannot be more than one model description");
+        if (entity != nullptr) {
+          throw EntityCreationError("There cannot be more than one model description");
+        }
+        entity = iter->second(id, rect, params);
       }
       entityMan.addEntity(entity);
       
@@ -67,8 +67,7 @@ EntityID EntityFactory::make(const std::string &name) try {
         if (entity == nullptr) {
           throw EntityCreationError("Model description must appear first");
         }
-        std::shared_ptr<LocalEntityView> view = iter->second(params);
-        view->setEntity(entity.get());
+        std::shared_ptr<LocalEntityView> view = iter->second(entity.get(), params);
         localViewMan.addView(id, view);
       }
       
@@ -80,8 +79,7 @@ EntityID EntityFactory::make(const std::string &name) try {
         if (entity == nullptr) {
           throw EntityCreationError("Model description must appear first");
         }
-        std::shared_ptr<LocalEntityController> controller = iter->second(params);
-        controller->setEntity(entity.get());
+        std::shared_ptr<LocalEntityController> controller = iter->second(entity.get(), params);
         localControllerMan.addController(id, controller);
       }
       

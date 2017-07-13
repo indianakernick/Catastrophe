@@ -42,6 +42,6 @@ void SimpleEntity::update(const uint64_t delta) {
       rect.p += ToVec::conv(moveDir);
     }
     moving = hasNextMoveDir;
-    nextMoveDir = moveDir;
+    moveDir = nextMoveDir;
   }
 }

@@ -8,11 +8,17 @@
 
 #include "local entity view manager.hpp"
 
-LocalEntityViewManager::LocalEntityViewManager(
-  SDL_Renderer *renderer,
-  const std::string &spritesheetPath
-) : camera(),
-    renderingContext(renderer, spritesheetPath, camera) {}
+LocalEntityViewManager::LocalEntityViewManager()
+  : camera(),
+    renderingContext(camera) {}
+
+void LocalEntityViewManager::init(SDL_Renderer *renderer, const std::string &spritesheetPath) {
+  renderingContext.init(renderer, spritesheetPath);
+}
+
+void LocalEntityViewManager::quit() {
+  renderingContext.quit();
+}
 
 void LocalEntityViewManager::render(const uint64_t delta) {
   for (auto v = views.cbegin(); v != views.cend(); ++v) {

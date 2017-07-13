@@ -10,6 +10,7 @@
 #define entity_factory_hpp
 
 #include <string>
+#include "rect.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
 #include <Simpleton/ID/local.hpp>
@@ -34,19 +35,19 @@ public:
 
 class EntityFactory {
 public:
-  using ModelFactory = std::shared_ptr<Entity>(*)(EntityID, const YAML::Node &);
-  using LocalViewFactory = std::shared_ptr<LocalEntityView>(*)(const YAML::Node &);
-  using LocalControllerFactory = std::shared_ptr<LocalEntityController>(*)(const YAML::Node &);
+  using ModelFactory = std::shared_ptr<Entity>(*)(EntityID, Rect, const YAML::Node &);
+  using LocalViewFactory = std::shared_ptr<LocalEntityView>(*)(Entity *, const YAML::Node &);
+  using LocalControllerFactory = std::shared_ptr<LocalEntityController>(*)(Entity *, const YAML::Node &);
   
   EntityFactory(EntityManager &, LocalEntityViewManager &, LocalEntityControllerManager &);
   ~EntityFactory() = default;
   
-  EntityID make(const std::string &);
+  EntityID make(const std::string &, Rect);
   void destroy(EntityID);
   
   template <typename Base, typename ...Args>
   void addFactory(const std::string &name, std::shared_ptr<Base>(*factory)(Args...)) {
-    this->*FactoryMember<Base>::MEMBER.emplace(name, factory);
+    (this->*FactoryMember<Base>::MEMBER).emplace(name, factory);
   }
   
   template <typename Base, typename Sub>
@@ -55,7 +56,7 @@ public:
     !std::is_same<Base, Sub>::value
   >
   addSimpleFactory() {
-    this->*FactoryMember<Base>::MEMBER.emplace(
+    (this->*FactoryMember<Base>::MEMBER).emplace(
       Utils::typeName<Sub>().to_string(),
       &SimpleFactoryMethod<Base, Sub>::method
     );
@@ -80,20 +81,17 @@ private:
   
   template <typename Base, typename Sub>
   struct SimpleFactoryMethod {
-    static std::shared_ptr<Base> method(const YAML::Node &) {
-      return std::make_shared<Sub>();
+    static std::shared_ptr<Base> method(Entity *entity, const YAML::Node &) {
+      return std::make_shared<Sub>(entity);
     }
   };
   
   template <typename Sub>
   struct SimpleFactoryMethod<Entity, Sub> {
-    static std::shared_ptr<Entity> method(const EntityID id, const YAML::Node &) {
-      return std::make_shared<Sub>(id);
+    static std::shared_ptr<Entity> method(const EntityID id, const Rect rect, const YAML::Node &) {
+      return std::make_shared<Sub>(id, rect);
     }
   };
-  
-  template <typename Base>
-  std::shared_ptr<Base> makeObject(const std::string &, const YAML::Node &) const;
 };
 
 template <>

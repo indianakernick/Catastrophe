@@ -9,16 +9,23 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
-#include "game logic.hpp"
-#include "game view.hpp"
+#include "entity manager.hpp"
+#include "entity factory.hpp"
+#include "local entity view manager.hpp"
 #include <Simpleton/Application/sdl app.hpp>
+#include "local entity controller manager.hpp"
 
 class AppImpl : public Game::SDLApp {
 public:
-  AppImpl() = default;
+  AppImpl();
   
-  GameLogic logic;
-  GameView view;
+  EntityManager entityMan;
+  LocalEntityViewManager localViewMan;
+  LocalEntityControllerManager localControllerMan;
+  //factory depends on the above members
+  EntityFactory factory;
+  
+  EntityID playerID;
 
 private:
   bool init() override;

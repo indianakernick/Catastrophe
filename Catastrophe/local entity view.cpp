@@ -7,3 +7,6 @@
 //
 
 #include "local entity view.hpp"
+
+LocalEntityView::LocalEntityView(Entity *entity)
+  : EntityView(entity) {}

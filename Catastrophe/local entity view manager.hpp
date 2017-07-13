@@ -14,8 +14,11 @@
 
 class LocalEntityViewManager {
 public:
-  LocalEntityViewManager(SDL_Renderer *renderer, const std::string &);
+  LocalEntityViewManager();
   ~LocalEntityViewManager() = default;
+  
+  void init(SDL_Renderer *, const std::string &);
+  void quit();
   
   void render(uint64_t);
   

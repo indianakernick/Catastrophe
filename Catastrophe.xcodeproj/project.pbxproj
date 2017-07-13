@@ -31,6 +31,8 @@
 		45F3DB401F1603880058D36B /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB3E1F1603880058D36B /* entity manager.cpp */; };
 		45F3DB431F1608A00058D36B /* entity factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB411F1608A00058D36B /* entity factory.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
+		45F3DB471F1715CC0058D36B /* player.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45F3DB461F1715CC0058D36B /* player.yaml */; };
+		45F3DB4A1F1716B00058D36B /* register factory functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB481F1716B00058D36B /* register factory functions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,9 @@
 		45F3DB411F1608A00058D36B /* entity factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity factory.cpp"; sourceTree = "<group>"; };
 		45F3DB421F1608A00058D36B /* entity factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity factory.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
+		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
+		45F3DB481F1716B00058D36B /* register factory functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "register factory functions.cpp"; sourceTree = "<group>"; };
+		45F3DB491F1716B00058D36B /* register factory functions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "register factory functions.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +111,7 @@
 				451FA2881F149B2200C43BE9 /* rat.png */,
 				451FA2891F149B2200C43BE9 /* sprites.atlas */,
 				451FA28A1F149B2200C43BE9 /* sprites.png */,
+				45F3DB461F1715CC0058D36B /* player.yaml */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -148,6 +154,10 @@
 				4592BAFE1F11D85700D1640D /* constants.hpp */,
 				4592BB321F1320FE00D1640D /* entity id.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
+				45F3DB481F1716B00058D36B /* register factory functions.cpp */,
+				45F3DB491F1716B00058D36B /* register factory functions.hpp */,
+				45F3DB411F1608A00058D36B /* entity factory.cpp */,
+				45F3DB421F1608A00058D36B /* entity factory.hpp */,
 				45F3DB2C1F15E9550058D36B /* model */,
 				45F3DB2D1F15E9690058D36B /* view */,
 				45F3DB2E1F15E9750058D36B /* controller */,
@@ -176,8 +186,6 @@
 				45F3DB3F1F1603880058D36B /* entity manager.hpp */,
 				451FA28F1F15D0AD00C43BE9 /* simple entity.cpp */,
 				451FA2901F15D0AD00C43BE9 /* simple entity.hpp */,
-				45F3DB411F1608A00058D36B /* entity factory.cpp */,
-				45F3DB421F1608A00058D36B /* entity factory.hpp */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -277,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				451FA28E1F149B2200C43BE9 /* sprites.png in Resources */,
+				45F3DB471F1715CC0058D36B /* player.yaml in Resources */,
 				451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 			);
@@ -320,6 +329,7 @@
 				45F3DB401F1603880058D36B /* entity manager.cpp in Sources */,
 				45F3DB3D1F15F9A00058D36B /* local entity view manager.cpp in Sources */,
 				4592BB211F12195000D1640D /* entity.cpp in Sources */,
+				45F3DB4A1F1716B00058D36B /* register factory functions.cpp in Sources */,
 				45F3DB211F15DBB50058D36B /* entity view.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,7 @@
 
 class LocalEntityView : public EntityView {
 public:
+  LocalEntityView() = default;
   explicit LocalEntityView(Entity *);
   virtual ~LocalEntityView() = default;
   
