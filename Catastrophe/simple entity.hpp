@@ -23,6 +23,7 @@ public:
   Rect getRect() const override;
   bool isMoving() const override;
   Math::Dir getMotionDir() const override;
+  float getMotionProgress() const override;
   
   void update(uint64_t) override;
 

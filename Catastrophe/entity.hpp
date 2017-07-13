@@ -26,6 +26,7 @@ public:
   virtual Rect getRect() const = 0;
   virtual bool isMoving() const = 0;
   virtual Math::Dir getMotionDir() const = 0;
+  virtual float getMotionProgress() const = 0;
 
   //interface for model manager (game logic)
   virtual void update(uint64_t) = 0;
