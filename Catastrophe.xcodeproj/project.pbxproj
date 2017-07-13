@@ -29,6 +29,8 @@
 		45F3DB3A1F15F84A0058D36B /* local entity view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB381F15F84A0058D36B /* local entity view.cpp */; };
 		45F3DB3D1F15F9A00058D36B /* local entity view manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB3B1F15F9A00058D36B /* local entity view manager.cpp */; };
 		45F3DB401F1603880058D36B /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB3E1F1603880058D36B /* entity manager.cpp */; };
+		45F3DB431F1608A00058D36B /* entity factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB411F1608A00058D36B /* entity factory.cpp */; };
+		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,9 @@
 		45F3DB3C1F15F9A00058D36B /* local entity view manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "local entity view manager.hpp"; sourceTree = "<group>"; };
 		45F3DB3E1F1603880058D36B /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
 		45F3DB3F1F1603880058D36B /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
+		45F3DB411F1608A00058D36B /* entity factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity factory.cpp"; sourceTree = "<group>"; };
+		45F3DB421F1608A00058D36B /* entity factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity factory.hpp"; sourceTree = "<group>"; };
+		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
 				4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */,
 				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
 				4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
@@ -152,6 +158,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */,
 				4592BB2B1F1319D400D1640D /* libUnpacker.dylib */,
 				4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */,
 				4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */,
@@ -169,6 +176,8 @@
 				45F3DB3F1F1603880058D36B /* entity manager.hpp */,
 				451FA28F1F15D0AD00C43BE9 /* simple entity.cpp */,
 				451FA2901F15D0AD00C43BE9 /* simple entity.hpp */,
+				45F3DB411F1608A00058D36B /* entity factory.cpp */,
+				45F3DB421F1608A00058D36B /* entity factory.hpp */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -304,6 +313,7 @@
 				4592BAFD1F11D84300D1640D /* app impl.cpp in Sources */,
 				45F3DB271F15E84A0058D36B /* entity controller.cpp in Sources */,
 				45F3DB241F15DCA00058D36B /* rendering context.cpp in Sources */,
+				45F3DB431F1608A00058D36B /* entity factory.cpp in Sources */,
 				45F3DB2A1F15E8930058D36B /* simple entity view.cpp in Sources */,
 				451FA2721F13430300C43BE9 /* camera.cpp in Sources */,
 				4592BAE41F11B51400D1640D /* main.cpp in Sources */,
@@ -416,17 +426,18 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/Cellar/sdl2/**",
 					/usr/local/include,
+					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
+					"/usr/local/Cellar/yaml-cpp/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/sdl2/**",
 					/usr/local/lib,
+					"/usr/local/Cellar/sdl2/**",
+					"/usr/local/Cellar/sdl2_ttf/**",
+					"/usr/local/Cellar/yaml-cpp/**",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -451,17 +462,18 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/Cellar/sdl2/**",
 					/usr/local/include,
+					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
+					"/usr/local/Cellar/yaml-cpp/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/sdl2/**",
 					/usr/local/lib,
+					"/usr/local/Cellar/sdl2/**",
+					"/usr/local/Cellar/sdl2_ttf/**",
+					"/usr/local/Cellar/yaml-cpp/**",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",

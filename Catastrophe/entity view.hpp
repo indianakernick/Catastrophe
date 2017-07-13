@@ -14,6 +14,7 @@
 
 class EntityView {
 public:
+  EntityView() = default;
   explicit EntityView(Entity *);
   virtual ~EntityView() = 0;
   
@@ -26,7 +27,7 @@ public:
   }
   
 private:
-  Entity *entity;
+  Entity *entity = nullptr;
 };
 
 #endif

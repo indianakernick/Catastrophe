@@ -13,6 +13,7 @@
 
 class EntityController {
 public:
+  EntityController() = default;
   explicit EntityController(Entity *);
   virtual ~EntityController() = 0;
   
@@ -25,7 +26,7 @@ public:
   }
 
 private:
-  Entity *entity;
+  Entity *entity = nullptr;
 };
 
 #endif
