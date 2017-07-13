@@ -9,15 +9,12 @@
 #ifndef simple_entity_controller_hpp
 #define simple_entity_controller_hpp
 
-#include "local entity controller.hpp"
+#include "local ortho move entity controller.hpp"
 
-class SimpleEntityController final : public LocalEntityController {
+class SimpleEntityController final : public LocalOrthoMoveEntityController {
 public:
-  explicit SimpleEntityController(Entity *);
+  SimpleEntityController(Entity *, Mapping);
   ~SimpleEntityController() = default;
-  
-  bool onKeyDown(const SDL_KeyboardEvent &) override;
-  bool onKeyUp(const SDL_KeyboardEvent &) override;
 };
 
 #endif

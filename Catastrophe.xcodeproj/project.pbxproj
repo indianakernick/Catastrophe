@@ -36,6 +36,8 @@
 		45F3DB4D1F17337B0058D36B /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB4B1F17337B0058D36B /* world.cpp */; };
 		45F3DB511F1752F40058D36B /* static entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB4F1F1752F30058D36B /* static entity.cpp */; };
 		45F3DB541F1753930058D36B /* ortho move entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB521F1753930058D36B /* ortho move entity.cpp */; };
+		45F3DB571F175B3A0058D36B /* local ortho move entity controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB551F175B3A0058D36B /* local ortho move entity controller.cpp */; };
+		45F3DB5A1F1760900058D36B /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB581F1760900058D36B /* string to scancode.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,10 @@
 		45F3DB501F1752F40058D36B /* static entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static entity.hpp"; sourceTree = "<group>"; };
 		45F3DB521F1753930058D36B /* ortho move entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ortho move entity.cpp"; sourceTree = "<group>"; };
 		45F3DB531F1753930058D36B /* ortho move entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "ortho move entity.hpp"; sourceTree = "<group>"; };
+		45F3DB551F175B3A0058D36B /* local ortho move entity controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "local ortho move entity controller.cpp"; sourceTree = "<group>"; };
+		45F3DB561F175B3A0058D36B /* local ortho move entity controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "local ortho move entity controller.hpp"; sourceTree = "<group>"; };
+		45F3DB581F1760900058D36B /* string to scancode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "string to scancode.cpp"; sourceTree = "<group>"; };
+		45F3DB591F1760900058D36B /* string to scancode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "string to scancode.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,8 @@
 				45F3DB2C1F15E9550058D36B /* model */,
 				45F3DB2D1F15E9690058D36B /* view */,
 				45F3DB2E1F15E9750058D36B /* controller */,
+				45F3DB581F1760900058D36B /* string to scancode.cpp */,
+				45F3DB591F1760900058D36B /* string to scancode.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -235,6 +243,8 @@
 				45F3DB301F15EA670058D36B /* local entity controller.hpp */,
 				45F3DB321F15EF490058D36B /* local entity controller manager.cpp */,
 				45F3DB331F15EF490058D36B /* local entity controller manager.hpp */,
+				45F3DB551F175B3A0058D36B /* local ortho move entity controller.cpp */,
+				45F3DB561F175B3A0058D36B /* local ortho move entity controller.hpp */,
 				45F3DB351F15EF640058D36B /* simple entity controller.cpp */,
 				45F3DB361F15EF640058D36B /* simple entity controller.hpp */,
 			);
@@ -334,6 +344,8 @@
 				45F3DB311F15EA670058D36B /* local entity controller.cpp in Sources */,
 				45F3DB371F15EF640058D36B /* simple entity controller.cpp in Sources */,
 				45F3DB3A1F15F84A0058D36B /* local entity view.cpp in Sources */,
+				45F3DB5A1F1760900058D36B /* string to scancode.cpp in Sources */,
+				45F3DB571F175B3A0058D36B /* local ortho move entity controller.cpp in Sources */,
 				451FA2911F15D0AD00C43BE9 /* simple entity.cpp in Sources */,
 				45F3DB4D1F17337B0058D36B /* world.cpp in Sources */,
 				45F3DB341F15EF490058D36B /* local entity controller manager.cpp in Sources */,

@@ -8,4 +8,8 @@
     sprite name: rat
 - type: local controller
   factory: SimpleEntityController
-  params: null
+  params:
+    up key: W
+    right key: D
+    down key: S
+    left key: A

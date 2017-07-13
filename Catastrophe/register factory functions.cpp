@@ -12,6 +12,7 @@
 #include "entity factory.hpp"
 #include "simple entity.hpp"
 #include "simple entity view.hpp"
+#include "string to scancode.hpp"
 #include "simple entity controller.hpp"
 
 std::shared_ptr<Entity> makeSimpleEntity(const EntityID id, const Rect rect, const YAML::Node &params) {
@@ -22,8 +23,20 @@ std::shared_ptr<LocalEntityView> makeSimpleView(Entity *entity, const YAML::Node
   return std::make_shared<SimpleEntityView>(entity, params["sprite name"].as<std::string>());
 }
 
+std::shared_ptr<LocalEntityController> makeSimpleController(Entity *entity, const YAML::Node &params) {
+  return std::make_shared<SimpleEntityController>(
+    entity,
+    LocalOrthoMoveEntityController::Mapping({
+      strToScancode(params["up key"].as<std::string>()),
+      strToScancode(params["right key"].as<std::string>()),
+      strToScancode(params["down key"].as<std::string>()),
+      strToScancode(params["left key"].as<std::string>())
+    })
+  );
+}
+
 void registerFactoryFunctions(EntityFactory &factory) {
   factory.addFactory("SimpleEntity", &makeSimpleEntity);
   factory.addFactory("SimpleEntityView", &makeSimpleView);
-  factory.addSimpleFactory<LocalEntityController, SimpleEntityController>();
+  factory.addFactory("SimpleEntityController", &makeSimpleController);
 }
