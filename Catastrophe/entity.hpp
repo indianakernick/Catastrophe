@@ -11,26 +11,14 @@
 
 #include "rect.hpp"
 #include "entity id.hpp"
-#include <Simpleton/Math/dir.hpp>
 
 class EntityManager;
 
 class Entity {
 public:
-  explicit Entity(EntityID);
+  Entity(EntityID, Rect);
   virtual ~Entity() = default;
-
-  //interface for controller
-  virtual void startMoving(Math::Dir) = 0;
-  virtual void stopMoving() = 0;
   
-  //interface for view. The view cannot modify the model
-  virtual Rect getRect() const = 0;
-  virtual bool isMoving() const = 0;
-  virtual Math::Dir getMotionDir() const = 0;
-  virtual float getMotionProgress() const = 0;
-
-  //interface for EntityManager
   virtual void update(EntityManager &, uint64_t) = 0;
   ///Can an entity collide with this entity?
   virtual bool entityCanCollide(Entity *) = 0;
@@ -39,8 +27,11 @@ public:
   ///This entity has collided with another entity
   virtual void onCollisionWithEntity(Entity *) = 0;
 
-  //interface for model
+  Rect getRect() const;
   EntityID getID() const;
+
+protected:
+  Rect rect;
 
 private:
   EntityID id;

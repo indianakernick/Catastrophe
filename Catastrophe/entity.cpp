@@ -8,8 +8,12 @@
 
 #include "entity.hpp"
 
-Entity::Entity(const EntityID id)
-  : id(id) {}
+Entity::Entity(const EntityID id, const Rect rect)
+  : rect(rect), id(id) {}
+
+Rect Entity::getRect() const {
+  return rect;
+}
 
 EntityID Entity::getID() const {
   return id;

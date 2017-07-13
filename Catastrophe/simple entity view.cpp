@@ -9,14 +9,16 @@
 #include "simple entity view.hpp"
 
 #include "dir to vec.hpp"
+#include "ortho move entity.hpp"
 
 SimpleEntityView::SimpleEntityView(Entity *entity, const std::string &name)
   : LocalEntityView(entity), spriteName(name) {}
 
 void SimpleEntityView::render(RenderingContext &ctx, uint64_t) {
+  const OrthoMoveEntity &entity = dynamic_cast<OrthoMoveEntity &>(getEntity());
   Rect rect = getEntity().getRect();
-  if (getEntity().isMoving()) {
-    rect.p += ToVec::conv(getEntity().getMotionDir(), getEntity().getMotionProgress());
+  if (entity.isMoving()) {
+    rect.p += ToVec::conv(entity.getMotionDir(), entity.getMotionProgress());
   }
   ctx.renderSprite(spriteName, rect);
 }

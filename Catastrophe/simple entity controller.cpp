@@ -8,22 +8,25 @@
 
 #include "simple entity controller.hpp"
 
+#include "ortho move entity.hpp"
+
 SimpleEntityController::SimpleEntityController(Entity *entity)
   : LocalEntityController(entity) {}
 
 bool SimpleEntityController::onKeyDown(const SDL_KeyboardEvent &event) {
+  OrthoMoveEntity &entity = dynamic_cast<OrthoMoveEntity &>(getEntity());
   switch (event.keysym.scancode) {
     case SDL_SCANCODE_UP:
-      getEntity().startMoving(Math::Dir::UP);
+      entity.startMoving(Math::Dir::UP);
       return true;
     case SDL_SCANCODE_RIGHT:
-      getEntity().startMoving(Math::Dir::RIGHT);
+      entity.startMoving(Math::Dir::RIGHT);
       return true;
     case SDL_SCANCODE_DOWN:
-      getEntity().startMoving(Math::Dir::DOWN);
+      entity.startMoving(Math::Dir::DOWN);
       return true;
     case SDL_SCANCODE_LEFT:
-      getEntity().startMoving(Math::Dir::LEFT);
+      entity.startMoving(Math::Dir::LEFT);
       return true;
     default:
       return false;
@@ -36,7 +39,7 @@ bool SimpleEntityController::onKeyUp(const SDL_KeyboardEvent &event) {
     case SDL_SCANCODE_RIGHT:
     case SDL_SCANCODE_DOWN:
     case SDL_SCANCODE_LEFT:
-      getEntity().stopMoving();
+      dynamic_cast<OrthoMoveEntity &>(getEntity()).stopMoving();
       return true;
     default:
       return false;

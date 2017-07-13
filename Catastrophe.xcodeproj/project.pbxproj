@@ -34,6 +34,8 @@
 		45F3DB471F1715CC0058D36B /* player.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45F3DB461F1715CC0058D36B /* player.yaml */; };
 		45F3DB4A1F1716B00058D36B /* register factory functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB481F1716B00058D36B /* register factory functions.cpp */; };
 		45F3DB4D1F17337B0058D36B /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB4B1F17337B0058D36B /* world.cpp */; };
+		45F3DB511F1752F40058D36B /* static entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB4F1F1752F30058D36B /* static entity.cpp */; };
+		45F3DB541F1753930058D36B /* ortho move entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB521F1753930058D36B /* ortho move entity.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,10 @@
 		45F3DB4B1F17337B0058D36B /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
 		45F3DB4C1F17337B0058D36B /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
 		45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "dir to vec.hpp"; sourceTree = "<group>"; };
+		45F3DB4F1F1752F30058D36B /* static entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static entity.cpp"; sourceTree = "<group>"; };
+		45F3DB501F1752F40058D36B /* static entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static entity.hpp"; sourceTree = "<group>"; };
+		45F3DB521F1753930058D36B /* ortho move entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ortho move entity.cpp"; sourceTree = "<group>"; };
+		45F3DB531F1753930058D36B /* ortho move entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "ortho move entity.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +197,10 @@
 				4592BB201F12195000D1640D /* entity.hpp */,
 				45F3DB3E1F1603880058D36B /* entity manager.cpp */,
 				45F3DB3F1F1603880058D36B /* entity manager.hpp */,
+				45F3DB4F1F1752F30058D36B /* static entity.cpp */,
+				45F3DB501F1752F40058D36B /* static entity.hpp */,
+				45F3DB521F1753930058D36B /* ortho move entity.cpp */,
+				45F3DB531F1753930058D36B /* ortho move entity.hpp */,
 				451FA28F1F15D0AD00C43BE9 /* simple entity.cpp */,
 				451FA2901F15D0AD00C43BE9 /* simple entity.hpp */,
 			);
@@ -331,6 +341,7 @@
 				45F3DB271F15E84A0058D36B /* entity controller.cpp in Sources */,
 				45F3DB241F15DCA00058D36B /* rendering context.cpp in Sources */,
 				45F3DB431F1608A00058D36B /* entity factory.cpp in Sources */,
+				45F3DB511F1752F40058D36B /* static entity.cpp in Sources */,
 				45F3DB2A1F15E8930058D36B /* simple entity view.cpp in Sources */,
 				451FA2721F13430300C43BE9 /* camera.cpp in Sources */,
 				4592BAE41F11B51400D1640D /* main.cpp in Sources */,
@@ -338,6 +349,7 @@
 				45F3DB3D1F15F9A00058D36B /* local entity view manager.cpp in Sources */,
 				4592BB211F12195000D1640D /* entity.cpp in Sources */,
 				45F3DB4A1F1716B00058D36B /* register factory functions.cpp in Sources */,
+				45F3DB541F1753930058D36B /* ortho move entity.cpp in Sources */,
 				45F3DB211F15DBB50058D36B /* entity view.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
