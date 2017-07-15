@@ -8,6 +8,8 @@
 
 #include "entity manager.hpp"
 
+#include "entity collision component.hpp"
+
 void EntityManager::update(const uint64_t delta) {
   for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
     e->second->update(*this, delta);
@@ -33,19 +35,25 @@ bool EntityManager::entityCanMoveTo(Entity *entity, const Rect dest) const {
     if (e->second.get() == entity) {
       continue;
     }
-    if (dest.interceptsWith(e->second->getRect()) && !e->second->entityCanCollide(entity)) {
-      return false;
+    if (dest.interceptsWith(e->second->rect) && e->second->hasComp<EntityCollisionComponent>()) {
+      if (!e->second->getCompRef<EntityCollisionComponent>().entityCanCollide(entity)) {
+        return false;
+      }
     }
   }
   return true;
 }
 
 void EntityManager::onEntityMove(Entity *entity) {
-  const Rect entityRect = entity->getRect();
+  const Rect entityRect = entity->rect;
   for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
-    if (entityRect.interceptsWith(e->second->getRect())) {
-      e->second->onEntityCollision(entity);
-      entity->onCollisionWithEntity(e->second.get());
+    if (entityRect.interceptsWith(e->second->rect)) {
+      if (e->second->hasComp<EntityCollisionComponent>()) {
+        e->second->getCompRef<EntityCollisionComponent>().onEntityCollision(entity);
+      }
+      if (entity->hasComp<EntityCollisionComponent>()) {
+        entity->getCompRef<EntityCollisionComponent>().onCollisionWithEntity(e->second.get());
+      }
     }
   }
 }

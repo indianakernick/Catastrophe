@@ -11,10 +11,6 @@
 
 #include "local entity controller.hpp"
 
-//I hope the class names don't get any longer than this!
-//I beleive I am using inhertance the right way because this
-//object is very specific and therefore has a very specific name.
-
 ///A local controller for entities that can move orthogonally
 class LocalOrthoMoveEntityController : public LocalEntityController {
 public:

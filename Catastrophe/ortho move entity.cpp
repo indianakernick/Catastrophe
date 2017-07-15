@@ -11,55 +11,54 @@
 #include "dir to vec.hpp"
 #include "entity manager.hpp"
 
-OrthoMoveEntity::OrthoMoveEntity(const EntityID id, const Rect rect, const int moveSpeed)
-  : Entity(id, rect), freqLimiter(Time::OP_PER_SEC, moveSpeed) {}
+OrthoMoveComponent::OrthoMoveComponent(const int moveSpeed)
+  : freqLimiter(Time::OP_PER_SEC, moveSpeed) {}
 
-void OrthoMoveEntity::startMoving(const Math::Dir dir) {
-  if (moving) {
+void OrthoMoveComponent::startMoving(const Math::Dir dir) {
+  if (moveDir != Math::Dir::NONE) {
     nextMoveDir = dir;
-    hasNextMoveDir = true;
   } else {
     freqLimiter.reset();
     moveDir = dir;
-    moving = true;
   }
 }
 
-void OrthoMoveEntity::stopMoving() {
-  hasNextMoveDir = false;
+void OrthoMoveComponent::stopMoving() {
+  nextMoveDir = Math::Dir::NONE;
 }
 
-bool OrthoMoveEntity::isMoving() const {
-  return moving;
+bool OrthoMoveComponent::isMoving() const {
+  return moveDir != Math::Dir::NONE;
 }
 
-Math::Dir OrthoMoveEntity::getMotionDir() const {
+Math::Dir OrthoMoveComponent::getMotionDir() const {
   return moveDir;
 }
 
-float OrthoMoveEntity::getMotionProgress() const {
-  if (moving) {
-    return static_cast<float>(freqLimiter.getTimeSinceLast()) / freqLimiter.getDuration();
-  } else {
+float OrthoMoveComponent::getMotionProgress() const {
+  if (moveDir == Math::Dir::NONE) {
     return 0.0f;
+  } else {
+    return freqLimiter.getProgress<float>();
   }
 }
 
-void OrthoMoveEntity::update(EntityManager &entityMan, const uint64_t delta) {
+void OrthoMoveComponent::update(EntityManager &entityMan, const uint64_t delta) {
+  Entity &entity = getEntity();
   freqLimiter.advance(delta);
   
-  if (moving && freqLimiter.canDoOverlap()) {
-    rect.p += ToVec::conv(moveDir);
-    entityMan.onEntityMove(this);
-    if (hasNextMoveDir) {
-      const Rect nextRect = {rect.p + ToVec::conv(nextMoveDir), rect.s};
-      if (entityMan.entityCanMoveTo(this, nextRect)) {
+  if (moveDir != Math::Dir::NONE && freqLimiter.canDoOverlap()) {
+    entity.rect.p += ToVec::conv(moveDir);
+    entityMan.onEntityMove(&entity);
+    if (nextMoveDir != Math::Dir::NONE) {
+      const Rect nextRect = {entity.rect.p + ToVec::conv(nextMoveDir), entity.rect.s};
+      if (entityMan.entityCanMoveTo(&entity, nextRect)) {
         moveDir = nextMoveDir;
       } else {
-        moving = false;
+        moveDir = Math::Dir::NONE;
       }
     } else {
-      moving = false;
+      moveDir = Math::Dir::NONE;
     }
   }
 }

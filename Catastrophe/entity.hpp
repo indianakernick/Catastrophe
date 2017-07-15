@@ -9,30 +9,25 @@
 #ifndef entity_hpp
 #define entity_hpp
 
+#include <vector>
 #include "rect.hpp"
 #include "entity id.hpp"
+#include "entity component.hpp"
+#include "component container.hpp"
 
 class EntityManager;
 
-class Entity {
+class Entity final : public ComponentContainer<Entity, EntityComponent, &EntityComponent::entity> {
 public:
   Entity(EntityID, Rect);
-  virtual ~Entity() = default;
+  ~Entity() = default;
   
-  virtual void update(EntityManager &, uint64_t) = 0;
-  ///Can an entity collide with this entity?
-  virtual bool entityCanCollide(Entity *) = 0;
-  ///An entity has collided with this entity
-  virtual void onEntityCollision(Entity *) = 0;
-  ///This entity has collided with another entity
-  virtual void onCollisionWithEntity(Entity *) = 0;
+  void update(EntityManager &, uint64_t);
 
-  Rect getRect() const;
   EntityID getID() const;
-
-protected:
+  
   Rect rect;
-
+  
 private:
   EntityID id;
 };

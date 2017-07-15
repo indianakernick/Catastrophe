@@ -13,8 +13,6 @@
 #include <SDL2/SDL_events.h>
 #include "local entity controller.hpp"
 
-//thats a long name
-
 class LocalEntityControllerManager {
 public:
   LocalEntityControllerManager() = default;

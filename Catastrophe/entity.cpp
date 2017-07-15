@@ -11,8 +11,8 @@
 Entity::Entity(const EntityID id, const Rect rect)
   : rect(rect), id(id) {}
 
-Rect Entity::getRect() const {
-  return rect;
+void Entity::update(EntityManager &entityMan, const uint64_t delta) {
+  updateComps(&EntityComponent::update, entityMan, delta);
 }
 
 EntityID Entity::getID() const {
