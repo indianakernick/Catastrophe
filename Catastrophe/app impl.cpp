@@ -30,27 +30,35 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else if (e.type == SDL_KEYDOWN) {
-      switch (e.key.keysym.scancode) {
-        case SDL_SCANCODE_UP:
-          player.startMoving(Math::Dir::UP);
-          break;
-        case SDL_SCANCODE_RIGHT:
-          player.startMoving(Math::Dir::RIGHT);
-          break;
-        case SDL_SCANCODE_DOWN:
-          player.startMoving(Math::Dir::DOWN);
-          break;
-        case SDL_SCANCODE_LEFT:
-          player.startMoving(Math::Dir::LEFT);
-        default: ;
+      if (e.key.repeat == 0) {
+        switch (e.key.keysym.scancode) {
+          case SDL_SCANCODE_W:
+            player.startMoving(Math::Dir::UP);
+            break;
+          case SDL_SCANCODE_D:
+            player.startMoving(Math::Dir::RIGHT);
+            break;
+          case SDL_SCANCODE_S:
+            player.startMoving(Math::Dir::DOWN);
+            break;
+          case SDL_SCANCODE_A:
+            player.startMoving(Math::Dir::LEFT);
+          default: ;
+        }
       }
     } else if (e.type == SDL_KEYUP) {
       switch (e.key.keysym.scancode) {
-        case SDL_SCANCODE_UP:
-        case SDL_SCANCODE_RIGHT:
-        case SDL_SCANCODE_DOWN:
-        case SDL_SCANCODE_LEFT:
-          player.stopMoving();
+        case SDL_SCANCODE_W:
+          player.stopMoving(Math::Dir::UP);
+          break;
+        case SDL_SCANCODE_D:
+          player.stopMoving(Math::Dir::RIGHT);
+          break;
+        case SDL_SCANCODE_S:
+          player.stopMoving(Math::Dir::DOWN);
+          break;
+        case SDL_SCANCODE_A:
+          player.stopMoving(Math::Dir::LEFT);
         default: ;
       }
     }

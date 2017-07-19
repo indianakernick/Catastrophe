@@ -10,23 +10,31 @@
 
 #include "constants.hpp"
 #include "dir to vec.hpp"
+#include <glm/gtx/norm.hpp>
 
 Player::Player()
-  : rect(0, 0, 1, 1),
-    moveDir(Math::Dir::NONE) {}
+  : rect(0, 0, 1, 1) {}
 
 void Player::startMoving(const Math::Dir dir) {
-  moveDir = dir;
+  motion[Math::ToNum<size_t>::conv(dir)] = true;
 }
 
-void Player::stopMoving() {
-  moveDir = Math::Dir::NONE;
+void Player::stopMoving(const Math::Dir dir) {
+  motion[Math::ToNum<size_t>::conv(dir)] = false;
 }
 
 void Player::update(const float delta) {
-  if (moveDir != Math::Dir::NONE) {
-    const float moveSpeed = 1.0f;//units per second
-    rect.p += ToVec::conv(moveDir, delta * moveSpeed);
+  const float moveSpeed = 2.0f;
+  
+  glm::vec2 moveDir = {0.0f, 0.0f};
+  moveDir += ToVec::conv(Math::Dir::UP,    static_cast<float>(motion[0]));
+  moveDir += ToVec::conv(Math::Dir::RIGHT, static_cast<float>(motion[1]));
+  moveDir += ToVec::conv(Math::Dir::DOWN,  static_cast<float>(motion[2]));
+  moveDir += ToVec::conv(Math::Dir::LEFT,  static_cast<float>(motion[3]));
+  
+  if (glm::length2(moveDir) > 0.0f) {
+    //diagonal motion has the same speed as orthogonal motion
+    rect.p += glm::normalize(moveDir) * (delta * moveSpeed);
   }
 }
 

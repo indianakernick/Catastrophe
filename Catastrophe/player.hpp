@@ -21,14 +21,14 @@ public:
   ~Player() = default;
 
   void startMoving(Math::Dir);
-  void stopMoving();
+  void stopMoving(Math::Dir);
   
   void update(float);
   void render(SDL_Renderer *);
   
 private:
   Rect rect;
-  Math::Dir moveDir;
+  bool motion[4] = {false};
 };
 
 #endif
