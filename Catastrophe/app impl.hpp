@@ -9,6 +9,7 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
+#include "player.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
@@ -16,6 +17,8 @@ public:
   AppImpl();
 
 private:
+  Player player;
+
   bool init() override;
   void quit() override;
   bool input(uint64_t) override;

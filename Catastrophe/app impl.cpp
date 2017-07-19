@@ -16,6 +16,7 @@ AppImpl::AppImpl() {}
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
+  SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   return true;
 }
 
@@ -28,19 +29,42 @@ bool AppImpl::input(uint64_t) {
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
       return false;
-    } else {
-      
+    } else if (e.type == SDL_KEYDOWN) {
+      switch (e.key.keysym.scancode) {
+        case SDL_SCANCODE_UP:
+          player.startMoving(Math::Dir::UP);
+          break;
+        case SDL_SCANCODE_RIGHT:
+          player.startMoving(Math::Dir::RIGHT);
+          break;
+        case SDL_SCANCODE_DOWN:
+          player.startMoving(Math::Dir::DOWN);
+          break;
+        case SDL_SCANCODE_LEFT:
+          player.startMoving(Math::Dir::LEFT);
+        default: ;
+      }
+    } else if (e.type == SDL_KEYUP) {
+      switch (e.key.keysym.scancode) {
+        case SDL_SCANCODE_UP:
+        case SDL_SCANCODE_RIGHT:
+        case SDL_SCANCODE_DOWN:
+        case SDL_SCANCODE_LEFT:
+          player.stopMoving();
+        default: ;
+      }
     }
   }
   return true;
 }
 
-bool AppImpl::update(const uint64_t) {
+bool AppImpl::update(const uint64_t deltaMS) {
+  player.update(deltaMS / 1000.0f);
   return true;
 }
 
 void AppImpl::render(const uint64_t) {
   renderer.clear();
-  
+  player.render(renderer.get());
   renderer.present();
 }
