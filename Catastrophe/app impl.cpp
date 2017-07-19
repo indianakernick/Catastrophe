@@ -9,34 +9,17 @@
 #include "app impl.hpp"
 
 #include "constants.hpp"
-#include <Simpleton/Event/manager.hpp>
-#include "register factory functions.hpp"
-#include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<AppImpl> app = nullptr;
 
-AppImpl::AppImpl()
-  : entityMan(),
-    localViewMan(),
-    localControllerMan(),
-    factory(entityMan, localViewMan, localControllerMan),
-    world(factory, entityMan) {}
+AppImpl::AppImpl() {}
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
-  localViewMan.init(renderer.get(), SPRITE_SHEET_PATH);
-  
-  registerFactoryFunctions(factory);
-  
-  world.init();
-  
   return true;
 }
 
 void AppImpl::quit() {
-  world.quit();
-
-  localViewMan.quit();
   SDLApp::quitWindow();
 }
 
@@ -46,21 +29,18 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      localControllerMan.handleEvent(e);
+      
     }
   }
   return true;
 }
 
-bool AppImpl::update(const uint64_t delta) {
-  entityMan.update(delta);
-  world.update(delta);
-  
+bool AppImpl::update(const uint64_t) {
   return true;
 }
 
-void AppImpl::render(const uint64_t delta) {
+void AppImpl::render(const uint64_t) {
   renderer.clear();
-  localViewMan.render(delta);
+  
   renderer.present();
 }
