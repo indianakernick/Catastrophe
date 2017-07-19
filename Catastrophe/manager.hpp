@@ -10,6 +10,7 @@
 #define manager_hpp
 
 #include <new>
+#include <cassert>
 #include "entity.hpp"
 #include "signature bitsets.hpp"
 #include "component storage.hpp"
@@ -26,6 +27,20 @@ public:
   
   Manager() {
     growTo(100);
+  }
+  ~Manager() {
+    clear();
+  }
+  
+  void clear() {
+    for (size_t e = 0; e != nextSize; e++) {
+      if (entities[e].alive) {
+        remAllComps(e);
+        entities[e].alive = false;
+      }
+    }
+    
+    size = nextSize = 0;
   }
   
   Entity &getEntity(const size_t index) {
@@ -86,14 +101,15 @@ public:
     assert(!getCompBit<Comp>(index));
     getCompBit<Comp>(index) = true;
     const size_t compIndex = entities[index].compIndex;
-    new (&components.components[compIndex]) Comp(std::forward<Args>(args)...);
-    return components.components[compIndex];
+    Comp &comp = std::get<std::vector<Comp>>(components.components)[compIndex];
+    new (&comp) Comp(std::forward<Args>(args)...);
+    return comp;
   }
   template <typename Comp>
   void remComp(const size_t index) {
     assert(getCompBit<Comp>(index));
     getCompBit<Comp>(index) = false;
-    components.components[entities[index].compIndex].~Comp();
+    std::get<std::vector<Comp>>(components.components)[entities[index].compIndex].~Comp();
   }
   template <typename Comp>
   Comp &getComp(const size_t index) {
@@ -104,6 +120,22 @@ public:
   const Comp &getComp(const size_t index) const {
     assert(getCompBit<Comp>(index));
     return components.components[entities[index].compIndex];
+  }
+  
+  void remAllComps(const size_t index) {
+    assert(index < nextSize);
+    Entity &entity = entities[index];
+    const size_t compIndex = entity.compIndex;
+    const Bitset bitset = entity.bitset;
+    
+    Utils::forEach<typename Settings::Comps>([this, compIndex, bitset] (auto c) {
+      using Comp = typename decltype(c)::type;
+      if (bitset[Settings::template compID<Comp>()]) {
+        std::get<std::vector<Comp>>(components.components)[compIndex].~Comp();
+      }
+    });
+    
+    entity.bitset.reset();
   }
   
   size_t makeEntity() {
@@ -149,6 +181,9 @@ private:
       
       assert(!entities[deadIndex].alive);
       assert(entities[aliveIndex].alive);
+      
+      //deadIndex was killed this update because it is with the live entities
+      remAllComps(deadIndex);
       
       std::swap(entities[deadIndex], entities[aliveIndex]);
       

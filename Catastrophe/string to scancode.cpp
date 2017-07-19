@@ -10,8 +10,6 @@
 
 #include <unordered_map>
 
-#include "manager.hpp"
-
 namespace {
   std::unordered_map<std::experimental::string_view, SDL_Scancode> map = {
     //{"UNKNOWN", SDL_SCANCODE_UNKNOWN},
