@@ -9,15 +9,11 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
-#include "manager.hpp"
-#include "game settings.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
 public:
   AppImpl();
-  
-  Manager<GameSettings> manager;
 
 private:
   bool init() override;

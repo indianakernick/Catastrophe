@@ -12,7 +12,6 @@
 		453479511F1DAA550083743E /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB581F1760900058D36B /* string to scancode.cpp */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		453479571F1F0ECD0083743E /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAFB1F11D84300D1640D /* app impl.cpp */; };
-		4534795A1F1F0FFE0083743E /* components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479581F1F0FFE0083743E /* components.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -28,16 +27,6 @@
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
 		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
 		451FA2921F15D42F00C43BE9 /* rect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rect.hpp; sourceTree = "<group>"; };
-		4534794F1F1D9D010083743E /* settings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = settings.hpp; sourceTree = "<group>"; };
-		453479501F1DA1B20083743E /* signature bitsets.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "signature bitsets.hpp"; sourceTree = "<group>"; };
-		453479521F1DAAC70083743E /* component storage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "component storage.hpp"; sourceTree = "<group>"; };
-		453479531F1DE5C70083743E /* manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = manager.hpp; sourceTree = "<group>"; };
-		453479551F1DF5F70083743E /* entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
-		453479581F1F0FFE0083743E /* components.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = components.cpp; sourceTree = "<group>"; };
-		453479591F1F0FFE0083743E /* components.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = components.hpp; sourceTree = "<group>"; };
-		4534795B1F1F100C0083743E /* tags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tags.hpp; sourceTree = "<group>"; };
-		4534795C1F1F1C950083743E /* signatures.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signatures.hpp; sourceTree = "<group>"; };
-		4534795D1F1F1CF30083743E /* game settings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "game settings.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,7 +39,6 @@
 		4592BAFC1F11D84300D1640D /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
 		4592BAFE1F11D85700D1640D /* constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = constants.hpp; sourceTree = "<group>"; };
 		4592BB2B1F1319D400D1640D /* libUnpacker.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUnpacker.dylib; path = ../../../../../../../usr/local/lib/libUnpacker.dylib; sourceTree = "<group>"; };
-		4592BB321F1320FE00D1640D /* entity id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
 		45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "dir to vec.hpp"; sourceTree = "<group>"; };
@@ -122,21 +110,10 @@
 				4592BAFB1F11D84300D1640D /* app impl.cpp */,
 				4592BAFC1F11D84300D1640D /* app impl.hpp */,
 				4592BAFE1F11D85700D1640D /* constants.hpp */,
-				4592BB321F1320FE00D1640D /* entity id.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
 				45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */,
 				45F3DB581F1760900058D36B /* string to scancode.cpp */,
 				45F3DB591F1760900058D36B /* string to scancode.hpp */,
-				4534794F1F1D9D010083743E /* settings.hpp */,
-				453479501F1DA1B20083743E /* signature bitsets.hpp */,
-				453479521F1DAAC70083743E /* component storage.hpp */,
-				453479551F1DF5F70083743E /* entity.hpp */,
-				453479531F1DE5C70083743E /* manager.hpp */,
-				453479581F1F0FFE0083743E /* components.cpp */,
-				453479591F1F0FFE0083743E /* components.hpp */,
-				4534795B1F1F100C0083743E /* tags.hpp */,
-				4534795C1F1F1C950083743E /* signatures.hpp */,
-				4534795D1F1F1CF30083743E /* game settings.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -244,7 +221,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,
-				4534795A1F1F0FFE0083743E /* components.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
 				453479511F1DAA550083743E /* string to scancode.cpp in Sources */,
 			);
