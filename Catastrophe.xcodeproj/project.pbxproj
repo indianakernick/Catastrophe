@@ -36,6 +36,10 @@
 		453479A41F2062390083743E /* handle player input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "handle player input.hpp"; sourceTree = "<group>"; };
 		453479A61F20A24D0083743E /* ortho move dir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ortho move dir.cpp"; sourceTree = "<group>"; };
 		453479A71F20A24D0083743E /* ortho move dir.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "ortho move dir.hpp"; sourceTree = "<group>"; };
+		453479A91F20A9520083743E /* window constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "window constants.hpp"; sourceTree = "<group>"; };
+		453479AA1F20A9880083743E /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
+		453479AB1F20A9AE0083743E /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
+		453479AC1F20A9E70083743E /* player constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "player constants.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,7 +50,6 @@
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
 		4592BAFB1F11D84300D1640D /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
 		4592BAFC1F11D84300D1640D /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
-		4592BAFE1F11D85700D1640D /* constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = constants.hpp; sourceTree = "<group>"; };
 		4592BB2B1F1319D400D1640D /* libUnpacker.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUnpacker.dylib; path = ../../../../../../../usr/local/lib/libUnpacker.dylib; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
@@ -118,7 +121,10 @@
 			children = (
 				4592BAFB1F11D84300D1640D /* app impl.cpp */,
 				4592BAFC1F11D84300D1640D /* app impl.hpp */,
-				4592BAFE1F11D85700D1640D /* constants.hpp */,
+				453479A91F20A9520083743E /* window constants.hpp */,
+				453479AA1F20A9880083743E /* input constants.hpp */,
+				453479AB1F20A9AE0083743E /* file constants.hpp */,
+				453479AC1F20A9E70083743E /* player constants.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
 				45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */,
 				45F3DB581F1760900058D36B /* string to scancode.cpp */,

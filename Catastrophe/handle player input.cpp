@@ -8,7 +8,7 @@
 
 #include "handle player input.hpp"
 
-#include "constants.hpp"
+#include "input constants.hpp"
 #include <SDL2/SDL_events.h>
 
 Math::Dir keyToDir(const SDL_Scancode key) {

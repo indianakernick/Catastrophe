@@ -8,7 +8,8 @@
 
 #include "player.hpp"
 
-#include "constants.hpp"
+#include "window constants.hpp"
+#include "player constants.hpp"
 #include "dir to vec.hpp"
 #include <SDL2/SDL_render.h>
 
