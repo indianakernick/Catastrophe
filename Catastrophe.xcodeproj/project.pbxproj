@@ -15,6 +15,7 @@
 		453479601F1F40870083743E /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534795E1F1F40870083743E /* player.cpp */; };
 		453479A51F2062390083743E /* handle player input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479A31F2062390083743E /* handle player input.cpp */; };
 		453479A81F20A24D0083743E /* ortho move dir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479A61F20A24D0083743E /* ortho move dir.cpp */; };
+		453479AF1F20AF7B0083743E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479AD1F20AF7B0083743E /* camera.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -40,6 +41,8 @@
 		453479AA1F20A9880083743E /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
 		453479AB1F20A9AE0083743E /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
 		453479AC1F20A9E70083743E /* player constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "player constants.hpp"; sourceTree = "<group>"; };
+		453479AD1F20AF7B0083743E /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		453479AE1F20AF7B0083743E /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				453479A41F2062390083743E /* handle player input.hpp */,
 				453479A61F20A24D0083743E /* ortho move dir.cpp */,
 				453479A71F20A24D0083743E /* ortho move dir.hpp */,
+				453479AD1F20AF7B0083743E /* camera.cpp */,
+				453479AE1F20AF7B0083743E /* camera.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453479AF1F20AF7B0083743E /* camera.cpp in Sources */,
 				453479601F1F40870083743E /* player.cpp in Sources */,
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,
 				453479A51F2062390083743E /* handle player input.cpp in Sources */,
