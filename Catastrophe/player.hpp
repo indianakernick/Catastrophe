@@ -23,12 +23,16 @@ public:
   void startMoving(Math::Dir);
   void stopMoving(Math::Dir);
   
+  void printState() const;
+  
   void update(float);
   void render(SDL_Renderer *);
   
 private:
   Rect rect;
-  bool motion[4] = {false};
+  Math::Dir prevDir = Math::Dir::NONE;
+  Math::Dir currDir = Math::Dir::NONE;
+  bool holding[static_cast<size_t>(Math::Axis::COUNT)] = {false};
 };
 
 #endif

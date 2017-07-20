@@ -16,25 +16,46 @@ Player::Player()
   : rect(0, 0, 1, 1) {}
 
 void Player::startMoving(const Math::Dir dir) {
-  motion[Math::ToNum<size_t>::conv(dir)] = true;
+  if (currDir == Math::opposite(dir)) {
+    currDir = prevDir;
+    prevDir = Math::Dir::NONE;
+    holding[static_cast<size_t>(Math::getAxis(dir))] = true;
+  } else if (prevDir == Math::opposite(dir)) {
+    prevDir = Math::Dir::NONE;
+    holding[static_cast<size_t>(Math::getAxis(dir))] = true;
+  } else {
+    prevDir = currDir;
+    currDir = dir;
+  }
 }
 
 void Player::stopMoving(const Math::Dir dir) {
-  motion[Math::ToNum<size_t>::conv(dir)] = false;
+  if (holding[static_cast<size_t>(Math::getAxis(dir))]) {
+    (currDir == Math::Dir::NONE ? currDir : prevDir) = Math::opposite(dir);
+    holding[static_cast<size_t>(Math::getAxis(dir))] = false;
+  } else {
+    if (prevDir != dir) {
+      currDir = prevDir;
+    }
+    prevDir = Math::Dir::NONE;
+  }
+}
+
+void Player::printState() const {
+  std::cout << "prevDir " << Math::ToString<true>::conv(prevDir) << '\n';
+  std::cout << "currDir " << Math::ToString<true>::conv(currDir) << '\n';
+  std::cout << std::boolalpha;
+  std::cout << "holding " << holding[0] << ", " << holding[1] << '\n';
+  std::cout << std::noboolalpha;//rdldrl
 }
 
 void Player::update(const float delta) {
-  const float moveSpeed = 2.0f;
+  //using ToIndex = Math::ToNum<size_t>;
+
+  const float moveSpeed = 0.5f;
   
-  glm::vec2 moveDir = {0.0f, 0.0f};
-  moveDir += ToVec::conv(Math::Dir::UP,    static_cast<float>(motion[0]));
-  moveDir += ToVec::conv(Math::Dir::RIGHT, static_cast<float>(motion[1]));
-  moveDir += ToVec::conv(Math::Dir::DOWN,  static_cast<float>(motion[2]));
-  moveDir += ToVec::conv(Math::Dir::LEFT,  static_cast<float>(motion[3]));
-  
-  if (glm::length2(moveDir) > 0.0f) {
-    //diagonal motion has the same speed as orthogonal motion
-    rect.p += glm::normalize(moveDir) * (delta * moveSpeed);
+  if (currDir != Math::Dir::NONE) {
+    rect.p += ToVec::conv(currDir, delta * moveSpeed);
   }
 }
 

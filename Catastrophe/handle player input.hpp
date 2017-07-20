@@ -1,0 +1,17 @@
+//
+//  handle player input.hpp
+//  Catastrophe
+//
+//  Created by Indi Kernick on 20/7/17.
+//  Copyright © 2017 Indi Kernick. All rights reserved.
+//
+
+#ifndef handle_player_input_hpp
+#define handle_player_input_hpp
+
+#include "player.hpp"
+#include <SDL2/SDL_events.h>
+
+void handlePlayerInput(Player &, SDL_Event);
+
+#endif

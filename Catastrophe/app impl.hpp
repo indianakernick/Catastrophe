@@ -10,6 +10,7 @@
 #define game_app_impl_hpp
 
 #include "player.hpp"
+#include <Simpleton/Time/fps.hpp>
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
@@ -18,6 +19,8 @@ public:
 
 private:
   Player player;
+  Time::FPS fpsCounter;
+  Time::RealFreqLimiter<std::chrono::seconds> fpsPrintFreq;
 
   bool init() override;
   void quit() override;

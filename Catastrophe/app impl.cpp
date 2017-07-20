@@ -9,14 +9,17 @@
 #include "app impl.hpp"
 
 #include "constants.hpp"
+#include "handle player input.hpp"
 
 std::unique_ptr<AppImpl> app = nullptr;
 
-AppImpl::AppImpl() {}
+AppImpl::AppImpl()
+  : fpsPrintFreq(2) {}
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, true);
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
+  fpsCounter.init();
   return true;
 }
 
@@ -29,49 +32,24 @@ bool AppImpl::input(uint64_t) {
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
       return false;
-    } else if (e.type == SDL_KEYDOWN) {
-      if (e.key.repeat == 0) {
-        switch (e.key.keysym.scancode) {
-          case SDL_SCANCODE_W:
-            player.startMoving(Math::Dir::UP);
-            break;
-          case SDL_SCANCODE_D:
-            player.startMoving(Math::Dir::RIGHT);
-            break;
-          case SDL_SCANCODE_S:
-            player.startMoving(Math::Dir::DOWN);
-            break;
-          case SDL_SCANCODE_A:
-            player.startMoving(Math::Dir::LEFT);
-          default: ;
-        }
-      }
-    } else if (e.type == SDL_KEYUP) {
-      switch (e.key.keysym.scancode) {
-        case SDL_SCANCODE_W:
-          player.stopMoving(Math::Dir::UP);
-          break;
-        case SDL_SCANCODE_D:
-          player.stopMoving(Math::Dir::RIGHT);
-          break;
-        case SDL_SCANCODE_S:
-          player.stopMoving(Math::Dir::DOWN);
-          break;
-        case SDL_SCANCODE_A:
-          player.stopMoving(Math::Dir::LEFT);
-        default: ;
-      }
+    } else {
+      handlePlayerInput(player, e);
     }
   }
   return true;
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
+  if (fpsPrintFreq.canDoOverlap()) {
+    //std::cout << "FPS:   " << fpsCounter.get() << '\n';
+  }
+  
   player.update(deltaMS / 1000.0f);
   return true;
 }
 
 void AppImpl::render(const uint64_t) {
+  fpsCounter.frame();
   renderer.clear();
   player.render(renderer.get());
   renderer.present();
