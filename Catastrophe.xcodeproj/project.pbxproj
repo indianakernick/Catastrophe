@@ -14,6 +14,7 @@
 		453479571F1F0ECD0083743E /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAFB1F11D84300D1640D /* app impl.cpp */; };
 		453479601F1F40870083743E /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534795E1F1F40870083743E /* player.cpp */; };
 		453479A51F2062390083743E /* handle player input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479A31F2062390083743E /* handle player input.cpp */; };
+		453479A81F20A24D0083743E /* ortho move dir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479A61F20A24D0083743E /* ortho move dir.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -33,6 +34,8 @@
 		4534795F1F1F40870083743E /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		453479A31F2062390083743E /* handle player input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "handle player input.cpp"; sourceTree = "<group>"; };
 		453479A41F2062390083743E /* handle player input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "handle player input.hpp"; sourceTree = "<group>"; };
+		453479A61F20A24D0083743E /* ortho move dir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ortho move dir.cpp"; sourceTree = "<group>"; };
+		453479A71F20A24D0083743E /* ortho move dir.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "ortho move dir.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,11 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
-				4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */,
-				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
-				4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
+				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
+				4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */,
+				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
+				4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +127,8 @@
 				4534795F1F1F40870083743E /* player.hpp */,
 				453479A31F2062390083743E /* handle player input.cpp */,
 				453479A41F2062390083743E /* handle player input.hpp */,
+				453479A61F20A24D0083743E /* ortho move dir.cpp */,
+				453479A71F20A24D0083743E /* ortho move dir.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -221,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd Catastrophe/Resources\npacker --silent config.yaml";
+			shellScript = "for f in \"libSDL2-2.0.0.dylib\" \"libSimpleton Engine.dylib\" \"libUnpacker.dylib\" \"libyaml-cpp.0.5.3.dylib\" \"libSDL2_ttf-2.0.0.dylib\"\ndo\n  ditto \"$src/$f\" \"$dest/$f\"\ndone\n\ncd \"Catastrophe/Resources\"\npacker --silent config.yaml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -235,6 +240,7 @@
 				453479A51F2062390083743E /* handle player input.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
 				453479511F1DAA550083743E /* string to scancode.cpp in Sources */,
+				453479A81F20A24D0083743E /* ortho move dir.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +358,7 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
+					/usr/local/Cellar/sdl2/2.0.5/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -388,6 +395,7 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
+					/usr/local/Cellar/sdl2/2.0.5/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",

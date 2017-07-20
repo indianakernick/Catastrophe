@@ -10,7 +10,8 @@
 #define handle_player_input_hpp
 
 #include "player.hpp"
-#include <SDL2/SDL_events.h>
+
+union SDL_Event;
 
 void handlePlayerInput(Player &, SDL_Event);
 

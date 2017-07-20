@@ -8,15 +8,18 @@
 
 #include "handle player input.hpp"
 
+#include "constants.hpp"
+#include <SDL2/SDL_events.h>
+
 Math::Dir keyToDir(const SDL_Scancode key) {
   switch (key) {
-    case SDL_SCANCODE_UP:
+    case UP_KEY:
       return Math::Dir::UP;
-    case SDL_SCANCODE_RIGHT:
+    case RIGHT_KEY:
       return Math::Dir::RIGHT;
-    case SDL_SCANCODE_DOWN:
+    case DOWN_KEY:
       return Math::Dir::DOWN;
-    case SDL_SCANCODE_LEFT:
+    case LEFT_KEY:
       return Math::Dir::LEFT;
     default:
       return Math::Dir::NONE;

@@ -13,13 +13,9 @@
 
 std::unique_ptr<AppImpl> app = nullptr;
 
-AppImpl::AppImpl()
-  : fpsPrintFreq(2) {}
-
 bool AppImpl::init() {
-  SDLApp::initWindow(WINDOW_DESC, true);
+  SDLApp::initWindow(WINDOW_DESC, VSYNC);
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
-  fpsCounter.init();
   return true;
 }
 
@@ -40,16 +36,11 @@ bool AppImpl::input(uint64_t) {
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
-  if (fpsPrintFreq.canDoOverlap()) {
-    //std::cout << "FPS:   " << fpsCounter.get() << '\n';
-  }
-  
   player.update(deltaMS / 1000.0f);
   return true;
 }
 
 void AppImpl::render(const uint64_t) {
-  fpsCounter.frame();
   renderer.clear();
   player.render(renderer.get());
   renderer.present();
