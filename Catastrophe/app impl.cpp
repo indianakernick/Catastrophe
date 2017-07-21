@@ -19,12 +19,13 @@ bool AppImpl::init() {
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderingContext.init(renderer.get(), SPRITE_SHEET_PATH);
   renderingContext.attachCamera(camera);
-  camera.setTarget(player);
+  player = entities.make<Player>();
+  camera.setTarget(*entities.get(player));
   return true;
 }
 
 void AppImpl::quit() {
-  camera.unsetTarget(player);
+  camera.unsetTarget(*entities.get(player));
   renderingContext.detachCamera();
   renderingContext.quit();
   SDLApp::quitWindow();
@@ -36,14 +37,14 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      handlePlayerInput(player, e);
+      handlePlayerInput(*entities.get<Player>(player), e);
     }
   }
   return true;
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
-  player.update(deltaMS / 1000.0f);
+  entities.update(deltaMS / 1000.0f);
   return true;
 }
 
@@ -52,7 +53,7 @@ void AppImpl::render(const uint64_t deltaMS) {
   
   renderingContext.fillRect({255, 0, 0, 255}, {0, 0, 1, 1});
   
-  player.render(renderingContext);
+  entities.render(renderingContext);
   camera.update(deltaMS / 1000.0f);
   renderer.present();
 }
