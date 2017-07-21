@@ -83,5 +83,11 @@ glm::vec2 Camera::getPos() const {
 }
 
 void Camera::onTargetMove(const Rect, const Rect currRect) {
-  moveInTime(currRect.p + currRect.s / 2.0f, CAMERA_MOVE_TARGET_TIME);
+  const glm::vec2 targetPos = currRect.p + currRect.s / 2.0f;
+  if constexpr (CAMERA_RIGID) {
+    moveTo(targetPos);
+  } else {
+    moveTo(glm::mix(currPos, targetPos, CAMERA_MOVE_TARGET_PERCENT));
+    moveInTime(targetPos, CAMERA_MOVE_TARGET_TIME);
+  }
 }
