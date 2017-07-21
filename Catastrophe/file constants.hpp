@@ -9,8 +9,8 @@
 #ifndef file_constants_hpp
 #define file_constants_hpp
 
-#include <string>
+#include <experimental/string_view>
 
-const std::string SPRITE_SHEET_PATH = "sprites";
+const std::experimental::string_view SPRITE_SHEET_PATH = "sprites";
 
 #endif
