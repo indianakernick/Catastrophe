@@ -8,7 +8,7 @@
 
 #include "camera.hpp"
 
-#include "player.hpp"
+#include "entity.hpp"
 #include <glm/glm.hpp>
 #include "window constants.hpp"
 #include "camera constants.hpp"
@@ -34,12 +34,12 @@ void Camera::update(const float delta) {
   }
 }
 
-void Camera::setTarget(Player &player) {
-  player.onMove(Utils::memFunWrap(this, &Camera::onTargetMove));
+void Camera::setTarget(Entity &entity) {
+  entity.onMove(Utils::memFunWrap(this, &Camera::onTargetMove));
 }
 
-void Camera::unsetTarget(Player &player) {
-  player.offMove();
+void Camera::unsetTarget(Entity &entity) {
+  entity.offMove();
 }
 
 void Camera::moveTo(const glm::vec2 newPos) {

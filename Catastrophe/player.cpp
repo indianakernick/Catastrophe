@@ -8,13 +8,12 @@
 
 #include "player.hpp"
 
-#include "window constants.hpp"
-#include "player constants.hpp"
 #include "dir to vec.hpp"
+#include "player constants.hpp"
 #include "rendering context.hpp"
 
 Player::Player()
-  : rect(0, 0, 1, 1) {}
+  : Entity({0, 0, 1, 1}) {}
 
 void Player::startMoving(const Math::Dir dir) {
   moveDir.start(dir);
@@ -28,19 +27,10 @@ void Player::update(const float delta) {
   if (moveDir.get() != Math::Dir::NONE) {
     const Rect prevRect = rect;
     rect.p += ToVec::conv(moveDir.get(), delta * PLAYER_MOVE_SPEED);
-    onMoveDispatcher.dispatch(prevRect, rect);
+    movedFrom(prevRect);
   }
 }
 
 void Player::render(RenderingContext &renderer) const {
   renderer.renderSprite("rat", rect);
-}
-
-void Player::onMove(OnMoveDispatcher::SettableListener listener) {
-  onMoveDispatcher.setListener(listener);
-  onMoveDispatcher.dispatch(rect, rect);
-}
-
-void Player::offMove() {
-  onMoveDispatcher.remListener();
 }
