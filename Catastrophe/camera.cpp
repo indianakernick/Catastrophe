@@ -11,7 +11,6 @@
 #include "entity.hpp"
 #include <glm/glm.hpp>
 #include "window constants.hpp"
-#include "camera constants.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include <Simpleton/Utils/member function.hpp>
 
@@ -84,10 +83,10 @@ glm::vec2 Camera::getPos() const {
 
 void Camera::onTargetMove(const Rect, const Rect currRect) {
   const glm::vec2 targetPos = currRect.p + currRect.s / 2.0f;
-  if constexpr (CAMERA_RIGID) {
+  if constexpr (RIGID) {
     moveTo(targetPos);
   } else {
-    moveTo(glm::mix(currPos, targetPos, CAMERA_MOVE_TARGET_PERCENT));
-    moveInTime(targetPos, CAMERA_MOVE_TARGET_TIME);
+    moveTo(glm::mix(currPos, targetPos, MOVE_TARGET_PERCENT));
+    moveInTime(targetPos, MOVE_TARGET_TIME);
   }
 }

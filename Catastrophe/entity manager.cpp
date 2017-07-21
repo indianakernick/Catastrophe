@@ -20,9 +20,9 @@ Entity *EntityManager::get(const EntityID id) const {
   }
 }
 
-void EntityManager::update(const float delta) const {
+void EntityManager::update(const float delta) {
   for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
-    e->second->update(delta);
+    e->second->update(*this, delta);
   }
 }
 

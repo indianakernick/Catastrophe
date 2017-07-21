@@ -8,12 +8,16 @@
 
 #include "player.hpp"
 
+#include "bullet.hpp"
 #include "dir to vec.hpp"
-#include "player constants.hpp"
+#include "entity manager.hpp"
 #include "rendering context.hpp"
 
 Player::Player()
-  : Entity({0, 0, 1, 1}) {}
+  : Entity({{}, SIZE}) {}
+
+Player::Player(const glm::vec2 pos)
+  : Entity({pos, SIZE}) {}
 
 void Player::startMoving(const Math::Dir dir) {
   moveDir.start(dir);
@@ -23,11 +27,22 @@ void Player::stopMoving(const Math::Dir dir) {
   moveDir.stop(dir);
 }
 
-void Player::update(const float delta) {
+void Player::startShooting(const Math::Dir dir) {
+  shootDir.start(dir);
+}
+
+void Player::stopShooting(const Math::Dir dir) {
+  shootDir.stop(dir);
+}
+
+void Player::update(EntityManager &entityManager, const float delta) {
   if (moveDir.get() != Math::Dir::NONE) {
     const Rect prevRect = rect;
-    rect.p += ToVec::conv(moveDir.get(), delta * PLAYER_MOVE_SPEED);
+    rect.p += ToVec::conv(moveDir.get(), delta * MOVE_SPEED);
     movedFrom(prevRect);
+  }
+  if (shootDir.get() != Math::Dir::NONE) {
+    entityManager.make<Bullet>(rect.p, shootDir.get());
   }
 }
 

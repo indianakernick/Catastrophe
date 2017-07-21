@@ -14,19 +14,27 @@
 
 class RenderingContext;
 
-class Player : public Entity {
+class Player final : public Entity {
 public:
+  static constexpr float MOVE_SPEED = 4.0f;
+  static constexpr glm::vec2 SIZE = {1.0f, 1.0f};
+
   Player();
+  explicit Player(glm::vec2);
   ~Player() = default;
 
   void startMoving(Math::Dir);
   void stopMoving(Math::Dir);
   
-  void update(float) override;
+  void startShooting(Math::Dir);
+  void stopShooting(Math::Dir);
+  
+  void update(EntityManager &, float) override;
   void render(RenderingContext &) const override;
   
 private:
   OrthoMoveDir moveDir;
+  OrthoMoveDir shootDir;
 };
 
 #endif

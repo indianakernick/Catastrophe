@@ -19,6 +19,8 @@
 		453479B31F219CE10083743E /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B11F219CE10083743E /* rendering context.cpp */; };
 		453479B81F21C3980083743E /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B61F21C3980083743E /* entity.cpp */; };
 		453479BB1F21CA500083743E /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B91F21CA500083743E /* entity manager.cpp */; };
+		453479BF1F21D00A0083743E /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479BD1F21D00A0083743E /* bullet.cpp */; };
+		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -43,10 +45,8 @@
 		453479A91F20A9520083743E /* window constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "window constants.hpp"; sourceTree = "<group>"; };
 		453479AA1F20A9880083743E /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
 		453479AB1F20A9AE0083743E /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
-		453479AC1F20A9E70083743E /* player constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "player constants.hpp"; sourceTree = "<group>"; };
 		453479AD1F20AF7B0083743E /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		453479AE1F20AF7B0083743E /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
-		453479B01F219C5D0083743E /* camera constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera constants.hpp"; sourceTree = "<group>"; };
 		453479B11F219CE10083743E /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
 		453479B21F219CE10083743E /* rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering context.hpp"; sourceTree = "<group>"; };
 		453479B61F21C3980083743E /* entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
@@ -54,6 +54,9 @@
 		453479B91F21CA500083743E /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
 		453479BA1F21CA500083743E /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
 		453479BC1F21CA790083743E /* entity id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
+		453479BD1F21D00A0083743E /* bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
+		453479BE1F21D00A0083743E /* bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
+		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 			children = (
 				451FA2871F149B2200C43BE9 /* config.yaml */,
 				451FA2881F149B2200C43BE9 /* rat.png */,
+				453479C01F21D2C60083743E /* small rat.png */,
 				451FA2891F149B2200C43BE9 /* sprites.atlas */,
 				451FA28A1F149B2200C43BE9 /* sprites.png */,
 				45F3DB461F1715CC0058D36B /* player.yaml */,
@@ -138,8 +142,6 @@
 				453479A91F20A9520083743E /* window constants.hpp */,
 				453479AA1F20A9880083743E /* input constants.hpp */,
 				453479AB1F20A9AE0083743E /* file constants.hpp */,
-				453479AC1F20A9E70083743E /* player constants.hpp */,
-				453479B01F219C5D0083743E /* camera constants.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
 				45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */,
 				45F3DB581F1760900058D36B /* string to scancode.cpp */,
@@ -159,6 +161,8 @@
 				453479B91F21CA500083743E /* entity manager.cpp */,
 				453479BA1F21CA500083743E /* entity manager.hpp */,
 				453479BC1F21CA790083743E /* entity id.hpp */,
+				453479BD1F21D00A0083743E /* bullet.cpp */,
+				453479BE1F21D00A0083743E /* bullet.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -238,6 +242,7 @@
 				451FA28E1F149B2200C43BE9 /* sprites.png in Resources */,
 				45F3DB471F1715CC0058D36B /* player.yaml in Resources */,
 				451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */,
+				453479C11F21D2C60083743E /* small rat.png in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +276,7 @@
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,
 				453479A51F2062390083743E /* handle player input.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
+				453479BF1F21D00A0083743E /* bullet.cpp in Sources */,
 				453479511F1DAA550083743E /* string to scancode.cpp in Sources */,
 				453479BB1F21CA500083743E /* entity manager.cpp in Sources */,
 				453479B81F21C3980083743E /* entity.cpp in Sources */,

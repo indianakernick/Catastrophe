@@ -12,6 +12,7 @@
 #include "rect.hpp"
 #include <Simpleton/Utils/dispatcher.hpp>
 
+class EntityManager;
 class RenderingContext;
 
 class Entity {
@@ -27,7 +28,7 @@ public:
   explicit Entity(Rect);
   virtual ~Entity() = default;
   
-  virtual void update(float) = 0;
+  virtual void update(EntityManager &, float) = 0;
   virtual void render(RenderingContext &) const = 0;
   
   void onMove(OnMoveDispatcher::SettableListener);

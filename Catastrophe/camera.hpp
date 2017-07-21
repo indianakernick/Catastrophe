@@ -17,6 +17,10 @@ class Entity;
 
 class Camera {
 public:
+  static constexpr bool RIGID = true;
+  static constexpr float MOVE_TARGET_PERCENT = 0.2f;
+  static constexpr float MOVE_TARGET_TIME = 0.1f;
+
   Camera();
   explicit Camera(glm::vec2);
   ~Camera() = default;

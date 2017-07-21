@@ -42,7 +42,7 @@ public:
   
   Entity *get(EntityID) const;
   
-  void update(float) const;
+  void update(float);
   void render(RenderingContext &) const;
   
 private:
