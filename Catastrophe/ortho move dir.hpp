@@ -9,7 +9,6 @@
 #ifndef ortho_move_dir_hpp
 #define ortho_move_dir_hpp
 
-#include <queue>
 #include <Simpleton/Math/dir.hpp>
 
 class OrthoMoveDir {
@@ -22,10 +21,9 @@ public:
   Math::Dir get() const;
 
 private:
-  std::deque<Math::Dir> queue;
-  Math::Dir dir = Math::Dir::NONE;
-  
-  void calcDir();
+  Math::Dir curr = Math::Dir::NONE;
+  Math::Dir prev = Math::Dir::NONE;
+  bool hold[static_cast<size_t>(Math::Axis::COUNT)] = {};
 };
 
 #endif
