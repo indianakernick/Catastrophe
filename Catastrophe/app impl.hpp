@@ -10,6 +10,8 @@
 #define game_app_impl_hpp
 
 #include "player.hpp"
+#include "camera.hpp"
+#include "rendering context.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
@@ -18,6 +20,8 @@ public:
 
 private:
   Player player;
+  RenderingContext renderingContext;
+  Camera camera;
 
   bool init() override;
   void quit() override;

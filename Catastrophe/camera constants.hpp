@@ -9,6 +9,6 @@
 #ifndef camera_constants_hpp
 #define camera_constants_hpp
 
-const float CAMERA_MOVE_TARGET_TIME = 0.1f;
+const float CAMERA_MOVE_TARGET_TIME = 2.0f;
 
 #endif

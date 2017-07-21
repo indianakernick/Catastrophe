@@ -11,7 +11,7 @@
 #include "window constants.hpp"
 #include "player constants.hpp"
 #include "dir to vec.hpp"
-#include <SDL2/SDL_render.h>
+#include "rendering context.hpp"
 
 Player::Player()
   : rect(0, 0, 1, 1) {}
@@ -32,19 +32,13 @@ void Player::update(const float delta) {
   }
 }
 
-void Player::render(SDL_Renderer *renderer) const {
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  const SDL_Rect dst = {
-    static_cast<int>(rect.p.x * PIXELS_PER_TILE.x),
-    static_cast<int>(rect.p.y * PIXELS_PER_TILE.y),
-    static_cast<int>(rect.s.x * PIXELS_PER_TILE.x),
-    static_cast<int>(rect.s.y * PIXELS_PER_TILE.y)
-  };
-  SDL_RenderFillRect(renderer, &dst);
+void Player::render(RenderingContext &renderer) const {
+  renderer.renderSprite("rat", rect);
 }
 
 void Player::onMove(OnMoveDispatcher::SettableListener listener) {
   onMoveDispatcher.setListener(listener);
+  onMoveDispatcher.dispatch(rect, rect);
 }
 
 void Player::offMove() {

@@ -39,6 +39,7 @@ void RenderingContext::init(
     image.data(),
     static_cast<int>(image.pitch())
   ));
+  CHECK_SDL_ERROR(SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND));
 }
 
 void RenderingContext::quit() {
@@ -48,9 +49,8 @@ void RenderingContext::quit() {
   renderer = nullptr;
 }
 
-void RenderingContext::attachCamera(Camera *newCamera) {
-  assert(newCamera);
-  camera = newCamera;
+void RenderingContext::attachCamera(Camera &newCamera) {
+  camera = &newCamera;
 }
 
 void RenderingContext::detachCamera() {
@@ -98,4 +98,20 @@ void RenderingContext::renderSprite(
     &src,
     &dst
   ));
+}
+
+void RenderingContext::fillRect(const glm::tvec4<uint8_t> color, const Rect dest) {
+  if (camera == nullptr) {
+    return;
+  }
+  
+  const RectPx destPixels = camera->transform(dest);
+  
+  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
+    return;
+  }
+  
+  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+  const SDL_Rect dst = toSDL(destPixels);
+  SDL_RenderFillRect(renderer, &dst);
 }

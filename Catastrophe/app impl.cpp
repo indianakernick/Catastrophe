@@ -8,6 +8,7 @@
 
 #include "app impl.hpp"
 
+#include "file constants.hpp"
 #include "window constants.hpp"
 #include "handle player input.hpp"
 
@@ -16,10 +17,16 @@ std::unique_ptr<AppImpl> app = nullptr;
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
+  renderingContext.init(renderer.get(), SPRITE_SHEET_PATH);
+  renderingContext.attachCamera(camera);
+  camera.setTarget(player);
   return true;
 }
 
 void AppImpl::quit() {
+  camera.unsetTarget(player);
+  renderingContext.detachCamera();
+  renderingContext.quit();
   SDLApp::quitWindow();
 }
 
@@ -40,8 +47,12 @@ bool AppImpl::update(const uint64_t deltaMS) {
   return true;
 }
 
-void AppImpl::render(const uint64_t) {
+void AppImpl::render(const uint64_t deltaMS) {
   renderer.clear();
-  player.render(renderer.get());
+  
+  renderingContext.fillRect({255, 0, 0, 255}, {0, 0, 1, 1});
+  
+  player.render(renderingContext);
+  camera.update(deltaMS / 1000.0f);
   renderer.present();
 }

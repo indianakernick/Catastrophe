@@ -17,7 +17,7 @@ class Player;
 
 class Camera {
 public:
-  Camera() = default;
+  Camera();
   explicit Camera(glm::vec2);
   ~Camera() = default;
   

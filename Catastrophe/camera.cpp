@@ -16,9 +16,12 @@
 #include <Simpleton/Utils/member function.hpp>
 
 uint64_t fromSeconds(const float seconds) {
-  //Animations are interpolated done in microseconds
+  //Animations are done in microseconds
   return seconds * 1'000'000.0f;
 }
+
+Camera::Camera()
+  : anim(0, Time::DeltaAnim::PAUSE) {}
 
 Camera::Camera(const glm::vec2 pos)
   : currPos(pos), anim(0, Time::DeltaAnim::PAUSE) {}
@@ -49,7 +52,7 @@ void Camera::moveTo(const glm::vec2 newPos) {
 void Camera::moveInTime(const glm::vec2 newPos, const float duration) {
   if (anim.isRunning()) {
     currPos = getPos();
-    nextPos = nextPos;
+    nextPos = newPos;
     anim.stop();
     anim.setDuration(fromSeconds(duration));
     anim.start();

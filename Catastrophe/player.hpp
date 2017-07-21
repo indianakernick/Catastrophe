@@ -13,7 +13,7 @@
 #include "ortho move dir.hpp"
 #include <Simpleton/Utils/dispatcher.hpp>
 
-struct SDL_Renderer;
+class RenderingContext;
 
 class Player {
 public:
@@ -31,7 +31,7 @@ public:
   void stopMoving(Math::Dir);
   
   void update(float);
-  void render(SDL_Renderer *) const;
+  void render(RenderingContext &) const;
   
   void onMove(OnMoveDispatcher::SettableListener);
   void offMove();
