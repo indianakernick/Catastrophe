@@ -8,11 +8,11 @@
 
 #include "entity.hpp"
 
-Entity::Entity()
-  : rect(0, 0, 1, 1) {}
+Entity::Entity(const EntityID id)
+  : rect(0, 0, 1, 1), id(id) {}
 
-Entity::Entity(const Rect rect)
-  : rect(rect) {}
+Entity::Entity(const EntityID id, const Rect rect)
+  : rect(rect), id(id) {}
 
 void Entity::onMove(OnMoveDispatcher::SettableListener listener) {
   onMoveDispatcher.setListener(listener);
@@ -21,6 +21,10 @@ void Entity::onMove(OnMoveDispatcher::SettableListener listener) {
 
 void Entity::offMove() {
   onMoveDispatcher.remListener();
+}
+
+EntityID Entity::getID() const {
+  return id;
 }
 
 void Entity::movedFrom(const Rect prevRect) {

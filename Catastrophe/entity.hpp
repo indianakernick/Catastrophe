@@ -10,6 +10,7 @@
 #define entity_hpp
 
 #include "rect.hpp"
+#include "entity id.hpp"
 #include <Simpleton/Utils/dispatcher.hpp>
 
 class EntityManager;
@@ -24,8 +25,8 @@ public:
     false              //Check recursive dispatch
   >;
   
-  Entity();
-  explicit Entity(Rect);
+  explicit Entity(EntityID);
+  Entity(EntityID, Rect);
   virtual ~Entity() = default;
   
   virtual void update(EntityManager &, float) = 0;
@@ -34,12 +35,15 @@ public:
   void onMove(OnMoveDispatcher::SettableListener);
   void offMove();
 
+  EntityID getID() const;
+
 protected:
   Rect rect;
   
   void movedFrom(Rect);
 
 private:
+  EntityID id;
   OnMoveDispatcher onMoveDispatcher;
 };
 

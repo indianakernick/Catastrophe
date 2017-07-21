@@ -9,12 +9,17 @@
 #include "bullet.hpp"
 
 #include "dir to vec.hpp"
+#include "entity manager.hpp"
 #include "rendering context.hpp"
 
-Bullet::Bullet(const glm::vec2 pos, const Math::Dir dir)
-  : Entity({pos, BULLET_SIZE}), dir(dir) {}
+Bullet::Bullet(const EntityID id, const glm::vec2 pos, const Math::Dir dir)
+  : Entity(id, {pos, SIZE}), timeTillDeath(LIFE_TIME), dir(dir) {}
 
-void Bullet::update(EntityManager &, const float delta) {
+void Bullet::update(EntityManager &entityManager, const float delta) {
+  timeTillDeath -= delta;
+  if (timeTillDeath <= 0.0f) {
+    entityManager.kill(getID());
+  }
   rect.p += ToVec::conv(dir, delta * MOVE_SPEED);
 }
 

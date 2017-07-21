@@ -13,11 +13,11 @@
 #include "entity manager.hpp"
 #include "rendering context.hpp"
 
-Player::Player()
-  : Entity({{}, SIZE}) {}
+Player::Player(const EntityID id)
+  : Entity(id, {{}, SIZE}) {}
 
-Player::Player(const glm::vec2 pos)
-  : Entity({pos, SIZE}) {}
+Player::Player(const EntityID id, const glm::vec2 pos)
+  : Entity(id, {pos, SIZE}) {}
 
 void Player::startMoving(const Math::Dir dir) {
   moveDir.start(dir);
@@ -42,7 +42,7 @@ void Player::update(EntityManager &entityManager, const float delta) {
     movedFrom(prevRect);
   }
   if (shootDir.get() != Math::Dir::NONE) {
-    entityManager.make<Bullet>(rect.p, shootDir.get());
+    entityManager.make<Bullet>(rect.p + (SIZE - Bullet::SIZE) / 2.0f, shootDir.get());
   }
 }
 

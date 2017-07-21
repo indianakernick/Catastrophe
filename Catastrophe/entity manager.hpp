@@ -10,6 +10,7 @@
 #define entity_manager_hpp
 
 #include <memory>
+#include <vector>
 #include "entity.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
@@ -31,9 +32,11 @@ public:
   template <typename EntityClass, typename ...Args>
   EntityID make(Args &&... args) {
     const EntityID id = idGen.make();
-    entities.emplace(id, std::make_unique<EntityClass>(std::forward<Args>(args)...));
+    entities.emplace(id, std::make_unique<EntityClass>(id, std::forward<Args>(args)...));
     return id;
   }
+  
+  void kill(EntityID);
   
   template <typename EntityClass>
   EntityClass *get(const EntityID id) const {
@@ -46,8 +49,11 @@ public:
   void render(RenderingContext &) const;
   
 private:
-  std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;
+  using EntityMap = std::unordered_map<EntityID, std::unique_ptr<Entity>>;
+  EntityMap entities;
+  std::vector<EntityMap::iterator> killedEntities;
   ID::Local<EntityID> idGen;
+  bool updating = false;
 };
 
 #endif

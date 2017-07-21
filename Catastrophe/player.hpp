@@ -19,8 +19,8 @@ public:
   static constexpr float MOVE_SPEED = 4.0f;
   static constexpr glm::vec2 SIZE = {1.0f, 1.0f};
 
-  Player();
-  explicit Player(glm::vec2);
+  explicit Player(EntityID);
+  Player(EntityID, glm::vec2);
   ~Player() = default;
 
   void startMoving(Math::Dir);
