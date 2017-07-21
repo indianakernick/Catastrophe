@@ -26,7 +26,9 @@ void Player::stopMoving(const Math::Dir dir) {
 
 void Player::update(const float delta) {
   if (moveDir.get() != Math::Dir::NONE) {
+    const Rect prevRect = rect;
     rect.p += ToVec::conv(moveDir.get(), delta * PLAYER_MOVE_SPEED);
+    onMoveDispatcher.dispatch(prevRect, rect);
   }
 }
 
@@ -39,4 +41,12 @@ void Player::render(SDL_Renderer *renderer) const {
     static_cast<int>(rect.s.y * PIXELS_PER_TILE.y)
   };
   SDL_RenderFillRect(renderer, &dst);
+}
+
+void Player::onMove(OnMoveDispatcher::SettableListener listener) {
+  onMoveDispatcher.setListener(listener);
+}
+
+void Player::offMove() {
+  onMoveDispatcher.remListener();
 }

@@ -11,11 +11,19 @@
 
 #include "rect.hpp"
 #include "ortho move dir.hpp"
+#include <Simpleton/Utils/dispatcher.hpp>
 
 struct SDL_Renderer;
 
 class Player {
 public:
+  using OnMoveDispatcher = Utils::SingleDispatcher<
+    void (Rect, Rect), //Signature
+    void,              //Return value handler
+    false,             //Use function pointers
+    false              //Check recursive dispatch
+  >;
+
   Player();
   ~Player() = default;
 
@@ -25,7 +33,11 @@ public:
   void update(float);
   void render(SDL_Renderer *) const;
   
+  void onMove(OnMoveDispatcher::SettableListener);
+  void offMove();
+  
 private:
+  OnMoveDispatcher onMoveDispatcher;
   Rect rect;
   OrthoMoveDir moveDir;
 };

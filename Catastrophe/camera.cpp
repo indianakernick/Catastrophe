@@ -8,9 +8,12 @@
 
 #include "camera.hpp"
 
+#include "player.hpp"
 #include <glm/glm.hpp>
 #include "window constants.hpp"
+#include "camera constants.hpp"
 #include <Simpleton/Math/interpolate.hpp>
+#include <Simpleton/Utils/member function.hpp>
 
 uint64_t fromSeconds(const float seconds) {
   //Animations are interpolated done in microseconds
@@ -26,6 +29,14 @@ void Camera::update(const float delta) {
     currPos = nextPos;
     anim.stop();
   }
+}
+
+void Camera::setTarget(Player &player) {
+  player.onMove(Utils::memFunWrap(this, &Camera::onTargetMove));
+}
+
+void Camera::unsetTarget(Player &player) {
+  player.offMove();
 }
 
 void Camera::moveTo(const glm::vec2 newPos) {
@@ -66,4 +77,8 @@ glm::vec2 Camera::getPos() const {
   } else {
     return currPos;
   }
+}
+
+void Camera::onTargetMove(const Rect, const Rect currRect) {
+  moveInTime(currRect.p + currRect.s / 2.0f, CAMERA_MOVE_TARGET_TIME);
 }

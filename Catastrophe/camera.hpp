@@ -13,6 +13,8 @@
 #include <glm/vec2.hpp>
 #include <Simpleton/Time/delta anim.hpp>
 
+class Player;
+
 class Camera {
 public:
   Camera() = default;
@@ -20,6 +22,9 @@ public:
   ~Camera() = default;
   
   void update(float);
+  
+  void setTarget(Player &);
+  void unsetTarget(Player &);
   
   void moveTo(glm::vec2);
   void moveInTime(glm::vec2, float);
@@ -32,6 +37,8 @@ private:
   Time::DeltaAnim anim;
   
   glm::vec2 getPos() const;
+  
+  void onTargetMove(Rect, Rect);
 };
 
 #endif
