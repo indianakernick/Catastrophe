@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45103F301F2310B3001B24E2 /* gun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F2E1F2310B2001B24E2 /* gun.cpp */; };
+		45103F331F231C47001B24E2 /* gun spec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F311F231C47001B24E2 /* gun spec.cpp */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		453479511F1DAA550083743E /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB581F1760900058D36B /* string to scancode.cpp */; };
@@ -31,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45103F2E1F2310B2001B24E2 /* gun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gun.cpp; sourceTree = "<group>"; };
+		45103F2F1F2310B3001B24E2 /* gun.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gun.hpp; sourceTree = "<group>"; };
+		45103F311F231C47001B24E2 /* gun spec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "gun spec.cpp"; sourceTree = "<group>"; };
+		45103F321F231C47001B24E2 /* gun spec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "gun spec.hpp"; sourceTree = "<group>"; };
+		45103F341F231CF4001B24E2 /* gun constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "gun constants.hpp"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -142,6 +149,7 @@
 				453479A91F20A9520083743E /* window constants.hpp */,
 				453479AA1F20A9880083743E /* input constants.hpp */,
 				453479AB1F20A9AE0083743E /* file constants.hpp */,
+				45103F341F231CF4001B24E2 /* gun constants.hpp */,
 				451FA2921F15D42F00C43BE9 /* rect.hpp */,
 				45F3DB4E1F1745FB0058D36B /* dir to vec.hpp */,
 				45F3DB581F1760900058D36B /* string to scancode.cpp */,
@@ -163,6 +171,10 @@
 				453479BC1F21CA790083743E /* entity id.hpp */,
 				453479BD1F21D00A0083743E /* bullet.cpp */,
 				453479BE1F21D00A0083743E /* bullet.hpp */,
+				45103F2E1F2310B2001B24E2 /* gun.cpp */,
+				45103F2F1F2310B3001B24E2 /* gun.hpp */,
+				45103F311F231C47001B24E2 /* gun spec.cpp */,
+				45103F321F231C47001B24E2 /* gun spec.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";
@@ -276,7 +288,9 @@
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,
 				453479A51F2062390083743E /* handle player input.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
+				45103F301F2310B3001B24E2 /* gun.cpp in Sources */,
 				453479BF1F21D00A0083743E /* bullet.cpp in Sources */,
+				45103F331F231C47001B24E2 /* gun spec.cpp in Sources */,
 				453479511F1DAA550083743E /* string to scancode.cpp in Sources */,
 				453479BB1F21CA500083743E /* entity manager.cpp in Sources */,
 				453479B81F21C3980083743E /* entity.cpp in Sources */,
