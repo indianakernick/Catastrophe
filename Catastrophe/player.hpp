@@ -9,6 +9,7 @@
 #ifndef player_hpp
 #define player_hpp
 
+#include "gun.hpp"
 #include "entity.hpp"
 #include "ortho move dir.hpp"
 
@@ -19,8 +20,7 @@ public:
   static constexpr float MOVE_SPEED = 4.0f;
   static constexpr glm::vec2 SIZE = {1.0f, 1.0f};
 
-  explicit Player(EntityID);
-  Player(EntityID, glm::vec2);
+  Player(EntityID, GunSpec, glm::vec2 = {});
   ~Player() = default;
 
   void startMoving(Math::Dir);
@@ -29,12 +29,16 @@ public:
   void startShooting(Math::Dir);
   void stopShooting(Math::Dir);
   
+  void reload();
+  
   void update(EntityManager &, float) override;
   void render(RenderingContext &) const override;
   
 private:
+  Gun gun;
   OrthoMoveDir moveDir;
   OrthoMoveDir shootDir;
+  Math::Dir lastShootDir = Math::Dir::NONE;
 };
 
 #endif

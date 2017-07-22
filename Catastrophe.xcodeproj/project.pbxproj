@@ -38,6 +38,7 @@
 		45103F311F231C47001B24E2 /* gun spec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "gun spec.cpp"; sourceTree = "<group>"; };
 		45103F321F231C47001B24E2 /* gun spec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "gun spec.hpp"; sourceTree = "<group>"; };
 		45103F341F231CF4001B24E2 /* gun constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "gun constants.hpp"; sourceTree = "<group>"; };
+		45103F3A1F2345A2001B24E2 /* bullet spec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "bullet spec.hpp"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 				45103F2F1F2310B3001B24E2 /* gun.hpp */,
 				45103F311F231C47001B24E2 /* gun spec.cpp */,
 				45103F321F231C47001B24E2 /* gun spec.hpp */,
+				45103F3A1F2345A2001B24E2 /* bullet spec.hpp */,
 			);
 			name = game;
 			sourceTree = "<group>";

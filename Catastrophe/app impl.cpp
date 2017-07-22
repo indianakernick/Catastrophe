@@ -8,6 +8,7 @@
 
 #include "app impl.hpp"
 
+#include "gun constants.hpp"
 #include "file constants.hpp"
 #include "window constants.hpp"
 #include "handle player input.hpp"
@@ -19,7 +20,7 @@ bool AppImpl::init() {
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderingContext.init(renderer.get(), SPRITE_SHEET_PATH);
   renderingContext.attachCamera(camera);
-  player = entities.make<Player>();
+  player = entities.make<Player>(STANDARD_GUN);
   camera.setTarget(*entities.get(player));
   return true;
 }

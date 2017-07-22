@@ -21,4 +21,6 @@ constexpr SDL_Scancode SHOOT_RIGHT_KEY = SDL_SCANCODE_L;
 constexpr SDL_Scancode SHOOT_DOWN_KEY  = SDL_SCANCODE_K;
 constexpr SDL_Scancode SHOOT_LEFT_KEY  = SDL_SCANCODE_J;
 
+constexpr SDL_Scancode RELOAD_KEY = SDL_SCANCODE_SPACE;
+
 #endif

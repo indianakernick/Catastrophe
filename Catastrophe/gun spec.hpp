@@ -10,13 +10,13 @@
 #define gun_spec_hpp
 
 #include <stdexcept>
+#include "bullet spec.hpp"
 
 struct GunSpec {
   unsigned clipSize;
   float fireRate;
   float reloadTime;
-  float bulletSpeed;
-  unsigned damage;
+  BulletSpec bullet;
   bool automatic;
 };
 

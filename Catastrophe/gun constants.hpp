@@ -18,8 +18,10 @@ static constexpr GunSpec STANDARD_GUN = {
   .clipSize = 8,
   .fireRate = 2.0f,
   .reloadTime = 4.0f,
-  .bulletSpeed = 50.0f,
-  .damage = 10,
+  .bullet = {
+    .speed = 50.0f,
+    .damage = 10
+  },
   .automatic = false
 };
 
@@ -27,8 +29,10 @@ static constexpr GunSpec SHOTGUN = {
   .clipSize = 2,
   .fireRate = 1.0f,
   .reloadTime = 6.0f,
-  .bulletSpeed = 40.0f,
-  .damage = 30,
+  .bullet = {
+    .speed = 40.0f,
+    .damage = 30
+  },
   .automatic = false
 };
 

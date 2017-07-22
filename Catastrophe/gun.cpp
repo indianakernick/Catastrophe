@@ -14,9 +14,14 @@ Gun::Gun(const GunSpec spec)
 }
 
 void Gun::update(const float delta) {
-  if (firing) {
+  if (spec.automatic && firing) {
     rof.advance(delta);
-  } else if (timeTillReload) {
+    return;
+  } else if (!spec.automatic) {
+    rof.advance(delta);
+  }
+  
+  if (timeTillReload) {
     timeTillReload -= delta;
     if (timeTillReload <= 0.0f) {
       timeTillReload = 0.0f;
@@ -33,15 +38,20 @@ void Gun::reload() {
 }
 
 void Gun::startFiring() {
-  assert(!firing);
-  if (timeTillReload == 0.0f) {
-    rof.reset();
+  if (!firing && timeTillReload == 0.0f) {
+    if (spec.automatic) {
+      rof.reset();
+    }
     firing = true;
     fired = false;
   }
 }
 
 unsigned Gun::canFire() {
+  if (!firing) {
+    return 0;
+  }
+  
   if (spec.automatic) {
     //canDoMultipleOverlap returns an integer so this cast is safe
     unsigned numCanFire = static_cast<unsigned>(rof.canDoMultipleOverlap());
@@ -54,16 +64,21 @@ unsigned Gun::canFire() {
       return numCanFire;
     }
   } else {
-    if (fired) {
+    if (fired || bullets == 0) {
       return 0;
     } else {
-      return rof.canDo();
+      if (rof.canDo()) {
+        bullets--;
+        fired = true;
+        return 1;
+      } else {
+        return 0;
+      }
     }
   }
 }
 
 void Gun::stopFiring() {
-  assert(firing);
   firing = false;
 }
 
@@ -71,10 +86,6 @@ void Gun::collectClips(const unsigned extraClips) {
   clips += extraClips;
 }
 
-float Gun::getBulletSpeed() const {
-  return spec.bulletSpeed;
-}
-
-unsigned Gun::getDamage() const {
-  return spec.damage;
+BulletSpec Gun::getBullet() const {
+  return spec.bullet;
 }

@@ -26,8 +26,7 @@ public:
   
   void collectClips(unsigned);
   
-  float getBulletSpeed() const;
-  unsigned getDamage() const;
+  BulletSpec getBullet() const;
 
 private:
   Time::DeltaFreqLimiter<float> rof;

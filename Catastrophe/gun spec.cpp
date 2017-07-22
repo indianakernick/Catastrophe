@@ -16,7 +16,7 @@ void checkGunSpec(const GunSpec spec) {
     spec.clipSize == 0 ||
     spec.fireRate <= 0.0f ||
     spec.reloadTime <= 0.0f ||
-    spec.bulletSpeed <= 0.0f
+    spec.bullet.speed <= 0.0f
   ) {
     throw InvalidGunSpec();
   }

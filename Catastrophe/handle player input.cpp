@@ -57,6 +57,10 @@ void handleKeyDown(Player &player, const SDL_KeyboardEvent keyEvent) {
   if (shootDir != Math::Dir::NONE) {
     player.startShooting(shootDir);
   }
+  
+  if (keyEvent.keysym.scancode == RELOAD_KEY) {
+    player.reload();
+  }
 }
 
 void handleKeyUp(Player &player, const SDL_KeyboardEvent keyEvent) {
