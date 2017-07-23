@@ -19,7 +19,7 @@ void moveRectToTouch(Rect &a, const Rect b) {
   };
   
   float minDist = std::numeric_limits<float>::max();
-  Math::Dir minDir;
+  Math::Dir minDir = Math::Dir::NONE;
   for (Math::Dir d = Math::Dir::BEGIN; d != Math::Dir::END; ++d) {
     const float dist = std::abs(dists[ToIndex::conv(d)]);
     if (dist <= minDist) {
@@ -70,12 +70,12 @@ void PhysicsSystem::update(const float delta) {
   updating = false;
 }
 
-void PhysicsSystem::addObject(PhysicalObject *object) {
+void PhysicsSystem::addObject(std::shared_ptr<PhysicalObject> object) {
   assert(object);
   objects.emplace(object);
 }
 
-void PhysicsSystem::remObject(PhysicalObject *object) {
+void PhysicsSystem::remObject(std::shared_ptr<PhysicalObject> object) {
   assert(object);
   if (updating) {
     removedObjects.emplace_back(objects.find(object));
