@@ -24,6 +24,7 @@ public:
   unsigned canFire();
   void stopFiring();
   
+  void changeDir();
   void collectClips(unsigned);
   
   BulletSpec getBullet() const;
@@ -31,13 +32,20 @@ public:
 private:
   Time::DeltaFreqLimiter<float> rof;
   GunSpec spec;
-  bool firing = false;
-  //for non-automatic weapons
-  bool fired = false;
   unsigned clips = 0;
   unsigned bullets = 0;
   //time until player finishs reloading 
   float timeTillReload = 0.0f;
+  
+  enum class State {
+    IDLE,
+    RELOADING,
+    FIRING,
+    FIRED
+  } state = State::IDLE;
+  
+  unsigned autoCanFire();
+  unsigned nonAutoCanFire();
 };
 
 #endif

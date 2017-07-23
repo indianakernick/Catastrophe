@@ -29,15 +29,27 @@ void Player::stopMoving(const Math::Dir dir) {
 void Player::startShooting(const Math::Dir dir) {
   shootDir.start(dir);
   if (shootDir.get() != lastShootDir) {
-    gun.stopFiring();
-    gun.startFiring();
+    if (shootDir.get() == Math::Dir::NONE) {
+      gun.stopFiring();
+    } else if (lastShootDir == Math::Dir::NONE) {
+      gun.startFiring();
+    } else {
+      gun.changeDir();
+    }
     lastShootDir = shootDir.get();
   }
 }
 
 void Player::stopShooting(const Math::Dir dir) {
   shootDir.stop(dir);
-  gun.stopFiring();
+  if (shootDir.get() != lastShootDir) {
+    if (shootDir.get() == Math::Dir::NONE) {
+      gun.stopFiring();
+    } else {
+      gun.changeDir();
+    }
+    lastShootDir = shootDir.get();
+  }
 }
 
 void Player::reload() {
