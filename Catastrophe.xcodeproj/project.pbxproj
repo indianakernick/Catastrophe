@@ -11,6 +11,7 @@
 		45103F331F231C47001B24E2 /* gun spec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F311F231C47001B24E2 /* gun spec.cpp */; };
 		45103F3D1F24325C001B24E2 /* physics system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F3B1F24325C001B24E2 /* physics system.cpp */; };
 		45103F441F2432E4001B24E2 /* physical object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F421F2432E4001B24E2 /* physical object.cpp */; };
+		45103F471F246887001B24E2 /* spawn bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F451F246887001B24E2 /* spawn bullet.cpp */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		453479511F1DAA550083743E /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB581F1760900058D36B /* string to scancode.cpp */; };
@@ -45,6 +46,8 @@
 		45103F3C1F24325C001B24E2 /* physics system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics system.hpp"; sourceTree = "<group>"; };
 		45103F421F2432E4001B24E2 /* physical object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physical object.cpp"; sourceTree = "<group>"; };
 		45103F431F2432E4001B24E2 /* physical object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physical object.hpp"; sourceTree = "<group>"; };
+		45103F451F246887001B24E2 /* spawn bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn bullet.cpp"; sourceTree = "<group>"; };
+		45103F461F246887001B24E2 /* spawn bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spawn bullet.hpp"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 				45103F311F231C47001B24E2 /* gun spec.cpp */,
 				45103F321F231C47001B24E2 /* gun spec.hpp */,
 				45103F3A1F2345A2001B24E2 /* bullet spec.hpp */,
+				45103F451F246887001B24E2 /* spawn bullet.cpp */,
+				45103F461F246887001B24E2 /* spawn bullet.hpp */,
 			);
 			name = gun;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			files = (
 				453479AF1F20AF7B0083743E /* camera.cpp in Sources */,
 				453479B31F219CE10083743E /* rendering context.cpp in Sources */,
+				45103F471F246887001B24E2 /* spawn bullet.cpp in Sources */,
 				453479601F1F40870083743E /* player.cpp in Sources */,
 				45103F441F2432E4001B24E2 /* physical object.cpp in Sources */,
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,

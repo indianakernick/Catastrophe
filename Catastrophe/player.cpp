@@ -10,11 +10,12 @@
 
 #include "bullet.hpp"
 #include "dir to vec.hpp"
-#include "entity manager.hpp"
+#include "spawn bullet.hpp"
 #include "rendering context.hpp"
 
 Player::Player(const EntityID id, const GunSpec gunSpec, const glm::vec2 pos)
   : Entity(id, {pos, SIZE}), gun(gunSpec) {
+  //just for debuging the gun
   gun.collectClips(4);
 }
 
@@ -65,18 +66,7 @@ void Player::update(EntityManager &entityManager, const float delta) {
   
   gun.update(delta);
   
-  unsigned numBulletsFired = gun.canFire();
-  const BulletSpec bulletSpec = gun.getBullet();
-  const glm::vec2 bulletPos = rect.p + (SIZE - Bullet::SIZE) / 2.0f;
-  const Math::Dir bulletDir = shootDir.get();
-  
-  while (numBulletsFired--) {
-    entityManager.make<Bullet>(
-      bulletSpec,
-      bulletPos,
-      bulletDir
-    );
-  }
+  spawnBullet(entityManager, gun, rect, shootDir.get());
 }
 
 void Player::render(RenderingContext &renderer) const {
