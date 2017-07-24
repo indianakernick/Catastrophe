@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include <Simpleton/ID/local.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
+#include <Simpleton/Utils/buffered container.hpp>
 
 class RenderingContext;
 
@@ -29,14 +30,8 @@ public:
   EntityManager() = default;
   ~EntityManager() = default;
   
-  template <typename EntityClass, typename ...Args>
-  EntityID make(Args &&... args) {
-    const EntityID id = idGen.make();
-    entities.emplace(id, std::make_unique<EntityClass>(id, std::forward<Args>(args)...));
-    return id;
-  }
-  
-  void kill(EntityID);
+  void add(EntityID, std::unique_ptr<Entity>);
+  void rem(EntityID);
   
   template <typename EntityClass>
   EntityClass *get(const EntityID id) const {
@@ -50,10 +45,7 @@ public:
   
 private:
   using EntityMap = std::unordered_map<EntityID, std::unique_ptr<Entity>>;
-  EntityMap entities;
-  std::vector<EntityMap::iterator> killedEntities;
-  ID::Local<EntityID> idGen;
-  bool updating = false;
+  Utils::BufferedMapContainer<EntityMap> entities;
 };
 
 #endif

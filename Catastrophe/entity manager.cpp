@@ -11,17 +11,18 @@
 EntityManager::EntityNotFound::EntityNotFound()
   : std::runtime_error("Entity not found") {}
 
-void EntityManager::kill(const EntityID id) {
-  if (updating) {
-    killedEntities.emplace_back(entities.find(id));
-  } else {
-    entities.erase(id);
-  }
+void EntityManager::add(const EntityID id, std::unique_ptr<Entity> entity) {
+  entities.add(id, entity);
+}
+
+void EntityManager::rem(const EntityID id) {
+  entities.rem(id);
 }
 
 Entity *EntityManager::get(const EntityID id) const {
-  auto iter = entities.find(id);
-  if (iter == entities.cend()) {
+  const EntityMap &entityMap = entities.view();
+  auto iter = entityMap.find(id);
+  if (iter == entityMap.cend()) {
     throw EntityNotFound();
   } else {
     return iter->second.get();
@@ -29,21 +30,16 @@ Entity *EntityManager::get(const EntityID id) const {
 }
 
 void EntityManager::update(const float delta) {
-  assert(!updating);
-  updating = true;
-  for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
+  EntityMap &entityMap = entities.startModifying();
+  for (auto e = entityMap.cbegin(); e != entityMap.cend(); ++e) {
     e->second->update(*this, delta);
   }
-  updating = false;
-  
-  for (auto e = killedEntities.cbegin(); e != killedEntities.cend(); ++e) {
-    entities.erase(*e);
-  }
-  killedEntities.clear();
+  entities.stopModifying();
 }
 
 void EntityManager::render(RenderingContext &renderingContext) const {
-  for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
+  const EntityMap &entityMap = entities.view();
+  for (auto e = entityMap.cbegin(); e != entityMap.cend(); ++e) {
     e->second->render(renderingContext);
   }
 }

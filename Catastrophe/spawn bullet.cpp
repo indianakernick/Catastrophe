@@ -10,7 +10,8 @@
 
 #include "gun.hpp"
 #include "bullet.hpp"
-#include "entity manager.hpp"
+#include "factory.hpp"
+#include "bullet factory data.hpp"
 
 glm::vec2 getBulletPos(
   const Rect shooter,
@@ -49,7 +50,6 @@ glm::vec2 getBulletPos(
 }
 
 void spawnBullet(
-  EntityManager &entityManager,
   Gun &gun,
   const Rect shooter,
   const Math::Dir dir
@@ -63,6 +63,6 @@ void spawnBullet(
   const glm::vec2 pos = getBulletPos(shooter, Bullet::SIZE, dir);
   
   while (numBulletsFired--) {
-    entityManager.make<Bullet>(spec, pos, dir);
+    Factory::make<Bullet>(pos, BulletFactoryData{spec, dir});
   }
 }

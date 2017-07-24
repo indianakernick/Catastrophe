@@ -8,9 +8,19 @@
 
 #include "physics system.hpp"
 
+void PhysicsSystem::add(
+  const EntityID id,
+  std::shared_ptr<PhysicalObject> object
+) {
+  assert(object);
+  objects.add(id, object);
+}
+
+void PhysicsSystem::rem(const EntityID id) {
+  objects.rem(id);
+}
+
 void moveRectToTouch(Rect &a, const Rect b) {
-  using ToIndex = Math::ToNum<size_t>;
-  
   const float dists[4] = {
     a.top() - b.bottom(),
     a.right() - b.left(),
@@ -21,31 +31,29 @@ void moveRectToTouch(Rect &a, const Rect b) {
   float minDist = std::numeric_limits<float>::max();
   Math::Dir minDir = Math::Dir::NONE;
   for (Math::Dir d = Math::Dir::BEGIN; d != Math::Dir::END; ++d) {
-    const float dist = std::abs(dists[ToIndex::conv(d)]);
-    if (dist <= minDist) {
+    const float dist = std::abs(dists[static_cast<size_t>(d)]);
+    if (dist <= minDist) {            
       minDist = dist;
       minDir = d;
     }
   }
   
-  a.side(minDir, a.side(minDir) - dists[ToIndex::conv(minDir)]);
+  a.side(minDir, a.side(minDir) - dists[static_cast<size_t>(minDir)]);
 }
 
 void PhysicsSystem::update(const float delta) {
-  assert(!updating);
+  ObjectMap &objectMap = objects.startModifying();
   
-  updating = true;
-  
-  for (auto o = objects.begin(); o != objects.end(); ++o) {
-    PhysicalObject &object = **o;
+  for (auto o = objectMap.begin(); o != objectMap.end(); ++o) {
+    PhysicalObject &object = *(o->second);
     object.rect.p += object.vel * delta;
     object.vel = {0.0f, 0.0f};
   }
   
-  for (auto a = objects.begin(); a != objects.end(); ++a) {
-    PhysicalObject &objectA = **a;
-    for (auto b = std::next(a); b != objects.end(); ++b) {
-      PhysicalObject &objectB = **b;
+  for (auto a = objectMap.begin(); a != objectMap.end(); ++a) {
+    PhysicalObject &objectA = *(a->second);
+    for (auto b = std::next(a); b != objectMap.end(); ++b) {
+      PhysicalObject &objectB = *(b->second);
       if (
         objectA.collidable &&
         objectB.collidable &&
@@ -62,24 +70,5 @@ void PhysicsSystem::update(const float delta) {
     }
   }
   
-  for (auto o = removedObjects.cbegin(); o != removedObjects.cend(); ++o) {
-    objects.erase(*o);
-  }
-  removedObjects.clear();
-  
-  updating = false;
-}
-
-void PhysicsSystem::addObject(std::shared_ptr<PhysicalObject> object) {
-  assert(object);
-  objects.emplace(object);
-}
-
-void PhysicsSystem::remObject(std::shared_ptr<PhysicalObject> object) {
-  assert(object);
-  if (updating) {
-    removedObjects.emplace_back(objects.find(object));
-  } else {
-    objects.erase(object);
-  }
+  objects.stopModifying();
 }

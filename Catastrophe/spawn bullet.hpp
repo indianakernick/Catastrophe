@@ -13,8 +13,7 @@
 #include <Simpleton/Math/dir.hpp>
 
 class Gun;
-class EntityManager;
 
-void spawnBullet(EntityManager &, Gun &, Rect, Math::Dir);
+void spawnBullet(Gun &, Rect, Math::Dir);
 
 #endif
