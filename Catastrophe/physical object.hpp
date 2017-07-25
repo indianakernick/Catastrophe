@@ -30,7 +30,8 @@ public:
   EntityID getID() const;
   Rect getRect() const;
   
-  void setVelocity(glm::vec2);
+  void applyForce(glm::vec2);
+  void applyImpulse(glm::vec2);
   
   void onCollision(CollisionDispatcher::SettableListener);
   void offCollision();
@@ -40,6 +41,7 @@ private:
   EntityID entity;
   Rect rect;
   glm::vec2 vel;
+  glm::vec2 accel;
   unsigned mass;
   bool collidable;
 };

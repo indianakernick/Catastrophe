@@ -12,7 +12,7 @@ EntityManager::EntityNotFound::EntityNotFound()
   : std::runtime_error("Entity not found") {}
 
 void EntityManager::add(const EntityID id, std::unique_ptr<Entity> entity) {
-  entities.add(id, entity);
+  //entities.add(id, entity);
 }
 
 void EntityManager::rem(const EntityID id) {
@@ -34,7 +34,7 @@ void EntityManager::update(const float delta) {
   for (auto e = entityMap.cbegin(); e != entityMap.cend(); ++e) {
     e->second->update(*this, delta);
   }
-  entities.stopModifying();
+  //entities.stopModifying();
 }
 
 void EntityManager::render(RenderingContext &renderingContext) const {

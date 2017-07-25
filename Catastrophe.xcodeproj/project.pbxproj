@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45103F301F2310B3001B24E2 /* gun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F2E1F2310B2001B24E2 /* gun.cpp */; };
-		45103F331F231C47001B24E2 /* gun spec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F311F231C47001B24E2 /* gun spec.cpp */; };
 		45103F3D1F24325C001B24E2 /* physics system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F3B1F24325C001B24E2 /* physics system.cpp */; };
 		45103F441F2432E4001B24E2 /* physical object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F421F2432E4001B24E2 /* physical object.cpp */; };
-		45103F471F246887001B24E2 /* spawn bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F451F246887001B24E2 /* spawn bullet.cpp */; };
 		45103F4A1F248096001B24E2 /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F481F248096001B24E2 /* factory.cpp */; };
-		45103F501F248B0D001B24E2 /* bullet factory data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F4E1F248B0D001B24E2 /* bullet factory data.cpp */; };
 		45103F551F248C01001B24E2 /* factory functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45103F531F248C01001B24E2 /* factory functions.cpp */; };
+		45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45103F7E1F272828001B24E2 /* libNumber Display.dylib */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		453479511F1DAA550083743E /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45F3DB581F1760900058D36B /* string to scancode.cpp */; };
@@ -27,7 +24,6 @@
 		453479B31F219CE10083743E /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B11F219CE10083743E /* rendering context.cpp */; };
 		453479B81F21C3980083743E /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B61F21C3980083743E /* entity.cpp */; };
 		453479BB1F21CA500083743E /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479B91F21CA500083743E /* entity manager.cpp */; };
-		453479BF1F21D00A0083743E /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453479BD1F21D00A0083743E /* bullet.cpp */; };
 		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
@@ -39,24 +35,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		45103F2E1F2310B2001B24E2 /* gun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gun.cpp; sourceTree = "<group>"; };
-		45103F2F1F2310B3001B24E2 /* gun.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gun.hpp; sourceTree = "<group>"; };
-		45103F311F231C47001B24E2 /* gun spec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "gun spec.cpp"; sourceTree = "<group>"; };
-		45103F321F231C47001B24E2 /* gun spec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "gun spec.hpp"; sourceTree = "<group>"; };
-		45103F341F231CF4001B24E2 /* gun constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "gun constants.hpp"; sourceTree = "<group>"; };
-		45103F3A1F2345A2001B24E2 /* bullet spec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "bullet spec.hpp"; sourceTree = "<group>"; };
 		45103F3B1F24325C001B24E2 /* physics system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics system.cpp"; sourceTree = "<group>"; };
 		45103F3C1F24325C001B24E2 /* physics system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics system.hpp"; sourceTree = "<group>"; };
 		45103F421F2432E4001B24E2 /* physical object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physical object.cpp"; sourceTree = "<group>"; };
 		45103F431F2432E4001B24E2 /* physical object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physical object.hpp"; sourceTree = "<group>"; };
-		45103F451F246887001B24E2 /* spawn bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn bullet.cpp"; sourceTree = "<group>"; };
-		45103F461F246887001B24E2 /* spawn bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spawn bullet.hpp"; sourceTree = "<group>"; };
 		45103F481F248096001B24E2 /* factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
 		45103F491F248096001B24E2 /* factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = factory.hpp; sourceTree = "<group>"; };
-		45103F4E1F248B0D001B24E2 /* bullet factory data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "bullet factory data.cpp"; sourceTree = "<group>"; };
-		45103F4F1F248B0D001B24E2 /* bullet factory data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "bullet factory data.hpp"; sourceTree = "<group>"; };
 		45103F531F248C01001B24E2 /* factory functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "factory functions.cpp"; sourceTree = "<group>"; };
 		45103F541F248C01001B24E2 /* factory functions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "factory functions.hpp"; sourceTree = "<group>"; };
+		45103F7E1F272828001B24E2 /* libNumber Display.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libNumber Display.dylib"; path = "../../../../../../../usr/local/lib/libNumber Display.dylib"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -80,8 +67,6 @@
 		453479B91F21CA500083743E /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
 		453479BA1F21CA500083743E /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
 		453479BC1F21CA790083743E /* entity id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
-		453479BD1F21D00A0083743E /* bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
-		453479BE1F21D00A0083743E /* bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
 		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
 				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
 				4592BB2C1F1319D400D1640D /* libUnpacker.dylib in Frameworks */,
@@ -117,22 +103,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45103F3E1F2432A3001B24E2 /* gun */ = {
-			isa = PBXGroup;
-			children = (
-				453479BD1F21D00A0083743E /* bullet.cpp */,
-				453479BE1F21D00A0083743E /* bullet.hpp */,
-				45103F2E1F2310B2001B24E2 /* gun.cpp */,
-				45103F2F1F2310B3001B24E2 /* gun.hpp */,
-				45103F311F231C47001B24E2 /* gun spec.cpp */,
-				45103F321F231C47001B24E2 /* gun spec.hpp */,
-				45103F3A1F2345A2001B24E2 /* bullet spec.hpp */,
-				45103F451F246887001B24E2 /* spawn bullet.cpp */,
-				45103F461F246887001B24E2 /* spawn bullet.hpp */,
-			);
-			name = gun;
-			sourceTree = "<group>";
-		};
 		45103F3F1F2432B4001B24E2 /* entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,8 +144,6 @@
 			children = (
 				45103F481F248096001B24E2 /* factory.cpp */,
 				45103F491F248096001B24E2 /* factory.hpp */,
-				45103F4E1F248B0D001B24E2 /* bullet factory data.cpp */,
-				45103F4F1F248B0D001B24E2 /* bullet factory data.hpp */,
 				45103F531F248C01001B24E2 /* factory functions.cpp */,
 				45103F541F248C01001B24E2 /* factory functions.hpp */,
 			);
@@ -255,11 +223,9 @@
 				453479A91F20A9520083743E /* window constants.hpp */,
 				453479AA1F20A9880083743E /* input constants.hpp */,
 				453479AB1F20A9AE0083743E /* file constants.hpp */,
-				45103F341F231CF4001B24E2 /* gun constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* player */,
 				45103F3F1F2432B4001B24E2 /* entity */,
-				45103F3E1F2432A3001B24E2 /* gun */,
 				45103F591F2497CD001B24E2 /* graphics */,
 				45103F581F24961B001B24E2 /* physics */,
 				45103F521F248B1E001B24E2 /* factory */,
@@ -270,6 +236,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45103F7E1F272828001B24E2 /* libNumber Display.dylib */,
 				45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */,
 				4592BB2B1F1319D400D1640D /* libUnpacker.dylib */,
 				4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */,
@@ -372,7 +339,6 @@
 			files = (
 				453479AF1F20AF7B0083743E /* camera.cpp in Sources */,
 				453479B31F219CE10083743E /* rendering context.cpp in Sources */,
-				45103F471F246887001B24E2 /* spawn bullet.cpp in Sources */,
 				453479601F1F40870083743E /* player.cpp in Sources */,
 				45103F441F2432E4001B24E2 /* physical object.cpp in Sources */,
 				453479571F1F0ECD0083743E /* app impl.cpp in Sources */,
@@ -380,12 +346,8 @@
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
 				45103F4A1F248096001B24E2 /* factory.cpp in Sources */,
 				45103F551F248C01001B24E2 /* factory functions.cpp in Sources */,
-				45103F301F2310B3001B24E2 /* gun.cpp in Sources */,
-				453479BF1F21D00A0083743E /* bullet.cpp in Sources */,
-				45103F331F231C47001B24E2 /* gun spec.cpp in Sources */,
 				453479511F1DAA550083743E /* string to scancode.cpp in Sources */,
 				453479BB1F21CA500083743E /* entity manager.cpp in Sources */,
-				45103F501F248B0D001B24E2 /* bullet factory data.cpp in Sources */,
 				45103F3D1F24325C001B24E2 /* physics system.cpp in Sources */,
 				453479B81F21C3980083743E /* entity.cpp in Sources */,
 				453479A81F20A24D0083743E /* ortho move dir.cpp in Sources */,
@@ -495,9 +457,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
+					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
+					"/usr/local/include/Simpleton/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -532,9 +496,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
+					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
+					"/usr/local/include/Simpleton/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

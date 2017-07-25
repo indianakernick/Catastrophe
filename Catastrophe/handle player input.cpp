@@ -26,21 +26,6 @@ Math::Dir getMoveDir(const SDL_Scancode key) {
   }
 }
 
-Math::Dir getShootDir(const SDL_Scancode key) {
-  switch (key) {
-    case SHOOT_UP_KEY:
-      return Math::Dir::UP;
-    case SHOOT_RIGHT_KEY:
-      return Math::Dir::RIGHT;
-    case SHOOT_DOWN_KEY:
-      return Math::Dir::DOWN;
-    case SHOOT_LEFT_KEY:
-      return Math::Dir::LEFT;
-    default:
-      return Math::Dir::NONE;
-  }
-}
-
 void handleKeyDown(Player &player, const SDL_KeyboardEvent keyEvent) {
   assert(keyEvent.type == SDL_KEYDOWN);
   
@@ -52,15 +37,6 @@ void handleKeyDown(Player &player, const SDL_KeyboardEvent keyEvent) {
   if (moveDir != Math::Dir::NONE) {
     player.startMoving(moveDir);
   }
-  
-  const Math::Dir shootDir = getShootDir(keyEvent.keysym.scancode);
-  if (shootDir != Math::Dir::NONE) {
-    player.startShooting(shootDir);
-  }
-  
-  if (keyEvent.keysym.scancode == RELOAD_KEY) {
-    player.reload();
-  }
 }
 
 void handleKeyUp(Player &player, const SDL_KeyboardEvent keyEvent) {
@@ -69,13 +45,7 @@ void handleKeyUp(Player &player, const SDL_KeyboardEvent keyEvent) {
   const Math::Dir moveDir = getMoveDir(keyEvent.keysym.scancode);
   if (moveDir != Math::Dir::NONE) {
     player.stopMoving(moveDir);
-  }
-  
-  const Math::Dir shootDir = getShootDir(keyEvent.keysym.scancode);
-  if (shootDir != Math::Dir::NONE) {
-    player.stopShooting(shootDir);
-  }
-}
+  }}
 
 void handlePlayerInput(Player &player, const SDL_Event e) {
   if (e.type == SDL_KEYDOWN) {
