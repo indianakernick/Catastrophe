@@ -11,19 +11,19 @@
 
 #include <Simpleton/Platform/window.hpp>
 
-const bool WINDOW_RESIZABLE = true;
+const glm::ivec2 WINDOW_PIXEL_SIZE = {1280, 720};
+const bool WINDOW_RESIZABLE = false;
 const Platform::Window::Desc WINDOW_DESC = {
   "Catastrophe",
-  {1280, 720},
+  WINDOW_PIXEL_SIZE,
   WINDOW_RESIZABLE
 };
 const bool WINDOW_VSYNC = true;
 
-const glm::ivec2 PIXELS_PER_TILE = {16, 16};
-const glm::vec2 WINDOW_TILE_SIZE = {20.0f, 11.25f};
-const glm::ivec2 WINDOW_PIXEL_SIZE = {
-  PIXELS_PER_TILE.x * WINDOW_TILE_SIZE.x,
-  PIXELS_PER_TILE.y * WINDOW_TILE_SIZE.y
+const float PIXELS_PER_METER = 20.0f;
+const glm::vec2 WINDOW_METER_SIZE = {
+  WINDOW_PIXEL_SIZE.x / PIXELS_PER_METER,
+  WINDOW_PIXEL_SIZE.y / PIXELS_PER_METER,
 };
 
 #endif

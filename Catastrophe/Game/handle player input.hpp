@@ -9,9 +9,8 @@
 #ifndef handle_player_input_hpp
 #define handle_player_input_hpp
 
-#include "player.hpp"
-
 union SDL_Event;
+class Player;
 
 void handlePlayerInput(Player &, SDL_Event);
 

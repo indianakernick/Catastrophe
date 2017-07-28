@@ -18,15 +18,10 @@ bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderingContext.init(renderer.get(), SPRITE_SHEET_PATH);
-  renderingContext.attachCamera(camera);
-  //player = entities.make<Player>(MINI_GUN);
-  camera.setTarget(*entities.get(player));
   return true;
 }
 
 void AppImpl::quit() {
-  camera.unsetTarget(*entities.get(player));
-  renderingContext.detachCamera();
   renderingContext.quit();
   SDLApp::quitWindow();
 }
@@ -37,7 +32,7 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      handlePlayerInput(*entities.get<Player>(player), e);
+      
     }
   }
   return true;

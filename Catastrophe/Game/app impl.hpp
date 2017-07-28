@@ -9,8 +9,6 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
-#include "entity manager.hpp"
-#include "camera.hpp"
 #include "rendering context.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
@@ -19,10 +17,7 @@ public:
   AppImpl() = default;
 
 private:
-  EntityManager entities;
   RenderingContext renderingContext;
-  Camera camera;
-  EntityID player;
 
   bool init() override;
   void quit() override;

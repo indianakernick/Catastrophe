@@ -12,18 +12,9 @@
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
-		453890531F2ADA9F007EBB5A /* physical object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538904F1F2ADA9F007EBB5A /* physical object.cpp */; };
-		453890541F2ADA9F007EBB5A /* physics system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890511F2ADA9F007EBB5A /* physics system.cpp */; };
-		453890591F2ADAB2007EBB5A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890551F2ADAB2007EBB5A /* camera.cpp */; };
 		4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890571F2ADAB2007EBB5A /* rendering context.cpp */; };
-		453890601F2ADAC1007EBB5A /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538905C1F2ADAC1007EBB5A /* entity manager.cpp */; };
-		453890611F2ADAC1007EBB5A /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538905E1F2ADAC1007EBB5A /* entity.cpp */; };
-		453890661F2ADAD2007EBB5A /* factory functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890621F2ADAD2007EBB5A /* factory functions.cpp */; };
-		453890671F2ADAD2007EBB5A /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890641F2ADAD2007EBB5A /* factory.cpp */; };
 		4538906C1F2ADAF0007EBB5A /* handle player input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890681F2ADAF0007EBB5A /* handle player input.cpp */; };
-		4538906D1F2ADAF0007EBB5A /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906A1F2ADAF0007EBB5A /* player.cpp */; };
 		453890721F2ADB13007EBB5A /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906E1F2ADB13007EBB5A /* app impl.cpp */; };
-		453890761F2ADB33007EBB5A /* ortho move dir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890741F2ADB33007EBB5A /* ortho move dir.cpp */; };
 		4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890791F2ADB4B007EBB5A /* string to scancode.cpp */; };
 		453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892361F2ADBB4007EBB5A /* b2BroadPhase.cpp */; };
 		453892991F2ADBB4007EBB5A /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892381F2ADBB4007EBB5A /* b2CollideCircle.cpp */; };
@@ -87,35 +78,15 @@
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
 		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
 		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
-		4538904F1F2ADA9F007EBB5A /* physical object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physical object.cpp"; sourceTree = "<group>"; };
-		453890501F2ADA9F007EBB5A /* physical object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physical object.hpp"; sourceTree = "<group>"; };
-		453890511F2ADA9F007EBB5A /* physics system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics system.cpp"; sourceTree = "<group>"; };
-		453890521F2ADA9F007EBB5A /* physics system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics system.hpp"; sourceTree = "<group>"; };
-		453890551F2ADAB2007EBB5A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
-		453890561F2ADAB2007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		453890571F2ADAB2007EBB5A /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
 		453890581F2ADAB2007EBB5A /* rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering context.hpp"; sourceTree = "<group>"; };
-		4538905B1F2ADAC1007EBB5A /* entity id.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
-		4538905C1F2ADAC1007EBB5A /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
-		4538905D1F2ADAC1007EBB5A /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
-		4538905E1F2ADAC1007EBB5A /* entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
-		4538905F1F2ADAC1007EBB5A /* entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
-		453890621F2ADAD2007EBB5A /* factory functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "factory functions.cpp"; sourceTree = "<group>"; };
-		453890631F2ADAD2007EBB5A /* factory functions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "factory functions.hpp"; sourceTree = "<group>"; };
-		453890641F2ADAD2007EBB5A /* factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
-		453890651F2ADAD2007EBB5A /* factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = factory.hpp; sourceTree = "<group>"; };
 		453890681F2ADAF0007EBB5A /* handle player input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "handle player input.cpp"; sourceTree = "<group>"; };
 		453890691F2ADAF0007EBB5A /* handle player input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "handle player input.hpp"; sourceTree = "<group>"; };
-		4538906A1F2ADAF0007EBB5A /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
-		4538906B1F2ADAF0007EBB5A /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
 		4538906F1F2ADB13007EBB5A /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
 		453890701F2ADB13007EBB5A /* file constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
 		453890711F2ADB13007EBB5A /* window constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "window constants.hpp"; sourceTree = "<group>"; };
 		453890731F2ADB29007EBB5A /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
-		453890741F2ADB33007EBB5A /* ortho move dir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ortho move dir.cpp"; sourceTree = "<group>"; };
-		453890751F2ADB33007EBB5A /* ortho move dir.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "ortho move dir.hpp"; sourceTree = "<group>"; };
-		453890771F2ADB4B007EBB5A /* dir to vec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "dir to vec.hpp"; sourceTree = "<group>"; };
 		453890781F2ADB4B007EBB5A /* rect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rect.hpp; sourceTree = "<group>"; };
 		453890791F2ADB4B007EBB5A /* string to scancode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "string to scancode.cpp"; sourceTree = "<group>"; };
 		4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "string to scancode.hpp"; sourceTree = "<group>"; };
@@ -242,27 +213,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45103F3F1F2432B4001B24E2 /* entity */ = {
-			isa = PBXGroup;
-			children = (
-				4538905B1F2ADAC1007EBB5A /* entity id.hpp */,
-				4538905C1F2ADAC1007EBB5A /* entity manager.cpp */,
-				4538905D1F2ADAC1007EBB5A /* entity manager.hpp */,
-				4538905E1F2ADAC1007EBB5A /* entity.cpp */,
-				4538905F1F2ADAC1007EBB5A /* entity.hpp */,
-			);
-			name = entity;
-			sourceTree = "<group>";
-		};
 		45103F401F2432C5001B24E2 /* player */ = {
 			isa = PBXGroup;
 			children = (
 				453890681F2ADAF0007EBB5A /* handle player input.cpp */,
 				453890691F2ADAF0007EBB5A /* handle player input.hpp */,
-				4538906A1F2ADAF0007EBB5A /* player.cpp */,
-				4538906B1F2ADAF0007EBB5A /* player.hpp */,
-				453890741F2ADB33007EBB5A /* ortho move dir.cpp */,
-				453890751F2ADB33007EBB5A /* ortho move dir.hpp */,
 			);
 			name = player;
 			sourceTree = "<group>";
@@ -270,7 +225,6 @@
 		45103F411F2432D2001B24E2 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				453890771F2ADB4B007EBB5A /* dir to vec.hpp */,
 				453890781F2ADB4B007EBB5A /* rect.hpp */,
 				453890791F2ADB4B007EBB5A /* string to scancode.cpp */,
 				4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */,
@@ -278,33 +232,9 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
-		45103F521F248B1E001B24E2 /* factory */ = {
-			isa = PBXGroup;
-			children = (
-				453890621F2ADAD2007EBB5A /* factory functions.cpp */,
-				453890631F2ADAD2007EBB5A /* factory functions.hpp */,
-				453890641F2ADAD2007EBB5A /* factory.cpp */,
-				453890651F2ADAD2007EBB5A /* factory.hpp */,
-			);
-			name = factory;
-			sourceTree = "<group>";
-		};
-		45103F581F24961B001B24E2 /* physics */ = {
-			isa = PBXGroup;
-			children = (
-				4538904F1F2ADA9F007EBB5A /* physical object.cpp */,
-				453890501F2ADA9F007EBB5A /* physical object.hpp */,
-				453890511F2ADA9F007EBB5A /* physics system.cpp */,
-				453890521F2ADA9F007EBB5A /* physics system.hpp */,
-			);
-			name = physics;
-			sourceTree = "<group>";
-		};
 		45103F591F2497CD001B24E2 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
-				453890551F2ADAB2007EBB5A /* camera.cpp */,
-				453890561F2ADAB2007EBB5A /* camera.hpp */,
 				453890571F2ADAB2007EBB5A /* rendering context.cpp */,
 				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
 			);
@@ -530,10 +460,7 @@
 				453890731F2ADB29007EBB5A /* input constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* player */,
-				45103F3F1F2432B4001B24E2 /* entity */,
 				45103F591F2497CD001B24E2 /* graphics */,
-				45103F581F24961B001B24E2 /* physics */,
-				45103F521F248B1E001B24E2 /* factory */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -643,7 +570,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				453892C31F2ADBB4007EBB5A /* b2WeldJoint.cpp in Sources */,
-				453890761F2ADB33007EBB5A /* ortho move dir.cpp in Sources */,
 				453892A51F2ADBB4007EBB5A /* b2Draw.cpp in Sources */,
 				453892AA1F2ADBB4007EBB5A /* b2Body.cpp in Sources */,
 				453892B11F2ADBB4007EBB5A /* b2ChainAndPolygonContact.cpp in Sources */,
@@ -660,20 +586,16 @@
 				4538929F1F2ADBB4007EBB5A /* b2TimeOfImpact.cpp in Sources */,
 				453892B31F2ADBB4007EBB5A /* b2Contact.cpp in Sources */,
 				453892AF1F2ADBB4007EBB5A /* b2WorldCallbacks.cpp in Sources */,
-				453890611F2ADAC1007EBB5A /* entity.cpp in Sources */,
 				453892A31F2ADBB4007EBB5A /* b2PolygonShape.cpp in Sources */,
 				453892BD1F2ADBB4007EBB5A /* b2MotorJoint.cpp in Sources */,
 				453892A61F2ADBB4007EBB5A /* b2Math.cpp in Sources */,
 				453892A41F2ADBB4007EBB5A /* b2BlockAllocator.cpp in Sources */,
-				453890591F2ADAB2007EBB5A /* camera.cpp in Sources */,
-				453890601F2ADAC1007EBB5A /* entity manager.cpp in Sources */,
 				453892B71F2ADBB4007EBB5A /* b2PolygonAndCircleContact.cpp in Sources */,
 				453892991F2ADBB4007EBB5A /* b2CollideCircle.cpp in Sources */,
 				453892B21F2ADBB4007EBB5A /* b2CircleContact.cpp in Sources */,
 				453892BE1F2ADBB4007EBB5A /* b2MouseJoint.cpp in Sources */,
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,
-				453890531F2ADA9F007EBB5A /* physical object.cpp in Sources */,
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
@@ -681,7 +603,6 @@
 				453892B81F2ADBB4007EBB5A /* b2PolygonContact.cpp in Sources */,
 				453892A21F2ADBB4007EBB5A /* b2EdgeShape.cpp in Sources */,
 				453892B01F2ADBB4007EBB5A /* b2ChainAndCircleContact.cpp in Sources */,
-				4538906D1F2ADAF0007EBB5A /* player.cpp in Sources */,
 				4538929C1F2ADBB4007EBB5A /* b2Collision.cpp in Sources */,
 				4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */,
 				453892A11F2ADBB4007EBB5A /* b2CircleShape.cpp in Sources */,
@@ -689,7 +610,6 @@
 				453892AC1F2ADBB4007EBB5A /* b2Fixture.cpp in Sources */,
 				453892C51F2ADBB4007EBB5A /* b2Rope.cpp in Sources */,
 				453892C41F2ADBB4007EBB5A /* b2WheelJoint.cpp in Sources */,
-				453890541F2ADA9F007EBB5A /* physics system.cpp in Sources */,
 				453892A81F2ADBB4007EBB5A /* b2StackAllocator.cpp in Sources */,
 				453892BF1F2ADBB4007EBB5A /* b2PrismaticJoint.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
@@ -700,8 +620,6 @@
 				453892AB1F2ADBB4007EBB5A /* b2ContactManager.cpp in Sources */,
 				4538929A1F2ADBB4007EBB5A /* b2CollideEdge.cpp in Sources */,
 				453892C21F2ADBB4007EBB5A /* b2RopeJoint.cpp in Sources */,
-				453890671F2ADAD2007EBB5A /* factory.cpp in Sources */,
-				453890661F2ADAD2007EBB5A /* factory functions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

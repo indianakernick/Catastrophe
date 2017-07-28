@@ -27,9 +27,6 @@ public:
   void init(SDL_Renderer *, std::experimental::string_view);
   void quit();
   
-  void attachCamera(Camera &);
-  void detachCamera();
-  
   void renderSprite(std::experimental::string_view, int, Rect);
   void renderSprite(std::experimental::string_view, Rect);
   
