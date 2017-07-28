@@ -9,6 +9,8 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
+#include "player.hpp"
+#include "physics system.hpp"
 #include "rendering context.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
@@ -17,7 +19,9 @@ public:
   AppImpl() = default;
 
 private:
-  RenderingContext renderingContext;
+  Renderer renderMan;
+  PhysicsSystem physicsSystem;
+  std::shared_ptr<Player> player;
 
   bool init() override;
   void quit() override;

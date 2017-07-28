@@ -62,6 +62,11 @@
 		453892C31F2ADBB4007EBB5A /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892911F2ADBB4007EBB5A /* b2WeldJoint.cpp */; };
 		453892C41F2ADBB4007EBB5A /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892931F2ADBB4007EBB5A /* b2WheelJoint.cpp */; };
 		453892C51F2ADBB4007EBB5A /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892961F2ADBB4007EBB5A /* b2Rope.cpp */; };
+		453892CC1F2AF420007EBB5A /* visible component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892CA1F2AF41F007EBB5A /* visible component.cpp */; };
+		453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892CE1F2AF7FE007EBB5A /* physics component.cpp */; };
+		453892D31F2AF877007EBB5A /* physics system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892D11F2AF877007EBB5A /* physics system.cpp */; };
+		453892D61F2B0074007EBB5A /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892D41F2B0074007EBB5A /* entity.cpp */; };
+		453892D91F2B0479007EBB5A /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892D71F2B0478007EBB5A /* player.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -183,6 +188,17 @@
 		453892941F2ADBB4007EBB5A /* b2WheelJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WheelJoint.h; sourceTree = "<group>"; };
 		453892961F2ADBB4007EBB5A /* b2Rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Rope.cpp; sourceTree = "<group>"; };
 		453892971F2ADBB4007EBB5A /* b2Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Rope.h; sourceTree = "<group>"; };
+		453892CA1F2AF41F007EBB5A /* visible component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "visible component.cpp"; sourceTree = "<group>"; };
+		453892CB1F2AF420007EBB5A /* visible component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "visible component.hpp"; sourceTree = "<group>"; };
+		453892CD1F2AF4E5007EBB5A /* entity id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "entity id.hpp"; sourceTree = "<group>"; };
+		453892CE1F2AF7FE007EBB5A /* physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics component.cpp"; sourceTree = "<group>"; };
+		453892CF1F2AF7FE007EBB5A /* physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics component.hpp"; sourceTree = "<group>"; };
+		453892D11F2AF877007EBB5A /* physics system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics system.cpp"; sourceTree = "<group>"; };
+		453892D21F2AF877007EBB5A /* physics system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics system.hpp"; sourceTree = "<group>"; };
+		453892D41F2B0074007EBB5A /* entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
+		453892D51F2B0074007EBB5A /* entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
+		453892D71F2B0478007EBB5A /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		453892D81F2B0478007EBB5A /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -461,6 +477,17 @@
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* player */,
 				45103F591F2497CD001B24E2 /* graphics */,
+				453892CA1F2AF41F007EBB5A /* visible component.cpp */,
+				453892CB1F2AF420007EBB5A /* visible component.hpp */,
+				453892CD1F2AF4E5007EBB5A /* entity id.hpp */,
+				453892CE1F2AF7FE007EBB5A /* physics component.cpp */,
+				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
+				453892D11F2AF877007EBB5A /* physics system.cpp */,
+				453892D21F2AF877007EBB5A /* physics system.hpp */,
+				453892D41F2B0074007EBB5A /* entity.cpp */,
+				453892D51F2B0074007EBB5A /* entity.hpp */,
+				453892D71F2B0478007EBB5A /* player.cpp */,
+				453892D81F2B0478007EBB5A /* player.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -576,6 +603,7 @@
 				4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */,
 				4538929D1F2ADBB4007EBB5A /* b2Distance.cpp in Sources */,
 				453890721F2ADB13007EBB5A /* app impl.cpp in Sources */,
+				453892D31F2AF877007EBB5A /* physics system.cpp in Sources */,
 				453892B91F2ADBB4007EBB5A /* b2DistanceJoint.cpp in Sources */,
 				453892B61F2ADBB4007EBB5A /* b2EdgeAndPolygonContact.cpp in Sources */,
 				453892A01F2ADBB4007EBB5A /* b2ChainShape.cpp in Sources */,
@@ -603,16 +631,20 @@
 				453892B81F2ADBB4007EBB5A /* b2PolygonContact.cpp in Sources */,
 				453892A21F2ADBB4007EBB5A /* b2EdgeShape.cpp in Sources */,
 				453892B01F2ADBB4007EBB5A /* b2ChainAndCircleContact.cpp in Sources */,
+				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4538929C1F2ADBB4007EBB5A /* b2Collision.cpp in Sources */,
 				4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */,
 				453892A11F2ADBB4007EBB5A /* b2CircleShape.cpp in Sources */,
 				453892AE1F2ADBB4007EBB5A /* b2World.cpp in Sources */,
+				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				453892AC1F2ADBB4007EBB5A /* b2Fixture.cpp in Sources */,
 				453892C51F2ADBB4007EBB5A /* b2Rope.cpp in Sources */,
 				453892C41F2ADBB4007EBB5A /* b2WheelJoint.cpp in Sources */,
 				453892A81F2ADBB4007EBB5A /* b2StackAllocator.cpp in Sources */,
 				453892BF1F2ADBB4007EBB5A /* b2PrismaticJoint.cpp in Sources */,
+				453892CC1F2AF420007EBB5A /* visible component.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
+				453892D91F2B0479007EBB5A /* player.cpp in Sources */,
 				4538906C1F2ADAF0007EBB5A /* handle player input.cpp in Sources */,
 				453892A71F2ADBB4007EBB5A /* b2Settings.cpp in Sources */,
 				453892C11F2ADBB4007EBB5A /* b2RevoluteJoint.cpp in Sources */,

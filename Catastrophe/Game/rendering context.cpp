@@ -8,16 +8,15 @@
 
 #include "rendering context.hpp"
 
-#include "camera.hpp"
 #include <SDL2/SDL_render.h>
 #include "window constants.hpp"
 #include <Simpleton/Platform/sdl error.hpp>
 #include <Simpleton/Platform/system info.hpp>
 
-RenderingContext::RenderingContext()
+Renderer::Renderer()
   : texture(nullptr, &SDL_DestroyTexture) {}
 
-void RenderingContext::init(
+void Renderer::init(
   SDL_Renderer *newRenderer,
   const std::experimental::string_view sheetName
 ) {
@@ -42,22 +41,37 @@ void RenderingContext::init(
   CHECK_SDL_ERROR(SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND));
 }
 
-void RenderingContext::quit() {
-  camera = nullptr;
+void Renderer::quit() {
   texture.reset();
   sheet = {};
   renderer = nullptr;
 }
 
-void RenderingContext::attachCamera(Camera &newCamera) {
-  camera = &newCamera;
+std::shared_ptr<VisibleComponent> Renderer::create(
+  const EntityID entityID,
+  const std::string &sprite
+) {
+  auto comp = std::make_shared<VisibleComponent>();
+  comp->spriteName = sprite;
+  components.emplace(entityID, comp);
+  return comp;
 }
 
-void RenderingContext::detachCamera() {
-  camera = nullptr;
+void Renderer::destroy(const EntityID entityID) {
+  auto iter = components.find(entityID);
+  if (iter != components.cend()) {
+    components.erase(iter);
+  }
 }
 
-void RenderingContext::renderSprite(
+void Renderer::render() {
+  for (auto c = components.cbegin(); c != components.cend(); ++c) {
+    const VisibleComponent &comp = *c->second;
+    renderSprite(comp.spriteName, comp.rect);
+  }
+}
+
+void Renderer::renderSprite(
   const std::experimental::string_view name,
   const int frame,
   const Rect dest
@@ -70,21 +84,24 @@ namespace {
   SDL_Rect toSDL(const Unpack::RectPx rect) {
     return {rect.x, rect.y, rect.w, rect.h};
   }
-  
+
   SDL_Rect toSDL(const RectPx rect) {
     return {rect.p.x, rect.p.y, rect.s.x, rect.s.y};
   }
+  
+  RectPx transform(const Rect rect) {
+    return {
+      rect.p * -PIXELS_PER_METER,
+      rect.s * PIXELS_PER_METER
+    };
+  }
 }
 
-void RenderingContext::renderSprite(
+void Renderer::renderSprite(
   const std::experimental::string_view name,
   const Rect dest
 ) {
-  if (camera == nullptr) {
-    return;
-  }
-  
-  const RectPx destPixels = camera->transform(dest);
+  const RectPx destPixels = transform(dest);
   
   if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
     return;
@@ -98,20 +115,4 @@ void RenderingContext::renderSprite(
     &src,
     &dst
   ));
-}
-
-void RenderingContext::fillRect(const glm::tvec4<uint8_t> color, const Rect dest) {
-  if (camera == nullptr) {
-    return;
-  }
-  
-  const RectPx destPixels = camera->transform(dest);
-  
-  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
-    return;
-  }
-  
-  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-  const SDL_Rect dst = toSDL(destPixels);
-  SDL_RenderFillRect(renderer, &dst);
 }
