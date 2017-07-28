@@ -10,9 +10,11 @@
 
 #include <unordered_map>
 
+KeyNotFound::KeyNotFound(const std::experimental::string_view name)
+  : std::runtime_error("Failed to find key: \"" + name.to_string() + "\"") {}
+
 namespace {
-  std::unordered_map<std::experimental::string_view, SDL_Scancode> map = {
-    //{"UNKNOWN", SDL_SCANCODE_UNKNOWN},
+  const std::unordered_map<std::experimental::string_view, SDL_Scancode> map = {
     {"A", SDL_SCANCODE_A},
     {"B", SDL_SCANCODE_B},
     {"C", SDL_SCANCODE_C},
@@ -257,5 +259,10 @@ namespace {
 }
 
 SDL_Scancode strToScancode(const std::experimental::string_view str) {
-  return map.at(str);
+  auto iter = map.find(str);
+  if (iter == map.cend()) {
+    throw KeyNotFound(str);
+  } else {
+    return iter->second;
+  }
 }
