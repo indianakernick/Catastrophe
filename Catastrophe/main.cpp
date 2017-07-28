@@ -8,6 +8,8 @@
 
 #include "app impl.hpp"
 
+#include "Libraries/Box2D/Box2D.h"
+
 int main(int, char **) {
   app = std::make_unique<AppImpl>();
   app->mainLoop<std::chrono::milliseconds>(16, 4);

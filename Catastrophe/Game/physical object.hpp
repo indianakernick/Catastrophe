@@ -15,23 +15,27 @@
 
 class PhysicalObject {
 private:
-  friend class PhysicsSystem;
-  
   using CollisionDispatcher = Utils::SingleDispatcher<
     void (EntityID),
     void
   >;
 
 public:
-  static constexpr unsigned FIXED = std::numeric_limits<unsigned>::max();
+  static constexpr float FIXED = std::numeric_limits<float>::max();
 
-  PhysicalObject(EntityID, Rect, unsigned, bool);
+  PhysicalObject(EntityID, Rect, float, bool);
   
   EntityID getID() const;
   Rect getRect() const;
   
+  void setRect(Rect);
+  void setMass(float);
+  void setCollidable(bool);
+  
   void applyForce(glm::vec2);
   void applyImpulse(glm::vec2);
+  
+  void update(float, glm::vec2);
   
   void onCollision(CollisionDispatcher::SettableListener);
   void offCollision();
@@ -42,7 +46,9 @@ private:
   Rect rect;
   glm::vec2 vel;
   glm::vec2 accel;
-  unsigned mass;
+  glm::vec2 force;
+  glm::vec2 impulse;
+  float mass;
   bool collidable;
 };
 
