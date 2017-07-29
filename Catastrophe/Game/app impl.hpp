@@ -26,6 +26,7 @@ private:
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   EntityID player;
+  EntityID platform;
 
   bool init() override;
   void quit() override;

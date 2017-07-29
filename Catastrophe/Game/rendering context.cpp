@@ -68,8 +68,8 @@ namespace {
   RectPx transform(const Rect rect) {
     return {
       {
-        rect.p.x * PIXELS_PER_METER,
-        rect.p.y * -PIXELS_PER_METER
+        (rect.p.x) * PIXELS_PER_METER,
+        (-rect.p.y + WINDOW_METER_SIZE.y - rect.s.y) * PIXELS_PER_METER
       },
       rect.s * PIXELS_PER_METER
     };
@@ -96,7 +96,7 @@ void RenderingContext::renderSprite(
   ));
 }
 
-void RenderingContext::renderRect(const glm::tvec4<uint8_t> color, const Rect dest) {
+void RenderingContext::renderRect(const Color color, const Rect dest) {
   const RectPx destPixels = transform(dest);
   
   if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {

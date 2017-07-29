@@ -1,23 +1,23 @@
 //
-//  player.hpp
+//  platform.hpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 28/7/17.
+//  Created by Indi Kernick on 29/7/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef player_hpp
-#define player_hpp
+#ifndef platform_hpp
+#define platform_hpp
 
+#include "rect.hpp"
 #include "factory fwd.hpp"
-#include "../Libraries/Box2D/Common/b2Math.h"
 
-std::unique_ptr<Entity> makePlayer(
+std::unique_ptr<Entity> makePlatform(
   EntityID,
   InputSystem &,
   PhysicsSystem &,
   RenderingSystem &,
-  b2Vec2
+  Rect
 );
 
 #endif

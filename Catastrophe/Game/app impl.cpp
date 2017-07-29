@@ -9,6 +9,7 @@
 #include "app impl.hpp"
 
 #include "player.hpp"
+#include "platform.hpp"
 #include "file constants.hpp"
 #include "window constants.hpp"
 
@@ -20,12 +21,14 @@ bool AppImpl::init() {
   physicsSystem.init();
   inputSystem.init();
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
-  player = entityManager.create(makePlayer);
+  player = entityManager.create(makePlayer, b2Vec2(0.0f, 10.0f));
+  platform = entityManager.create(makePlatform,
+    Rect({0.0f, 0.0f}, {WINDOW_METER_SIZE.x, 2.0f})
+  );
   return true;
 }
 
 void AppImpl::quit() {
-  entityManager.destroy(player);
   entityManager.quit();
   inputSystem.quit();
   physicsSystem.quit();

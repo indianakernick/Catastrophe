@@ -10,7 +10,7 @@
 #define rendering_context_hpp
 
 #include "rect.hpp"
-#include <glm/vec4.hpp>
+#include "color.hpp"
 #include <Unpacker/unpacker.hpp>
 #include <Simpleton/Platform/sdl object.hpp>
 
@@ -28,7 +28,7 @@ public:
   
   void renderSprite(std::experimental::string_view, int, Rect);
   void renderSprite(std::experimental::string_view, Rect);
-  void renderRect(glm::tvec4<uint8_t>, Rect);
+  void renderRect(Color, Rect);
   
 private:
   SDL_Renderer *renderer;

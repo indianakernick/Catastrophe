@@ -14,13 +14,14 @@
 #include "rendering system.hpp"
 #include "player constants.hpp"
 #include "player input component.hpp"
-#include "player render component.hpp"
+#include "static sprite render component.hpp"
 
 std::unique_ptr<Entity> makePlayer(
   const EntityID id,
   InputSystem &input,
   PhysicsSystem &physics,
-  RenderingSystem &rendering
+  RenderingSystem &rendering,
+  const b2Vec2 pos
 ) {
   std::unique_ptr<Entity> player = std::make_unique<Entity>(id);
   
@@ -38,8 +39,9 @@ std::unique_ptr<Entity> makePlayer(
   fixtureDef.density = PLAYER_DENSITY;
   
   player->physics->body->CreateFixture(&fixtureDef);
+  player->physics->body->SetTransform(pos, 0.0f);
   
-  player->render = std::make_shared<PlayerRenderComponent>();
+  player->render = std::make_shared<StaticSpriteRenderComponent>("rat", PLAYER_WIDTH, PLAYER_HEIGHT);
   rendering.add(id, player->render);
   
   player->input = std::make_shared<PlayerInputComponent>();

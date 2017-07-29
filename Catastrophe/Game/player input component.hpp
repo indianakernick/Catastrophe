@@ -13,7 +13,7 @@
 #include <SDL2/SDL_scancode.h>
 #include "input component.hpp"
 
-class PlayerInputComponent : public InputComponent {
+class PlayerInputComponent final : public InputComponent {
 public:
   PlayerInputComponent() = default;
   ~PlayerInputComponent() = default;

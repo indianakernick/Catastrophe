@@ -70,8 +70,10 @@
 		453892E51F2C1757007EBB5A /* input system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E31F2C1757007EBB5A /* input system.cpp */; };
 		453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E61F2C1A06007EBB5A /* player input component.cpp */; };
 		453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892ED1F2C2487007EBB5A /* rendering system.cpp */; };
-		453892F51F2C291B007EBB5A /* player render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F31F2C291B007EBB5A /* player render component.cpp */; };
+		453892F51F2C291B007EBB5A /* static sprite render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F31F2C291B007EBB5A /* static sprite render component.cpp */; };
 		453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F91F2C4209007EBB5A /* entity manager.cpp */; };
+		453893011F2C4D6B007EBB5A /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892FF1F2C4D6B007EBB5A /* platform.cpp */; };
+		453893041F2C5574007EBB5A /* static color render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453893021F2C5574007EBB5A /* static color render component.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -210,11 +212,17 @@
 		453892EC1F2C2117007EBB5A /* player constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "player constants.hpp"; sourceTree = "<group>"; };
 		453892ED1F2C2487007EBB5A /* rendering system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering system.cpp"; sourceTree = "<group>"; };
 		453892EE1F2C2487007EBB5A /* rendering system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering system.hpp"; sourceTree = "<group>"; };
-		453892F31F2C291B007EBB5A /* player render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player render component.cpp"; sourceTree = "<group>"; };
-		453892F41F2C291B007EBB5A /* player render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player render component.hpp"; sourceTree = "<group>"; };
+		453892F31F2C291B007EBB5A /* static sprite render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static sprite render component.cpp"; sourceTree = "<group>"; };
+		453892F41F2C291B007EBB5A /* static sprite render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static sprite render component.hpp"; sourceTree = "<group>"; };
 		453892F91F2C4209007EBB5A /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
 		453892FA1F2C4209007EBB5A /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
 		453892FE1F2C4BA6007EBB5A /* factory fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "factory fwd.hpp"; sourceTree = "<group>"; };
+		453892FF1F2C4D6B007EBB5A /* platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
+		453893001F2C4D6B007EBB5A /* platform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
+		453893021F2C5574007EBB5A /* static color render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static color render component.cpp"; sourceTree = "<group>"; };
+		453893031F2C5574007EBB5A /* static color render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static color render component.hpp"; sourceTree = "<group>"; };
+		453893051F2C55B4007EBB5A /* color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
+		453893061F2C572D007EBB5A /* platform constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "platform constants.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -260,6 +268,7 @@
 				453890781F2ADB4B007EBB5A /* rect.hpp */,
 				453890791F2ADB4B007EBB5A /* string to scancode.cpp */,
 				4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */,
+				453893051F2C55B4007EBB5A /* color.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -480,8 +489,10 @@
 		453892F81F2C417F007EBB5A /* render components */ = {
 			isa = PBXGroup;
 			children = (
-				453892F31F2C291B007EBB5A /* player render component.cpp */,
-				453892F41F2C291B007EBB5A /* player render component.hpp */,
+				453892F31F2C291B007EBB5A /* static sprite render component.cpp */,
+				453892F41F2C291B007EBB5A /* static sprite render component.hpp */,
+				453893021F2C5574007EBB5A /* static color render component.cpp */,
+				453893031F2C5574007EBB5A /* static color render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -489,9 +500,11 @@
 		453892FD1F2C4B70007EBB5A /* factory */ = {
 			isa = PBXGroup;
 			children = (
+				453892FE1F2C4BA6007EBB5A /* factory fwd.hpp */,
 				453892D71F2B0478007EBB5A /* player.cpp */,
 				453892D81F2B0478007EBB5A /* player.hpp */,
-				453892FE1F2C4BA6007EBB5A /* factory fwd.hpp */,
+				453892FF1F2C4D6B007EBB5A /* platform.cpp */,
+				453893001F2C4D6B007EBB5A /* platform.hpp */,
 			);
 			name = factory;
 			sourceTree = "<group>";
@@ -535,6 +548,7 @@
 				453890701F2ADB13007EBB5A /* file constants.hpp */,
 				453890711F2ADB13007EBB5A /* window constants.hpp */,
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
+				453893061F2C572D007EBB5A /* platform constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* input components */,
 				453892F81F2C417F007EBB5A /* render components */,
@@ -681,8 +695,9 @@
 				453892991F2ADBB4007EBB5A /* b2CollideCircle.cpp in Sources */,
 				453892B21F2ADBB4007EBB5A /* b2CircleContact.cpp in Sources */,
 				453892BE1F2ADBB4007EBB5A /* b2MouseJoint.cpp in Sources */,
+				453893041F2C5574007EBB5A /* static color render component.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
-				453892F51F2C291B007EBB5A /* player render component.cpp in Sources */,
+				453892F51F2C291B007EBB5A /* static sprite render component.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,
@@ -703,6 +718,7 @@
 				453892AE1F2ADBB4007EBB5A /* b2World.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				453892AC1F2ADBB4007EBB5A /* b2Fixture.cpp in Sources */,
+				453893011F2C4D6B007EBB5A /* platform.cpp in Sources */,
 				453892C51F2ADBB4007EBB5A /* b2Rope.cpp in Sources */,
 				453892C41F2ADBB4007EBB5A /* b2WheelJoint.cpp in Sources */,
 				453892A81F2ADBB4007EBB5A /* b2StackAllocator.cpp in Sources */,
