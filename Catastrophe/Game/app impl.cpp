@@ -16,7 +16,6 @@ std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
-  SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
   physicsSystem.init();
   inputSystem.init();

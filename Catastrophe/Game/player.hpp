@@ -9,13 +9,7 @@
 #ifndef player_hpp
 #define player_hpp
 
-#include <memory>
-#include "entity id.hpp"
-
-class Entity;
-class PhysicsSystem;
-class RenderingSystem;
-class InputSystem;
+#include "factory fwd.hpp"
 
 std::unique_ptr<Entity> makePlayer(EntityID, InputSystem &, PhysicsSystem &, RenderingSystem &);
 
