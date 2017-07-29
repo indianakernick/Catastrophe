@@ -8,26 +8,27 @@
 
 #include "player.hpp"
 
+#include "entity.hpp"
+#include "input system.hpp"
 #include "physics system.hpp"
 #include "rendering system.hpp"
-#include "input system.hpp"
 #include "player constants.hpp"
 #include "player input component.hpp"
 #include "player render component.hpp"
 
-std::shared_ptr<Entity> makePlayer(
+std::unique_ptr<Entity> makePlayer(
   const EntityID id,
-  PhysicsSystem &physicsSystem,
-  RenderingSystem &renderer,
-  InputSystem &input
+  InputSystem &input,
+  PhysicsSystem &physics,
+  RenderingSystem &rendering
 ) {
-  auto player = std::make_shared<Entity>(id);
+  std::unique_ptr<Entity> player = std::make_unique<Entity>(id);
   
   b2BodyDef bodyDef;
   bodyDef.type = b2_dynamicBody;
   bodyDef.fixedRotation = true;
   
-  player->physics = physicsSystem.create(id, bodyDef);
+  player->physics = physics.create(id, bodyDef);
   
   b2PolygonShape shape;
   shape.SetAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -39,7 +40,7 @@ std::shared_ptr<Entity> makePlayer(
   player->physics->body->CreateFixture(&fixtureDef);
   
   player->render = std::make_shared<PlayerRenderComponent>();
-  renderer.add(id, player->render);
+  rendering.add(id, player->render);
   
   player->input = std::make_shared<PlayerInputComponent>();
   input.add(id, player->input);

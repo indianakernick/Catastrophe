@@ -9,12 +9,14 @@
 #ifndef player_hpp
 #define player_hpp
 
-#include "entity.hpp"
+#include <memory>
+#include "entity id.hpp"
 
+class Entity;
 class PhysicsSystem;
 class RenderingSystem;
 class InputSystem;
 
-std::shared_ptr<Entity> makePlayer(EntityID, PhysicsSystem &, RenderingSystem &, InputSystem &);
+std::unique_ptr<Entity> makePlayer(EntityID, InputSystem &, PhysicsSystem &, RenderingSystem &);
 
 #endif

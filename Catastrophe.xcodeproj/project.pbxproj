@@ -71,6 +71,7 @@
 		453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E61F2C1A06007EBB5A /* player input component.cpp */; };
 		453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892ED1F2C2487007EBB5A /* rendering system.cpp */; };
 		453892F51F2C291B007EBB5A /* player render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F31F2C291B007EBB5A /* player render component.cpp */; };
+		453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F91F2C4209007EBB5A /* entity manager.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -211,6 +212,8 @@
 		453892EE1F2C2487007EBB5A /* rendering system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering system.hpp"; sourceTree = "<group>"; };
 		453892F31F2C291B007EBB5A /* player render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player render component.cpp"; sourceTree = "<group>"; };
 		453892F41F2C291B007EBB5A /* player render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player render component.hpp"; sourceTree = "<group>"; };
+		453892F91F2C4209007EBB5A /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
+		453892FA1F2C4209007EBB5A /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,15 +244,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45103F401F2432C5001B24E2 /* player */ = {
+		45103F401F2432C5001B24E2 /* input components */ = {
 			isa = PBXGroup;
 			children = (
 				453892E61F2C1A06007EBB5A /* player input component.cpp */,
 				453892E71F2C1A06007EBB5A /* player input component.hpp */,
-				453892F31F2C291B007EBB5A /* player render component.cpp */,
-				453892F41F2C291B007EBB5A /* player render component.hpp */,
 			);
-			name = player;
+			name = "input components";
 			sourceTree = "<group>";
 		};
 		45103F411F2432D2001B24E2 /* utils */ = {
@@ -453,6 +454,37 @@
 			path = Rope;
 			sourceTree = "<group>";
 		};
+		453892F61F2C4053007EBB5A /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				453892CE1F2AF7FE007EBB5A /* physics component.cpp */,
+				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
+				453892D11F2AF877007EBB5A /* physics system.cpp */,
+				453892D21F2AF877007EBB5A /* physics system.hpp */,
+			);
+			name = physics;
+			sourceTree = "<group>";
+		};
+		453892F71F2C4061007EBB5A /* input */ = {
+			isa = PBXGroup;
+			children = (
+				453892E01F2C1206007EBB5A /* input component.cpp */,
+				453892E11F2C1206007EBB5A /* input component.hpp */,
+				453892E31F2C1757007EBB5A /* input system.cpp */,
+				453892E41F2C1757007EBB5A /* input system.hpp */,
+			);
+			name = input;
+			sourceTree = "<group>";
+		};
+		453892F81F2C417F007EBB5A /* render components */ = {
+			isa = PBXGroup;
+			children = (
+				453892F31F2C291B007EBB5A /* player render component.cpp */,
+				453892F41F2C291B007EBB5A /* player render component.hpp */,
+			);
+			name = "render components";
+			sourceTree = "<group>";
+		};
 		4592BAC81F11B48F00D1640D = {
 			isa = PBXGroup;
 			children = (
@@ -493,21 +525,18 @@
 				453890711F2ADB13007EBB5A /* window constants.hpp */,
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
-				45103F401F2432C5001B24E2 /* player */,
+				45103F401F2432C5001B24E2 /* input components */,
+				453892F81F2C417F007EBB5A /* render components */,
 				45103F591F2497CD001B24E2 /* graphics */,
+				453892F61F2C4053007EBB5A /* physics */,
+				453892F71F2C4061007EBB5A /* input */,
 				453892CD1F2AF4E5007EBB5A /* entity id.hpp */,
-				453892CE1F2AF7FE007EBB5A /* physics component.cpp */,
-				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
-				453892D11F2AF877007EBB5A /* physics system.cpp */,
-				453892D21F2AF877007EBB5A /* physics system.hpp */,
 				453892D41F2B0074007EBB5A /* entity.cpp */,
 				453892D51F2B0074007EBB5A /* entity.hpp */,
 				453892D71F2B0478007EBB5A /* player.cpp */,
 				453892D81F2B0478007EBB5A /* player.hpp */,
-				453892E01F2C1206007EBB5A /* input component.cpp */,
-				453892E11F2C1206007EBB5A /* input component.hpp */,
-				453892E31F2C1757007EBB5A /* input system.cpp */,
-				453892E41F2C1757007EBB5A /* input system.hpp */,
+				453892F91F2C4209007EBB5A /* entity manager.cpp */,
+				453892FA1F2C4209007EBB5A /* entity manager.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -649,6 +678,7 @@
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
+				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
 				453892AD1F2ADBB4007EBB5A /* b2Island.cpp in Sources */,

@@ -14,29 +14,20 @@
 
 std::unique_ptr<AppImpl> app = nullptr;
 
-void destroyEntity(
-  const EntityID id,
-  PhysicsSystem &physics,
-  RenderingSystem &renderer,
-  InputSystem &input
-) {
-  physics.destroy(id);
-  renderer.rem(id);
-  input.rem(id);
-}
-
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
   physicsSystem.init();
   inputSystem.init();
-  player = makePlayer(0, physicsSystem, renderingSystem, inputSystem);
+  entityManager.init(inputSystem, physicsSystem, renderingSystem);
+  player = entityManager.create(makePlayer);
   return true;
 }
 
 void AppImpl::quit() {
-  destroyEntity(0, physicsSystem, renderingSystem, inputSystem);
+  entityManager.destroy(player);
+  entityManager.quit();
   inputSystem.quit();
   physicsSystem.quit();
   renderingSystem.quit();
@@ -57,7 +48,7 @@ bool AppImpl::input(uint64_t) {
 
 bool AppImpl::update(const uint64_t deltaMS) {
   physicsSystem.update(deltaMS / 1000.0f);
-  player->update(deltaMS / 1000.0f);
+  entityManager.update(deltaMS / 1000.0f);
   return true;
 }
 

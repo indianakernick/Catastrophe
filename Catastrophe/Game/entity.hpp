@@ -23,9 +23,9 @@ public:
   
   void update(float);
   
+  std::shared_ptr<InputComponent> input;
   std::shared_ptr<PhysicsComponent> physics;
   std::shared_ptr<RenderComponent> render;
-  std::shared_ptr<InputComponent> input;
   
   EntityID getID() const;
   b2Vec2 getPos() const;
