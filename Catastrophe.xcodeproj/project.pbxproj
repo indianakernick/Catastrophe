@@ -69,6 +69,8 @@
 		453892E21F2C1206007EBB5A /* input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E01F2C1206007EBB5A /* input component.cpp */; };
 		453892E51F2C1757007EBB5A /* input system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E31F2C1757007EBB5A /* input system.cpp */; };
 		453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892E61F2C1A06007EBB5A /* player input component.cpp */; };
+		453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892ED1F2C2487007EBB5A /* rendering system.cpp */; };
+		453892F51F2C291B007EBB5A /* player visible component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F31F2C291B007EBB5A /* player visible component.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -205,6 +207,10 @@
 		453892E61F2C1A06007EBB5A /* player input component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player input component.cpp"; sourceTree = "<group>"; };
 		453892E71F2C1A06007EBB5A /* player input component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player input component.hpp"; sourceTree = "<group>"; };
 		453892EC1F2C2117007EBB5A /* player constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "player constants.hpp"; sourceTree = "<group>"; };
+		453892ED1F2C2487007EBB5A /* rendering system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering system.cpp"; sourceTree = "<group>"; };
+		453892EE1F2C2487007EBB5A /* rendering system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering system.hpp"; sourceTree = "<group>"; };
+		453892F31F2C291B007EBB5A /* player visible component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player visible component.cpp"; sourceTree = "<group>"; };
+		453892F41F2C291B007EBB5A /* player visible component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player visible component.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,6 +246,8 @@
 			children = (
 				453892E61F2C1A06007EBB5A /* player input component.cpp */,
 				453892E71F2C1A06007EBB5A /* player input component.hpp */,
+				453892F31F2C291B007EBB5A /* player visible component.cpp */,
+				453892F41F2C291B007EBB5A /* player visible component.hpp */,
 			);
 			name = player;
 			sourceTree = "<group>";
@@ -259,6 +267,8 @@
 			children = (
 				453890571F2ADAB2007EBB5A /* rendering context.cpp */,
 				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
+				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
+				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -632,6 +642,8 @@
 				453892991F2ADBB4007EBB5A /* b2CollideCircle.cpp in Sources */,
 				453892B21F2ADBB4007EBB5A /* b2CircleContact.cpp in Sources */,
 				453892BE1F2ADBB4007EBB5A /* b2MouseJoint.cpp in Sources */,
+				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
+				453892F51F2C291B007EBB5A /* player visible component.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,

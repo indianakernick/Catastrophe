@@ -13,10 +13,10 @@
 #include <Simpleton/Platform/sdl error.hpp>
 #include <Simpleton/Platform/system info.hpp>
 
-Renderer::Renderer()
+RenderingContext::RenderingContext()
   : texture(nullptr, &SDL_DestroyTexture) {}
 
-void Renderer::init(
+void RenderingContext::init(
   SDL_Renderer *newRenderer,
   const std::experimental::string_view sheetName
 ) {
@@ -41,37 +41,13 @@ void Renderer::init(
   CHECK_SDL_ERROR(SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND));
 }
 
-void Renderer::quit() {
+void RenderingContext::quit() {
   texture.reset();
   sheet = {};
   renderer = nullptr;
 }
 
-std::shared_ptr<VisibleComponent> Renderer::create(
-  const EntityID entityID,
-  const std::string &sprite
-) {
-  auto comp = std::make_shared<VisibleComponent>();
-  comp->spriteName = sprite;
-  components.emplace(entityID, comp);
-  return comp;
-}
-
-void Renderer::destroy(const EntityID entityID) {
-  auto iter = components.find(entityID);
-  if (iter != components.cend()) {
-    components.erase(iter);
-  }
-}
-
-void Renderer::render() {
-  for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    const VisibleComponent &comp = *c->second;
-    renderSprite(comp.spriteName, comp.rect);
-  }
-}
-
-void Renderer::renderSprite(
+void RenderingContext::renderSprite(
   const std::experimental::string_view name,
   const int frame,
   const Rect dest
@@ -100,7 +76,7 @@ namespace {
   }
 }
 
-void Renderer::renderSprite(
+void RenderingContext::renderSprite(
   const std::experimental::string_view name,
   const Rect dest
 ) {
@@ -118,4 +94,19 @@ void Renderer::renderSprite(
     &src,
     &dst
   ));
+}
+
+void RenderingContext::renderRect(const glm::tvec4<uint8_t> color, const Rect dest) {
+  const RectPx destPixels = transform(dest);
+  
+  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
+    return;
+  }
+  
+  const SDL_Rect dst = toSDL(destPixels);
+  
+  CHECK_SDL_ERROR(
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a)
+  );
+  CHECK_SDL_ERROR(SDL_RenderFillRect(renderer, &dst));
 }

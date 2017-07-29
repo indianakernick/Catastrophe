@@ -17,7 +17,7 @@ public:
   InputComponent() = default;
   ~InputComponent() = default;
   
-  virtual void update() = 0;
+  virtual void update(Entity *, float) = 0;
   virtual bool handleEvent(SDL_Event) = 0;
 };
 

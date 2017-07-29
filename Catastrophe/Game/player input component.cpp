@@ -14,10 +14,7 @@
 #include "physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-PlayerInputComponent::PlayerInputComponent(Entity *const entity)
-  : entity(entity) {}
-
-void PlayerInputComponent::update() {
+void PlayerInputComponent::update(Entity *entity, float) {
   if (entity->physics) {
     b2Vec2 force = {0.0f, 0.0f};
     if (flags[MOVING_LEFT_BIT]) {

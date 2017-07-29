@@ -9,9 +9,8 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
-#include "player.hpp"
 #include "physics system.hpp"
-#include "rendering context.hpp"
+#include "rendering system.hpp"
 #include "input system.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
@@ -20,7 +19,7 @@ public:
   AppImpl() = default;
 
 private:
-  Renderer renderMan;
+  RenderingSystem renderingSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   std::shared_ptr<Entity> player;

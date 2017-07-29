@@ -15,10 +15,10 @@
 
 class PlayerInputComponent : public InputComponent {
 public:
-  explicit PlayerInputComponent(Entity *);
+  PlayerInputComponent() = default;
   ~PlayerInputComponent() = default;
   
-  void update() override;
+  void update(Entity *, float) override;
   bool handleEvent(SDL_Event) override;
 
 private:
@@ -26,7 +26,6 @@ private:
   static constexpr size_t MOVING_RIGHT_BIT = 1;
   static constexpr size_t JUMPING_BIT      = 2;
 
-  Entity *entity;
   std::bitset<3> flags;
   
   bool handleKeyDown(SDL_Scancode);

@@ -9,8 +9,8 @@
 #ifndef rendering_context_hpp
 #define rendering_context_hpp
 
-#include "entity id.hpp"
-#include "visible component.hpp"
+#include "rect.hpp"
+#include <glm/vec4.hpp>
 #include <Unpacker/unpacker.hpp>
 #include <Simpleton/Platform/sdl object.hpp>
 
@@ -18,28 +18,22 @@ struct SDL_Renderer;
 struct SDL_Texture;
 extern "C" void SDL_DestroyTexture(SDL_Texture *);
 
-class Renderer {
+class RenderingContext {
 public:
-  Renderer();
-  ~Renderer() = default;
+  RenderingContext();
+  ~RenderingContext() = default;
   
   void init(SDL_Renderer *, std::experimental::string_view);
   void quit();
   
-  std::shared_ptr<VisibleComponent> create(EntityID, const std::string &);
-  void destroy(EntityID);
-  
-  void render();
+  void renderSprite(std::experimental::string_view, int, Rect);
+  void renderSprite(std::experimental::string_view, Rect);
+  void renderRect(glm::tvec4<uint8_t>, Rect);
   
 private:
   SDL_Renderer *renderer;
   Unpack::Spritesheet sheet;
   SDL_OBJECT_DESTROY(Texture) texture;
-  
-  std::unordered_map<EntityID, std::shared_ptr<VisibleComponent>> components;
-  
-  void renderSprite(std::experimental::string_view, int, Rect);
-  void renderSprite(std::experimental::string_view, Rect);
 };
 
 #endif

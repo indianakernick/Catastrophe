@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "entity id.hpp"
+#include "../Libraries/Box2D/Common/b2Math.h"
 
 class PhysicsComponent;
 class VisibleComponent;
@@ -20,16 +21,18 @@ class Entity {
 public:
   explicit Entity(EntityID);
   
-  void update();
+  void update(float);
   
   std::shared_ptr<PhysicsComponent> physics;
   std::shared_ptr<VisibleComponent> visual;
   std::shared_ptr<InputComponent> input;
   
   EntityID getID() const;
+  b2Vec2 getPos() const;
 
 private:
   EntityID id;
+  b2Vec2 pos = {0.0f, 0.0f};
 };
 
 #endif

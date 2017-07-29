@@ -9,16 +9,16 @@
 #ifndef visible_component_hpp
 #define visible_component_hpp
 
-#include <string>
-#include "rect.hpp"
+class Entity;
+class RenderingContext;
 
 class VisibleComponent {
 public:
   VisibleComponent() = default;
   ~VisibleComponent() = default;
 
-  std::string spriteName;
-  Rect rect;
+  virtual void update(Entity *, float) = 0;
+  virtual void render(RenderingContext &) = 0;
 };
 
 #endif

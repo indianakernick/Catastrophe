@@ -9,15 +9,16 @@
 #include "player.hpp"
 
 #include "physics system.hpp"
-#include "rendering context.hpp"
+#include "rendering system.hpp"
 #include "input system.hpp"
 #include "player constants.hpp"
 #include "player input component.hpp"
+#include "player visible component.hpp"
 
 std::shared_ptr<Entity> makePlayer(
   const EntityID id,
   PhysicsSystem &physicsSystem,
-  Renderer &renderer,
+  RenderingSystem &renderer,
   InputSystem &input
 ) {
   auto player = std::make_shared<Entity>(id);
@@ -37,9 +38,10 @@ std::shared_ptr<Entity> makePlayer(
   
   player->physics->body->CreateFixture(&fixtureDef);
   
-  player->visual = renderer.create(id, "rat");
+  player->visual = std::make_shared<PlayerVisibleComponent>();
+  renderer.add(id, player->visual);
   
-  player->input = std::make_shared<PlayerInputComponent>(player.get());
+  player->input = std::make_shared<PlayerInputComponent>();
   input.add(id, player->input);
   
   return player;

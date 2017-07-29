@@ -21,12 +21,6 @@ void InputSystem::rem(const EntityID id) {
   components.erase(id);
 }
 
-void InputSystem::update() {
-  for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    c->second->update();
-  }
-}
-
 void InputSystem::handleEvent(const SDL_Event event) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     if (c->second->handleEvent(event)) {

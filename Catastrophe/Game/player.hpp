@@ -12,9 +12,9 @@
 #include "entity.hpp"
 
 class PhysicsSystem;
-class Renderer;
+class RenderingSystem;
 class InputSystem;
 
-std::shared_ptr<Entity> makePlayer(EntityID, PhysicsSystem &, Renderer &, InputSystem &);
+std::shared_ptr<Entity> makePlayer(EntityID, PhysicsSystem &, RenderingSystem &, InputSystem &);
 
 #endif

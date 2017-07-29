@@ -25,7 +25,6 @@ public:
   void add(EntityID, std::shared_ptr<InputComponent>);
   void rem(EntityID);
   
-  void update();
   void handleEvent(SDL_Event);
 
 private:

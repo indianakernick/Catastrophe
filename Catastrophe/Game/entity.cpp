@@ -16,17 +16,22 @@
 Entity::Entity(const EntityID id)
   : id(id) {}
 
-void Entity::update() {
+void Entity::update(const float delta) {
   if (input) {
-    input->update();
+    input->update(this, delta);
   }
-  if (physics && visual) {
-    const b2Vec2 pos = physics->body->GetPosition();
-    visual->rect.p = {pos.x, pos.y};
-    visual->rect.s = {1.0f, 1.0f};
+  if (physics) {
+    pos = physics->body->GetPosition();
+  }
+  if (visual) {
+    visual->update(this, delta);
   }
 }
 
 EntityID Entity::getID() const {
   return id;
+}
+
+b2Vec2 Entity::getPos() const {
+  return pos;
 }
