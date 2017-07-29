@@ -1,18 +1,18 @@
 //
-//  player visible component.cpp
+//  player render component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 29/7/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "player visible component.hpp"
+#include "player render component.hpp"
 
 #include "entity.hpp"
 #include "player constants.hpp"
 #include "rendering context.hpp"
 
-void PlayerVisibleComponent::update(Entity *entity, const float) {
+void PlayerRenderComponent::update(Entity *entity, const float) {
   const b2Vec2 pos = entity->getPos();
   rect = {
     {pos.x, pos.y},
@@ -20,6 +20,6 @@ void PlayerVisibleComponent::update(Entity *entity, const float) {
   };
 }
 
-void PlayerVisibleComponent::render(RenderingContext &context) {
+void PlayerRenderComponent::render(RenderingContext &context) {
   context.renderSprite("rat", rect);
 }

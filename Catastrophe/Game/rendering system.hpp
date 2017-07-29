@@ -12,7 +12,7 @@
 #include "entity id.hpp"
 #include <unordered_map>
 #include "rendering context.hpp"
-#include "visible component.hpp"
+#include "render component.hpp"
 
 class RenderingSystem {
 public:
@@ -22,7 +22,7 @@ public:
   void init(SDL_Renderer *, std::experimental::string_view);
   void quit();
   
-  void add(EntityID, std::shared_ptr<VisibleComponent>);
+  void add(EntityID, std::shared_ptr<RenderComponent>);
   void rem(EntityID);
   
   void render();
@@ -30,7 +30,7 @@ public:
 private:
   RenderingContext context;
   
-  std::unordered_map<EntityID, std::shared_ptr<VisibleComponent>> components;
+  std::unordered_map<EntityID, std::shared_ptr<RenderComponent>> components;
 };
 
 #endif

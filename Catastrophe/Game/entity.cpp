@@ -9,7 +9,7 @@
 #include "entity.hpp"
 
 #include "input component.hpp"
-#include "visible component.hpp"
+#include "render component.hpp"
 #include "physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -23,8 +23,8 @@ void Entity::update(const float delta) {
   if (physics) {
     pos = physics->body->GetPosition();
   }
-  if (visual) {
-    visual->update(this, delta);
+  if (render) {
+    render->update(this, delta);
   }
 }
 

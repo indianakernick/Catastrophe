@@ -13,7 +13,7 @@
 #include "input system.hpp"
 #include "player constants.hpp"
 #include "player input component.hpp"
-#include "player visible component.hpp"
+#include "player render component.hpp"
 
 std::shared_ptr<Entity> makePlayer(
   const EntityID id,
@@ -38,8 +38,8 @@ std::shared_ptr<Entity> makePlayer(
   
   player->physics->body->CreateFixture(&fixtureDef);
   
-  player->visual = std::make_shared<PlayerVisibleComponent>();
-  renderer.add(id, player->visual);
+  player->render = std::make_shared<PlayerRenderComponent>();
+  renderer.add(id, player->render);
   
   player->input = std::make_shared<PlayerInputComponent>();
   input.add(id, player->input);

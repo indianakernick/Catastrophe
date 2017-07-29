@@ -16,7 +16,7 @@ void RenderingSystem::quit() {
   context.quit();
 }
 
-void RenderingSystem::add(const EntityID id, const std::shared_ptr<VisibleComponent> comp) {
+void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
   components.emplace(id, comp);
 }
 

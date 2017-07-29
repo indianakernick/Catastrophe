@@ -14,7 +14,7 @@
 #include "../Libraries/Box2D/Common/b2Math.h"
 
 class PhysicsComponent;
-class VisibleComponent;
+class RenderComponent;
 class InputComponent;
 
 class Entity {
@@ -24,7 +24,7 @@ public:
   void update(float);
   
   std::shared_ptr<PhysicsComponent> physics;
-  std::shared_ptr<VisibleComponent> visual;
+  std::shared_ptr<RenderComponent> render;
   std::shared_ptr<InputComponent> input;
   
   EntityID getID() const;

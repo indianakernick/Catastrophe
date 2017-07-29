@@ -1,21 +1,21 @@
 //
-//  player visible component.hpp
+//  player render component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 29/7/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef player_visible_component_hpp
-#define player_visible_component_hpp
+#ifndef player_render_component_hpp
+#define player_render_component_hpp
 
 #include "rect.hpp"
-#include "visible component.hpp"
+#include "render component.hpp"
 
-class PlayerVisibleComponent : public VisibleComponent {
+class PlayerRenderComponent : public RenderComponent {
 public:
-  PlayerVisibleComponent() = default;
-  ~PlayerVisibleComponent() = default;
+  PlayerRenderComponent() = default;
+  ~PlayerRenderComponent() = default;
   
   void update(Entity *, float) override;
   void render(RenderingContext &) override;
