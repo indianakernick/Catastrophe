@@ -14,15 +14,17 @@
 
 class PhysicsComponent;
 class VisibleComponent;
+class InputComponent;
 
 class Entity {
 public:
   explicit Entity(EntityID);
   
-  virtual void update() = 0;
+  void update();
   
   std::shared_ptr<PhysicsComponent> physics;
   std::shared_ptr<VisibleComponent> visual;
+  std::shared_ptr<InputComponent> input;
   
   EntityID getID() const;
 

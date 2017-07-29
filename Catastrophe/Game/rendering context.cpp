@@ -91,7 +91,10 @@ namespace {
   
   RectPx transform(const Rect rect) {
     return {
-      rect.p * -PIXELS_PER_METER,
+      {
+        rect.p.x * PIXELS_PER_METER,
+        rect.p.y * -PIXELS_PER_METER
+      },
       rect.s * PIXELS_PER_METER
     };
   }

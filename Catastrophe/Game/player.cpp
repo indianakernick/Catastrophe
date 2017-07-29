@@ -10,63 +10,17 @@
 
 #include "physics system.hpp"
 #include "rendering context.hpp"
+#include "input system.hpp"
+#include "player constants.hpp"
+#include "player input component.hpp"
 
-Player::Player(const EntityID id)
-  : Entity(id) {}
-
-void Player::startMovingLeft() {
-  flags[MOVING_LEFT_BIT] = true;
-}
-
-void Player::startMovingRight() {
-  flags[MOVING_RIGHT_BIT] = true;
-}
-
-void Player::startJumping() {
-  flags[JUMPING_BIT] = true;
-}
-
-void Player::stopMovingLeft() {
-  flags[MOVING_LEFT_BIT] = false;
-}
-
-void Player::stopMovingRight() {
-  flags[MOVING_RIGHT_BIT] = false;
-}
-
-void Player::stopJumping() {
-  flags[JUMPING_BIT] = false;
-}
-
-void Player::update() {
-  if (physics) {
-    b2Body *body = physics->body;
-    
-    b2Vec2 force = {0.0f, 0.0f};
-    if (flags[MOVING_LEFT_BIT]) {
-      force += {-MOVE_FORCE, 0.0f};
-    }
-    if (flags[MOVING_RIGHT_BIT]) {
-      force += {MOVE_FORCE, 0.0f};
-    }
-    if (flags[JUMPING_BIT]) {
-      force += {0.0f, JUMP_FORCE};
-    }
-    
-    body->ApplyForceToCenter(force, true);
-    
-    const b2Vec2 pos = body->GetPosition();
-    visual->rect.p = {pos.x, pos.y};
-    visual->rect.s = {1.0f, 1.0f};
-  }
-}
-
-std::shared_ptr<Player> makePlayer(
+std::shared_ptr<Entity> makePlayer(
   const EntityID id,
   PhysicsSystem &physicsSystem,
-  Renderer &renderer
+  Renderer &renderer,
+  InputSystem &input
 ) {
-  auto player = std::make_shared<Player>(id);
+  auto player = std::make_shared<Entity>(id);
   
   b2BodyDef bodyDef;
   bodyDef.type = b2_dynamicBody;
@@ -75,15 +29,18 @@ std::shared_ptr<Player> makePlayer(
   player->physics = physicsSystem.create(id, bodyDef);
   
   b2PolygonShape shape;
-  shape.SetAsBox(Player::WIDTH, Player::HEIGHT);
+  shape.SetAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
   
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &shape;
-  fixtureDef.density = Player::DENSITY;
+  fixtureDef.density = PLAYER_DENSITY;
   
   player->physics->body->CreateFixture(&fixtureDef);
   
   player->visual = renderer.create(id, "rat");
+  
+  player->input = std::make_shared<PlayerInputComponent>(player.get());
+  input.add(id, player->input);
   
   return player;
 }

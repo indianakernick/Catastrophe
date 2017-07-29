@@ -10,13 +10,18 @@
 
 #include "file constants.hpp"
 #include "window constants.hpp"
-#include "handle player input.hpp"
 
 std::unique_ptr<AppImpl> app = nullptr;
 
-void destroyEntity(const EntityID id, PhysicsSystem &physics, Renderer &renderer) {
+void destroyEntity(
+  const EntityID id,
+  PhysicsSystem &physics,
+  Renderer &renderer,
+  InputSystem &input
+) {
   physics.destroy(id);
   renderer.destroy(id);
+  input.rem(id);
 }
 
 bool AppImpl::init() {
@@ -24,12 +29,14 @@ bool AppImpl::init() {
   SDL_RenderSetLogicalSize(renderer.get(), WINDOW_PIXEL_SIZE.x, WINDOW_PIXEL_SIZE.y);
   renderMan.init(renderer.get(), SPRITE_SHEET_PATH);
   physicsSystem.init();
-  player = makePlayer(0, physicsSystem, renderMan);
+  inputSystem.init();
+  player = makePlayer(0, physicsSystem, renderMan, inputSystem);
   return true;
 }
 
 void AppImpl::quit() {
-  destroyEntity(0, physicsSystem, renderMan);
+  destroyEntity(0, physicsSystem, renderMan, inputSystem);
+  inputSystem.quit();
   physicsSystem.quit();
   renderMan.quit();
   SDLApp::quitWindow();
@@ -41,13 +48,14 @@ bool AppImpl::input(uint64_t) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      handlePlayerInput(*player, e);
+      inputSystem.handleEvent(e);
     }
   }
   return true;
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
+  inputSystem.update();
   physicsSystem.update(deltaMS / 1000.0f);
   player->update();
   return true;

@@ -12,6 +12,7 @@
 #include "player.hpp"
 #include "physics system.hpp"
 #include "rendering context.hpp"
+#include "input system.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
 class AppImpl : public Game::SDLApp {
@@ -21,7 +22,8 @@ public:
 private:
   Renderer renderMan;
   PhysicsSystem physicsSystem;
-  std::shared_ptr<Player> player;
+  InputSystem inputSystem;
+  std::shared_ptr<Entity> player;
 
   bool init() override;
   void quit() override;

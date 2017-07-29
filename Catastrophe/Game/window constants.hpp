@@ -20,7 +20,7 @@ const Platform::Window::Desc WINDOW_DESC = {
 };
 const bool WINDOW_VSYNC = true;
 
-const float PIXELS_PER_METER = 20.0f;
+const float PIXELS_PER_METER = 50.0f;
 const glm::vec2 WINDOW_METER_SIZE = {
   WINDOW_PIXEL_SIZE.x / PIXELS_PER_METER,
   WINDOW_PIXEL_SIZE.y / PIXELS_PER_METER,
