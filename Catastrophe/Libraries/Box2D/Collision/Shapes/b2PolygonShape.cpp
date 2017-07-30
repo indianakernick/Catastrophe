@@ -29,16 +29,16 @@ b2Shape* b2PolygonShape::Clone(b2BlockAllocator* allocator) const
 
 void b2PolygonShape::SetAsBox(float32 hx, float32 hy)
 {
-	m_count = 4;
-	m_vertices[0].Set(-hx, -hy);
-	m_vertices[1].Set( hx, -hy);
-	m_vertices[2].Set( hx,  hy);
-	m_vertices[3].Set(-hx,  hy);
-	m_normals[0].Set(0.0f, -1.0f);
-	m_normals[1].Set(1.0f, 0.0f);
-	m_normals[2].Set(0.0f, 1.0f);
-	m_normals[3].Set(-1.0f, 0.0f);
-	m_centroid.SetZero();
+  m_count = 4;
+  m_vertices[0].Set(-hx, -hy);
+  m_vertices[1].Set( hx, -hy);
+  m_vertices[2].Set( hx,  hy);
+  m_vertices[3].Set(-hx,  hy);
+  m_normals[0].Set(0.0f, -1.0f);
+  m_normals[1].Set(1.0f, 0.0f);
+  m_normals[2].Set(0.0f, 1.0f);
+  m_normals[3].Set(-1.0f, 0.0f);
+  m_centroid.SetZero();
 }
 
 void b2PolygonShape::SetAsBox(float32 hx, float32 hy, const b2Vec2& center, float32 angle)

@@ -29,7 +29,7 @@ std::unique_ptr<Entity> makePlatform(
   platform->physics = physics.create(id, bodyDef);
   
   b2PolygonShape shape;
-  shape.SetAsBox(rect.s.x, rect.s.y);
+  shape.SetAsBox(rect.s.x / 2.0f, rect.s.y / 2.0f);
 
   b2FixtureDef fixture;
   fixture.shape = &shape;

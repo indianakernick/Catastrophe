@@ -10,11 +10,15 @@
 
 const b2Vec2 PhysicsSystem::GRAVITY = {0.0f, -9.80665f};
 
-void PhysicsSystem::init() {
+void PhysicsSystem::init(SDL_Renderer *renderer) {
   world.emplace(GRAVITY);
+  draw.emplace(renderer);
+  world->SetDebugDraw(&(*draw));
 }
 
 void PhysicsSystem::quit() {
+  world->SetDebugDraw(nullptr);
+  draw = std::experimental::nullopt;
   world = std::experimental::nullopt;
 }
 
@@ -39,4 +43,8 @@ void PhysicsSystem::destroy(const EntityID entityID) {
 
 void PhysicsSystem::update(const float delta) {
   world->Step(delta, 6, 2);
+}
+
+void PhysicsSystem::debugRender() {
+  world->DrawDebugData();
 }

@@ -18,12 +18,12 @@ std::unique_ptr<AppImpl> app = nullptr;
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
-  physicsSystem.init();
+  physicsSystem.init(renderer.get());
   inputSystem.init();
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
   player = entityManager.create(makePlayer, b2Vec2(0.0f, 10.0f));
   platform = entityManager.create(makePlatform,
-    Rect({0.0f, 0.0f}, {WINDOW_METER_SIZE.x, 2.0f})
+    Rect({0.0f, -WINDOW_METER_SIZE.y / 2.0f + 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
   );
   return true;
 }
@@ -57,5 +57,8 @@ bool AppImpl::update(const uint64_t deltaMS) {
 void AppImpl::render(const uint64_t) {
   renderer.clear();
   renderingSystem.render();
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    physicsSystem.debugRender();
+  }
   renderer.present();
 }

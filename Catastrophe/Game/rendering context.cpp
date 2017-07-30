@@ -8,6 +8,7 @@
 
 #include "rendering context.hpp"
 
+#include "camera.hpp"
 #include <SDL2/SDL_render.h>
 #include "window constants.hpp"
 #include <Simpleton/Platform/sdl error.hpp>
@@ -64,23 +65,13 @@ namespace {
   SDL_Rect toSDL(const RectPx rect) {
     return {rect.p.x, rect.p.y, rect.s.x, rect.s.y};
   }
-  
-  RectPx transform(const Rect rect) {
-    return {
-      {
-        (rect.p.x) * PIXELS_PER_METER,
-        (-rect.p.y + WINDOW_METER_SIZE.y - rect.s.y) * PIXELS_PER_METER
-      },
-      rect.s * PIXELS_PER_METER
-    };
-  }
 }
 
 void RenderingContext::renderSprite(
   const std::experimental::string_view name,
   const Rect dest
 ) {
-  const RectPx destPixels = transform(dest);
+  const RectPx destPixels = rectToPixels(dest);
   
   if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
     return;
@@ -97,7 +88,7 @@ void RenderingContext::renderSprite(
 }
 
 void RenderingContext::renderRect(const Color color, const Rect dest) {
-  const RectPx destPixels = transform(dest);
+  const RectPx destPixels = rectToPixels(dest);
   
   if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
     return;

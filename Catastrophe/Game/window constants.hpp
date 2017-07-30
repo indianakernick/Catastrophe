@@ -26,4 +26,6 @@ const glm::vec2 WINDOW_METER_SIZE = {
   WINDOW_PIXEL_SIZE.y / PIXELS_PER_METER,
 };
 
+constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
+
 #endif

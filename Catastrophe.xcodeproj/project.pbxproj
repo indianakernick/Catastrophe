@@ -74,6 +74,9 @@
 		453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892F91F2C4209007EBB5A /* entity manager.cpp */; };
 		453893011F2C4D6B007EBB5A /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892FF1F2C4D6B007EBB5A /* platform.cpp */; };
 		453893041F2C5574007EBB5A /* static color render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453893021F2C5574007EBB5A /* static color render component.cpp */; };
+		453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453893071F2D6F21007EBB5A /* debug draw.cpp */; };
+		4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538930A1F2D6F5D007EBB5A /* camera.cpp */; };
+		4538930E1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -223,6 +226,11 @@
 		453893031F2C5574007EBB5A /* static color render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static color render component.hpp"; sourceTree = "<group>"; };
 		453893051F2C55B4007EBB5A /* color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
 		453893061F2C572D007EBB5A /* platform constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "platform constants.hpp"; sourceTree = "<group>"; };
+		453893071F2D6F21007EBB5A /* debug draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug draw.cpp"; sourceTree = "<group>"; };
+		453893081F2D6F21007EBB5A /* debug draw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug draw.hpp"; sourceTree = "<group>"; };
+		4538930A1F2D6F5D007EBB5A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		4538930B1F2D6F5D007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_gfx-1.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2_gfx/1.0.1/lib/libSDL2_gfx-1.0.0.dylib"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4538930E1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib in Frameworks */,
 				45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
 				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
@@ -282,6 +291,8 @@
 				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
 				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
+				4538930A1F2D6F5D007EBB5A /* camera.cpp */,
+				4538930B1F2D6F5D007EBB5A /* camera.hpp */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -471,6 +482,8 @@
 				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
 				453892D11F2AF877007EBB5A /* physics system.cpp */,
 				453892D21F2AF877007EBB5A /* physics system.hpp */,
+				453893071F2D6F21007EBB5A /* debug draw.cpp */,
+				453893081F2D6F21007EBB5A /* debug draw.hpp */,
 			);
 			name = physics;
 			sourceTree = "<group>";
@@ -568,6 +581,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */,
 				45103F7E1F272828001B24E2 /* libNumber Display.dylib */,
 				45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */,
 				4592BB2B1F1319D400D1640D /* libUnpacker.dylib */,
@@ -689,6 +703,7 @@
 				453892AF1F2ADBB4007EBB5A /* b2WorldCallbacks.cpp in Sources */,
 				453892A31F2ADBB4007EBB5A /* b2PolygonShape.cpp in Sources */,
 				453892BD1F2ADBB4007EBB5A /* b2MotorJoint.cpp in Sources */,
+				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				453892A61F2ADBB4007EBB5A /* b2Math.cpp in Sources */,
 				453892A41F2ADBB4007EBB5A /* b2BlockAllocator.cpp in Sources */,
 				453892B71F2ADBB4007EBB5A /* b2PolygonAndCircleContact.cpp in Sources */,
@@ -707,6 +722,7 @@
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
 				453892AD1F2ADBB4007EBB5A /* b2Island.cpp in Sources */,
+				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,
 				453892B81F2ADBB4007EBB5A /* b2PolygonContact.cpp in Sources */,
 				453892A21F2ADBB4007EBB5A /* b2EdgeShape.cpp in Sources */,
 				453892B01F2ADBB4007EBB5A /* b2ChainAndCircleContact.cpp in Sources */,
@@ -838,6 +854,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
+					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
@@ -851,7 +868,7 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
-					/usr/local/Cellar/sdl2/2.0.5/lib,
+					"/usr/local/Cellar/sdl2_gfx/**",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -877,6 +894,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
+					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
@@ -890,7 +908,7 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
-					/usr/local/Cellar/sdl2/2.0.5/lib,
+					"/usr/local/Cellar/sdl2_gfx/**",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",

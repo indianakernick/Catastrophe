@@ -32,7 +32,7 @@ std::unique_ptr<Entity> makePlayer(
   player->physics = physics.create(id, bodyDef);
   
   b2PolygonShape shape;
-  shape.SetAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
+  shape.SetAsBox(PLAYER_WIDTH / 2.0f, PLAYER_HEIGHT / 2.0f);
   
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &shape;
