@@ -8,12 +8,10 @@
 
 #include "debug draw.hpp"
 
+#include <cmath>
 #include "camera.hpp"
 #include <SDL2/SDL2_gfxPrimitives.h>
-//#include <Simpleton/Platform/sdl error.hpp>
-
-#undef CHECK_SDL_ERROR
-#define CHECK_SDL_ERROR(EXP) (EXP)
+#include <Simpleton/Platform/sdl error.hpp>
 
 DebugDraw::DebugDraw(SDL_Renderer *renderer)
   : b2Draw(), renderer(renderer) {
@@ -48,7 +46,9 @@ namespace {
 
 void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
   const Verts pxVerts = polygonToPixels(verts, numVerts);
-  CHECK_SDL_ERROR(polygonRGBA(
+  //polygonRGBA returns -1 (signalling an error)
+  //even though it successfully renders a polygon.
+  polygonRGBA(
     renderer,
     pxVerts.x.get(),
     pxVerts.y.get(),
@@ -57,7 +57,7 @@ void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2C
     color.g * 255,
     color.b * 255,
     color.a * 255
-  ));
+  );
 }
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
@@ -89,19 +89,21 @@ void DebugDraw::DrawCircle(const b2Vec2 &center, const float32 radius, const b2C
   ));
 }
 
+namespace {
+  b2Color brighten(const b2Color color) {
+    constexpr float COEF = 1.1f;
+    return {
+      std::min(color.r * COEF, 1.0f),
+      std::min(color.g * COEF, 1.0f),
+      std::min(color.b * COEF, 1.0f),
+      color.a,
+    };
+  }
+}
+
 void DebugDraw::DrawSolidCircle(const b2Vec2 &center, const float32 radius, const b2Vec2 &axis, const b2Color &color) {
-  const glm::ivec2 pxCenter = posToPixels({center.x, center.y});
-  const Sint16 pxRadius = sizeToPixels(radius);
-  CHECK_SDL_ERROR(filledCircleRGBA(
-    renderer,
-    pxCenter.x,
-    pxCenter.y,
-    pxRadius,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  ));
+  DrawPoint(center, radius, color);
+  DrawSegment(center, center + radius * axis, brighten(color));
 }
 
 void DebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
@@ -120,10 +122,21 @@ void DebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &c
   ));
 }
 
-void DebugDraw::DrawTransform(const b2Transform &transform) {
+void DebugDraw::DrawTransform(const b2Transform &) {
   
 }
 
 void DebugDraw::DrawPoint(const b2Vec2 &p, const float32 size, const b2Color &color) {
-  DrawSolidCircle(p, size, {0.0f, 0.0f}, color);
+  const glm::ivec2 pxCenter = posToPixels({p.x, p.y});
+  const Sint16 pxRadius = sizeToPixels(size);
+  CHECK_SDL_ERROR(filledCircleRGBA(
+    renderer,
+    pxCenter.x,
+    pxCenter.y,
+    pxRadius,
+    color.r * 255,
+    color.g * 255,
+    color.b * 255,
+    color.a * 255
+  ));
 }
