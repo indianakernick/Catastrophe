@@ -109,7 +109,7 @@ std::pair<SDL_Rect, bool> RenderingContext::rectToPixels(const Rect rect) {
     camera->posToPixels(rect.p),
     camera->sizeToPixels(rect.s)
   };
-  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
+  if (!camera->visible(destPixels)) {
     return {{}, false};
   } else {
     return {toSDL(destPixels), true};

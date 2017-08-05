@@ -13,6 +13,8 @@
 namespace {
   const glm::vec2 HALF_WINDOW_PIXEL_SIZE =
     static_cast<glm::vec2>(WINDOW_PIXEL_SIZE) / 2.0f;
+  
+  const RectPx WINDOW_RECT = RectPx(WINDOW_PIXEL_SIZE);
 }
 
 Camera::Camera()
@@ -59,4 +61,56 @@ glm::vec2 Camera::posToMeters(const glm::ivec2 p) const {
 
 glm::vec2 Camera::posToMeters(const int x, const int y) const {
   return posToMeters({x, y});
+}
+
+bool Camera::visible(const int x, const int y) const {
+  return WINDOW_RECT.encloses({x, y});
+}
+
+bool Camera::visible(const glm::ivec2 p) const {
+  return WINDOW_RECT.encloses(p);
+}
+
+bool Camera::visible(const RectPx r) const {
+  return WINDOW_RECT.interceptsWith(r);
+}
+
+bool Camera::visible(const glm::ivec2 p, const int r) const {
+  //https://stackoverflow.com/a/402010
+  
+  const glm::ivec2 HALF_WINDOW_PIXEL_SIZE = WINDOW_PIXEL_SIZE / 2;
+  
+  //distance between center of circle and center of rectangle (window)
+  const glm::ivec2 centerDist = {
+    std::abs(p.x - HALF_WINDOW_PIXEL_SIZE.x),
+    std::abs(p.y - HALF_WINDOW_PIXEL_SIZE.y)
+  };
+  
+  if (centerDist.x > HALF_WINDOW_PIXEL_SIZE.x + r) return false;
+  if (centerDist.y > HALF_WINDOW_PIXEL_SIZE.y + r) return false;
+  
+  if (centerDist.x <= HALF_WINDOW_PIXEL_SIZE.x) return true;
+  if (centerDist.y <= HALF_WINDOW_PIXEL_SIZE.y) return true;
+  
+  auto square = [] (const int n) {
+    return n * n;
+  };
+  
+  //squared distance between center of circle and corner
+  const int cornerDist = square(centerDist.x - HALF_WINDOW_PIXEL_SIZE.x) +
+                         square(centerDist.y - HALF_WINDOW_PIXEL_SIZE.y);
+  return cornerDist <= square(r);
+}
+
+bool Camera::visible(glm::ivec2 p0, glm::ivec2 p1) const {
+  //a few false positives are ok
+  //could use SDL_IntersectRectAndLine for better accuracy
+  
+  if (p0.x > p1.x) {
+    std::swap(p0.x, p1.x);
+  }
+  if (p0.y > p1.y) {
+    std::swap(p0.y, p1.y);
+  }
+  return WINDOW_RECT.interceptsWith(RectPx(p0, p1 - p0));
 }
