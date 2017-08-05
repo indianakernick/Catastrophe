@@ -26,7 +26,7 @@ const glm::vec2 WINDOW_METER_SIZE = {
   WINDOW_PIXEL_SIZE.y / PIXELS_PER_METER,
 };
 
-constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = true;
-constexpr bool ENABLE_GAME_RENDER = false;
+constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
+constexpr bool ENABLE_GAME_RENDER = true;
 
 #endif

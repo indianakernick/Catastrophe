@@ -61,6 +61,7 @@ namespace {
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &bodyShape;
     bodyFixture.density = PLAYER_DENSITY;
+    bodyFixture.friction = PLAYER_FRICTION;
     bodyFixture.userData = getUserData<Symbol::PlayerBody>();
     
     b2PolygonShape footShape;

@@ -12,5 +12,6 @@
 #include "color.hpp"
 
 const Color PLATFORM_COLOR = {0, 0, 255, 255};
+constexpr float PLATFORM_FRICTION = 1.0f;
 
 #endif

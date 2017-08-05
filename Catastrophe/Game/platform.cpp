@@ -37,7 +37,7 @@ std::unique_ptr<Entity> makePlatform(
 
   b2FixtureDef fixture;
   fixture.shape = &shape;
-  fixture.friction = 0.0f;
+  fixture.friction = PLATFORM_FRICTION;
   fixture.userData = getUserData<Symbol::Platform>();
 
   body->CreateFixture(&fixture);
