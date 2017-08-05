@@ -34,6 +34,9 @@ public:
   
   void update(float);
   void debugRender();
+  
+  void attachCamera(const Camera *);
+  void detachCamera();
 
 private:
   static const b2Vec2 GRAVITY;

@@ -29,3 +29,11 @@ void RenderingSystem::render() {
     c->second->render(context);
   }
 }
+
+void RenderingSystem::attachCamera(const Camera *camera) {
+  context.attachCamera(camera);
+}
+
+void RenderingSystem::detachCamera() {
+  context.detachCamera();
+}

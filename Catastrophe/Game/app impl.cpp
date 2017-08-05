@@ -17,22 +17,34 @@ std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
+  
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
+  renderingSystem.attachCamera(&camera);
+  
   physicsSystem.init(renderer.get());
+  physicsSystem.attachCamera(&camera);
+  
   inputSystem.init();
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
-  player = entityManager.create(makePlayer, b2Vec2(0.0f, 10.0f));
+  
+  player = entityManager.create(makePlayer, b2Vec2(WINDOW_METER_SIZE.x / 2.0f, 10.0f));
   platform = entityManager.create(makePlatform,
-    Rect({0.0f, -WINDOW_METER_SIZE.y / 2.0f + 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
+    Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
   );
+  
   return true;
 }
 
 void AppImpl::quit() {
   entityManager.quit();
   inputSystem.quit();
+  
+  physicsSystem.detachCamera();
   physicsSystem.quit();
+  
+  renderingSystem.detachCamera();
   renderingSystem.quit();
+  
   SDLApp::quitWindow();
 }
 

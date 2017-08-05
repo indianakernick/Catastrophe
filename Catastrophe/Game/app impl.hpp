@@ -9,6 +9,7 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
+#include "camera.hpp"
 #include "input system.hpp"
 #include "physics system.hpp"
 #include "rendering system.hpp"
@@ -25,6 +26,8 @@ private:
   RenderingSystem renderingSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
+  Camera camera;
+  
   EntityID player;
   EntityID platform;
 

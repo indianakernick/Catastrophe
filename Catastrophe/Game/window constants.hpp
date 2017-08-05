@@ -21,12 +21,13 @@ const Platform::Window::Desc WINDOW_DESC = {
 const bool WINDOW_VSYNC = true;
 
 const float PIXELS_PER_METER = 50.0f;
-const glm::vec2 WINDOW_METER_SIZE = {
-  WINDOW_PIXEL_SIZE.x / PIXELS_PER_METER,
-  WINDOW_PIXEL_SIZE.y / PIXELS_PER_METER,
-};
+const glm::vec2 PIXELS_PER_METER_POS = {PIXELS_PER_METER, -PIXELS_PER_METER};
+const glm::vec2 PIXELS_PER_METER_SIZE = {PIXELS_PER_METER, PIXELS_PER_METER};
 
-constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
+const glm::vec2 WINDOW_METER_SIZE =
+  static_cast<glm::vec2>(WINDOW_PIXEL_SIZE) / PIXELS_PER_METER_SIZE;
+
+constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = true;
 constexpr bool ENABLE_GAME_RENDER = true;
 
 #endif

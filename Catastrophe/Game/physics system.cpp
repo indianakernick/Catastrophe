@@ -56,3 +56,11 @@ void PhysicsSystem::update(const float delta) {
 void PhysicsSystem::debugRender() {
   world->DrawDebugData();
 }
+
+void PhysicsSystem::attachCamera(const Camera *newCamera) {
+  draw->attachCamera(newCamera);
+}
+
+void PhysicsSystem::detachCamera() {
+  draw->detachCamera();
+}

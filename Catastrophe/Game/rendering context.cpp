@@ -71,14 +71,10 @@ void RenderingContext::renderSprite(
   const std::experimental::string_view name,
   const Rect dest
 ) {
-  const RectPx destPixels = rectToPixels(dest);
-  
-  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
-    return;
-  }
+  const auto [dst, ok] = rectToPixels(dest);
+  if (!ok) return;
   
   const SDL_Rect src = toSDL(sheet.getSprite(name));
-  const SDL_Rect dst = toSDL(destPixels);
   CHECK_SDL_ERROR(SDL_RenderCopy(
     renderer,
     texture.get(),
@@ -88,16 +84,34 @@ void RenderingContext::renderSprite(
 }
 
 void RenderingContext::renderRect(const Color color, const Rect dest) {
-  const RectPx destPixels = rectToPixels(dest);
-  
-  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
-    return;
-  }
-  
-  const SDL_Rect dst = toSDL(destPixels);
+  const auto [dst, ok] = rectToPixels(dest);
+  if (!ok) return;
   
   CHECK_SDL_ERROR(
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a)
   );
   CHECK_SDL_ERROR(SDL_RenderFillRect(renderer, &dst));
+}
+
+void RenderingContext::attachCamera(const Camera *newCamera) {
+  camera = newCamera;
+}
+
+void RenderingContext::detachCamera() {
+  camera = nullptr;
+}
+
+std::pair<SDL_Rect, bool> RenderingContext::rectToPixels(const Rect rect) {
+  if (camera == nullptr) {
+    return {{}, false};
+  }
+  const RectPx destPixels = {
+    camera->posToPixels(rect.p),
+    camera->sizeToPixels(rect.s)
+  };
+  if (!destPixels.interceptsWith(RectPx(WINDOW_PIXEL_SIZE))) {
+    return {{}, false};
+  } else {
+    return {toSDL(destPixels), true};
+  }
 }

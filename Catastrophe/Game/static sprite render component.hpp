@@ -22,7 +22,8 @@ public:
 
 private:
   std::string sprite;
-  Rect rect;
+  glm::vec2 center;
+  glm::vec2 size;
 };
 
 #endif

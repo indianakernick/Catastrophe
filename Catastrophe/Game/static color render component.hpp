@@ -9,8 +9,8 @@
 #ifndef static_color_render_component_hpp
 #define static_color_render_component_hpp
 
-#include "rect.hpp"
 #include "color.hpp"
+#include <glm/vec2.hpp>
 #include "render component.hpp"
 
 class StaticColorRenderComponent final : public RenderComponent {
@@ -23,7 +23,8 @@ public:
   
 private:
   Color color;
-  Rect rect;
+  glm::vec2 center;
+  glm::vec2 size;
 };
 
 #endif

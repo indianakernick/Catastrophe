@@ -16,13 +16,13 @@ StaticColorRenderComponent::StaticColorRenderComponent(
   const float width,
   const float height
 ) : color(color),
-    rect({}, {width, height}) {}
+    size(width, height) {}
 
 void StaticColorRenderComponent::update(Entity *entity, const float) {
   const b2Vec2 pos = entity->getPos();
-  rect.p = {pos.x, pos.y};
+  center = {pos.x, pos.y};
 }
 
 void StaticColorRenderComponent::render(RenderingContext &context) {
-  context.renderRect(color, rect);
+  context.renderRect(color, makeRectCenterSize(center, size));
 }

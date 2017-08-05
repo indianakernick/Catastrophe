@@ -26,6 +26,9 @@ public:
   void rem(EntityID);
   
   void render();
+  
+  void attachCamera(const Camera *);
+  void detachCamera();
 
 private:
   RenderingContext context;
