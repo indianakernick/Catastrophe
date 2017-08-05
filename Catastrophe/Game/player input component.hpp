@@ -13,6 +13,8 @@
 #include <SDL2/SDL_scancode.h>
 #include "input component.hpp"
 
+class b2Body;
+
 class PlayerInputComponent final : public InputComponent {
 public:
   PlayerInputComponent() = default;
@@ -28,6 +30,9 @@ private:
 
   std::bitset<3> flags;
   float timeTillFinishJump = 0.0f;
+  
+  void handleMovement(b2Body *, bool);
+  void handleJump(b2Body *, bool, float);
   
   bool handleKeyDown(SDL_Scancode);
   bool handleKeyUp(SDL_Scancode);

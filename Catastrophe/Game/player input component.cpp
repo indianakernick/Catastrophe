@@ -17,43 +17,13 @@
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 void PlayerInputComponent::update(Entity *entity, const float delta) {
-  if (entity->physics) {
-    auto physics = Utils::safeDownCast<PlayerPhysicsComponent>(entity->physics);
-    b2Body *body = physics->getBody();
+  if (entity->physics == nullptr) return;
   
-    const b2Vec2 vel = body->GetLinearVelocity();
-    if (std::abs(vel.x) > PLAYER_MAX_MOVE_SPEED) {
-      body->SetLinearVelocity({
-        vel.x < 0.0f ? -PLAYER_MAX_MOVE_SPEED : PLAYER_MAX_MOVE_SPEED,
-        vel.y
-      });
-    } else {
-      const float MOVE_FORCE = physics->onGround()
-                             ? PLAYER_MOVE_FORCE
-                             : PLAYER_AIR_MOVE_FORCE;
-      if (flags[MOVING_LEFT_BIT]) {
-        body->ApplyForceToCenter({-MOVE_FORCE, 0.0f}, true);
-      }
-      if (flags[MOVING_RIGHT_BIT]) {
-        body->ApplyForceToCenter({MOVE_FORCE, 0.0f}, true);
-      }
-    }
-    
-    if (flags[JUMPING_BIT]) {
-      if (physics->onGround() && timeTillFinishJump == 0.0f) {
-        //starting a jump
-        body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
-        timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
-      } else if (timeTillFinishJump > 0.0f) {
-        //jumping
-        body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
-        timeTillFinishJump -= delta;
-      } else if (timeTillFinishJump < 0.0f) {
-        //jump timed out
-        timeTillFinishJump = 0.0f;
-      }
-    }
-  }
+  auto physics = Utils::safeDownCast<PlayerPhysicsComponent>(entity->physics);
+  b2Body *body = physics->getBody();
+  const bool onGround = physics->onGround();
+  handleMovement(body, onGround);
+  handleJump(body, onGround, delta);
 }
 
 bool PlayerInputComponent::handleEvent(const SDL_Event event) {
@@ -63,6 +33,43 @@ bool PlayerInputComponent::handleEvent(const SDL_Event event) {
     return handleKeyUp(event.key.keysym.scancode);
   } else {
     return false;
+  }
+}
+
+void PlayerInputComponent::handleMovement(b2Body *body, const bool onGround) {
+  const b2Vec2 vel = body->GetLinearVelocity();
+  if (std::abs(vel.x) > PLAYER_MAX_MOVE_SPEED) {
+    body->SetLinearVelocity({
+      vel.x < 0.0f ? -PLAYER_MAX_MOVE_SPEED : PLAYER_MAX_MOVE_SPEED,
+      vel.y
+    });
+  } else {
+    const float MOVE_FORCE = onGround
+                           ? PLAYER_MOVE_FORCE
+                           : PLAYER_AIR_MOVE_FORCE;
+    if (flags[MOVING_LEFT_BIT]) {
+      body->ApplyForceToCenter({-MOVE_FORCE, 0.0f}, true);
+    }
+    if (flags[MOVING_RIGHT_BIT]) {
+      body->ApplyForceToCenter({MOVE_FORCE, 0.0f}, true);
+    }
+  }
+}
+
+void PlayerInputComponent::handleJump(b2Body *body, const bool onGround, const float delta) {
+  if (flags[JUMPING_BIT]) {
+    if (onGround && timeTillFinishJump == 0.0f) {
+      //starting a jump
+      body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+      timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
+    } else if (timeTillFinishJump > 0.0f) {
+      //jumping
+      body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+      timeTillFinishJump -= delta;
+    } else if (timeTillFinishJump < 0.0f) {
+      //jump timed out
+      timeTillFinishJump = 0.0f;
+    }
   }
 }
 
