@@ -27,6 +27,7 @@ private:
   static constexpr size_t JUMPING_BIT      = 2;
 
   std::bitset<3> flags;
+  float timeTillFinishJump = 0.0f;
   
   bool handleKeyDown(SDL_Scancode);
   bool handleKeyUp(SDL_Scancode);

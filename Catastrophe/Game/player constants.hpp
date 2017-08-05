@@ -17,8 +17,8 @@ constexpr SDL_Scancode PLAYER_JUMP_KEY  = SDL_SCANCODE_SPACE;
 
 constexpr float PLAYER_MOVE_FORCE = 100.0f;
 constexpr float PLAYER_MAX_MOVE_SPEED = 4.0f;
-constexpr float PLAYER_JUMP_FORCE = 20.0f;
-constexpr float PLAYER_MAX_JUMP_DUR = 1.0f;
+constexpr float PLAYER_JUMP_FORCE = 400.0f;
+constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
 
 constexpr float PLAYER_WIDTH = 1.0f;
 constexpr float PLAYER_HEIGHT = 1.0f;

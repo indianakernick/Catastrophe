@@ -16,7 +16,7 @@
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 #include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
-void PlayerInputComponent::update(Entity *entity, float) {
+void PlayerInputComponent::update(Entity *entity, const float delta) {
   if (entity->physics) {
     auto physics = Utils::safeDownCast<PlayerPhysicsComponent>(entity->physics);
     b2Body *body = physics->getBody();
@@ -27,8 +27,19 @@ void PlayerInputComponent::update(Entity *entity, float) {
     if (flags[MOVING_RIGHT_BIT]) {
       body->ApplyForceToCenter({PLAYER_MOVE_FORCE, 0.0f}, true);
     }
-    if (flags[JUMPING_BIT] && physics->onGround()) {
-      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+    if (flags[JUMPING_BIT]) {
+      if (physics->onGround() && timeTillFinishJump == 0.0f) {
+        //starting a jump
+        body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+        timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
+      } else if (timeTillFinishJump > 0.0f) {
+        //jumping
+        body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+        timeTillFinishJump -= delta;
+      } else if (timeTillFinishJump < 0.0f) {
+        //jump timed out
+        timeTillFinishJump = 0.0f;
+      }
     }
   }
 }
@@ -70,6 +81,7 @@ bool PlayerInputComponent::handleKeyUp(const SDL_Scancode key) {
       return true;
     case PLAYER_JUMP_KEY:
       flags[JUMPING_BIT] = false;
+      timeTillFinishJump = 0.0f;
       return true;
       
     default:
