@@ -21,7 +21,7 @@ void Entity::update(const float delta) {
     input->update(this, delta);
   }
   if (physics) {
-    pos = physics->body->GetPosition();
+    pos = physics->getPos();
   }
   if (render) {
     render->update(this, delta);

@@ -11,23 +11,25 @@
 #include "entity.hpp"
 #include <SDL2/SDL_events.h>
 #include "player constants.hpp"
-#include "physics component.hpp"
+#include "player physics component.hpp"
+#include <Simpleton/Utils/safe down cast.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
+#include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
 void PlayerInputComponent::update(Entity *entity, float) {
   if (entity->physics) {
-    b2Vec2 force = {0.0f, 0.0f};
+    auto physics = Utils::safeDownCast<PlayerPhysicsComponent>(entity->physics);
+    b2Body *body = physics->getBody();
+  
     if (flags[MOVING_LEFT_BIT]) {
-      force += {-PLAYER_MOVE_FORCE, 0.0f};
+      body->ApplyForceToCenter({-PLAYER_MOVE_FORCE, 0.0f}, true);
     }
     if (flags[MOVING_RIGHT_BIT]) {
-      force += {PLAYER_MOVE_FORCE, 0.0f};
+      body->ApplyForceToCenter({PLAYER_MOVE_FORCE, 0.0f}, true);
     }
-    if (flags[JUMPING_BIT]) {
-      force += {0.0f, PLAYER_JUMP_FORCE};
+    if (flags[JUMPING_BIT] && physics->onGround()) {
+      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
     }
-    
-    entity->physics->body->ApplyForceToCenter(force, true);
   }
 }
 

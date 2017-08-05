@@ -12,6 +12,7 @@
 #include "entity id.hpp"
 #include <unordered_map>
 #include "debug draw.hpp"
+#include "contact listener.hpp"
 #include "physics component.hpp"
 #include <experimental/optional>
 #include "../Libraries/Box2D/Box2D.h"
@@ -26,8 +27,10 @@ public:
   void init(SDL_Renderer *);
   void quit();
   
-  std::shared_ptr<PhysicsComponent> create(EntityID, b2BodyDef);
-  void destroy(EntityID);
+  b2World *getWorld();
+  
+  void add(EntityID, std::shared_ptr<PhysicsComponent>);
+  void rem(EntityID);
   
   void update(float);
   void debugRender();
@@ -37,6 +40,7 @@ private:
 
   std::experimental::optional<b2World> world;
   std::experimental::optional<DebugDraw> draw;
+  std::experimental::optional<ContactListener> contactListener;
 
   std::unordered_map<EntityID, std::shared_ptr<PhysicsComponent>> components;
 };

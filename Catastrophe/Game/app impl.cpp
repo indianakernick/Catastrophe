@@ -56,11 +56,11 @@ bool AppImpl::update(const uint64_t deltaMS) {
 
 void AppImpl::render(const uint64_t) {
   renderer.clear();
-  if constexpr (ENABLE_GAME_RENDER) {
-    renderingSystem.render();
-  }
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
+  }
+  if constexpr (ENABLE_GAME_RENDER) {
+    renderingSystem.render();
   }
   renderer.present();
 }

@@ -9,14 +9,18 @@
 #ifndef physics_component_hpp
 #define physics_component_hpp
 
-#include "../Libraries/Box2D/Dynamics/b2Body.h"
+class b2Body;
+struct b2Vec2;
 
 class PhysicsComponent {
 public:
   PhysicsComponent() = default;
-  ~PhysicsComponent() = default;
+  virtual ~PhysicsComponent() = default;
   
-  b2Body *body = nullptr;
+  virtual b2Vec2 getPos() const = 0;
+  
+  virtual b2Body *getBody() = 0;
+  virtual const b2Body *getBody() const = 0;
 };
 
 #endif

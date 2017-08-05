@@ -13,31 +13,39 @@ const b2Vec2 PhysicsSystem::GRAVITY = {0.0f, -9.80665f};
 void PhysicsSystem::init(SDL_Renderer *renderer) {
   world.emplace(GRAVITY);
   draw.emplace(renderer);
+  contactListener.emplace();
   world->SetDebugDraw(&(*draw));
+  world->SetContactListener(&(*contactListener));
 }
 
 void PhysicsSystem::quit() {
+  world->SetContactListener(nullptr);
   world->SetDebugDraw(nullptr);
+  contactListener = std::experimental::nullopt;
   draw = std::experimental::nullopt;
   world = std::experimental::nullopt;
 }
 
-std::shared_ptr<PhysicsComponent> PhysicsSystem::create(
-  const EntityID entityID,
-  const b2BodyDef bodyDef
-) {
-  auto comp = std::make_shared<PhysicsComponent>();
-  comp->body = world->CreateBody(&bodyDef);
-  components.emplace(entityID, comp);
-  return comp;
+b2World *PhysicsSystem::getWorld() {
+  return world ? &(*world) : nullptr;
 }
 
-void PhysicsSystem::destroy(const EntityID entityID) {
+void PhysicsSystem::add(
+  const EntityID entityID,
+  const std::shared_ptr<PhysicsComponent> comp
+) {
+  components.emplace(entityID, comp);
+}
+
+void PhysicsSystem::rem(const EntityID entityID) {
   auto iter = components.find(entityID);
   if (iter == components.cend()) {
     return;
   }
-  world->DestroyBody(iter->second->body);
+  b2Body *const body = iter->second->getBody();
+  if (body) {
+    world->DestroyBody(body);
+  }
   components.erase(iter);
 }
 

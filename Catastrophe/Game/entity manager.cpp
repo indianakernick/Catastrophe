@@ -27,7 +27,7 @@ void EntityManager::quit() {
 
 void EntityManager::destroy(const EntityID id) {
   rendering->rem(id);
-  physics->destroy(id);
+  physics->rem(id);
   input->rem(id);
   entities.erase(id);
 }
