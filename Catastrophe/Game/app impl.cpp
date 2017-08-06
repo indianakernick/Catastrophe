@@ -12,6 +12,7 @@
 #include "platform.hpp"
 #include "file constants.hpp"
 #include "window constants.hpp"
+#include "register collision listeners.hpp"
 
 std::unique_ptr<AppImpl> app = nullptr;
 
@@ -23,6 +24,7 @@ bool AppImpl::init() {
   
   physicsSystem.init(renderer.get());
   physicsSystem.attachCamera(&camera);
+  registerCollisionListeners(physicsSystem.getContactListener());
   
   inputSystem.init();
   entityManager.init(inputSystem, physicsSystem, renderingSystem);

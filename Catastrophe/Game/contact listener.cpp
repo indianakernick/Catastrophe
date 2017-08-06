@@ -8,13 +8,7 @@
 
 #include "contact listener.hpp"
 
-#include "object types.hpp"
-#include "player physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/Contacts/b2Contact.h"
-
-#define COLLIDE(TYPE_A, TYPE_B)                                                 \
-  typeA == getUserData<Symbol::TYPE_A>() &&                                     \
-  typeB == getUserData<Symbol::TYPE_B>()
 
 /*
 The user data on a fixture is a symbol defined in "object types.hpp".
@@ -22,39 +16,38 @@ The user data on a body is a pointer to the physics component.
 */
 
 void ContactListener::BeginContact(b2Contact *contact) {
-  void *typeA = contact->GetFixtureA()->GetUserData();
-  void *typeB = contact->GetFixtureB()->GetUserData();
-  
-  if (COLLIDE(PlayerFoot, Platform)) {
-    PlayerPhysicsComponent *player = reinterpret_cast<PlayerPhysicsComponent *>(
-      contact->GetFixtureA()->GetBody()->GetUserData()
-    );
-    player->beginContactingGround();
-  } else if (COLLIDE(Platform, PlayerFoot)) {
-    PlayerPhysicsComponent *player = reinterpret_cast<PlayerPhysicsComponent *>(
-      contact->GetFixtureB()->GetBody()->GetUserData()
-    );
-    player->beginContactingGround();
+  const auto [fixtureA, fixtureB, iter] = getListener(contact);
+  if (iter != listeners.cend() && iter->second.begin) {
+    iter->second.begin(fixtureA, fixtureB);
   }
 }
 
 void ContactListener::EndContact(b2Contact *contact) {
-  //these pointers point to the physics component of the entity
-  void *typeA = contact->GetFixtureA()->GetUserData();
-  void *typeB = contact->GetFixtureB()->GetUserData();
-  
-  if (COLLIDE(PlayerFoot, Platform)) {
-    PlayerPhysicsComponent *player = reinterpret_cast<PlayerPhysicsComponent *>(
-      contact->GetFixtureA()->GetBody()->GetUserData()
-    );
-    player->endContactingGround();
-  } else if (COLLIDE(Platform, PlayerFoot)) {
-    PlayerPhysicsComponent *player = reinterpret_cast<PlayerPhysicsComponent *>(
-      contact->GetFixtureB()->GetBody()->GetUserData()
-    );
-    player->endContactingGround();
+  const auto [fixtureA, fixtureB, iter] = getListener(contact);
+  if (iter != listeners.cend() && iter->second.end) {
+    iter->second.end(fixtureA, fixtureB);
   }
 }
 
+void ContactListener::addListener(
+  const CollisionPair key,
+  const CollisionListener listener
+) {
+  assert(key.first < key.second);
+  listeners.emplace(key, listener);
+}
 
-#undef COLLIDE
+ContactListener::ListenerData ContactListener::getListener(
+  b2Contact *contact
+) {
+  b2Fixture *const fixtureA = contact->GetFixtureA();
+  b2Fixture *const fixtureB = contact->GetFixtureB();
+  void *const hashA = fixtureA->GetUserData();
+  void *const hashB = fixtureB->GetUserData();
+  
+  if (hashA < hashB) {
+    return {fixtureA, fixtureB, listeners.find({hashA, hashB})};
+  } else {
+    return {fixtureB, fixtureA, listeners.find({hashB, hashA})};
+  }
+}

@@ -87,6 +87,7 @@
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
 		45FA993F1F35476400F8C639 /* contact listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA993D1F35476400F8C639 /* contact listener.cpp */; };
+		45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99431F36A12A00F8C639 /* register collision listeners.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -252,6 +253,8 @@
 		45FA993D1F35476400F8C639 /* contact listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "contact listener.cpp"; sourceTree = "<group>"; };
 		45FA993E1F35476400F8C639 /* contact listener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "contact listener.hpp"; sourceTree = "<group>"; };
 		45FA99401F354C8D00F8C639 /* object types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "object types.hpp"; sourceTree = "<group>"; };
+		45FA99431F36A12A00F8C639 /* register collision listeners.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "register collision listeners.cpp"; sourceTree = "<group>"; };
+		45FA99441F36A12A00F8C639 /* register collision listeners.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "register collision listeners.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +591,8 @@
 				453892FA1F2C4209007EBB5A /* entity manager.hpp */,
 				45FA993D1F35476400F8C639 /* contact listener.cpp */,
 				45FA993E1F35476400F8C639 /* contact listener.hpp */,
+				45FA99431F36A12A00F8C639 /* register collision listeners.cpp */,
+				45FA99441F36A12A00F8C639 /* register collision listeners.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -745,6 +750,7 @@
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
 				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
+				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
 				45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */,
 				45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */,

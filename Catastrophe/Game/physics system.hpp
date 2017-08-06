@@ -37,6 +37,8 @@ public:
   
   void attachCamera(const Camera *);
   void detachCamera();
+  
+  ContactListener &getContactListener();
 
 private:
   static const b2Vec2 GRAVITY;

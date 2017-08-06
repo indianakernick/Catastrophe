@@ -64,3 +64,7 @@ void PhysicsSystem::attachCamera(const Camera *newCamera) {
 void PhysicsSystem::detachCamera() {
   draw->detachCamera();
 }
+
+ContactListener &PhysicsSystem::getContactListener() {
+  return *contactListener;
+}
