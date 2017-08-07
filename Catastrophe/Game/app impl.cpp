@@ -11,7 +11,7 @@
 #include "player.hpp"
 #include "platform.hpp"
 #include "file constants.hpp"
-#include "window constants.hpp"
+#include "camera constants.hpp"
 #include "register collision listeners.hpp"
 
 std::unique_ptr<AppImpl> app = nullptr;
@@ -34,10 +34,14 @@ bool AppImpl::init() {
     Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
   );
   
+  renderingSystem.track(player);
+  
   return true;
 }
 
 void AppImpl::quit() {
+  renderingSystem.stopTracking();
+
   entityManager.quit();
   inputSystem.quit();
   
@@ -63,6 +67,7 @@ bool AppImpl::input(uint64_t) {
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
+  camera.update(deltaMS / 1000.0f);
   physicsSystem.update(deltaMS / 1000.0f);
   entityManager.update(deltaMS / 1000.0f);
   return true;

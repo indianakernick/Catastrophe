@@ -20,11 +20,11 @@ public:
   
   void update(Entity *, float) override;
   void render(RenderingContext &) override;
+  const CameraTarget *getCameraTarget() const override;
   
 private:
   Color color;
-  glm::vec2 center;
-  glm::vec2 size;
+  CameraTarget rect;
 };
 
 #endif

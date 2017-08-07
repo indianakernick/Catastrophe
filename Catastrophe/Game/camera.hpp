@@ -10,7 +10,8 @@
 #define camera_hpp
 
 #include "rect.hpp"
-#include <glm/vec2.hpp>
+
+using CameraTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
 class Camera {
 public:
@@ -44,8 +45,27 @@ public:
   ///Line
   bool visible(glm::ivec2, glm::ivec2) const;
 
+  void update(float);
+  
+  void setTrackingBounds(glm::vec2);
+
+  void trackTarget(const CameraTarget *);
+  void stopTracking();
+  const CameraTarget *getTarget() const;
+  
+  void moveTo(glm::vec2);
+  glm::vec2 getPos() const;
+  
+  void zoomTo(float);
+  float getZoom() const;
+
 private:
+  const CameraTarget *target;
   glm::vec2 center;
+  //setting zoom changes the size of the camera
+  glm::vec2 size;
+  //size of a rectangle in the center of the view port
+  glm::vec2 trackingBounds;
 };
 
 #endif

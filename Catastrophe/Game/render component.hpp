@@ -9,16 +9,19 @@
 #ifndef render_component_hpp
 #define render_component_hpp
 
+#include "camera.hpp"
+
 class Entity;
 class RenderingContext;
 
 class RenderComponent {
 public:
   RenderComponent() = default;
-  ~RenderComponent() = default;
+  virtual ~RenderComponent() = default;
 
   virtual void update(Entity *, float) = 0;
   virtual void render(RenderingContext &) = 0;
+  virtual const CameraTarget *getCameraTarget() const = 0;
 };
 
 #endif

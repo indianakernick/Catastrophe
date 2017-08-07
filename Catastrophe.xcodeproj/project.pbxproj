@@ -255,6 +255,7 @@
 		45FA99401F354C8D00F8C639 /* object types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "object types.hpp"; sourceTree = "<group>"; };
 		45FA99431F36A12A00F8C639 /* register collision listeners.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "register collision listeners.cpp"; sourceTree = "<group>"; };
 		45FA99441F36A12A00F8C639 /* register collision listeners.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "register collision listeners.hpp"; sourceTree = "<group>"; };
+		45FA99471F36CD3500F8C639 /* camera constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera constants.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,6 +492,11 @@
 		453892F61F2C4053007EBB5A /* physics */ = {
 			isa = PBXGroup;
 			children = (
+				45FA99401F354C8D00F8C639 /* object types.hpp */,
+				45FA993D1F35476400F8C639 /* contact listener.cpp */,
+				45FA993E1F35476400F8C639 /* contact listener.hpp */,
+				45FA99431F36A12A00F8C639 /* register collision listeners.cpp */,
+				45FA99441F36A12A00F8C639 /* register collision listeners.hpp */,
 				453892CE1F2AF7FE007EBB5A /* physics component.cpp */,
 				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
 				453892D11F2AF877007EBB5A /* physics system.cpp */,
@@ -575,7 +581,7 @@
 				453890711F2ADB13007EBB5A /* window constants.hpp */,
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
 				453893061F2C572D007EBB5A /* platform constants.hpp */,
-				45FA99401F354C8D00F8C639 /* object types.hpp */,
+				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* input components */,
 				453892F81F2C417F007EBB5A /* render components */,
@@ -584,15 +590,7 @@
 				453892F61F2C4053007EBB5A /* physics */,
 				453892F71F2C4061007EBB5A /* input */,
 				453892FD1F2C4B70007EBB5A /* factory */,
-				453892CD1F2AF4E5007EBB5A /* entity id.hpp */,
-				453892D41F2B0074007EBB5A /* entity.cpp */,
-				453892D51F2B0074007EBB5A /* entity.hpp */,
-				453892F91F2C4209007EBB5A /* entity manager.cpp */,
-				453892FA1F2C4209007EBB5A /* entity manager.hpp */,
-				45FA993D1F35476400F8C639 /* contact listener.cpp */,
-				45FA993E1F35476400F8C639 /* contact listener.hpp */,
-				45FA99431F36A12A00F8C639 /* register collision listeners.cpp */,
-				45FA99441F36A12A00F8C639 /* register collision listeners.hpp */,
+				45FA99461F36C9F000F8C639 /* entity */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -620,6 +618,18 @@
 				45FA99171F33104200F8C639 /* simple physics component.hpp */,
 			);
 			name = "physics components";
+			sourceTree = "<group>";
+		};
+		45FA99461F36C9F000F8C639 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				453892CD1F2AF4E5007EBB5A /* entity id.hpp */,
+				453892D41F2B0074007EBB5A /* entity.cpp */,
+				453892D51F2B0074007EBB5A /* entity.hpp */,
+				453892F91F2C4209007EBB5A /* entity manager.cpp */,
+				453892FA1F2C4209007EBB5A /* entity manager.hpp */,
+			);
+			name = entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

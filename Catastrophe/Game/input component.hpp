@@ -15,7 +15,7 @@ union SDL_Event;
 class InputComponent {
 public:
   InputComponent() = default;
-  ~InputComponent() = default;
+  virtual ~InputComponent() = default;
   
   virtual void update(Entity *, float) = 0;
   virtual bool handleEvent(SDL_Event) = 0;

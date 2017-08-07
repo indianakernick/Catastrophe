@@ -16,13 +16,17 @@ StaticSpriteRenderComponent::StaticSpriteRenderComponent(
   const float width,
   const float height
 ) : sprite(sprite),
-    size(width, height) {}
+    rect(0.0f, 0.0f, width, height) {}
 
 void StaticSpriteRenderComponent::update(Entity *entity, const float) {
   const b2Vec2 pos = entity->getPos();
-  center = {pos.x, pos.y};
+  rect.c = {pos.x, pos.y};
 }
 
 void StaticSpriteRenderComponent::render(RenderingContext &context) {
-  context.renderSprite(sprite, makeRectCenterSize(center, size));
+  context.renderSprite(sprite, makeRectCenterSize(rect.c, rect.s));
+}
+
+const CameraTarget *StaticSpriteRenderComponent::getCameraTarget() const {
+  return &rect;
 }

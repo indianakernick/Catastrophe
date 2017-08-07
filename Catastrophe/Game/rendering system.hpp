@@ -27,11 +27,15 @@ public:
   
   void render();
   
-  void attachCamera(const Camera *);
+  void attachCamera(Camera *);
   void detachCamera();
+  
+  void track(EntityID);
+  void stopTracking();
 
 private:
   RenderingContext context;
+  Camera *camera;
   
   std::unordered_map<EntityID, std::shared_ptr<RenderComponent>> components;
 };

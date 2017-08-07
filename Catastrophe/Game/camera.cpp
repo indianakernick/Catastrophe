@@ -8,7 +8,7 @@
 
 #include "camera.hpp"
 
-#include "window constants.hpp"
+#include "camera constants.hpp"
 
 namespace {
   const glm::vec2 HALF_WINDOW_PIXEL_SIZE =
@@ -18,7 +18,10 @@ namespace {
 }
 
 Camera::Camera()
-  : center(WINDOW_METER_SIZE / 2.0f) {}
+  : target(nullptr),
+    center(WINDOW_METER_SIZE / 2.0f),
+    size(WINDOW_METER_SIZE),
+    trackingBounds(DEFAULT_TRACKING_BOUNDS) {}
 
 int Camera::sizeToPixels(const float s) const {
   return s * PIXELS_PER_METER;
@@ -113,4 +116,69 @@ bool Camera::visible(glm::ivec2 p0, glm::ivec2 p1) const {
     std::swap(p0.y, p1.y);
   }
   return WINDOW_RECT.interceptsWith(RectPx(p0, p1 - p0));
+}
+
+void Camera::update(const float delta) {
+  if (target == nullptr) {
+    return;
+  }
+  
+  const CameraTarget bounds(center, trackingBounds);
+  
+  if (bounds.encloses(*target)) {
+    return;
+  }
+
+  glm::vec2 motion = {0.0f, 0.0f};
+  
+  if (const float moveUp    = target->top   () - bounds.top   (); moveUp    > 0.0f) {
+    motion.y = moveUp;
+  }
+  
+  if (const float moveRight = target->right () - bounds.right (); moveRight > 0.0f) {
+    motion.x = moveRight;
+  }
+  
+  if (const float moveDown  = target->bottom() - bounds.bottom(); moveDown  < 0.0f) {
+    motion.y = moveDown;
+  }
+  
+  if (const float moveLeft  = target->left  () - bounds.left  (); moveLeft  < 0.0f) {
+    motion.x = moveLeft;
+  }
+  
+  center += motion;
+}
+
+void Camera::setTrackingBounds(const glm::vec2 newTrackingBounds) {
+  trackingBounds = newTrackingBounds;
+}
+
+void Camera::trackTarget(const CameraTarget *newTarget) {
+  target = newTarget;
+}
+
+void Camera::stopTracking() {
+  target = nullptr;
+}
+
+const CameraTarget *Camera::getTarget() const {
+  return target;
+}
+
+void Camera::moveTo(const glm::vec2 pos) {
+  
+}
+
+glm::vec2 Camera::getPos() const {
+  return {};
+}
+
+void Camera::zoomTo(const float zoom) {
+  assert(zoom >= MIN_ZOOM);
+  assert(zoom <= MAX_ZOOM);
+}
+
+float Camera::getZoom() const {
+  return WINDOW_METER_SIZE.x / size.x;
 }
