@@ -18,7 +18,7 @@ const glm::vec2 PIXELS_PER_METER_SIZE = {PIXELS_PER_METER, PIXELS_PER_METER};
 const glm::vec2 WINDOW_METER_SIZE =
   static_cast<glm::vec2>(WINDOW_PIXEL_SIZE) / PIXELS_PER_METER_SIZE;
 
-const glm::vec2 DEFAULT_TRACKING_BOUNDS = WINDOW_METER_SIZE / 4.0f;
+const glm::vec2 DEFAULT_TRACKING_BOUNDS = WINDOW_METER_SIZE / 2.0f;
 constexpr float MAX_TRACKING_TIME = 1.0f;
 constexpr float MAX_ZOOMING_TIME = 2.0f;
 constexpr float MAX_ZOOM = 16.0f;

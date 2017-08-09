@@ -24,7 +24,7 @@ public:
   PhysicsSystem() = default;
   ~PhysicsSystem() = default;
   
-  void init(SDL_Renderer *);
+  void init();
   void quit();
   
   b2World *getWorld();
@@ -35,8 +35,8 @@ public:
   void update(float);
   void debugRender();
   
-  void attachCamera(const Camera *);
-  void detachCamera();
+  void attachRenderer(RenderingContext &);
+  void detachRenderer();
   
   ContactListener &getContactListener();
 

@@ -11,12 +11,11 @@
 
 #include "../Libraries/Box2D/Common/b2Draw.h"
 
-class Camera;
-struct SDL_Renderer;
+class RenderingContext;
 
 class DebugDraw final : public b2Draw {
 public:
-  explicit DebugDraw(SDL_Renderer *);
+  DebugDraw() = default;
 
   void DrawPolygon(const b2Vec2 *, int32, const b2Color &) override;
   void DrawSolidPolygon(const b2Vec2 *, int32, const b2Color &) override;
@@ -26,16 +25,11 @@ public:
   void DrawTransform(const b2Transform &) override;
   void DrawPoint(const b2Vec2 &, float32, const b2Color &) override;
 
-  void attachCamera(const Camera *);
-  void detachCamera();
+  void attachRenderer(RenderingContext *);
+  void detachRenderer();
 
 private:
-  SDL_Renderer *renderer;
-  const Camera *camera = nullptr;
-  
-  struct Verts;
-  
-  Verts polygonToPixels(const b2Vec2 *, int32);
+  RenderingContext *renderer = nullptr;
 };
 
 #endif

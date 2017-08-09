@@ -20,10 +20,11 @@ bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
-  renderingSystem.attachCamera(&camera);
   
-  physicsSystem.init(renderer.get());
-  physicsSystem.attachCamera(&camera);
+  physicsSystem.init();
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    physicsSystem.attachRenderer(renderingSystem.getRenderer());
+  }
   registerCollisionListeners(physicsSystem.getContactListener());
   
   inputSystem.init();
@@ -45,10 +46,9 @@ void AppImpl::quit() {
   entityManager.quit();
   inputSystem.quit();
   
-  physicsSystem.detachCamera();
+  physicsSystem.detachRenderer();
   physicsSystem.quit();
   
-  renderingSystem.detachCamera();
   renderingSystem.quit();
   
   SDLApp::quitWindow();
@@ -67,9 +67,10 @@ bool AppImpl::input(uint64_t) {
 }
 
 bool AppImpl::update(const uint64_t deltaMS) {
-  camera.update(deltaMS / 1000.0f);
-  physicsSystem.update(deltaMS / 1000.0f);
-  entityManager.update(deltaMS / 1000.0f);
+  const float delta = deltaMS / 1000.0f;
+  physicsSystem.update(delta);
+  entityManager.update(delta);
+  renderingSystem.update(delta);
   return true;
 }
 

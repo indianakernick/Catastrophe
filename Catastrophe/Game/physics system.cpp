@@ -10,9 +10,9 @@
 
 const b2Vec2 PhysicsSystem::GRAVITY = {0.0f, -9.80665f};
 
-void PhysicsSystem::init(SDL_Renderer *renderer) {
+void PhysicsSystem::init() {
   world.emplace(GRAVITY);
-  draw.emplace(renderer);
+  draw.emplace();
   contactListener.emplace();
   world->SetDebugDraw(&(*draw));
   world->SetContactListener(&(*contactListener));
@@ -57,12 +57,12 @@ void PhysicsSystem::debugRender() {
   world->DrawDebugData();
 }
 
-void PhysicsSystem::attachCamera(const Camera *newCamera) {
-  draw->attachCamera(newCamera);
+void PhysicsSystem::attachRenderer(RenderingContext &newRenderer) {
+  draw->attachRenderer(&newRenderer);
 }
 
-void PhysicsSystem::detachCamera() {
-  draw->detachCamera();
+void PhysicsSystem::detachRenderer() {
+  draw->detachRenderer();
 }
 
 ContactListener &PhysicsSystem::getContactListener() {

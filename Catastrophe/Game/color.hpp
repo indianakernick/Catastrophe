@@ -9,6 +9,7 @@
 #ifndef color_hpp
 #define color_hpp
 
+#include <cstdint>
 #include <glm/vec4.hpp>
 
 using Color = glm::tvec4<uint8_t>;

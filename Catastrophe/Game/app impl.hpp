@@ -26,7 +26,6 @@ private:
   RenderingSystem renderingSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
-  Camera camera;
   
   EntityID player;
   EntityID platform;

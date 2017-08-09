@@ -11,8 +11,8 @@
 
 #include "entity id.hpp"
 #include <unordered_map>
-#include "rendering context.hpp"
 #include "render component.hpp"
+#include "rendering context.hpp"
 
 class RenderingSystem {
 public:
@@ -25,17 +25,18 @@ public:
   void add(EntityID, std::shared_ptr<RenderComponent>);
   void rem(EntityID);
   
+  void update(float);
   void render();
-  
-  void attachCamera(Camera *);
-  void detachCamera();
   
   void track(EntityID);
   void stopTracking();
+  
+  RenderingContext &getRenderer();
+  Camera &getCamera();
 
 private:
-  RenderingContext context;
-  Camera *camera;
+  RenderingContext renderer;
+  Camera camera;
   
   std::unordered_map<EntityID, std::shared_ptr<RenderComponent>> components;
 };

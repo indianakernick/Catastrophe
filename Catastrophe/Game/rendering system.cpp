@@ -10,12 +10,12 @@
 
 #include "camera.hpp"
 
-void RenderingSystem::init(SDL_Renderer *renderer, const std::experimental::string_view sheet) {
-  context.init(renderer, sheet);
+void RenderingSystem::init(SDL_Renderer *sdlRenderer, const std::experimental::string_view sheet) {
+  renderer.init(sdlRenderer, sheet, &camera);
 }
 
 void RenderingSystem::quit() {
-  context.quit();
+  renderer.quit();
 }
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
@@ -26,20 +26,14 @@ void RenderingSystem::rem(const EntityID id) {
   components.erase(id);
 }
 
+void RenderingSystem::update(const float delta) {
+  camera.update(delta);
+}
+
 void RenderingSystem::render() {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    c->second->render(context);
+    c->second->render(renderer);
   }
-}
-
-void RenderingSystem::attachCamera(Camera *newCamera) {
-  context.attachCamera(newCamera);
-  camera = newCamera;
-}
-
-void RenderingSystem::detachCamera() {
-  context.detachCamera();
-  camera = nullptr;
 }
 
 void RenderingSystem::track(const EntityID entity) {
@@ -47,9 +41,17 @@ void RenderingSystem::track(const EntityID entity) {
   assert(iter != components.end());
   const CameraTarget *target = iter->second->getCameraTarget();
   assert(target);
-  camera->trackTarget(target);
+  camera.trackTarget(target);
 }
 
 void RenderingSystem::stopTracking() {
-  camera->stopTracking();
+  camera.stopTracking();
+}
+
+RenderingContext &RenderingSystem::getRenderer() {
+  return renderer;
+}
+
+Camera &RenderingSystem::getCamera() {
+  return camera;
 }

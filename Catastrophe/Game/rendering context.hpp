@@ -25,12 +25,21 @@ public:
   RenderingContext();
   ~RenderingContext() = default;
   
-  void init(SDL_Renderer *, std::experimental::string_view);
+  void init(SDL_Renderer *, std::experimental::string_view, const Camera *);
   void quit();
   
   void renderSprite(std::experimental::string_view, int, Rect);
   void renderSprite(std::experimental::string_view, Rect);
+  
   void renderRect(Color, Rect);
+  void renderPoint(Color, glm::vec2);
+  void renderLine(Color, glm::vec2, glm::vec2);
+  
+  void renderCircle(Color, glm::vec2, float);
+  void renderFilledCircle(Color, glm::vec2, float);
+  
+  void renderPolygon(Color, const glm::vec2 *, size_t);
+  void renderFilledPolygon(Color, const glm::vec2 *, size_t);
   
   void attachCamera(const Camera *);
   void detachCamera();
@@ -42,6 +51,7 @@ private:
   const Camera *camera = nullptr;
   
   std::pair<SDL_Rect, bool> rectToPixels(Rect);
+  void setColor(Color);
 };
 
 #endif

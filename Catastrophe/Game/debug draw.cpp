@@ -8,101 +8,7 @@
 
 #include "debug draw.hpp"
 
-#include <cmath>
-#include <memory>
-#include "camera.hpp"
-#include <SDL2/SDL2_gfxPrimitives.h>
-#include <Simpleton/Platform/sdl error.hpp>
-
-DebugDraw::DebugDraw(SDL_Renderer *renderer)
-  : b2Draw(), renderer(renderer) {
-  SetFlags(e_shapeBit | e_jointBit | e_aabbBit | e_pairBit | e_centerOfMassBit);
-}
-
-struct DebugDraw::Verts {
-  std::unique_ptr<Sint16[]> x;
-  std::unique_ptr<Sint16[]> y;
-  bool visible;
-};
-  
-DebugDraw::Verts DebugDraw::polygonToPixels(const b2Vec2 *verts, const int32 numVerts) {
-  Verts pxVerts = {
-    std::make_unique<Sint16[]>(numVerts + 1),
-    std::make_unique<Sint16[]>(numVerts + 1),
-    false
-  };
-  
-  for (int32 i = 0; i != numVerts; ++i) {
-    const glm::ivec2 pos = camera->posToPixels(verts[i].x, verts[i].y);
-    if (camera->visible(pos)) {
-      pxVerts.visible = true;
-    }
-    pxVerts.x[i] = pos.x;
-    pxVerts.y[i] = pos.y;
-  }
-  
-  const glm::ivec2 pos = camera->posToPixels(verts->x, verts->y);
-  if (camera->visible(pos)) {
-    pxVerts.visible = true;
-  }
-  pxVerts.x[numVerts] = pos.x;
-  pxVerts.y[numVerts] = pos.y;
-  
-  return pxVerts;
-}
-
-void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
-  const Verts pxVerts = polygonToPixels(verts, numVerts);
-  if (!pxVerts.visible) return;
-  
-  //polygonRGBA returns -1 (signalling an error)
-  //even though it successfully renders a polygon.
-  polygonRGBA(
-    renderer,
-    pxVerts.x.get(),
-    pxVerts.y.get(),
-    numVerts + 1,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  );
-}
-
-void DebugDraw::DrawSolidPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
-  const Verts pxVerts = polygonToPixels(verts, numVerts);
-  if (!pxVerts.visible) return;
-  
-  CHECK_SDL_ERROR(filledPolygonRGBA(
-    renderer,
-    pxVerts.x.get(),
-    pxVerts.y.get(),
-    numVerts + 1,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  ));
-}
-
-void DebugDraw::DrawCircle(const b2Vec2 &center, const float32 radius, const b2Color &color) {
-  if (camera == nullptr) return;
-  
-  const glm::ivec2 pxCenter = camera->posToPixels(center.x, center.y);
-  const Sint16 pxRadius = camera->sizeToPixels(radius);
-  if (!camera->visible(pxCenter, pxRadius)) return;
-  
-  CHECK_SDL_ERROR(circleRGBA(
-    renderer,
-    pxCenter.x,
-    pxCenter.y,
-    pxRadius,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  ));
-}
+#include "rendering context.hpp"
 
 namespace {
   b2Color brighten(const b2Color color) {
@@ -114,6 +20,38 @@ namespace {
       color.a,
     };
   }
+  
+  Color castColor(const b2Color color) {
+    return {color.r * 255, color.g * 255, color.b * 255, color.a * 255};
+  }
+  
+  glm::vec2 castVec2(const b2Vec2 vec2) {
+    return {vec2.x, vec2.y};
+  }
+  
+  //should be safe to reinterpret_cast
+  static_assert(sizeof(b2Vec2) == sizeof(glm::vec2));
+  static_assert(offsetof(b2Vec2, x) == offsetof(glm::vec2, x));
+  static_assert(offsetof(b2Vec2, y) == offsetof(glm::vec2, y));
+  static_assert(std::is_same<float32, float>::value);
+}
+
+void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
+  if (renderer) {
+    renderer->renderPolygon(castColor(color), reinterpret_cast<const glm::vec2 *>(verts), numVerts);
+  }
+}
+
+void DebugDraw::DrawSolidPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
+  if (renderer) {
+    renderer->renderFilledPolygon(castColor(color), reinterpret_cast<const glm::vec2 *>(verts), numVerts);
+  }
+}
+
+void DebugDraw::DrawCircle(const b2Vec2 &center, const float32 radius, const b2Color &color) {
+  if (renderer) {
+    renderer->renderCircle(castColor(color), castVec2(center), radius);
+  }
 }
 
 void DebugDraw::DrawSolidCircle(const b2Vec2 &center, const float32 radius, const b2Vec2 &axis, const b2Color &color) {
@@ -122,23 +60,9 @@ void DebugDraw::DrawSolidCircle(const b2Vec2 &center, const float32 radius, cons
 }
 
 void DebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
-  if (camera == nullptr) return;
-  
-  const glm::ivec2 px1 = camera->posToPixels(p1.x, p1.y);
-  const glm::ivec2 px2 = camera->posToPixels(p2.x, p2.y);
-  if (!camera->visible(px1, px2)) return;
-  
-  CHECK_SDL_ERROR(lineRGBA(
-    renderer,
-    px1.x,
-    px1.y,
-    px2.x,
-    px2.y,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  ));
+  if (renderer) {
+    renderer->renderLine(castColor(color), castVec2(p1), castVec2(p2));
+  }
 }
 
 void DebugDraw::DrawTransform(const b2Transform &) {
@@ -146,28 +70,15 @@ void DebugDraw::DrawTransform(const b2Transform &) {
 }
 
 void DebugDraw::DrawPoint(const b2Vec2 &p, const float32 size, const b2Color &color) {
-  if (camera == nullptr) return;
-  
-  const glm::ivec2 pxCenter = camera->posToPixels(p.x, p.y);
-  const Sint16 pxRadius = camera->sizeToPixels(size);
-  if (!camera->visible(pxCenter, pxRadius)) return;
-  
-  CHECK_SDL_ERROR(filledCircleRGBA(
-    renderer,
-    pxCenter.x,
-    pxCenter.y,
-    pxRadius,
-    color.r * 255,
-    color.g * 255,
-    color.b * 255,
-    color.a * 255
-  ));
+  if (renderer) {
+    renderer->renderFilledCircle(castColor(color), castVec2(p), size);
+  }
 }
 
-void DebugDraw::attachCamera(const Camera *newCamera) {
-  camera = newCamera;
+void DebugDraw::attachRenderer(RenderingContext *newRenderer) {
+  renderer = newRenderer;
 }
 
-void DebugDraw::detachCamera() {
-  camera = nullptr;
+void DebugDraw::detachRenderer() {
+  renderer = nullptr;
 }
