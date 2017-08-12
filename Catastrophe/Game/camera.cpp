@@ -9,6 +9,7 @@
 #include "camera.hpp"
 
 #include "camera constants.hpp"
+#include <Simpleton/Math/scale.hpp>
 
 /*
 tracking bounds is relative to the center of the window and the size of the
@@ -16,11 +17,10 @@ tracking bounds is relative to the size of the window
 */
 
 Camera::Camera()
-  : target(nullptr),
-    center(),
-    windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
+  : windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
     trackingBounds(DEFAULT_TRACKING_BOUNDS),
-    pixelsPerMeter(DEFAULT_PIXELS_PER_METER) {}
+    pixelsPerMeter(DEFAULT_PIXELS_PER_METER),
+    zoomTarget(pixelsPerMeter) {}
 
 int Camera::sizeToPixels(const float s) const {
   return s * pixelsPerMeter;
@@ -148,6 +148,8 @@ void Camera::update(const float delta) {
   }
   
   center += motion;
+  
+  animateZoom(delta);
 }
 
 void Camera::setTrackingBounds(const glm::vec2 newTrackingBounds) {
@@ -177,7 +179,8 @@ glm::vec2 Camera::getPos() const {
 void Camera::zoomTo(const float zoom) {
   assert(zoom >= MIN_ZOOM);
   assert(zoom <= MAX_ZOOM);
-  pixelsPerMeter = zoom;
+  
+  zoomTarget = zoom;
 }
 
 float Camera::getZoom() const {
@@ -190,4 +193,24 @@ glm::vec2 Camera::pixelsPerMeterPos() const {
 
 glm::vec2 Camera::halfWindowPixelSize() const {
   return windowSize / 2;
+}
+
+void Camera::animateZoom(const float delta) {
+  float desired = zoomTarget - pixelsPerMeter;
+  const float distance = std::abs(desired);
+  desired /= distance;
+  
+  if (distance < ZOOM_STOP_DIST) {
+    pixelsPerMeter = zoomTarget;
+    zoomVel = 0.0f;
+    return;
+  } else if (distance <= ZOOM_SLOW_DIST) {
+    desired *= Math::scale(distance, 0.0f, ZOOM_SLOW_DIST, 0.0f, MAX_ZOOM_VEL);
+  } else {
+    desired *= MAX_ZOOM_VEL;
+  }
+  
+  const float steer = std::min(MAX_ZOOM_FORCE, desired - zoomVel);
+  zoomVel += steer * delta;
+  pixelsPerMeter += zoomVel * delta;
 }

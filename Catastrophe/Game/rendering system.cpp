@@ -9,9 +9,11 @@
 #include "rendering system.hpp"
 
 #include "camera.hpp"
+#include "camera constants.hpp"
 
 void RenderingSystem::init(SDL_Renderer *sdlRenderer, const std::experimental::string_view sheet) {
   renderer.init(sdlRenderer, sheet, &camera);
+  camera.zoomTo(MAX_ZOOM);
 }
 
 void RenderingSystem::quit() {

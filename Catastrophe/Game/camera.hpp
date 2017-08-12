@@ -60,15 +60,20 @@ public:
   float getZoom() const;
 
 private:
-  const CameraTarget *target;
-  glm::vec2 center;
+  const CameraTarget *target = nullptr;
+  glm::vec2 center = {0.0f, 0.0f};
   glm::ivec2 windowSize;
   //size of a rectangle in the center of the view port
   glm::vec2 trackingBounds;
   float pixelsPerMeter;
   
+  float zoomVel = 0.0f;
+  float zoomTarget;
+  
   glm::vec2 pixelsPerMeterPos() const;
   glm::vec2 halfWindowPixelSize() const;
+  
+  void animateZoom(float);
 };
 
 #endif
