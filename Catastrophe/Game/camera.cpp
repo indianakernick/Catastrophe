@@ -10,25 +10,24 @@
 
 #include "camera constants.hpp"
 
-namespace {
-  const glm::vec2 HALF_WINDOW_PIXEL_SIZE =
-    static_cast<glm::vec2>(WINDOW_PIXEL_SIZE) / 2.0f;
-  
-  const RectPx WINDOW_RECT = RectPx(WINDOW_PIXEL_SIZE);
-}
+/*
+tracking bounds is relative to the center of the window and the size of the
+tracking bounds is relative to the size of the window
+*/
 
 Camera::Camera()
   : target(nullptr),
-    center(WINDOW_METER_SIZE / 2.0f),
-    size(WINDOW_METER_SIZE),
-    trackingBounds(DEFAULT_TRACKING_BOUNDS) {}
+    center(),
+    windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
+    trackingBounds(DEFAULT_TRACKING_BOUNDS),
+    pixelsPerMeter(DEFAULT_PIXELS_PER_METER) {}
 
 int Camera::sizeToPixels(const float s) const {
-  return s * PIXELS_PER_METER;
+  return s * pixelsPerMeter;
 }
 
 glm::ivec2 Camera::sizeToPixels(const glm::vec2 s) const {
-  return s * PIXELS_PER_METER;
+  return s * pixelsPerMeter;
 }
 
 glm::ivec2 Camera::sizeToPixels(const float w, const float h) const {
@@ -36,7 +35,7 @@ glm::ivec2 Camera::sizeToPixels(const float w, const float h) const {
 }
 
 glm::ivec2 Camera::posToPixels(const glm::vec2 p) const {
-  return (p - center) * PIXELS_PER_METER_POS + HALF_WINDOW_PIXEL_SIZE;
+  return (p - center) * pixelsPerMeterPos() + halfWindowPixelSize();
 }
 
 glm::ivec2 Camera::posToPixels(const float x, const float y) const {
@@ -44,11 +43,11 @@ glm::ivec2 Camera::posToPixels(const float x, const float y) const {
 }
 
 float Camera::sizeToMeters(const int s) const {
-  return static_cast<float>(s) / PIXELS_PER_METER;
+  return static_cast<float>(s) / pixelsPerMeter;
 }
 
 glm::vec2 Camera::sizeToMeters(const glm::ivec2 s) const {
-  return static_cast<glm::vec2>(s) / PIXELS_PER_METER;
+  return static_cast<glm::vec2>(s) / pixelsPerMeter;
 }
 
 glm::vec2 Camera::sizeToMeters(const int w, const int h) const {
@@ -57,8 +56,8 @@ glm::vec2 Camera::sizeToMeters(const int w, const int h) const {
 
 glm::vec2 Camera::posToMeters(const glm::ivec2 p) const {
   return
-    (static_cast<glm::vec2>(p) - HALF_WINDOW_PIXEL_SIZE) /
-    PIXELS_PER_METER_POS + center
+    (static_cast<glm::vec2>(p) - halfWindowPixelSize()) /
+    pixelsPerMeterPos() + center
   ;
 }
 
@@ -67,21 +66,21 @@ glm::vec2 Camera::posToMeters(const int x, const int y) const {
 }
 
 bool Camera::visible(const int x, const int y) const {
-  return WINDOW_RECT.encloses({x, y});
+  return RectPx(windowSize).encloses({x, y});
 }
 
 bool Camera::visible(const glm::ivec2 p) const {
-  return WINDOW_RECT.encloses(p);
+  return RectPx(windowSize).encloses(p);
 }
 
 bool Camera::visible(const RectPx r) const {
-  return WINDOW_RECT.interceptsWith(r);
+  return RectPx(windowSize).interceptsWith(r);
 }
 
 bool Camera::visible(const glm::ivec2 p, const int r) const {
   //https://stackoverflow.com/a/402010
   
-  const glm::ivec2 HALF_WINDOW_PIXEL_SIZE = WINDOW_PIXEL_SIZE / 2;
+  const glm::ivec2 HALF_WINDOW_PIXEL_SIZE = windowSize / 2;
   
   //distance between center of circle and center of rectangle (window)
   const glm::ivec2 centerDist = {
@@ -115,7 +114,7 @@ bool Camera::visible(glm::ivec2 p0, glm::ivec2 p1) const {
   if (p0.y > p1.y) {
     std::swap(p0.y, p1.y);
   }
-  return WINDOW_RECT.interceptsWith(RectPx(p0, p1 - p0));
+  return RectPx(windowSize).interceptsWith(RectPx(p0, p1 - p0));
 }
 
 void Camera::update(const float delta) {
@@ -123,7 +122,8 @@ void Camera::update(const float delta) {
     return;
   }
   
-  const CameraTarget bounds(center, trackingBounds);
+  const glm::vec2 pxTrackingBounds = trackingBounds * static_cast<glm::vec2>(windowSize);
+  const CameraTarget bounds(center, pxTrackingBounds / pixelsPerMeter);
   
   if (bounds.encloses(*target)) {
     return;
@@ -167,7 +167,7 @@ const CameraTarget *Camera::getTarget() const {
 }
 
 void Camera::moveTo(const glm::vec2 pos) {
-  
+  center = pos;
 }
 
 glm::vec2 Camera::getPos() const {
@@ -177,8 +177,17 @@ glm::vec2 Camera::getPos() const {
 void Camera::zoomTo(const float zoom) {
   assert(zoom >= MIN_ZOOM);
   assert(zoom <= MAX_ZOOM);
+  pixelsPerMeter = zoom;
 }
 
 float Camera::getZoom() const {
-  return WINDOW_METER_SIZE.x / size.x;
+  return pixelsPerMeter;
+}
+
+glm::vec2 Camera::pixelsPerMeterPos() const {
+  return {pixelsPerMeter, -pixelsPerMeter};
+}
+
+glm::vec2 Camera::halfWindowPixelSize() const {
+  return windowSize / 2;
 }

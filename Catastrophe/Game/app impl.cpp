@@ -30,6 +30,8 @@ bool AppImpl::init() {
   inputSystem.init();
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
   
+  const glm::vec2 WINDOW_METER_SIZE = static_cast<glm::vec2>(DEFAULT_WINDOW_PIXEL_SIZE) / DEFAULT_PIXELS_PER_METER;
+  
   player = entityManager.create(makePlayer, b2Vec2(WINDOW_METER_SIZE.x / 2.0f, 10.0f));
   platform = entityManager.create(makePlatform,
     Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})

@@ -62,10 +62,13 @@ public:
 private:
   const CameraTarget *target;
   glm::vec2 center;
-  //setting zoom changes the size of the camera
-  glm::vec2 size;
+  glm::ivec2 windowSize;
   //size of a rectangle in the center of the view port
   glm::vec2 trackingBounds;
+  float pixelsPerMeter;
+  
+  glm::vec2 pixelsPerMeterPos() const;
+  glm::vec2 halfWindowPixelSize() const;
 };
 
 #endif
