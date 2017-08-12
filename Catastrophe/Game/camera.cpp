@@ -8,6 +8,7 @@
 
 #include "camera.hpp"
 
+#include <glm/gtx/norm.hpp>
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
 
@@ -20,7 +21,8 @@ Camera::Camera()
   : windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
     trackingBounds(DEFAULT_TRACKING_BOUNDS),
     pixelsPerMeter(DEFAULT_PIXELS_PER_METER),
-    zoomTarget(pixelsPerMeter) {}
+    zoomTarget(pixelsPerMeter),
+    motionTarget(center) {}
 
 int Camera::sizeToPixels(const float s) const {
   return s * pixelsPerMeter;
@@ -118,37 +120,8 @@ bool Camera::visible(glm::ivec2 p0, glm::ivec2 p1) const {
 }
 
 void Camera::update(const float delta) {
-  if (target == nullptr) {
-    return;
-  }
-  
-  const glm::vec2 pxTrackingBounds = trackingBounds * static_cast<glm::vec2>(windowSize);
-  const CameraTarget bounds(center, pxTrackingBounds / pixelsPerMeter);
-  
-  if (bounds.encloses(*target)) {
-    return;
-  }
-
-  glm::vec2 motion = {0.0f, 0.0f};
-  
-  if (const float moveUp    = target->top   () - bounds.top   (); moveUp    > 0.0f) {
-    motion.y = moveUp;
-  }
-  
-  if (const float moveRight = target->right () - bounds.right (); moveRight > 0.0f) {
-    motion.x = moveRight;
-  }
-  
-  if (const float moveDown  = target->bottom() - bounds.bottom(); moveDown  < 0.0f) {
-    motion.y = moveDown;
-  }
-  
-  if (const float moveLeft  = target->left  () - bounds.left  (); moveLeft  < 0.0f) {
-    motion.x = moveLeft;
-  }
-  
-  center += motion;
-  
+  track();
+  animateMove(delta);
   animateZoom(delta);
 }
 
@@ -187,6 +160,20 @@ float Camera::getZoom() const {
   return pixelsPerMeter;
 }
 
+void Camera::print() const {
+  std::cout.precision(10);
+  std::cout << "Camera {\n";
+  std::cout << "  center:         {" << center.x << ", " << center.y << "},\n";
+  std::cout << "  windowSize:     {" << windowSize.x << ", " << windowSize.y << "},\n";
+  std::cout << "  trackingBounds: {" << trackingBounds.x << ", " << trackingBounds.y << "},\n";
+  std::cout << "  pixelsPerMeter: " << pixelsPerMeter << ",\n";
+  std::cout << "  zoomVel:        " << zoomVel << ",\n";
+  std::cout << "  zoomTarget:     " << zoomTarget << ",\n";
+  std::cout << "  motionVel:      {" << motionVel.x << ", " << motionVel.y << "},\n";
+  std::cout << "  motionTarget:   {" << motionTarget.x << ", " << motionTarget.y << "}\n";
+  std::cout << "}";
+}
+
 glm::vec2 Camera::pixelsPerMeterPos() const {
   return {pixelsPerMeter, -pixelsPerMeter};
 }
@@ -195,22 +182,94 @@ glm::vec2 Camera::halfWindowPixelSize() const {
   return windowSize / 2;
 }
 
+void Camera::track() {
+  if (target == nullptr) {
+    return;
+  }
+  
+  const glm::vec2 pxTrackingBounds = trackingBounds * static_cast<glm::vec2>(windowSize);
+  const CameraTarget bounds(center, pxTrackingBounds / pixelsPerMeter);
+  
+  if (bounds.encloses(*target)) {
+    motionTarget = center;
+    return;
+  }
+
+  glm::vec2 motion = {0.0f, 0.0f};
+  
+  if (const float moveUp    = target->top   () - bounds.top   (); moveUp    > 0.0f) {
+    motion.y = moveUp;
+  }
+  
+  if (const float moveRight = target->right () - bounds.right (); moveRight > 0.0f) {
+    motion.x = moveRight;
+  }
+  
+  if (const float moveDown  = target->bottom() - bounds.bottom(); moveDown  < 0.0f) {
+    motion.y = moveDown;
+  }
+  
+  if (const float moveLeft  = target->left  () - bounds.left  (); moveLeft  < 0.0f) {
+    motion.x = moveLeft;
+  }
+  
+  motionTarget = center + motion;
+}
+
+void Camera::animateMove(const float delta) {
+  glm::vec2 desired = motionTarget - center;
+  const float distance = glm::length(desired);
+  if (distance != 0.0f) {
+    desired /= distance;
+  }
+  
+  if (distance <= MOVE_SLOW_DIST) {
+    desired *= Math::scale(distance, 0.0f, MOVE_SLOW_DIST, 0.0f, MAX_MOVE_VEL);
+  } else {
+    desired *= MAX_MOVE_VEL;
+  }
+  
+  glm::vec2 steer = desired - motionVel;
+  if (glm::length2(steer) > MAX_MOVE_FORCE * MAX_MOVE_FORCE) {
+    steer = glm::normalize(steer);
+    steer *= MAX_MOVE_FORCE;
+  }
+  
+  if (
+    glm::length2(motionVel) <= MOVE_STOP_VEL * MOVE_STOP_VEL &&
+    distance <= MOVE_STOP_DIST
+  ) {
+    motionVel = {0.0f, 0.0f};
+    center = motionTarget;
+  } else {
+    motionVel += steer;
+    center += motionVel * delta;
+  }
+}
+
 void Camera::animateZoom(const float delta) {
   float desired = zoomTarget - pixelsPerMeter;
   const float distance = std::abs(desired);
-  desired /= distance;
+  if (distance != 0.0f) {
+    desired /= distance;
+  }
   
-  if (distance < ZOOM_STOP_DIST) {
-    pixelsPerMeter = zoomTarget;
-    zoomVel = 0.0f;
-    return;
-  } else if (distance <= ZOOM_SLOW_DIST) {
+  if (distance <= ZOOM_SLOW_DIST) {
     desired *= Math::scale(distance, 0.0f, ZOOM_SLOW_DIST, 0.0f, MAX_ZOOM_VEL);
   } else {
     desired *= MAX_ZOOM_VEL;
   }
   
-  const float steer = std::min(MAX_ZOOM_FORCE, desired - zoomVel);
-  zoomVel += steer * delta;
-  pixelsPerMeter += zoomVel * delta;
+  float steer = desired - zoomVel;
+  if (std::abs(steer) > MAX_ZOOM_FORCE) {
+    steer = Math::sign(steer) * MAX_ZOOM_FORCE;
+  }
+ 
+  if (std::abs(zoomVel) <= ZOOM_STOP_VEL && distance <= ZOOM_STOP_DIST) {
+    zoomVel = 0.0f;
+    pixelsPerMeter = zoomTarget;
+  } else {
+    zoomVel += steer;
+    pixelsPerMeter += zoomVel * delta;
+  }
 }

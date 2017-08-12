@@ -16,12 +16,18 @@ const glm::vec2 DEFAULT_TRACKING_BOUNDS = glm::vec2(1.0f, 1.0f) / 2.0f;
 constexpr float MAX_ZOOM = 128.0f;
 constexpr float MIN_ZOOM = 16.0f;
 
-constexpr float MAX_ZOOM_VEL = 64.0f;
-constexpr float MAX_ZOOM_FORCE = 16.0f;
+constexpr float MAX_ZOOM_VEL = 16.0f;
+constexpr float MAX_ZOOM_FORCE = 8.0f;
 //distance from zoom target to start slowing down
-constexpr float ZOOM_SLOW_DIST = 32.0f;
-//distance from zoom target stop
-constexpr float ZOOM_STOP_DIST = 0.05f;
+constexpr float ZOOM_SLOW_DIST = 16.0f;
+//velocity of zoom to stop at
+constexpr float ZOOM_STOP_VEL = 0.2f;
+constexpr float ZOOM_STOP_DIST = 0.1f;
 
+constexpr float MAX_MOVE_VEL = 16.0f;
+constexpr float MAX_MOVE_FORCE = 8.0f;
+constexpr float MOVE_SLOW_DIST = 16.0f;
+constexpr float MOVE_STOP_VEL = 0.05f;
+constexpr float MOVE_STOP_DIST = 0.025f;
 
 #endif

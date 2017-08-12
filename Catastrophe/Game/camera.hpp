@@ -59,6 +59,8 @@ public:
   void zoomTo(float);
   float getZoom() const;
 
+  void print() const;
+
 private:
   const CameraTarget *target = nullptr;
   glm::vec2 center = {0.0f, 0.0f};
@@ -70,9 +72,14 @@ private:
   float zoomVel = 0.0f;
   float zoomTarget;
   
+  glm::vec2 motionVel = {0.0f, 0.0f};
+  glm::vec2 motionTarget;
+  
   glm::vec2 pixelsPerMeterPos() const;
   glm::vec2 halfWindowPixelSize() const;
   
+  void track();
+  void animateMove(float);
   void animateZoom(float);
 };
 
