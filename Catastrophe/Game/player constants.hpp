@@ -15,19 +15,20 @@ constexpr SDL_Scancode PLAYER_LEFT_KEY  = SDL_SCANCODE_A;
 constexpr SDL_Scancode PLAYER_RIGHT_KEY = SDL_SCANCODE_D;
 constexpr SDL_Scancode PLAYER_JUMP_KEY  = SDL_SCANCODE_SPACE;
 
-constexpr float PLAYER_MOVE_FORCE = 100.0f;
-constexpr float PLAYER_AIR_MOVE_FORCE = 20.0f;
+constexpr float PLAYER_MOVE_FORCE = 50.0f;
+constexpr float PLAYER_AIR_MOVE_FORCE = 40.0f;
 constexpr float PLAYER_MAX_MOVE_SPEED = 4.0f;
 
-constexpr float PLAYER_JUMP_FORCE = 400.0f;
+constexpr float PLAYER_JUMP_IMPULSE = 2.0f;
 constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
+constexpr float PLAYER_LINEAR_DAMPING = 0.5f;
 
 constexpr float PLAYER_WIDTH = 1.0f;
 constexpr float PLAYER_HEIGHT = 1.0f;
 constexpr float PLAYER_FOOT_HEIGHT = 0.05f;
 
-constexpr float PLAYER_FRICTION = 0.2f;
-constexpr float PLAYER_MASS = 10.0f;
+constexpr float PLAYER_FRICTION = 0.1f;
+constexpr float PLAYER_MASS = 4.0f;
 constexpr float PLAYER_DENSITY = PLAYER_MASS / (PLAYER_WIDTH * PLAYER_HEIGHT);
 
 #endif

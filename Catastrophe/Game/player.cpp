@@ -99,6 +99,7 @@ std::unique_ptr<Entity> makePlayer(
   bodyDef.fixedRotation = true;
   
   b2Body *body = physics.getWorld()->CreateBody(&bodyDef);
+  body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysics<PlayerPhysicsComponent>(body);
   attachFixtures(body);
   body->SetTransform(pos, 0.0f);

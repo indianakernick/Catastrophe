@@ -60,11 +60,11 @@ void PlayerInputComponent::handleJump(b2Body *body, const bool onGround, const f
   if (flags[JUMPING_BIT]) {
     if (onGround && timeTillFinishJump == 0.0f) {
       //starting a jump
-      body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
       timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
     } else if (timeTillFinishJump > 0.0f) {
       //jumping
-      body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
       timeTillFinishJump -= delta;
     } else if (timeTillFinishJump < 0.0f) {
       //jump timed out
