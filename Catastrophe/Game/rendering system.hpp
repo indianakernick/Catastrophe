@@ -27,6 +27,10 @@ public:
   
   void update(float);
   void render();
+  void cameraDebugRender();
+  
+  void attachRendererToCamera();
+  void detachRendererFromCamera();
   
   void track(EntityID);
   void stopTracking();

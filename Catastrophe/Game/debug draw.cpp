@@ -29,11 +29,34 @@ namespace {
     return {vec2.x, vec2.y};
   }
   
+  template <typename MemberPointer>
+  struct MemberType;
+  
+  template <typename Class, typename Member>
+  struct MemberType<Member (Class::*)> {
+    using type = Member;
+  };
+  
+  template <typename MemberPointer>
+  using MemberType_t = typename MemberType<MemberPointer>::type;
+  
   //should be safe to reinterpret_cast
   static_assert(sizeof(b2Vec2) == sizeof(glm::vec2));
   static_assert(offsetof(b2Vec2, x) == offsetof(glm::vec2, x));
   static_assert(offsetof(b2Vec2, y) == offsetof(glm::vec2, y));
-  static_assert(std::is_same<float32, float>::value);
+  static_assert(std::is_same<
+    MemberType_t<decltype(&b2Vec2::x)>,
+    MemberType_t<decltype(&glm::vec2::x)>
+  >::value);
+  static_assert(std::is_same<
+    MemberType_t<decltype(&b2Vec2::y)>,
+    MemberType_t<decltype(&glm::vec2::y)>
+  >::value);
+}
+
+DebugDraw::DebugDraw()
+  : b2Draw() {
+  m_drawFlags = 0xFFFFFFFF;
 }
 
 void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {

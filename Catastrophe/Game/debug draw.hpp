@@ -15,7 +15,7 @@ class RenderingContext;
 
 class DebugDraw final : public b2Draw {
 public:
-  DebugDraw() = default;
+  DebugDraw();
 
   void DrawPolygon(const b2Vec2 *, int32, const b2Color &) override;
   void DrawSolidPolygon(const b2Vec2 *, int32, const b2Color &) override;

@@ -13,6 +13,8 @@
 
 using CameraTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
+class RenderingContext;
+
 class Camera {
 public:
   Camera();
@@ -50,8 +52,12 @@ public:
   bool visible(glm::ivec2, glm::ivec2) const;
 
   void update(float);
+  void debugRender();
   
-  void setTrackingBounds(glm::vec2);
+  void attachRenderer(RenderingContext &);
+  void detachRenderer();
+  
+  void setTrackingBounds(glm::vec2, glm::vec2);
 
   void trackTarget(const CameraTarget *);
   void stopTracking();
@@ -63,24 +69,28 @@ public:
   void zoomTo(float);
   float getZoom() const;
 
-  void print() const;
-
 private:
   const CameraTarget *target = nullptr;
   glm::vec2 center = {0.0f, 0.0f};
   glm::ivec2 windowSize;
-  //size of a rectangle in the center of the view port
-  glm::vec2 trackingBounds;
+  //relative to the center of the camera in units that are the size of the window
+  glm::vec2 trackingBoundsCenter;
+  //in units that are the size of the window
+  glm::vec2 trackingBoundsSize;
   float pixelsPerMeter;
   
   float zoomVel = 0.0f;
   float zoomTarget;
+  
+  RenderingContext *renderer = nullptr;
   
   glm::vec2 motionVel = {0.0f, 0.0f};
   glm::vec2 motionTarget;
   
   glm::vec2 pixelsPerMeterPos() const;
   glm::vec2 halfWindowPixelSize() const;
+  
+  glm::vec2 trackingBoundsToMeters(glm::vec2) const;
   
   void track();
   void animateMove(float);

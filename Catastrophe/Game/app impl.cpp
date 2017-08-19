@@ -20,6 +20,9 @@ bool AppImpl::init() {
   SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   
   renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
+  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    renderingSystem.attachRendererToCamera();
+  }
   
   physicsSystem.init();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
@@ -44,6 +47,7 @@ bool AppImpl::init() {
 
 void AppImpl::quit() {
   renderingSystem.stopTracking();
+  renderingSystem.detachRendererFromCamera();
 
   entityManager.quit();
   inputSystem.quit();
@@ -80,6 +84,9 @@ void AppImpl::render(const uint64_t) {
   renderer.clear();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
+  }
+  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    renderingSystem.cameraDebugRender();
   }
   if constexpr (ENABLE_GAME_RENDER) {
     renderingSystem.render();

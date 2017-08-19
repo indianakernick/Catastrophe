@@ -8,7 +8,7 @@
 
 #include "camera.hpp"
 
-#include <iostream>
+#include "rendering context.hpp"
 #include <glm/gtx/norm.hpp>
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
@@ -20,7 +20,8 @@ tracking bounds is relative to the size of the window
 
 Camera::Camera()
   : windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
-    trackingBounds(DEFAULT_TRACKING_BOUNDS),
+    trackingBoundsCenter(DEFAULT_TRACKING_BOUNDS_CENTER),
+    trackingBoundsSize(DEFAULT_TRACKING_BOUNDS_SIZE),
     pixelsPerMeter(DEFAULT_PIXELS_PER_METER),
     zoomTarget(pixelsPerMeter),
     motionTarget(center) {}
@@ -138,8 +139,32 @@ void Camera::update(const float delta) {
   animateZoom(delta);
 }
 
-void Camera::setTrackingBounds(const glm::vec2 newTrackingBounds) {
-  trackingBounds = newTrackingBounds;
+void Camera::debugRender() {
+  if (renderer == nullptr) {
+    return;
+  }
+  
+  const glm::vec2 centerM = center + trackingBoundsToMeters(trackingBoundsCenter);
+  const glm::vec2 sizeM = trackingBoundsToMeters(trackingBoundsSize);
+  const glm::vec2 cornerM = centerM - sizeM / 2.0f;
+  renderer->renderRect(CAM_TRACK_COLOR, {cornerM, sizeM});
+  
+  if (target) {
+    renderer->renderRect(CAM_TARGET_COLOR, static_cast<Rect>(*target));
+  }
+}
+
+void Camera::attachRenderer(RenderingContext &newRenderer) {
+  renderer = &newRenderer;
+}
+
+void Camera::detachRenderer() {
+  renderer = nullptr;
+}
+
+void Camera::setTrackingBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {
+  trackingBoundsCenter = newCenter;
+  trackingBoundsSize = newSize;
 }
 
 void Camera::trackTarget(const CameraTarget *newTarget) {
@@ -173,20 +198,6 @@ float Camera::getZoom() const {
   return pixelsPerMeter;
 }
 
-void Camera::print() const {
-  std::cout.precision(10);
-  std::cout << "Camera {\n";
-  std::cout << "  center:         {" << center.x << ", " << center.y << "},\n";
-  std::cout << "  windowSize:     {" << windowSize.x << ", " << windowSize.y << "},\n";
-  std::cout << "  trackingBounds: {" << trackingBounds.x << ", " << trackingBounds.y << "},\n";
-  std::cout << "  pixelsPerMeter: " << pixelsPerMeter << ",\n";
-  std::cout << "  zoomVel:        " << zoomVel << ",\n";
-  std::cout << "  zoomTarget:     " << zoomTarget << ",\n";
-  std::cout << "  motionVel:      {" << motionVel.x << ", " << motionVel.y << "},\n";
-  std::cout << "  motionTarget:   {" << motionTarget.x << ", " << motionTarget.y << "}\n";
-  std::cout << "}";
-}
-
 glm::vec2 Camera::pixelsPerMeterPos() const {
   return {pixelsPerMeter, -pixelsPerMeter};
 }
@@ -195,13 +206,18 @@ glm::vec2 Camera::halfWindowPixelSize() const {
   return windowSize / 2;
 }
 
+glm::vec2 Camera::trackingBoundsToMeters(const glm::vec2 v) const {
+  return (v * static_cast<glm::vec2>(windowSize)) / pixelsPerMeter;
+}
+
 void Camera::track() {
   if (target == nullptr) {
     return;
   }
   
-  const glm::vec2 pxTrackingBounds = trackingBounds * static_cast<glm::vec2>(windowSize);
-  const CameraTarget bounds(center, pxTrackingBounds / pixelsPerMeter);
+  const glm::vec2 centerM = trackingBoundsToMeters(trackingBoundsCenter);
+  const glm::vec2 sizeM = trackingBoundsToMeters(trackingBoundsSize);
+  const CameraTarget bounds(center + centerM, sizeM);
   
   if (bounds.encloses(*target)) {
     motionTarget = center;

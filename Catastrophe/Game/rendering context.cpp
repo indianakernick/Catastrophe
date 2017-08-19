@@ -74,8 +74,11 @@ void RenderingContext::renderSprite(
   const std::experimental::string_view name,
   const Rect dest
 ) {
-  const auto [dst, ok] = rectToPixels(dest);
-  if (!ok) return;
+  if (camera == nullptr) return;
+  
+  const RectPx dstRect = camera->rectToPixels(dest);
+  if (!camera->visible(dstRect)) return;
+  const SDL_Rect dst = toSDL(dstRect);
   
   const SDL_Rect src = toSDL(sheet.getSprite(name));
   CHECK_SDL_ERROR(SDL_RenderCopy(
@@ -87,10 +90,14 @@ void RenderingContext::renderSprite(
 }
 
 void RenderingContext::renderRect(const Color color, const Rect dest) {
-  const auto [dst, ok] = rectToPixels(dest);
-  if (!ok) return;
+  if (camera == nullptr) return;
+  
+  const RectPx dstRect = camera->rectToPixels(dest);
+  if (!camera->visible(dstRect)) return;
+  const SDL_Rect dst = toSDL(dstRect);
   
   setColor(color);
+  CHECK_SDL_ERROR(SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND));
   CHECK_SDL_ERROR(SDL_RenderFillRect(renderer, &dst));
 }
 
@@ -205,7 +212,7 @@ void RenderingContext::renderPolygon(
   CHECK_SDL_ERROR(SDL_RenderDrawLines(
     renderer,
     pxVerts.get(),
-    static_cast<int>(numVerts))
+    static_cast<int>(numVerts + 1))
   );
 }
 
@@ -262,14 +269,6 @@ void RenderingContext::attachCamera(const Camera *newCamera) {
 
 void RenderingContext::detachCamera() {
   camera = nullptr;
-}
-
-std::pair<SDL_Rect, bool> RenderingContext::rectToPixels(const Rect rect) {
-  if (camera == nullptr) {
-    return {{}, false};
-  }
-  const RectPx destPixels = camera->rectToPixels(rect);
-  return {toSDL(destPixels), camera->visible(destPixels)};
 }
 
 void RenderingContext::setColor(const Color color) {

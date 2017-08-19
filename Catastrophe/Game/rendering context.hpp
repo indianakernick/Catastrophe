@@ -50,7 +50,6 @@ private:
   SDL_OBJECT_DESTROY(Texture) texture;
   const Camera *camera = nullptr;
   
-  std::pair<SDL_Rect, bool> rectToPixels(Rect);
   void setColor(Color);
 };
 
