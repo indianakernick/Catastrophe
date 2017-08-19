@@ -16,7 +16,7 @@
 #include "entity manager.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 
-class AppImpl : public Game::SDLApp {
+class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
 public:
   AppImpl() = default;
 
@@ -32,9 +32,9 @@ private:
 
   bool init() override;
   void quit() override;
-  bool input(uint64_t) override;
-  bool update(uint64_t) override;
-  void render(uint64_t) override;
+  bool input(float) override;
+  bool update(float) override;
+  void render(float) override;
 };
 
 extern std::unique_ptr<AppImpl> app;

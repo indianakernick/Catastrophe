@@ -60,7 +60,7 @@ void AppImpl::quit() {
   SDLApp::quitWindow();
 }
 
-bool AppImpl::input(uint64_t) {
+bool AppImpl::input(float) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
@@ -72,15 +72,14 @@ bool AppImpl::input(uint64_t) {
   return true;
 }
 
-bool AppImpl::update(const uint64_t deltaMS) {
-  const float delta = deltaMS / 1000.0f;
+bool AppImpl::update(const float delta) {
   physicsSystem.update(delta);
   entityManager.update(delta);
   renderingSystem.update(delta);
   return true;
 }
 
-void AppImpl::render(const uint64_t) {
+void AppImpl::render(const float) {
   renderer.clear();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();

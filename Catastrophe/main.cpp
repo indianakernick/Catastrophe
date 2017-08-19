@@ -10,6 +10,6 @@
 
 int main(int, char **) {
   app = std::make_unique<AppImpl>();
-  app->mainLoop<std::chrono::milliseconds>(16, 4);
+  app->mainLoop(1.0f / 60.0f, 16);
   return 0;
 }
