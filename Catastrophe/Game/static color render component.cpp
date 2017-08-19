@@ -24,7 +24,7 @@ void StaticColorRenderComponent::update(Entity *entity, const float) {
 }
 
 void StaticColorRenderComponent::render(RenderingContext &context) {
-  context.renderRect(color, makeRectCenterSize(rect.c, rect.s));
+  context.renderRect(color, static_cast<Rect>(rect));
 }
 
 const CameraTarget *StaticColorRenderComponent::getCameraTarget() const {

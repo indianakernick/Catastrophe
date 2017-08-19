@@ -11,16 +11,7 @@
 
 #include <Simpleton/Math/rect.hpp>
 
-using Rect = Math::RectPS<float>;
-using RectPx = Math::RectPS<int>;
-
-inline Rect makeRectCenterSize(const glm::vec2 center, const glm::vec2 size) {
-  return {
-    center.x - size.x / 2.0f,
-    center.y + size.y / 2.0f,
-    size.x,
-    size.y
-  };
-}
+using Rect = Math::RectPS<float, Math::Dir::RIGHT, Math::Dir::UP>;
+using RectPx = Math::RectPS<int, Math::Dir::RIGHT, Math::Dir::DOWN>;
 
 #endif

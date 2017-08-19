@@ -187,7 +187,7 @@ void RenderingContext::renderPolygon(
   pxVerts[0].x = pxVert.x;
   pxVerts[0].y = pxVert.y;
   
-  Math::RectPP<int> rect(pxVert, pxVert);
+  Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
     const glm::ivec2 pxVert = camera->posToPixels(verts[v]);
@@ -233,7 +233,7 @@ void RenderingContext::renderFilledPolygon(
   pxVertX[0] = pxVert.x;
   pxVertY[0] = pxVert.y;
   
-  Math::RectPP<int> rect(pxVert, pxVert);
+  Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
     const glm::ivec2 pxVert = camera->posToPixels(verts[v]);
@@ -268,15 +268,8 @@ std::pair<SDL_Rect, bool> RenderingContext::rectToPixels(const Rect rect) {
   if (camera == nullptr) {
     return {{}, false};
   }
-  const RectPx destPixels = {
-    camera->posToPixels(rect.p),
-    camera->sizeToPixels(rect.s)
-  };
-  if (!camera->visible(destPixels)) {
-    return {{}, false};
-  } else {
-    return {toSDL(destPixels), true};
-  }
+  const RectPx destPixels = camera->rectToPixels(rect);
+  return {toSDL(destPixels), camera->visible(destPixels)};
 }
 
 void RenderingContext::setColor(const Color color) {

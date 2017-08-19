@@ -24,7 +24,7 @@ void StaticSpriteRenderComponent::update(Entity *entity, const float) {
 }
 
 void StaticSpriteRenderComponent::render(RenderingContext &context) {
-  context.renderSprite(sprite, makeRectCenterSize(rect.c, rect.s));
+  context.renderSprite(sprite, static_cast<Rect>(rect));
 }
 
 const CameraTarget *StaticSpriteRenderComponent::getCameraTarget() const {

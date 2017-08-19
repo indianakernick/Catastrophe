@@ -26,6 +26,8 @@ public:
   glm::ivec2 posToPixels(glm::vec2) const;
   glm::ivec2 posToPixels(float, float) const;
   
+  RectPx rectToPixels(Rect) const;
+  
   //pixels to meters
   float sizeToMeters(int) const;
   glm::vec2 sizeToMeters(glm::ivec2) const;
@@ -33,6 +35,8 @@ public:
 
   glm::vec2 posToMeters(glm::ivec2) const;
   glm::vec2 posToMeters(int, int) const;
+  
+  Rect rectToMeters(RectPx) const;
   
   ///Point
   bool visible(int, int) const;

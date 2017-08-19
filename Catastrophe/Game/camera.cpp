@@ -8,6 +8,7 @@
 
 #include "camera.hpp"
 
+#include <iostream>
 #include <glm/gtx/norm.hpp>
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
@@ -44,6 +45,12 @@ glm::ivec2 Camera::posToPixels(const float x, const float y) const {
   return posToPixels({x, y});
 }
 
+RectPx Camera::rectToPixels(const Rect rect) const {
+  const glm::ivec2 pos = posToPixels(rect.p);
+  const glm::ivec2 size = sizeToPixels(rect.s);
+  return {{pos.x, pos.y - size.y}, size};
+}
+
 float Camera::sizeToMeters(const int s) const {
   return static_cast<float>(s) / pixelsPerMeter;
 }
@@ -65,6 +72,12 @@ glm::vec2 Camera::posToMeters(const glm::ivec2 p) const {
 
 glm::vec2 Camera::posToMeters(const int x, const int y) const {
   return posToMeters({x, y});
+}
+
+Rect Camera::rectToMeters(const RectPx rect) const {
+  const glm::vec2 pos = posToMeters(rect.p);
+  const glm::vec2 size = sizeToMeters(rect.s);
+  return {{pos.x, pos.y + size.y}, size};
 }
 
 bool Camera::visible(const int x, const int y) const {
