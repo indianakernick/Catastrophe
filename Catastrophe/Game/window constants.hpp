@@ -24,6 +24,7 @@ constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
 constexpr bool ENABLE_DEBUG_CAMERA_RENDER = true;
 constexpr bool ENABLE_GAME_RENDER = true;
 constexpr bool ENABLE_DEBUG_INPUT_LOG = false;
+constexpr bool ENABLE_FPS_RENDER = true;
 
 constexpr unsigned MAX_INPUT_EVENTS_PER_FRAME = 64;
 

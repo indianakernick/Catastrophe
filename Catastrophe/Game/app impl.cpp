@@ -45,6 +45,8 @@ bool AppImpl::init() {
   
   renderingSystem.track(player);
   
+  fpsCounter.init();
+  
   return true;
 }
 
@@ -100,5 +102,22 @@ void AppImpl::render(const float) {
   if constexpr (ENABLE_GAME_RENDER) {
     renderingSystem.render();
   }
+  
+  if constexpr (ENABLE_FPS_RENDER) {
+    fpsCounter.frame();
+    const uint32_t frames = fpsCounter.get();
+    
+    char stringBuf[32];
+    //@TODO use std::to_chars
+    const int err = std::snprintf(stringBuf, sizeof(stringBuf), "FPS: %u", frames);
+    assert(0 < err && err < static_cast<int>(sizeof(stringBuf)));
+  
+    renderingSystem.getRenderer().renderDebugText(
+      {255, 255, 255, 255},
+      {0, 0},
+      stringBuf
+    );
+  }
+  
   renderer.present();
 }

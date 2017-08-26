@@ -15,6 +15,7 @@
 #include "rendering system.hpp"
 #include "entity manager.hpp"
 #include <Simpleton/Application/sdl app.hpp>
+#include <Simpleton/Time/fps.hpp>
 
 class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
 public:
@@ -26,6 +27,7 @@ private:
   RenderingSystem renderingSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
+  Time::FPS fpsCounter;
   
   EntityID player;
   EntityID platform;

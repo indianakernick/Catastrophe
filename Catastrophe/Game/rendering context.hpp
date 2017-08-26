@@ -41,6 +41,8 @@ public:
   void renderPolygon(Color, const glm::vec2 *, size_t);
   void renderFilledPolygon(Color, const glm::vec2 *, size_t);
   
+  void renderDebugText(Color, glm::ivec2, const char *);
+  
   void attachCamera(const Camera *);
   void detachCamera();
   

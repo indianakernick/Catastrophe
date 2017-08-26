@@ -263,6 +263,27 @@ void RenderingContext::renderFilledPolygon(
   ));
 }
 
+void RenderingContext::renderDebugText(
+  const Color color,
+  const glm::ivec2 pos,
+  const char *text
+) {
+  float scaleX, scaleY;
+  SDL_RenderGetScale(renderer, &scaleX, &scaleY);
+  CHECK_SDL_ERROR(SDL_RenderSetScale(renderer, 2.0f, 2.0f));
+  CHECK_SDL_ERROR(stringRGBA(
+    renderer,
+    pos.x,
+    pos.y,
+    text,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  ));
+  CHECK_SDL_ERROR(SDL_RenderSetScale(renderer, scaleX, scaleY));
+}
+
 void RenderingContext::attachCamera(const Camera *newCamera) {
   camera = newCamera;
 }
