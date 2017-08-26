@@ -67,7 +67,7 @@ void AppImpl::quit() {
 bool AppImpl::input(float) {
   SDL_Event e;
   unsigned eventCount = 0;
-  while (eventCount != MAX_INPUT_EVENTS && SDL_PollEvent(&e)) {
+  while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
     if constexpr (ENABLE_DEBUG_INPUT_LOG) {
       printEvent(e);
     }
