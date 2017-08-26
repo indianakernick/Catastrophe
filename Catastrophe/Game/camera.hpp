@@ -14,6 +14,8 @@
 using CameraTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
 class RenderingContext;
+class InputSystem;
+extern "C" union SDL_Event;
 
 class Camera {
 public:
@@ -56,6 +58,8 @@ public:
   
   void attachRenderer(RenderingContext &);
   void detachRenderer();
+  void addEventListener(InputSystem &);
+  void remEventListener(InputSystem &);
   
   void setTrackingBounds(glm::vec2, glm::vec2);
 
@@ -86,6 +90,10 @@ private:
   
   glm::vec2 motionVel = {0.0f, 0.0f};
   glm::vec2 motionTarget;
+  
+  uint32_t listenerID = 0xFFFFFFFF;
+  
+  bool eventListener(const SDL_Event &);
   
   glm::vec2 pixelsPerMeterPos() const;
   glm::vec2 halfWindowPixelSize() const;

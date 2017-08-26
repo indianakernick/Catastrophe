@@ -23,5 +23,8 @@ const bool WINDOW_VSYNC = true;
 constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
 constexpr bool ENABLE_DEBUG_CAMERA_RENDER = true;
 constexpr bool ENABLE_GAME_RENDER = true;
+constexpr bool ENABLE_DEBUG_INPUT_LOG = false;
+
+constexpr unsigned MAX_INPUT_EVENTS = 64;
 
 #endif

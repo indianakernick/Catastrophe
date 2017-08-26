@@ -22,9 +22,21 @@ void InputSystem::rem(const EntityID id) {
 }
 
 void InputSystem::handleEvent(const SDL_Event event) {
+  if (dispatcher.dispatch(event)) {
+    return;
+  }
+  
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     if (c->second->handleEvent(event)) {
       break;
     }
   }
+}
+
+InputSystem::ListenerID InputSystem::addListener(const Listener &listener) {
+  return dispatcher.addListener(listener);
+}
+
+void InputSystem::remListener(const ListenerID id) {
+  dispatcher.remListener(id);
 }

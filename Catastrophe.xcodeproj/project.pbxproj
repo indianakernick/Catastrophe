@@ -12,6 +12,7 @@
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
+		4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534A60F1F51289B00F3AC06 /* debug input.cpp */; };
 		4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890571F2ADAB2007EBB5A /* rendering context.cpp */; };
 		453890721F2ADB13007EBB5A /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906E1F2ADB13007EBB5A /* app impl.cpp */; };
 		4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890791F2ADB4B007EBB5A /* string to scancode.cpp */; };
@@ -97,6 +98,8 @@
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
 		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
 		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
+		4534A60F1F51289B00F3AC06 /* debug input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug input.cpp"; sourceTree = "<group>"; };
+		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
 		453890571F2ADAB2007EBB5A /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
 		453890581F2ADAB2007EBB5A /* rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering context.hpp"; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
@@ -514,6 +517,8 @@
 				453892E11F2C1206007EBB5A /* input component.hpp */,
 				453892E31F2C1757007EBB5A /* input system.cpp */,
 				453892E41F2C1757007EBB5A /* input system.hpp */,
+				4534A60F1F51289B00F3AC06 /* debug input.cpp */,
+				4534A6101F51289B00F3AC06 /* debug input.hpp */,
 			);
 			name = input;
 			sourceTree = "<group>";
@@ -732,6 +737,7 @@
 				453890721F2ADB13007EBB5A /* app impl.cpp in Sources */,
 				453892D31F2AF877007EBB5A /* physics system.cpp in Sources */,
 				453892B91F2ADBB4007EBB5A /* b2DistanceJoint.cpp in Sources */,
+				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
 				453892B61F2ADBB4007EBB5A /* b2EdgeAndPolygonContact.cpp in Sources */,
 				453892A01F2ADBB4007EBB5A /* b2ChainShape.cpp in Sources */,
 				4538929B1F2ADBB4007EBB5A /* b2CollidePolygon.cpp in Sources */,

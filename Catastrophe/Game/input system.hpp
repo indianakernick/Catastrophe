@@ -10,12 +10,17 @@
 #define input_system_hpp
 
 #include <memory>
+#include <unordered_map>
 #include "entity id.hpp"
 #include "input component.hpp"
-#include <unordered_map>
+#include <Simpleton/Utils/dispatcher.hpp>
 
 class InputSystem {
 public:
+  using Dispatcher = Utils::Handlable<uint32_t, const SDL_Event &>;
+  using Listener = typename Dispatcher::Listener;
+  using ListenerID = typename Dispatcher::ListenerID;
+
   InputSystem() = default;
   ~InputSystem() = default;
   
@@ -26,9 +31,13 @@ public:
   void rem(EntityID);
   
   void handleEvent(SDL_Event);
+  
+  ListenerID addListener(const Listener &);
+  void remListener(ListenerID);
 
 private:
   std::unordered_map<EntityID, std::shared_ptr<InputComponent>> components;
+  Dispatcher dispatcher;
 };
 
 #endif

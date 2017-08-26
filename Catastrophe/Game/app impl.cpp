@@ -10,6 +10,7 @@
 
 #include "player.hpp"
 #include "platform.hpp"
+#include "debug input.hpp"
 #include "file constants.hpp"
 #include "camera constants.hpp"
 #include "register collision listeners.hpp"
@@ -31,6 +32,8 @@ bool AppImpl::init() {
   registerCollisionListeners(physicsSystem.getContactListener());
   
   inputSystem.init();
+  renderingSystem.getCamera().addEventListener(inputSystem);
+  
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
   
   const glm::vec2 WINDOW_METER_SIZE = static_cast<glm::vec2>(DEFAULT_WINDOW_PIXEL_SIZE) / DEFAULT_PIXELS_PER_METER;
@@ -50,6 +53,7 @@ void AppImpl::quit() {
   renderingSystem.detachRendererFromCamera();
 
   entityManager.quit();
+  renderingSystem.getCamera().remEventListener(inputSystem);
   inputSystem.quit();
   
   physicsSystem.detachRenderer();
@@ -62,12 +66,18 @@ void AppImpl::quit() {
 
 bool AppImpl::input(float) {
   SDL_Event e;
-  while (SDL_PollEvent(&e)) {
+  unsigned eventCount = 0;
+  while (eventCount != MAX_INPUT_EVENTS && SDL_PollEvent(&e)) {
+    if constexpr (ENABLE_DEBUG_INPUT_LOG) {
+      printEvent(e);
+    }
+    
     if (e.type == SDL_QUIT) {
       return false;
     } else {
       inputSystem.handleEvent(e);
     }
+    eventCount++;
   }
   return true;
 }

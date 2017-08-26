@@ -8,9 +8,12 @@
 
 #include "camera.hpp"
 
-#include "rendering context.hpp"
+#include <SDL2/SDL_rect.h>
+#include "input system.hpp"
 #include <glm/gtx/norm.hpp>
+#include <SDL2/SDL_events.h>
 #include "camera constants.hpp"
+#include "rendering context.hpp"
 #include <Simpleton/Math/scale.hpp>
 
 /*
@@ -121,16 +124,8 @@ bool Camera::visible(const glm::ivec2 p, const int r) const {
 }
 
 bool Camera::visible(glm::ivec2 p0, glm::ivec2 p1) const {
-  //a few false positives are ok
-  //could use SDL_IntersectRectAndLine for better accuracy
-  
-  if (p0.x > p1.x) {
-    std::swap(p0.x, p1.x);
-  }
-  if (p0.y > p1.y) {
-    std::swap(p0.y, p1.y);
-  }
-  return RectPx(windowSize).interceptsWith(RectPx(p0, p1 - p0));
+  const SDL_Rect windowRect = {0, 0, windowSize.x, windowSize.y};
+  return SDL_IntersectRectAndLine(&windowRect, &p0.x, &p0.y, &p1.x, &p1.y);
 }
 
 void Camera::update(const float delta) {
@@ -160,6 +155,16 @@ void Camera::attachRenderer(RenderingContext &newRenderer) {
 
 void Camera::detachRenderer() {
   renderer = nullptr;
+}
+
+void Camera::addEventListener(InputSystem &inputSystem) {
+  assert(listenerID == 0xFFFFFFFF);
+  listenerID = inputSystem.addListener(Utils::memFunWrap(this, &Camera::eventListener));
+}
+
+void Camera::remEventListener(InputSystem &inputSystem) {
+  assert(listenerID != 0xFFFFFFFF);
+  inputSystem.remListener(listenerID);
 }
 
 void Camera::setTrackingBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {
@@ -196,6 +201,21 @@ void Camera::zoomTo(const float zoom) {
 
 float Camera::getZoom() const {
   return pixelsPerMeter;
+}
+
+bool Camera::eventListener(const SDL_Event &event) {
+  if (event.type != SDL_WINDOWEVENT) {
+    return false;
+  }
+  
+  const SDL_WindowEvent &winEvent = event.window;
+  
+  if (winEvent.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+    windowSize = {winEvent.data1, winEvent.data2};
+    return true;
+  } else {
+    return false;
+  }
 }
 
 glm::vec2 Camera::pixelsPerMeterPos() const {
