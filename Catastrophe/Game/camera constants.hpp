@@ -26,8 +26,8 @@ constexpr float ZOOM_SLOW_DIST = 16.0f;
 constexpr float ZOOM_STOP_VEL = 0.2f;
 constexpr float ZOOM_STOP_DIST = 0.1f;
 
-constexpr float MAX_MOVE_VEL = 16.0f;
-constexpr float MAX_MOVE_FORCE = 8.0f;
+constexpr float MAX_MOVE_VEL = 32.0f;
+constexpr float MAX_MOVE_FORCE = 16.0f;
 constexpr float MOVE_SLOW_DIST = 16.0f;
 constexpr float MOVE_STOP_VEL = 0.05f;
 constexpr float MOVE_STOP_DIST = 0.025f;

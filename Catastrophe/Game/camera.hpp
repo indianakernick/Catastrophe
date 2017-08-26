@@ -89,6 +89,7 @@ private:
   RenderingContext *renderer = nullptr;
   
   glm::vec2 motionVel = {0.0f, 0.0f};
+  glm::vec2 lastMotionTarget;
   glm::vec2 motionTarget;
   
   uint32_t listenerID = 0xFFFFFFFF;

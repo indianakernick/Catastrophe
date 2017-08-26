@@ -27,6 +27,7 @@ Camera::Camera()
     trackingBoundsSize(DEFAULT_TRACKING_BOUNDS_SIZE),
     pixelsPerMeter(DEFAULT_PIXELS_PER_METER),
     zoomTarget(pixelsPerMeter),
+    lastMotionTarget(center),
     motionTarget(center) {}
 
 int Camera::sizeToPixels(const float s) const {
@@ -239,6 +240,8 @@ void Camera::track() {
   const glm::vec2 sizeM = trackingBoundsToMeters(trackingBoundsSize);
   const CameraTarget bounds(center + centerM, sizeM);
   
+  lastMotionTarget = motionTarget;
+  
   if (bounds.encloses(*target)) {
     motionTarget = center;
     return;
@@ -286,7 +289,8 @@ void Camera::animateMove(const float delta) {
   
   if (
     glm::length2(motionVel) <= MOVE_STOP_VEL * MOVE_STOP_VEL &&
-    distance <= MOVE_STOP_DIST
+    distance <= MOVE_STOP_DIST &&
+    motionTarget == lastMotionTarget
   ) {
     motionVel = {0.0f, 0.0f};
     center = motionTarget;
