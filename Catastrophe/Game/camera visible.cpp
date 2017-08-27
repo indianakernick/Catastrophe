@@ -10,6 +10,7 @@
 
 #include <glm/common.hpp>
 #include <SDL2/SDL_rect.h>
+#include <Simpleton/Math/vectors.hpp>
 
 CameraVisible::CameraVisible(const glm::ivec2 windowSize)
   : windowSize(windowSize) {}
@@ -30,7 +31,6 @@ bool CameraVisible::circle(const glm::ivec2 p, const int r) const {
   //https://stackoverflow.com/a/402010
   
   const glm::ivec2 halfWindowSize = windowSize / 2;
-  //distance between center of circle and center of rectangle (window)
   const glm::ivec2 centerDist = glm::abs(p - halfWindowSize);
   
   if (centerDist.x > halfWindowSize.x + r) return false;
@@ -39,14 +39,8 @@ bool CameraVisible::circle(const glm::ivec2 p, const int r) const {
   if (centerDist.x <= halfWindowSize.x) return true;
   if (centerDist.y <= halfWindowSize.y) return true;
   
-  auto square = [] (const int n) {
-    return n * n;
-  };
-  
-  //squared distance between center of circle and corner
-  const int cornerDist = square(centerDist.x - halfWindowSize.x) +
-                         square(centerDist.y - halfWindowSize.y);
-  return cornerDist <= r * r;
+  //Why does glm/gtx/norm.hpp only provide distance2 impl for floats?
+  return Math::distance2(centerDist, halfWindowSize) <= r * r;
 }
 
 bool CameraVisible::line(glm::ivec2 p0, glm::ivec2 p1) const {
