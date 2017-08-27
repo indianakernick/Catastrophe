@@ -53,11 +53,11 @@ void RenderingSystem::track(const EntityID entity) {
   assert(iter != components.end());
   const CameraTarget *target = iter->second->getCameraTarget();
   assert(target);
-  camera.trackTarget(target);
+  camera.track.start(target);
 }
 
 void RenderingSystem::stopTracking() {
-  camera.stopTracking();
+  camera.track.stop();
 }
 
 RenderingContext &RenderingSystem::getRenderer() {

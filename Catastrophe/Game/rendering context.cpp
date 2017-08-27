@@ -76,8 +76,8 @@ void RenderingContext::renderSprite(
 ) {
   if (camera == nullptr) return;
   
-  const RectPx dstRect = camera->rectToPixels(dest);
-  if (!camera->visible(dstRect)) return;
+  const RectPx dstRect = camera->toPixels().rect(dest);
+  if (!camera->visible().rect(dstRect)) return;
   const SDL_Rect dst = toSDL(dstRect);
   
   const SDL_Rect src = toSDL(sheet.getSprite(name));
@@ -92,8 +92,8 @@ void RenderingContext::renderSprite(
 void RenderingContext::renderRect(const Color color, const Rect dest) {
   if (camera == nullptr) return;
   
-  const RectPx dstRect = camera->rectToPixels(dest);
-  if (!camera->visible(dstRect)) return;
+  const RectPx dstRect = camera->toPixels().rect(dest);
+  if (!camera->visible().rect(dstRect)) return;
   const SDL_Rect dst = toSDL(dstRect);
   
   setColor(color);
@@ -104,8 +104,8 @@ void RenderingContext::renderRect(const Color color, const Rect dest) {
 void RenderingContext::renderPoint(const Color color, const glm::vec2 point) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxPoint = camera->posToPixels(point);
-  if (!camera->visible(pxPoint)) return;
+  const glm::ivec2 pxPoint = camera->toPixels().pos(point);
+  if (!camera->visible().point(pxPoint)) return;
   
   setColor(color);
   CHECK_SDL_ERROR(SDL_RenderDrawPoint(renderer, pxPoint.x, pxPoint.y));
@@ -118,9 +118,9 @@ void RenderingContext::renderLine(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxP0 = camera->posToPixels(p0);
-  const glm::ivec2 pxP1 = camera->posToPixels(p1);
-  if (!camera->visible(pxP0, pxP1)) return;
+  const glm::ivec2 pxP0 = camera->toPixels().pos(p0);
+  const glm::ivec2 pxP1 = camera->toPixels().pos(p1);
+  if (!camera->visible().line(pxP0, pxP1)) return;
   
   setColor(color);
   CHECK_SDL_ERROR(SDL_RenderDrawLine(renderer, pxP0.x, pxP0.y, pxP1.x, pxP1.y));
@@ -133,9 +133,9 @@ void RenderingContext::renderCircle(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxCenter = camera->posToPixels(center);
-  const int pxRadius = camera->sizeToPixels(radius);
-  if (!camera->visible(pxCenter, pxRadius)) return;
+  const glm::ivec2 pxCenter = camera->toPixels().pos(center);
+  const int pxRadius = camera->toPixels().size(radius);
+  if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(circleRGBA(
     renderer,
@@ -156,9 +156,9 @@ void RenderingContext::renderFilledCircle(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxCenter = camera->posToPixels(center);
-  const int pxRadius = camera->sizeToPixels(radius);
-  if (!camera->visible(pxCenter, pxRadius)) return;
+  const glm::ivec2 pxCenter = camera->toPixels().pos(center);
+  const int pxRadius = camera->toPixels().size(radius);
+  if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(filledCircleRGBA(
     renderer,
@@ -190,14 +190,14 @@ void RenderingContext::renderPolygon(
     pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->posToPixels(verts[0]);
+  const glm::ivec2 pxVert = camera->toPixels().pos(verts[0]);
   pxVerts[0].x = pxVert.x;
   pxVerts[0].y = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->posToPixels(verts[v]);
+    const glm::ivec2 pxVert = camera->toPixels().pos(verts[v]);
     rect.extendToEnclose(pxVert);
     pxVerts[v].x = pxVert.x;
     pxVerts[v].y = pxVert.y;
@@ -206,7 +206,7 @@ void RenderingContext::renderPolygon(
   pxVerts[numVerts].x = pxVert.x;
   pxVerts[numVerts].y = pxVert.y;
   
-  if (!camera->visible(static_cast<RectPx>(rect))) return;
+  if (!camera->visible().rect(static_cast<RectPx>(rect))) return;
   
   setColor(color);
   CHECK_SDL_ERROR(SDL_RenderDrawLines(
@@ -236,20 +236,20 @@ void RenderingContext::renderFilledPolygon(
     pxVertY = std::make_unique<Sint16 []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->posToPixels(verts[0]);
+  const glm::ivec2 pxVert = camera->toPixels().pos(verts[0]);
   pxVertX[0] = pxVert.x;
   pxVertY[0] = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->posToPixels(verts[v]);
+    const glm::ivec2 pxVert = camera->toPixels().pos(verts[v]);
     rect.extendToEnclose(pxVert);
     pxVertX[v] = pxVert.x;
     pxVertY[v] = pxVert.y;
   }
   
-  if (!camera->visible(static_cast<RectPx>(rect))) return;
+  if (!camera->visible().rect(static_cast<RectPx>(rect))) return;
   
   CHECK_SDL_ERROR(filledPolygonRGBA(
     renderer,

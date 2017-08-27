@@ -32,7 +32,7 @@ bool AppImpl::init() {
   registerCollisionListeners(physicsSystem.getContactListener());
   
   inputSystem.init();
-  renderingSystem.getCamera().addEventListener(inputSystem);
+  renderingSystem.getCamera().windowSize.addEventListener(inputSystem);
   
   entityManager.init(inputSystem, physicsSystem, renderingSystem);
   
@@ -55,7 +55,7 @@ void AppImpl::quit() {
   renderingSystem.detachRendererFromCamera();
 
   entityManager.quit();
-  renderingSystem.getCamera().remEventListener(inputSystem);
+  renderingSystem.getCamera().windowSize.remEventListener(inputSystem);
   inputSystem.quit();
   
   physicsSystem.detachRenderer();
@@ -105,7 +105,8 @@ void AppImpl::render(const float) {
   
   if constexpr (ENABLE_FPS_RENDER) {
     fpsCounter.frame();
-    const uint32_t frames = fpsCounter.get();
+    //fpsCounter.get() returns uint32_t
+    const unsigned frames = fpsCounter.get();
     
     char stringBuf[32];
     //@TODO use std::to_chars
