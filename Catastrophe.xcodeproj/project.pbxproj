@@ -262,6 +262,8 @@
 		454116261F524CCA00C2865B /* camera scale tracking bounds.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera scale tracking bounds.hpp"; sourceTree = "<group>"; };
 		454116281F5255CD00C2865B /* camera window size.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera window size.cpp"; sourceTree = "<group>"; };
 		454116291F5255CD00C2865B /* camera window size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera window size.hpp"; sourceTree = "<group>"; };
+		4541162B1F526DB200C2865B /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
+		4541162D1F526DDB00C2865B /* physics constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics constants.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -635,6 +637,8 @@
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
 				453893061F2C572D007EBB5A /* platform constants.hpp */,
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
+				4541162B1F526DB200C2865B /* input constants.hpp */,
+				4541162D1F526DDB00C2865B /* physics constants.hpp */,
 				45103F411F2432D2001B24E2 /* utils */,
 				45103F401F2432C5001B24E2 /* input components */,
 				453892F81F2C417F007EBB5A /* render components */,

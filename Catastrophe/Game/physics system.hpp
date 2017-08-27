@@ -41,8 +41,6 @@ public:
   ContactListener &getContactListener();
 
 private:
-  static const b2Vec2 GRAVITY;
-
   std::experimental::optional<b2World> world;
   std::experimental::optional<DebugDraw> draw;
   std::experimental::optional<ContactListener> contactListener;

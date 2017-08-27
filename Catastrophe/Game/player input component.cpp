@@ -11,6 +11,7 @@
 #include <cmath>
 #include "entity.hpp"
 #include <SDL2/SDL_events.h>
+#include "input constants.hpp"
 #include "player constants.hpp"
 #include "player physics component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>

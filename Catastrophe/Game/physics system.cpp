@@ -8,7 +8,7 @@
 
 #include "physics system.hpp"
 
-const b2Vec2 PhysicsSystem::GRAVITY = {0.0f, -9.80665f};
+#include "physics constants.hpp"
 
 void PhysicsSystem::init() {
   world.emplace(GRAVITY);
