@@ -19,10 +19,12 @@ public:
   glm::vec2 size(glm::ivec2) const;
   glm::vec2 size(int, int) const;
 
-  glm::vec2 pos(glm::ivec2) const;
-  glm::vec2 pos(int, int) const;
+  glm::vec2 point(glm::ivec2) const;
+  glm::vec2 point(int, int) const;
   
   Rect rect(RectPx) const;
+  std::pair<glm::vec2, float> circle(glm::ivec2, int) const;
+  std::pair<glm::vec2, glm::vec2> line(glm::ivec2, glm::ivec2) const;
   
 private:
   glm::vec2 halfWindowSize;

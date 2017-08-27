@@ -78,8 +78,8 @@ void RenderingContext::renderSprite(
   
   const RectPx dstRect = camera->toPixels().rect(dest);
   if (!camera->visible().rect(dstRect)) return;
-  const SDL_Rect dst = toSDL(dstRect);
   
+  const SDL_Rect dst = toSDL(dstRect);
   const SDL_Rect src = toSDL(sheet.getSprite(name));
   CHECK_SDL_ERROR(SDL_RenderCopy(
     renderer,
@@ -94,8 +94,8 @@ void RenderingContext::renderRect(const Color color, const Rect dest) {
   
   const RectPx dstRect = camera->toPixels().rect(dest);
   if (!camera->visible().rect(dstRect)) return;
-  const SDL_Rect dst = toSDL(dstRect);
   
+  const SDL_Rect dst = toSDL(dstRect);
   setColor(color);
   CHECK_SDL_ERROR(SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND));
   CHECK_SDL_ERROR(SDL_RenderFillRect(renderer, &dst));
@@ -104,7 +104,7 @@ void RenderingContext::renderRect(const Color color, const Rect dest) {
 void RenderingContext::renderPoint(const Color color, const glm::vec2 point) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxPoint = camera->toPixels().pos(point);
+  const glm::ivec2 pxPoint = camera->toPixels().point(point);
   if (!camera->visible().point(pxPoint)) return;
   
   setColor(color);
@@ -118,8 +118,7 @@ void RenderingContext::renderLine(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxP0 = camera->toPixels().pos(p0);
-  const glm::ivec2 pxP1 = camera->toPixels().pos(p1);
+  const auto [pxP0, pxP1] = camera->toPixels().line(p0, p1);
   if (!camera->visible().line(pxP0, pxP1)) return;
   
   setColor(color);
@@ -133,8 +132,7 @@ void RenderingContext::renderCircle(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxCenter = camera->toPixels().pos(center);
-  const int pxRadius = camera->toPixels().size(radius);
+  const auto [pxCenter, pxRadius] = camera->toPixels().circle(center, radius);
   if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(circleRGBA(
@@ -156,8 +154,7 @@ void RenderingContext::renderFilledCircle(
 ) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxCenter = camera->toPixels().pos(center);
-  const int pxRadius = camera->toPixels().size(radius);
+  const auto [pxCenter, pxRadius] = camera->toPixels().circle(center, radius);
   if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(filledCircleRGBA(
@@ -190,14 +187,14 @@ void RenderingContext::renderPolygon(
     pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->toPixels().pos(verts[0]);
+  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
   pxVerts[0].x = pxVert.x;
   pxVerts[0].y = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->toPixels().pos(verts[v]);
+    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
     rect.extendToEnclose(pxVert);
     pxVerts[v].x = pxVert.x;
     pxVerts[v].y = pxVert.y;
@@ -236,14 +233,14 @@ void RenderingContext::renderFilledPolygon(
     pxVertY = std::make_unique<Sint16 []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->toPixels().pos(verts[0]);
+  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
   pxVertX[0] = pxVert.x;
   pxVertY[0] = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->toPixels().pos(verts[v]);
+    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
     rect.extendToEnclose(pxVert);
     pxVertX[v] = pxVert.x;
     pxVertY[v] = pxVert.y;
@@ -265,7 +262,7 @@ void RenderingContext::renderFilledPolygon(
 
 void RenderingContext::renderDebugText(
   const Color color,
-  const glm::ivec2 pos,
+  const glm::ivec2 tlCorner,
   const char *text
 ) {
   float scaleX, scaleY;
@@ -273,8 +270,8 @@ void RenderingContext::renderDebugText(
   CHECK_SDL_ERROR(SDL_RenderSetScale(renderer, 2.0f, 2.0f));
   CHECK_SDL_ERROR(stringRGBA(
     renderer,
-    pos.x,
-    pos.y,
+    tlCorner.x,
+    tlCorner.y,
     text,
     color.r,
     color.g,
