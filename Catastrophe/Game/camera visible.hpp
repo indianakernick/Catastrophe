@@ -16,15 +16,22 @@ struct CameraProps;
 class CameraVisible {
 public:
   explicit CameraVisible(CameraProps);
+  CameraVisible(const CameraVisible &) = delete;
+  CameraVisible &operator=(const CameraVisible &) = delete;
+  CameraVisible &operator=(CameraVisible &&) = delete;
 
-  bool point(int, int) const;
-  bool point(glm::ivec2) const;
-  bool rect(RectPx) const;
-  bool circle(glm::ivec2, int) const;
-  bool line(glm::ivec2, glm::ivec2) const;
+  bool point(int, int) &&;
+  bool point(glm::ivec2) &&;
+  bool rect(RectPx) &&;
+  bool circle(glm::ivec2, int) &&;
+  bool line(glm::ivec2, glm::ivec2) &&;
 
 private:
-  glm::ivec2 windowSize;
+  const glm::ivec2 windowSize;
+  
+  //Only Camera can move CameraVisible in Camera::visible()
+  friend class Camera;
+  CameraVisible(CameraVisible &&) = default;
 };
 
 #endif

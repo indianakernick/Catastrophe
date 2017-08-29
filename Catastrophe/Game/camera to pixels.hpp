@@ -16,24 +16,31 @@ struct CameraProps;
 class CameraToPixels {
 public:
   explicit CameraToPixels(CameraProps);
+  CameraToPixels(const CameraToPixels &) = delete;
+  CameraToPixels &operator=(const CameraToPixels &) = delete;
+  CameraToPixels &operator=(CameraToPixels &&) = delete;
   
-  int size(float) const;
-  glm::ivec2 size(glm::vec2) const;
-  glm::ivec2 size(float, float) const;
+  int size(float) &&;
+  glm::ivec2 size(glm::vec2) &&;
+  glm::ivec2 size(float, float) &&;
 
-  glm::ivec2 point(glm::vec2) const;
-  glm::ivec2 point(float, float) const;
+  glm::ivec2 point(glm::vec2) &&;
+  glm::ivec2 point(float, float) &&;
   
-  RectPx rect(Rect) const;
-  std::pair<glm::ivec2, int> circle(glm::vec2, float) const;
-  std::pair<glm::ivec2, glm::ivec2> line(glm::vec2, glm::vec2) const;
+  RectPx rect(Rect) &&;
+  std::pair<glm::ivec2, int> circle(glm::vec2, float) &&;
+  std::pair<glm::ivec2, glm::ivec2> line(glm::vec2, glm::vec2) &&;
   
 private:
-  glm::vec2 halfWindowSize;
-  glm::vec2 center;
-  float pixelsPerMeter;
+  const glm::vec2 halfWindowSize;
+  const glm::vec2 center;
+  const float pixelsPerMeter;
   
-  glm::vec2 pixelsPerMeterPos() const;
+  glm::vec2 pixelsPerMeterPos() &&;
+  
+  //Only Camera can move CameraToPixels in Camera::toPixels()
+  friend class Camera;
+  CameraToPixels(CameraToPixels &&) = default;
 };
 
 #endif
