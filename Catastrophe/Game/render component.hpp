@@ -21,7 +21,7 @@ public:
 
   virtual void update(Entity *, float) = 0;
   virtual void render(RenderingContext &) = 0;
-  virtual const CameraTarget *getCameraTarget() const = 0;
+  virtual const CameraMotionTarget *getCameraTarget() const = 0;
 };
 
 #endif

@@ -51,7 +51,7 @@ void RenderingSystem::detachRendererFromCamera() {
 void RenderingSystem::track(const EntityID entity) {
   auto iter = components.find(entity);
   assert(iter != components.end());
-  const CameraTarget *target = iter->second->getCameraTarget();
+  const CameraMotionTarget *target = iter->second->getCameraTarget();
   assert(target);
   camera.track.start(target);
 }

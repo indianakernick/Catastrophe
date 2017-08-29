@@ -27,6 +27,6 @@ void StaticColorRenderComponent::render(RenderingContext &context) {
   context.renderRect(color, static_cast<Rect>(rect));
 }
 
-const CameraTarget *StaticColorRenderComponent::getCameraTarget() const {
+const CameraMotionTarget *StaticColorRenderComponent::getCameraTarget() const {
   return &rect;
 }

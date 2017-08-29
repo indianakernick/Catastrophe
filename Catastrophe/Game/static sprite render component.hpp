@@ -19,11 +19,11 @@ public:
   
   void update(Entity *, float) override;
   void render(RenderingContext &) override;
-  const CameraTarget *getCameraTarget() const override;
+  const CameraMotionTarget *getCameraTarget() const override;
   
 private:
   std::string sprite;
-  CameraTarget rect;
+  CameraMotionTarget rect;
 };
 
 #endif

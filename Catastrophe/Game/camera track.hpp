@@ -11,27 +11,27 @@
 
 #include <Simpleton/Math/rect.hpp>
 
-using CameraTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
+using CameraMotionTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
 class CameraPos;
 struct CameraProps;
 class RenderingContext;
 
-class CameraTrack {
+class CameraMotionTrack {
   
   friend class Camera;
 
 public:
-  CameraTrack();
-  CameraTrack(const CameraTrack &);
-  CameraTrack &operator=(const CameraTrack &);
+  CameraMotionTrack();
+  CameraMotionTrack(const CameraMotionTrack &);
+  CameraMotionTrack &operator=(const CameraMotionTrack &);
   
-  void start(const CameraTarget *);
+  void start(const CameraMotionTarget *);
   void stop();
   bool hasTarget() const;
-  const CameraTarget *get() const;
+  const CameraMotionTarget *get() const;
   
-  void setLocal(CameraTarget);
+  void setLocal(CameraMotionTarget);
   void startLocal();
   
   void setBounds(glm::vec2, glm::vec2);
@@ -39,8 +39,8 @@ public:
   glm::vec2 calcMotionTarget(CameraProps) const;
   
 private:
-  const CameraTarget *target;
-  CameraTarget localTarget;
+  const CameraMotionTarget *target;
+  CameraMotionTarget localTarget;
   glm::vec2 center;
   glm::vec2 size;
   

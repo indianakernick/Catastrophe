@@ -13,13 +13,13 @@
 #include "camera constants.hpp"
 #include "rendering context.hpp"
 
-CameraTrack::CameraTrack()
+CameraMotionTrack::CameraMotionTrack()
   : target(nullptr),
     localTarget(),
     center(DEFAULT_TRACKING_BOUNDS_CENTER),
     size(DEFAULT_TRACKING_BOUNDS_SIZE) {}
 
-CameraTrack::CameraTrack(const CameraTrack &other)
+CameraMotionTrack::CameraMotionTrack(const CameraMotionTrack &other)
   : localTarget(other.localTarget),
     center(other.center),
     size(other.size) {
@@ -30,7 +30,7 @@ CameraTrack::CameraTrack(const CameraTrack &other)
   }
 }
 
-CameraTrack &CameraTrack::operator=(const CameraTrack &other) {
+CameraMotionTrack &CameraMotionTrack::operator=(const CameraMotionTrack &other) {
   if (other.target == &other.localTarget) {
     target = &localTarget;
   } else {
@@ -44,41 +44,41 @@ CameraTrack &CameraTrack::operator=(const CameraTrack &other) {
   return *this;
 }
 
-void CameraTrack::start(const CameraTarget *newTarget) {
+void CameraMotionTrack::start(const CameraMotionTarget *newTarget) {
   target = newTarget;
 }
 
-void CameraTrack::stop() {
+void CameraMotionTrack::stop() {
   target = nullptr;
 }
 
-bool CameraTrack::hasTarget() const {
+bool CameraMotionTrack::hasTarget() const {
   return target != nullptr;
 }
 
-const CameraTarget *CameraTrack::get() const {
+const CameraMotionTarget *CameraMotionTrack::get() const {
   return target;
 }
 
-void CameraTrack::setLocal(const CameraTarget newTarget) {
+void CameraMotionTrack::setLocal(const CameraMotionTarget newTarget) {
   localTarget = newTarget;
 }
 
-void CameraTrack::startLocal() {
+void CameraMotionTrack::startLocal() {
   target = &localTarget;
 }
 
-void CameraTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {
+void CameraMotionTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {
   center = newCenter;
   size = newSize;
 }
 
-glm::vec2 CameraTrack::calcMotionTarget(const CameraProps props) const {
+glm::vec2 CameraMotionTrack::calcMotionTarget(const CameraProps props) const {
   if (target == nullptr) {
     return props.center;
   }
   
-  const CameraTarget bounds(centerToMeters(props, center), sizeToMeters(props, size));
+  const CameraMotionTarget bounds(centerToMeters(props, center), sizeToMeters(props, size));
   
   if (bounds.encloses(*target)) {
     return props.center;
@@ -102,15 +102,15 @@ glm::vec2 CameraTrack::calcMotionTarget(const CameraProps props) const {
   return props.center + motion;
 }
 
-glm::vec2 CameraTrack::centerToMeters(const CameraProps props, const glm::vec2 center) const {
+glm::vec2 CameraMotionTrack::centerToMeters(const CameraProps props, const glm::vec2 center) const {
   return props.center + sizeToMeters(props, center);
 }
 
-glm::vec2 CameraTrack::sizeToMeters(const CameraProps props, const glm::vec2 size) const {
+glm::vec2 CameraMotionTrack::sizeToMeters(const CameraProps props, const glm::vec2 size) const {
   return (size * static_cast<glm::vec2>(props.windowSize)) / props.pixelsPerMeter;
 }
 
-void CameraTrack::debugRender(
+void CameraMotionTrack::debugRender(
   const CameraProps props,
   RenderingContext &renderer
 ) const {

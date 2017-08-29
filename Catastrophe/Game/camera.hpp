@@ -30,7 +30,7 @@ public:
 
   CameraPos pos;
   CameraZoom zoom;
-  CameraTrack track;
+  CameraMotionTrack track;
   CameraWindowSize windowSize;
 
   void update(float);

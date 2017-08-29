@@ -27,6 +27,6 @@ void StaticSpriteRenderComponent::render(RenderingContext &context) {
   context.renderSprite(sprite, static_cast<Rect>(rect));
 }
 
-const CameraTarget *StaticSpriteRenderComponent::getCameraTarget() const {
+const CameraMotionTarget *StaticSpriteRenderComponent::getCameraTarget() const {
   return &rect;
 }
