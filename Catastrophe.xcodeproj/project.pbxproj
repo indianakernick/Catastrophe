@@ -83,7 +83,7 @@
 		454116171F523D6600C2865B /* camera visible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116151F523D6600C2865B /* camera visible.cpp */; };
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
-		454116201F523DA500C2865B /* camera track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera track.cpp */; };
+		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
@@ -256,8 +256,8 @@
 		454116191F523D7400C2865B /* camera pos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera pos.hpp"; sourceTree = "<group>"; };
 		4541161B1F523D8200C2865B /* camera zoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom.cpp"; sourceTree = "<group>"; };
 		4541161C1F523D8200C2865B /* camera zoom.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom.hpp"; sourceTree = "<group>"; };
-		4541161E1F523DA400C2865B /* camera track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera track.cpp"; sourceTree = "<group>"; };
-		4541161F1F523DA400C2865B /* camera track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera track.hpp"; sourceTree = "<group>"; };
+		4541161E1F523DA400C2865B /* camera motion track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera motion track.cpp"; sourceTree = "<group>"; };
+		4541161F1F523DA400C2865B /* camera motion track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera motion track.hpp"; sourceTree = "<group>"; };
 		454116281F5255CD00C2865B /* camera window size.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera window size.cpp"; sourceTree = "<group>"; };
 		454116291F5255CD00C2865B /* camera window size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera window size.hpp"; sourceTree = "<group>"; };
 		4541162B1F526DB200C2865B /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
@@ -586,8 +586,8 @@
 				454116191F523D7400C2865B /* camera pos.hpp */,
 				4541161B1F523D8200C2865B /* camera zoom.cpp */,
 				4541161C1F523D8200C2865B /* camera zoom.hpp */,
-				4541161E1F523DA400C2865B /* camera track.cpp */,
-				4541161F1F523DA400C2865B /* camera track.hpp */,
+				4541161E1F523DA400C2865B /* camera motion track.cpp */,
+				4541161F1F523DA400C2865B /* camera motion track.hpp */,
 				454116281F5255CD00C2865B /* camera window size.cpp */,
 				454116291F5255CD00C2865B /* camera window size.hpp */,
 				4541162E1F5405FD00C2865B /* camera props.cpp */,
@@ -795,7 +795,7 @@
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
 				453892B61F2ADBB4007EBB5A /* b2EdgeAndPolygonContact.cpp in Sources */,
 				453892A01F2ADBB4007EBB5A /* b2ChainShape.cpp in Sources */,
-				454116201F523DA500C2865B /* camera track.cpp in Sources */,
+				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
 				4538929B1F2ADBB4007EBB5A /* b2CollidePolygon.cpp in Sources */,
 				453892BB1F2ADBB4007EBB5A /* b2GearJoint.cpp in Sources */,
 				453892C01F2ADBB4007EBB5A /* b2PulleyJoint.cpp in Sources */,

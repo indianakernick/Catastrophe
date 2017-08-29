@@ -12,11 +12,11 @@
 #include "camera pos.hpp"
 #include "camera zoom.hpp"
 #include "camera props.hpp"
-#include "camera track.hpp"
 #include "camera visible.hpp"
 #include "camera to pixels.hpp"
 #include "camera to meters.hpp"
 #include "camera window size.hpp"
+#include "camera motion track.hpp"
 
 class RenderingContext;
 

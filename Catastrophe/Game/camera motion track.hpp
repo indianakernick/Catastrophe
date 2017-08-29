@@ -1,13 +1,13 @@
 //
-//  camera track.hpp
+//  camera motion track.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 27/8/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef camera_track_hpp
-#define camera_track_hpp
+#ifndef camera_motion_track_hpp
+#define camera_motion_track_hpp
 
 #include <Simpleton/Math/rect.hpp>
 

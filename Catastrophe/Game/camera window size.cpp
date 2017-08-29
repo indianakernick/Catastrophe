@@ -13,27 +13,27 @@
 #include "camera constants.hpp"
 
 namespace {
-  constexpr InputSystem::ListenerID NOT_SET =
+  constexpr InputSystem::ListenerID NOT_LISTENING =
     std::numeric_limits<InputSystem::ListenerID>::max();
 }
 
 CameraWindowSize::CameraWindowSize()
   : windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
-    listenerID(NOT_SET) {}
+    listenerID(NOT_LISTENING) {}
 
 glm::ivec2 CameraWindowSize::get() const {
   return windowSize;
 }
 
 void CameraWindowSize::addEventListener(InputSystem &inputSystem) {
-  assert(listenerID == NOT_SET);
+  assert(listenerID == NOT_LISTENING);
   listenerID = inputSystem.addListener(
     Utils::memFunWrap(this, &CameraWindowSize::eventListener)
   );
 }
 
 void CameraWindowSize::remEventListener(InputSystem &inputSystem) {
-  assert(listenerID != NOT_SET);
+  assert(listenerID != NOT_LISTENING);
   inputSystem.remListener(listenerID);
 }
 

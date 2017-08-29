@@ -1,12 +1,12 @@
 //
-//  camera track.cpp
+//  camera motion track.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 27/8/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "camera track.hpp"
+#include "camera motion track.hpp"
 
 #include "camera pos.hpp"
 #include "camera props.hpp"
