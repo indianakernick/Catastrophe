@@ -9,14 +9,40 @@
 #include "camera track.hpp"
 
 #include "camera pos.hpp"
+#include "camera props.hpp"
 #include "camera constants.hpp"
 #include "rendering context.hpp"
-#include "camera scale tracking bounds.hpp"
 
 CameraTrack::CameraTrack()
   : target(nullptr),
+    localTarget(),
     center(DEFAULT_TRACKING_BOUNDS_CENTER),
     size(DEFAULT_TRACKING_BOUNDS_SIZE) {}
+
+CameraTrack::CameraTrack(const CameraTrack &other)
+  : localTarget(other.localTarget),
+    center(other.center),
+    size(other.size) {
+  if (other.target == &other.localTarget) {
+    target = &localTarget;
+  } else {
+    target = other.target;
+  }
+}
+
+CameraTrack &CameraTrack::operator=(const CameraTrack &other) {
+  if (other.target == &other.localTarget) {
+    target = &localTarget;
+  } else {
+    target = other.target;
+  }
+  
+  localTarget = other.localTarget;
+  center = other.center;
+  size = other.size;
+  
+  return *this;
+}
 
 void CameraTrack::start(const CameraTarget *newTarget) {
   target = newTarget;
@@ -26,8 +52,20 @@ void CameraTrack::stop() {
   target = nullptr;
 }
 
+bool CameraTrack::hasTarget() const {
+  return target != nullptr;
+}
+
 const CameraTarget *CameraTrack::get() const {
   return target;
+}
+
+void CameraTrack::setLocal(const CameraTarget newTarget) {
+  localTarget = newTarget;
+}
+
+void CameraTrack::startLocal() {
+  target = &localTarget;
 }
 
 void CameraTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {
@@ -35,13 +73,15 @@ void CameraTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 newSize) 
   size = newSize;
 }
 
-void CameraTrack::setTargetPos(CameraPos &pos, const CameraScaleTrackingBounds scale) {
-  if (target == nullptr) return;
+glm::vec2 CameraTrack::calcMotionTarget(const CameraProps props) const {
+  if (target == nullptr) {
+    return props.center;
+  }
   
-  const CameraTarget bounds(scale.centerToMeters(center), scale.sizeToMeters(size));
+  const CameraTarget bounds(centerToMeters(props, center), sizeToMeters(props, size));
   
   if (bounds.encloses(*target)) {
-    return pos.setMoving(pos.get());
+    return props.center;
   }
 
   glm::vec2 motion = {0.0f, 0.0f};
@@ -59,15 +99,23 @@ void CameraTrack::setTargetPos(CameraPos &pos, const CameraScaleTrackingBounds s
     motion.x = moveLeft;
   }
   
-  pos.setMoving(pos.get() + motion);
+  return props.center + motion;
+}
+
+glm::vec2 CameraTrack::centerToMeters(const CameraProps props, const glm::vec2 center) const {
+  return props.center + sizeToMeters(props, center);
+}
+
+glm::vec2 CameraTrack::sizeToMeters(const CameraProps props, const glm::vec2 size) const {
+  return (size * static_cast<glm::vec2>(props.windowSize)) / props.pixelsPerMeter;
 }
 
 void CameraTrack::debugRender(
-  RenderingContext &renderer,
-  const CameraScaleTrackingBounds scale
+  const CameraProps props,
+  RenderingContext &renderer
 ) const {
-  const glm::vec2 centerM = scale.centerToMeters(center);
-  const glm::vec2 sizeM = scale.sizeToMeters(size);
+  const glm::vec2 centerM = centerToMeters(props, center);
+  const glm::vec2 sizeM = sizeToMeters(props, size);
   const glm::vec2 cornerM = centerM - sizeM / 2.0f;
   renderer.renderRect(CAM_TRACK_COLOR, {cornerM, sizeM});
   

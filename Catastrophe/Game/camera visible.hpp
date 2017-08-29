@@ -11,9 +11,11 @@
 
 #include "rect.hpp"
 
+struct CameraProps;
+
 class CameraVisible {
 public:
-  explicit CameraVisible(glm::ivec2);
+  explicit CameraVisible(CameraProps);
 
   bool point(int, int) const;
   bool point(glm::ivec2) const;

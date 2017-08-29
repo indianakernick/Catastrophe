@@ -20,7 +20,6 @@ public:
   CameraWindowSize();
   
   glm::ivec2 get() const;
-  glm::vec2 half() const;
   
   void addEventListener(InputSystem &);
   void remEventListener(InputSystem &);

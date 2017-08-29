@@ -12,29 +12,36 @@
 #include "camera constants.hpp"
 #include "camera to pixels.hpp"
 #include "camera to meters.hpp"
-#include "camera scale tracking bounds.hpp"
 
 CameraToPixels Camera::toPixels() const {
-  return CameraToPixels(windowSize.half(), pos.get(), zoom.get());
+  return CameraToPixels(props);
 }
 
 CameraToMeters Camera::toMeters() const {
-  return CameraToMeters(windowSize.half(), pos.get(), zoom.get());
+  return CameraToMeters(props);
 }
 
 CameraVisible Camera::visible() const {
-  return CameraVisible(windowSize.get());
+  return CameraVisible(props);
 }
 
 void Camera::update(const float delta) {
-  track.setTargetPos(pos, scaleTrack());
-  pos.animate(delta);
-  zoom.animate(delta);
+  const glm::vec2 motionTarget = track.calcMotionTarget(props);
+  const glm::vec2 newCenter = pos.calcCenter(props, motionTarget, delta);
+  
+  const float zoomTarget = props.pixelsPerMeter;
+  const float newPPM = zoom.calcPPM(props, zoomTarget, delta);
+  
+  const glm::vec2 newWindowSize = windowSize.get();
+  
+  props.center = newCenter;
+  props.pixelsPerMeter = newPPM;
+  props.windowSize = newWindowSize;
 }
 
 void Camera::debugRender() {
   if (renderer != nullptr) {
-    track.debugRender(*renderer, scaleTrack());
+    track.debugRender(props, *renderer);
   }
 }
 
@@ -44,8 +51,4 @@ void Camera::attachRenderer(RenderingContext &newRenderer) {
 
 void Camera::detachRenderer() {
   renderer = nullptr;
-}
-
-CameraScaleTrackingBounds Camera::scaleTrack() const {
-  return CameraScaleTrackingBounds(windowSize.get(), pos.get(), zoom.get());
 }

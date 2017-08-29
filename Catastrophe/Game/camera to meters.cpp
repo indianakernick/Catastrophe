@@ -8,13 +8,12 @@
 
 #include "camera to meters.hpp"
 
-CameraToMeters::CameraToMeters(
-  const glm::vec2 halfWindowSize,
-  const glm::vec2 center,
-  const float pixelsPerMeter
-) : halfWindowSize(halfWindowSize),
-    center(center),
-    pixelsPerMeter(pixelsPerMeter) {}
+#include "camera props.hpp"
+
+CameraToMeters::CameraToMeters(const CameraProps props)
+  : halfWindowSize(static_cast<glm::vec2>(props.windowSize) / 2.0f),
+    center(props.center),
+    pixelsPerMeter(props.pixelsPerMeter) {}
 
 float CameraToMeters::size(const int s) const {
   return static_cast<float>(s) / pixelsPerMeter;

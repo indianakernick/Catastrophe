@@ -9,27 +9,25 @@
 #include "camera zoom.hpp"
 
 #include <cmath>
+#include "camera props.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
 
 CameraZoom::CameraZoom()
-  : pixelsPerMeter(DEFAULT_PIXELS_PER_METER),
-    zoomVel(0.0f),
-    zoomTarget(pixelsPerMeter) {}
+  : zoomVel(0.0f) {}
 
-void CameraZoom::set(const float zoom) {
-  assert(zoom >= MIN_ZOOM);
-  assert(zoom <= MAX_ZOOM);
-  
-  zoomTarget = zoom;
-}
+float CameraZoom::calcPPM(
+  const CameraProps props,
+  const float zoomTarget,
+  const float delta
+) {
+  assert(zoomTarget >= MIN_ZOOM);
+  assert(zoomTarget <= MAX_ZOOM);
 
-float CameraZoom::get() const {
-  return pixelsPerMeter;
-}
+  const float oldPPM = props.pixelsPerMeter;
+  float newPPM;
 
-void CameraZoom::animate(const float delta) {
-  float desired = zoomTarget - pixelsPerMeter;
+  float desired = zoomTarget - oldPPM;
   const float distance = std::abs(desired);
   if (distance != 0.0f) {
     desired /= distance;
@@ -48,9 +46,11 @@ void CameraZoom::animate(const float delta) {
  
   if (std::abs(zoomVel) <= ZOOM_STOP_VEL && distance <= ZOOM_STOP_DIST) {
     zoomVel = 0.0f;
-    pixelsPerMeter = zoomTarget;
+    newPPM = zoomTarget;
   } else {
     zoomVel += steer;
-    pixelsPerMeter += zoomVel * delta;
+    newPPM = oldPPM + zoomVel * delta;
   }
+  
+  return newPPM;
 }

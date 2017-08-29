@@ -9,22 +9,16 @@
 #ifndef camera_zoom_hpp
 #define camera_zoom_hpp
 
+struct CameraProps;
+
 class CameraZoom {
-
-  friend class Camera;
-
 public:
   CameraZoom();
 
-  void set(float);
-  float get() const;
+  float calcPPM(CameraProps, float, float);
 
 private:
-  float pixelsPerMeter;
   float zoomVel;
-  float zoomTarget;
-  
-  void animate(float);
 };
 
 #endif

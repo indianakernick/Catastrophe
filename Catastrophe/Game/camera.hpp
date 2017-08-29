@@ -11,6 +11,7 @@
 
 #include "camera pos.hpp"
 #include "camera zoom.hpp"
+#include "camera props.hpp"
 #include "camera track.hpp"
 #include "camera visible.hpp"
 #include "camera to pixels.hpp"
@@ -40,8 +41,7 @@ public:
 
 private:
   RenderingContext *renderer = nullptr;
-  
-  CameraScaleTrackingBounds scaleTrack() const;
+  CameraProps props;
 };
 
 #endif

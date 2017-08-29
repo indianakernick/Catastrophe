@@ -25,10 +25,6 @@ glm::ivec2 CameraWindowSize::get() const {
   return windowSize;
 }
 
-glm::vec2 CameraWindowSize::half() const {
-  return static_cast<glm::vec2>(windowSize) / 2.0f;
-}
-
 void CameraWindowSize::addEventListener(InputSystem &inputSystem) {
   assert(listenerID == NOT_SET);
   listenerID = inputSystem.addListener(

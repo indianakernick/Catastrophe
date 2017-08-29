@@ -11,26 +11,17 @@
 
 #include <glm/vec2.hpp>
 
+struct CameraProps;
+
 class CameraPos {
-
-  friend class Camera;
-
 public:
   CameraPos();
-  
-  //call set to move to a positon
-  void set(glm::vec2);
-  //repeatedly call setMoving to follow a moving target
-  void setMoving(glm::vec2);
-  glm::vec2 get() const;
+
+  glm::vec2 calcCenter(CameraProps, glm::vec2, float);
   
 private:
-  glm::vec2 center;
   glm::vec2 motionVel;
-  glm::vec2 motionTarget;
   glm::vec2 lastMotionTarget;
-  
-  void animate(float);
 };
 
 #endif

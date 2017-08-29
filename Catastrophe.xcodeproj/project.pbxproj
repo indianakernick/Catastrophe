@@ -84,8 +84,8 @@
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
 		454116201F523DA500C2865B /* camera track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera track.cpp */; };
-		454116271F524CCA00C2865B /* camera scale tracking bounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116251F524CCA00C2865B /* camera scale tracking bounds.cpp */; };
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
+		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -258,12 +258,12 @@
 		4541161C1F523D8200C2865B /* camera zoom.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom.hpp"; sourceTree = "<group>"; };
 		4541161E1F523DA400C2865B /* camera track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera track.cpp"; sourceTree = "<group>"; };
 		4541161F1F523DA400C2865B /* camera track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera track.hpp"; sourceTree = "<group>"; };
-		454116251F524CCA00C2865B /* camera scale tracking bounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera scale tracking bounds.cpp"; sourceTree = "<group>"; };
-		454116261F524CCA00C2865B /* camera scale tracking bounds.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera scale tracking bounds.hpp"; sourceTree = "<group>"; };
 		454116281F5255CD00C2865B /* camera window size.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera window size.cpp"; sourceTree = "<group>"; };
 		454116291F5255CD00C2865B /* camera window size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera window size.hpp"; sourceTree = "<group>"; };
 		4541162B1F526DB200C2865B /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
 		4541162D1F526DDB00C2865B /* physics constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics constants.hpp"; sourceTree = "<group>"; };
+		4541162E1F5405FD00C2865B /* camera props.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera props.cpp"; sourceTree = "<group>"; };
+		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -332,8 +332,8 @@
 				453892CB1F2AF420007EBB5A /* render component.hpp */,
 				453890571F2ADAB2007EBB5A /* rendering context.cpp */,
 				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
-				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
+				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				454116211F523DAC00C2865B /* camera */,
 			);
 			name = graphics;
@@ -588,10 +588,10 @@
 				4541161C1F523D8200C2865B /* camera zoom.hpp */,
 				4541161E1F523DA400C2865B /* camera track.cpp */,
 				4541161F1F523DA400C2865B /* camera track.hpp */,
-				454116251F524CCA00C2865B /* camera scale tracking bounds.cpp */,
-				454116261F524CCA00C2865B /* camera scale tracking bounds.hpp */,
 				454116281F5255CD00C2865B /* camera window size.cpp */,
 				454116291F5255CD00C2865B /* camera window size.hpp */,
+				4541162E1F5405FD00C2865B /* camera props.cpp */,
+				4541162F1F5405FD00C2865B /* camera props.hpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -823,6 +823,7 @@
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
 				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
+				454116301F5405FD00C2865B /* camera props.cpp in Sources */,
 				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
 				45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */,
@@ -834,7 +835,6 @@
 				453892A21F2ADBB4007EBB5A /* b2EdgeShape.cpp in Sources */,
 				453892B01F2ADBB4007EBB5A /* b2ChainAndCircleContact.cpp in Sources */,
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
-				454116271F524CCA00C2865B /* camera scale tracking bounds.cpp in Sources */,
 				4538929C1F2ADBB4007EBB5A /* b2Collision.cpp in Sources */,
 				4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */,
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,

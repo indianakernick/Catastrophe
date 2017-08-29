@@ -11,9 +11,11 @@
 
 #include "rect.hpp"
 
+struct CameraProps;
+
 class CameraToPixels {
 public:
-  CameraToPixels(glm::vec2, glm::vec2, float);
+  explicit CameraToPixels(CameraProps);
   
   int size(float) const;
   glm::ivec2 size(glm::vec2) const;

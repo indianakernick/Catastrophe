@@ -10,10 +10,11 @@
 
 #include <glm/common.hpp>
 #include <SDL2/SDL_rect.h>
+#include "camera props.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-CameraVisible::CameraVisible(const glm::ivec2 windowSize)
-  : windowSize(windowSize) {}
+CameraVisible::CameraVisible(const CameraProps props)
+  : windowSize(props.windowSize) {}
 
 bool CameraVisible::point(const int x, const int y) const {
   return RectPx(windowSize).encloses({x, y});

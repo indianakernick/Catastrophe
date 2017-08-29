@@ -8,32 +8,24 @@
 
 #include "camera pos.hpp"
 
+#include "camera props.hpp"
 #include <glm/gtx/norm.hpp>
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
 
 CameraPos::CameraPos()
-  : center(0.0f, 0.0f),
-    motionVel(0.0f, 0.0f),
-    motionTarget(0.0f, 0.0f),
+  : motionVel(0.0f, 0.0f),
     lastMotionTarget(0.0f, 0.0f) {}
 
-void CameraPos::set(const glm::vec2 pos) {
-  lastMotionTarget = pos;
-  motionTarget = pos;
-}
+glm::vec2 CameraPos::calcCenter(
+  const CameraProps props,
+  const glm::vec2 motionTarget,
+  const float delta
+) {
+  const glm::vec2 oldCenter = props.center;
+  glm::vec2 newCenter;
 
-void CameraPos::setMoving(const glm::vec2 pos) {
-  lastMotionTarget = motionTarget;
-  motionTarget = pos;
-}
-
-glm::vec2 CameraPos::get() const {
-  return center;
-}
-
-void CameraPos::animate(const float delta) {
-  glm::vec2 desired = motionTarget - center;
+  glm::vec2 desired = motionTarget - oldCenter;
   const float distance = glm::length(desired);
   if (distance != 0.0f) {
     desired /= distance;
@@ -57,9 +49,12 @@ void CameraPos::animate(const float delta) {
     motionTarget == lastMotionTarget
   ) {
     motionVel = {0.0f, 0.0f};
-    center = motionTarget;
+    newCenter = motionTarget;
   } else {
     motionVel += steer;
-    center += motionVel * delta;
+    newCenter = oldCenter + motionVel * delta;
   }
+  
+  lastMotionTarget = motionTarget;
+  return newCenter;
 }
