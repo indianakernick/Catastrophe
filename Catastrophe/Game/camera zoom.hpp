@@ -19,6 +19,15 @@ public:
 
 private:
   float zoomVel;
+  
+  float getNewPPM(float, float, float);
+  float getNewPPMwithDesired(float, float, float, float);
+  float applySteerOrStop(float, float, float, float, float);
+  bool shouldStop(float) const;
+  float scaleDesired(float, float) const;
+  float getSteer(float) const;
+  float applyStop(float);
+  float applySteer(float, float, float);
 };
 
 #endif

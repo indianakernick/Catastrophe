@@ -19,38 +19,63 @@ CameraZoom::CameraZoom()
 
 float CameraZoom::calcPPM(
   const CameraProps props,
-  float zoomTarget,
+  const float target,
   const float delta
 ) {
-  zoomTarget = Math::clamp(zoomTarget, MIN_ZOOM, MAX_ZOOM);
+  return getNewPPM(
+    props.pixelsPerMeter,
+    Math::clamp(target, MIN_ZOOM, MAX_ZOOM),
+    delta
+  );
+}
 
-  const float oldPPM = props.pixelsPerMeter;
-  float newPPM;
+float CameraZoom::getNewPPM(const float ppm, const float target, const float delta) {
+  return getNewPPMwithDesired(ppm, target, delta, target - ppm);
+}
 
-  float desired = zoomTarget - oldPPM;
-  const float distance = std::abs(desired);
-  if (distance != 0.0f) {
-    desired /= distance;
-  }
-  
-  if (distance <= ZOOM_SLOW_DIST) {
-    desired *= Math::scale(distance, 0.0f, ZOOM_SLOW_DIST, 0.0f, MAX_ZOOM_VEL);
+float CameraZoom::getNewPPMwithDesired(
+  const float ppm,
+  const float target,
+  const float delta,
+  const float desired
+) {
+  return applySteerOrStop(ppm, target, delta, desired, std::abs(desired));
+}
+
+float CameraZoom::applySteerOrStop(
+  const float ppm,
+  const float target,
+  const float delta,
+  const float desired,
+  const float distance
+) {
+  if (shouldStop(distance)) {
+    return applyStop(target);
   } else {
-    desired *= MAX_ZOOM_VEL;
+    return applySteer(ppm, scaleDesired(desired, distance), delta);
   }
-  
-  float steer = desired - zoomVel;
-  if (std::abs(steer) > MAX_ZOOM_FORCE) {
-    steer = Math::sign(steer) * MAX_ZOOM_FORCE;
-  }
- 
-  if (std::abs(zoomVel) <= ZOOM_STOP_VEL && distance <= ZOOM_STOP_DIST) {
-    zoomVel = 0.0f;
-    newPPM = zoomTarget;
-  } else {
-    zoomVel += steer;
-    newPPM = oldPPM + zoomVel * delta;
-  }
-  
-  return newPPM;
+}
+
+bool CameraZoom::shouldStop(const float distance) const {
+  return std::abs(zoomVel) <= ZOOM_STOP_VEL && distance <= ZOOM_STOP_DIST;
+}
+
+float CameraZoom::scaleDesired(const float desired, const float distance) const {
+  return Math::sign(desired) * (
+    std::min(distance, ZOOM_SLOW_DIST) / ZOOM_SLOW_DIST * MAX_ZOOM_VEL
+  );
+}
+
+float CameraZoom::getSteer(const float desired) const {
+  return Math::clamp(desired - zoomVel, -MAX_ZOOM_FORCE, MAX_ZOOM_FORCE);
+}
+
+float CameraZoom::applyStop(const float target) {
+  zoomVel = 0.0f;
+  return target;
+}
+
+float CameraZoom::applySteer(const float ppm, const float desired, const float delta) {
+  zoomVel += getSteer(desired);
+  return ppm + zoomVel * delta;
 }
