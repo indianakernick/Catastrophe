@@ -86,6 +86,7 @@
 		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
+		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
@@ -264,6 +265,8 @@
 		4541162D1F526DDB00C2865B /* physics constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics constants.hpp"; sourceTree = "<group>"; };
 		4541162E1F5405FD00C2865B /* camera props.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera props.cpp"; sourceTree = "<group>"; };
 		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
+		454116331F5622D600C2865B /* camera zoom track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom track.cpp"; sourceTree = "<group>"; };
+		454116341F5622D700C2865B /* camera zoom track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom track.hpp"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 			children = (
 				4538930A1F2D6F5D007EBB5A /* camera.cpp */,
 				4538930B1F2D6F5D007EBB5A /* camera.hpp */,
+				4541162E1F5405FD00C2865B /* camera props.cpp */,
+				4541162F1F5405FD00C2865B /* camera props.hpp */,
 				4541160F1F523D4400C2865B /* camera to pixels.cpp */,
 				454116101F523D4400C2865B /* camera to pixels.hpp */,
 				454116121F523D5400C2865B /* camera to meters.cpp */,
@@ -584,14 +589,14 @@
 				454116161F523D6600C2865B /* camera visible.hpp */,
 				454116181F523D7400C2865B /* camera pos.cpp */,
 				454116191F523D7400C2865B /* camera pos.hpp */,
-				4541161B1F523D8200C2865B /* camera zoom.cpp */,
-				4541161C1F523D8200C2865B /* camera zoom.hpp */,
 				4541161E1F523DA400C2865B /* camera motion track.cpp */,
 				4541161F1F523DA400C2865B /* camera motion track.hpp */,
+				4541161B1F523D8200C2865B /* camera zoom.cpp */,
+				4541161C1F523D8200C2865B /* camera zoom.hpp */,
+				454116331F5622D600C2865B /* camera zoom track.cpp */,
+				454116341F5622D700C2865B /* camera zoom track.hpp */,
 				454116281F5255CD00C2865B /* camera window size.cpp */,
 				454116291F5255CD00C2865B /* camera window size.hpp */,
-				4541162E1F5405FD00C2865B /* camera props.cpp */,
-				4541162F1F5405FD00C2865B /* camera props.hpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
 				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
+				454116351F5622D700C2865B /* camera zoom track.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
 				454116301F5405FD00C2865B /* camera props.cpp in Sources */,
 				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,

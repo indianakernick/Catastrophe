@@ -12,17 +12,17 @@
 #include "camera props.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>
+#include <Simpleton/Math/clamp.hpp>
 
 CameraZoom::CameraZoom()
   : zoomVel(0.0f) {}
 
 float CameraZoom::calcPPM(
   const CameraProps props,
-  const float zoomTarget,
+  float zoomTarget,
   const float delta
 ) {
-  assert(zoomTarget >= MIN_ZOOM);
-  assert(zoomTarget <= MAX_ZOOM);
+  zoomTarget = Math::clamp(zoomTarget, MIN_ZOOM, MAX_ZOOM);
 
   const float oldPPM = props.pixelsPerMeter;
   float newPPM;

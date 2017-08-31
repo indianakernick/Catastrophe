@@ -53,7 +53,7 @@ void CameraMotionTrack::stop() {
 }
 
 bool CameraMotionTrack::hasTarget() const {
-  return target != nullptr;
+  return target;
 }
 
 const CameraMotionTarget *CameraMotionTrack::get() const {
@@ -66,6 +66,11 @@ void CameraMotionTrack::setLocal(const CameraMotionTarget newTarget) {
 
 void CameraMotionTrack::startLocal() {
   target = &localTarget;
+}
+
+void CameraMotionTrack::setAndStartLocal(const CameraMotionTarget newTarget) {
+  setLocal(newTarget);
+  startLocal();
 }
 
 void CameraMotionTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 newSize) {

@@ -13,7 +13,6 @@
 
 using CameraMotionTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
-class CameraPos;
 struct CameraProps;
 class RenderingContext;
 
@@ -33,6 +32,7 @@ public:
   
   void setLocal(CameraMotionTarget);
   void startLocal();
+  void setAndStartLocal(CameraMotionTarget);
   
   void setBounds(glm::vec2, glm::vec2);
   

@@ -15,6 +15,7 @@
 #include "camera visible.hpp"
 #include "camera to pixels.hpp"
 #include "camera to meters.hpp"
+#include "camera zoom track.hpp"
 #include "camera window size.hpp"
 #include "camera motion track.hpp"
 
@@ -30,7 +31,8 @@ public:
 
   CameraPos pos;
   CameraZoom zoom;
-  CameraMotionTrack track;
+  CameraMotionTrack motionTrack;
+  CameraZoomTrack zoomTrack;
   CameraWindowSize windowSize;
 
   void update(float);

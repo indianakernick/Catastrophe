@@ -26,10 +26,10 @@ CameraVisible Camera::visible() const {
 }
 
 void Camera::update(const float delta) {
-  const glm::vec2 motionTarget = track.calcMotionTarget(props);
+  const glm::vec2 motionTarget = motionTrack.calcMotionTarget(props);
   const glm::vec2 newCenter = pos.calcCenter(props, motionTarget, delta);
   
-  const float zoomTarget = props.pixelsPerMeter;
+  const float zoomTarget = zoomTrack.calcZoomTarget(props);
   const float newPPM = zoom.calcPPM(props, zoomTarget, delta);
   
   const glm::vec2 newWindowSize = windowSize.get();
@@ -41,7 +41,7 @@ void Camera::update(const float delta) {
 
 void Camera::debugRender() {
   if (renderer != nullptr) {
-    track.debugRender(props, *renderer);
+    motionTrack.debugRender(props, *renderer);
   }
 }
 
