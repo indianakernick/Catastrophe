@@ -8,8 +8,15 @@
 
 #include "app impl.hpp"
 
+#include <iostream>
+#include <Simpleton/Math/scale.hpp>
+#include <Simpleton/Platform/system info.hpp>
+#include "vector file.hpp"
+
 int main(int, char **) {
-  app = std::make_unique<AppImpl>();
-  app->mainLoop(1.0f / 60.0f, 16);
+  Sprite sprite = loadSprite((Platform::getResDir() + "player sprite.yaml").c_str());
+  
+  /*app = std::make_unique<AppImpl>();
+  app->mainLoop(1.0f / 60.0f, 16);*/
   return 0;
 }

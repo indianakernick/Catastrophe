@@ -1,0 +1,147 @@
+anims:
+- name: "Run"
+  duration: 1.0
+  size: [16, 16]
+  frames:
+  - offset: 0.0
+    points:
+    - [9, 3]    # 0 head
+    - [9, 4]    # 1 neck
+    - [8, 9]    # 2 hip
+    - [9, 7]    # 3 left elbow
+    - [11, 7]   # 4 left hand
+    - [7, 6]    # 5 right elbow
+    - [9, 7]    # 6 right hand
+    - [7, 12]   # 7 left knee
+    - [3, 10]   # 8 left foot
+    - [9, 12]   # 9 right knee
+    - [8, 16]   #10 right foot
+  - offset: 0.125
+    points:
+    - [9, 3]
+    - [9, 4]
+    - [8, 9]
+    - [8, 7]
+    - [10, 8]
+    - [8, 7]
+    - [10, 8]
+    - [10, 12]
+    - [7, 13]
+    - [7, 12]
+    - [4, 16]
+  - offset: 0.25
+    points:
+    - [9, 2]
+    - [9, 3]
+    - [8, 8]
+    - [7, 5]
+    - [9, 6]
+    - [9, 6]
+    - [11, 6]
+    - [12, 10]
+    - [14, 14]
+    - [6, 12]
+    - [2, 12]
+  - offset: 0.375
+    points:
+    - [9, 2]
+    - [9, 3]
+    - [8, 8]
+    - [10, 6]
+    - [12, 5]
+    - [6, 4]
+    - [8, 6]
+    - [5, 11]
+    - [1, 10]
+    - [11, 11]
+    - [12, 16]
+
+  # To create next 4 frames,
+  # copy first 4 frames then
+  # swap left and right limbs
+
+  - offset: 0.5
+    points:
+    - [9, 3]    # 0 head
+    - [9, 4]    # 1 neck
+    - [8, 9]    # 2 hip
+    - [7, 6]    # 3 left elbow
+    - [9, 7]    # 4 left hand
+    - [9, 7]    # 5 right elbow
+    - [11, 7]   # 6 right hand
+    - [9, 12]   # 7 left knee
+    - [8, 16]   # 8 left foot
+    - [7, 12]   # 9 right knee
+    - [3, 10]   #10 right foot
+  - offset: 0.625
+    points:
+    - [9, 3]
+    - [9, 4]
+    - [8, 9]
+    - [8, 7]
+    - [10, 8]
+    - [8, 7]
+    - [10, 8]
+    - [7, 12]
+    - [4, 16]
+    - [10, 12]
+    - [7, 13]
+  - offset: 0.75
+    points:
+    - [9, 2]
+    - [9, 3]
+    - [8, 8]
+    - [9, 6]
+    - [11, 6]
+    - [7, 5]
+    - [9, 6]
+    - [6, 12]
+    - [2, 12]
+    - [12, 10]
+    - [14, 14]
+  - offset: 0.875
+    points:
+    - [9, 2]
+    - [9, 3]
+    - [8, 8]
+    - [6, 4]
+    - [8, 6]
+    - [10, 6]
+    - [12, 5]
+    - [11, 11]
+    - [12, 16]
+    - [5, 11]
+    - [1, 10]
+
+shapes:
+- type: filled circle
+  color: [255, 255, 255, 255]
+  attribs: [1]
+  indicies: [0]
+
+- type: line strip
+  color: [255, 255, 255, 255]
+  attribs: [1]
+  indicies:
+  - 4  # left hand
+  - 3  # left elbow
+  - 1  # neck
+  - 2  # hip
+  - 7  # left knee
+  - 8  # left foot
+
+- type: line strip
+  color: [255, 255, 255, 255]
+  attribs: [1]
+  indicies:
+  - 1  # neck
+  - 5  # right elbow
+  - 6  # right hand
+
+- type: line strip
+  color: [255, 255, 255, 255]
+  attribs: [1]
+  indicies:
+  - 2  # hip
+  - 9  # right knee
+  - 10 # right foot

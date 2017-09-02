@@ -23,7 +23,9 @@ class RenderingContext;
 
 class Camera {
 public:
-  Camera() = default;
+  Camera() {
+    zoomTrack.setAndStartLocal(glm::vec2(1.0f) / 64.0f);
+  }
   
   CameraToPixels toPixels() const;
   CameraToMeters toMeters() const;
