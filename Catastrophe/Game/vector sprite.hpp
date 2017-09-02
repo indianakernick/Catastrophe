@@ -11,6 +11,7 @@
 
 #include <array>
 #include <vector>
+#include <unordered_map>
 #include <experimental/string_view>
 #include "color.hpp"
 #include <glm/vec2.hpp>
@@ -35,10 +36,12 @@ const std::experimental::string_view SHAPE_NAMES[6] = {
 
 using TimeSec = float;
 using Index = uint32_t;
+using Indicies = std::vector<Index>;
+
 using Coord = float;
 using Point = glm::tvec2<Coord>;
 using Points = std::vector<Point>;
-using Indicies = std::vector<Index>;
+
 using Attrib = float;
 using Attribs = std::array<Attrib, 2>;
 
@@ -49,6 +52,8 @@ struct Shape {
   Indicies pointIndicies;
 };
 
+using Shapes = std::vector<Shape>;
+
 struct Keyframe {
   //time since the beginning of the animation
   TimeSec offsetSec;
@@ -56,16 +61,18 @@ struct Keyframe {
   Points points;
 };
 
+using Keyframes = std::vector<Keyframe>;
+
 struct Animation {
-  //used to identify the animation
-  std::string name;
   TimeSec durationSec;
-  std::vector<Keyframe> frames;
+  Keyframes frames;
 };
 
+using Animations = std::unordered_map<std::string, Animation>;
+
 struct Sprite {
-  std::vector<Animation> animations;
-  std::vector<Shape> shapes;
+  Animations animations;
+  Shapes shapes;
 };
 
 #endif

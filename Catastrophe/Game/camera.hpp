@@ -24,7 +24,7 @@ class RenderingContext;
 class Camera {
 public:
   Camera() {
-    zoomTrack.setAndStartLocal(glm::vec2(1.0f) / 64.0f);
+    //zoomTrack.setAndStartLocal(glm::vec2(1.0f) / 64.0f);
   }
   
   CameraToPixels toPixels() const;

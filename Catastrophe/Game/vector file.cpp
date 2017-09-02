@@ -85,12 +85,19 @@ namespace {
     return frame;
   }
   
-  std::vector<Keyframe> readKeyframes(const YAML::Node &framesNode, const Point size) {
+  Keyframes readKeyframes(const YAML::Node &framesNode, const Point size) {
     checkType(framesNode, YAML::NodeType::Sequence);
     
-    std::vector<Keyframe> frames;
+    Keyframes frames;
+    TimeSec prevOffset = -1.0f;
     for (auto f = framesNode.begin(); f != framesNode.end(); ++f) {
       frames.emplace_back(readKeyframe(*f, size));
+      if (frames.back().offsetSec < prevOffset) {
+        throw std::runtime_error("");
+      }
+    }
+    if (frames.empty() || frames.front().offsetSec != 0.0f) {
+      throw std::runtime_error("");
     }
     
     return frames;
@@ -100,7 +107,6 @@ namespace {
     checkType(animNode, YAML::NodeType::Map);
     
     Animation anim;
-    anim.name = getChild(animNode, "name").as<std::string>();
     anim.durationSec = getChild(animNode, "duration").as<TimeSec>();
     anim.frames = readKeyframes(
       getChild(animNode, "frames"),
@@ -110,12 +116,12 @@ namespace {
     return anim;
   }
   
-  std::vector<Animation> readAnims(const YAML::Node &animsNode) {
-    checkType(animsNode, YAML::NodeType::Sequence);
+  Animations readAnims(const YAML::Node &animsNode) {
+    checkType(animsNode, YAML::NodeType::Map);
     
-    std::vector<Animation> anims;
+    Animations anims;
     for (auto a = animsNode.begin(); a != animsNode.end(); ++a) {
-      anims.emplace_back(readAnim(*a));
+      anims.emplace(a->first.as<std::string>(), readAnim(a->second));
     }
     
     return anims;
@@ -187,10 +193,10 @@ namespace {
     return shape;
   }
   
-  std::vector<Shape> readShapes(const YAML::Node &shapesNode) {
+  Shapes readShapes(const YAML::Node &shapesNode) {
     checkType(shapesNode, YAML::NodeType::Sequence);
     
-    std::vector<Shape> shapes;
+    Shapes shapes;
     for (auto s = shapesNode.begin(); s != shapesNode.end(); ++s) {
       shapes.emplace_back(readShape(*s));
     }

@@ -125,6 +125,70 @@ void RenderingContext::renderLine(
   CHECK_SDL_ERROR(SDL_RenderDrawLine(renderer, pxP0.x, pxP0.y, pxP1.x, pxP1.y));
 }
 
+void RenderingContext::renderThickLine(
+  const Color color,
+  const glm::vec2 p0,
+  const glm::vec2 p1,
+  const float thickness
+) {
+  if (camera == nullptr) return;
+  
+  const auto [pxP0, pxP1] = camera->toPixels().line(p0, p1);
+  if (!camera->visible().line(pxP0, pxP1)) return;
+  
+  CHECK_SDL_ERROR(thickLineRGBA(
+    renderer,
+    pxP0.x, pxP0.y,
+    pxP1.x, pxP1.y,
+    camera->toPixels().size(thickness),
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  ));
+}
+
+void RenderingContext::renderLineStrip(
+  const Color color,
+  const glm::vec2 *verts,
+  const size_t numVerts
+) {
+  assert(verts != nullptr);
+  assert(numVerts > 1);
+  
+  if (camera == nullptr) return;
+  
+  static size_t numPxVerts = 32;
+  static auto pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
+  
+  if (numPxVerts < numVerts) {
+    numPxVerts = numVerts * 2;
+    pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
+  }
+  
+  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
+  pxVerts[0].x = pxVert.x;
+  pxVerts[0].y = pxVert.y;
+  
+  Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
+  
+  for (size_t v = 1; v != numVerts; ++v) {
+    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
+    rect.extendToEnclose(pxVert);
+    pxVerts[v].x = pxVert.x;
+    pxVerts[v].y = pxVert.y;
+  }
+  
+  if (!camera->visible().rect(static_cast<RectPx>(rect))) return;
+  
+  setColor(color);
+  CHECK_SDL_ERROR(SDL_RenderDrawLines(
+    renderer,
+    pxVerts.get(),
+    static_cast<int>(numVerts + 1))
+  );
+}
+
 void RenderingContext::renderCircle(
   const Color color,
   const glm::vec2 center,
@@ -174,43 +238,8 @@ void RenderingContext::renderPolygon(
   const glm::vec2 *verts,
   const size_t numVerts
 ) {
-  assert(verts != nullptr);
-  assert(numVerts > 1);
-  
-  if (camera == nullptr) return;
-  
-  static size_t numPxVerts = 32;
-  static auto pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
-  
-  if (numPxVerts <= numVerts) {
-    numPxVerts = numVerts * 2;
-    pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
-  }
-  
-  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
-  pxVerts[0].x = pxVert.x;
-  pxVerts[0].y = pxVert.y;
-  
-  Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
-  
-  for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
-    rect.extendToEnclose(pxVert);
-    pxVerts[v].x = pxVert.x;
-    pxVerts[v].y = pxVert.y;
-  }
-  
-  pxVerts[numVerts].x = pxVert.x;
-  pxVerts[numVerts].y = pxVert.y;
-  
-  if (!camera->visible().rect(static_cast<RectPx>(rect))) return;
-  
-  setColor(color);
-  CHECK_SDL_ERROR(SDL_RenderDrawLines(
-    renderer,
-    pxVerts.get(),
-    static_cast<int>(numVerts + 1))
-  );
+  renderLineStrip(color, verts, numVerts);
+  renderLine(color, verts[numVerts - 1], verts[0]);
 }
 
 void RenderingContext::renderFilledPolygon(

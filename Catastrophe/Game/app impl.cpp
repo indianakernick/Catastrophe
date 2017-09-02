@@ -15,6 +15,10 @@
 #include "camera constants.hpp"
 #include "register collision listeners.hpp"
 
+#include <Simpleton/Platform/system info.hpp>
+#include "vector file.hpp"
+#include "vector render.hpp"
+
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
@@ -46,6 +50,8 @@ bool AppImpl::init() {
   renderingSystem.track(player);
   
   fpsCounter.init();
+  
+  sprite = loadSprite((Platform::getResDir() + "player sprite.yaml").c_str());
   
   return true;
 }
@@ -91,17 +97,23 @@ bool AppImpl::update(const float delta) {
   return true;
 }
 
-void AppImpl::render(const float) {
+void AppImpl::render(const float delta) {
   renderer.clear();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    physicsSystem.debugRender();
+    //physicsSystem.debugRender();
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    renderingSystem.cameraDebugRender();
+    //renderingSystem.cameraDebugRender();
   }
   if constexpr (ENABLE_GAME_RENDER) {
-    renderingSystem.render();
+    //renderingSystem.render();
   }
+  
+  progress += delta * 0.125;
+  while (progress > sprite.animations.at("Run").durationSec) {
+    progress -= sprite.animations.at("Run").durationSec;
+  }
+  renderSprite(renderingSystem.getRenderer(), sprite, "Run", progress, true, {0.0f, 0.0f}, {720.0f / 70.0f, 720.0f / 70.0f});
   
   if constexpr (ENABLE_FPS_RENDER) {
     fpsCounter.frame();

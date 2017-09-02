@@ -34,6 +34,9 @@ public:
   void renderRect(Color, Rect);
   void renderPoint(Color, glm::vec2);
   void renderLine(Color, glm::vec2, glm::vec2);
+  void renderThickLine(Color, glm::vec2, glm::vec2, float);
+  
+  void renderLineStrip(Color, const glm::vec2 *, size_t);
   
   void renderCircle(Color, glm::vec2, float);
   void renderFilledCircle(Color, glm::vec2, float);

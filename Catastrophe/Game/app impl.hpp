@@ -17,6 +17,8 @@
 #include <Simpleton/Application/sdl app.hpp>
 #include <Simpleton/Time/fps.hpp>
 
+#include "vector sprite.hpp"
+
 class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
 public:
   AppImpl() = default;
@@ -28,6 +30,9 @@ private:
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   Time::FPS fpsCounter;
+  
+  Sprite sprite;
+  float progress;
   
   EntityID player;
   EntityID platform;
