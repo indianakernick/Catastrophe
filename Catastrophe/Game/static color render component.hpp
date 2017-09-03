@@ -10,7 +10,6 @@
 #define static_color_render_component_hpp
 
 #include "color.hpp"
-#include <glm/vec2.hpp>
 #include "render component.hpp"
 
 class StaticColorRenderComponent final : public RenderComponent {

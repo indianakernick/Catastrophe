@@ -140,6 +140,14 @@ shapes:
   - 8  # left foot
 
 - type: line strip
+  color: [127, 127, 127, 255]
+  attribs: [1]
+  indicies:
+  - 2  # hip
+  - 9  # right knee
+  - 10 # right foot
+
+- type: line strip
   color: [255, 255, 255, 255]
   attribs: [1]
   indicies:
@@ -153,14 +161,6 @@ shapes:
   - 1  # neck
   - 5  # right elbow
   - 6  # right hand
-
-- type: line strip
-  color: [127, 127, 127, 255]
-  attribs: [1]
-  indicies:
-  - 2  # hip
-  - 9  # right knee
-  - 10 # right foot
 
 - type: filled circle
   color: [255, 255, 255, 255]

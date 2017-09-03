@@ -9,7 +9,6 @@
 #ifndef static_sprite_render_component_hpp
 #define static_sprite_render_component_hpp
 
-#include "camera.hpp"
 #include "render component.hpp"
 
 class StaticSpriteRenderComponent final : public RenderComponent {

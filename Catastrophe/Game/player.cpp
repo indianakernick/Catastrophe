@@ -16,7 +16,7 @@
 #include "player constants.hpp"
 #include "player input component.hpp"
 #include "player physics component.hpp"
-#include "static sprite render component.hpp"
+#include "vector sprite render component.hpp"
 
 namespace {
   const b2Vec2 BOX_NORMALS[4] = {
@@ -104,7 +104,11 @@ std::unique_ptr<Entity> makePlayer(
   attachFixtures(body);
   body->SetTransform(pos, 0.0f);
   
-  player->render = std::make_shared<StaticSpriteRenderComponent>("rat", PLAYER_WIDTH, PLAYER_HEIGHT);
+  player->render = std::make_shared<VectorSpriteRenderComponent>(
+    "player sprite.yaml",
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT
+  );
   rendering.add(id, player->render);
   
   player->input = std::make_shared<PlayerInputComponent>();

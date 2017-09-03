@@ -13,7 +13,9 @@
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
 #include "player constants.hpp"
+#include <Simpleton/Math/scale.hpp>
 #include "player physics component.hpp"
+#include "vector sprite render component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -25,6 +27,7 @@ void PlayerInputComponent::update(Entity *entity, const float delta) {
   const bool onGround = physics->onGround();
   handleMovement(body, onGround);
   handleJump(body, onGround, delta);
+  handleAnim(entity);
 }
 
 bool PlayerInputComponent::handleEvent(const SDL_Event event) {
@@ -107,4 +110,17 @@ bool PlayerInputComponent::handleKeyUp(const SDL_Scancode key) {
     default:
       return false;
   }
+}
+
+void PlayerInputComponent::handleAnim(Entity *entity) {
+  auto renderComp = Utils::safeDownCast<VectorSpriteRenderComponent>(entity->render);
+  const b2Body *body = entity->physics->getBody();
+  renderComp->setRepeat(true);
+  renderComp->setAnimName("Run");
+  
+  const float horiVel = body->GetLinearVelocity().x;
+  //@TODO don't hardcode these values
+  //foot moves 0.25 meters in 0.125 seconds
+  renderComp->setSpeed(Math::abs(horiVel / (0.25f / 0.125f)));
+  renderComp->setHoriScale(Math::sign(horiVel));
 }

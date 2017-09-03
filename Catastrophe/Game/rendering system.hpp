@@ -9,6 +9,7 @@
 #ifndef rendering_system_hpp
 #define rendering_system_hpp
 
+#include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
 #include "render component.hpp"

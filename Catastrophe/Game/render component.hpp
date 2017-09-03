@@ -9,7 +9,7 @@
 #ifndef render_component_hpp
 #define render_component_hpp
 
-#include "camera.hpp"
+#include "camera motion track.hpp"
 
 class Entity;
 class RenderingContext;

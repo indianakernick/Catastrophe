@@ -8,16 +8,18 @@
 
 #include "matrix mul.hpp"
 
+#include <Simpleton/Math/scale.hpp>
+
 glm::vec2 mulPoint(const glm::mat3 &mat, const glm::vec2 point) {
   return mat * glm::vec3(point.x, point.y, 1.0f);
 }
 
 glm::vec2 mulSize(const glm::mat3 &mat, const glm::vec2 size) {
-  return size * mat[0][0];
+  return glm::abs(mat * glm::vec3(size.x, size.y, 0.0f));
 }
 
 float mulSize(const glm::mat3 &mat, const float size) {
-  return size * mat[0][0];
+  return Math::abs(size * mat[0][0]);
 }
 
 RectPx mulRect(const glm::mat3 &mat, const Rect rect) {

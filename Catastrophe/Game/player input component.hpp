@@ -36,6 +36,8 @@ private:
   
   bool handleKeyDown(SDL_Scancode);
   bool handleKeyUp(SDL_Scancode);
+  
+  void handleAnim(Entity *);
 };
 
 #endif
