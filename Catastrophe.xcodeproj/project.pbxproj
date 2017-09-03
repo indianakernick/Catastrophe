@@ -11,6 +11,7 @@
 		4509F8D21F5A414800927A19 /* vector file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8D01F5A414800927A19 /* vector file.cpp */; };
 		4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4509F8D31F5A429800927A19 /* player sprite.yaml */; };
 		4509F8D71F5A8EED00927A19 /* vector render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8D51F5A8EED00927A19 /* vector render.cpp */; };
+		4509F8DC1F5B94E800927A19 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8DA1F5B94E800927A19 /* camera transform.cpp */; };
 		45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45103F7E1F272828001B24E2 /* libNumber Display.dylib */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
@@ -82,8 +83,6 @@
 		453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453893071F2D6F21007EBB5A /* debug draw.cpp */; };
 		4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538930A1F2D6F5D007EBB5A /* camera.cpp */; };
 		4538930E1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */; };
-		454116111F523D4400C2865B /* camera to pixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541160F1F523D4400C2865B /* camera to pixels.cpp */; };
-		454116141F523D5400C2865B /* camera to meters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116121F523D5400C2865B /* camera to meters.cpp */; };
 		454116171F523D6600C2865B /* camera visible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116151F523D6600C2865B /* camera visible.cpp */; };
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
@@ -112,6 +111,8 @@
 		4509F8D31F5A429800927A19 /* player sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.yaml"; sourceTree = "<group>"; };
 		4509F8D51F5A8EED00927A19 /* vector render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector render.cpp"; sourceTree = "<group>"; };
 		4509F8D61F5A8EED00927A19 /* vector render.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector render.hpp"; sourceTree = "<group>"; };
+		4509F8DA1F5B94E800927A19 /* camera transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera transform.cpp"; sourceTree = "<group>"; };
+		4509F8DB1F5B94E800927A19 /* camera transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera transform.hpp"; sourceTree = "<group>"; };
 		45103F7E1F272828001B24E2 /* libNumber Display.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libNumber Display.dylib"; path = "../../../../../../../usr/local/lib/libNumber Display.dylib"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
@@ -258,10 +259,6 @@
 		4538930A1F2D6F5D007EBB5A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		4538930B1F2D6F5D007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_gfx-1.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2_gfx/1.0.1/lib/libSDL2_gfx-1.0.0.dylib"; sourceTree = "<group>"; };
-		4541160F1F523D4400C2865B /* camera to pixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera to pixels.cpp"; sourceTree = "<group>"; };
-		454116101F523D4400C2865B /* camera to pixels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera to pixels.hpp"; sourceTree = "<group>"; };
-		454116121F523D5400C2865B /* camera to meters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera to meters.cpp"; sourceTree = "<group>"; };
-		454116131F523D5400C2865B /* camera to meters.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera to meters.hpp"; sourceTree = "<group>"; };
 		454116151F523D6600C2865B /* camera visible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera visible.cpp"; sourceTree = "<group>"; };
 		454116161F523D6600C2865B /* camera visible.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera visible.hpp"; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
@@ -607,10 +604,8 @@
 				4538930B1F2D6F5D007EBB5A /* camera.hpp */,
 				4541162E1F5405FD00C2865B /* camera props.cpp */,
 				4541162F1F5405FD00C2865B /* camera props.hpp */,
-				4541160F1F523D4400C2865B /* camera to pixels.cpp */,
-				454116101F523D4400C2865B /* camera to pixels.hpp */,
-				454116121F523D5400C2865B /* camera to meters.cpp */,
-				454116131F523D5400C2865B /* camera to meters.hpp */,
+				4509F8DA1F5B94E800927A19 /* camera transform.cpp */,
+				4509F8DB1F5B94E800927A19 /* camera transform.hpp */,
 				454116151F523D6600C2865B /* camera visible.cpp */,
 				454116161F523D6600C2865B /* camera visible.hpp */,
 				454116181F523D7400C2865B /* camera pos.cpp */,
@@ -837,6 +832,7 @@
 				453892B31F2ADBB4007EBB5A /* b2Contact.cpp in Sources */,
 				453892AF1F2ADBB4007EBB5A /* b2WorldCallbacks.cpp in Sources */,
 				453892A31F2ADBB4007EBB5A /* b2PolygonShape.cpp in Sources */,
+				4509F8DC1F5B94E800927A19 /* camera transform.cpp in Sources */,
 				453892BD1F2ADBB4007EBB5A /* b2MotorJoint.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				453892A61F2ADBB4007EBB5A /* b2Math.cpp in Sources */,
@@ -850,7 +846,6 @@
 				453892F51F2C291B007EBB5A /* static sprite render component.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,
-				454116141F523D5400C2865B /* camera to meters.cpp in Sources */,
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,
 				4509F8D71F5A8EED00927A19 /* vector render.cpp in Sources */,
@@ -862,7 +857,6 @@
 				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,
 				4538929E1F2ADBB4007EBB5A /* b2DynamicTree.cpp in Sources */,
 				45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */,
-				454116111F523D4400C2865B /* camera to pixels.cpp in Sources */,
 				45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */,
 				453892AD1F2ADBB4007EBB5A /* b2Island.cpp in Sources */,
 				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,

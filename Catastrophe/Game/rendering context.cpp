@@ -76,7 +76,9 @@ void RenderingContext::renderSprite(
 ) {
   if (camera == nullptr) return;
   
-  const RectPx dstRect = camera->toPixels().rect(dest);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const RectPx dstRect = mulRect(toPixelsMat, dest);
+  
   if (!camera->visible().rect(dstRect)) return;
   
   const SDL_Rect dst = toSDL(dstRect);
@@ -92,7 +94,9 @@ void RenderingContext::renderSprite(
 void RenderingContext::renderRect(const Color color, const Rect dest) {
   if (camera == nullptr) return;
   
-  const RectPx dstRect = camera->toPixels().rect(dest);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const RectPx dstRect = mulRect(toPixelsMat, dest);
+  
   if (!camera->visible().rect(dstRect)) return;
   
   const SDL_Rect dst = toSDL(dstRect);
@@ -104,7 +108,7 @@ void RenderingContext::renderRect(const Color color, const Rect dest) {
 void RenderingContext::renderPoint(const Color color, const glm::vec2 point) {
   if (camera == nullptr) return;
   
-  const glm::ivec2 pxPoint = camera->toPixels().point(point);
+  const glm::ivec2 pxPoint = mulPoint(camera->toPixels(), point);
   if (!camera->visible().point(pxPoint)) return;
   
   setColor(color);
@@ -118,7 +122,10 @@ void RenderingContext::renderLine(
 ) {
   if (camera == nullptr) return;
   
-  const auto [pxP0, pxP1] = camera->toPixels().line(p0, p1);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxP0 = mulPoint(toPixelsMat, p0);
+  const glm::ivec2 pxP1 = mulPoint(toPixelsMat, p1);
+  
   if (!camera->visible().line(pxP0, pxP1)) return;
   
   setColor(color);
@@ -133,14 +140,17 @@ void RenderingContext::renderThickLine(
 ) {
   if (camera == nullptr) return;
   
-  const auto [pxP0, pxP1] = camera->toPixels().line(p0, p1);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxP0 = mulPoint(toPixelsMat, p0);
+  const glm::ivec2 pxP1 = mulPoint(toPixelsMat, p1);
+  
   if (!camera->visible().line(pxP0, pxP1)) return;
   
   CHECK_SDL_ERROR(thickLineRGBA(
     renderer,
     pxP0.x, pxP0.y,
     pxP1.x, pxP1.y,
-    camera->toPixels().size(thickness),
+    mulSize(toPixelsMat, thickness),
     color.r,
     color.g,
     color.b,
@@ -166,14 +176,15 @@ void RenderingContext::renderLineStrip(
     pxVerts = std::make_unique<SDL_Point []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxVert = mulPoint(toPixelsMat, verts[0]);
   pxVerts[0].x = pxVert.x;
   pxVerts[0].y = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
+    const glm::ivec2 pxVert = mulPoint(toPixelsMat, verts[v]);
     rect.extendToEnclose(pxVert);
     pxVerts[v].x = pxVert.x;
     pxVerts[v].y = pxVert.y;
@@ -196,7 +207,10 @@ void RenderingContext::renderCircle(
 ) {
   if (camera == nullptr) return;
   
-  const auto [pxCenter, pxRadius] = camera->toPixels().circle(center, radius);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxCenter = mulPoint(toPixelsMat, center);
+  const int pxRadius = mulSize(toPixelsMat, radius);
+  
   if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(circleRGBA(
@@ -218,7 +232,10 @@ void RenderingContext::renderFilledCircle(
 ) {
   if (camera == nullptr) return;
   
-  const auto [pxCenter, pxRadius] = camera->toPixels().circle(center, radius);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxCenter = mulPoint(toPixelsMat, center);
+  const int pxRadius = mulSize(toPixelsMat, radius);
+  
   if (!camera->visible().circle(pxCenter, pxRadius)) return;
   
   CHECK_SDL_ERROR(filledCircleRGBA(
@@ -262,14 +279,15 @@ void RenderingContext::renderFilledPolygon(
     pxVertY = std::make_unique<Sint16 []>(numPxVerts);
   }
   
-  const glm::ivec2 pxVert = camera->toPixels().point(verts[0]);
+  const glm::mat3 toPixelsMat = camera->toPixels();
+  const glm::ivec2 pxVert = mulPoint(toPixelsMat, verts[0]);
   pxVertX[0] = pxVert.x;
   pxVertY[0] = pxVert.y;
   
   Math::RectPP<int, Math::Dir::RIGHT, Math::Dir::DOWN> rect(pxVert, pxVert);
   
   for (size_t v = 1; v != numVerts; ++v) {
-    const glm::ivec2 pxVert = camera->toPixels().point(verts[v]);
+    const glm::ivec2 pxVert = mulPoint(toPixelsMat, verts[v]);
     rect.extendToEnclose(pxVert);
     pxVertX[v] = pxVert.x;
     pxVertY[v] = pxVert.y;

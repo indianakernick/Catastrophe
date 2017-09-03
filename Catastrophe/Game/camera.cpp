@@ -10,15 +10,13 @@
 
 #include "camera visible.hpp"
 #include "camera constants.hpp"
-#include "camera to pixels.hpp"
-#include "camera to meters.hpp"
 
-CameraToPixels Camera::toPixels() const {
-  return CameraToPixels(props);
+glm::mat3 Camera::toPixels() const {
+  return ::toPixels(props);
 }
 
-CameraToMeters Camera::toMeters() const {
-  return CameraToMeters(props);
+glm::mat3 Camera::toMeters() const {
+  return ::toPixels(props);
 }
 
 CameraVisible Camera::visible() const {
