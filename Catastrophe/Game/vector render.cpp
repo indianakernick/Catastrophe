@@ -105,7 +105,8 @@ namespace {
   void renderRect(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     
   }
@@ -113,7 +114,8 @@ namespace {
   void renderFilledRect(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     
   }
@@ -121,13 +123,14 @@ namespace {
   void renderLineStrip(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     //the first attribute is the thickness of the lines
     
     Point prevPoint = points[shape.pointIndicies.front()];
     for (auto i = shape.pointIndicies.cbegin() + 1; i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderThickLine(shape.color, prevPoint, points[*i], shape.attribs[0]);
+      renderer.renderThickLine(shape.color, prevPoint, points[*i], shape.attribs[0] * scale);
       prevPoint = points[*i];
     }
   }
@@ -135,7 +138,8 @@ namespace {
   void renderFilledPolygon(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     
   }
@@ -143,7 +147,8 @@ namespace {
   void renderCircle(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     
   }
@@ -151,42 +156,44 @@ namespace {
   void renderFilledCircle(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     //each point is the center of a circle
     //the first attribute is the radius
     
     for (auto i = shape.pointIndicies.cbegin(); i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderFilledCircle(shape.color, points[*i], shape.attribs[0]);
+      renderer.renderFilledCircle(shape.color, points[*i], shape.attribs[0] * scale);
     }
   }
   
   void renderShape(
     RenderingContext &renderer,
     const Points &points,
-    const Shape &shape
+    const Shape &shape,
+    const float scale
   ) {
     switch (shape.type) {
       case ShapeType::RECT:
-        return renderRect(renderer, points, shape);
+        return renderRect(renderer, points, shape, scale);
       case ShapeType::FILLED_RECT:
-        return renderFilledRect(renderer, points, shape);
+        return renderFilledRect(renderer, points, shape, scale);
       case ShapeType::LINE_STRIP:
-        return renderLineStrip(renderer, points, shape);
+        return renderLineStrip(renderer, points, shape, scale);
       case ShapeType::FILLED_POLYGON:
-        return renderFilledPolygon(renderer, points, shape);
+        return renderFilledPolygon(renderer, points, shape, scale);
       case ShapeType::CIRCLE:
-        return renderCircle(renderer, points, shape);
+        return renderCircle(renderer, points, shape, scale);
       case ShapeType::FILLED_CIRCLE:
-        return renderFilledCircle(renderer, points, shape);
+        return renderFilledCircle(renderer, points, shape, scale);
     }
   }
   
-  void transform(Points &points, const glm::vec2 pos, const glm::vec2 size) {
+  void transform(Points &points, const glm::vec2 pos, const float scale) {
     for (auto p = points.begin(); p != points.end(); ++p) {
-      *p *= glm::vec2(size.x, -size.y);
+      *p *= glm::vec2(scale, -scale);
       *p += pos;
-      p->y += size.y;
+      p->y += scale;
     }
   }
 }
@@ -198,7 +205,7 @@ void renderSprite(
   const float progressSec,
   const bool repeat,
   const glm::vec2 pos,
-  const glm::vec2 size
+  const float scale
 ) {
   if (sprite.shapes.empty()) {
     //nothing to render
@@ -207,9 +214,9 @@ void renderSprite(
   
   const Animation &anim = sprite.animations.at(animName.to_string());
   Points points = lerpAnim(anim, progressSec, repeat);
-  transform(points, pos, size);
+  transform(points, pos, scale);
   
   for (auto s = sprite.shapes.cbegin(); s != sprite.shapes.cend(); ++s) {
-    renderShape(renderer, points, *s);
+    renderShape(renderer, points, *s, scale);
   }
 }

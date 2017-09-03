@@ -22,7 +22,7 @@ void renderSprite(
   float,
   bool,
   glm::vec2,
-  glm::vec2
+  float
 );
 
 #endif

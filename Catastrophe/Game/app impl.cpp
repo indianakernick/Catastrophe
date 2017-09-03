@@ -109,11 +109,11 @@ void AppImpl::render(const float delta) {
     //renderingSystem.render();
   }
   
-  progress += delta * 0.125;
+  progress += delta;
   while (progress > sprite.animations.at("Run").durationSec) {
     progress -= sprite.animations.at("Run").durationSec;
   }
-  renderSprite(renderingSystem.getRenderer(), sprite, "Run", progress, true, {0.0f, 0.0f}, {720.0f / 70.0f, 720.0f / 70.0f});
+  renderSprite(renderingSystem.getRenderer(), sprite, "Run", progress, true, {0.0f, 0.0f}, 1.0f);
   
   if constexpr (ENABLE_FPS_RENDER) {
     fpsCounter.frame();
