@@ -1,7 +1,7 @@
+scale: 16
 anims:
   Run:
     duration: 1.0
-    size: [16, 16]
     frames:
     - offset: 0.0
       points:
@@ -116,7 +116,7 @@ anims:
 shapes:
 - type: filled circle
   color: [191, 191, 191, 255]
-  attribs: [0.03125]
+  attribs: [0.5]
   indicies:
   - 3  # left elbow
   - 4  # left hand
@@ -125,7 +125,7 @@ shapes:
 
 - type: line strip
   color: [191, 191, 191, 255]
-  attribs: [0.0625]
+  attribs: [1]
   indicies:
   - 1  # neck
   - 3  # left elbow
@@ -133,7 +133,7 @@ shapes:
 
 - type: line strip
   color: [191, 191, 191, 255]
-  attribs: [0.0625]
+  attribs: [1]
   indicies:
   - 2  # hip
   - 7  # left knee
@@ -141,14 +141,14 @@ shapes:
 
 - type: line strip
   color: [255, 255, 255, 255]
-  attribs: [0.0625]
+  attribs: [1]
   indicies:
   - 1  # neck
   - 2  # hip
 
 - type: line strip
   color: [127, 127, 127, 255]
-  attribs: [0.0625]
+  attribs: [1]
   indicies:
   - 1  # neck
   - 5  # right elbow
@@ -156,7 +156,7 @@ shapes:
 
 - type: line strip
   color: [127, 127, 127, 255]
-  attribs: [0.0625]
+  attribs: [1]
   indicies:
   - 2  # hip
   - 9  # right knee
@@ -164,13 +164,13 @@ shapes:
 
 - type: filled circle
   color: [255, 255, 255, 255]
-  attribs: [0.03125]
+  attribs: [0.5]
   indicies:
   - 2  # hip
 
 - type: filled circle
   color: [127, 127, 127, 255]
-  attribs: [0.03125]
+  attribs: [0.5]
   indicies:
   - 5  # right elbow
   - 6  # right hand
@@ -179,5 +179,5 @@ shapes:
 
 - type: filled circle
   color: [255, 255, 255, 255]
-  attribs: [0.125]
+  attribs: [1.5]
   indicies: [0] # head

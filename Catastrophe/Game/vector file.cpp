@@ -56,42 +56,42 @@ namespace {
     };
   }
   
-  Point readSize(const YAML::Node &sizeNode) {
-    const Point size = readPoint(sizeNode);
-    if (size.x <= 0.0f || size.y <= 0.0f) {
+  float readInvScale(const YAML::Node &scaleNode) {
+    const float scale = scaleNode.as<float>();
+    if (scale <= 0.0f) {
       throw std::runtime_error("");
     }
-    return size;
+    return 1.0f / scale;
   }
   
-  Points readPoints(const YAML::Node &pointsNode, const Point size) {
+  Points readPoints(const YAML::Node &pointsNode, const float invScale) {
     checkType(pointsNode, YAML::NodeType::Sequence);
     
     Points points;
     for (auto p = pointsNode.begin(); p != pointsNode.end(); ++p) {
-      points.emplace_back(readPoint(*p) / size);
+      points.emplace_back(readPoint(*p) * invScale);
     }
     
     return points;
   }
   
-  Keyframe readKeyframe(const YAML::Node &frameNode, const Point size) {
+  Keyframe readKeyframe(const YAML::Node &frameNode, const float invScale) {
     checkType(frameNode, YAML::NodeType::Map);
     
     Keyframe frame;
     frame.offsetSec = getChild(frameNode, "offset").as<TimeSec>();
-    frame.points = readPoints(getChild(frameNode, "points"), size);
+    frame.points = readPoints(getChild(frameNode, "points"), invScale);
     
     return frame;
   }
   
-  Keyframes readKeyframes(const YAML::Node &framesNode, const Point size) {
+  Keyframes readKeyframes(const YAML::Node &framesNode, const float invScale) {
     checkType(framesNode, YAML::NodeType::Sequence);
     
     Keyframes frames;
     TimeSec prevOffset = -1.0f;
     for (auto f = framesNode.begin(); f != framesNode.end(); ++f) {
-      frames.emplace_back(readKeyframe(*f, size));
+      frames.emplace_back(readKeyframe(*f, invScale));
       if (frames.back().offsetSec < prevOffset) {
         throw std::runtime_error("");
       }
@@ -103,25 +103,25 @@ namespace {
     return frames;
   }
   
-  Animation readAnim(const YAML::Node &animNode) {
+  Animation readAnim(const YAML::Node &animNode, const float invScale) {
     checkType(animNode, YAML::NodeType::Map);
     
     Animation anim;
     anim.durationSec = getChild(animNode, "duration").as<TimeSec>();
     anim.frames = readKeyframes(
       getChild(animNode, "frames"),
-      readSize(getChild(animNode, "size"))
+      invScale
     );
     
     return anim;
   }
   
-  Animations readAnims(const YAML::Node &animsNode) {
+  Animations readAnims(const YAML::Node &animsNode, const float invScale) {
     checkType(animsNode, YAML::NodeType::Map);
     
     Animations anims;
     for (auto a = animsNode.begin(); a != animsNode.end(); ++a) {
-      anims.emplace(a->first.as<std::string>(), readAnim(a->second));
+      anims.emplace(a->first.as<std::string>(), readAnim(a->second, invScale));
     }
     
     return anims;
@@ -154,7 +154,7 @@ namespace {
     };
   }
   
-  Attribs readAttribs(const YAML::Node &attribsNode) {
+  Attribs readAttribs(const YAML::Node &attribsNode, const float invScale) {
     checkType(attribsNode, YAML::NodeType::Sequence);
     if (attribsNode.size() > std::tuple_size<Attribs>::value) {
       throw std::runtime_error("");
@@ -163,7 +163,7 @@ namespace {
     Attribs attribs;
     auto attrib = attribs.begin();
     for (auto a = attribsNode.begin(); a != attribsNode.end(); ++a) {
-      *(attrib++) = a->as<Attrib>();
+      *(attrib++) = a->as<Attrib>() * invScale;
     }
     std::fill(attrib, attribs.end(), Attrib(0));
     
@@ -181,24 +181,24 @@ namespace {
     return indicies;
   }
   
-  Shape readShape(const YAML::Node &shapeNode) {
+  Shape readShape(const YAML::Node &shapeNode, const float invScale) {
     checkType(shapeNode, YAML::NodeType::Map);
     
     Shape shape;
     shape.type = readShapeType(getChild(shapeNode, "type"));
     shape.color = readColor(getChild(shapeNode, "color"));
-    shape.attribs = readAttribs(getChild(shapeNode, "attribs"));
+    shape.attribs = readAttribs(getChild(shapeNode, "attribs"), invScale);
     shape.pointIndicies = readIndicies(getChild(shapeNode, "indicies"));
     
     return shape;
   }
   
-  Shapes readShapes(const YAML::Node &shapesNode) {
+  Shapes readShapes(const YAML::Node &shapesNode, const float invScale) {
     checkType(shapesNode, YAML::NodeType::Sequence);
     
     Shapes shapes;
     for (auto s = shapesNode.begin(); s != shapesNode.end(); ++s) {
-      shapes.emplace_back(readShape(*s));
+      shapes.emplace_back(readShape(*s, invScale));
     }
     
     return shapes;
@@ -208,9 +208,12 @@ namespace {
 Sprite loadSprite(const char *fileName) {
   const YAML::Node rootNode = YAML::LoadFile(fileName);
   checkType(rootNode, YAML::NodeType::Map);
-  Sprite sprite = {
-    readAnims(getChild(rootNode, "anims")),
-    readShapes(getChild(rootNode, "shapes"))
+  
+  const float invScale = readInvScale(getChild(rootNode, "scale"));
+  const Sprite sprite = {
+    readAnims(getChild(rootNode, "anims"), invScale),
+    readShapes(getChild(rootNode, "shapes"), invScale)
   };
+  
   return sprite;
 }
