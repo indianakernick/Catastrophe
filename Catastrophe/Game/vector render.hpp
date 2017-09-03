@@ -11,6 +11,7 @@
 
 #include <experimental/string_view>
 #include <glm/vec2.hpp>
+#include <glm/mat3x3.hpp>
 
 struct Sprite;
 class RenderingContext;
@@ -19,10 +20,9 @@ void renderSprite(
   RenderingContext &,
   const Sprite &,
   std::experimental::string_view,
+  const glm::mat3 &,
   float,
-  bool,
-  glm::vec2,
-  float
+  bool
 );
 
 #endif

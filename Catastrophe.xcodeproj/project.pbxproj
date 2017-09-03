@@ -12,6 +12,7 @@
 		4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4509F8D31F5A429800927A19 /* player sprite.yaml */; };
 		4509F8D71F5A8EED00927A19 /* vector render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8D51F5A8EED00927A19 /* vector render.cpp */; };
 		4509F8DC1F5B94E800927A19 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8DA1F5B94E800927A19 /* camera transform.cpp */; };
+		4509F8DF1F5BA25300927A19 /* matrix mul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8DD1F5BA25300927A19 /* matrix mul.cpp */; };
 		45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45103F7E1F272828001B24E2 /* libNumber Display.dylib */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
@@ -113,6 +114,8 @@
 		4509F8D61F5A8EED00927A19 /* vector render.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector render.hpp"; sourceTree = "<group>"; };
 		4509F8DA1F5B94E800927A19 /* camera transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera transform.cpp"; sourceTree = "<group>"; };
 		4509F8DB1F5B94E800927A19 /* camera transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera transform.hpp"; sourceTree = "<group>"; };
+		4509F8DD1F5BA25300927A19 /* matrix mul.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "matrix mul.cpp"; sourceTree = "<group>"; };
+		4509F8DE1F5BA25300927A19 /* matrix mul.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "matrix mul.hpp"; sourceTree = "<group>"; };
 		45103F7E1F272828001B24E2 /* libNumber Display.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libNumber Display.dylib"; path = "../../../../../../../usr/local/lib/libNumber Display.dylib"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
@@ -360,6 +363,8 @@
 				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				454116211F523DAC00C2865B /* camera */,
 				4509F8CC1F5A392300927A19 /* vector */,
+				4509F8DD1F5BA25300927A19 /* matrix mul.cpp */,
+				4509F8DE1F5BA25300927A19 /* matrix mul.hpp */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
 				453892F51F2C291B007EBB5A /* static sprite render component.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
+				4509F8DF1F5BA25300927A19 /* matrix mul.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,
 				453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */,
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,

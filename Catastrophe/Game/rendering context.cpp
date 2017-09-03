@@ -9,6 +9,7 @@
 #include "rendering context.hpp"
 
 #include "camera.hpp"
+#include "matrix mul.hpp"
 #include <SDL2/SDL_render.h>
 #include "window constants.hpp"
 #include <SDL2/SDL2_gfxPrimitives.h>

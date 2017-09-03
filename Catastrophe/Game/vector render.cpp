@@ -8,6 +8,7 @@
 
 #include "vector render.hpp"
 
+#include "matrix mul.hpp"
 #include "vector sprite.hpp"
 #include "rendering context.hpp"
 #include <Simpleton/Math/interpolate.hpp>
@@ -106,7 +107,7 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     
   }
@@ -115,7 +116,7 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     
   }
@@ -124,13 +125,18 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     //the first attribute is the thickness of the lines
     
     Point prevPoint = points[shape.pointIndicies.front()];
     for (auto i = shape.pointIndicies.cbegin() + 1; i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderThickLine(shape.color, prevPoint, points[*i], shape.attribs[0] * scale);
+      renderer.renderThickLine(
+        shape.color,
+        prevPoint,
+        points[*i],
+        mulSize(mat, shape.attribs[0])
+      );
       prevPoint = points[*i];
     }
   }
@@ -139,7 +145,7 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     
   }
@@ -148,7 +154,7 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     
   }
@@ -157,13 +163,17 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     //each point is the center of a circle
     //the first attribute is the radius
     
     for (auto i = shape.pointIndicies.cbegin(); i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderFilledCircle(shape.color, points[*i], shape.attribs[0] * scale);
+      renderer.renderFilledCircle(
+        shape.color,
+        points[*i],
+        mulSize(mat, shape.attribs[0])
+      );
     }
   }
   
@@ -171,29 +181,27 @@ namespace {
     RenderingContext &renderer,
     const Points &points,
     const Shape &shape,
-    const float scale
+    const glm::mat3 mat
   ) {
     switch (shape.type) {
       case ShapeType::RECT:
-        return renderRect(renderer, points, shape, scale);
+        return renderRect(renderer, points, shape, mat);
       case ShapeType::FILLED_RECT:
-        return renderFilledRect(renderer, points, shape, scale);
+        return renderFilledRect(renderer, points, shape, mat);
       case ShapeType::LINE_STRIP:
-        return renderLineStrip(renderer, points, shape, scale);
+        return renderLineStrip(renderer, points, shape, mat);
       case ShapeType::FILLED_POLYGON:
-        return renderFilledPolygon(renderer, points, shape, scale);
+        return renderFilledPolygon(renderer, points, shape, mat);
       case ShapeType::CIRCLE:
-        return renderCircle(renderer, points, shape, scale);
+        return renderCircle(renderer, points, shape, mat);
       case ShapeType::FILLED_CIRCLE:
-        return renderFilledCircle(renderer, points, shape, scale);
+        return renderFilledCircle(renderer, points, shape, mat);
     }
   }
   
-  void transform(Points &points, const glm::vec2 pos, const float scale) {
+  void transform(Points &points, const glm::mat3 &mat) {
     for (auto p = points.begin(); p != points.end(); ++p) {
-      *p *= glm::vec2(scale, -scale);
-      *p += pos;
-      p->y += scale;
+      *p = mulPoint(mat, *p);
     }
   }
 }
@@ -202,10 +210,9 @@ void renderSprite(
   RenderingContext &renderer,
   const Sprite &sprite,
   const std::experimental::string_view animName,
+  const glm::mat3 &mat,
   const float progressSec,
-  const bool repeat,
-  const glm::vec2 pos,
-  const float scale
+  const bool repeat
 ) {
   if (sprite.shapes.empty()) {
     //nothing to render
@@ -214,9 +221,9 @@ void renderSprite(
   
   const Animation &anim = sprite.animations.at(animName.to_string());
   Points points = lerpAnim(anim, progressSec, repeat);
-  transform(points, pos, scale);
+  transform(points, mat);
   
   for (auto s = sprite.shapes.cbegin(); s != sprite.shapes.cend(); ++s) {
-    renderShape(renderer, points, *s, scale);
+    renderShape(renderer, points, *s, mat);
   }
 }
