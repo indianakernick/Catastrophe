@@ -40,7 +40,7 @@ public:
   void attachRenderer(RenderingContext &);
   void detachRenderer();
 
-private:
+//private:
   RenderingContext *renderer = nullptr;
   CameraProps props;
 };

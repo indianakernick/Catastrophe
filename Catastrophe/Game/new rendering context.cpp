@@ -77,22 +77,17 @@ void NewRenderingContext::quit() {
 }
 
 void NewRenderingContext::preRender(const glm::mat3 viewProj) {
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+  glClearDepth(0.0);
+  glClearStencil(0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  
   int windowWidth, windowHeight;
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
   nvgBeginFrame(context, windowWidth, windowHeight, 1.0f);
   
-  nvgResetTransform(context);
+  nvgReset(context);
   nvgTransform(context, viewProj);
-  
-  nvgBeginPath(context);
-  NVGcolor color;
-  color.r = 1.0f;
-  color.g = 0.0f;
-  color.b = 0.0f;
-  color.a = 1.0f;
-  nvgRect(context, -100.0f, -100.0f, 200.0f, 200.0f);
-  nvgFillColor(context, color);
-  nvgFill(context);
 }
 
 void NewRenderingContext::postRender() {

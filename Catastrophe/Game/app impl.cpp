@@ -15,6 +15,10 @@
 #include "camera constants.hpp"
 #include "register collision listeners.hpp"
 
+#include "vector file.hpp"
+#include <Simpleton/Platform/system info.hpp>
+#include "new vector render.hpp"
+
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
@@ -52,6 +56,8 @@ bool AppImpl::init() {
   SDL_Window *win = SDL_CreateWindow("Window", 0, 0, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
   assert(win);
   newRenderer.init(&renderingSystem.getCamera(), win);
+  
+  sprite = loadSprite((Platform::getResDir() + "player sprite.yaml").c_str());
   
   return true;
 }
@@ -99,9 +105,21 @@ bool AppImpl::update(const float delta) {
   return true;
 }
 
+#include <glm/gtx/matrix_transform_2d.hpp>
+
 void AppImpl::render(const float delta) {
   //renderer.clear();
-  newRenderer.preRender({});
+  Camera cam;
+  cam.props.windowSize = {700, 700};
+  newRenderer.preRender(cam.toPixels());
+  prog += delta;
+  if (prog > 1.0f) {
+    prog -= 1.0f;
+  }
+  
+  const glm::mat3 mat = glm::scale({}, glm::vec2(4.0f, 4.0f));
+  
+  newRenderSprite(newRenderer.getContext(), sprite, "Run", mat, prog, true);
   newRenderer.postRender();
   /*if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();

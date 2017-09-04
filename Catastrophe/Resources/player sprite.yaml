@@ -114,15 +114,6 @@ anims:
       - [12, 0]
 
 shapes:
-- type: filled circle
-  color: [191, 191, 191, 255]
-  attribs: [0.5]
-  indicies:
-  - 3  # left elbow
-  - 4  # left hand
-  - 7  # left knee
-  - 8  # left foot
-
 - type: line strip
   color: [191, 191, 191, 255]
   attribs: [1]
@@ -161,21 +152,6 @@ shapes:
   - 1  # neck
   - 5  # right elbow
   - 6  # right hand
-
-- type: filled circle
-  color: [255, 255, 255, 255]
-  attribs: [0.5]
-  indicies:
-  - 2  # hip
-
-- type: filled circle
-  color: [127, 127, 127, 255]
-  attribs: [0.5]
-  indicies:
-  - 5  # right elbow
-  - 6  # right hand
-  - 9  # right knee
-  - 10 # right foot
 
 - type: filled circle
   color: [255, 255, 255, 255]

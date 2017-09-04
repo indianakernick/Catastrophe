@@ -9,10 +9,13 @@
 #ifndef nvg_helper_hpp
 #define nvg_helper_hpp
 
+#include "color.hpp"
 #include <glm/mat3x3.hpp>
 
 extern "C" struct NVGcontext;
+extern "C" struct NVGcolor;
 
 void nvgTransform(NVGcontext *, const glm::mat3 &);
+NVGcolor nvgRGBA(Color);
 
 #endif
