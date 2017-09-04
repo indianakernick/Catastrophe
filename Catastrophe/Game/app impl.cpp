@@ -18,9 +18,11 @@
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
-  SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
+  //SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
   
-  renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
+  
+  
+  /*renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     renderingSystem.attachRendererToCamera();
   }
@@ -45,13 +47,19 @@ bool AppImpl::init() {
   
   renderingSystem.track(player);
   
-  fpsCounter.init();
+  fpsCounter.init();*/
+  
+  SDL_Window *win = SDL_CreateWindow("Window", 0, 0, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+  assert(win);
+  newRenderer.init(&renderingSystem.getCamera(), win);
   
   return true;
 }
 
 void AppImpl::quit() {
-  renderingSystem.stopTracking();
+  newRenderer.quit();
+  
+  /*renderingSystem.stopTracking();
   renderingSystem.detachRendererFromCamera();
 
   entityManager.quit();
@@ -61,9 +69,9 @@ void AppImpl::quit() {
   physicsSystem.detachRenderer();
   physicsSystem.quit();
   
-  renderingSystem.quit();
+  renderingSystem.quit();*/
   
-  SDLApp::quitWindow();
+  //SDLApp::quitWindow();
 }
 
 bool AppImpl::input(float) {
@@ -85,15 +93,17 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
-  physicsSystem.update(delta);
+  /*physicsSystem.update(delta);
   entityManager.update(delta);
-  renderingSystem.update(delta);
+  renderingSystem.update(delta);*/
   return true;
 }
 
 void AppImpl::render(const float delta) {
-  renderer.clear();
-  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+  //renderer.clear();
+  newRenderer.preRender({});
+  newRenderer.postRender();
+  /*if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
@@ -118,7 +128,7 @@ void AppImpl::render(const float delta) {
       {0, 0},
       stringBuf
     );
-  }
+  }*/
   
-  renderer.present();
+  //renderer.present();
 }

@@ -11,11 +11,11 @@
 #include "camera.hpp"
 
 void RenderingSystem::init(SDL_Renderer *sdlRenderer, const std::experimental::string_view sheet) {
-  renderer.init(sdlRenderer, sheet, &camera);
+  //renderer.init(sdlRenderer, sheet, &camera);
 }
 
 void RenderingSystem::quit() {
-  renderer.quit();
+  //renderer.quit();
 }
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
@@ -32,7 +32,7 @@ void RenderingSystem::update(const float delta) {
 
 void RenderingSystem::render() {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    c->second->render(renderer);
+    //c->second->render(renderer);
   }
 }
 

@@ -17,6 +17,8 @@
 #include <Simpleton/Application/sdl app.hpp>
 #include <Simpleton/Time/fps.hpp>
 
+#include "new rendering context.hpp"
+
 class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
 public:
   AppImpl() = default;
@@ -28,6 +30,7 @@ private:
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   Time::FPS fpsCounter;
+  NewRenderingContext newRenderer;
   
   EntityID player;
   EntityID platform;

@@ -34,7 +34,11 @@ void VectorSpriteRenderComponent::update(Entity *entity, const float delta) {
 
 void VectorSpriteRenderComponent::render(RenderingContext &renderer) {
   if (!animName.empty()) {
-    glm::mat3 transform = glm::translate({}, rect.c - rect.h);
+    glm::vec2 pos = rect.c - rect.h;
+    if (horiScale == -1.0f) {
+      pos.x += rect.h.x * 2.0f;
+    }
+    glm::mat3 transform = glm::translate({}, pos);
     transform[0][0] = horiScale;
     renderSprite(
       renderer,

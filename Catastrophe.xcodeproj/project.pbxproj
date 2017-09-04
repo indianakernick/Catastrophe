@@ -14,6 +14,15 @@
 		4509F8DC1F5B94E800927A19 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8DA1F5B94E800927A19 /* camera transform.cpp */; };
 		4509F8DF1F5BA25300927A19 /* matrix mul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8DD1F5BA25300927A19 /* matrix mul.cpp */; };
 		4509F8E21F5BB23600927A19 /* vector sprite render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E01F5BB23600927A19 /* vector sprite render component.cpp */; };
+		4509F8E61F5CE20000927A19 /* new rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E41F5CE20000927A19 /* new rendering context.cpp */; };
+		4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8E71F5CE2AE00927A19 /* libnanovg.a */; };
+		4509F8EA1F5D247100927A19 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8E91F5D247100927A19 /* CoreVideo.framework */; };
+		4509F8EC1F5D247700927A19 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8EB1F5D247700927A19 /* Cocoa.framework */; };
+		4509F8EE1F5D247D00927A19 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8ED1F5D247D00927A19 /* IOKit.framework */; };
+		4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8EF1F5D248500927A19 /* OpenGL.framework */; };
+		4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */; };
+		4509F8F61F5D359B00927A19 /* new vector render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8F41F5D359B00927A19 /* new vector render.cpp */; };
+		4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8F71F5D3DD000927A19 /* nvg helper.cpp */; };
 		45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45103F7E1F272828001B24E2 /* libNumber Display.dylib */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
@@ -119,6 +128,18 @@
 		4509F8DE1F5BA25300927A19 /* matrix mul.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "matrix mul.hpp"; sourceTree = "<group>"; };
 		4509F8E01F5BB23600927A19 /* vector sprite render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector sprite render component.cpp"; sourceTree = "<group>"; };
 		4509F8E11F5BB23600927A19 /* vector sprite render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector sprite render component.hpp"; sourceTree = "<group>"; };
+		4509F8E41F5CE20000927A19 /* new rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "new rendering context.cpp"; sourceTree = "<group>"; };
+		4509F8E51F5CE20000927A19 /* new rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "new rendering context.hpp"; sourceTree = "<group>"; };
+		4509F8E71F5CE2AE00927A19 /* libnanovg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnanovg.a; path = ../../../../../../../usr/local/lib/libnanovg.a; sourceTree = "<group>"; };
+		4509F8E91F5D247100927A19 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		4509F8EB1F5D247700927A19 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4509F8ED1F5D247D00927A19 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		4509F8EF1F5D248500927A19 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
+		4509F8F41F5D359B00927A19 /* new vector render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "new vector render.cpp"; sourceTree = "<group>"; };
+		4509F8F51F5D359B00927A19 /* new vector render.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "new vector render.hpp"; sourceTree = "<group>"; };
+		4509F8F71F5D3DD000927A19 /* nvg helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "nvg helper.cpp"; sourceTree = "<group>"; };
+		4509F8F81F5D3DD000927A19 /* nvg helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "nvg helper.hpp"; sourceTree = "<group>"; };
 		45103F7E1F272828001B24E2 /* libNumber Display.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libNumber Display.dylib"; path = "../../../../../../../usr/local/lib/libNumber Display.dylib"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
@@ -309,6 +330,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
+				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
+				4509F8EE1F5D247D00927A19 /* IOKit.framework in Frameworks */,
+				4509F8EC1F5D247700927A19 /* Cocoa.framework in Frameworks */,
+				4509F8EA1F5D247100927A19 /* CoreVideo.framework in Frameworks */,
+				4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */,
 				4538930E1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib in Frameworks */,
 				45103F7F1F272828001B24E2 /* libNumber Display.dylib in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
@@ -331,6 +358,8 @@
 				4509F8D11F5A414800927A19 /* vector file.hpp */,
 				4509F8D51F5A8EED00927A19 /* vector render.cpp */,
 				4509F8D61F5A8EED00927A19 /* vector render.hpp */,
+				4509F8F41F5D359B00927A19 /* new vector render.cpp */,
+				4509F8F51F5D359B00927A19 /* new vector render.hpp */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -362,12 +391,16 @@
 				453892CB1F2AF420007EBB5A /* render component.hpp */,
 				453890571F2ADAB2007EBB5A /* rendering context.cpp */,
 				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
-				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
 				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
+				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
+				4509F8E41F5CE20000927A19 /* new rendering context.cpp */,
+				4509F8E51F5CE20000927A19 /* new rendering context.hpp */,
 				454116211F523DAC00C2865B /* camera */,
 				4509F8CC1F5A392300927A19 /* vector */,
 				4509F8DD1F5BA25300927A19 /* matrix mul.cpp */,
 				4509F8DE1F5BA25300927A19 /* matrix mul.hpp */,
+				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
+				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -691,6 +724,12 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */,
+				4509F8EF1F5D248500927A19 /* OpenGL.framework */,
+				4509F8ED1F5D247D00927A19 /* IOKit.framework */,
+				4509F8EB1F5D247700927A19 /* Cocoa.framework */,
+				4509F8E91F5D247100927A19 /* CoreVideo.framework */,
+				4509F8E71F5CE2AE00927A19 /* libnanovg.a */,
 				4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */,
 				45103F7E1F272828001B24E2 /* libNumber Display.dylib */,
 				45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */,
@@ -819,6 +858,7 @@
 			files = (
 				453892C31F2ADBB4007EBB5A /* b2WeldJoint.cpp in Sources */,
 				453892A51F2ADBB4007EBB5A /* b2Draw.cpp in Sources */,
+				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
 				454116171F523D6600C2865B /* camera visible.cpp in Sources */,
 				453892AA1F2ADBB4007EBB5A /* b2Body.cpp in Sources */,
 				4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */,
@@ -850,6 +890,7 @@
 				453892B71F2ADBB4007EBB5A /* b2PolygonAndCircleContact.cpp in Sources */,
 				453892991F2ADBB4007EBB5A /* b2CollideCircle.cpp in Sources */,
 				453892B21F2ADBB4007EBB5A /* b2CircleContact.cpp in Sources */,
+				4509F8F61F5D359B00927A19 /* new vector render.cpp in Sources */,
 				453892BE1F2ADBB4007EBB5A /* b2MouseJoint.cpp in Sources */,
 				453893041F2C5574007EBB5A /* static color render component.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
@@ -876,6 +917,7 @@
 				453892B01F2ADBB4007EBB5A /* b2ChainAndCircleContact.cpp in Sources */,
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4538929C1F2ADBB4007EBB5A /* b2Collision.cpp in Sources */,
+				4509F8E61F5CE20000927A19 /* new rendering context.cpp in Sources */,
 				4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */,
 				4509F8E21F5BB23600927A19 /* vector sprite render component.cpp in Sources */,
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
@@ -1004,6 +1046,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					"/usr/local/Cellar/sdl2_gfx/**",
@@ -1012,6 +1055,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/include/Simpleton/**",
+					"/usr/local/Cellar/glew/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1021,6 +1065,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/Cellar/sdl2_gfx/**",
+					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -1044,6 +1089,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					"/usr/local/Cellar/sdl2_gfx/**",
@@ -1052,6 +1098,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/include/Simpleton/**",
+					"/usr/local/Cellar/glew/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1061,6 +1108,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/Cellar/sdl2_gfx/**",
+					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
