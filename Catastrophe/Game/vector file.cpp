@@ -8,51 +8,17 @@
 
 #include "vector file.hpp"
 
-#include <yaml-cpp/yaml.h>
+#include "vector file helper.hpp"
 
 namespace {
-  YAML::Node getChild(const YAML::Node &parent, const char *name) {
-    const YAML::Node child = parent[name];
-    if (child) {
-      return child;
-    } else {
-      throw std::runtime_error("");
-    }
-  }
-  
-  void checkType(const YAML::Node &node, const YAML::NodeType::value type) {
-    if (node.Type() != type) {
-      throw std::runtime_error("");
-    }
-  }
-  
-  template <typename Number>
-  Number asNumber(const YAML::Node &node) {
-    static_assert(std::is_arithmetic<Number>::value);
-    
-    if constexpr (std::is_integral<Number>::value && sizeof(Number) == sizeof(char)) {
-      static_assert(sizeof(Number) < sizeof(int));
-      using Limits = std::numeric_limits<Number>;
-      
-      const int num = node.as<int>();
-      if (Limits::min() <= num && num <= Limits::max()) {
-        return num;
-      } else {
-        throw std::runtime_error("");
-      }
-    } else {
-      return node.as<Number>();
-    }
-  }
-  
   Point readPoint(const YAML::Node &pointNode) {
     checkType(pointNode, YAML::NodeType::Sequence);
     if (pointNode.size() != 2) {
       throw std::runtime_error("");
     }
     return {
-      asNumber<Coord>(pointNode[0]),
-      asNumber<Coord>(pointNode[1])
+      pointNode[0].as<Coord>(),
+      pointNode[1].as<Coord>()
     };
   }
   

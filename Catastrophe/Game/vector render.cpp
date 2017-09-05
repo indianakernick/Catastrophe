@@ -2,15 +2,15 @@
 //  vector render.cpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 2/9/17.
+//  Created by Indi Kernick on 4/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
 #include "vector render.hpp"
 
-#include "matrix mul.hpp"
+#include "nvg helper.hpp"
+#include <nanovg/nanovg.h>
 #include "vector sprite.hpp"
-#include "rendering context.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 
 namespace {
@@ -104,126 +104,120 @@ namespace {
   }
   
   void renderRect(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     
   }
   
   void renderFilledRect(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     
   }
   
   void renderLineStrip(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     //the first attribute is the thickness of the lines
     
-    Point prevPoint = points[shape.pointIndicies.front()];
+    nvgBeginPath(context);
+    nvgStrokeColor(context, nvgRGBA(shape.color));
+    nvgStrokeWidth(context, shape.attribs[0]);
+    nvgLineCap(context, NVG_ROUND);
+    nvgLineJoin(context, NVG_ROUND);
+    
+    const Point firstPoint = points[shape.pointIndicies.front()];
+    nvgMoveTo(context, firstPoint.x, firstPoint.y);
     for (auto i = shape.pointIndicies.cbegin() + 1; i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderThickLine(
-        shape.color,
-        prevPoint,
-        points[*i],
-        mulSize(mat, shape.attribs[0])
-      );
-      prevPoint = points[*i];
+      const Point point = points[*i];
+      nvgLineTo(context, point.x, point.y);
     }
+    
+    nvgStroke(context);
   }
   
   void renderFilledPolygon(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     
   }
   
   void renderCircle(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     
   }
   
   void renderFilledCircle(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     //each point is the center of a circle
     //the first attribute is the radius
     
     for (auto i = shape.pointIndicies.cbegin(); i != shape.pointIndicies.cend(); ++i) {
-      renderer.renderFilledCircle(
-        shape.color,
-        points[*i],
-        mulSize(mat, shape.attribs[0])
-      );
+      nvgBeginPath(context);
+      nvgFillColor(context, nvgRGBA(shape.color));
+      const Point center = points[*i];
+      nvgCircle(context, center.x, center.y, shape.attribs[0]);
+      nvgFill(context);
     }
   }
   
   void renderShape(
-    RenderingContext &renderer,
+    NVGcontext *context,
     const Points &points,
-    const Shape &shape,
-    const glm::mat3 mat
+    const Shape &shape
   ) {
     switch (shape.type) {
       case ShapeType::RECT:
-        return renderRect(renderer, points, shape, mat);
+        return renderRect(context, points, shape);
       case ShapeType::FILLED_RECT:
-        return renderFilledRect(renderer, points, shape, mat);
+        return renderFilledRect(context, points, shape);
       case ShapeType::LINE_STRIP:
-        return renderLineStrip(renderer, points, shape, mat);
+        return renderLineStrip(context, points, shape);
       case ShapeType::FILLED_POLYGON:
-        return renderFilledPolygon(renderer, points, shape, mat);
+        return renderFilledPolygon(context, points, shape);
       case ShapeType::CIRCLE:
-        return renderCircle(renderer, points, shape, mat);
+        return renderCircle(context, points, shape);
       case ShapeType::FILLED_CIRCLE:
-        return renderFilledCircle(renderer, points, shape, mat);
-    }
-  }
-  
-  void transform(Points &points, const glm::mat3 &mat) {
-    for (auto p = points.begin(); p != points.end(); ++p) {
-      *p = mulPoint(mat, *p);
+        return renderFilledCircle(context, points, shape);
     }
   }
 }
 
-void renderSprite(
-  RenderingContext &renderer,
+void newRenderSprite(
+  NVGcontext *context,
   const Sprite &sprite,
   const std::experimental::string_view animName,
-  const glm::mat3 &mat,
+  const glm::mat3 &model,
   const float progressSec,
   const bool repeat
 ) {
+  //nvgSave(context);
+  
   if (sprite.shapes.empty()) {
     //nothing to render
-    return;
   }
+  
+  nvgTransform(context, model);
   
   const Animation &anim = sprite.animations.at(animName.to_string());
-  Points points = lerpAnim(anim, progressSec, repeat);
-  transform(points, mat);
-  
+  const Points points = lerpAnim(anim, progressSec, repeat);
   for (auto s = sprite.shapes.cbegin(); s != sprite.shapes.cend(); ++s) {
-    renderShape(renderer, points, *s, mat);
+    renderShape(context, points, *s);
   }
+   
+  //nvgRestore(context);
 }

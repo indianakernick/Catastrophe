@@ -9,65 +9,76 @@
 #ifndef vector_sprite_hpp
 #define vector_sprite_hpp
 
-#include <array>
 #include <vector>
-#include <unordered_map>
-#include <experimental/string_view>
-#include "color.hpp"
 #include <glm/vec2.hpp>
+#include <unordered_map>
 
-enum class ShapeType {
-  RECT,
-  FILLED_RECT,
-  LINE_STRIP,
-  FILLED_POLYGON,
-  CIRCLE,
-  FILLED_CIRCLE
-};
-
-const std::experimental::string_view SHAPE_NAMES[6] = {
-  "rect",
-  "filled rect",
-  "line strip",
-  "filled polygon",
-  "circle",
-  "filled circle"
-};
+extern "C" struct NVGcolor;
 
 using TimeSec = float;
-using Index = uint32_t;
-using Indicies = std::vector<Index>;
-
 using Coord = float;
 using Point = glm::tvec2<Coord>;
 using Points = std::vector<Point>;
+using Colors = std::vector<NVGcolor>;
+using Scalars = std::vector<Coord>;
 
-using Attrib = float;
-using Attribs = std::array<Attrib, 2>;
+using Index = uint32_t;
+using Indicies = std::vector<Index>;
+constexpr Index NULL_INDEX = std::numeric_limits<Index>::max();
 
-struct Shape {
-  ShapeType type;
-  Color color;
-  Attribs attribs;
-  Indicies pointIndicies;
+///The points, colors and scalars for point in time. Values are interpolated
+///between keyframes.
+struct Frame {
+  Points points;
+  Colors colors;
+  Scalars scalars;
 };
 
-using Shapes = std::vector<Shape>;
+struct FrameSize {
+  Index numPoints;
+  Index numColors;
+  Index numScalars;
+};
 
-struct Keyframe {
-  //time since the beginning of the animation
+namespace YAML {
+  class Node;
+}
+extern "C" struct NVGcontext;
+
+class Shape {
+public:
+  Shape() = default;
+  virtual ~Shape() = default;
+  
+  virtual void load(const YAML::Node &, FrameSize) = 0;
+  virtual void draw(NVGcontext *, const Frame &) const = 0;
+};
+using Shapes = std::vector<std::unique_ptr<Shape>>;
+
+struct PointKeyframe {
   TimeSec offsetSec;
-  //animation simply moves points. The shapes don't change
   Points points;
 };
+using PointKeyframes = std::vector<PointKeyframe>;
 
-using Keyframes = std::vector<Keyframe>;
+struct ColorKeyframe {
+  TimeSec offsetSec;
+  Colors colors;
+};
+using ColorKeyframes = std::vector<ColorKeyframe>;
+
+struct ScalarKeyframe {
+  TimeSec offsetSec;
+  Scalars scalars;
+};
+using ScalarKeyframes = std::vector<ScalarKeyframe>;
 
 struct Animation {
   TimeSec durationSec;
-  Keyframes frames;
+  PointKeyframes pointFrames;
+  ColorKeyframes colorFrames;
+  ScalarKeyframes scalarFrames;
 };
-
 using Animations = std::unordered_map<std::string, Animation>;
 
 struct Sprite {

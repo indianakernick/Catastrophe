@@ -45,6 +45,7 @@ void NewRenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
   if (sdlGLContext == nullptr) {
     throw std::runtime_error(SDL_GetError());
   }
+  SDL_GL_SetSwapInterval(1);
   
   glewExperimental = GL_TRUE;
   const GLenum glewError = glewInit();
@@ -84,7 +85,10 @@ void NewRenderingContext::preRender(const glm::mat3 viewProj) {
   
   int windowWidth, windowHeight;
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
-  nvgBeginFrame(context, windowWidth, windowHeight, 1.0f);
+  int renderWidth, renderHeight;
+  SDL_GL_GetDrawableSize(window, &renderWidth, &renderHeight);
+  const float devicePixelRatio = static_cast<float>(renderWidth) / windowWidth;
+  nvgBeginFrame(context, windowWidth, windowHeight, devicePixelRatio);
   
   nvgReset(context);
   nvgTransform(context, viewProj);
