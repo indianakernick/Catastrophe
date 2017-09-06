@@ -30,7 +30,6 @@
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
 		4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534A60F1F51289B00F3AC06 /* debug input.cpp */; };
-		4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890571F2ADAB2007EBB5A /* rendering context.cpp */; };
 		453890721F2ADB13007EBB5A /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906E1F2ADB13007EBB5A /* app impl.cpp */; };
 		4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890791F2ADB4B007EBB5A /* string to scancode.cpp */; };
 		453892981F2ADBB4007EBB5A /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453892361F2ADBB4007EBB5A /* b2BroadPhase.cpp */; };
@@ -151,8 +150,6 @@
 		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
 		4534A60F1F51289B00F3AC06 /* debug input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug input.cpp"; sourceTree = "<group>"; };
 		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
-		453890571F2ADAB2007EBB5A /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
-		453890581F2ADAB2007EBB5A /* rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering context.hpp"; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
 		4538906F1F2ADB13007EBB5A /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
 		453890701F2ADB13007EBB5A /* file constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
@@ -396,8 +393,6 @@
 			children = (
 				453892CA1F2AF41F007EBB5A /* render component.cpp */,
 				453892CB1F2AF420007EBB5A /* render component.hpp */,
-				453890571F2ADAB2007EBB5A /* rendering context.cpp */,
-				453890581F2ADAB2007EBB5A /* rendering context.hpp */,
 				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
 				4509F8E41F5CE20000927A19 /* new rendering context.cpp */,
@@ -924,7 +919,6 @@
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4538929C1F2ADBB4007EBB5A /* b2Collision.cpp in Sources */,
 				4509F8E61F5CE20000927A19 /* new rendering context.cpp in Sources */,
-				4538905A1F2ADAB2007EBB5A /* rendering context.cpp in Sources */,
 				4509F8E21F5BB23600927A19 /* vector sprite render component.cpp in Sources */,
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,

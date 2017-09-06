@@ -24,7 +24,6 @@ public:
   void setSpeed(float);
   void setAnimName(std::experimental::string_view);
   void setHoriScale(float);
-  void setRepeat(bool);
 
 private:
   Sprite sprite;
@@ -33,7 +32,6 @@ private:
   float animSpeed = 1.0f;
   std::string animName;
   float horiScale = 1.0f;
-  bool repeat = false;
 };
 
 #endif

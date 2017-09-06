@@ -11,7 +11,7 @@
 #include "nvg helper.hpp"
 #include "vector file helper.hpp"
 
-void ShapeLine::load(const YAML::Node &node, const FrameSize) {
+void ShapeCircle::load(const YAML::Node &node, const FrameSize) {
   //@TODO use frameSize to check bounds of indicies
   
   points = getChild(node, "points").as<Indicies>();
@@ -30,7 +30,7 @@ void ShapeLine::load(const YAML::Node &node, const FrameSize) {
   }
 }
 
-void ShapeLine::draw(NVGcontext *context, const Frame &frame) const {
+void ShapeCircle::draw(NVGcontext *context, const Frame &frame) const {
   for (auto i = points.cbegin(); i != points.cend(); ++i) {
     nvgBeginPath(context);
     

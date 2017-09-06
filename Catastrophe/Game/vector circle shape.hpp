@@ -10,9 +10,8 @@
 #define vector_circle_shape_hpp
 
 #include "vector sprite.hpp"
-#include <nanovg/nanovg.h>
 
-class ShapeLine final : public Shape {
+class ShapeCircle final : public Shape {
 public:
   void load(const YAML::Node &, FrameSize) override;
   void draw(NVGcontext *, const Frame &) const override;

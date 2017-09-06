@@ -45,8 +45,7 @@ void VectorSpriteRenderComponent::render(RenderingContext &renderer) {
       sprite,
       animName,
       transform,
-      animProgress,
-      repeat
+      animProgress
     );
   }
 }
@@ -73,8 +72,4 @@ void VectorSpriteRenderComponent::setHoriScale(const float newHoriScale) {
   } else {
     horiScale = newHoriScale;
   }
-}
-
-void VectorSpriteRenderComponent::setRepeat(const bool newRepeat) {
-  repeat = newRepeat;
 }

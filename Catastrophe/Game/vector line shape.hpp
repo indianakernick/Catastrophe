@@ -10,7 +10,6 @@
 #define vector_line_shape_hpp
 
 #include "vector sprite.hpp"
-#include <nanovg/nanovg.h>
 
 class ShapeLine final : public Shape {
 public:

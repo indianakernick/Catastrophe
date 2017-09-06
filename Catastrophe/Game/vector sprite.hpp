@@ -10,10 +10,10 @@
 #define vector_sprite_hpp
 
 #include <vector>
+#include <string>
 #include <glm/vec2.hpp>
 #include <unordered_map>
-
-extern "C" struct NVGcolor;
+#include <nanovg/nanovg.h>
 
 using TimeSec = float;
 using Coord = float;
@@ -57,19 +57,19 @@ using Shapes = std::vector<std::unique_ptr<Shape>>;
 
 struct PointKeyframe {
   TimeSec offsetSec;
-  Points points;
+  Points data;
 };
 using PointKeyframes = std::vector<PointKeyframe>;
 
 struct ColorKeyframe {
   TimeSec offsetSec;
-  Colors colors;
+  Colors data;
 };
 using ColorKeyframes = std::vector<ColorKeyframe>;
 
 struct ScalarKeyframe {
   TimeSec offsetSec;
-  Scalars scalars;
+  Scalars data;
 };
 using ScalarKeyframes = std::vector<ScalarKeyframe>;
 

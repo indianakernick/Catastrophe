@@ -17,7 +17,7 @@
 
 #include "vector file.hpp"
 #include <Simpleton/Platform/system info.hpp>
-#include "new vector render.hpp"
+#include "vector render.hpp"
 
 std::unique_ptr<AppImpl> app = nullptr;
 
@@ -119,7 +119,7 @@ void AppImpl::render(const float delta) {
   
   const glm::mat3 mat = glm::scale({}, glm::vec2(4.0f, 4.0f));
   
-  newRenderSprite(newRenderer.getContext(), sprite, "Run", mat, prog, true);
+  renderSprite(newRenderer.getContext(), sprite, "Run", mat, prog);
   newRenderer.postRender();
   /*if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();

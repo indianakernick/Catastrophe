@@ -15,7 +15,7 @@
 struct Sprite;
 extern "C" struct NVGcontext;
 
-void newRenderSprite(
+void renderSprite(
   NVGcontext *,
   const Sprite &,
   std::experimental::string_view,
