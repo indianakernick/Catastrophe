@@ -35,7 +35,7 @@ namespace {
   }
 }
 
-void NewRenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
+void RenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
   camera = newCamera;
   window = newWindow;
   
@@ -68,7 +68,7 @@ void NewRenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
   }
 }
 
-void NewRenderingContext::quit() {
+void RenderingContext::quit() {
   nvgDeleteGL3(context);
   context = nullptr;
   SDL_GL_DeleteContext(sdlGLContext);
@@ -77,7 +77,7 @@ void NewRenderingContext::quit() {
   camera = nullptr;
 }
 
-void NewRenderingContext::preRender(const glm::mat3 viewProj) {
+void RenderingContext::preRender(const glm::mat3 viewProj) {
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(0.0);
   glClearStencil(0);
@@ -94,11 +94,11 @@ void NewRenderingContext::preRender(const glm::mat3 viewProj) {
   nvgTransform(context, viewProj);
 }
 
-void NewRenderingContext::postRender() {
+void RenderingContext::postRender() {
   nvgEndFrame(context);
   SDL_GL_SwapWindow(window);
 }
 
-NVGcontext *NewRenderingContext::getContext() const {
+NVGcontext *RenderingContext::getContext() const {
   return context;
 }

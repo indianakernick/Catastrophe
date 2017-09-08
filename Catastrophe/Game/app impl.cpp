@@ -22,18 +22,11 @@
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
-  //SDLApp::initWindow(WINDOW_DESC, WINDOW_VSYNC);
-  
-  
-  
-  /*renderingSystem.init(renderer.get(), SPRITE_SHEET_PATH);
-  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    renderingSystem.attachRendererToCamera();
-  }
+  renderingSystem.init();
   
   physicsSystem.init();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    physicsSystem.attachRenderer(renderingSystem.getRenderer());
+    physicsSystem.attachRenderer(renderingContext.getContext());
   }
   registerCollisionListeners(physicsSystem.getContactListener());
   
@@ -51,22 +44,19 @@ bool AppImpl::init() {
   
   renderingSystem.track(player);
   
-  fpsCounter.init();*/
+  window = Platform::makeWindow(WINDOW_DESC);
+  renderingContext.init(&renderingSystem.getCamera(), window.get());
   
-  SDL_Window *win = SDL_CreateWindow("Window", 0, 0, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-  assert(win);
-  newRenderer.init(&renderingSystem.getCamera(), win);
-  
-  sprite = loadSprite((Platform::getResDir() + "player sprite.yaml").c_str());
+  fpsCounter.init();
   
   return true;
 }
 
 void AppImpl::quit() {
-  newRenderer.quit();
+  renderingContext.quit();
+  window.reset();
   
-  /*renderingSystem.stopTracking();
-  renderingSystem.detachRendererFromCamera();
+  renderingSystem.stopTracking();
 
   entityManager.quit();
   renderingSystem.getCamera().windowSize.remEventListener(inputSystem);
@@ -75,9 +65,7 @@ void AppImpl::quit() {
   physicsSystem.detachRenderer();
   physicsSystem.quit();
   
-  renderingSystem.quit();*/
-  
-  //SDLApp::quitWindow();
+  renderingSystem.quit();
 }
 
 bool AppImpl::input(float) {
@@ -99,41 +87,28 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
-  /*physicsSystem.update(delta);
+  physicsSystem.update(delta);
   entityManager.update(delta);
-  renderingSystem.update(delta);*/
+  renderingSystem.update(delta);
   return true;
 }
 
-#include <glm/gtx/matrix_transform_2d.hpp>
-
-void AppImpl::render(const float delta) {
-  //renderer.clear();
-  Camera cam;
-  cam.props.windowSize = {700, 700};
-  newRenderer.preRender(cam.toPixels());
-  prog += delta;
-  if (prog > 1.0f) {
-    prog -= 1.0f;
-  }
+void AppImpl::render(const float) {
+  renderingContext.preRender(renderingSystem.getCamera().toPixels());
   
-  const glm::mat3 mat = glm::scale({}, glm::vec2(4.0f, 4.0f));
-  
-  renderSprite(newRenderer.getContext(), sprite, "Run", mat, prog);
-  newRenderer.postRender();
-  /*if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    renderingSystem.cameraDebugRender();
+    renderingSystem.cameraDebugRender(renderingContext.getContext());
   }
   if constexpr (ENABLE_GAME_RENDER) {
-    renderingSystem.render();
+    renderingSystem.render(renderingContext.getContext());
   }
   
   if constexpr (ENABLE_FPS_RENDER) {
-    fpsCounter.frame();
-    //fpsCounter.get() returns uint32_t
+    /*fpsCounter.frame();
+    fpsCounter.get() //returns uint32_t
     const unsigned frames = fpsCounter.get();
     
     char stringBuf[32];
@@ -145,8 +120,8 @@ void AppImpl::render(const float delta) {
       {255, 255, 255, 255},
       {0, 0},
       stringBuf
-    );
-  }*/
+    );*/
+  }
   
-  //renderer.present();
+  renderingContext.postRender();
 }

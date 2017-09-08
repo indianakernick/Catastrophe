@@ -15,9 +15,9 @@ class Camera;
 extern "C" struct NVGcontext;
 extern "C" struct SDL_Window;
 
-class NewRenderingContext {
+class RenderingContext {
 public:
-  NewRenderingContext() = default;
+  RenderingContext() = default;
   
   void init(const Camera *, SDL_Window *);
   void quit();

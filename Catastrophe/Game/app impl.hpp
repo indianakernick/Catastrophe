@@ -16,9 +16,7 @@
 #include "entity manager.hpp"
 #include <Simpleton/Application/sdl app.hpp>
 #include <Simpleton/Time/fps.hpp>
-
 #include "rendering context.hpp"
-#include "vector sprite.hpp"
 
 class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
 public:
@@ -31,10 +29,7 @@ private:
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   Time::FPS fpsCounter;
-  NewRenderingContext newRenderer;
-  
-  Sprite sprite;
-  float prog = 0.0f;
+  RenderingContext renderingContext;
   
   EntityID player;
   EntityID platform;

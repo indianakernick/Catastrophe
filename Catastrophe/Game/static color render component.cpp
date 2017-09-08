@@ -25,13 +25,15 @@ void StaticColorRenderComponent::update(Entity *entity, const float) {
 }
 
 void StaticColorRenderComponent::render(NVGcontext *context) {
+  nvgSave(context);
+  
   nvgBeginPath(context);
   nvgFillColor(context, color);
-  
   const Rect rectps = static_cast<Rect>(rect);
   nvgRect(context, rectps.p.x, rectps.p.y, rectps.s.x, rectps.s.y);
-  
   nvgFill(context);
+  
+  nvgRestore(context);
 }
 
 const CameraMotionTarget *StaticColorRenderComponent::getCameraTarget() const {

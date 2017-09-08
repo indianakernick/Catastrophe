@@ -108,11 +108,12 @@ void renderSprite(
   const glm::mat3 &model,
   const float progressSec
 ) {
-  //nvgSave(context);
-  
   if (sprite.shapes.empty()) {
     //nothing to render
+    return;
   }
+  
+  nvgSave(context);
   
   nvgTransform(context, model);
   
@@ -126,5 +127,5 @@ void renderSprite(
     (*s)->draw(context, frame);
   }
    
-  //nvgRestore(context);
+  nvgRestore(context);
 }
