@@ -9,20 +9,20 @@
 #ifndef static_color_render_component_hpp
 #define static_color_render_component_hpp
 
-#include "color.hpp"
+#include <nanovg/nanovg.h>
 #include "render component.hpp"
 
 class StaticColorRenderComponent final : public RenderComponent {
 public:
-  StaticColorRenderComponent(Color, float, float);
+  StaticColorRenderComponent(NVGcolor, float, float);
   ~StaticColorRenderComponent() = default;
   
   void update(Entity *, float) override;
-  void render(RenderingContext &) override;
+  void render(NVGcontext *) override;
   const CameraMotionTarget *getCameraTarget() const override;
   
 private:
-  Color color;
+  NVGcolor color;
   CameraMotionTarget rect;
 };
 

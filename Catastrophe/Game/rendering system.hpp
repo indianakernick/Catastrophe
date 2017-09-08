@@ -20,27 +20,22 @@ public:
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
-  void init(SDL_Renderer *, std::experimental::string_view);
+  void init();
   void quit();
   
   void add(EntityID, std::shared_ptr<RenderComponent>);
   void rem(EntityID);
   
   void update(float);
-  void render();
-  void cameraDebugRender();
-  
-  void attachRendererToCamera();
-  void detachRendererFromCamera();
+  void render(NVGcontext *);
+  void cameraDebugRender(NVGcontext *);
   
   void track(EntityID);
   void stopTracking();
   
-  RenderingContext &getRenderer();
   Camera &getCamera();
 
 private:
-  RenderingContext renderer;
   Camera camera;
   
   std::unordered_map<EntityID, std::shared_ptr<RenderComponent>> components;

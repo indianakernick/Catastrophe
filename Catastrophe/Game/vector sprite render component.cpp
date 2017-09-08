@@ -32,7 +32,7 @@ void VectorSpriteRenderComponent::update(Entity *entity, const float delta) {
   }
 }
 
-void VectorSpriteRenderComponent::render(RenderingContext &renderer) {
+void VectorSpriteRenderComponent::render(NVGcontext *context) {
   if (!animName.empty()) {
     glm::vec2 pos = rect.c - rect.h;
     if (horiScale == -1.0f) {
@@ -41,7 +41,7 @@ void VectorSpriteRenderComponent::render(RenderingContext &renderer) {
     glm::mat3 transform = glm::translate({}, pos);
     transform[0][0] = horiScale;
     renderSprite(
-      renderer,
+      context,
       sprite,
       animName,
       transform,

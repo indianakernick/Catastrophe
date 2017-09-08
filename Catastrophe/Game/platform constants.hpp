@@ -9,9 +9,9 @@
 #ifndef platform_constants_hpp
 #define platform_constants_hpp
 
-#include "color.hpp"
+#include <nanovg/nanovg.h>
 
-const Color PLATFORM_COLOR = {0, 0, 255, 255};
+const NVGcolor PLATFORM_COLOR = {.r = 0.0f, .g = 0.0f, .b = 1.0f, .a = 1.0f};
 constexpr float PLATFORM_FRICTION = 1.0f;
 
 #endif

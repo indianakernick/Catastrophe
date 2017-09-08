@@ -9,7 +9,6 @@
 #ifndef camera_constants_hpp
 #define camera_constants_hpp
 
-#include "color.hpp"
 #include "window constants.hpp"
 
 constexpr float DEFAULT_PIXELS_PER_METER = 64.0f;
@@ -36,8 +35,5 @@ constexpr float MAX_MOVE_FORCE = 16.0f;
 constexpr float MOVE_SLOW_DIST = 16.0f;
 constexpr float MOVE_STOP_VEL = 0.05f;
 constexpr float MOVE_STOP_DIST = 0.025f;
-
-const Color CAM_TARGET_COLOR = {255, 255, 0, 127};
-const Color CAM_TRACK_COLOR = {0, 255, 0, 127};
 
 #endif

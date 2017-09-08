@@ -8,11 +8,12 @@
 
 #include "static color render component.hpp"
 
+#include "rect.hpp"
 #include "entity.hpp"
-#include "rendering context.hpp"
+#include <nanovg/nanovg.h>
 
 StaticColorRenderComponent::StaticColorRenderComponent(
-  const Color color,
+  const NVGcolor color,
   const float width,
   const float height
 ) : color(color),
@@ -23,8 +24,14 @@ void StaticColorRenderComponent::update(Entity *entity, const float) {
   rect.c = {pos.x, pos.y};
 }
 
-void StaticColorRenderComponent::render(RenderingContext &context) {
-  context.renderRect(color, static_cast<Rect>(rect));
+void StaticColorRenderComponent::render(NVGcontext *context) {
+  nvgBeginPath(context);
+  nvgFillColor(context, color);
+  
+  const Rect rectps = static_cast<Rect>(rect);
+  nvgRect(context, rectps.p.x, rectps.p.y, rectps.s.x, rectps.s.y);
+  
+  nvgFill(context);
 }
 
 const CameraMotionTarget *StaticColorRenderComponent::getCameraTarget() const {

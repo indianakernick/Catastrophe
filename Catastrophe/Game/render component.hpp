@@ -14,13 +14,15 @@
 class Entity;
 class RenderingContext;
 
+extern "C" struct NVGcontext;
+
 class RenderComponent {
 public:
   RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
   virtual void update(Entity *, float) = 0;
-  virtual void render(RenderingContext &) = 0;
+  virtual void render(NVGcontext *) = 0;
   virtual const CameraMotionTarget *getCameraTarget() const = 0;
 };
 

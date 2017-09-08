@@ -8,7 +8,9 @@
 
 #include "debug draw.hpp"
 
-#include "rendering context.hpp"
+#include <cmath>
+#include <glm/vec2.hpp>
+#include <nanovg/nanovg.h>
 
 namespace {
   b2Color brighten(const b2Color color) {
@@ -21,37 +23,9 @@ namespace {
     };
   }
   
-  Color castColor(const b2Color color) {
-    return {color.r * 255, color.g * 255, color.b * 255, color.a * 255};
+  NVGcolor castColor(const b2Color color) {
+    return nvgRGBAf(color.r, color.g, color.b, color.a);
   }
-  
-  glm::vec2 castVec2(const b2Vec2 vec2) {
-    return {vec2.x, vec2.y};
-  }
-  
-  template <typename MemberPointer>
-  struct MemberType;
-  
-  template <typename Class, typename Member>
-  struct MemberType<Member (Class::*)> {
-    using type = Member;
-  };
-  
-  template <typename MemberPointer>
-  using MemberType_t = typename MemberType<MemberPointer>::type;
-  
-  //should be safe to reinterpret_cast
-  static_assert(sizeof(b2Vec2) == sizeof(glm::vec2));
-  static_assert(offsetof(b2Vec2, x) == offsetof(glm::vec2, x));
-  static_assert(offsetof(b2Vec2, y) == offsetof(glm::vec2, y));
-  static_assert(std::is_same<
-    MemberType_t<decltype(&b2Vec2::x)>,
-    MemberType_t<decltype(&glm::vec2::x)>
-  >::value);
-  static_assert(std::is_same<
-    MemberType_t<decltype(&b2Vec2::y)>,
-    MemberType_t<decltype(&glm::vec2::y)>
-  >::value);
 }
 
 DebugDraw::DebugDraw()
@@ -61,19 +35,50 @@ DebugDraw::DebugDraw()
 
 void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
   if (renderer) {
-    renderer->renderPolygon(castColor(color), reinterpret_cast<const glm::vec2 *>(verts), numVerts);
+    if (numVerts == 0) {
+      return;
+    }
+    
+    nvgBeginPath(renderer);
+    nvgStrokeColor(renderer, castColor(color));
+    nvgStrokeWidth(renderer, 0.05f); //@TODO should be the inverse of pixels per meter
+    nvgMoveTo(renderer, verts[0].x, verts[0].y);
+    
+    const b2Vec2 *const endVerts = verts + numVerts;
+    for (const b2Vec2 *v = verts + 1; v != endVerts; ++v) {
+      nvgLineTo(renderer, v->x, v->y);
+    }
+    
+    nvgStroke(renderer);
   }
 }
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
   if (renderer) {
-    renderer->renderFilledPolygon(castColor(color), reinterpret_cast<const glm::vec2 *>(verts), numVerts);
+    if (numVerts == 0) {
+      return;
+    }
+    
+    nvgBeginPath(renderer);
+    nvgFillColor(renderer, castColor(color));
+    nvgMoveTo(renderer, verts[0].x, verts[0].y);
+    
+    const b2Vec2 *const endVerts = verts + numVerts;
+    for (const b2Vec2 *v = verts + 1; v != endVerts; ++v) {
+      nvgLineTo(renderer, v->x, v->y);
+    }
+    
+    nvgFill(renderer);
   }
 }
 
 void DebugDraw::DrawCircle(const b2Vec2 &center, const float32 radius, const b2Color &color) {
   if (renderer) {
-    renderer->renderCircle(castColor(color), castVec2(center), radius);
+    nvgBeginPath(renderer);
+    nvgStrokeColor(renderer, castColor(color));
+    nvgStrokeWidth(renderer, 0.05f); //@TODO should be the inverse of pixels per meter
+    nvgCircle(renderer, center.x, center.y, radius);
+    nvgStroke(renderer);
   }
 }
 
@@ -84,7 +89,12 @@ void DebugDraw::DrawSolidCircle(const b2Vec2 &center, const float32 radius, cons
 
 void DebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
   if (renderer) {
-    renderer->renderLine(castColor(color), castVec2(p1), castVec2(p2));
+    nvgBeginPath(renderer);
+    nvgStrokeColor(renderer, castColor(color));
+    nvgStrokeWidth(renderer, 0.05f); //@TODO should be the inverse of pixels per meter
+    nvgMoveTo(renderer, p1.x, p1.y);
+    nvgLineTo(renderer, p2.x, p2.y);
+    nvgStroke(renderer);
   }
 }
 
@@ -94,11 +104,14 @@ void DebugDraw::DrawTransform(const b2Transform &) {
 
 void DebugDraw::DrawPoint(const b2Vec2 &p, const float32 size, const b2Color &color) {
   if (renderer) {
-    renderer->renderFilledCircle(castColor(color), castVec2(p), size);
+    nvgBeginPath(renderer);
+    nvgFillColor(renderer, castColor(color));
+    nvgCircle(renderer, p.x, p.y, size);
+    nvgFill(renderer);
   }
 }
 
-void DebugDraw::attachRenderer(RenderingContext *newRenderer) {
+void DebugDraw::attachRenderer(NVGcontext *newRenderer) {
   renderer = newRenderer;
 }
 

@@ -64,8 +64,13 @@ namespace {
     return colors;
   }
   
-  Scalars readScalars(const YAML::Node &scalarsNode) {
-    return scalarsNode.as<Scalars>();
+  Scalars readScalars(const YAML::Node &scalarsNode, const float invScale) {
+    checkType(scalarsNode, YAML::NodeType::Sequence);
+    Scalars scalars;
+    for (auto s = scalarsNode.begin(); s != scalarsNode.end(); ++s) {
+      scalars.emplace_back(s->as<Coord>() * invScale);
+    }
+    return scalars;
   }
   
   PointKeyframe readPointKeyframe(const YAML::Node &frameNode, const float invScale) {
@@ -84,11 +89,11 @@ namespace {
     };
   }
   
-  ScalarKeyframe readScalarKeyframe(const YAML::Node &frameNode) {
+  ScalarKeyframe readScalarKeyframe(const YAML::Node &frameNode, const float invScale) {
     checkType(frameNode, YAML::NodeType::Map);
     return {
       getChild(frameNode, "offset").as<TimeSec>(),
-      readScalars(getChild(frameNode, "scalars"))
+      readScalars(getChild(frameNode, "scalars"), invScale)
     };
   }
   
@@ -156,7 +161,7 @@ namespace {
     return frames;
   }
   
-  ScalarKeyframes readScalarKeyframes(const YAML::Node &framesNode) {
+  ScalarKeyframes readScalarKeyframes(const YAML::Node &framesNode, const float invScale) {
     checkType(framesNode, YAML::NodeType::Sequence);
     
     OffsetChecker checker;
@@ -165,11 +170,11 @@ namespace {
     if (framesNode.size() == 0) {
       return frames;
     }
-    frames.emplace_back(readColorKeyframe(framesNode[0]));
+    frames.emplace_back(readScalarKeyframe(framesNode[0], invScale));
     checker.first(frames.front().offsetSec);
     
     for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readScalarKeyframe(*f));
+      frames.emplace_back(readScalarKeyframe(*f, invScale));
       checker.check(frames.back().offsetSec);
     }
     
@@ -183,7 +188,7 @@ namespace {
       getChild(animNode, "duration").as<TimeSec>(),
       readPointKeyframes(getChild(animNode, "point frames"), invScale),
       readColorKeyframes(getChild(animNode, "color frames")),
-      readScalarKeyframes(getChild(animNode, "scalar frames"))
+      readScalarKeyframes(getChild(animNode, "scalar frames"), invScale)
     };
   }
   
@@ -210,7 +215,10 @@ namespace {
     }
   }
   
-  std::unique_ptr<Shape> readShape(const YAML::Node &shapeNode, const FrameSize frameSize) {
+  std::unique_ptr<Shape> readShape(
+    const YAML::Node &shapeNode,
+    const FrameSize frameSize
+  ) {
     checkType(shapeNode, YAML::NodeType::Map);
     
     std::unique_ptr<Shape> shape = readShapeType(getChild(shapeNode, "type"));
@@ -219,7 +227,10 @@ namespace {
     return shape;
   }
   
-  Shapes readShapes(const YAML::Node &shapesNode, const FrameSize frameSize) {
+  Shapes readShapes(
+    const YAML::Node &shapesNode,
+    const FrameSize frameSize
+  ) {
     checkType(shapesNode, YAML::NodeType::Sequence);
     
     Shapes shapes;

@@ -1,13 +1,13 @@
 //
-//  new rendering context.hpp
+//  rendering context.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 4/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef new_rendering_context_hpp
-#define new_rendering_context_hpp
+#ifndef rendering_context_hpp
+#define rendering_context_hpp
 
 #include <glm/mat3x3.hpp>
 

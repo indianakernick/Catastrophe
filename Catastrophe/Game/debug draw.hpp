@@ -11,7 +11,7 @@
 
 #include "../Libraries/Box2D/Common/b2Draw.h"
 
-class RenderingContext;
+extern "C" struct NVGcontext;
 
 class DebugDraw final : public b2Draw {
 public:
@@ -25,11 +25,11 @@ public:
   void DrawTransform(const b2Transform &) override;
   void DrawPoint(const b2Vec2 &, float32, const b2Color &) override;
 
-  void attachRenderer(RenderingContext *);
+  void attachRenderer(NVGcontext *);
   void detachRenderer();
 
 private:
-  RenderingContext *renderer = nullptr;
+  NVGcontext *renderer = nullptr;
 };
 
 #endif

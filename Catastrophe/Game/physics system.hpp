@@ -17,8 +17,6 @@
 #include <experimental/optional>
 #include "../Libraries/Box2D/Box2D.h"
 
-struct SDL_Renderer;
-
 class PhysicsSystem {
 public:
   PhysicsSystem() = default;
@@ -35,7 +33,7 @@ public:
   void update(float);
   void debugRender();
   
-  void attachRenderer(RenderingContext &);
+  void attachRenderer(NVGcontext *);
   void detachRenderer();
   
   ContactListener &getContactListener();

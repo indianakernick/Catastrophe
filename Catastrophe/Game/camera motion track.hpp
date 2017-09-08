@@ -14,12 +14,9 @@
 using CameraMotionTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
 
 struct CameraProps;
-class RenderingContext;
+extern "C" struct NVGcontext;
 
 class CameraMotionTrack {
-  
-  friend class Camera;
-
 public:
   CameraMotionTrack();
   CameraMotionTrack(const CameraMotionTrack &);
@@ -38,6 +35,8 @@ public:
   
   glm::vec2 calcMotionTarget(CameraProps) const;
   
+  void debugRender(NVGcontext *, CameraProps) const;
+  
 private:
   const CameraMotionTarget *target;
   CameraMotionTarget localTarget;
@@ -46,8 +45,6 @@ private:
   
   glm::vec2 centerToMeters(CameraProps, glm::vec2) const;
   glm::vec2 sizeToMeters(CameraProps, glm::vec2) const;
-  
-  void debugRender(CameraProps, RenderingContext &) const;
 };
 
 #endif

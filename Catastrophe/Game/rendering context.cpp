@@ -1,12 +1,12 @@
 //
-//  new rendering context.cpp
+//  rendering context.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 4/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "new rendering context.hpp"
+#include "rendering context.hpp"
 
 #include "camera.hpp"
 #include <stdexcept>

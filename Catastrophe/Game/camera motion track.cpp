@@ -8,10 +8,15 @@
 
 #include "camera motion track.hpp"
 
+#include "rect.hpp"
 #include "camera pos.hpp"
+#include <nanovg/nanovg.h>
 #include "camera props.hpp"
 #include "camera constants.hpp"
 #include "rendering context.hpp"
+
+const NVGcolor CAM_TARGET_COLOR = {.r = 1.0f, .g = 1.0f, .b = 0.0f, .a = 0.5f};
+const NVGcolor CAM_TRACK_COLOR = {.r = 0.0f, .g = 1.0f, .b = 0, .a = 0.0f};
 
 CameraMotionTrack::CameraMotionTrack()
   : target(nullptr),
@@ -107,24 +112,33 @@ glm::vec2 CameraMotionTrack::calcMotionTarget(const CameraProps props) const {
   return props.center + motion;
 }
 
+void CameraMotionTrack::debugRender(
+  NVGcontext *context,
+  const CameraProps props
+) const {
+  const glm::vec2 centerM = centerToMeters(props, center);
+  const glm::vec2 sizeM = sizeToMeters(props, size);
+  const glm::vec2 cornerM = centerM - sizeM / 2.0f;
+  
+  nvgBeginPath(context);
+  nvgFillColor(context, CAM_TRACK_COLOR);
+  nvgRect(context, cornerM.x, cornerM.y, sizeM.x, sizeM.y);
+  nvgFill(context);
+  
+  if (target) {
+    const Rect targetRect = static_cast<Rect>(*target);
+  
+    nvgBeginPath(context);
+    nvgFillColor(context, CAM_TARGET_COLOR);
+    nvgRect(context, targetRect.p.x, targetRect.p.y, targetRect.s.x, targetRect.s.y);
+    nvgFill(context);
+  }
+}
+
 glm::vec2 CameraMotionTrack::centerToMeters(const CameraProps props, const glm::vec2 center) const {
   return props.center + sizeToMeters(props, center);
 }
 
 glm::vec2 CameraMotionTrack::sizeToMeters(const CameraProps props, const glm::vec2 size) const {
   return (size * static_cast<glm::vec2>(props.windowSize)) / props.pixelsPerMeter;
-}
-
-void CameraMotionTrack::debugRender(
-  const CameraProps props,
-  RenderingContext &renderer
-) const {
-  const glm::vec2 centerM = centerToMeters(props, center);
-  const glm::vec2 sizeM = sizeToMeters(props, size);
-  const glm::vec2 cornerM = centerM - sizeM / 2.0f;
-  renderer.renderRect(CAM_TRACK_COLOR, {cornerM, sizeM});
-  
-  if (target) {
-    renderer.renderRect(CAM_TARGET_COLOR, static_cast<Rect>(*target));
-  }
 }

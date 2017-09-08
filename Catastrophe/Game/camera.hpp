@@ -18,8 +18,6 @@
 #include "camera window size.hpp"
 #include "camera motion track.hpp"
 
-class RenderingContext;
-
 class Camera {
 public:
   Camera() = default;
@@ -35,13 +33,9 @@ public:
   CameraWindowSize windowSize;
 
   void update(float);
-  void debugRender();
-  
-  void attachRenderer(RenderingContext &);
-  void detachRenderer();
+  void debugRender(NVGcontext *);
 
 //private:
-  RenderingContext *renderer = nullptr;
   CameraProps props;
 };
 

@@ -37,16 +37,6 @@ void Camera::update(const float delta) {
   props.windowSize = newWindowSize;
 }
 
-void Camera::debugRender() {
-  if (renderer != nullptr) {
-    motionTrack.debugRender(props, *renderer);
-  }
-}
-
-void Camera::attachRenderer(RenderingContext &newRenderer) {
-  renderer = &newRenderer;
-}
-
-void Camera::detachRenderer() {
-  renderer = nullptr;
+void Camera::debugRender(NVGcontext *context) {
+  motionTrack.debugRender(context, props);
 }

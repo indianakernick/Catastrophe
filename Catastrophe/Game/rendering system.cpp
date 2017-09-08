@@ -10,12 +10,12 @@
 
 #include "camera.hpp"
 
-void RenderingSystem::init(SDL_Renderer *sdlRenderer, const std::experimental::string_view sheet) {
-  //renderer.init(sdlRenderer, sheet, &camera);
+void RenderingSystem::init() {
+  
 }
 
 void RenderingSystem::quit() {
-  //renderer.quit();
+  
 }
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
@@ -30,22 +30,14 @@ void RenderingSystem::update(const float delta) {
   camera.update(delta);
 }
 
-void RenderingSystem::render() {
+void RenderingSystem::render(NVGcontext *context) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    //c->second->render(renderer);
+    c->second->render(context);
   }
 }
 
-void RenderingSystem::cameraDebugRender() {
-  camera.debugRender();
-}
-
-void RenderingSystem::attachRendererToCamera() {
-  camera.attachRenderer(renderer);
-}
-
-void RenderingSystem::detachRendererFromCamera() {
-  camera.detachRenderer();
+void RenderingSystem::cameraDebugRender(NVGcontext *context) {
+  camera.debugRender(context);
 }
 
 void RenderingSystem::track(const EntityID entity) {
@@ -58,10 +50,6 @@ void RenderingSystem::track(const EntityID entity) {
 
 void RenderingSystem::stopTracking() {
   camera.motionTrack.stop();
-}
-
-RenderingContext &RenderingSystem::getRenderer() {
-  return renderer;
 }
 
 Camera &RenderingSystem::getCamera() {

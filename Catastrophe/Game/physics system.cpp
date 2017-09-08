@@ -57,8 +57,8 @@ void PhysicsSystem::debugRender() {
   world->DrawDebugData();
 }
 
-void PhysicsSystem::attachRenderer(RenderingContext &newRenderer) {
-  draw->attachRenderer(&newRenderer);
+void PhysicsSystem::attachRenderer(NVGcontext *newRenderer) {
+  draw->attachRenderer(newRenderer);
 }
 
 void PhysicsSystem::detachRenderer() {

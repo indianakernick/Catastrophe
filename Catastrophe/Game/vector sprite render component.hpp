@@ -17,7 +17,7 @@ public:
   VectorSpriteRenderComponent(std::experimental::string_view, float, float);
   
   void update(Entity *, float) override;
-  void render(RenderingContext &) override;
+  void render(NVGcontext *) override;
   const CameraMotionTarget *getCameraTarget() const override;
 
   void setProgress(float);

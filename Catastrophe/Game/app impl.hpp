@@ -17,7 +17,7 @@
 #include <Simpleton/Application/sdl app.hpp>
 #include <Simpleton/Time/fps.hpp>
 
-#include "new rendering context.hpp"
+#include "rendering context.hpp"
 #include "vector sprite.hpp"
 
 class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
