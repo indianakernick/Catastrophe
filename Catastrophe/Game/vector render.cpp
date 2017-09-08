@@ -69,7 +69,7 @@ namespace {
       return keyframes[0].data;
     }
     
-    const Keyframe searchFrame = {.offsetSec = progressSec};
+    const Keyframe searchFrame = {progressSec, {}};
     //upperKeyframe is the keyframe after the progress
     const auto upperKeyframe = std::lower_bound(
       keyframes.cbegin(),

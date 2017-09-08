@@ -100,7 +100,6 @@
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
-		4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */; };
 		4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45F3DB471F1715CC0058D36B /* player.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45F3DB461F1715CC0058D36B /* player.yaml */; };
@@ -138,7 +137,6 @@
 		4509F9011F5E816F00927A19 /* vector file helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector file helper.hpp"; sourceTree = "<group>"; };
 		4509F9031F5E8EC200927A19 /* vector circle shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector circle shape.cpp"; sourceTree = "<group>"; };
 		4509F9041F5E8EC200927A19 /* vector circle shape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector circle shape.hpp"; sourceTree = "<group>"; };
-		45103F7E1F272828001B24E2 /* libNumber Display.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libNumber Display.dylib"; path = "../../../../../../../usr/local/lib/libNumber Display.dylib"; sourceTree = "<group>"; };
 		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 		453893081F2D6F21007EBB5A /* debug draw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug draw.hpp"; sourceTree = "<group>"; };
 		4538930A1F2D6F5D007EBB5A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		4538930B1F2D6F5D007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
-		4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_gfx-1.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2_gfx/1.0.1/lib/libSDL2_gfx-1.0.0.dylib"; sourceTree = "<group>"; };
 		454116151F523D6600C2865B /* camera visible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera visible.cpp"; sourceTree = "<group>"; };
 		454116161F523D6600C2865B /* camera visible.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera visible.hpp"; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
@@ -301,9 +298,7 @@
 		4592BAE31F11B51400D1640D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4592BAE51F11B5C200D1640D /* ideas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ideas.txt; sourceTree = "<group>"; };
 		4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2_ttf/2.0.14/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
-		4592BB2B1F1319D400D1640D /* libUnpacker.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUnpacker.dylib; path = ../../../../../../../usr/local/lib/libUnpacker.dylib; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
@@ -332,7 +327,6 @@
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
 				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
 				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
-				4592BAF81F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,12 +711,8 @@
 				4509F8EB1F5D247700927A19 /* Cocoa.framework */,
 				4509F8E91F5D247100927A19 /* CoreVideo.framework */,
 				4509F8E71F5CE2AE00927A19 /* libnanovg.a */,
-				4538930D1F2D7523007EBB5A /* libSDL2_gfx-1.0.0.dylib */,
-				45103F7E1F272828001B24E2 /* libNumber Display.dylib */,
 				45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */,
-				4592BB2B1F1319D400D1640D /* libUnpacker.dylib */,
 				4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */,
-				4592BAF71F11D72B00D1640D /* libSDL2_ttf-2.0.0.dylib */,
 				4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */,
 			);
 			name = Frameworks;

@@ -11,7 +11,7 @@
 
 #include <nanovg/nanovg.h>
 
-const NVGcolor PLATFORM_COLOR = {.r = 0.0f, .g = 0.0f, .b = 1.0f, .a = 1.0f};
+const NVGcolor PLATFORM_COLOR = nvgRGBAf(0.0f, 0.0f, 1.0f, 1.0f);
 constexpr float PLATFORM_FRICTION = 1.0f;
 
 #endif

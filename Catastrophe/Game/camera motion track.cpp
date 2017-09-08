@@ -15,8 +15,8 @@
 #include "camera constants.hpp"
 #include "rendering context.hpp"
 
-const NVGcolor CAM_TARGET_COLOR = {.r = 1.0f, .g = 1.0f, .b = 0.0f, .a = 0.5f};
-const NVGcolor CAM_TRACK_COLOR = {.r = 0.0f, .g = 1.0f, .b = 0, .a = 0.0f};
+const NVGcolor CAM_TARGET_COLOR = nvgRGBAf(1.0f, 1.0f, 0.0f, 0.5f);
+const NVGcolor CAM_TRACK_COLOR = nvgRGBAf(0.0f, 1.0f, 0.0f, 0.5f);
 
 CameraMotionTrack::CameraMotionTrack()
   : target(nullptr),
