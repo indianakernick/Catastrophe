@@ -109,7 +109,8 @@ void RenderingContext::postRender(const bool printFPS) {
     nvgFontFaceId(context, fpsFontHandle);
     nvgFontSize(context, 32.0f);
     nvgFillColor(context, nvgRGBAf(1.0f, 1.0f, 1.0f, 1.0f));
-    nvgText(context, 0.0f, 24.0f, fpsStr.c_str(), fpsStr.c_str() + fpsStr.size());
+    nvgTextAlign(context, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+    nvgText(context, 0.0f, 0.0f, fpsStr.c_str(), fpsStr.c_str() + fpsStr.size());
   }
 
   nvgEndFrame(context);
