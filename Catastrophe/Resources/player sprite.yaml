@@ -1,6 +1,6 @@
 scale: 16
 anims:
-  Run:
+  run:
     duration: 1.0
     point frames:
     - offset: 0.0

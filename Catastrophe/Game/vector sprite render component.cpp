@@ -38,10 +38,9 @@ void VectorSpriteRenderComponent::render(NVGcontext *context) {
     transform = glm::scale(transform, scale);
     renderSprite(
       context,
-      sprite,
-      animName,
-      transform,
-      animProgress
+      sprite.shapes,
+      getFrame(sprite, animName, animProgress),
+      transform
     );
   }
 }

@@ -115,7 +115,7 @@ bool PlayerInputComponent::handleKeyUp(const SDL_Scancode key) {
 void PlayerInputComponent::handleAnim(Entity *entity) {
   auto renderComp = Utils::safeDownCast<VectorSpriteRenderComponent>(entity->render);
   const b2Body *body = entity->physics->getBody();
-  renderComp->setAnimName("Run");
+  renderComp->setAnimName("run");
   
   const float horiVel = body->GetLinearVelocity().x;
   //@TODO don't hardcode these values

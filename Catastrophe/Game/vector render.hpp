@@ -10,17 +10,10 @@
 #define vector_render_hpp
 
 #include <glm/mat3x3.hpp>
-#include <experimental/string_view>
+#include "vector sprite.hpp"
 
-struct Sprite;
-extern "C" struct NVGcontext;
-
-void renderSprite(
-  NVGcontext *,
-  const Sprite &,
-  std::experimental::string_view,
-  const glm::mat3 &,
-  float
-);
+Frame getFrame(const Sprite &, const std::string &, float);
+void lerpFrames(float, Frame &, const Frame &);
+void renderSprite(NVGcontext *, const Shapes &, const Frame &, glm::mat3);
 
 #endif

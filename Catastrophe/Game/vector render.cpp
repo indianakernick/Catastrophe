@@ -32,11 +32,28 @@ namespace {
     const KeyframeData &lower,
     const KeyframeData &upper
   ) {
+    if (lower.size() != upper.size()) {
+      throw std::runtime_error("Cannot interpolate keyframes of different sizes");
+    }
     KeyframeData data(lower.size());
     for (size_t d = 0; d != data.size(); ++d) {
       data[d] = lerpFun(prog, lower[d], upper[d]);
     }
     return data;
+  }
+  
+  template <typename KeyframeData>
+  void lerpModify(
+    const float prog,
+    KeyframeData &lower,
+    const KeyframeData &upper
+  ) {
+    if (lower.size() != upper.size()) {
+      throw std::runtime_error("Cannot interpolate keyframes of different sizes");
+    }
+    for (size_t d = 0; lower.size(); ++d) {
+      lower[d] = lerpFun(prog, lower[d], upper[d]);
+    }
   }
 
   template <typename Keyframe>
@@ -101,29 +118,35 @@ namespace {
   }
 }
 
-void renderSprite(
-  NVGcontext *context,
+Frame getFrame(
   const Sprite &sprite,
-  const std::experimental::string_view animName,
-  const glm::mat3 &model,
+  const std::string &animName,
   const float progressSec
 ) {
-  if (sprite.shapes.empty()) {
-    //nothing to render
-    return;
-  }
-  
-  nvgSave(context);
-  
-  nvgTransform(context, model);
-  
-  const Animation &anim = sprite.animations.at(animName.to_string());
-  const Frame frame = {
+  const Animation &anim = sprite.animations.at(animName);
+  return {
     lerpAllKeyframes(anim.pointFrames, progressSec),
     lerpAllKeyframes(anim.colorFrames, progressSec),
     lerpAllKeyframes(anim.scalarFrames, progressSec)
   };
-  for (auto s = sprite.shapes.cbegin(); s != sprite.shapes.cend(); ++s) {
+}
+
+void lerpFrames(const float progress, Frame &lower, const Frame &upper) {
+  lerpModify(progress, lower.points, upper.points);
+  lerpModify(progress, lower.colors, upper.colors);
+  lerpModify(progress, lower.scalars, upper.scalars);
+}
+
+void renderSprite(
+  NVGcontext *context,
+  const Shapes &shapes,
+  const Frame &frame,
+  const glm::mat3 model
+) {
+  nvgSave(context);
+  nvgTransform(context, model);
+  
+  for (auto s = shapes.cbegin(); s != shapes.cend(); ++s) {
     (*s)->draw(context, frame);
   }
    

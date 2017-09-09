@@ -373,14 +373,14 @@
 		45103F591F2497CD001B24E2 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				454116211F523DAC00C2865B /* camera */,
+				4509F8CC1F5A392300927A19 /* vector */,
 				453892CA1F2AF41F007EBB5A /* render component.cpp */,
 				453892CB1F2AF420007EBB5A /* render component.hpp */,
 				453892ED1F2C2487007EBB5A /* rendering system.cpp */,
 				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
 				4509F8E41F5CE20000927A19 /* rendering context.cpp */,
 				4509F8E51F5CE20000927A19 /* rendering context.hpp */,
-				454116211F523DAC00C2865B /* camera */,
-				4509F8CC1F5A392300927A19 /* vector */,
 				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
 				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 			);
