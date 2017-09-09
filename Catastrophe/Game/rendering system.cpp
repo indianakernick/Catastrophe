@@ -10,13 +10,8 @@
 
 #include "camera.hpp"
 
-void RenderingSystem::init() {
-  
-}
-
-void RenderingSystem::quit() {
-  
-}
+void RenderingSystem::init() {}
+void RenderingSystem::quit() {}
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
   components.emplace(id, comp);

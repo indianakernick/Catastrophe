@@ -121,5 +121,5 @@ void PlayerInputComponent::handleAnim(Entity *entity) {
   //@TODO don't hardcode these values
   //foot moves 0.25 meters in 0.125 seconds
   renderComp->setSpeed(Math::abs(horiVel / (0.25f / 0.125f)));
-  renderComp->setHoriScale(Math::sign(horiVel));
+  renderComp->setScale({Math::sign(horiVel), 1.0f});
 }

@@ -23,7 +23,7 @@ public:
   void setProgress(float);
   void setSpeed(float);
   void setAnimName(std::experimental::string_view);
-  void setHoriScale(float);
+  void setScale(glm::vec2);
 
 private:
   Sprite sprite;
@@ -31,7 +31,7 @@ private:
   float animProgress = 0.0f;
   float animSpeed = 1.0f;
   std::string animName;
-  float horiScale = 1.0f;
+  glm::vec2 scale;
 };
 
 #endif

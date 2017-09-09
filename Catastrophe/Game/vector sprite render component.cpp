@@ -34,12 +34,8 @@ void VectorSpriteRenderComponent::update(Entity *entity, const float delta) {
 
 void VectorSpriteRenderComponent::render(NVGcontext *context) {
   if (!animName.empty()) {
-    glm::vec2 pos = rect.c - rect.h;
-    if (horiScale == -1.0f) {
-      pos.x += rect.h.x * 2.0f;
-    }
-    glm::mat3 transform = glm::translate({}, pos);
-    transform[0][0] = horiScale;
+    glm::mat3 transform = glm::translate({}, rect.c);
+    transform = glm::scale(transform, scale);
     renderSprite(
       context,
       sprite,
@@ -66,10 +62,6 @@ void VectorSpriteRenderComponent::setAnimName(const std::experimental::string_vi
   animName.assign(newAnimName.data(), newAnimName.size());
 }
 
-void VectorSpriteRenderComponent::setHoriScale(const float newHoriScale) {
-  if (newHoriScale == 0.0f) {
-    horiScale = 1.0f;
-  } else {
-    horiScale = newHoriScale;
-  }
+void VectorSpriteRenderComponent::setScale(const glm::vec2 newScale) {
+  scale = newScale;
 }
