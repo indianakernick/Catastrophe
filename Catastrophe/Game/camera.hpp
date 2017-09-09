@@ -9,11 +9,11 @@
 #ifndef camera_hpp
 #define camera_hpp
 
+#include <glm/mat3x3.hpp>
 #include "camera pos.hpp"
 #include "camera zoom.hpp"
 #include "camera props.hpp"
 #include "camera visible.hpp"
-#include "camera transform.hpp"
 #include "camera zoom track.hpp"
 #include "camera window size.hpp"
 #include "camera motion track.hpp"
@@ -35,7 +35,7 @@ public:
   void update(float);
   void debugRender(NVGcontext *);
 
-//private:
+private:
   CameraProps props;
 };
 

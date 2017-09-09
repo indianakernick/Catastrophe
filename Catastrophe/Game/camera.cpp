@@ -10,13 +10,23 @@
 
 #include "camera visible.hpp"
 #include "camera constants.hpp"
+#include <glm/gtx/matrix_transform_2d.hpp>
 
 glm::mat3 Camera::toPixels() const {
-  return ::toPixels(props);
+  return glm::translate(
+    glm::scale(
+      glm::translate(
+        {},
+        static_cast<glm::vec2>(props.windowSize) / 2.0f
+      ),
+      {props.pixelsPerMeter, -props.pixelsPerMeter}
+    ),
+    -props.center
+  );
 }
 
 glm::mat3 Camera::toMeters() const {
-  return ::toPixels(props);
+  return glm::inverse(toPixels());
 }
 
 CameraVisible Camera::visible() const {

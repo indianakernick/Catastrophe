@@ -14,47 +14,38 @@
 #include <Simpleton/Math/scale.hpp>
 
 CameraPos::CameraPos()
-  : motionVel(0.0f, 0.0f),
-    lastMotionTarget(0.0f, 0.0f) {}
+  : vel(0.0f, 0.0f),
+    lastTarget(0.0f, 0.0f) {}
 
 glm::vec2 CameraPos::calcCenter(
   const CameraProps props,
-  const glm::vec2 motionTarget,
+  const glm::vec2 target,
   const float delta
 ) {
-  const glm::vec2 oldCenter = props.center;
-  glm::vec2 newCenter;
-
-  glm::vec2 desired = motionTarget - oldCenter;
+  const glm::vec2 desired = target - props.center;
   const float distance = glm::length(desired);
-  if (distance != 0.0f) {
-    desired /= distance;
-  }
-  
-  if (distance <= MOVE_SLOW_DIST) {
-    desired *= Math::scale(distance, 0.0f, MOVE_SLOW_DIST, 0.0f, MAX_MOVE_VEL);
+  if (shouldStop(target, distance)) {
+    vel = {0.0f, 0.0f};
+    lastTarget = target;
+    return target;
   } else {
-    desired *= MAX_MOVE_VEL;
+    vel += getSteer(desired, distance);
+    lastTarget = props.center + vel * delta;
+    return lastTarget;
   }
-  
-  glm::vec2 steer = desired - motionVel;
-  if (glm::length2(steer) > MAX_MOVE_FORCE * MAX_MOVE_FORCE) {
-    steer = glm::normalize(steer);
-    steer *= MAX_MOVE_FORCE;
-  }
-  
-  if (
-    glm::length2(motionVel) <= MOVE_STOP_VEL * MOVE_STOP_VEL &&
+}
+
+bool CameraPos::shouldStop(const glm::vec2 target, const float distance) const {
+  return
+    glm::length2(vel) <= MOVE_STOP_VEL * MOVE_STOP_VEL &&
     distance <= MOVE_STOP_DIST &&
-    motionTarget == lastMotionTarget
-  ) {
-    motionVel = {0.0f, 0.0f};
-    newCenter = motionTarget;
-  } else {
-    motionVel += steer;
-    newCenter = oldCenter + motionVel * delta;
-  }
-  
-  lastMotionTarget = motionTarget;
-  return newCenter;
+    target == lastTarget
+  ;
+}
+
+glm::vec2 CameraPos::getSteer(const glm::vec2 desired, const float distance) const {
+  const glm::vec2 scaledDesired = glm::sign(desired) * (
+    std::min(distance, MOVE_SLOW_DIST) / MOVE_SLOW_DIST * MAX_MOVE_VEL
+  );
+  return glm::clamp(scaledDesired - vel, -MAX_MOVE_FORCE, MAX_MOVE_FORCE);
 }

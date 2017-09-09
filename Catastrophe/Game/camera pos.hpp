@@ -20,8 +20,11 @@ public:
   glm::vec2 calcCenter(CameraProps, glm::vec2, float);
   
 private:
-  glm::vec2 motionVel;
-  glm::vec2 lastMotionTarget;
+  glm::vec2 vel;
+  glm::vec2 lastTarget;
+  
+  bool shouldStop(glm::vec2, float) const;
+  glm::vec2 getSteer(glm::vec2, float) const;
 };
 
 #endif
