@@ -13,4 +13,6 @@
 
 const b2Vec2 GRAVITY = {0.0f, -9.80665f};
 
+constexpr float DEBUG_DRAW_STROKE_WIDTH = 1 / 32.0f;
+
 #endif
