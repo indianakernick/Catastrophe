@@ -8,8 +8,6 @@
 
 #include "rendering context.hpp"
 
-#include "camera.hpp"
-#include <stdexcept>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
@@ -18,6 +16,7 @@
 #include <nanovg/nanovg_gl.h>
 #include <Simpleton/Platform/sdl error.hpp>
 #include "nvg helper.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 constexpr int DEPTH_BITS = 16;
 constexpr int STENCIL_BITS = 8;
@@ -35,8 +34,7 @@ namespace {
   }
 }
 
-void RenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
-  camera = newCamera;
+void RenderingContext::init(SDL_Window *newWindow) {
   window = newWindow;
   
   setSDLGLcontextAttribs();
@@ -66,6 +64,14 @@ void RenderingContext::init(const Camera *newCamera, SDL_Window *newWindow) {
   if (context == nullptr) {
     throw std::runtime_error("NanoVG init failed");
   }
+  
+  fpsFontHandle = nvgCreateFont(
+    context,
+    "FPS font",
+    (Platform::getResDir() + "Consolas.ttf").c_str()
+  );
+  
+  fpsCounter.init();
 }
 
 void RenderingContext::quit() {
@@ -74,7 +80,6 @@ void RenderingContext::quit() {
   SDL_GL_DeleteContext(sdlGLContext);
   sdlGLContext = nullptr;
   window = nullptr;
-  camera = nullptr;
 }
 
 void RenderingContext::preRender(const glm::mat3 viewProj) {
@@ -94,7 +99,19 @@ void RenderingContext::preRender(const glm::mat3 viewProj) {
   nvgTransform(context, viewProj);
 }
 
-void RenderingContext::postRender() {
+void RenderingContext::postRender(const bool printFPS) {
+  fpsCounter.frame();
+  
+  if (printFPS) {
+    //@TODO use to_chars
+    const std::string fpsStr = "FPS: " + std::to_string(fpsCounter.get());
+    nvgResetTransform(context);
+    nvgFontFaceId(context, fpsFontHandle);
+    nvgFontSize(context, 32.0f);
+    nvgFillColor(context, nvgRGBAf(1.0f, 1.0f, 1.0f, 1.0f));
+    nvgText(context, 0.0f, 24.0f, fpsStr.c_str(), fpsStr.c_str() + fpsStr.size());
+  }
+
   nvgEndFrame(context);
   SDL_GL_SwapWindow(window);
 }

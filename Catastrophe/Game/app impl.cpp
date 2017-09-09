@@ -15,13 +15,13 @@
 #include "camera constants.hpp"
 #include "register collision listeners.hpp"
 
-#include "vector file.hpp"
-#include <Simpleton/Platform/system info.hpp>
-#include "vector render.hpp"
-
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
+  windowLibrary.emplace(SDL_INIT_EVENTS);
+  window = Platform::makeWindow(WINDOW_DESC);
+  renderingContext.init(window.get());
+
   renderingSystem.init();
   
   physicsSystem.init();
@@ -44,18 +44,10 @@ bool AppImpl::init() {
   
   renderingSystem.track(player);
   
-  window = Platform::makeWindow(WINDOW_DESC);
-  renderingContext.init(&renderingSystem.getCamera(), window.get());
-  
-  fpsCounter.init();
-  
   return true;
 }
 
 void AppImpl::quit() {
-  renderingContext.quit();
-  window.reset();
-  
   renderingSystem.stopTracking();
 
   entityManager.quit();
@@ -66,6 +58,10 @@ void AppImpl::quit() {
   physicsSystem.quit();
   
   renderingSystem.quit();
+  
+  renderingContext.quit();
+  window.reset();
+  windowLibrary = std::experimental::nullopt;
 }
 
 bool AppImpl::input(float) {
@@ -106,22 +102,5 @@ void AppImpl::render(const float) {
     renderingSystem.render(renderingContext.getContext());
   }
   
-  if constexpr (ENABLE_FPS_RENDER) {
-    /*fpsCounter.frame();
-    fpsCounter.get() //returns uint32_t
-    const unsigned frames = fpsCounter.get();
-    
-    char stringBuf[32];
-    //@TODO use std::to_chars
-    const int err = std::snprintf(stringBuf, sizeof(stringBuf), "FPS: %u", frames);
-    assert(0 < err && err < static_cast<int>(sizeof(stringBuf)));
-  
-    renderingSystem.getRenderer().renderDebugText(
-      {255, 255, 255, 255},
-      {0, 0},
-      stringBuf
-    );*/
-  }
-  
-  renderingContext.postRender();
+  renderingContext.postRender(ENABLE_FPS_RENDER);
 }

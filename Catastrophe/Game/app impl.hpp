@@ -9,27 +9,28 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
-#include "camera.hpp"
 #include "input system.hpp"
 #include "physics system.hpp"
-#include "rendering system.hpp"
 #include "entity manager.hpp"
-#include <Simpleton/Application/sdl app.hpp>
-#include <Simpleton/Time/fps.hpp>
+#include "rendering system.hpp"
 #include "rendering context.hpp"
+#include <experimental/optional>
+#include <Simpleton/Application/app.hpp>
+#include <Simpleton/Platform/window library.hpp>
 
-class AppImpl : public Game::SDLApp<std::chrono::duration<float>> {
+class AppImpl : public Game::App<std::chrono::duration<float>> {
 public:
   AppImpl() = default;
 
   EntityManager entityManager;
 
 private:
+  std::experimental::optional<Platform::WindowLibrary> windowLibrary;
+  Platform::Window window;
+  RenderingContext renderingContext;
   RenderingSystem renderingSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
-  Time::FPS fpsCounter;
-  RenderingContext renderingContext;
   
   EntityID player;
   EntityID platform;

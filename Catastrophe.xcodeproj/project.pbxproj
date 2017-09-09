@@ -26,6 +26,7 @@
 		4509F9051F5E8EC200927A19 /* vector circle shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9031F5E8EC200927A19 /* vector circle shape.cpp */; };
 		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
 		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
+		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
 		4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534A60F1F51289B00F3AC06 /* debug input.cpp */; };
@@ -141,6 +142,7 @@
 		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
 		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
+		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
 		4534A60F1F51289B00F3AC06 /* debug input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug input.cpp"; sourceTree = "<group>"; };
 		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		451FA2851F1499CC00C43BE9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
 				4509F8D31F5A429800927A19 /* player sprite.yaml */,
 				451FA2871F149B2200C43BE9 /* config.yaml */,
 				451FA2881F149B2200C43BE9 /* rat.png */,
@@ -806,6 +809,7 @@
 				45F3DB471F1715CC0058D36B /* player.yaml in Resources */,
 				451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */,
 				453479C11F21D2C60083743E /* small rat.png in Resources */,
+				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
