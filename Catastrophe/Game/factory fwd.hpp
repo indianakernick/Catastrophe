@@ -15,6 +15,7 @@
 class Entity;
 class InputSystem;
 class PhysicsSystem;
+class AnimationSystem;
 class RenderingSystem;
 
 #endif

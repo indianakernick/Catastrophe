@@ -12,24 +12,26 @@
 #include "physics component.hpp"
 
 class b2Fixture;
+class PlayerInputCommands;
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
   explicit PlayerPhysicsComponent(b2Body *);
   
-  b2Vec2 getPos() const override;
-  
-  b2Body *getBody() override;
-  const b2Body *getBody() const override;
-
-  bool onGround() const;
+  void preStep(PhysicsState &, const InputCommands &, float) override;
+  void postStep(PhysicsState &, const InputCommands &) override;
   
   void beginContactingGround();
   void endContactingGround();
 
 private:
-  b2Body *body;
   int footContactCount = 0;
+  float timeTillFinishJump = 0.0f;
+  
+  bool onGround() const;
+  void clampVel();
+  void handleMovement(const PlayerInputCommands &);
+  void handleJump(const PlayerInputCommands &, float);
 };
 
 #endif

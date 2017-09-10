@@ -21,8 +21,6 @@ bool AppImpl::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
-
-  renderingSystem.init();
   
   physicsSystem.init();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
@@ -30,10 +28,9 @@ bool AppImpl::init() {
   }
   registerCollisionListeners(physicsSystem.getContactListener());
   
-  inputSystem.init();
   renderingSystem.getCamera().windowSize.addEventListener(inputSystem);
   
-  entityManager.init(inputSystem, physicsSystem, renderingSystem);
+  entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
   
   const glm::vec2 WINDOW_METER_SIZE = static_cast<glm::vec2>(DEFAULT_WINDOW_PIXEL_SIZE) / DEFAULT_PIXELS_PER_METER;
   
@@ -52,12 +49,9 @@ void AppImpl::quit() {
 
   entityManager.quit();
   renderingSystem.getCamera().windowSize.remEventListener(inputSystem);
-  inputSystem.quit();
   
   physicsSystem.detachRenderer();
   physicsSystem.quit();
-  
-  renderingSystem.quit();
   
   renderingContext.quit();
   window.reset();
@@ -75,7 +69,7 @@ bool AppImpl::input(float) {
     if (e.type == SDL_QUIT) {
       return false;
     } else {
-      inputSystem.handleEvent(e);
+      inputSystem.handleEvent(entityManager, e);
     }
     eventCount++;
   }
@@ -83,13 +77,14 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
-  physicsSystem.update(delta);
-  entityManager.update(delta);
-  renderingSystem.update(delta);
+  physicsSystem.update(entityManager, delta);
   return true;
 }
 
-void AppImpl::render(const float) {
+void AppImpl::render(const float delta) {
+  animationSystem.update(entityManager, delta);
+  renderingSystem.update(delta);
+  
   renderingContext.preRender(renderingSystem.getCamera().toPixels());
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
@@ -99,7 +94,7 @@ void AppImpl::render(const float) {
     renderingSystem.cameraDebugRender(renderingContext.getContext());
   }
   if constexpr (ENABLE_GAME_RENDER) {
-    renderingSystem.render(renderingContext.getContext());
+    renderingSystem.render(entityManager, renderingContext.getContext());
   }
   
   renderingContext.postRender(ENABLE_FPS_RENDER);

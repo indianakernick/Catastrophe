@@ -12,26 +12,15 @@
 #include "vector sprite.hpp"
 #include "render component.hpp"
 
-class VectorSpriteRenderComponent final : public RenderComponent {
+class VectorRenderComponent final : public RenderComponent {
 public:
-  VectorSpriteRenderComponent(std::experimental::string_view, float, float);
+  VectorRenderComponent(float, float);
   
-  void update(Entity *, float) override;
-  void render(NVGcontext *) override;
+  void render(NVGcontext *, const RenderingState &) override;
   const CameraMotionTarget *getCameraTarget() const override;
 
-  void setProgress(float);
-  void setSpeed(float);
-  void setAnimName(std::experimental::string_view);
-  void setScale(glm::vec2);
-
 private:
-  Sprite sprite;
   CameraMotionTarget rect;
-  float animProgress = 0.0f;
-  float animSpeed = 1.0f;
-  std::string animName;
-  glm::vec2 scale;
 };
 
 #endif

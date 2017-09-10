@@ -9,9 +9,8 @@
 #include "rendering system.hpp"
 
 #include "camera.hpp"
-
-void RenderingSystem::init() {}
-void RenderingSystem::quit() {}
+#include "entity manager.hpp"
+#include "render component.hpp"
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
   components.emplace(id, comp);
@@ -25,9 +24,11 @@ void RenderingSystem::update(const float delta) {
   camera.update(delta);
 }
 
-void RenderingSystem::render(NVGcontext *context) {
+void RenderingSystem::render(EntityManager &entityMan, NVGcontext *context) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    c->second->render(context);
+    const Entity &entity = entityMan.getEntity(c->first);
+    const RenderingState &rendering = *entity.latestRenderingState;
+    c->second->render(context, rendering);
   }
 }
 

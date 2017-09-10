@@ -17,6 +17,7 @@
 #include <Simpleton/Platform/sdl error.hpp>
 #include "nvg helper.hpp"
 #include <Simpleton/Platform/system info.hpp>
+#include "window constants.hpp"
 
 constexpr int DEPTH_BITS = 16;
 constexpr int STENCIL_BITS = 8;
@@ -43,7 +44,7 @@ void RenderingContext::init(SDL_Window *newWindow) {
   if (sdlGLContext == nullptr) {
     throw std::runtime_error(SDL_GetError());
   }
-  SDL_GL_SetSwapInterval(1);
+  SDL_GL_SetSwapInterval(WINDOW_VSYNC);
   
   glewExperimental = GL_TRUE;
   const GLenum glewError = glewInit();

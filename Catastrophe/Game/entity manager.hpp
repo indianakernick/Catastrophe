@@ -15,6 +15,7 @@
 
 class InputSystem;
 class PhysicsSystem;
+class AnimationSystem;
 class RenderingSystem;
 
 class EntityManager {
@@ -22,12 +23,12 @@ public:
   EntityManager() = default;
   ~EntityManager() = default;
   
-  void init(InputSystem &, PhysicsSystem &, RenderingSystem &);
+  void init(InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &);
   void quit();
   
   template <typename ...Args>
   using Factory = std::unique_ptr<Entity> (*) (
-    EntityID, InputSystem &, PhysicsSystem &, RenderingSystem &, Args...
+    EntityID, InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &, Args...
   );
   
   template <typename ...FunArgs, typename ...Args>
@@ -36,7 +37,7 @@ public:
     entities.emplace(
       id,
       factory(
-        id, *input, *physics, *rendering, std::forward<Args>(args)...
+        id, *input, *physics, *animation, *rendering, std::forward<Args>(args)...
       )
     );
     return id;
@@ -44,11 +45,12 @@ public:
   
   void destroy(EntityID);
   
-  void update(float);
+  Entity &getEntity(EntityID);
   
 private:
   InputSystem *input = nullptr;
   PhysicsSystem *physics = nullptr;
+  AnimationSystem *animation = nullptr;
   RenderingSystem *rendering = nullptr;
 
   std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;

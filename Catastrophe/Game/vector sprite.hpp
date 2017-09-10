@@ -53,7 +53,7 @@ public:
   virtual void load(const YAML::Node &, FrameSize) = 0;
   virtual void draw(NVGcontext *, const Frame &) const = 0;
 };
-using Shapes = std::vector<std::unique_ptr<Shape>>;
+using Shapes = std::vector<std::shared_ptr<Shape>>;
 
 struct PointKeyframe {
   TimeSec offsetSec;

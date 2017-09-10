@@ -15,13 +15,8 @@ class SimplePhysicsComponent final : public PhysicsComponent {
 public:
   explicit SimplePhysicsComponent(b2Body *);
   
-  b2Vec2 getPos() const override;
-  
-  b2Body *getBody() override;
-  const b2Body *getBody() const override;
-
-private:
-  b2Body *body;
+  void preStep(PhysicsState &, const InputCommands &, float) override;
+  void postStep(PhysicsState &, const InputCommands &) override;
 };
 
 #endif

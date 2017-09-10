@@ -203,25 +203,25 @@ namespace {
     return anims;
   }
   
-  std::unique_ptr<Shape> readShapeType(const YAML::Node &shapeTypeNode) {
+  std::shared_ptr<Shape> readShapeType(const YAML::Node &shapeTypeNode) {
     const std::string shapeTypeString = shapeTypeNode.as<std::string>();
     
            if (shapeTypeString == "line") {
-      return std::make_unique<ShapeLine>();
+      return std::make_shared<ShapeLine>();
     } else if (shapeTypeString == "circle") {
-      return std::make_unique<ShapeCircle>();
+      return std::make_shared<ShapeCircle>();
     } else {
       throw std::runtime_error("Invalid shape type");
     }
   }
   
-  std::unique_ptr<Shape> readShape(
+  std::shared_ptr<Shape> readShape(
     const YAML::Node &shapeNode,
     const FrameSize frameSize
   ) {
     checkType(shapeNode, YAML::NodeType::Map);
     
-    std::unique_ptr<Shape> shape = readShapeType(getChild(shapeNode, "type"));
+    std::shared_ptr<Shape> shape = readShapeType(getChild(shapeNode, "type"));
     shape->load(shapeNode, frameSize);
     
     return shape;
@@ -242,7 +242,7 @@ namespace {
   }
 }
 
-Sprite loadSprite(const char *fileName) {
+Sprite loadSprite(const std::string &fileName) {
   const YAML::Node rootNode = YAML::LoadFile(fileName);
   checkType(rootNode, YAML::NodeType::Map);
   

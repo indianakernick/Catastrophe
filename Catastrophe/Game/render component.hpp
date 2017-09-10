@@ -11,9 +11,7 @@
 
 #include "camera motion track.hpp"
 
-class Entity;
-class RenderingContext;
-
+class RenderingState;
 extern "C" struct NVGcontext;
 
 class RenderComponent {
@@ -21,8 +19,7 @@ public:
   RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
-  virtual void update(Entity *, float) = 0;
-  virtual void render(NVGcontext *) = 0;
+  virtual void render(NVGcontext *, const RenderingState &) = 0;
   virtual const CameraMotionTarget *getCameraTarget() const = 0;
 };
 

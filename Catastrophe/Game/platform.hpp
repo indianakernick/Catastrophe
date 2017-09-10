@@ -16,6 +16,7 @@ std::unique_ptr<Entity> makePlatform(
   EntityID,
   InputSystem &,
   PhysicsSystem &,
+  AnimationSystem &,
   RenderingSystem &,
   Rect
 );

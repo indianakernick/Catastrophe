@@ -8,19 +8,14 @@
 
 #include "simple physics component.hpp"
 
+#include "physics state.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-SimplePhysicsComponent::SimplePhysicsComponent(b2Body *const body)
-  : body(body) {}
+SimplePhysicsComponent::SimplePhysicsComponent(b2Body *body)
+  : PhysicsComponent(body) {}
 
-b2Vec2 SimplePhysicsComponent::getPos() const {
-  return body->GetPosition();
-}
+void SimplePhysicsComponent::preStep(PhysicsState &, const InputCommands &, float) {}
 
-b2Body *SimplePhysicsComponent::getBody() {
-  return body;
-}
-
-const b2Body *SimplePhysicsComponent::getBody() const {
-  return body;
+void SimplePhysicsComponent::postStep(PhysicsState &physics, const InputCommands &) {
+  physics.pos = body->GetPosition();
 }

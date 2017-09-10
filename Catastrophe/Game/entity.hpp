@@ -11,28 +11,32 @@
 
 #include <memory>
 #include "entity id.hpp"
-#include "../Libraries/Box2D/Common/b2Math.h"
+#include "input commands.hpp"
+#include "physics state.hpp"
+#include "rendering state.hpp"
 
-class PhysicsComponent;
-class RenderComponent;
 class InputComponent;
+class PhysicsComponent;
+class AnimationComponent;
+class RenderComponent;
 
 class Entity {
 public:
   explicit Entity(EntityID);
   
-  void update(float);
-  
   std::shared_ptr<InputComponent> input;
   std::shared_ptr<PhysicsComponent> physics;
+  std::shared_ptr<AnimationComponent> animation;
   std::shared_ptr<RenderComponent> render;
   
+  std::unique_ptr<InputCommands> latestInputCommands;
+  std::unique_ptr<PhysicsState> latestPhysicsState;
+  std::unique_ptr<RenderingState> latestRenderingState;
+  
   EntityID getID() const;
-  b2Vec2 getPos() const;
 
 private:
   EntityID id;
-  b2Vec2 pos = {0.0f, 0.0f};
 };
 
 #endif

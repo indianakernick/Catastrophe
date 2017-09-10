@@ -11,16 +11,20 @@
 
 class b2Body;
 struct b2Vec2;
+class PhysicsState;
+class InputCommands;
 
 class PhysicsComponent {
 public:
-  PhysicsComponent() = default;
+  explicit PhysicsComponent(b2Body *);
   virtual ~PhysicsComponent() = default;
   
-  virtual b2Vec2 getPos() const = 0;
+  //Called before b2World::Step
+  virtual void preStep(PhysicsState &, const InputCommands &, float) = 0;
+  //Called after b2World::Step
+  virtual void postStep(PhysicsState &, const InputCommands &) = 0;
   
-  virtual b2Body *getBody() = 0;
-  virtual const b2Body *getBody() const = 0;
+  b2Body *body = nullptr;
 };
 
 #endif

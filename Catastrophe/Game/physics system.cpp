@@ -8,7 +8,9 @@
 
 #include "physics system.hpp"
 
+#include "entity manager.hpp"
 #include "physics constants.hpp"
+#include "physics component.hpp"
 
 void PhysicsSystem::init() {
   world.emplace(GRAVITY);
@@ -42,15 +44,29 @@ void PhysicsSystem::rem(const EntityID entityID) {
   if (iter == components.cend()) {
     return;
   }
-  b2Body *const body = iter->second->getBody();
+  b2Body *const body = iter->second->body;
   if (body) {
     world->DestroyBody(body);
   }
   components.erase(iter);
 }
 
-void PhysicsSystem::update(const float delta) {
-  world->Step(delta, 6, 2);
+void PhysicsSystem::update(EntityManager &entityMan, const float delta) {
+  for (auto c = components.cbegin(); c != components.cend(); ++c) {
+    const Entity &entity = entityMan.getEntity(c->first);
+    const InputCommands &input = *entity.latestInputCommands;
+    PhysicsState &physics = *entity.latestPhysicsState;
+    c->second->preStep(physics, input, delta);
+  }
+
+  world->Step(delta, VELOCITY_ITER, POSITION_ITER);
+  
+  for (auto c = components.cbegin(); c != components.cend(); ++c) {
+    const Entity &entity = entityMan.getEntity(c->first);
+    const InputCommands &input = *entity.latestInputCommands;
+    PhysicsState &physics = *entity.latestPhysicsState;
+    c->second->postStep(physics, input);
+  }
 }
 
 void PhysicsSystem::debugRender() {

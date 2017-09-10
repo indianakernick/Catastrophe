@@ -13,9 +13,11 @@
 #include <unordered_map>
 #include "debug draw.hpp"
 #include "contact listener.hpp"
-#include "physics component.hpp"
 #include <experimental/optional>
 #include "../Libraries/Box2D/Box2D.h"
+
+class PhysicsComponent;
+class EntityManager;
 
 class PhysicsSystem {
 public:
@@ -30,7 +32,7 @@ public:
   void add(EntityID, std::shared_ptr<PhysicsComponent>);
   void rem(EntityID);
   
-  void update(float);
+  void update(EntityManager &, float);
   void debugRender();
   
   void attachRenderer(NVGcontext *);

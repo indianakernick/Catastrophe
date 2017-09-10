@@ -11,6 +11,7 @@
 #include "rect.hpp"
 #include "entity.hpp"
 #include <nanovg/nanovg.h>
+#include "rendering state.hpp"
 
 StaticColorRenderComponent::StaticColorRenderComponent(
   const NVGcolor color,
@@ -19,12 +20,12 @@ StaticColorRenderComponent::StaticColorRenderComponent(
 ) : color(color),
     rect(0.0f, 0.0f, width, height) {}
 
-void StaticColorRenderComponent::update(Entity *entity, const float) {
-  const b2Vec2 pos = entity->getPos();
-  rect.c = {pos.x, pos.y};
-}
+void StaticColorRenderComponent::render(
+  NVGcontext *context,
+  const RenderingState &rendering
+) {
+  rect.c = rendering.modelMat[2];
 
-void StaticColorRenderComponent::render(NVGcontext *context) {
   nvgSave(context);
   
   nvgBeginPath(context);

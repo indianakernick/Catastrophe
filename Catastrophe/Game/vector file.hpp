@@ -11,6 +11,6 @@
 
 #include "vector sprite.hpp"
 
-Sprite loadSprite(const char *);
+Sprite loadSprite(const std::string &);
 
 #endif

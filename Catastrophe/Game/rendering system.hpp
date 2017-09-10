@@ -12,22 +12,20 @@
 #include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
-#include "render component.hpp"
-#include "rendering context.hpp"
+
+class RenderComponent;
+class EntityManager;
 
 class RenderingSystem {
 public:
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
-  void init();
-  void quit();
-  
   void add(EntityID, std::shared_ptr<RenderComponent>);
   void rem(EntityID);
   
   void update(float);
-  void render(NVGcontext *);
+  void render(EntityManager &, NVGcontext *);
   void cameraDebugRender(NVGcontext *);
   
   void track(EntityID);

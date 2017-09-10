@@ -12,14 +12,17 @@
 #include <Simpleton/Platform/window.hpp>
 
 const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {1280, 720};
-const bool WINDOW_RESIZABLE = true;
+
+constexpr bool WINDOW_RESIZABLE = true;
+constexpr bool WINDOW_VSYNC = false;
+constexpr bool WINDOW_OPENGL = true;
+
 const Platform::Window::Desc WINDOW_DESC = {
   "Catastrophe",
   DEFAULT_WINDOW_PIXEL_SIZE,
   WINDOW_RESIZABLE,
-  true
+  WINDOW_OPENGL
 };
-const bool WINDOW_VSYNC = true;
 
 constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
 constexpr bool ENABLE_DEBUG_CAMERA_RENDER = false;

@@ -9,14 +9,21 @@
 #include "player.hpp"
 
 #include "entity.hpp"
+#include "vector file.hpp"
 #include "input system.hpp"
 #include "object types.hpp"
 #include "physics system.hpp"
+#include "animation system.hpp"
 #include "rendering system.hpp"
 #include "player constants.hpp"
 #include "player input component.hpp"
 #include "player physics component.hpp"
+#include "player animation component.hpp"
 #include "vector sprite render component.hpp"
+#include <Simpleton/Platform/system info.hpp>
+#include "player input commands.hpp"
+#include "player physics state.hpp"
+#include "vector rendering state.hpp"
 
 namespace {
   const b2Vec2 BOX_NORMALS[4] = {
@@ -89,6 +96,7 @@ std::unique_ptr<Entity> makePlayer(
   const EntityID id,
   InputSystem &input,
   PhysicsSystem &physics,
+  AnimationSystem &animation,
   RenderingSystem &rendering,
   const b2Vec2 pos
 ) {
@@ -101,11 +109,16 @@ std::unique_ptr<Entity> makePlayer(
   b2Body *body = physics.getWorld()->CreateBody(&bodyDef);
   body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysics<PlayerPhysicsComponent>(body);
+  physics.add(id, player->physics);
   attachFixtures(body);
   body->SetTransform(pos, 0.0f);
   
-  player->render = std::make_shared<VectorSpriteRenderComponent>(
-    "player sprite.yaml",
+  player->animation = std::make_shared<PlayerAnimationComponent>(
+    loadSprite(Platform::getResDir() + "player sprite.yaml")
+  );
+  animation.add(id, player->animation);
+  
+  player->render = std::make_shared<VectorRenderComponent>(
     PLAYER_WIDTH,
     PLAYER_HEIGHT
   );
@@ -113,6 +126,10 @@ std::unique_ptr<Entity> makePlayer(
   
   player->input = std::make_shared<PlayerInputComponent>();
   input.add(id, player->input);
+  
+  player->latestInputCommands = std::make_unique<PlayerInputCommands>();
+  player->latestPhysicsState = std::make_unique<PlayerPhysicsState>();
+  player->latestRenderingState = std::make_unique<VectorRenderingState>();
   
   return player;
 }

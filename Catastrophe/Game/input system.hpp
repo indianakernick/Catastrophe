@@ -12,8 +12,11 @@
 #include <memory>
 #include <unordered_map>
 #include "entity id.hpp"
-#include "input component.hpp"
 #include <Simpleton/Utils/dispatcher.hpp>
+
+extern "C" union SDL_Event;
+class InputComponent;
+class EntityManager;
 
 class InputSystem {
 public:
@@ -24,13 +27,10 @@ public:
   InputSystem() = default;
   ~InputSystem() = default;
   
-  void init();
-  void quit();
-  
   void add(EntityID, std::shared_ptr<InputComponent>);
   void rem(EntityID);
   
-  void handleEvent(SDL_Event);
+  void handleEvent(EntityManager &, SDL_Event);
   
   ListenerID addListener(const Listener &);
   void remListener(ListenerID);

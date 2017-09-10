@@ -8,118 +8,74 @@
 
 #include "player input component.hpp"
 
-#include <cmath>
-#include "entity.hpp"
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
-#include "player constants.hpp"
-#include <Simpleton/Math/scale.hpp>
-#include "player physics component.hpp"
-#include "vector sprite render component.hpp"
-#include <Simpleton/Utils/safe down cast.hpp>
-#include "../Libraries/Box2D/Dynamics/b2Body.h"
+#include "player input commands.hpp"
 
-void PlayerInputComponent::update(Entity *entity, const float delta) {
-  if (entity->physics == nullptr) return;
-  
-  auto physics = Utils::safeDownCast<PlayerPhysicsComponent>(entity->physics);
-  b2Body *body = physics->getBody();
-  const bool onGround = physics->onGround();
-  handleMovement(body, onGround);
-  handleJump(body, onGround, delta);
-  handleAnim(entity);
-}
-
-bool PlayerInputComponent::handleEvent(const SDL_Event event) {
+bool PlayerInputComponent::handleEvent(InputCommands &commands, const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
-    return handleKeyDown(event.key.keysym.scancode);
+    return handleKeyDown(commands, event.key.keysym.scancode);
   } else if (event.type == SDL_KEYUP) {
-    return handleKeyUp(event.key.keysym.scancode);
+    return handleKeyUp(commands, event.key.keysym.scancode);
   } else {
     return false;
   }
 }
 
-void PlayerInputComponent::handleMovement(b2Body *body, const bool onGround) {
-  const b2Vec2 vel = body->GetLinearVelocity();
-  if (std::abs(vel.x) > PLAYER_MAX_MOVE_SPEED) {
-    body->SetLinearVelocity({
-      vel.x < 0.0f ? -PLAYER_MAX_MOVE_SPEED : PLAYER_MAX_MOVE_SPEED,
-      vel.y
-    });
-  } else {
-    const float MOVE_FORCE = onGround
-                           ? PLAYER_MOVE_FORCE
-                           : PLAYER_AIR_MOVE_FORCE;
-    if (flags[MOVING_LEFT_BIT]) {
-      body->ApplyForceToCenter({-MOVE_FORCE, 0.0f}, true);
-    }
-    if (flags[MOVING_RIGHT_BIT]) {
-      body->ApplyForceToCenter({MOVE_FORCE, 0.0f}, true);
-    }
-  }
-}
-
-void PlayerInputComponent::handleJump(b2Body *body, const bool onGround, const float delta) {
-  if (flags[JUMPING_BIT]) {
-    if (onGround && timeTillFinishJump == 0.0f) {
-      //starting a jump
-      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
-      timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
-    } else if (timeTillFinishJump > 0.0f) {
-      //jumping
-      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
-      timeTillFinishJump -= delta;
-    } else if (timeTillFinishJump < 0.0f) {
-      //jump timed out
-      timeTillFinishJump = 0.0f;
-    }
-  }
-}
-
-bool PlayerInputComponent::handleKeyDown(const SDL_Scancode key) {
-  switch (key) {
-    case PLAYER_LEFT_KEY:
-      flags[MOVING_LEFT_BIT] = true;
-      return true;
-    case PLAYER_RIGHT_KEY:
-      flags[MOVING_RIGHT_BIT] = true;
-      return true;
-    case PLAYER_JUMP_KEY:
-      flags[JUMPING_BIT] = true;
-      return true;
-      
-    default:
-      return false;
-  }
-}
-
-bool PlayerInputComponent::handleKeyUp(const SDL_Scancode key) {
-  switch (key) {
-    case PLAYER_LEFT_KEY:
-      flags[MOVING_LEFT_BIT] = false;
-      return true;
-    case PLAYER_RIGHT_KEY:
-      flags[MOVING_RIGHT_BIT] = false;
-      return true;
-    case PLAYER_JUMP_KEY:
-      flags[JUMPING_BIT] = false;
-      timeTillFinishJump = 0.0f;
-      return true;
-      
-    default:
-      return false;
-  }
-}
-
-void PlayerInputComponent::handleAnim(Entity *entity) {
-  auto renderComp = Utils::safeDownCast<VectorSpriteRenderComponent>(entity->render);
-  const b2Body *body = entity->physics->getBody();
-  renderComp->setAnimName("run");
+bool PlayerInputComponent::handleKeyDown(InputCommands &commands, const SDL_Scancode key) {
+  PlayerInputCommands &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
   
-  const float horiVel = body->GetLinearVelocity().x;
-  //@TODO don't hardcode these values
-  //foot moves 0.25 meters in 0.125 seconds
-  renderComp->setSpeed(Math::abs(horiVel / (0.25f / 0.125f)));
-  renderComp->setScale({Math::sign(horiVel), 1.0f});
+  switch (key) {
+    case PLAYER_LEFT_KEY:
+      leftButton = true;
+      break;
+    case PLAYER_RIGHT_KEY:
+      rightButton = true;
+      break;
+    case PLAYER_JUMP_KEY:
+      playerCommands.jump = true;
+      break;
+      
+    default:
+      return false;
+  }
+  
+  if (leftButton && rightButton) {
+    playerCommands.moveLeft = false;
+    playerCommands.moveRight = false;
+  } else {
+    playerCommands.moveLeft = leftButton;
+    playerCommands.moveRight = rightButton;
+  }
+  
+  return true;
+}
+
+bool PlayerInputComponent::handleKeyUp(InputCommands &commands, const SDL_Scancode key) {
+  PlayerInputCommands &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
+  
+  switch (key) {
+    case PLAYER_LEFT_KEY:
+      leftButton = false;
+      break;
+    case PLAYER_RIGHT_KEY:
+      rightButton = false;
+      break;
+    case PLAYER_JUMP_KEY:
+      playerCommands.jump = false;
+      break;
+      
+    default:
+      return false;
+  }
+  
+  if (leftButton && rightButton) {
+    playerCommands.moveLeft = false;
+    playerCommands.moveRight = false;
+  } else {
+    playerCommands.moveLeft = leftButton;
+    playerCommands.moveRight = rightButton;
+  }
+  
+  return true;
 }

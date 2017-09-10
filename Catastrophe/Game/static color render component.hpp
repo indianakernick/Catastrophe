@@ -17,8 +17,7 @@ public:
   StaticColorRenderComponent(NVGcolor, float, float);
   ~StaticColorRenderComponent() = default;
   
-  void update(Entity *, float) override;
-  void render(NVGcontext *) override;
+  void render(NVGcontext *, const RenderingState &) override;
   const CameraMotionTarget *getCameraTarget() const override;
   
 private:

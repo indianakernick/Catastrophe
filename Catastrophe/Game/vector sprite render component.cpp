@@ -8,59 +8,19 @@
 
 #include "vector sprite render component.hpp"
 
-#include "entity.hpp"
-#include "vector file.hpp"
-#include <glm/gtx/matrix_transform_2d.hpp>
 #include "vector render.hpp"
-#include "rendering context.hpp"
-#include <Simpleton/Platform/system info.hpp>
+#include "vector rendering state.hpp"
 
-VectorSpriteRenderComponent::VectorSpriteRenderComponent(
-  const std::experimental::string_view spritePath,
-  const float width,
-  const float height
-) : sprite(loadSprite((Platform::getResDir() + spritePath.data()).c_str())),
-    rect(0.0f, 0.0f, width, height) {}
+VectorRenderComponent::VectorRenderComponent(const float width, const float height)
+  : rect({}, {width, height}) {}
 
-void VectorSpriteRenderComponent::update(Entity *entity, const float delta) {
-  const b2Vec2 pos = entity->getPos();
-  rect.c = {pos.x, pos.y};
-  animProgress += delta * animSpeed;
-  if (!animName.empty()) {
-    const float duration = sprite.animations.at(animName).durationSec;
-    animProgress = std::fmod(animProgress, duration);
-  }
+void VectorRenderComponent::render(NVGcontext *context, const RenderingState &rendering) {
+  rect.c = rendering.modelMat[2];
+  
+  const VectorRenderingState &vectorRender = dynamic_cast<const VectorRenderingState &>(rendering);
+  renderSprite(context, vectorRender.shapes, vectorRender.frame, vectorRender.modelMat);
 }
 
-void VectorSpriteRenderComponent::render(NVGcontext *context) {
-  if (!animName.empty()) {
-    glm::mat3 transform = glm::translate({}, rect.c);
-    transform = glm::scale(transform, scale);
-    renderSprite(
-      context,
-      sprite.shapes,
-      getFrame(sprite, animName, animProgress),
-      transform
-    );
-  }
-}
-
-const CameraMotionTarget *VectorSpriteRenderComponent::getCameraTarget() const {
+const CameraMotionTarget *VectorRenderComponent::getCameraTarget() const {
   return &rect;
-}
-
-void VectorSpriteRenderComponent::setProgress(const float newProgress) {
-  animProgress = newProgress;
-}
-
-void VectorSpriteRenderComponent::setSpeed(const float newSpeed) {
-  animSpeed = newSpeed;
-}
-
-void VectorSpriteRenderComponent::setAnimName(const std::experimental::string_view newAnimName) {
-  animName.assign(newAnimName.data(), newAnimName.size());
-}
-
-void VectorSpriteRenderComponent::setScale(const glm::vec2 newScale) {
-  scale = newScale;
 }

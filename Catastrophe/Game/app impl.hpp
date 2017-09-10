@@ -13,6 +13,7 @@
 #include "physics system.hpp"
 #include "entity manager.hpp"
 #include "rendering system.hpp"
+#include "animation system.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
 #include <Simpleton/Application/app.hpp>
@@ -29,6 +30,7 @@ private:
   Platform::Window window;
   RenderingContext renderingContext;
   RenderingSystem renderingSystem;
+  AnimationSystem animationSystem;
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   
