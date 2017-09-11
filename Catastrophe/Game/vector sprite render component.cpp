@@ -12,7 +12,8 @@
 #include "vector rendering state.hpp"
 
 VectorRenderComponent::VectorRenderComponent(const float width, const float height)
-  : rect({}, {width, height}) {}
+  : rect({}, {width, height}),
+    size(width, height) {}
 
 void VectorRenderComponent::render(NVGcontext *context, const RenderingState &rendering) {
   rect.c = rendering.modelMat[2];
@@ -21,6 +22,10 @@ void VectorRenderComponent::render(NVGcontext *context, const RenderingState &re
   renderSprite(context, vectorRender.shapes, vectorRender.frame, vectorRender.modelMat);
 }
 
-const CameraMotionTarget *VectorRenderComponent::getCameraTarget() const {
+const CameraMotionTarget *VectorRenderComponent::getMotionTarget() const {
   return &rect;
+}
+
+const CameraZoomTarget *VectorRenderComponent::getZoomTarget() const {
+  return &size;
 }

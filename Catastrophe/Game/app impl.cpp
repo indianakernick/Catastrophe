@@ -39,13 +39,15 @@ bool AppImpl::init() {
     Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
   );
   
-  renderingSystem.track(player);
+  renderingSystem.startMotionTrack(player);
+  renderingSystem.startZoomTrack(player);
   
   return true;
 }
 
 void AppImpl::quit() {
-  renderingSystem.stopTracking();
+  renderingSystem.stopZoomTrack();
+  renderingSystem.stopMotionTrack();
 
   entityManager.quit();
   renderingSystem.getCamera().windowSize.remEventListener(inputSystem);

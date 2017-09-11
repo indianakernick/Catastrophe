@@ -9,6 +9,7 @@
 #ifndef render_component_hpp
 #define render_component_hpp
 
+#include "camera zoom track.hpp"
 #include "camera motion track.hpp"
 
 class RenderingState;
@@ -20,7 +21,8 @@ public:
   virtual ~RenderComponent() = default;
 
   virtual void render(NVGcontext *, const RenderingState &) = 0;
-  virtual const CameraMotionTarget *getCameraTarget() const = 0;
+  virtual const CameraMotionTarget *getMotionTarget() const = 0;
+  virtual const CameraZoomTarget *getZoomTarget() const = 0;
 };
 
 #endif

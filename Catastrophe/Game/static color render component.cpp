@@ -18,7 +18,8 @@ StaticColorRenderComponent::StaticColorRenderComponent(
   const float width,
   const float height
 ) : color(color),
-    rect(0.0f, 0.0f, width, height) {}
+    rect(0.0f, 0.0f, width, height),
+    size(width, height) {}
 
 void StaticColorRenderComponent::render(
   NVGcontext *context,
@@ -37,6 +38,10 @@ void StaticColorRenderComponent::render(
   nvgRestore(context);
 }
 
-const CameraMotionTarget *StaticColorRenderComponent::getCameraTarget() const {
+const CameraMotionTarget *StaticColorRenderComponent::getMotionTarget() const {
   return &rect;
+}
+
+const CameraZoomTarget *StaticColorRenderComponent::getZoomTarget() const {
+  return &size;
 }

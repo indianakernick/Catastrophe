@@ -28,8 +28,11 @@ public:
   void render(EntityManager &, NVGcontext *);
   void cameraDebugRender(NVGcontext *);
   
-  void track(EntityID);
-  void stopTracking();
+  void startMotionTrack(EntityID);
+  void stopMotionTrack();
+  
+  void startZoomTrack(EntityID);
+  void stopZoomTrack();
   
   Camera &getCamera();
 

@@ -17,10 +17,12 @@ public:
   VectorRenderComponent(float, float);
   
   void render(NVGcontext *, const RenderingState &) override;
-  const CameraMotionTarget *getCameraTarget() const override;
+  const CameraMotionTarget *getMotionTarget() const override;
+  const CameraZoomTarget *getZoomTarget() const override;
 
 private:
   CameraMotionTarget rect;
+  CameraZoomTarget size;
 };
 
 #endif

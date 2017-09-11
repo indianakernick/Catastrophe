@@ -18,11 +18,13 @@ public:
   ~StaticColorRenderComponent() = default;
   
   void render(NVGcontext *, const RenderingState &) override;
-  const CameraMotionTarget *getCameraTarget() const override;
+  const CameraMotionTarget *getMotionTarget() const override;
+  const CameraZoomTarget *getZoomTarget() const override;
   
 private:
   NVGcolor color;
   CameraMotionTarget rect;
+  CameraZoomTarget size;
 };
 
 #endif

@@ -36,16 +36,30 @@ void RenderingSystem::cameraDebugRender(NVGcontext *context) {
   camera.debugRender(context);
 }
 
-void RenderingSystem::track(const EntityID entity) {
+void RenderingSystem::startMotionTrack(const EntityID entity) {
   auto iter = components.find(entity);
-  assert(iter != components.end());
-  const CameraMotionTarget *target = iter->second->getCameraTarget();
-  assert(target);
+  if (iter == components.end()) {
+    throw std::runtime_error("Cannot track entity that doesn't exist");
+  }
+  const CameraMotionTarget *target = iter->second->getMotionTarget();
   camera.motionTrack.start(target);
 }
 
-void RenderingSystem::stopTracking() {
+void RenderingSystem::stopMotionTrack() {
   camera.motionTrack.stop();
+}
+
+void RenderingSystem::startZoomTrack(const EntityID entity) {
+  auto iter = components.find(entity);
+  if (iter == components.end()) {
+    throw std::runtime_error("Cannot track entity that doesn't exist");
+  }
+  const CameraZoomTarget *target = iter->second->getZoomTarget();
+  camera.zoomTrack.start(target);
+}
+
+void RenderingSystem::stopZoomTrack() {
+  camera.zoomTrack.stop();
 }
 
 Camera &RenderingSystem::getCamera() {
