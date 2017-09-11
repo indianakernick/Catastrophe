@@ -51,7 +51,7 @@ namespace {
     if (lower.size() != upper.size()) {
       throw std::runtime_error("Cannot interpolate keyframes of different sizes");
     }
-    for (size_t d = 0; lower.size(); ++d) {
+    for (size_t d = 0; d != lower.size(); ++d) {
       lower[d] = lerpFun(prog, lower[d], upper[d]);
     }
   }
