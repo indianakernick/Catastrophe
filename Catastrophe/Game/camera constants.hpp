@@ -19,7 +19,7 @@ const glm::vec2 DEFAULT_TRACKING_BOUNDS_SIZE = glm::vec2(1.0f, 1.0f) / 2.0f;
 constexpr float MIN_ZOOM = 16.0f;
 constexpr float MAX_ZOOM = 128.0f;
 
-constexpr float DEFAULT_ZOOM_MIN_SIZE = 1.0f / 32.0f;
+constexpr float DEFAULT_ZOOM_MIN_SIZE = 1.0f / 16.0f;
 constexpr float DEFAULT_ZOOM_MAX_SIZE = 1.0f / 8.0f;
 
 constexpr float MAX_ZOOM_VEL = 16.0f;

@@ -52,7 +52,9 @@ void AppImpl::quit() {
   entityManager.quit();
   renderingSystem.getCamera().windowSize.remEventListener(inputSystem);
   
-  physicsSystem.detachRenderer();
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    physicsSystem.detachRenderer();
+  }
   physicsSystem.quit();
   
   renderingContext.quit();
