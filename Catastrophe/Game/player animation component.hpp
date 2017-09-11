@@ -22,10 +22,22 @@ public:
 private:
   Sprite sprite;
   Time::SimpleAnim<float> anim;
+  Time::SimpleAnim<float> standRun;
+  enum class State {
+    STANDING,
+    STARTING_TO_RUN,
+    RUNNING
+  } state = State::STANDING;
   
   //@TODO store these values in Sprite somehow
   //foot moves 0.25 meters in 0.125 seconds
   static constexpr float PLAYER_FOOT_SPEED = 0.25f / 0.125f;
+  
+  float calcAnimAdvance(float, float) const;
+  
+  Frame getFrameStanding(float, float);
+  Frame getFrameStartingToRun(float, float);
+  Frame getFrameRunning(float, float);
 };
 
 #endif
