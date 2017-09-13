@@ -181,6 +181,19 @@ namespace {
     return frames;
   }
   
+  MetaData readMetaData(const YAML::Node &metaNode) {
+    if (metaNode) {
+      checkType(metaNode, YAML::NodeType::Map);
+      MetaData meta;
+      for (auto m = metaNode.begin(); m != metaNode.end(); ++m) {
+        meta.insert({m->first.as<std::string>(), m->second.as<float>()});
+      }
+      return meta;
+    } else {
+      return {};
+    }
+  }
+  
   Animation readAnim(const YAML::Node &animNode, const float invScale) {
     checkType(animNode, YAML::NodeType::Map);
     
@@ -188,7 +201,8 @@ namespace {
       getChild(animNode, "duration").as<TimeSec>(),
       readPointKeyframes(getChild(animNode, "point frames"), invScale),
       readColorKeyframes(getChild(animNode, "color frames")),
-      readScalarKeyframes(getChild(animNode, "scalar frames"), invScale)
+      readScalarKeyframes(getChild(animNode, "scalar frames"), invScale),
+      readMetaData(animNode["meta"])
     };
   }
   

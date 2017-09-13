@@ -18,7 +18,8 @@
 PlayerAnimationComponent::PlayerAnimationComponent(const Sprite &sprite)
   : sprite(sprite),
     anim(sprite.animations.at("run").durationSec),
-    standRun(0.125) {}
+    standRun(0.125),
+    footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
 
 void PlayerAnimationComponent::update(
   RenderingState &rendering,
@@ -66,7 +67,7 @@ float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
 }
 
 float PlayerAnimationComponent::calcAnimAdvance(const float horiVel, const float delta) const {
-  return delta * Math::abs(horiVel / PLAYER_FOOT_SPEED);
+  return delta * Math::abs(horiVel / footSpeed);
 }
 
 Frame PlayerAnimationComponent::getFrameStanding(const float horiVel, const float delta) {

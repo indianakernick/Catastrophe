@@ -73,11 +73,13 @@ struct ScalarKeyframe {
 };
 using ScalarKeyframes = std::vector<ScalarKeyframe>;
 
+using MetaData = std::unordered_map<std::string, Coord>;
 struct Animation {
   TimeSec durationSec;
   PointKeyframes pointFrames;
   ColorKeyframes colorFrames;
   ScalarKeyframes scalarFrames;
+  MetaData meta;
 };
 using Animations = std::unordered_map<std::string, Animation>;
 

@@ -140,6 +140,11 @@ anims:
       - 1    # line width
       - 1.5  # head radius
 
+    meta:
+      # Foot moves 0.25 scaled units in 0.125 seconds
+      # Speed is 0.25 / 0.125
+      foot speed: 2
+
   stand:
     duration: 0.0
     point frames:
