@@ -84,15 +84,18 @@ void RenderingContext::quit() {
 }
 
 void RenderingContext::preRender(const glm::mat3 viewProj) {
+  int windowWidth, windowHeight;
+  SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+  int renderWidth, renderHeight;
+  SDL_GL_GetDrawableSize(window, &renderWidth, &renderHeight);
+  
+  glViewport(0, 0, windowWidth, windowHeight);
+  
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(0.0);
   glClearStencil(0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   
-  int windowWidth, windowHeight;
-  SDL_GetWindowSize(window, &windowWidth, &windowHeight);
-  int renderWidth, renderHeight;
-  SDL_GL_GetDrawableSize(window, &renderWidth, &renderHeight);
   const float devicePixelRatio = static_cast<float>(renderWidth) / windowWidth;
   nvgBeginFrame(context, windowWidth, windowHeight, devicePixelRatio);
   

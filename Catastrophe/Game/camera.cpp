@@ -40,7 +40,7 @@ void Camera::update(const float delta) {
   const float zoomTarget = zoomTrack.calcZoomTarget(props);
   const float newPPM = zoom.calcPPM(props, zoomTarget, delta);
   
-  const glm::vec2 newWindowSize = windowSize.get();
+  const glm::ivec2 newWindowSize = windowSize.get();
   
   props.center = newCenter;
   props.pixelsPerMeter = newPPM;

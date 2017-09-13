@@ -28,7 +28,7 @@ bool AppImpl::init() {
   }
   registerCollisionListeners(physicsSystem.getContactListener());
   
-  renderingSystem.getCamera().windowSize.addEventListener(inputSystem);
+  renderingSystem.getCamera().windowSize.attachWindow(window.get());
   
   entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
   
@@ -50,7 +50,7 @@ void AppImpl::quit() {
   renderingSystem.stopMotionTrack();
 
   entityManager.quit();
-  renderingSystem.getCamera().windowSize.remEventListener(inputSystem);
+  renderingSystem.getCamera().windowSize.detachWindow();
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.detachRenderer();

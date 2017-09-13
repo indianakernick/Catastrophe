@@ -26,8 +26,6 @@ public:
   glm::mat3 toMeters() const;
   CameraVisible visible() const;
 
-  CameraPos pos;
-  CameraZoom zoom;
   CameraMotionTrack motionTrack;
   CameraZoomTrack zoomTrack;
   CameraWindowSize windowSize;
@@ -36,7 +34,9 @@ public:
   void debugRender(NVGcontext *);
 
 private:
+  CameraPos pos;
   CameraProps props;
+  CameraZoom zoom;
 };
 
 #endif

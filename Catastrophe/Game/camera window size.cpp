@@ -8,46 +8,25 @@
 
 #include "camera window size.hpp"
 
-#include <limits>
-#include <SDL2/SDL_events.h>
-#include "camera constants.hpp"
+#include <SDL2/SDL_video.h>
 
-namespace {
-  constexpr InputSystem::ListenerID NOT_LISTENING =
-    std::numeric_limits<InputSystem::ListenerID>::max();
-}
-
-CameraWindowSize::CameraWindowSize()
-  : windowSize(DEFAULT_WINDOW_PIXEL_SIZE),
-    listenerID(NOT_LISTENING) {}
+NoWindowAttached::NoWindowAttached()
+  : std::logic_error("Tried to get the size of the window but the window was not attached") {}
 
 glm::ivec2 CameraWindowSize::get() const {
-  return windowSize;
-}
-
-void CameraWindowSize::addEventListener(InputSystem &inputSystem) {
-  assert(listenerID == NOT_LISTENING);
-  listenerID = inputSystem.addListener(
-    Utils::memFunWrap(this, &CameraWindowSize::eventListener)
-  );
-}
-
-void CameraWindowSize::remEventListener(InputSystem &inputSystem) {
-  assert(listenerID != NOT_LISTENING);
-  inputSystem.remListener(listenerID);
-}
-
-bool CameraWindowSize::eventListener(const SDL_Event &event) {
-  if (event.type != SDL_WINDOWEVENT) {
-    return false;
-  }
-  
-  const SDL_WindowEvent &winEvent = event.window;
-  
-  if (winEvent.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
-    windowSize = {winEvent.data1, winEvent.data2};
-    return true;
+  if (window == nullptr) {
+    throw NoWindowAttached();
   } else {
-    return false;
+    glm::ivec2 size;
+    SDL_GetWindowSize(window, &size.x, &size.y);
+    return size;
   }
+}
+
+void CameraWindowSize::attachWindow(SDL_Window *newWindow) {
+  window = newWindow;
+}
+
+void CameraWindowSize::detachWindow() {
+  window = nullptr;
 }

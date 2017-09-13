@@ -9,26 +9,27 @@
 #ifndef camera_window_size_hpp
 #define camera_window_size_hpp
 
+#include <stdexcept>
 #include <glm/vec2.hpp>
-#include "input system.hpp"
 
-class InputSystem;
-extern "C" union SDL_Event;
+extern "C" struct SDL_Window;
+
+class NoWindowAttached final : public std::logic_error {
+public:
+  NoWindowAttached();
+};
 
 class CameraWindowSize {
 public:
-  CameraWindowSize();
+  CameraWindowSize() = default;
   
   glm::ivec2 get() const;
   
-  void addEventListener(InputSystem &);
-  void remEventListener(InputSystem &);
+  void attachWindow(SDL_Window *);
+  void detachWindow();
   
 private:
-  glm::ivec2 windowSize;
-  InputSystem::ListenerID listenerID;
-  
-  bool eventListener(const SDL_Event &);
+  SDL_Window *window = nullptr;
 };
 
 #endif
