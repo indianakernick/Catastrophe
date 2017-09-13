@@ -27,7 +27,8 @@ private:
   enum class State {
     STANDING,
     STARTING_TO_RUN,
-    RUNNING
+    RUNNING,
+    STARTING_TO_STAND
   } state = State::STANDING;
   
   //@TODO store these values in Sprite somehow
@@ -40,6 +41,7 @@ private:
   Frame getFrameStanding(float, float);
   Frame getFrameStartingToRun(float, float);
   Frame getFrameRunning(float, float);
+  Frame getFrameStartingToStand(float, float);
 };
 
 #endif

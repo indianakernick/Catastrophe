@@ -41,6 +41,9 @@ void PlayerAnimationComponent::update(
     case State::RUNNING:
       vectorRender.frame = getFrameRunning(horiVel, delta);
       break;
+    case State::STARTING_TO_STAND:
+      vectorRender.frame = getFrameStartingToStand(horiVel, delta);
+      break;
     
     default:
       assert(false);
@@ -79,16 +82,17 @@ Frame PlayerAnimationComponent::getFrameStanding(const float horiVel, const floa
 
 Frame PlayerAnimationComponent::getFrameStartingToRun(const float horiVel, const float delta) {
   if (horiVel == 0.0f) {
-    state = State::STANDING;
-    return getFrameStanding(horiVel, delta);
+    state = State::STARTING_TO_STAND;
+    return getFrameStartingToStand(horiVel, delta);
   } else {
     standRun.advance(calcAnimAdvance(horiVel, delta));
     if (standRun.overflow()) {
       anim.setProgressTime(0.125f + standRun.getProgressTime() - standRun.getDuration());
+      standRun.toEnd();
       state = State::RUNNING;
       return getFrameRunning(horiVel, delta);
     } else {
-      Frame standingFrame = getFrame(sprite, "stand", standRun.getProgressTime());
+      Frame standingFrame = getFrame(sprite, "stand", 0.0f);
       lerpFrames(
         standRun.getProgress<float>(),
         standingFrame,
@@ -101,11 +105,34 @@ Frame PlayerAnimationComponent::getFrameStartingToRun(const float horiVel, const
 
 Frame PlayerAnimationComponent::getFrameRunning(const float horiVel, const float delta) {
   if (horiVel == 0.0f) {
-    state = State::STANDING;
-    return getFrameStanding(horiVel, delta);
+    state = State::STARTING_TO_STAND;
+    return getFrameStartingToStand(horiVel, delta);
   } else {
     anim.advance(calcAnimAdvance(horiVel, delta));
     anim.repeatOnOverflow();
     return getFrame(sprite, "run", anim.getProgressTime());
+  }
+}
+
+Frame PlayerAnimationComponent::getFrameStartingToStand(const float horiVel, const float delta) {
+  //standRun is at the beginning when the player is standing and
+  //            at the end       when the player is running
+  if (horiVel == 0.0f) {
+    standRun.advanceRev(delta);
+    if (standRun.underflow()) {
+      standRun.toBegin();
+      state = State::STANDING;
+      return getFrameStanding(horiVel, delta);
+    } else {
+      Frame standingFrame = getFrame(sprite, "stand", 0.0f);
+      lerpFrames(
+        standRun.getProgress<float>(),
+        standingFrame,
+        getFrame(sprite, "run", anim.getProgressTime())
+      );
+      return standingFrame;
+    }
+  } else {
+    return getFrameStartingToRun(horiVel, delta);
   }
 }
