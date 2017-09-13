@@ -23,6 +23,7 @@ private:
   Sprite sprite;
   Time::SimpleAnim<float> anim;
   Time::SimpleAnim<float> standRun;
+  float lastDir = 1.0f;
   enum class State {
     STANDING,
     STARTING_TO_RUN,
@@ -33,6 +34,7 @@ private:
   //foot moves 0.25 meters in 0.125 seconds
   static constexpr float PLAYER_FOOT_SPEED = 0.25f / 0.125f;
   
+  float calcHoriScale(float);
   float calcAnimAdvance(float, float) const;
   
   Frame getFrameStanding(float, float);

@@ -23,8 +23,6 @@
 		4509F8FF1F5E7E2500927A19 /* vector line shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8FD1F5E7E2500927A19 /* vector line shape.cpp */; };
 		4509F9021F5E816F00927A19 /* vector file helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9001F5E816F00927A19 /* vector file helper.cpp */; };
 		4509F9051F5E8EC200927A19 /* vector circle shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9031F5E8EC200927A19 /* vector circle shape.cpp */; };
-		451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 451FA2891F149B2200C43BE9 /* sprites.atlas */; };
-		451FA28E1F149B2200C43BE9 /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 451FA28A1F149B2200C43BE9 /* sprites.png */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9D81F64C104003A98B1 /* player input commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9D21F63DDF1003A98B1 /* player input commands.cpp */; };
 		452FF9D91F64C104003A98B1 /* input commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C91F63D829003A98B1 /* input commands.cpp */; };
@@ -37,7 +35,6 @@
 		452FF9E71F64D39D003A98B1 /* vector rendering state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */; };
 		452FF9EB1F64E6DC003A98B1 /* simple animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9E91F64E6DC003A98B1 /* simple animation component.cpp */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
-		453479C11F21D2C60083743E /* small rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 453479C01F21D2C60083743E /* small rat.png */; };
 		4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534A60F1F51289B00F3AC06 /* debug input.cpp */; };
 		453890721F2ADB13007EBB5A /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906E1F2ADB13007EBB5A /* app impl.cpp */; };
 		4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453890791F2ADB4B007EBB5A /* string to scancode.cpp */; };
@@ -111,7 +108,6 @@
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
-		45F3DB471F1715CC0058D36B /* player.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45F3DB461F1715CC0058D36B /* player.yaml */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
 		45FA993F1F35476400F8C639 /* contact listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA993D1F35476400F8C639 /* contact listener.cpp */; };
@@ -144,10 +140,6 @@
 		4509F9011F5E816F00927A19 /* vector file helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector file helper.hpp"; sourceTree = "<group>"; };
 		4509F9031F5E8EC200927A19 /* vector circle shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector circle shape.cpp"; sourceTree = "<group>"; };
 		4509F9041F5E8EC200927A19 /* vector circle shape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector circle shape.hpp"; sourceTree = "<group>"; };
-		451FA2871F149B2200C43BE9 /* config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yaml; sourceTree = "<group>"; };
-		451FA2881F149B2200C43BE9 /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
-		451FA2891F149B2200C43BE9 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprites.atlas; sourceTree = "<group>"; };
-		451FA28A1F149B2200C43BE9 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -170,7 +162,6 @@
 		452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 glm cast.hpp"; sourceTree = "<group>"; };
 		452FF9E91F64E6DC003A98B1 /* simple animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple animation component.cpp"; sourceTree = "<group>"; };
 		452FF9EA1F64E6DC003A98B1 /* simple animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple animation component.hpp"; sourceTree = "<group>"; };
-		453479C01F21D2C60083743E /* small rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small rat.png"; sourceTree = "<group>"; };
 		4534A60F1F51289B00F3AC06 /* debug input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug input.cpp"; sourceTree = "<group>"; };
 		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
@@ -326,7 +317,6 @@
 		4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
-		45F3DB461F1715CC0058D36B /* player.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.yaml; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
 		45FA99161F33104200F8C639 /* simple physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple physics component.cpp"; sourceTree = "<group>"; };
@@ -423,12 +413,6 @@
 			children = (
 				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
 				4509F8D31F5A429800927A19 /* player sprite.yaml */,
-				451FA2871F149B2200C43BE9 /* config.yaml */,
-				451FA2881F149B2200C43BE9 /* rat.png */,
-				453479C01F21D2C60083743E /* small rat.png */,
-				451FA2891F149B2200C43BE9 /* sprites.atlas */,
-				451FA28A1F149B2200C43BE9 /* sprites.png */,
-				45F3DB461F1715CC0058D36B /* player.yaml */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -868,11 +852,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				451FA28E1F149B2200C43BE9 /* sprites.png in Resources */,
 				4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */,
-				45F3DB471F1715CC0058D36B /* player.yaml in Resources */,
-				451FA28D1F149B2200C43BE9 /* sprites.atlas in Resources */,
-				453479C11F21D2C60083743E /* small rat.png in Resources */,
 				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 			);
@@ -892,7 +872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in \"libSDL2-2.0.0.dylib\" \"libSimpleton Engine.dylib\" \"libUnpacker.dylib\" \"libyaml-cpp.0.5.3.dylib\" \"libSDL2_ttf-2.0.0.dylib\"\ndo\n  ditto \"$src/$f\" \"$dest/$f\"\ndone\n\ncd \"Catastrophe/Resources\"\npacker --silent config.yaml";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

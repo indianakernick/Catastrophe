@@ -46,9 +46,20 @@ void PlayerAnimationComponent::update(
       assert(false);
   }
   
-  const float horiScale = horiVel < 0.0f ? -1.0f : 1.0f;
   vectorRender.modelMat = glm::translate({}, castToGLM(physics.pos));
-  vectorRender.modelMat = glm::scale(vectorRender.modelMat, {horiScale, 1.0f});
+  vectorRender.modelMat = glm::scale(vectorRender.modelMat, {calcHoriScale(horiVel), 1.0f});
+}
+
+float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
+  if (horiVel < 0.0f) {
+    lastDir = -1.0f;
+    return lastDir;
+  } else if (horiVel > 0.0f) {
+    lastDir = 1.0f;
+    return lastDir;
+  } else {
+    return lastDir;
+  }
 }
 
 float PlayerAnimationComponent::calcAnimAdvance(const float horiVel, const float delta) const {
