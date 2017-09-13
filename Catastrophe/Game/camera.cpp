@@ -34,17 +34,16 @@ CameraVisible Camera::visible() const {
 }
 
 void Camera::update(const float delta) {
+  props.windowSize = windowSize.get();
+
   const glm::vec2 motionTarget = motionTrack.calcMotionTarget(props);
   const glm::vec2 newCenter = pos.calcCenter(props, motionTarget, delta);
   
   const float zoomTarget = zoomTrack.calcZoomTarget(props);
   const float newPPM = zoom.calcPPM(props, zoomTarget, delta);
   
-  const glm::ivec2 newWindowSize = windowSize.get();
-  
   props.center = newCenter;
   props.pixelsPerMeter = newPPM;
-  props.windowSize = newWindowSize;
 }
 
 void Camera::debugRender(NVGcontext *context) {
