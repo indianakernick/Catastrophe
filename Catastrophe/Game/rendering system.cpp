@@ -28,7 +28,9 @@ void RenderingSystem::render(EntityManager &entityMan, NVGcontext *context) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     const Entity &entity = entityMan.getEntity(c->first);
     const RenderingState &rendering = *entity.latestRenderingState;
-    c->second->render(context, rendering);
+    if (camera.visibleMeters(c->second->getAABB(rendering))) {
+      c->second->render(context, rendering);
+    }
   }
 }
 

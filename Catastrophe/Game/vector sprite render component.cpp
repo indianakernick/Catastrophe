@@ -14,7 +14,7 @@
 VectorRenderComponent::VectorRenderComponent(const float width, const float height)
   : rect({}, {width, height}),
     size(width, height) {}
-
+    
 void VectorRenderComponent::render(NVGcontext *context, const RenderingState &rendering) {
   rect.c = rendering.modelMat[2];
   
@@ -28,4 +28,8 @@ const CameraMotionTarget *VectorRenderComponent::getMotionTarget() const {
 
 const CameraZoomTarget *VectorRenderComponent::getZoomTarget() const {
   return &size;
+}
+
+Rect VectorRenderComponent::getAABB(const RenderingState &) const {
+  return static_cast<Rect>(rect);
 }

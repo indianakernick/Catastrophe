@@ -8,8 +8,6 @@
 
 #include "camera.hpp"
 
-#include "camera visible.hpp"
-#include "camera constants.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 
 glm::mat3 Camera::toPixels() const {
@@ -29,8 +27,11 @@ glm::mat3 Camera::toMeters() const {
   return glm::inverse(toPixels());
 }
 
-CameraVisible Camera::visible() const {
-  return CameraVisible(props);
+bool Camera::visibleMeters(const Rect aabbMeters) const {
+  const glm::ivec2 posPixels = toPixels() * glm::vec3(aabbMeters.p.x, aabbMeters.p.y, 1.0f);
+  const glm::ivec2 sizePixels = aabbMeters.s * props.pixelsPerMeter;
+  const RectPx aabbPixels = {{posPixels.x, posPixels.y - sizePixels.y}, sizePixels};
+  return RectPx(props.windowSize).interceptsWith(aabbPixels);
 }
 
 void Camera::update(const float delta) {

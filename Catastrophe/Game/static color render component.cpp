@@ -45,3 +45,7 @@ const CameraMotionTarget *StaticColorRenderComponent::getMotionTarget() const {
 const CameraZoomTarget *StaticColorRenderComponent::getZoomTarget() const {
   return &size;
 }
+
+Rect StaticColorRenderComponent::getAABB(const RenderingState &) const {
+  return static_cast<Rect>(rect);
+}

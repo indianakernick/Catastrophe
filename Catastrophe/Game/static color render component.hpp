@@ -20,6 +20,7 @@ public:
   void render(NVGcontext *, const RenderingState &) override;
   const CameraMotionTarget *getMotionTarget() const override;
   const CameraZoomTarget *getZoomTarget() const override;
+  Rect getAABB(const RenderingState &) const override;
   
 private:
   NVGcolor color;
