@@ -34,6 +34,9 @@
 		452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9DF1F64D219003A98B1 /* player animation component.cpp */; };
 		452FF9E71F64D39D003A98B1 /* vector rendering state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */; };
 		452FF9EB1F64E6DC003A98B1 /* simple animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9E91F64E6DC003A98B1 /* simple animation component.cpp */; };
+		452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F31F6A70DC003A98B1 /* rect.yaml */; };
+		452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */; };
+		452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */; };
 		453479561F1F0E6D0083743E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4592BAE31F11B51400D1640D /* main.cpp */; };
 		4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4534A60F1F51289B00F3AC06 /* debug input.cpp */; };
 		453890721F2ADB13007EBB5A /* app impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538906E1F2ADB13007EBB5A /* app impl.cpp */; };
@@ -162,6 +165,10 @@
 		452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 glm cast.hpp"; sourceTree = "<group>"; };
 		452FF9E91F64E6DC003A98B1 /* simple animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple animation component.cpp"; sourceTree = "<group>"; };
 		452FF9EA1F64E6DC003A98B1 /* simple animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple animation component.hpp"; sourceTree = "<group>"; };
+		452FF9F31F6A70DC003A98B1 /* rect.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rect.yaml; sourceTree = "<group>"; };
+		452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rect 2.yaml"; sourceTree = "<group>"; };
+		452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "sprite test app.cpp"; sourceTree = "<group>"; };
+		452FF9F81F6BB83E003A98B1 /* sprite test app.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "sprite test app.hpp"; sourceTree = "<group>"; };
 		4534A60F1F51289B00F3AC06 /* debug input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug input.cpp"; sourceTree = "<group>"; };
 		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
@@ -411,8 +418,10 @@
 		451FA2851F1499CC00C43BE9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				452FF9F31F6A70DC003A98B1 /* rect.yaml */,
 				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
 				4509F8D31F5A429800927A19 /* player sprite.yaml */,
+				452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -739,6 +748,8 @@
 			children = (
 				4538906E1F2ADB13007EBB5A /* app impl.cpp */,
 				4538906F1F2ADB13007EBB5A /* app impl.hpp */,
+				452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */,
+				452FF9F81F6BB83E003A98B1 /* sprite test app.hpp */,
 				452FF9C01F63D007003A98B1 /* constants */,
 				45103F411F2432D2001B24E2 /* utils */,
 				453892F71F2C4061007EBB5A /* input */,
@@ -852,6 +863,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
+				452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */,
 				4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */,
 				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
@@ -933,6 +946,7 @@
 				453892B51F2ADBB4007EBB5A /* b2EdgeAndCircleContact.cpp in Sources */,
 				453892A91F2ADBB4007EBB5A /* b2Timer.cpp in Sources */,
 				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
+				452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */,
 				454116351F5622D700C2865B /* camera zoom track.cpp in Sources */,
 				453892B41F2ADBB4007EBB5A /* b2ContactSolver.cpp in Sources */,
 				4509F9021F5E816F00927A19 /* vector file helper.cpp in Sources */,

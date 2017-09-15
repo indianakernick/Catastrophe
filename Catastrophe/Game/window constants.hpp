@@ -11,7 +11,7 @@
 
 #include <Simpleton/Platform/window.hpp>
 
-const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {1280, 720};
+const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {512, 512};
 
 constexpr bool WINDOW_RESIZABLE = true;
 constexpr bool WINDOW_VSYNC = true;
@@ -26,9 +26,9 @@ const Platform::Window::Desc WINDOW_DESC = {
 
 constexpr bool ENABLE_DEBUG_PHYSICS_RENDER = false;
 constexpr bool ENABLE_DEBUG_CAMERA_RENDER = false;
-constexpr bool ENABLE_GAME_RENDER = true;
+constexpr bool ENABLE_GAME_RENDER = false;
 constexpr bool ENABLE_DEBUG_INPUT_LOG = false;
-constexpr bool ENABLE_FPS_RENDER = true;
+constexpr bool ENABLE_FPS_RENDER = false;
 
 constexpr unsigned MAX_INPUT_EVENTS_PER_FRAME = 64;
 
