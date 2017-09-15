@@ -12,6 +12,7 @@
 #include "vector file.hpp"
 #include "vector render.hpp"
 #include "window constants.hpp"
+#include "framebuffer to png.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Platform/system info.hpp>
 
@@ -70,7 +71,7 @@ void SpriteTestApp::render(const float delta) {
     {0.5f, 0.5f}
   );
   
-  mat = glm::scale(mat, {0.75f, 0.75f});
+  mat = glm::scale(mat, {0.875f, 0.875f});
   
   renderingContext.preRender(mat);
   
@@ -80,4 +81,7 @@ void SpriteTestApp::render(const float delta) {
   renderSprite(renderingContext.getContext(), sprite.shapes, frame, {});
   
   renderingContext.postRender(ENABLE_FPS_RENDER);
+  
+  framebufferToPNG("icon512.png", 512, 512);
+  
 }
