@@ -24,8 +24,13 @@ namespace {
     }
     return 1.0f / scale;
   }
-
-  Point readPoint(const YAML::Node &pointNode) {
+  
+  template <typename Object>
+  std::enable_if_t<false, Object> readObject(const YAML::Node &, float);
+  
+  template <typename Object>
+  std::enable_if_t<std::is_same<Object, Point>::value, Point>
+  readObject(const YAML::Node &pointNode, const float invScale) {
     checkType(pointNode, YAML::NodeType::Sequence);
     if (pointNode.size() != 2) {
       throw std::runtime_error(
@@ -35,12 +40,14 @@ namespace {
       );
     }
     return {
-      pointNode[0].as<Coord>(),
-      pointNode[1].as<Coord>()
+      pointNode[0].as<Coord>() * invScale,
+      pointNode[1].as<Coord>() * invScale
     };
   }
   
-  NVGcolor readColor(const YAML::Node &colorNode) {
+  template <typename Object>
+  std::enable_if_t<std::is_same<Object, NVGcolor>::value, NVGcolor>
+  readObject(const YAML::Node &colorNode, float) {
     checkType(colorNode, YAML::NodeType::Sequence);
     if (colorNode.size() != 4) {
       throw std::runtime_error(
@@ -57,54 +64,63 @@ namespace {
     }}};
   }
   
-  Points readPoints(const YAML::Node &pointsNode, const float invScale) {
-    checkType(pointsNode, YAML::NodeType::Sequence);
-    Points points;
-    for (auto p = pointsNode.begin(); p != pointsNode.end(); ++p) {
-      points.emplace_back(readPoint(*p) * invScale);
-    }
-    return points;
+  template <typename Object>
+  std::enable_if_t<std::is_same<Object, Coord>::value, Coord>
+  readObject(const YAML::Node &scalarNode, const float invScale) {
+    return scalarNode.as<Coord>() * invScale;
   }
   
-  Colors readColors(const YAML::Node &colorsNode) {
-    checkType(colorsNode, YAML::NodeType::Sequence);
-    Colors colors;
-    for (auto c = colorsNode.begin(); c != colorsNode.end(); ++c) {
-      colors.emplace_back(readColor(*c));
+  class BadDataSize {};
+  
+  void checkFrameSize(Index &frameSize, const size_t numObjects) {
+    if (frameSize == NULL_INDEX) {
+      frameSize = static_cast<Index>(numObjects);
+    } else if (frameSize != numObjects) {
+      throw BadDataSize();
     }
-    return colors;
   }
   
-  Scalars readScalars(const YAML::Node &scalarsNode, const float invScale) {
-    checkType(scalarsNode, YAML::NodeType::Sequence);
-    Scalars scalars;
-    for (auto s = scalarsNode.begin(); s != scalarsNode.end(); ++s) {
-      scalars.emplace_back(s->as<Coord>() * invScale);
+  template <typename Objects>
+  void checkFrameSize(FrameSize &frameSize, const size_t numObjects) {
+           if constexpr (std::is_same<Objects, Points>::value) {
+      checkFrameSize(frameSize.numPoints, numObjects);
+    } else if constexpr (std::is_same<Objects, Colors>::value) {
+      checkFrameSize(frameSize.numColors, numObjects);
+    } else if constexpr (std::is_same<Objects, Scalars>::value) {
+      checkFrameSize(frameSize.numScalars, numObjects);
     }
-    return scalars;
   }
   
-  PointKeyframe readPointKeyframe(const YAML::Node &frameNode, const float invScale) {
+  template <typename Objects>
+  Objects readObjects(const YAML::Node &objectsNode, const float invScale, FrameSize &frameSize) {
+    using Object = typename Objects::value_type;
+    
+    checkType(objectsNode, YAML::NodeType::Sequence);
+    
+    try {
+      checkFrameSize<Objects>(frameSize, objectsNode.size());
+    } catch (BadDataSize &) {
+      throw std::runtime_error(
+        "Inconsistent data size at line "
+        + std::to_string(objectsNode.Mark().line)
+      );
+    }
+    
+    Objects objects;
+    for (auto o = objectsNode.begin(); o != objectsNode.end(); ++o) {
+      objects.emplace_back(readObject<Object>(*o, invScale));
+    }
+    return objects;
+  }
+  
+  template <typename Keyframe>
+  Keyframe readKeyframe(const YAML::Node &frameNode, const float invScale, FrameSize &frameSize) {
+    using Object = decltype(std::declval<Keyframe>().data);
+    
     checkType(frameNode, YAML::NodeType::Map);
     return {
       getChild(frameNode, "offset").as<TimeSec>(),
-      readPoints(getChild(frameNode, "points"), invScale)
-    };
-  }
-  
-  ColorKeyframe readColorKeyframe(const YAML::Node &frameNode) {
-    checkType(frameNode, YAML::NodeType::Map);
-    return {
-      getChild(frameNode, "offset").as<TimeSec>(),
-      readColors(getChild(frameNode, "colors"))
-    };
-  }
-  
-  ScalarKeyframe readScalarKeyframe(const YAML::Node &frameNode, const float invScale) {
-    checkType(frameNode, YAML::NodeType::Map);
-    return {
-      getChild(frameNode, "offset").as<TimeSec>(),
-      readScalars(getChild(frameNode, "scalars"), invScale)
+      readObjects<Object>(getChild(frameNode, "data"), invScale, frameSize)
     };
   }
   
@@ -129,63 +145,24 @@ namespace {
   private:
     TimeSec prevOffset;
   };
-  
-  //@TODO the next 3 functions are way too similar
-  
-  PointKeyframes readPointKeyframes(const YAML::Node &framesNode, const float invScale) {
+
+  template <typename Keyframes>
+  Keyframes readKeyframes(const YAML::Node &framesNode, const float invScale, FrameSize &frameSize) {
+    using Keyframe = typename Keyframes::value_type;
+    
     checkType(framesNode, YAML::NodeType::Sequence);
     
     OffsetChecker checker;
-    PointKeyframes frames;
+    Keyframes frames;
     
     if (framesNode.size() == 0) {
       return frames;
     }
-    frames.emplace_back(readPointKeyframe(framesNode[0], invScale));
+    frames.emplace_back(readKeyframe<Keyframe>(framesNode[0], invScale, frameSize));
     checker.first(frames.front().offsetSec);
     
     for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readPointKeyframe(*f, invScale));
-      checker.check(frames.back().offsetSec);
-    }
-    
-    return frames;
-  }
-  
-  ColorKeyframes readColorKeyframes(const YAML::Node &framesNode) {
-    checkType(framesNode, YAML::NodeType::Sequence);
-    
-    OffsetChecker checker;
-    ColorKeyframes frames;
-    
-    if (framesNode.size() == 0) {
-      return frames;
-    }
-    frames.emplace_back(readColorKeyframe(framesNode[0]));
-    checker.first(frames.front().offsetSec);
-    
-    for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readColorKeyframe(*f));
-      checker.check(frames.back().offsetSec);
-    }
-    
-    return frames;
-  }
-  
-  ScalarKeyframes readScalarKeyframes(const YAML::Node &framesNode, const float invScale) {
-    checkType(framesNode, YAML::NodeType::Sequence);
-    
-    OffsetChecker checker;
-    ScalarKeyframes frames;
-    
-    if (framesNode.size() == 0) {
-      return frames;
-    }
-    frames.emplace_back(readScalarKeyframe(framesNode[0], invScale));
-    checker.first(frames.front().offsetSec);
-    
-    for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readScalarKeyframe(*f, invScale));
+      frames.emplace_back(readKeyframe<Keyframe>(*f, invScale, frameSize));
       checker.check(frames.back().offsetSec);
     }
     
@@ -205,24 +182,24 @@ namespace {
     }
   }
   
-  Animation readAnim(const YAML::Node &animNode, const float invScale) {
+  Animation readAnim(const YAML::Node &animNode, const float invScale, FrameSize &frameSize) {
     checkType(animNode, YAML::NodeType::Map);
     
     return {
       getChild(animNode, "duration").as<TimeSec>(),
-      readPointKeyframes(getChild(animNode, "point frames"), invScale),
-      readColorKeyframes(getChild(animNode, "color frames")),
-      readScalarKeyframes(getChild(animNode, "scalar frames"), invScale),
+      readKeyframes<PointKeyframes>(getChild(animNode, "point frames"), invScale, frameSize),
+      readKeyframes<ColorKeyframes>(getChild(animNode, "color frames"), invScale, frameSize),
+      readKeyframes<ScalarKeyframes>(getChild(animNode, "scalar frames"), invScale, frameSize),
       readMetaData(animNode["meta"])
     };
   }
   
-  Animations readAnims(const YAML::Node &animsNode, const float invScale) {
+  Animations readAnims(const YAML::Node &animsNode, const float invScale, FrameSize &frameSize) {
     checkType(animsNode, YAML::NodeType::Map);
     
     Animations anims;
     for (auto a = animsNode.begin(); a != animsNode.end(); ++a) {
-      anims.emplace(a->first.as<std::string>(), readAnim(a->second, invScale));
+      anims.emplace(a->first.as<std::string>(), readAnim(a->second, invScale, frameSize));
     }
     
     return anims;
@@ -272,9 +249,10 @@ Sprite loadSprite(const std::string &fileName) {
   checkType(rootNode, YAML::NodeType::Map);
   
   const float invScale = readInvScale(getChild(rootNode, "scale"));
+  FrameSize frameSize;
+  const Animations anims = readAnims(getChild(rootNode, "anims"), invScale, frameSize);
   return {
-    readAnims(getChild(rootNode, "anims"), invScale),
-    //@TODO get FrameSize from readAnims and pass it to readShapes
-    readShapes(getChild(rootNode, "shapes"), {})
+    anims,
+    readShapes(getChild(rootNode, "shapes"), frameSize)
   };
 }

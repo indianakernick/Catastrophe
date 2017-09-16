@@ -35,9 +35,9 @@ struct Frame {
 };
 
 struct FrameSize {
-  Index numPoints;
-  Index numColors;
-  Index numScalars;
+  Index numPoints = NULL_INDEX;
+  Index numColors = NULL_INDEX;
+  Index numScalars = NULL_INDEX;
 };
 
 namespace YAML {
@@ -52,6 +52,10 @@ public:
   
   virtual void load(const YAML::Node &, FrameSize) = 0;
   virtual void draw(NVGcontext *, const Frame &) const = 0;
+
+protected:
+  static Index readIndex(const YAML::Node &, Index);
+  static Indicies readIndicies(const YAML::Node &, Index);
 };
 using Shapes = std::vector<std::shared_ptr<Shape>>;
 

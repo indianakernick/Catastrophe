@@ -11,22 +11,20 @@
 #include "nvg helper.hpp"
 #include "yaml helper.hpp"
 
-void ShapeCircle::load(const YAML::Node &node, const FrameSize) {
-  //@TODO use frameSize to check bounds of indicies
-  
-  points = getChild(node, "points").as<Indicies>();
+void ShapeCircle::load(const YAML::Node &node, const FrameSize frameSize) {
+  points = readIndicies(getChild(node, "points"), frameSize.numPoints);
   
   if (const YAML::Node &radiusNode = node["radius"]) {
-    radius = radiusNode.as<Index>();
+    radius = readIndex(radiusNode, frameSize.numScalars);
   }
   if (const YAML::Node &strokeColorNode = node["stroke color"]) {
-    strokeColor = strokeColorNode.as<Index>();
+    strokeColor = readIndex(strokeColorNode, frameSize.numColors);
   }
   if (const YAML::Node &fillColorNode = node["fill color"]) {
-    fillColor = fillColorNode.as<Index>();
+    fillColor = readIndex(fillColorNode, frameSize.numColors);
   }
   if (const YAML::Node &strokeWidthNode = node["stroke width"]) {
-    strokeWidth = strokeWidthNode.as<Index>();
+    strokeWidth = readIndex(strokeWidthNode, frameSize.numScalars);
   }
 }
 

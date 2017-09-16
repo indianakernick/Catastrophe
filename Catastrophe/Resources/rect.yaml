@@ -4,7 +4,7 @@ anims:
     duration: 0.0
     point frames:
     - offset: 0.0
-      points: &static_frame
+      data: &static_frame
       - [-4, -4]
       - [-4, 4]
       - [4, 4]
@@ -12,32 +12,32 @@ anims:
 
     color frames: &common_colors
     - offset: 0.0
-      colors:
+      data:
       - [1.0, 1.0, 1.0, 1.0]
 
     scalar frames: &common_scalars
     - offset: 0.0
-      scalars: []
+      data: []
 
   left and right:
     duration: 2.0
     point frames:
     - offset: 0.0
-      points: &left_and_right_first_frame
+      data: &left_and_right_first_frame
       - [-8, -4]
       - [-8, 4]
       - [0, 4]
       - [0, -4]
 
     - offset: 1.0
-      points:
+      data:
       - [0, -4]
       - [0, 4]
       - [8, 4]
       - [8, -4]
 
     - offset: 2.0
-      points: *left_and_right_first_frame
+      data: *left_and_right_first_frame
 
     color frames: *common_colors
     scalar frames: *common_scalars
@@ -46,35 +46,35 @@ anims:
     duration: 4.0
     point frames:
     - offset: 0.0
-      points: &top_left
+      data: &top_left
       - [-8, 0]
       - [-8, 8]
       - [0, 8]
       - [0, 0]
 
     - offset: 1.0
-      points:
+      data:
       - [0, 0]
       - [0, 8]
       - [8, 8]
       - [8, 0]
 
     - offset: 2.0
-      points:
+      data:
       - [0, -8]
       - [0, 0]
       - [8, 0]
       - [8, -8]
 
     - offset: 3.0
-      points:
+      data:
       - [-8, -8]
       - [-8, 0]
       - [0, 0]
       - [0, -8]
 
     - offset: 4.0
-      points: *top_left
+      data: *top_left
 
     color frames: *common_colors
     scalar frames: *common_scalars
@@ -83,21 +83,21 @@ anims:
     duration: 2.0
     point frames:
     - offset: 0.0
-      points: &tiny_rect
+      data: &tiny_rect
       - [0, 0]
       - [0, 0]
       - [0, 0]
       - [0, 0]
 
     - offset: 1.0
-      points:
+      data:
       - [-8, -8]
       - [-8, 8]
       - [8, 8]
       - [8, -8]
 
     - offset: 2.0
-      points: *tiny_rect
+      data: *tiny_rect
 
     color frames: *common_colors
     scalar frames: *common_scalars

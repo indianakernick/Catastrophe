@@ -4,7 +4,7 @@ anims:
     duration: 8.0
     point frames:
     - offset: 0.0
-      points:
+      data:
       #fast
       - [-8, 2]
       - [-8, 6]
@@ -17,7 +17,7 @@ anims:
       - [-4, -6]
 
     - offset: 2.0
-      points:
+      data:
       #fast
       - [4, 2]
       - [4, 6]
@@ -30,7 +30,7 @@ anims:
       - [2, -6]
 
     - offset: 4.0
-      points:
+      data:
       #fast
       - [-8, 2]
       - [-8, 6]
@@ -43,7 +43,7 @@ anims:
       - [8, -6]
 
     - offset: 6.0
-      points:
+      data:
       #fast
       - [4, 2]
       - [4, 6]
@@ -56,7 +56,7 @@ anims:
       - [2, -6]
 
     - offset: 8.0
-      points:
+      data:
       #fast
       - [-8, 2]
       - [-8, 6]
@@ -70,12 +70,12 @@ anims:
 
     color frames:
     - offset: 0.0
-      colors:
+      data:
       - [1.0, 1.0, 1.0, 1.0]
 
     scalar frames:
     - offset: 0.0
-      scalars: []
+      data: []
 
 shapes:
 - type: line

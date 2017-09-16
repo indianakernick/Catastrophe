@@ -12,6 +12,8 @@
 #include "yaml helper.hpp"
 
 namespace {
+  class BadLineCap {};
+
   NVGlineCap readCap(const std::string &str) {
            if (str == "butt") {
       return NVG_BUTT;
@@ -24,30 +26,42 @@ namespace {
     } else if (str == "miter") {
       return NVG_MITER;
     } else {
-      throw std::runtime_error("Invalid line cap");
+      throw BadLineCap();
     }
   }
 }
 
-void ShapeLine::load(const YAML::Node &node, const FrameSize) {
-  //@TODO use frameSize to check bounds of indicies
-  
-  points = getChild(node, "points").as<Indicies>();
+void ShapeLine::load(const YAML::Node &node, const FrameSize frameSize) {
+  points = readIndicies(getChild(node, "points"), frameSize.numPoints);
   
   if (const YAML::Node &capNode = node["cap"]) {
-    cap = readCap(capNode.as<std::string>());
+    try {
+      cap = readCap(capNode.as<std::string>());
+    } catch (BadLineCap &) {
+      throw std::runtime_error(
+        "Invalid cap at line "
+        + std::to_string(capNode.Mark().line)
+      );
+    }
   }
-  if (const YAML::Node &capNode = node["join"]) {
-    join = readCap(capNode.as<std::string>());
+  if (const YAML::Node &joinNode = node["join"]) {
+    try {
+      join = readCap(joinNode.as<std::string>());
+    } catch (BadLineCap &) {
+      throw std::runtime_error(
+        "Invalid join at line "
+        + std::to_string(joinNode.Mark().line)
+      );
+    }
   }
   if (const YAML::Node &strokeColorNode = node["stroke color"]) {
-    strokeColor = strokeColorNode.as<Index>();
+    strokeColor = readIndex(strokeColorNode, frameSize.numColors);
   }
   if (const YAML::Node &fillColorNode = node["fill color"]) {
-    fillColor = fillColorNode.as<Index>();
+    fillColor = readIndex(fillColorNode, frameSize.numColors);
   }
   if (const YAML::Node &strokeWidthNode = node["stroke width"]) {
-    strokeWidth = strokeWidthNode.as<Index>();
+    strokeWidth = readIndex(strokeWidthNode, frameSize.numScalars);
   }
 }
 

@@ -4,7 +4,7 @@ anims:
     duration: 1.0
     point frames:
     - offset: 0.0
-      points: &first_points
+      data: &first_points
       - [1, 5]    # 0 head
       - [1, 4]    # 1 neck
       - [0, -1]   # 2 hip
@@ -17,7 +17,7 @@ anims:
       - [1, -4]   # 9 right knee
       - [0, -8]   #10 right foot
     - offset: 0.125
-      points:
+      data:
       - [1, 5]
       - [1, 4]
       - [0, -1]
@@ -30,7 +30,7 @@ anims:
       - [-1, -4]
       - [-4, -8]
     - offset: 0.25
-      points:
+      data:
       - [1, 6]
       - [1, 5]
       - [0, 0]
@@ -43,7 +43,7 @@ anims:
       - [-2, -4]
       - [-6, -4]
     - offset: 0.375
-      points:
+      data:
       - [1, 6]
       - [1, 5]
       - [0, 0]
@@ -61,7 +61,7 @@ anims:
     # swap left and right limbs
 
     - offset: 0.5
-      points:
+      data:
       - [1, 5]    # 0 head
       - [1, 4]    # 1 neck
       - [0, -1]   # 2 hip
@@ -74,7 +74,7 @@ anims:
       - [-1, -4]  # 9 right knee
       - [-5, -2]  #10 right foot
     - offset: 0.625
-      points:
+      data:
       - [1, 5]
       - [1, 4]
       - [0, -1]
@@ -87,7 +87,7 @@ anims:
       - [2, -4]
       - [-1, -5]
     - offset: 0.75
-      points:
+      data:
       - [1, 6]
       - [1, 5]
       - [0, 0]
@@ -100,7 +100,7 @@ anims:
       - [4, -2]
       - [6, -6]
     - offset: 0.875
-      points:
+      data:
       - [1, 6]
       - [1, 5]
       - [0, 0]
@@ -114,18 +114,18 @@ anims:
       - [4, -8]
 
     - offset: 1.0
-      points: *first_points
+      data: *first_points
 
     color frames: &common_colors
     - offset: 0.0
-      colors:
+      data:
       - [0.75, 0.75, 0.75, 1.0]
       - [0.5, 0.5, 0.5, 1.0]
       - [1.0, 1.0, 1.0, 1.0]
 
     scalar frames: &common_scalars
     - offset: 0.0
-      scalars:
+      data:
       - 1    # line width
       - 1.5  # head radius
 
@@ -138,7 +138,7 @@ anims:
     duration: 0.0
     point frames:
     - offset: 0.0
-      points:
+      data:
       - [0, 5]    # 0 head
       - [0, 4]    # 1 neck
       - [-1, -1]  # 2 hip
