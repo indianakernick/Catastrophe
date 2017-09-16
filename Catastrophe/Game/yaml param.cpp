@@ -8,6 +8,8 @@
 
 #include "yaml param.hpp"
 
+#include <Simpleton/Memory/file io.hpp>
+
 std::string getParamString(const Params &params) {
   if (params.empty()) {
     return {};
@@ -23,4 +25,20 @@ std::string getParamString(const Params &params) {
     }
     return paramStr;
   }
+}
+
+std::unique_ptr<char []> concatParamStringToFile(
+  const Params &params,
+  const std::string &filePath
+) {
+  const std::string paramStr = getParamString(params);
+  Memory::FileHandle file = Memory::openFileRead(filePath.c_str());
+  const size_t fileSize = Memory::sizeOfFile(file.get());
+  auto fileStr = std::make_unique<char []>(paramStr.size() + fileSize + 1);
+  
+  std::copy(paramStr.cbegin(), paramStr.cend(), fileStr.get());
+  Memory::readFile(fileStr.get() + paramStr.size(), fileSize, file.get());
+  fileStr[paramStr.size() + fileSize] = 0;
+  
+  return fileStr;
 }

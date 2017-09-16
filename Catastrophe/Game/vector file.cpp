@@ -244,8 +244,9 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &fileName) {
-  const YAML::Node rootNode = YAML::LoadFile(fileName);
+Sprite loadSprite(const std::string &fileName, const Params &params) {
+  std::unique_ptr<char []> fileStr = concatParamStringToFile(params, fileName);
+  const YAML::Node rootNode = YAML::Load(fileStr.get());
   checkType(rootNode, YAML::NodeType::Map);
   
   const float invScale = readInvScale(getChild(rootNode, "scale"));

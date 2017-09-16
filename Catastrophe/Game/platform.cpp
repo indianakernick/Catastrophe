@@ -38,8 +38,8 @@ std::unique_ptr<Entity> makePlatform(
     Platform::getResDir() + "platform body.yaml",
     physics.getWorld(),
     {
-      {"half_width", 10.0f},
-      {"half_height", 1.0f}
+      {"half_width", rect.s.x / 2.0f},
+      {"half_height", rect.s.y / 2.0f}
     }
   );
   platform->physics = makePhysicsComp<SimplePhysicsComponent>(body);
@@ -49,7 +49,9 @@ std::unique_ptr<Entity> makePlatform(
   platform->animation = std::make_shared<SimpleAnimationComponent>();
   animation.add(id, platform->animation);
   
-  platform->render = std::make_shared<StaticColorRenderComponent>(PLATFORM_COLOR, 20.0f, 2.0f);
+  platform->render = std::make_shared<StaticColorRenderComponent>(
+    PLATFORM_COLOR, rect.s.x, rect.s.y
+  );
   rendering.add(id, platform->render);
   
   platform->latestPhysicsState = std::make_unique<PhysicsState>();

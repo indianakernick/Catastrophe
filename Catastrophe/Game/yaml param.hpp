@@ -15,5 +15,6 @@
 using Params = std::unordered_map<std::string, float>;
 
 std::string getParamString(const Params &);
+std::unique_ptr<char[]> concatParamStringToFile(const Params &, const std::string &);
 
 #endif
