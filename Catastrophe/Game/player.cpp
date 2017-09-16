@@ -10,78 +10,33 @@
 
 #include "entity.hpp"
 #include "vector file.hpp"
+#include "physics file.hpp"
 #include "input system.hpp"
 #include "object types.hpp"
 #include "physics system.hpp"
 #include "animation system.hpp"
 #include "rendering system.hpp"
 #include "player constants.hpp"
+#include "player physics state.hpp"
+#include "player input commands.hpp"
+#include "vector rendering state.hpp"
 #include "player input component.hpp"
 #include "player physics component.hpp"
 #include "player animation component.hpp"
 #include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
-#include "player input commands.hpp"
-#include "player physics state.hpp"
-#include "vector rendering state.hpp"
 
 namespace {
-  const b2Vec2 BOX_NORMALS[4] = {
-    {0.0f, -1.0f},
-    {1.0f, 0.0f},
-    {0.0f, 1.0f},
-    {-1.0f, 0.0f}
-  };
-  
-  #define BOX_VERTS(TOP, RIGHT, BOTTOM, LEFT) {                                 \
-    {(LEFT), (BOTTOM)},                                                         \
-    {(RIGHT), (BOTTOM)},                                                        \
-    {(RIGHT), (TOP)},                                                           \
-    {(LEFT), (TOP)}                                                             \
-  }
-  
-  constexpr float BODY_RIGHT = PLAYER_WIDTH / 2.0f;
-  constexpr float BODY_TOP = PLAYER_HEIGHT / 2.0f;
-  constexpr float FOOT_BOTTOM = -PLAYER_HEIGHT / 2.0f - PLAYER_FOOT_HEIGHT;
-  
-  const b2Vec2 BODY_VERTS[4] = BOX_VERTS(BODY_TOP, BODY_RIGHT, -BODY_TOP, -BODY_RIGHT);
-  const b2Vec2 FOOT_VERTS[4] = BOX_VERTS(-BODY_TOP, BODY_RIGHT, FOOT_BOTTOM, -BODY_RIGHT);
-
-  #undef BOX_VERTS
-
-  void setBodyShape(b2PolygonShape &bodyShape) {
-    bodyShape.m_count = 4;
-    std::copy(BOX_NORMALS, BOX_NORMALS + 4, bodyShape.m_normals);
-    std::copy(BODY_VERTS, BODY_VERTS + 4, bodyShape.m_vertices);
-  }
-  
-  void setFootShape(b2PolygonShape &footShape) {
-    footShape.m_count = 4;
-    std::copy(BOX_NORMALS, BOX_NORMALS + 4, footShape.m_normals);
-    std::copy(FOOT_VERTS, FOOT_VERTS + 4, footShape.m_vertices);
-  }
-
-  void attachFixtures(b2Body *body) {
-    b2PolygonShape bodyShape;
-    setBodyShape(bodyShape);
+  void setFixtureUserData(b2Body *body) {
+    //b2Body::CreateFixture pushes the new fixture to the FRONT
+    //so the list is in reverse order to the sequence in "player body.yaml"
+    b2Fixture *footFix = body->GetFixtureList();
+    assert(footFix);
+    footFix->SetUserData(getUserData<Symbol::PlayerFoot>());
     
-    b2FixtureDef bodyFixture;
-    bodyFixture.shape = &bodyShape;
-    bodyFixture.density = PLAYER_DENSITY;
-    bodyFixture.friction = PLAYER_FRICTION;
-    bodyFixture.userData = getUserData<Symbol::PlayerBody>();
-    
-    b2PolygonShape footShape;
-    setFootShape(footShape);
-    
-    b2FixtureDef footFixture;
-    footFixture.shape = &footShape;
-    footFixture.density = 0;
-    footFixture.isSensor = true;
-    footFixture.userData = getUserData<Symbol::PlayerFoot>();
-    
-    body->CreateFixture(&bodyFixture);
-    body->CreateFixture(&footFixture);
+    b2Fixture *bodyFix = footFix->GetNext();
+    assert(bodyFix);
+    bodyFix->SetUserData(getUserData<Symbol::PlayerBody>());
   }
   
   template <typename Component>
@@ -102,15 +57,11 @@ std::unique_ptr<Entity> makePlayer(
 ) {
   std::unique_ptr<Entity> player = std::make_unique<Entity>(id);
   
-  b2BodyDef bodyDef;
-  bodyDef.type = b2_dynamicBody;
-  bodyDef.fixedRotation = true;
-  
-  b2Body *body = physics.getWorld()->CreateBody(&bodyDef);
+  b2Body *body = loadBody(Platform::getResDir() + "player body.yaml", physics.getWorld());
   body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysics<PlayerPhysicsComponent>(body);
   physics.add(id, player->physics);
-  attachFixtures(body);
+  setFixtureUserData(body);
   body->SetTransform(pos, 0.0f);
   
   player->animation = std::make_shared<PlayerAnimationComponent>(
@@ -118,10 +69,7 @@ std::unique_ptr<Entity> makePlayer(
   );
   animation.add(id, player->animation);
   
-  player->render = std::make_shared<VectorRenderComponent>(
-    PLAYER_WIDTH,
-    PLAYER_HEIGHT
-  );
+  player->render = std::make_shared<VectorRenderComponent>(1.0f, 1.0f);
   rendering.add(id, player->render);
   
   player->input = std::make_shared<PlayerInputComponent>();

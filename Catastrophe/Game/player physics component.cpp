@@ -85,5 +85,7 @@ void PlayerPhysicsComponent::handleJump(const PlayerInputCommands &input, const 
       //jump timed out
       timeTillFinishJump = 0.0f;
     }
+  } else {
+    timeTillFinishJump = 0.0f;
   }
 }

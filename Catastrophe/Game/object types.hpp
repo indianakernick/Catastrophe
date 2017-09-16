@@ -20,7 +20,7 @@ void *getUserData() {
 
 template <typename Symbol0, typename Symbol1>
 constexpr bool symbolLess() {
-  return Utils::typeHash<Symbol0>() < Utils::typeHash<Symbol1>();
+  return Utils::typeLess<Symbol0, Symbol1>();
 }
 
 template <typename Symbol0, typename Symbol1>

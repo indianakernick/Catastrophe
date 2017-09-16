@@ -17,12 +17,4 @@ constexpr float PLAYER_JUMP_IMPULSE = 2.0f;
 constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
 constexpr float PLAYER_LINEAR_DAMPING = 0.8f;
 
-constexpr float PLAYER_WIDTH = 1.0f;
-constexpr float PLAYER_HEIGHT = 1.0f;
-constexpr float PLAYER_FOOT_HEIGHT = 0.05f;
-
-constexpr float PLAYER_FRICTION = 0.1f;
-constexpr float PLAYER_MASS = 4.0f;
-constexpr float PLAYER_DENSITY = PLAYER_MASS / (PLAYER_WIDTH * PLAYER_HEIGHT);
-
 #endif

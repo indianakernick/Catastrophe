@@ -8,16 +8,19 @@
 
 #include "vector file.hpp"
 
-#include <nanovg/nanovg.h>
+#include "yaml helper.hpp"
 #include "vector line shape.hpp"
-#include "vector file helper.hpp"
 #include "vector circle shape.hpp"
 
 namespace {
   float readInvScale(const YAML::Node &scaleNode) {
     const float scale = scaleNode.as<float>();
     if (scale <= 0.0f) {
-      throw std::runtime_error("");
+      throw std::runtime_error(
+        "Scale at line "
+        + std::to_string(scaleNode.Mark().line)
+        + " is negative"
+      );
     }
     return 1.0f / scale;
   }
@@ -25,7 +28,11 @@ namespace {
   Point readPoint(const YAML::Node &pointNode) {
     checkType(pointNode, YAML::NodeType::Sequence);
     if (pointNode.size() != 2) {
-      throw std::runtime_error("");
+      throw std::runtime_error(
+        "Vector at line "
+        + std::to_string(pointNode.Mark().line)
+        + " must have 2 components"
+      );
     }
     return {
       pointNode[0].as<Coord>(),
@@ -36,7 +43,11 @@ namespace {
   NVGcolor readColor(const YAML::Node &colorNode) {
     checkType(colorNode, YAML::NodeType::Sequence);
     if (colorNode.size() != 4) {
-      throw std::runtime_error("");
+      throw std::runtime_error(
+        "Color at line "
+        + std::to_string(colorNode.Mark().line)
+        + " must have 4 components"
+      );
     }
     return {{{
       colorNode[0].as<float>(),

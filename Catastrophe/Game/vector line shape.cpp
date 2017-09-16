@@ -9,7 +9,7 @@
 #include "vector line shape.hpp"
 
 #include "nvg helper.hpp"
-#include "vector file helper.hpp"
+#include "yaml helper.hpp"
 
 namespace {
   NVGlineCap readCap(const std::string &str) {

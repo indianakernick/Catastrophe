@@ -1,12 +1,12 @@
 //
-//  vector file helper.cpp
+//  yaml helper.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 5/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "vector file helper.hpp"
+#include "yaml helper.hpp"
 
 #include <stdexcept>
 

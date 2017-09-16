@@ -9,7 +9,7 @@
 #include "vector circle shape.hpp"
 
 #include "nvg helper.hpp"
-#include "vector file helper.hpp"
+#include "yaml helper.hpp"
 
 void ShapeCircle::load(const YAML::Node &node, const FrameSize) {
   //@TODO use frameSize to check bounds of indicies
