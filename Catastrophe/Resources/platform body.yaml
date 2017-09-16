@@ -1,0 +1,14 @@
+body:
+  type: static
+
+shapes:
+  body:
+    type: polygon
+    half width: 10
+    half height: 1
+
+fixtures:
+- shape: body
+  friction: 1.0
+  userData: Platform
+  

@@ -45,20 +45,14 @@ using Symbols = Utils::TypeList<
   Symbol::Platform
 >;
 
-inline void *getUserData(const std::experimental::string_view symbolName) {
-  void *userData = nullptr;
-  Utils::forEach<Symbols>([&userData, symbolName] (auto t) {
-    using type = typename decltype(t)::type;
-    std::experimental::string_view thisSymbolName = Utils::typeName<type>();
-    thisSymbolName.remove_prefix(8); // trim "Symbol::"
-    if (symbolName == thisSymbolName) {
-      userData = getUserData<type>();
-    }
-  });
-  if (userData == nullptr) {
+inline void *getUserData(const std::string &symbolName) {
+  try {
+    return Utils::getValueByName<void *, Symbols>("Symbol::" + symbolName, [] (auto t) {
+      return getUserData<typename decltype(t)::type>();
+    });
+  } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid symbol name");
   }
-  return userData;
 }
 
 #endif

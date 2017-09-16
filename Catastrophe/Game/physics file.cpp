@@ -99,16 +99,25 @@ namespace {
   }
   
   std::unique_ptr<b2PolygonShape> readPolygon(const YAML::Node &polygonNode) {
-    const YAML::Node &vertsNode = getChild(polygonNode, "verts");
-    const std::vector<b2Vec2> verts = readVecs(vertsNode);
-    if (verts.size() > b2_maxPolygonVertices) {
-      throw std::runtime_error(
-        "Too many verticies for polygon at line"
-        + std::to_string(vertsNode.Mark().line)
-      );
-    }
     auto polygon = std::make_unique<b2PolygonShape>();
-    polygon->Set(verts.data(), static_cast<int32>(verts.size()));
+    
+    if (const YAML::Node &vertsNode = polygonNode["verts"]) {
+      const std::vector<b2Vec2> verts = readVecs(vertsNode);
+      if (verts.size() > b2_maxPolygonVertices) {
+        throw std::runtime_error(
+          "Too many verticies for polygon at line"
+          + std::to_string(vertsNode.Mark().line)
+        );
+      }
+    
+      polygon->Set(verts.data(), static_cast<int32>(verts.size()));
+    } else {
+      const YAML::Node &halfWidth = getChild(polygonNode, "half width");
+      const YAML::Node &halfHeight = getChild(polygonNode, "half height");
+      
+      polygon->SetAsBox(halfWidth.as<float32>(), halfHeight.as<float32>());
+    }
+    
     return polygon;
   }
   

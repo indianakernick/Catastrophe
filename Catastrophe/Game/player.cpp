@@ -16,6 +16,7 @@
 #include "animation system.hpp"
 #include "rendering system.hpp"
 #include "player constants.hpp"
+#include "make physics comp.hpp"
 #include "player physics state.hpp"
 #include "player input commands.hpp"
 #include "vector rendering state.hpp"
@@ -24,15 +25,6 @@
 #include "player animation component.hpp"
 #include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
-
-namespace {
-  template <typename Component>
-  std::shared_ptr<PhysicsComponent> makePhysics(b2Body *body) {
-    auto component = std::make_shared<Component>(body);
-    body->SetUserData(component.get());
-    return component;
-  }
-}
 
 std::unique_ptr<Entity> makePlayer(
   const EntityID id,
@@ -46,7 +38,7 @@ std::unique_ptr<Entity> makePlayer(
   
   b2Body *body = loadBody(Platform::getResDir() + "player body.yaml", physics.getWorld());
   body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
-  player->physics = makePhysics<PlayerPhysicsComponent>(body);
+  player->physics = makePhysicsComp<PlayerPhysicsComponent>(body);
   physics.add(id, player->physics);
   body->SetTransform(pos, 0.0f);
   
