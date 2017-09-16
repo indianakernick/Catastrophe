@@ -80,8 +80,12 @@ void SpriteTestApp::render(const float delta) {
   const Frame frame = getFrame(sprite, animName, 0.25f);
   renderSprite(renderingContext.getContext(), sprite.shapes, frame, {});
   
-  renderingContext.postRender(ENABLE_FPS_RENDER);
+  const size_t size = 512 * 512 * 4;
+  //std image write calls std::realloc on the pointer
+  std::unique_ptr<uint8_t[], decltype(&std::free)> data(reinterpret_cast<uint8_t *>(std::malloc(size)), &std::free);
   
-  framebufferToPNG("icon512.png", 512, 512);
+  renderingContext.postRender(ENABLE_FPS_RENDER, data.get(), size);
+  
+  //framebufferToPNG("icon 16.png", renderingContext.getFramebufferSize(), data.get());
   
 }

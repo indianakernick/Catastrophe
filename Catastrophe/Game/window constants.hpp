@@ -11,7 +11,7 @@
 
 #include <Simpleton/Platform/window.hpp>
 
-const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {512, 512};
+const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {16, 16};
 
 constexpr bool WINDOW_RESIZABLE = true;
 constexpr bool WINDOW_VSYNC = true;

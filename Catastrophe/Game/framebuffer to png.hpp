@@ -9,7 +9,8 @@
 #ifndef framebuffer_to_png_hpp
 #define framebuffer_to_png_hpp
 
-void framebufferToPNG(const char *path, unsigned w, unsigned h);
-void framebufferToPNG(const char *path, int x, int y, unsigned w, unsigned h);
+#include <glm/vec2.hpp>
+
+void framebufferToPNG(const char *path, glm::ivec2, const uint8_t *);
 
 #endif

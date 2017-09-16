@@ -86,8 +86,7 @@ void RenderingContext::quit() {
 void RenderingContext::preRender(const glm::mat3 viewProj) {
   int windowWidth, windowHeight;
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
-  int renderWidth, renderHeight;
-  SDL_GL_GetDrawableSize(window, &renderWidth, &renderHeight);
+  SDL_GL_GetDrawableSize(window, &renderSize.x, &renderSize.y);
   
   glViewport(0, 0, windowWidth, windowHeight);
   
@@ -96,31 +95,67 @@ void RenderingContext::preRender(const glm::mat3 viewProj) {
   glClearStencil(0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   
-  const float devicePixelRatio = static_cast<float>(renderWidth) / windowWidth;
+  const float devicePixelRatio = static_cast<float>(renderSize.x) / windowWidth;
   nvgBeginFrame(context, windowWidth, windowHeight, devicePixelRatio);
   
   nvgReset(context);
   nvgTransform(context, viewProj);
 }
 
-void RenderingContext::postRender(const bool printFPS) {
+void RenderingContext::postRender(
+  const bool printFPS,
+  uint8_t *const data,
+  const size_t size
+) {
   fpsCounter.frame();
   
   if (printFPS) {
-    //@TODO use to_chars
-    const std::string fpsStr = "FPS: " + std::to_string(fpsCounter.get());
-    nvgResetTransform(context);
-    nvgFontFaceId(context, fpsFontHandle);
-    nvgFontSize(context, 32.0f);
-    nvgFillColor(context, nvgRGBAf(1.0f, 1.0f, 1.0f, 1.0f));
-    nvgTextAlign(context, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
-    nvgText(context, 0.0f, 0.0f, fpsStr.c_str(), fpsStr.c_str() + fpsStr.size());
+    renderFPS();
   }
-
+  
   nvgEndFrame(context);
+  
+  if (data != nullptr && static_cast<int>(size) >= renderSize.x * renderSize.y * 4) {
+    captureFrame(data);
+  }
+  
   SDL_GL_SwapWindow(window);
 }
 
 NVGcontext *RenderingContext::getContext() const {
   return context;
+}
+
+glm::ivec2 RenderingContext::getFramebufferSize() const {
+  return renderSize;
+}
+
+void RenderingContext::renderFPS() {
+  //@TODO use to_chars
+  const std::string fpsStr = "FPS: " + std::to_string(fpsCounter.get());
+  nvgResetTransform(context);
+  nvgFontFaceId(context, fpsFontHandle);
+  nvgFontSize(context, 32.0f);
+  nvgFillColor(context, nvgRGBAf(1.0f, 1.0f, 1.0f, 1.0f));
+  nvgTextAlign(context, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+  nvgText(context, 0.0f, 0.0f, fpsStr.c_str(), fpsStr.c_str() + fpsStr.size());
+}
+
+void RenderingContext::captureFrame(uint8_t *const data) {
+  while (glGetError() != GL_NO_ERROR);
+  glReadPixels(
+    0, 0,
+    renderSize.x, renderSize.y,
+    GL_RGBA,
+    GL_UNSIGNED_BYTE,
+    data
+  );
+  const GLenum error = glGetError();
+  
+  if (error != GL_NO_ERROR) {
+    throw std::runtime_error(
+      std::string("Failed to copy framebuffer into RAM: ") +
+      reinterpret_cast<const char *>(gluErrorString(error))
+    );
+  }
 }

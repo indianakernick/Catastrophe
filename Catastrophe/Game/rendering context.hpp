@@ -23,9 +23,10 @@ public:
   void quit();
   
   void preRender(glm::mat3);
-  void postRender(bool);
+  void postRender(bool, uint8_t * = nullptr, size_t = 0);
   
   NVGcontext *getContext() const;
+  glm::ivec2 getFramebufferSize() const;
   
 private:
   SDL_Window *window = nullptr;
@@ -33,7 +34,11 @@ private:
   void *sdlGLContext = nullptr;
   NVGcontext *context = nullptr;
   Time::FPS fpsCounter;
+  glm::ivec2 renderSize;
   int fpsFontHandle = 0;
+  
+  void renderFPS();
+  void captureFrame(uint8_t *);
 };
 
 #endif
