@@ -10,6 +10,7 @@
 
 #include "yaml helper.hpp"
 #include "object types.hpp"
+#include <Simpleton/Memory/file io.hpp>
 
 namespace {
   class BadBodyDef {};
@@ -213,8 +214,19 @@ namespace {
   }
 }
 
-b2Body *loadBody(const std::string &fileName, b2World *const world) {
-  const YAML::Node rootNode = YAML::LoadFile(fileName);
+b2Body *loadBody(const std::string &fileName, b2World *const world, const Params &params) {
+  const std::string paramStr = getParamString(params);
+  
+  Memory::FileHandle file = Memory::openFileRead(fileName.c_str());
+  const size_t fileSize = Memory::sizeOfFile(file.get());
+  auto fileStr = std::make_unique<char []>(paramStr.size() + fileSize + 1);
+  
+  std::copy(paramStr.cbegin(), paramStr.cend(), fileStr.get());
+  Memory::readFile(fileStr.get() + paramStr.size(), fileSize, file.get());
+  file.reset();
+  fileStr[paramStr.size() + fileSize] = 0;
+  
+  const YAML::Node rootNode = YAML::Load(fileStr.get());
   checkType(rootNode, YAML::NodeType::Map);
   
   const b2BodyDef bodyDef = readBodyDef(getChild(rootNode, "body"));

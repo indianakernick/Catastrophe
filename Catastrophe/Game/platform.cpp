@@ -34,7 +34,14 @@ std::unique_ptr<Entity> makePlatform(
   b2BodyDef bodyDef;
   bodyDef.type = b2_staticBody;
   
-  b2Body *body = loadBody(Platform::getResDir() + "platform body.yaml", physics.getWorld());
+  b2Body *body = loadBody(
+    Platform::getResDir() + "platform body.yaml",
+    physics.getWorld(),
+    {
+      {"half_width", 10.0f},
+      {"half_height", 1.0f}
+    }
+  );
   platform->physics = makePhysicsComp<SimplePhysicsComponent>(body);
   physics.add(id, platform->physics);
   body->SetTransform({rect.p.x, rect.p.y}, 0.0f);
