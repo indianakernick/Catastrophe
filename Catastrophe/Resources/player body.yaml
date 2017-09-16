@@ -23,7 +23,9 @@ fixtures:
 - shape: body
   friction: 0.1
   density: 4.0
+  userData: PlayerBody
 
 - shape: foot
   density: 0.0
   isSensor: true
+  userData: PlayerFoot

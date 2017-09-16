@@ -9,9 +9,10 @@
 #include "physics file.hpp"
 
 #include "yaml helper.hpp"
+#include "object types.hpp"
 
 namespace {
-  class BadEnum {};
+  class BadBodyDef {};
   
   b2BodyType readBodyType(const std::string &typeName) {
            if (typeName == "static") {
@@ -21,7 +22,7 @@ namespace {
     } else if (typeName == "dynamic") {
       return b2_dynamicBody;
     } else {
-      throw BadEnum();
+      throw BadBodyDef();
     }
   }
 
@@ -30,7 +31,7 @@ namespace {
     
     try {
       bodyDef.type = readBodyType(getChild(bodyNode, "type").as<std::string>());
-    } catch (BadEnum &) {
+    } catch (BadBodyDef &) {
       throw std::runtime_error(
         "Invalid body type at line: "
         + std::to_string(bodyNode.Mark().line)
@@ -40,7 +41,6 @@ namespace {
     if (const YAML::Node &fixedRotation = bodyNode["fixedRotation"]) {
       bodyDef.fixedRotation = fixedRotation.as<bool>();
     }
-    
     if (const YAML::Node &bullet = bodyNode["bullet"]) {
       bodyDef.bullet = bullet.as<bool>();
     }
@@ -174,17 +174,17 @@ namespace {
     if (const YAML::Node &friction = fixtureNode["friction"]) {
       fixtureDef.friction = friction.as<float32>();
     }
-    
     if (const YAML::Node &restitution = fixtureNode["restitution"]) {
       fixtureDef.restitution = restitution.as<float32>();
     }
-    
     if (const YAML::Node &density = fixtureNode["density"]) {
       fixtureDef.density = density.as<float32>();
     }
-    
     if (const YAML::Node &isSensor = fixtureNode["isSensor"]) {
       fixtureDef.isSensor = isSensor.as<bool>();
+    }
+    if (const YAML::Node &userData = fixtureNode["userData"]) {
+      fixtureDef.userData = getUserData(userData.as<std::string>());
     }
     
     body->CreateFixture(&fixtureDef);

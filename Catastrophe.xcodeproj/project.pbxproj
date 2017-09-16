@@ -410,7 +410,7 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
-		45103F591F2497CD001B24E2 /* graphics */ = {
+		45103F591F2497CD001B24E2 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
 				453892F81F2C417F007EBB5A /* render components */,
@@ -425,7 +425,7 @@
 				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
 				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 			);
-			name = graphics;
+			name = rendering;
 			sourceTree = "<group>";
 		};
 		451FA2851F1499CC00C43BE9 /* Resources */ = {
@@ -772,7 +772,7 @@
 				453892F71F2C4061007EBB5A /* input */,
 				453892F61F2C4053007EBB5A /* physics */,
 				452FF9C11F63D018003A98B1 /* animation */,
-				45103F591F2497CD001B24E2 /* graphics */,
+				45103F591F2497CD001B24E2 /* rendering */,
 				453892FD1F2C4B70007EBB5A /* factory */,
 				45FA99461F36C9F000F8C639 /* entity */,
 			);

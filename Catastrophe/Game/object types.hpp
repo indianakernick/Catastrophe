@@ -10,7 +10,7 @@
 #define object_types_hpp
 
 #include <utility>
-#include <Simpleton/Utils/type name.hpp>
+#include <Simpleton/Utils/type list.hpp>
 #include <Simpleton/Utils/instance limiter.hpp>
 
 template <typename Symbol>
@@ -20,7 +20,8 @@ void *getUserData() {
 
 template <typename Symbol0, typename Symbol1>
 constexpr bool symbolLess() {
-  return Utils::typeLess<Symbol0, Symbol1>();
+  //don't change this to Utils::typeLess
+  return Utils::typeHash<Symbol0>() < Utils::typeHash<Symbol1>();
 }
 
 template <typename Symbol0, typename Symbol1>
@@ -37,5 +38,27 @@ namespace Symbol {
   MAKE_SYMBOL(PlayerFoot);
   MAKE_SYMBOL(Platform);
 };
+
+using Symbols = Utils::TypeList<
+  Symbol::PlayerBody,
+  Symbol::PlayerFoot,
+  Symbol::Platform
+>;
+
+inline void *getUserData(const std::experimental::string_view symbolName) {
+  void *userData = nullptr;
+  Utils::forEach<Symbols>([&userData, symbolName] (auto t) {
+    using type = typename decltype(t)::type;
+    std::experimental::string_view thisSymbolName = Utils::typeName<type>();
+    thisSymbolName.remove_prefix(8); // trim "Symbol::"
+    if (symbolName == thisSymbolName) {
+      userData = getUserData<type>();
+    }
+  });
+  if (userData == nullptr) {
+    throw std::runtime_error("Invalid symbol name");
+  }
+  return userData;
+}
 
 #endif

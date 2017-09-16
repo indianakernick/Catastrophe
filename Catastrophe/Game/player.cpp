@@ -12,7 +12,6 @@
 #include "vector file.hpp"
 #include "physics file.hpp"
 #include "input system.hpp"
-#include "object types.hpp"
 #include "physics system.hpp"
 #include "animation system.hpp"
 #include "rendering system.hpp"
@@ -27,18 +26,6 @@
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
-  void setFixtureUserData(b2Body *body) {
-    //b2Body::CreateFixture pushes the new fixture to the FRONT
-    //so the list is in reverse order to the sequence in "player body.yaml"
-    b2Fixture *footFix = body->GetFixtureList();
-    assert(footFix);
-    footFix->SetUserData(getUserData<Symbol::PlayerFoot>());
-    
-    b2Fixture *bodyFix = footFix->GetNext();
-    assert(bodyFix);
-    bodyFix->SetUserData(getUserData<Symbol::PlayerBody>());
-  }
-  
   template <typename Component>
   std::shared_ptr<PhysicsComponent> makePhysics(b2Body *body) {
     auto component = std::make_shared<Component>(body);
@@ -61,7 +48,6 @@ std::unique_ptr<Entity> makePlayer(
   body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysics<PlayerPhysicsComponent>(body);
   physics.add(id, player->physics);
-  setFixtureUserData(body);
   body->SetTransform(pos, 0.0f);
   
   player->animation = std::make_shared<PlayerAnimationComponent>(
