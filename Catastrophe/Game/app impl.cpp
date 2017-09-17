@@ -13,7 +13,10 @@
 #include "debug input.hpp"
 #include "file constants.hpp"
 #include "camera constants.hpp"
+#include "framebuffer to png.hpp"
+#include "../Libraries/tinyfiledialogs.h"
 #include "register collision listeners.hpp"
+#include <Simpleton/Time/get.hpp>
 
 std::unique_ptr<AppImpl> app = nullptr;
 
@@ -41,6 +44,8 @@ bool AppImpl::init() {
   
   renderingSystem.startMotionTrack(player);
   renderingSystem.startZoomTrack(player);
+  
+  screenshotMem = std::make_unique<uint8_t[]>(SCREENSHOT_MEM_SIZE);
   
   return true;
 }
@@ -72,6 +77,8 @@ bool AppImpl::input(float) {
     
     if (e.type == SDL_QUIT) {
       return false;
+    } else if (e.type == SDL_KEYDOWN && e.key.repeat == 0 && e.key.keysym.scancode == SDL_SCANCODE_P) {
+      takeScreenshot = true;
     } else {
       inputSystem.handleEvent(entityManager, e);
     }
@@ -101,5 +108,29 @@ void AppImpl::render(const float delta) {
     renderingSystem.cameraDebugRender(renderingContext.getContext());
   }
   
-  renderingContext.postRender(ENABLE_FPS_RENDER);
+  if (takeScreenshot) {
+    takeScreenshot = false;
+    renderingContext.postRender(
+      false,
+      screenshotMem.get(),
+      SCREENSHOT_MEM_SIZE
+    );
+    
+    const char *filePath = tinyfd_saveFileDialog(
+      "Save screenshot",
+      "Screenshot.png",
+      0,
+      nullptr,
+      "Image"
+    );
+    if (filePath != nullptr) {
+      framebufferToPNG(
+        filePath,
+        renderingContext.getFramebufferSize(),
+        screenshotMem.get()
+      );
+    }
+  } else {
+    renderingContext.postRender(ENABLE_FPS_RENDER);
+  }
 }
