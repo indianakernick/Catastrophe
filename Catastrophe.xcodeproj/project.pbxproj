@@ -342,6 +342,8 @@
 		45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform body.yaml"; sourceTree = "<group>"; };
 		45DE9FAA1F6D102A00B1DA72 /* yaml param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "yaml param.cpp"; sourceTree = "<group>"; };
 		45DE9FAB1F6D102A00B1DA72 /* yaml param.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "yaml param.hpp"; sourceTree = "<group>"; };
+		45DE9FB01F6DF5AF00B1DA72 /* systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = systems.hpp; sourceTree = "<group>"; };
+		45DE9FB11F6DF5B900B1DA72 /* systems fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "systems fwd.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -718,6 +720,8 @@
 				453893001F2C4D6B007EBB5A /* platform.hpp */,
 				45DE9FA51F6D01F800B1DA72 /* make physics comp.cpp */,
 				45DE9FA61F6D01F800B1DA72 /* make physics comp.hpp */,
+				45DE9FB01F6DF5AF00B1DA72 /* systems.hpp */,
+				45DE9FB11F6DF5B900B1DA72 /* systems fwd.hpp */,
 			);
 			name = factory;
 			sourceTree = "<group>";

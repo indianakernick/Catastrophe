@@ -14,10 +14,7 @@
 
 std::unique_ptr<Entity> makePlayer(
   EntityID,
-  InputSystem &,
-  PhysicsSystem &,
-  AnimationSystem &,
-  RenderingSystem &,
+  Systems,
   b2Vec2
 );
 

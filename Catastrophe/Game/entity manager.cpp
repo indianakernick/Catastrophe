@@ -49,3 +49,12 @@ Entity &EntityManager::getEntity(const EntityID id) {
     return *(iter->second);
   }
 }
+
+Systems EntityManager::getSystems() const {
+  return {
+    *input,
+    *physics,
+    *animation,
+    *rendering
+  };
+}

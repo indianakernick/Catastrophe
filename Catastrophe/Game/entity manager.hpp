@@ -10,6 +10,7 @@
 #define entity_manager_hpp
 
 #include "entity.hpp"
+#include "systems.hpp"
 #include <unordered_map>
 #include <Simpleton/ID/local.hpp>
 
@@ -27,19 +28,12 @@ public:
   void quit();
   
   template <typename ...Args>
-  using Factory = std::unique_ptr<Entity> (*) (
-    EntityID, InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &, Args...
-  );
+  using Factory = std::unique_ptr<Entity> (*) (EntityID, Systems, Args...);
   
   template <typename ...FunArgs, typename ...Args>
   EntityID create(const Factory<FunArgs...> factory, Args &&... args) {
     const EntityID id = idGen.make();
-    entities.emplace(
-      id,
-      factory(
-        id, *input, *physics, *animation, *rendering, std::forward<Args>(args)...
-      )
-    );
+    entities.emplace(id, factory(id, getSystems(), std::forward<Args>(args)...));
     return id;
   }
   
@@ -55,6 +49,8 @@ private:
 
   std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;
   ID::Local<EntityID> idGen;
+  
+  Systems getSystems() const;
 };
 
 #endif

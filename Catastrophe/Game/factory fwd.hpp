@@ -11,11 +11,8 @@
 
 #include <memory>
 #include "entity id.hpp"
+#include "systems fwd.hpp"
 
 class Entity;
-class InputSystem;
-class PhysicsSystem;
-class AnimationSystem;
-class RenderingSystem;
 
 #endif

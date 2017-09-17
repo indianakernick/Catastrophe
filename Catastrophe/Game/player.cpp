@@ -9,12 +9,9 @@
 #include "player.hpp"
 
 #include "entity.hpp"
+#include "systems.hpp"
 #include "vector file.hpp"
 #include "physics file.hpp"
-#include "input system.hpp"
-#include "physics system.hpp"
-#include "animation system.hpp"
-#include "rendering system.hpp"
 #include "player constants.hpp"
 #include "make physics comp.hpp"
 #include "player physics state.hpp"
@@ -28,30 +25,30 @@
 
 std::unique_ptr<Entity> makePlayer(
   const EntityID id,
-  InputSystem &input,
-  PhysicsSystem &physics,
-  AnimationSystem &animation,
-  RenderingSystem &rendering,
+  const Systems systems,
   const b2Vec2 pos
 ) {
   std::unique_ptr<Entity> player = std::make_unique<Entity>(id);
   
-  b2Body *body = loadBody(Platform::getResDir() + "player body.yaml", physics.getWorld());
+  player->input = std::make_shared<PlayerInputComponent>();
+  systems.input.add(id, player->input);
+  
+  b2Body *body = loadBody(
+    Platform::getResDir() + "player body.yaml",
+    systems.physics.getWorld()
+  );
   body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysicsComp<PlayerPhysicsComponent>(body);
-  physics.add(id, player->physics);
+  systems.physics.add(id, player->physics);
   body->SetTransform(pos, 0.0f);
   
   player->animation = std::make_shared<PlayerAnimationComponent>(
     loadSprite(Platform::getResDir() + "player sprite.yaml")
   );
-  animation.add(id, player->animation);
+  systems.animation.add(id, player->animation);
   
   player->render = std::make_shared<VectorRenderComponent>(1.0f, 1.0f);
-  rendering.add(id, player->render);
-  
-  player->input = std::make_shared<PlayerInputComponent>();
-  input.add(id, player->input);
+  systems.rendering.add(id, player->render);
   
   player->latestInputCommands = std::make_unique<PlayerInputCommands>();
   player->latestPhysicsState = std::make_unique<PlayerPhysicsState>();
