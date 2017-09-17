@@ -38,7 +38,7 @@ namespace {
       );
     }
     
-    if (const YAML::Node &fixedRotation = bodyNode["fixedRotation"]) {
+    if (const YAML::Node &fixedRotation = bodyNode["fixed rotation"]) {
       bodyDef.fixedRotation = fixedRotation.as<bool>();
     }
     if (const YAML::Node &bullet = bodyNode["bullet"]) {
@@ -46,6 +46,18 @@ namespace {
     }
     
     return bodyDef;
+  }
+  
+  void readBodyProps(b2Body *body, const YAML::Node &bodyNode) {
+    if (const YAML::Node &linearDamping = bodyNode["linear damping"]) {
+      body->SetLinearDamping(linearDamping.as<float32>());
+    }
+    if (const YAML::Node &angularDamping = bodyNode["angular damping"]) {
+      body->SetAngularDamping(angularDamping.as<float32>());
+    }
+    if (const YAML::Node &gravityScale = bodyNode["gravity scale"]) {
+      body->SetGravityScale(gravityScale.as<float32>());
+    }
   }
   
   b2Vec2 readVec(const YAML::Node &vecNode) {
@@ -123,7 +135,7 @@ namespace {
   
   std::unique_ptr<b2ChainShape> readChain(const YAML::Node &chainNode) {
     bool isLoop = false;
-    if (const YAML::Node &isLoopNode = chainNode["isLoop"]) {
+    if (const YAML::Node &isLoopNode = chainNode["is loop"]) {
       isLoop = isLoopNode.as<bool>();
     }
     const std::vector<b2Vec2> verts = readVecs(getChild(chainNode, "verts"));
@@ -189,10 +201,10 @@ namespace {
     if (const YAML::Node &density = fixtureNode["density"]) {
       fixtureDef.density = density.as<float32>();
     }
-    if (const YAML::Node &isSensor = fixtureNode["isSensor"]) {
+    if (const YAML::Node &isSensor = fixtureNode["is sensor"]) {
       fixtureDef.isSensor = isSensor.as<bool>();
     }
-    if (const YAML::Node &userData = fixtureNode["userData"]) {
+    if (const YAML::Node &userData = fixtureNode["user data"]) {
       fixtureDef.userData = getUserData(userData.as<std::string>());
     }
     
@@ -218,8 +230,10 @@ b2Body *loadBody(const std::string &fileName, b2World *const world, const Params
   const YAML::Node rootNode = YAML::Load(fileStr.get());
   checkType(rootNode, YAML::NodeType::Map);
   
-  const b2BodyDef bodyDef = readBodyDef(getChild(rootNode, "body"));
+  const YAML::Node &bodyNode = getChild(rootNode, "body");
+  const b2BodyDef bodyDef = readBodyDef(bodyNode);
   b2Body *body = world->CreateBody(&bodyDef);
+  readBodyProps(body, bodyNode);
   
   readFixtures(body, getChild(rootNode, "shapes"), getChild(rootNode, "fixtures"));
   

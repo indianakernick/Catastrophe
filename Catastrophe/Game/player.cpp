@@ -37,7 +37,6 @@ std::unique_ptr<Entity> makePlayer(
     Platform::getResDir() + "player body.yaml",
     systems.physics.getWorld()
   );
-  body->SetLinearDamping(PLAYER_LINEAR_DAMPING);
   player->physics = makePhysicsComp<PlayerPhysicsComponent>(body);
   systems.physics.add(id, player->physics);
   body->SetTransform(pos, 0.0f);

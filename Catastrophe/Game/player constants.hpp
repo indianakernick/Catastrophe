@@ -15,6 +15,5 @@ constexpr float PLAYER_MAX_MOVE_SPEED = 4.0f;
 
 constexpr float PLAYER_JUMP_IMPULSE = 2.0f;
 constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
-constexpr float PLAYER_LINEAR_DAMPING = 0.8f;
 
 #endif

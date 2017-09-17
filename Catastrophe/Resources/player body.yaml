@@ -1,6 +1,7 @@
 body:
   type: dynamic
-  fixedRotation: true
+  fixed rotation: true
+  linear damping: 0.8
 
 shapes:
   body:
@@ -26,18 +27,18 @@ shapes:
 fixtures:
 - shape: body
   density: 6.0
-  userData: PlayerBody
+  user data: PlayerBody
 
 - shape: leg
   friction: 0.1
   density: 6.0
-  userData: PlayerBody
+  user data: PlayerBody
 
 - shape: head
   density: 6.0
-  userData: PlayerBody
+  user data: PlayerBody
 
 - shape: foot
   density: 0.0
-  isSensor: true
-  userData: PlayerFoot
+  is sensor: true
+  user data: PlayerFoot

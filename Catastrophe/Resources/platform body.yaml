@@ -10,5 +10,5 @@ shapes:
 fixtures:
 - shape: body
   friction: 1.0
-  userData: Platform
+  user data: Platform
   
