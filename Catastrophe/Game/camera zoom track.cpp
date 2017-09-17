@@ -8,9 +8,11 @@
 
 #include "camera zoom track.hpp"
 
+#include <nanovg/nanovg.h>
 #include "camera props.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Math/interpolate.hpp>
+#include "camera debug render constants.hpp"
 
 CameraZoomTrack::CameraZoomTrack()
   : target(nullptr),
@@ -80,4 +82,25 @@ float CameraZoomTrack::calcZoomTarget(const CameraProps props) const {
   } else {
     return props.pixelsPerMeter;
   }
+}
+
+void CameraZoomTrack::debugRender(NVGcontext *context, const CameraProps props) const {
+  nvgSave(context);
+    nvgResetTransform(context);
+    nvgScale(context, props.windowSize.x, -props.windowSize.y);
+    nvgTranslate(context, 0.5f, -1.0f);
+  
+    nvgBeginPath(context);
+    nvgStrokeColor(context, CAMERA_SCALE_COLOR);
+    nvgStrokeWidth(context, CAMERA_SCALE_THICKNESS);
+    nvgLineCap(context, NVG_BUTT);
+  
+    nvgMoveTo(context, -maxSize / 2.0f, CAMERA_SCALE_THICKNESS * 0.5f);
+    nvgLineTo(context, maxSize / 2.0f, CAMERA_SCALE_THICKNESS * 0.5f);
+  
+    nvgMoveTo(context, -minSize / 2.0f, CAMERA_SCALE_THICKNESS * 1.5f);
+    nvgLineTo(context, minSize / 2.0f, CAMERA_SCALE_THICKNESS * 1.5f);
+  
+    nvgStroke(context);
+  nvgRestore(context);
 }

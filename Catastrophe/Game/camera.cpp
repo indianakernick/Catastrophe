@@ -49,4 +49,5 @@ void Camera::update(const float delta) {
 
 void Camera::debugRender(NVGcontext *context) {
   motionTrack.debugRender(context, props);
+  zoomTrack.debugRender(context, props);
 }

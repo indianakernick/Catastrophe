@@ -14,6 +14,7 @@
 using CameraZoomTarget = glm::vec2;
 
 struct CameraProps;
+extern "C" struct NVGcontext;
 
 //modifies zoomTarget to keep the CameraZoomTarget size within the bounds.
 //bounds are in relative to the size of the window
@@ -34,6 +35,8 @@ public:
   void setMinMaxSize(float, float);
   
   float calcZoomTarget(CameraProps) const;
+  
+  void debugRender(NVGcontext *, CameraProps) const;
 
 private:
   const CameraZoomTarget *target;

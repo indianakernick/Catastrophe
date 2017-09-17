@@ -343,6 +343,7 @@
 		45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.yaml"; sourceTree = "<group>"; };
 		45DE9FB41F6E02AF00B1DA72 /* static vector animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static vector animation component.cpp"; sourceTree = "<group>"; };
 		45DE9FB51F6E02AF00B1DA72 /* static vector animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static vector animation component.hpp"; sourceTree = "<group>"; };
+		45DE9FB71F6E1B0C00B1DA72 /* camera debug render constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera debug render constants.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -463,6 +464,7 @@
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
 				4541162B1F526DB200C2865B /* input constants.hpp */,
 				4541162D1F526DDB00C2865B /* physics constants.hpp */,
+				45DE9FB71F6E1B0C00B1DA72 /* camera debug render constants.hpp */,
 			);
 			name = constants;
 			sourceTree = "<group>";

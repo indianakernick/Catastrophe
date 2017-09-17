@@ -10,13 +10,9 @@
 
 #include "rect.hpp"
 #include "camera pos.hpp"
-#include <nanovg/nanovg.h>
 #include "camera props.hpp"
 #include "camera constants.hpp"
-#include "rendering context.hpp"
-
-const NVGcolor CAM_TARGET_COLOR = nvgRGBAf(1.0f, 1.0f, 0.0f, 0.5f);
-const NVGcolor CAM_TRACK_COLOR = nvgRGBAf(0.0f, 1.0f, 0.0f, 0.5f);
+#include "camera debug render constants.hpp"
 
 CameraMotionTrack::CameraMotionTrack()
   : target(nullptr),
@@ -109,27 +105,36 @@ glm::vec2 CameraMotionTrack::calcMotionTarget(const CameraProps props) const {
     motion.x = moveLeft;
   }
   
+  if (target->halfSize.x > bounds.halfSize.x) {
+    motion.x = target->center.x - bounds.center.x;
+  }
+  if (target->halfSize.y > bounds.halfSize.y) {
+    motion.y = target->center.y - bounds.center.y;
+  }
+  
   return props.center + motion;
 }
 
-void CameraMotionTrack::debugRender(
-  NVGcontext *context,
-  const CameraProps props
-) const {
-  const glm::vec2 centerM = centerToMeters(props, center);
-  const glm::vec2 sizeM = sizeToMeters(props, size);
-  const glm::vec2 cornerM = centerM - sizeM / 2.0f;
+void CameraMotionTrack::debugRender(NVGcontext *context, const CameraProps props) const {
+  const glm::vec2 corner = center - size / 2.0f;
   
-  nvgBeginPath(context);
-  nvgFillColor(context, CAM_TRACK_COLOR);
-  nvgRect(context, cornerM.x, cornerM.y, sizeM.x, sizeM.y);
-  nvgFill(context);
+  nvgSave(context);
+    nvgResetTransform(context);
+    nvgScale(context, props.windowSize.x, -props.windowSize.y);
+    nvgTranslate(context, 0.5f, -0.5f);
+    
+    nvgBeginPath(context);
+    nvgFillColor(context, CAMERA_TRACK_COLOR);
+    nvgRect(context, corner.x, corner.y, size.x, size.y);
+  
+    nvgFill(context);
+  nvgRestore(context);
   
   if (target) {
     const Rect targetRect = static_cast<Rect>(*target);
   
     nvgBeginPath(context);
-    nvgFillColor(context, CAM_TARGET_COLOR);
+    nvgFillColor(context, CAMERA_TARGET_COLOR);
     nvgRect(context, targetRect.p.x, targetRect.p.y, targetRect.s.x, targetRect.s.y);
     nvgFill(context);
   }

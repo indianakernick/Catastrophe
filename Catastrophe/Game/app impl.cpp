@@ -94,11 +94,11 @@ void AppImpl::render(const float delta) {
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
   }
-  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    renderingSystem.cameraDebugRender(renderingContext.getContext());
-  }
   if constexpr (ENABLE_GAME_RENDER) {
     renderingSystem.render(entityManager, renderingContext.getContext());
+  }
+  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    renderingSystem.cameraDebugRender(renderingContext.getContext());
   }
   
   renderingContext.postRender(ENABLE_FPS_RENDER);
