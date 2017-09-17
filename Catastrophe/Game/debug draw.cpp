@@ -31,7 +31,13 @@ namespace {
 
 DebugDraw::DebugDraw()
   : b2Draw() {
-  m_drawFlags = 0xFFFFFFFF;
+  m_drawFlags =
+    (ENABLE_SHAPE_RENDER ? e_shapeBit : 0) |
+    (ENABLE_JOINT_RENDER ? e_jointBit : 0) |
+    (ENABLE_AABB_RENDER ? e_aabbBit : 0) |
+    (ENABLE_PAIR_RENDER ? e_pairBit : 0) |
+    (ENABLE_CENTER_OF_MASS_RENDER ? e_centerOfMassBit : 0)
+  ;
 }
 
 void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {

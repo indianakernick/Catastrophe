@@ -17,4 +17,10 @@ constexpr int32 POSITION_ITER = 2;
 
 constexpr float DEBUG_DRAW_STROKE_WIDTH = 1 / 32.0f;
 
+constexpr bool ENABLE_SHAPE_RENDER = true;
+constexpr bool ENABLE_JOINT_RENDER = true;
+constexpr bool ENABLE_AABB_RENDER = false;
+constexpr bool ENABLE_PAIR_RENDER = false;
+constexpr bool ENABLE_CENTER_OF_MASS_RENDER = false;
+
 #endif
