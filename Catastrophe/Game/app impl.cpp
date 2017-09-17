@@ -36,7 +36,7 @@ bool AppImpl::init() {
   
   player = entityManager.create(makePlayer, b2Vec2(WINDOW_METER_SIZE.x / 2.0f, 10.0f));
   platform = entityManager.create(makePlatform,
-    Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 2.0f})
+    Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 1.0f})
   );
   
   renderingSystem.startMotionTrack(player);

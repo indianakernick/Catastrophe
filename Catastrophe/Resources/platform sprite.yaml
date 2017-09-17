@@ -1,0 +1,74 @@
+scale: 4
+anims:
+  static:
+    duration: 0.0
+    point frames:
+    - offset: 0.0
+      data:
+      - [-2, -2]  # 0 bottom left
+      - [-2, 2]   # 1 top left
+      - [-1, 2]   # 2 top left mid
+      - [0, 2]    # 3 top mid
+      - [1, 2]    # 4 top right mid
+      - [2, 2]    # 5 top right
+      - [2, -2]   # 6 bottom right
+      - [1, -2]   # 7 bottom right mid
+      - [0, -2]   # 8 bottom mid
+      - [-1, -2]  # 9 bottom left mid
+
+    scalar frames:
+    - offset: 0.0
+      # 1/16
+      data: [0.0625]
+
+    color frames:
+    - offset: 0.0
+      data:
+      - [0.0, 0.0, 0.5, 1.0] # back
+      - [0.2, 0.2, 1.0, 1.0] # cross
+      - [0.0, 0.0, 1.0, 1.0] # outline
+
+shapes:
+- type: line
+  fill color: 0
+  points:
+  - 0  # bottom left
+  - 1  # top left
+  - 5  # top right
+  - 6  # bottom right
+
+- type: line
+  cap: butt
+  join: bevel
+  stroke width: 0
+  stroke color: 1
+  points:
+  - 0  # bottom left
+  - 2  # top left mid
+  - 8  # bottom mid
+  - 4  # top right mid
+  - 6  # bottom right
+
+- type: line
+  cap: butt
+  join: bevel
+  stroke width: 0
+  stroke color: 1
+  points:
+  - 1  # top left
+  - 9  # bottom left mid
+  - 3  # top mid
+  - 7  # bottom right mid
+  - 5  # top right
+
+- type: line
+  cap: square
+  join: miter
+  stroke width: 0
+  stroke color: 2
+  points:
+  - 0  # bottom left
+  - 1  # top left
+  - 5  # top right
+  - 6  # bottom right
+  - 0  # bottom left
