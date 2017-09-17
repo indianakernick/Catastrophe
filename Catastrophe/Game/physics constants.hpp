@@ -12,8 +12,8 @@
 #include "../Libraries/Box2D/Common/b2Math.h"
 
 const b2Vec2 GRAVITY = {0.0f, -9.80665f};
-constexpr int32 VELOCITY_ITER = 6;
-constexpr int32 POSITION_ITER = 2;
+constexpr int32 VELOCITY_ITER = 8;
+constexpr int32 POSITION_ITER = 4;
 
 constexpr float DEBUG_DRAW_STROKE_WIDTH = 1 / 32.0f;
 

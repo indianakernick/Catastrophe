@@ -1,0 +1,22 @@
+input:
+  name: PlayerInputComponent
+  args: []
+  state: PlayerInputCommands
+
+physics:
+  name: PlayerPhysicsComponent
+  args:
+  - player body.yaml
+  - *pos
+  state: PlayerPhysicsState
+
+animation:
+  name: PlayerAnimationComponent
+  args:
+  - player sprite.yaml
+  state: VectorRenderingState
+
+rendering:
+  name: VectorRenderingComponent
+  args:
+  - [1.0f, 1.0f]
