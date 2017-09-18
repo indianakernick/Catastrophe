@@ -17,13 +17,13 @@ public:
   VectorRenderComponent(float, float);
   
   void render(NVGcontext *, const RenderingState &) override;
-  const CameraMotionTarget *getMotionTarget() const override;
-  const CameraZoomTarget *getZoomTarget() const override;
+  std::shared_ptr<const CameraMotionTarget> getMotionTarget() const override;
+  std::shared_ptr<const CameraZoomTarget> getZoomTarget() const override;
   Rect getAABB(const RenderingState &) const override;
 
 private:
-  CameraMotionTarget rect;
-  CameraZoomTarget size;
+  std::shared_ptr<CameraMotionTarget> rect;
+  std::shared_ptr<CameraZoomTarget> size;
 };
 
 #endif

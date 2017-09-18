@@ -15,58 +15,25 @@
 #include "camera debug render constants.hpp"
 
 CameraMotionTrack::CameraMotionTrack()
-  : target(nullptr),
-    localTarget(),
+  : target(),
+    localTarget(std::make_shared<CameraMotionTarget>()),
     center(DEFAULT_TRACKING_BOUNDS_CENTER),
     size(DEFAULT_TRACKING_BOUNDS_SIZE) {}
 
-CameraMotionTrack::CameraMotionTrack(const CameraMotionTrack &other)
-  : localTarget(other.localTarget),
-    center(other.center),
-    size(other.size) {
-  if (other.target == &other.localTarget) {
-    target = &localTarget;
-  } else {
-    target = other.target;
-  }
-}
-
-CameraMotionTrack &CameraMotionTrack::operator=(const CameraMotionTrack &other) {
-  if (other.target == &other.localTarget) {
-    target = &localTarget;
-  } else {
-    target = other.target;
-  }
-  
-  localTarget = other.localTarget;
-  center = other.center;
-  size = other.size;
-  
-  return *this;
-}
-
-void CameraMotionTrack::start(const CameraMotionTarget *newTarget) {
+void CameraMotionTrack::start(const std::shared_ptr<const CameraMotionTarget> newTarget) {
   target = newTarget;
 }
 
 void CameraMotionTrack::stop() {
-  target = nullptr;
-}
-
-bool CameraMotionTrack::hasTarget() const {
-  return target;
-}
-
-const CameraMotionTarget *CameraMotionTrack::get() const {
-  return target;
+  target.reset();
 }
 
 void CameraMotionTrack::setLocal(const CameraMotionTarget newTarget) {
-  localTarget = newTarget;
+  *localTarget = newTarget;
 }
 
 void CameraMotionTrack::startLocal() {
-  target = &localTarget;
+  target = localTarget;
 }
 
 void CameraMotionTrack::setAndStartLocal(const CameraMotionTarget newTarget) {
@@ -80,36 +47,38 @@ void CameraMotionTrack::setBounds(const glm::vec2 newCenter, const glm::vec2 new
 }
 
 glm::vec2 CameraMotionTrack::calcMotionTarget(const CameraProps props) const {
-  if (target == nullptr) {
+  const auto targetShared = target.lock();
+  if (targetShared == nullptr) {
     return props.center;
   }
+  const CameraMotionTarget targetObj = *targetShared;
   
   const CameraMotionTarget bounds(centerToMeters(props, center), sizeToMeters(props, size));
   
-  if (bounds.encloses(*target)) {
+  if (bounds.encloses(targetObj)) {
     return props.center;
   }
 
   glm::vec2 motion = {0.0f, 0.0f};
   
-  if (const float moveUp    = target->top   () - bounds.top   (); moveUp    > 0.0f) {
+  if (const float moveUp    = targetObj.top   () - bounds.top   (); moveUp    > 0.0f) {
     motion.y = moveUp;
   }
-  if (const float moveRight = target->right () - bounds.right (); moveRight > 0.0f) {
+  if (const float moveRight = targetObj.right () - bounds.right (); moveRight > 0.0f) {
     motion.x = moveRight;
   }
-  if (const float moveDown  = target->bottom() - bounds.bottom(); moveDown  < 0.0f) {
+  if (const float moveDown  = targetObj.bottom() - bounds.bottom(); moveDown  < 0.0f) {
     motion.y = moveDown;
   }
-  if (const float moveLeft  = target->left  () - bounds.left  (); moveLeft  < 0.0f) {
+  if (const float moveLeft  = targetObj.left  () - bounds.left  (); moveLeft  < 0.0f) {
     motion.x = moveLeft;
   }
   
-  if (target->halfSize.x > bounds.halfSize.x) {
-    motion.x = target->center.x - bounds.center.x;
+  if (targetObj.halfSize.x > bounds.halfSize.x) {
+    motion.x = targetObj.center.x - bounds.center.x;
   }
-  if (target->halfSize.y > bounds.halfSize.y) {
-    motion.y = target->center.y - bounds.center.y;
+  if (targetObj.halfSize.y > bounds.halfSize.y) {
+    motion.y = targetObj.center.y - bounds.center.y;
   }
   
   return props.center + motion;
@@ -130,8 +99,10 @@ void CameraMotionTrack::debugRender(NVGcontext *context, const CameraProps props
     nvgFill(context);
   nvgRestore(context);
   
-  if (target) {
-    const Rect targetRect = static_cast<Rect>(*target);
+  const auto targetShared = target.lock();
+  
+  if (targetShared) {
+    const Rect targetRect = static_cast<Rect>(*targetShared);
   
     nvgBeginPath(context);
     nvgFillColor(context, CAMERA_TARGET_COLOR);

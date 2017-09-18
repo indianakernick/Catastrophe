@@ -43,8 +43,7 @@ void RenderingSystem::startMotionTrack(const EntityID entity) {
   if (iter == components.end()) {
     throw std::runtime_error("Cannot track entity that doesn't exist");
   }
-  const CameraMotionTarget *target = iter->second->getMotionTarget();
-  camera.motionTrack.start(target);
+  camera.motionTrack.start(iter->second->getMotionTarget());
 }
 
 void RenderingSystem::stopMotionTrack() {
@@ -56,8 +55,7 @@ void RenderingSystem::startZoomTrack(const EntityID entity) {
   if (iter == components.end()) {
     throw std::runtime_error("Cannot track entity that doesn't exist");
   }
-  const CameraZoomTarget *target = iter->second->getZoomTarget();
-  camera.zoomTrack.start(target);
+  camera.zoomTrack.start(iter->second->getZoomTarget());
 }
 
 void RenderingSystem::stopZoomTrack() {

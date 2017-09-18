@@ -15,33 +15,27 @@
 #include "camera debug render constants.hpp"
 
 CameraZoomTrack::CameraZoomTrack()
-  : target(nullptr),
-    localTarget(Math::middle(DEFAULT_ZOOM_MIN_SIZE, DEFAULT_ZOOM_MAX_SIZE)),
+  : target(),
+    localTarget(std::make_shared<CameraZoomTarget>(
+      Math::middle(DEFAULT_ZOOM_MIN_SIZE, DEFAULT_ZOOM_MAX_SIZE))
+    ),
     minSize(DEFAULT_ZOOM_MIN_SIZE),
     maxSize(DEFAULT_ZOOM_MAX_SIZE) {}
 
-void CameraZoomTrack::start(const CameraZoomTarget *newTarget) {
+void CameraZoomTrack::start(const std::shared_ptr<const CameraZoomTarget> newTarget) {
   target = newTarget;
 }
 
 void CameraZoomTrack::stop() {
-  target = nullptr;
-}
-
-bool CameraZoomTrack::hasTarget() const {
-  return target;
-}
-
-const CameraZoomTarget *CameraZoomTrack::get() const {
-  return target;
+  target.reset();
 }
 
 void CameraZoomTrack::setLocal(const CameraZoomTarget newTarget) {
-  localTarget = newTarget;
+  *localTarget = newTarget;
 }
 
 void CameraZoomTrack::startLocal() {
-  target = &localTarget;
+  target = localTarget;
 }
 
 void CameraZoomTrack::setAndStartLocal(const CameraZoomTarget newTarget) {
@@ -65,12 +59,14 @@ void CameraZoomTrack::setMinMaxSize(const float newMinSize, const float newMaxSi
 }
 
 float CameraZoomTrack::calcZoomTarget(const CameraProps props) const {
-  if (target == nullptr) {
+  const auto targetShared = target.lock();
+  if (targetShared == nullptr) {
     return props.pixelsPerMeter;
   }
+  const CameraZoomTarget targetObj = *targetShared;
   
-  const glm::length_t maxAxis = target->x < target->y ? 1 : 0;
-  const float targetMaxAxis = (*target)[maxAxis];
+  const glm::length_t maxAxis = targetObj.x < targetObj.y ? 1 : 0;
+  const float targetMaxAxis = targetObj[maxAxis];
   const float windowMaxAxis = props.windowSize[maxAxis];
   const float minSizeM = (minSize * windowMaxAxis) / props.pixelsPerMeter;
   const float maxSizeM = (maxSize * windowMaxAxis) / props.pixelsPerMeter;

@@ -12,24 +12,24 @@
 #include "vector rendering state.hpp"
 
 VectorRenderComponent::VectorRenderComponent(const float width, const float height)
-  : rect({}, {width, height}),
-    size(width, height) {}
+  : rect(std::make_shared<CameraMotionTarget>(glm::vec2(), glm::vec2(width, height))),
+    size(std::make_shared<CameraZoomTarget>(width, height)) {}
     
 void VectorRenderComponent::render(NVGcontext *context, const RenderingState &rendering) {
-  rect.c = rendering.modelMat[2];
+  rect->c = rendering.modelMat[2];
   
   const VectorRenderingState &vectorRender = dynamic_cast<const VectorRenderingState &>(rendering);
   renderSprite(context, vectorRender.shapes, vectorRender.frame, vectorRender.modelMat);
 }
 
-const CameraMotionTarget *VectorRenderComponent::getMotionTarget() const {
-  return &rect;
+std::shared_ptr<const CameraMotionTarget> VectorRenderComponent::getMotionTarget() const {
+  return rect;
 }
 
-const CameraZoomTarget *VectorRenderComponent::getZoomTarget() const {
-  return &size;
+std::shared_ptr<const CameraZoomTarget> VectorRenderComponent::getZoomTarget() const {
+  return size;
 }
 
 Rect VectorRenderComponent::getAABB(const RenderingState &) const {
-  return static_cast<Rect>(rect);
+  return static_cast<Rect>(*rect);
 }

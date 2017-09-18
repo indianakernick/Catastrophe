@@ -22,8 +22,8 @@ public:
   virtual ~RenderComponent() = default;
 
   virtual void render(NVGcontext *, const RenderingState &) = 0;
-  virtual const CameraMotionTarget *getMotionTarget() const = 0;
-  virtual const CameraZoomTarget *getZoomTarget() const = 0;
+  virtual std::shared_ptr<const CameraMotionTarget> getMotionTarget() const = 0;
+  virtual std::shared_ptr<const CameraZoomTarget> getZoomTarget() const = 0;
   virtual Rect getAABB(const RenderingState &) const = 0;
 };
 

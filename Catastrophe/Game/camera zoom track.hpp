@@ -9,6 +9,7 @@
 #ifndef camera_zoom_track_hpp
 #define camera_zoom_track_hpp
 
+#include <memory>
 #include <glm/vec2.hpp>
 
 using CameraZoomTarget = glm::vec2;
@@ -22,10 +23,8 @@ class CameraZoomTrack {
 public:
   CameraZoomTrack();
   
-  void start(const CameraZoomTarget *);
+  void start(std::shared_ptr<const CameraZoomTarget>);
   void stop();
-  bool hasTarget() const;
-  const CameraZoomTarget *get() const;
   
   void setLocal(CameraZoomTarget);
   void startLocal();
@@ -39,8 +38,8 @@ public:
   void debugRender(NVGcontext *, CameraProps) const;
 
 private:
-  const CameraZoomTarget *target;
-  CameraZoomTarget localTarget;
+  std::weak_ptr<const CameraZoomTarget> target;
+  std::shared_ptr<CameraZoomTarget> localTarget;
   float minSize;
   float maxSize;
 };
