@@ -9,9 +9,9 @@
 #ifndef physics_file_hpp
 #define physics_file_hpp
 
-#include <glm/mat3x3.hpp>
+#include <glm/mat2x2.hpp>
 #include "../Libraries/Box2D/Box2D.h"
 
-b2Body *loadBody(const std::string &, b2World *, glm::mat3);
+b2Body *loadBody(const std::string &, b2World *, glm::mat2);
 
 #endif

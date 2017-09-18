@@ -60,7 +60,7 @@ namespace {
     }
   }
   
-  b2Vec2 readVec(const YAML::Node &vecNode, const glm::mat3 mat) {
+  b2Vec2 readVec(const YAML::Node &vecNode, const glm::mat2 mat) {
     checkType(vecNode, YAML::NodeType::Sequence);
     
     if (vecNode.size() != 2) {
@@ -71,16 +71,15 @@ namespace {
       );
     }
     
-    glm::tvec3<float32> vec3 = {
+    glm::tvec2<float32> vec = {
       vecNode[0].as<float32>(),
-      vecNode[1].as<float32>(),
-      1.0f
+      vecNode[1].as<float32>()
     };
-    vec3 = vec3 * mat;
-    return {vec3.x, vec3.y};
+    vec = vec * mat;
+    return {vec.x, vec.y};
   }
   
-  std::vector<b2Vec2> readVecs(const YAML::Node &vecsNode, const glm::mat3 mat) {
+  std::vector<b2Vec2> readVecs(const YAML::Node &vecsNode, const glm::mat2 mat) {
     checkType(vecsNode, YAML::NodeType::Sequence);
     
     std::vector<b2Vec2> vecs;
@@ -91,7 +90,7 @@ namespace {
     return vecs;
   }
   
-  float32 mul(const float32 scalar, const glm::mat3 mat) {
+  float32 mul(const float32 scalar, const glm::mat2 mat) {
     //nvg__getAverageScale
     //nvg matricies are transposed
     const float32 sx = std::sqrt(mat[0][0]*mat[0][0] + mat[1][0]*mat[1][0]);
@@ -101,7 +100,7 @@ namespace {
   
   std::unique_ptr<b2CircleShape> readCircle(
     const YAML::Node &circleNode,
-    const glm::mat3 mat
+    const glm::mat2 mat
   ) {
     auto circle = std::make_unique<b2CircleShape>();
     circle->m_p = readVec(getChild(circleNode, "pos"), mat);
@@ -111,7 +110,7 @@ namespace {
   
   std::unique_ptr<b2EdgeShape> readEdge(
     const YAML::Node &edgeNode,
-    const glm::mat3 mat
+    const glm::mat2 mat
   ) {
     auto edge = std::make_unique<b2EdgeShape>();
     if (const YAML::Node &vert0 = edgeNode["vert 0"]) {
@@ -129,7 +128,7 @@ namespace {
   
   std::unique_ptr<b2PolygonShape> readPolygon(
     const YAML::Node &polygonNode,
-    const glm::mat3 mat
+    const glm::mat2 mat
   ) {
     auto polygon = std::make_unique<b2PolygonShape>();
     
@@ -147,16 +146,16 @@ namespace {
       const YAML::Node &halfWidth = getChild(polygonNode, "half width");
       const YAML::Node &halfHeight = getChild(polygonNode, "half height");
       
-      glm::tvec3<float32> vec3 = {halfWidth.as<float32>(), halfHeight.as<float32>(), 0.0f};
-      vec3 = vec3 * mat;
+      glm::tvec2<float32> vec = {halfWidth.as<float32>(), halfHeight.as<float32>()};
+      vec = vec * mat;
       
-      polygon->SetAsBox(std::abs(vec3.x), std::abs(vec3.y));
+      polygon->SetAsBox(std::abs(vec.x), std::abs(vec.y));
     }
     
     return polygon;
   }
   
-  std::unique_ptr<b2ChainShape> readChain(const YAML::Node &chainNode, const glm::mat3 mat) {
+  std::unique_ptr<b2ChainShape> readChain(const YAML::Node &chainNode, const glm::mat2 mat) {
     bool isLoop = false;
     if (const YAML::Node &isLoopNode = chainNode["is loop"]) {
       isLoop = isLoopNode.as<bool>();
@@ -182,7 +181,7 @@ namespace {
     return chain;
   }
   
-  std::unique_ptr<b2Shape> readShape(const YAML::Node &shapeNode, const glm::mat3 mat) {
+  std::unique_ptr<b2Shape> readShape(const YAML::Node &shapeNode, const glm::mat2 mat) {
     checkType(shapeNode, YAML::NodeType::Map);
     
     const std::string typeName = getChild(shapeNode, "type").as<std::string>();
@@ -206,7 +205,7 @@ namespace {
     b2Body *body,
     const YAML::Node &shapesNode,
     const YAML::Node &fixtureNode,
-    const glm::mat3 mat
+    const glm::mat2 mat
   ) {
     const std::string shapeName = getChild(fixtureNode, "shape").as<std::string>();
     const YAML::Node &shapeNode = getChild(shapesNode, shapeName.c_str());
@@ -239,7 +238,7 @@ namespace {
     b2Body *body,
     const YAML::Node &shapesNode,
     const YAML::Node &fixturesNode,
-    const glm::mat3 mat
+    const glm::mat2 mat
   ) {
     checkType(shapesNode, YAML::NodeType::Map);
     checkType(fixturesNode, YAML::NodeType::Sequence);
@@ -253,7 +252,7 @@ namespace {
 b2Body *loadBody(
   const std::string &fileName,
   b2World *const world,
-  const glm::mat3 mat
+  const glm::mat2 mat
 ) {
   const YAML::Node rootNode = YAML::LoadFile(fileName);
   checkType(rootNode, YAML::NodeType::Map);
