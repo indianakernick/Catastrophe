@@ -14,68 +14,38 @@
 
 bool PlayerInputComponent::handleEvent(InputCommands &commands, const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
-    return handleKeyDown(commands, event.key.keysym.scancode);
+    return handleKey(commands, event.key.keysym.scancode, true);
   } else if (event.type == SDL_KEYUP) {
-    return handleKeyUp(commands, event.key.keysym.scancode);
+    return handleKey(commands, event.key.keysym.scancode, false);
   } else {
     return false;
   }
 }
 
-bool PlayerInputComponent::handleKeyDown(InputCommands &commands, const SDL_Scancode key) {
-  PlayerInputCommands &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
+bool PlayerInputComponent::handleKey(
+  InputCommands &commands,
+  const SDL_Scancode key,
+  const bool down
+) {
+  auto &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
   
   switch (key) {
     case PLAYER_LEFT_KEY:
-      leftButton = true;
+      leftButton = down;
       break;
     case PLAYER_RIGHT_KEY:
-      rightButton = true;
+      rightButton = down;
       break;
     case PLAYER_JUMP_KEY:
-      playerCommands.jump = true;
+      playerCommands.jump = down;
       break;
       
     default:
       return false;
   }
-  
-  if (leftButton && rightButton) {
-    playerCommands.moveLeft = false;
-    playerCommands.moveRight = false;
-  } else {
-    playerCommands.moveLeft = leftButton;
-    playerCommands.moveRight = rightButton;
-  }
-  
-  return true;
-}
 
-bool PlayerInputComponent::handleKeyUp(InputCommands &commands, const SDL_Scancode key) {
-  PlayerInputCommands &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
-  
-  switch (key) {
-    case PLAYER_LEFT_KEY:
-      leftButton = false;
-      break;
-    case PLAYER_RIGHT_KEY:
-      rightButton = false;
-      break;
-    case PLAYER_JUMP_KEY:
-      playerCommands.jump = false;
-      break;
-      
-    default:
-      return false;
-  }
-  
-  if (leftButton && rightButton) {
-    playerCommands.moveLeft = false;
-    playerCommands.moveRight = false;
-  } else {
-    playerCommands.moveLeft = leftButton;
-    playerCommands.moveRight = rightButton;
-  }
+  playerCommands.moveLeft  = leftButton  && !rightButton;
+  playerCommands.moveRight = rightButton && !leftButton;
   
   return true;
 }

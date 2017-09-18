@@ -9,7 +9,6 @@
 #ifndef player_input_component_hpp
 #define player_input_component_hpp
 
-#include <bitset>
 #include <SDL2/SDL_scancode.h>
 #include "input component.hpp"
 
@@ -24,8 +23,7 @@ private:
   bool leftButton = false;
   bool rightButton = false;
 
-  bool handleKeyDown(InputCommands &, SDL_Scancode);
-  bool handleKeyUp(InputCommands &, SDL_Scancode);
+  bool handleKey(InputCommands &, SDL_Scancode, bool);
 };
 
 #endif
