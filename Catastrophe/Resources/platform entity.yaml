@@ -1,0 +1,17 @@
+matrix:
+- [*width, 0.0, *pos_x]
+- [0.0, *height, *pos_y]
+
+physics:
+  name: SimplePhysicsComponent
+  state: PhysicsState
+  args: {}
+
+animation:
+  name: StaticVectorAnimationComponent
+  args: {}
+
+rendering:
+  name: VectorRenderingComponent
+  state: VectorRenderingState
+  args: {}
