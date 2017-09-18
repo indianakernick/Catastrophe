@@ -60,7 +60,7 @@ namespace {
     }
   }
   
-  b2Vec2 readVec(const YAML::Node &vecNode) {
+  b2Vec2 readVec(const YAML::Node &vecNode, const glm::mat3 mat) {
     checkType(vecNode, YAML::NodeType::Sequence);
     
     if (vecNode.size() != 2) {
@@ -71,50 +71,70 @@ namespace {
       );
     }
     
-    return {
+    glm::tvec3<float32> vec3 = {
       vecNode[0].as<float32>(),
-      vecNode[1].as<float32>()
+      vecNode[1].as<float32>(),
+      1.0f
     };
+    vec3 = vec3 * mat;
+    return {vec3.x, vec3.y};
   }
   
-  std::vector<b2Vec2> readVecs(const YAML::Node &vecsNode) {
+  std::vector<b2Vec2> readVecs(const YAML::Node &vecsNode, const glm::mat3 mat) {
     checkType(vecsNode, YAML::NodeType::Sequence);
     
     std::vector<b2Vec2> vecs;
     for (auto v = vecsNode.begin(); v != vecsNode.end(); ++v) {
-      vecs.emplace_back(readVec(*v));
+      vecs.emplace_back(readVec(*v, mat));
     }
     
     return vecs;
   }
   
-  std::unique_ptr<b2CircleShape> readCircle(const YAML::Node &circleNode) {
+  float32 mul(const float32 scalar, const glm::mat3 mat) {
+    //nvg__getAverageScale
+    //nvg matricies are transposed
+    const float32 sx = std::sqrt(mat[0][0]*mat[0][0] + mat[1][0]*mat[1][0]);
+    const float32 sy = std::sqrt(mat[0][1]*mat[0][1] + mat[1][1]*mat[1][1]);
+    return scalar * (sx + sy) * 0.5f;
+  }
+  
+  std::unique_ptr<b2CircleShape> readCircle(
+    const YAML::Node &circleNode,
+    const glm::mat3 mat
+  ) {
     auto circle = std::make_unique<b2CircleShape>();
-    circle->m_p = readVec(getChild(circleNode, "pos"));
-    circle->m_radius = getChild(circleNode, "radius").as<float32>();
+    circle->m_p = readVec(getChild(circleNode, "pos"), mat);
+    circle->m_radius = mul(getChild(circleNode, "radius").as<float32>(), mat);
     return circle;
   }
   
-  std::unique_ptr<b2EdgeShape> readEdge(const YAML::Node &edgeNode) {
+  std::unique_ptr<b2EdgeShape> readEdge(
+    const YAML::Node &edgeNode,
+    const glm::mat3 mat
+  ) {
     auto edge = std::make_unique<b2EdgeShape>();
     if (const YAML::Node &vert0 = edgeNode["vert 0"]) {
-      edge->m_vertex0 = readVec(vert0);
+      edge->m_vertex0 = readVec(vert0, mat);
       edge->m_hasVertex0 = true;
     }
-    edge->m_vertex1 = readVec(getChild(edgeNode, "vert 1"));
-    edge->m_vertex2 = readVec(getChild(edgeNode, "vert 2"));
+    edge->m_vertex1 = readVec(getChild(edgeNode, "vert 1"), mat);
+    edge->m_vertex2 = readVec(getChild(edgeNode, "vert 2"), mat);
     if (const YAML::Node &vert3 = edgeNode["vert 3"]) {
-      edge->m_vertex3 = readVec(vert3);
+      edge->m_vertex3 = readVec(vert3, mat);
       edge->m_hasVertex3 = true;
     }
     return edge;
   }
   
-  std::unique_ptr<b2PolygonShape> readPolygon(const YAML::Node &polygonNode) {
+  std::unique_ptr<b2PolygonShape> readPolygon(
+    const YAML::Node &polygonNode,
+    const glm::mat3 mat
+  ) {
     auto polygon = std::make_unique<b2PolygonShape>();
     
     if (const YAML::Node &vertsNode = polygonNode["verts"]) {
-      const std::vector<b2Vec2> verts = readVecs(vertsNode);
+      const std::vector<b2Vec2> verts = readVecs(vertsNode, mat);
       if (verts.size() > b2_maxPolygonVertices) {
         throw std::runtime_error(
           "Too many verticies for polygon at line"
@@ -127,18 +147,21 @@ namespace {
       const YAML::Node &halfWidth = getChild(polygonNode, "half width");
       const YAML::Node &halfHeight = getChild(polygonNode, "half height");
       
-      polygon->SetAsBox(halfWidth.as<float32>(), halfHeight.as<float32>());
+      glm::tvec3<float32> vec3 = {halfWidth.as<float32>(), halfHeight.as<float32>(), 0.0f};
+      vec3 = vec3 * mat;
+      
+      polygon->SetAsBox(std::abs(vec3.x), std::abs(vec3.y));
     }
     
     return polygon;
   }
   
-  std::unique_ptr<b2ChainShape> readChain(const YAML::Node &chainNode) {
+  std::unique_ptr<b2ChainShape> readChain(const YAML::Node &chainNode, const glm::mat3 mat) {
     bool isLoop = false;
     if (const YAML::Node &isLoopNode = chainNode["is loop"]) {
       isLoop = isLoopNode.as<bool>();
     }
-    const std::vector<b2Vec2> verts = readVecs(getChild(chainNode, "verts"));
+    const std::vector<b2Vec2> verts = readVecs(getChild(chainNode, "verts"), mat);
     
     auto chain = std::make_unique<b2ChainShape>();
     if (isLoop) {
@@ -147,30 +170,30 @@ namespace {
       chain->CreateChain(verts.data(), static_cast<int32>(verts.size()));
       
       if (const YAML::Node &prevVert = chainNode["prev vert"]) {
-        chain->m_prevVertex = readVec(prevVert);
+        chain->m_prevVertex = readVec(prevVert, mat);
         chain->m_hasPrevVertex = true;
       }
       
       if (const YAML::Node &nextVert = chainNode["next vert"]) {
-        chain->m_nextVertex = readVec(nextVert);
+        chain->m_nextVertex = readVec(nextVert, mat);
         chain->m_hasNextVertex = true;
       }
     }
     return chain;
   }
   
-  std::unique_ptr<b2Shape> readShape(const YAML::Node &shapeNode) {
+  std::unique_ptr<b2Shape> readShape(const YAML::Node &shapeNode, const glm::mat3 mat) {
     checkType(shapeNode, YAML::NodeType::Map);
     
     const std::string typeName = getChild(shapeNode, "type").as<std::string>();
     if (typeName == "circle") {
-      return readCircle(shapeNode);
+      return readCircle(shapeNode, mat);
     } else if (typeName == "edge") {
-      return readEdge(shapeNode);
+      return readEdge(shapeNode, mat);
     } else if (typeName == "polygon") {
-      return readPolygon(shapeNode);
+      return readPolygon(shapeNode, mat);
     } else if (typeName == "chain") {
-      return readChain(shapeNode);
+      return readChain(shapeNode, mat);
     } else {
       throw std::runtime_error (
         "Invalid shape type at line: "
@@ -182,14 +205,15 @@ namespace {
   void readFixture(
     b2Body *body,
     const YAML::Node &shapesNode,
-    const YAML::Node &fixtureNode
+    const YAML::Node &fixtureNode,
+    const glm::mat3 mat
   ) {
     const std::string shapeName = getChild(fixtureNode, "shape").as<std::string>();
     const YAML::Node &shapeNode = getChild(shapesNode, shapeName.c_str());
-    std::unique_ptr<b2Shape> shape = readShape(shapeNode);
+    std::unique_ptr<b2Shape> shape = readShape(shapeNode, mat);
     
     b2FixtureDef fixtureDef;
-    //createFixture copies the shape
+    //CreateFixture copies the shape
     fixtureDef.shape = shape.get();
     
     if (const YAML::Node &friction = fixtureNode["friction"]) {
@@ -214,20 +238,24 @@ namespace {
   void readFixtures(
     b2Body *body,
     const YAML::Node &shapesNode,
-    const YAML::Node &fixturesNode
+    const YAML::Node &fixturesNode,
+    const glm::mat3 mat
   ) {
     checkType(shapesNode, YAML::NodeType::Map);
     checkType(fixturesNode, YAML::NodeType::Sequence);
     
     for (auto f = fixturesNode.begin(); f != fixturesNode.end(); ++f) {
-      readFixture(body, shapesNode, *f);
+      readFixture(body, shapesNode, *f, mat);
     }
   }
 }
 
-b2Body *loadBody(const std::string &fileName, b2World *const world, const Params &params) {
-  std::unique_ptr<char []> fileStr = concatParamStringToFile(params, fileName);
-  const YAML::Node rootNode = YAML::Load(fileStr.get());
+b2Body *loadBody(
+  const std::string &fileName,
+  b2World *const world,
+  const glm::mat3 mat
+) {
+  const YAML::Node rootNode = YAML::LoadFile(fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &bodyNode = getChild(rootNode, "body");
@@ -235,7 +263,12 @@ b2Body *loadBody(const std::string &fileName, b2World *const world, const Params
   b2Body *body = world->CreateBody(&bodyDef);
   readBodyProps(body, bodyNode);
   
-  readFixtures(body, getChild(rootNode, "shapes"), getChild(rootNode, "fixtures"));
+  readFixtures(
+    body,
+    getChild(rootNode, "shapes"),
+    getChild(rootNode, "fixtures"),
+    mat
+  );
   
   return body;
 }

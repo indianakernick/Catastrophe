@@ -35,7 +35,8 @@ std::unique_ptr<Entity> makePlayer(
   
   b2Body *body = loadBody(
     Platform::getResDir() + "player body.yaml",
-    systems.physics.getWorld()
+    systems.physics.getWorld(),
+    {}
   );
   player->physics = makePhysicsComp<PlayerPhysicsComponent>(body);
   systems.physics.add(id, player->physics);

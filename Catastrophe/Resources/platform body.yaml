@@ -4,8 +4,8 @@ body:
 shapes:
   body:
     type: polygon
-    half width: *half_width
-    half height: *half_height
+    half width: 0.5
+    half height: 0.5
 
 fixtures:
 - shape: body

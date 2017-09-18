@@ -9,9 +9,9 @@
 #ifndef physics_file_hpp
 #define physics_file_hpp
 
-#include "yaml param.hpp"
+#include <glm/mat3x3.hpp>
 #include "../Libraries/Box2D/Box2D.h"
 
-b2Body *loadBody(const std::string &, b2World *, const Params & = {});
+b2Body *loadBody(const std::string &, b2World *, glm::mat3);
 
 #endif

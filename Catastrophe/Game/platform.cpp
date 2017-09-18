@@ -17,6 +17,7 @@
 #include "platform constants.hpp"
 #include "vector rendering state.hpp"
 #include "simple physics component.hpp"
+#include <glm/gtx/matrix_transform_2d.hpp>
 #include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
 #include "static vector animation component.hpp"
@@ -31,10 +32,7 @@ std::unique_ptr<Entity> makePlatform(
   b2Body *body = loadBody(
     Platform::getResDir() + "platform body.yaml",
     systems.physics.getWorld(),
-    {
-      {"half_width", rect.s.x / 2.0f},
-      {"half_height", rect.s.y / 2.0f}
-    }
+    glm::scale({}, rect.s)
   );
   platform->physics = makePhysicsComp<SimplePhysicsComponent>(body);
   systems.physics.add(id, platform->physics);
