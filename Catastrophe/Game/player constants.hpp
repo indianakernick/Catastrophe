@@ -13,7 +13,7 @@ constexpr float PLAYER_MOVE_FORCE = 60.0f;
 constexpr float PLAYER_AIR_MOVE_FORCE = 40.0f;
 constexpr float PLAYER_MAX_MOVE_SPEED = 4.0f;
 
-constexpr float PLAYER_JUMP_IMPULSE = 2.0f;
+constexpr float PLAYER_JUMP_FORCE = 120.0f;
 constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
 
 #endif

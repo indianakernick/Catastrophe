@@ -8,7 +8,7 @@
 
 #include "player physics component.hpp"
 
-#include <cmath>
+#include <algorithm>
 #include "player constants.hpp"
 #include "player input commands.hpp"
 #include "player physics state.hpp"
@@ -23,7 +23,7 @@ void PlayerPhysicsComponent::preStep(
   const InputCommands &input,
   const float delta
 ) {
-  const PlayerInputCommands &playerInput = dynamic_cast<const PlayerInputCommands &>(input);
+  const auto &playerInput = dynamic_cast<const PlayerInputCommands &>(input);
   handleMovement(playerInput);
   handleJump(playerInput, delta);
 }
@@ -34,7 +34,7 @@ void PlayerPhysicsComponent::postStep(
 ) {
   clampVel();
 
-  PlayerPhysicsState &playerPhysics = dynamic_cast<PlayerPhysicsState &>(physics);
+  auto &playerPhysics = dynamic_cast<PlayerPhysicsState &>(physics);
   playerPhysics.pos = body->GetPosition();
   playerPhysics.vel = body->GetLinearVelocity();
   playerPhysics.onGround = onGround();
@@ -61,29 +61,22 @@ void PlayerPhysicsComponent::clampVel() {
 }
 
 void PlayerPhysicsComponent::handleMovement(const PlayerInputCommands &input) {
-  const float moveForce = onGround()
-                        ? PLAYER_MOVE_FORCE
-                        : PLAYER_AIR_MOVE_FORCE;
-  if (input.moveLeft) {
-    body->ApplyForceToCenter({-moveForce, 0.0f}, true);
-  } else if (input.moveRight) {
-    body->ApplyForceToCenter({moveForce, 0.0f}, true);
-  }
+  const float moveForceMag = onGround()
+                           ? PLAYER_MOVE_FORCE
+                           : PLAYER_AIR_MOVE_FORCE;
+  const float moveForceDir = input.moveLeft * -1.0f
+                           + input.moveRight * 1.0f;
+  body->ApplyForceToCenter({moveForceMag * moveForceDir, 0.0f}, true);
 }
 
 void PlayerPhysicsComponent::handleJump(const PlayerInputCommands &input, const float delta) {
   if (input.jump) {
     if (onGround() && timeTillFinishJump == 0.0f) {
-      //starting a jump
-      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
-      timeTillFinishJump = PLAYER_MAX_JUMP_DUR - delta;
-    } else if (timeTillFinishJump > 0.0f) {
-      //jumping
-      body->ApplyLinearImpulseToCenter({0.0f, PLAYER_JUMP_IMPULSE}, true);
-      timeTillFinishJump -= delta;
-    } else if (timeTillFinishJump < 0.0f) {
-      //jump timed out
-      timeTillFinishJump = 0.0f;
+      timeTillFinishJump = PLAYER_MAX_JUMP_DUR;
+    }
+    if (timeTillFinishJump > 0.0f) {
+      body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+      timeTillFinishJump = std::max(timeTillFinishJump - delta, 0.0f);
     }
   } else {
     timeTillFinishJump = 0.0f;
