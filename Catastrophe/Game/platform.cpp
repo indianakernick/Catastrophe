@@ -14,10 +14,9 @@
 #include "physics file.hpp"
 #include "make physics comp.hpp"
 #include "platform constants.hpp"
-#include "simple physics component.hpp"
+#include "vector render component.hpp"
 #include "static animation component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
-#include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<Entity> makePlatform(
@@ -32,7 +31,7 @@ std::unique_ptr<Entity> makePlatform(
     systems.physics.getWorld(),
     glm::scale({}, rect.s)
   );
-  platform->physics = makePhysicsComp<SimplePhysicsComponent>(platform.get(), body);
+  platform->physics = makePhysicsComp("SimplePhysicsComponent", platform.get(), body);
   systems.physics.add(id, platform->physics);
   body->SetTransform({rect.p.x, rect.p.y}, 0.0f);
   

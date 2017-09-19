@@ -15,9 +15,8 @@
 #include "player constants.hpp"
 #include "make physics comp.hpp"
 #include "player input component.hpp"
-#include "player physics component.hpp"
+#include "vector render component.hpp"
 #include "player animation component.hpp"
-#include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<Entity> makePlayer(
@@ -35,7 +34,7 @@ std::unique_ptr<Entity> makePlayer(
     systems.physics.getWorld(),
     {}
   );
-  player->physics = makePhysicsComp<PlayerPhysicsComponent>(player.get(), body);
+  player->physics = makePhysicsComp("PlayerPhysicsComponent", player.get(), body);
   systems.physics.add(id, player->physics);
   body->SetTransform(pos, 0.0f);
   

@@ -1,9 +1,11 @@
 physics:
   name: SimplePhysicsComponent
+  body: platform body.yaml
   args: {}
 
 animation:
   name: StaticAnimationComponent
+  sprite: platform sprite.yaml
   args: {}
 
 rendering:

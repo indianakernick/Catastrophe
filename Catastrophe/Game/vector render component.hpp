@@ -1,13 +1,13 @@
 //
-//  vector sprite render component.hpp
+//  vector render component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 3/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef vector_sprite_render_component_hpp
-#define vector_sprite_render_component_hpp
+#ifndef vector_render_component_hpp
+#define vector_render_component_hpp
 
 #include "render component.hpp"
 

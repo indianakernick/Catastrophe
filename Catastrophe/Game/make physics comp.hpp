@@ -11,16 +11,12 @@
 
 #include <memory>
 #include "physics component.hpp"
-#include "../Libraries/Box2D/Dynamics/b2Body.h"
+#include <experimental/string_view>
 
-template <typename Component>
 std::shared_ptr<PhysicsComponent> makePhysicsComp(
-  Entity *const entity,
-  b2Body *const body
-) {
-  auto component = std::make_shared<Component>(entity, body);
-  body->SetUserData(component.get());
-  return component;
-}
+  std::experimental::string_view,
+  Entity *,
+  b2Body *
+);
 
 #endif

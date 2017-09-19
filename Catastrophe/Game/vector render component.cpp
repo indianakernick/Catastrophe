@@ -1,12 +1,12 @@
 //
-//  vector sprite render component.cpp
+//  vector render component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 3/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "vector sprite render component.hpp"
+#include "vector render component.hpp"
 
 #include "entity.hpp"
 #include "vector render.hpp"
