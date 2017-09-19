@@ -4,7 +4,6 @@ matrix:
 
 physics:
   name: SimplePhysicsComponent
-  state: PhysicsState
   args: {}
 
 animation:
@@ -13,5 +12,4 @@ animation:
 
 rendering:
   name: VectorRenderingComponent
-  state: VectorRenderingState
   args: {}

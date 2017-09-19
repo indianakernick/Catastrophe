@@ -4,13 +4,11 @@ matrix:
 
 input:
   name: PlayerInputComponent
-  state: PlayerInputCommands
   args: {}
 
 physics:
   name: PlayerPhysicsComponent
   body: player body.yaml
-  state: PlayerPhysicsState
   args: {}
 
 animation:
@@ -20,5 +18,4 @@ animation:
 
 rendering:
   name: VectorRenderingComponent
-  state: VectorRenderingState
   args: {}
