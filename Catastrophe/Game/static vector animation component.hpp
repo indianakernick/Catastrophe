@@ -16,7 +16,7 @@ class StaticVectorAnimationComponent final : public AnimationComponent {
 public:
   StaticVectorAnimationComponent(Entity *, const Sprite &, glm::vec2);
   
-  void update(RenderingState &, const PhysicsState &, float) override;
+  void update(float) override;
 
 private:
   Sprite sprite;

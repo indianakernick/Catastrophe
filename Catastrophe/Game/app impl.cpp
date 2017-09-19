@@ -80,7 +80,7 @@ bool AppImpl::input(float) {
     } else if (e.type == SDL_KEYDOWN && e.key.repeat == 0 && e.key.keysym.scancode == SDL_SCANCODE_P) {
       takeScreenshot = true;
     } else {
-      inputSystem.handleEvent(entityManager, e);
+      inputSystem.handleEvent(e);
     }
     eventCount++;
   }
@@ -88,12 +88,12 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
-  physicsSystem.update(entityManager, delta);
+  physicsSystem.update(delta);
   return true;
 }
 
 void AppImpl::render(const float delta) {
-  animationSystem.update(entityManager, delta);
+  animationSystem.update(delta);
   renderingSystem.update(delta);
   
   renderingContext.preRender(renderingSystem.getCamera().toPixels());
@@ -102,7 +102,7 @@ void AppImpl::render(const float delta) {
     physicsSystem.debugRender();
   }
   if constexpr (ENABLE_GAME_RENDER) {
-    renderingSystem.render(entityManager, renderingContext.getContext());
+    renderingSystem.render(renderingContext.getContext());
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     renderingSystem.cameraDebugRender(renderingContext.getContext());

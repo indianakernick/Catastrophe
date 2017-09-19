@@ -9,7 +9,6 @@
 #include "input system.hpp"
 
 #include <SDL2/SDL_events.h>
-#include "entity manager.hpp"
 #include "input component.hpp"
 
 void InputSystem::add(const EntityID id, const std::shared_ptr<InputComponent> comp) {
@@ -20,14 +19,13 @@ void InputSystem::rem(const EntityID id) {
   components.erase(id);
 }
 
-void InputSystem::handleEvent(EntityManager &entityMan, const SDL_Event event) {
+void InputSystem::handleEvent(const SDL_Event event) {
   if (dispatcher.dispatch(event)) {
     return;
   }
   
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    InputCommands &input = *entityMan.getEntity(c->first).latestInputCommands;
-    if (c->second->handleEvent(input, event)) {
+    if (c->second->handleEvent(event)) {
       break;
     }
   }

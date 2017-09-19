@@ -14,7 +14,6 @@
 #include "entity id.hpp"
 
 class AnimationComponent;
-class EntityManager;
 
 class AnimationSystem {
 public:
@@ -24,7 +23,7 @@ public:
   void add(EntityID, std::shared_ptr<AnimationComponent>);
   void rem(EntityID);
   
-  void update(EntityManager &, float);
+  void update(float);
   
 private:
   std::unordered_map<EntityID, std::shared_ptr<AnimationComponent>> components;

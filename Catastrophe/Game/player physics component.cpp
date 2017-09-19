@@ -9,6 +9,7 @@
 #include "player physics component.hpp"
 
 #include <algorithm>
+#include "entity.hpp"
 #include "player constants.hpp"
 #include "player input commands.hpp"
 #include "player physics state.hpp"
@@ -20,23 +21,16 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(
   b2Body *body
 ) : PhysicsComponent(entity, body) {}
 
-void PlayerPhysicsComponent::preStep(
-  PhysicsState &,
-  const InputCommands &input,
-  const float delta
-) {
-  const auto &playerInput = dynamic_cast<const PlayerInputCommands &>(input);
+void PlayerPhysicsComponent::preStep(const float delta) {
+  const auto &playerInput = dynamic_cast<const PlayerInputCommands &>(*getEntity().latestInputCommands);
   handleMovement(playerInput);
   handleJump(playerInput, delta);
 }
 
-void PlayerPhysicsComponent::postStep(
-  PhysicsState &physics,
-  const InputCommands &
-) {
+void PlayerPhysicsComponent::postStep() {
   clampVel();
 
-  auto &playerPhysics = dynamic_cast<PlayerPhysicsState &>(physics);
+  auto &playerPhysics = dynamic_cast<PlayerPhysicsState &>(*getEntity().latestPhysicsState);
   playerPhysics.pos = body->GetPosition();
   playerPhysics.vel = body->GetLinearVelocity();
   playerPhysics.onGround = onGround();

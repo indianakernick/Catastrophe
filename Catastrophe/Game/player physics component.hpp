@@ -18,8 +18,8 @@ class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
   PlayerPhysicsComponent(Entity *, b2Body *);
   
-  void preStep(PhysicsState &, const InputCommands &, float) override;
-  void postStep(PhysicsState &, const InputCommands &) override;
+  void preStep(float) override;
+  void postStep() override;
   
   void beginContactingGround();
   void endContactingGround();

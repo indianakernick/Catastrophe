@@ -16,7 +16,6 @@
 
 extern "C" union SDL_Event;
 class InputComponent;
-class EntityManager;
 
 class InputSystem {
 public:
@@ -30,7 +29,7 @@ public:
   void add(EntityID, std::shared_ptr<InputComponent>);
   void rem(EntityID);
   
-  void handleEvent(EntityManager &, SDL_Event);
+  void handleEvent(SDL_Event);
   
   ListenerID addListener(const Listener &);
   void remListener(ListenerID);

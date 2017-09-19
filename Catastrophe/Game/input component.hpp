@@ -12,7 +12,6 @@
 #include "component.hpp"
 
 class Entity;
-class InputCommands;
 extern "C" union SDL_Event;
 
 class InputComponent : public Component {
@@ -20,7 +19,7 @@ public:
   explicit InputComponent(Entity *);
   virtual ~InputComponent() = default;
   
-  virtual bool handleEvent(InputCommands &, SDL_Event) = 0;
+  virtual bool handleEvent(SDL_Event) = 0;
 };
 
 #endif

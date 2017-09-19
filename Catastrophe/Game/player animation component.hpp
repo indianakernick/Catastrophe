@@ -17,7 +17,7 @@ class PlayerAnimationComponent final : public AnimationComponent {
 public:
   PlayerAnimationComponent(Entity *, const Sprite &);
   
-  void update(RenderingState &, const PhysicsState &, float) override;
+  void update(float) override;
 
 private:
   Sprite sprite;

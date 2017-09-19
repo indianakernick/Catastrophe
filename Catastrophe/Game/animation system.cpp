@@ -22,11 +22,8 @@ void AnimationSystem::rem(const EntityID entityID) {
   components.erase(entityID);
 }
 
-void AnimationSystem::update(EntityManager &entityMan, const float delta) {
+void AnimationSystem::update(const float delta) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    const Entity &entity = entityMan.getEntity(c->first);
-    const PhysicsState &physics = *entity.latestPhysicsState;
-    RenderingState &rendering = *entity.latestRenderingState;
-    c->second->update(rendering, physics, delta);
+    c->second->update(delta);
   }
 }

@@ -8,14 +8,12 @@
 
 #include "physics component.hpp"
 
-#include <stdexcept>
+#include <cassert>
 
 PhysicsComponent::PhysicsComponent(
   Entity *const entity,
   b2Body *const body
 ) : Component(entity),
     body(body) {
-  if (body == nullptr) {
-    throw std::runtime_error("Null physics body passed to PhysicsComponent");
-  }
+  assert(body);
 }

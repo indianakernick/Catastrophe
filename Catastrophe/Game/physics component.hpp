@@ -22,9 +22,9 @@ public:
   virtual ~PhysicsComponent() = default;
   
   //Called before b2World::Step
-  virtual void preStep(PhysicsState &, const InputCommands &, float) = 0;
+  virtual void preStep(float) = 0;
   //Called after b2World::Step
-  virtual void postStep(PhysicsState &, const InputCommands &) = 0;
+  virtual void postStep() = 0;
   
   b2Body *body = nullptr;
 };

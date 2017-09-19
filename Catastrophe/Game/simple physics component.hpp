@@ -15,8 +15,8 @@ class SimplePhysicsComponent final : public PhysicsComponent {
 public:
   SimplePhysicsComponent(Entity *, b2Body *);
   
-  void preStep(PhysicsState &, const InputCommands &, float) override;
-  void postStep(PhysicsState &, const InputCommands &) override;
+  void preStep(float) override;
+  void postStep() override;
 };
 
 #endif

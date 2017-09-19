@@ -14,7 +14,6 @@
 #include <unordered_map>
 
 class RenderComponent;
-class EntityManager;
 
 class RenderingSystem {
 public:
@@ -25,7 +24,7 @@ public:
   void rem(EntityID);
   
   void update(float);
-  void render(EntityManager &, NVGcontext *);
+  void render(NVGcontext *);
   void cameraDebugRender(NVGcontext *);
   
   void startMotionTrack(EntityID);

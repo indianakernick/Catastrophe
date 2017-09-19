@@ -8,6 +8,7 @@
 
 #include "player animation component.hpp"
 
+#include "entity.hpp"
 #include "b2 glm cast.hpp"
 #include "vector render.hpp"
 #include "player physics state.hpp"
@@ -24,13 +25,9 @@ PlayerAnimationComponent::PlayerAnimationComponent(
     standRun(0.125),
     footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
 
-void PlayerAnimationComponent::update(
-  RenderingState &rendering,
-  const PhysicsState &physics,
-  const float delta
-) {
-  VectorRenderingState &vectorRender = dynamic_cast<VectorRenderingState &>(rendering);
-  const PlayerPhysicsState &playerPhysics = dynamic_cast<const PlayerPhysicsState &>(physics);
+void PlayerAnimationComponent::update(const float delta) {
+  auto &vectorRender = dynamic_cast<VectorRenderingState &>(*getEntity().latestRenderingState);
+  const auto &playerPhysics = dynamic_cast<const PlayerPhysicsState &>(*getEntity().latestPhysicsState);
   
   vectorRender.shapes = sprite.shapes;
   
@@ -53,7 +50,7 @@ void PlayerAnimationComponent::update(
       assert(false);
   }
   
-  vectorRender.modelMat = glm::translate({}, castToGLM(physics.pos));
+  vectorRender.modelMat = glm::translate({}, castToGLM(playerPhysics.pos));
   vectorRender.modelMat = glm::scale(vectorRender.modelMat, {calcHoriScale(horiVel), 1.0f});
 }
 

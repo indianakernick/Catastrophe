@@ -51,21 +51,15 @@ void PhysicsSystem::rem(const EntityID entityID) {
   components.erase(iter);
 }
 
-void PhysicsSystem::update(EntityManager &entityMan, const float delta) {
+void PhysicsSystem::update(const float delta) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    const Entity &entity = entityMan.getEntity(c->first);
-    const InputCommands &input = *entity.latestInputCommands;
-    PhysicsState &physics = *entity.latestPhysicsState;
-    c->second->preStep(physics, input, delta);
+    c->second->preStep(delta);
   }
 
   world->Step(delta, VELOCITY_ITER, POSITION_ITER);
   
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
-    const Entity &entity = entityMan.getEntity(c->first);
-    const InputCommands &input = *entity.latestInputCommands;
-    PhysicsState &physics = *entity.latestPhysicsState;
-    c->second->postStep(physics, input);
+    c->second->postStep();
   }
 }
 

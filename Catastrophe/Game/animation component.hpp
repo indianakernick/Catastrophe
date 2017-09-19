@@ -19,7 +19,7 @@ public:
   explicit AnimationComponent(Entity *);
   virtual ~AnimationComponent() = default;
   
-  virtual void update(RenderingState &, const PhysicsState &, float) = 0;
+  virtual void update(float) = 0;
 };
 
 #endif

@@ -17,7 +17,6 @@
 #include "../Libraries/Box2D/Box2D.h"
 
 class PhysicsComponent;
-class EntityManager;
 
 class PhysicsSystem {
 public:
@@ -32,7 +31,7 @@ public:
   void add(EntityID, std::shared_ptr<PhysicsComponent>);
   void rem(EntityID);
   
-  void update(EntityManager &, float);
+  void update(float);
   void debugRender();
   
   void attachRenderer(NVGcontext *);

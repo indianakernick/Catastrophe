@@ -8,6 +8,7 @@
 
 #include "static vector animation component.hpp"
 
+#include "entity.hpp"
 #include "b2 glm cast.hpp"
 #include "vector render.hpp"
 #include "physics state.hpp"
@@ -22,12 +23,9 @@ StaticVectorAnimationComponent::StaticVectorAnimationComponent(
     sprite(sprite),
     scale(scale) {}
 
-void StaticVectorAnimationComponent::update(
-  RenderingState &rendering,
-  const PhysicsState &physics,
-  float
-) {
-  VectorRenderingState &vectorRender = dynamic_cast<VectorRenderingState &>(rendering);
+void StaticVectorAnimationComponent::update(float) {
+  auto &vectorRender = dynamic_cast<VectorRenderingState &>(*getEntity().latestRenderingState);
+  const auto &physics = *getEntity().latestPhysicsState;
   
   vectorRender.shapes = sprite.shapes;
   vectorRender.frame = getFrame(sprite, "static", 0.0f);

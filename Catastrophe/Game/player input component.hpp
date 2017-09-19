@@ -17,13 +17,13 @@ public:
   explicit PlayerInputComponent(Entity *);
   ~PlayerInputComponent() = default;
   
-  bool handleEvent(InputCommands &, SDL_Event) override;
+  bool handleEvent(SDL_Event) override;
 
 private:
   bool leftButton = false;
   bool rightButton = false;
 
-  bool handleKey(InputCommands &, SDL_Scancode, bool);
+  bool handleKey(SDL_Scancode, bool);
 };
 
 #endif

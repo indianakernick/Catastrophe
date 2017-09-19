@@ -16,10 +16,10 @@ class VectorRenderComponent final : public RenderComponent {
 public:
   VectorRenderComponent(Entity *, float, float);
   
-  void render(NVGcontext *, const RenderingState &) override;
+  void render(NVGcontext *) override;
   std::shared_ptr<const CameraMotionTarget> getMotionTarget() const override;
   std::shared_ptr<const CameraZoomTarget> getZoomTarget() const override;
-  Rect getAABB(const RenderingState &) const override;
+  Rect getAABB() const override;
 
 private:
   std::shared_ptr<CameraMotionTarget> rect;

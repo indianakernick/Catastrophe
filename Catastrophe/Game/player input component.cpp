@@ -8,6 +8,7 @@
 
 #include "player input component.hpp"
 
+#include "entity.hpp"
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
 #include "player input commands.hpp"
@@ -15,22 +16,21 @@
 PlayerInputComponent::PlayerInputComponent(Entity *const entity)
   : InputComponent(entity) {}
 
-bool PlayerInputComponent::handleEvent(InputCommands &commands, const SDL_Event event) {
+bool PlayerInputComponent::handleEvent(const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
-    return handleKey(commands, event.key.keysym.scancode, true);
+    return handleKey(event.key.keysym.scancode, true);
   } else if (event.type == SDL_KEYUP) {
-    return handleKey(commands, event.key.keysym.scancode, false);
+    return handleKey(event.key.keysym.scancode, false);
   } else {
     return false;
   }
 }
 
 bool PlayerInputComponent::handleKey(
-  InputCommands &commands,
   const SDL_Scancode key,
   const bool down
 ) {
-  auto &playerCommands = dynamic_cast<PlayerInputCommands &>(commands);
+  auto &playerCommands = dynamic_cast<PlayerInputCommands &>(*getEntity().latestInputCommands);
   
   switch (key) {
     case PLAYER_LEFT_KEY:
