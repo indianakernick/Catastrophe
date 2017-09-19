@@ -10,9 +10,8 @@
 #define animation_component_hpp
 
 #include "component.hpp"
-
-class PhysicsState;
-class RenderingState;
+#include <glm/mat3x3.hpp>
+#include "vector sprite.hpp"
 
 class AnimationComponent : public Component {
 public:
@@ -20,6 +19,9 @@ public:
   virtual ~AnimationComponent() = default;
   
   virtual void update(float) = 0;
+  virtual const Shapes &getShapes() const = 0;
+  virtual const Frame &getFrame() const = 0;
+  virtual glm::mat3 getModelMat() const = 0;
 };
 
 #endif

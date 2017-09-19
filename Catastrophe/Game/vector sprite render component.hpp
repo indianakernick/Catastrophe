@@ -9,7 +9,6 @@
 #ifndef vector_sprite_render_component_hpp
 #define vector_sprite_render_component_hpp
 
-#include "vector sprite.hpp"
 #include "render component.hpp"
 
 class VectorRenderComponent final : public RenderComponent {

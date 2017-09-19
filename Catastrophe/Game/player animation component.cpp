@@ -11,7 +11,6 @@
 #include "entity.hpp"
 #include "vector render.hpp"
 #include <Simpleton/Math/scale.hpp>
-#include "vector rendering state.hpp"
 #include "player physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
@@ -26,41 +25,53 @@ PlayerAnimationComponent::PlayerAnimationComponent(
     footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
 
 void PlayerAnimationComponent::update(const float delta) {
-  auto &vectorRender = dynamic_cast<VectorRenderingState &>(*getEntity().latestRenderingState);
   const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(getEntity().physics);
-  
-  vectorRender.shapes = sprite.shapes;
   
   const float horiVel = playerPhysics->getVel().x;
   switch (state) {
     case State::STANDING:
-      vectorRender.frame = getFrameStanding(horiVel, delta);
+      setFrameStanding(horiVel, delta);
       break;
     case State::STARTING_TO_RUN:
-      vectorRender.frame = getFrameStartingToRun(horiVel, delta);
+      setFrameStartingToRun(horiVel, delta);
       break;
     case State::RUNNING:
-      vectorRender.frame = getFrameRunning(horiVel, delta);
+      setFrameRunning(horiVel, delta);
       break;
     case State::STARTING_TO_STAND:
-      vectorRender.frame = getFrameStartingToStand(horiVel, delta);
+      setFrameStartingToStand(horiVel, delta);
       break;
     
     default:
       assert(false);
   }
   
-  vectorRender.modelMat = glm::translate({}, playerPhysics->getPos());
-  vectorRender.modelMat = glm::scale(vectorRender.modelMat, {calcHoriScale(horiVel), 1.0f});
+  model = glm::scale(
+    glm::translate(
+      {},
+      playerPhysics->getPos()
+    ),
+    {calcHoriScale(horiVel), 1.0f}
+  );
+}
+
+const Shapes &PlayerAnimationComponent::getShapes() const {
+  return sprite.shapes;
+}
+
+const Frame &PlayerAnimationComponent::getFrame() const {
+  return frame;
+}
+
+glm::mat3 PlayerAnimationComponent::getModelMat() const {
+  return model;
 }
 
 float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
   if (horiVel < 0.0f) {
-    lastDir = -1.0f;
-    return lastDir;
+    return lastDir = -1.0f;
   } else if (horiVel > 0.0f) {
-    lastDir = 1.0f;
-    return lastDir;
+    return lastDir = 1.0f;
   } else {
     return lastDir;
   }
@@ -70,52 +81,52 @@ float PlayerAnimationComponent::calcAnimAdvance(const float horiVel, const float
   return delta * Math::abs(horiVel / footSpeed);
 }
 
-Frame PlayerAnimationComponent::getFrameStanding(const float horiVel, const float delta) {
+void PlayerAnimationComponent::setFrameStanding(const float horiVel, const float delta) {
   if (horiVel == 0.0f) {
-    return getFrame(sprite, "stand", 0.0f);
+    frame = ::getFrame(sprite, "stand", 0.0f);
   } else {
     state = State::STARTING_TO_RUN;
     anim.setProgressTime(0.125f);
     standRun.toBegin();
-    return getFrameStartingToRun(horiVel, delta);
+    setFrameStartingToRun(horiVel, delta);
   }
 }
 
-Frame PlayerAnimationComponent::getFrameStartingToRun(const float horiVel, const float delta) {
+void PlayerAnimationComponent::setFrameStartingToRun(const float horiVel, const float delta) {
   if (horiVel == 0.0f) {
     state = State::STARTING_TO_STAND;
-    return getFrameStartingToStand(horiVel, delta);
+    setFrameStartingToStand(horiVel, delta);
   } else {
     standRun.advance(calcAnimAdvance(horiVel, delta));
     if (standRun.overflow()) {
       anim.setProgressTime(0.125f + standRun.getProgressTime() - standRun.getDuration());
       standRun.toEnd();
       state = State::RUNNING;
-      return getFrameRunning(horiVel, delta);
+      return setFrameRunning(horiVel, delta);
     } else {
-      Frame standingFrame = getFrame(sprite, "stand", 0.0f);
+      Frame standingFrame = ::getFrame(sprite, "stand", 0.0f);
       lerpFrames(
         standRun.getProgress<float>(),
         standingFrame,
-        getFrame(sprite, "run", 0.125f)
+        ::getFrame(sprite, "run", 0.125f)
       );
-      return standingFrame;
+      frame = standingFrame;
     }
   }
 }
 
-Frame PlayerAnimationComponent::getFrameRunning(const float horiVel, const float delta) {
+void PlayerAnimationComponent::setFrameRunning(const float horiVel, const float delta) {
   if (horiVel == 0.0f) {
     state = State::STARTING_TO_STAND;
-    return getFrameStartingToStand(horiVel, delta);
+    setFrameStartingToStand(horiVel, delta);
   } else {
     anim.advance(calcAnimAdvance(horiVel, delta));
     anim.repeatOnOverflow();
-    return getFrame(sprite, "run", anim.getProgressTime());
+    frame = ::getFrame(sprite, "run", anim.getProgressTime());
   }
 }
 
-Frame PlayerAnimationComponent::getFrameStartingToStand(const float horiVel, const float delta) {
+void PlayerAnimationComponent::setFrameStartingToStand(const float horiVel, const float delta) {
   //standRun is at the beginning when the player is standing and
   //            at the end       when the player is running
   if (horiVel == 0.0f) {
@@ -123,17 +134,17 @@ Frame PlayerAnimationComponent::getFrameStartingToStand(const float horiVel, con
     if (standRun.underflow()) {
       standRun.toBegin();
       state = State::STANDING;
-      return getFrameStanding(horiVel, delta);
+      setFrameStanding(horiVel, delta);
     } else {
-      Frame standingFrame = getFrame(sprite, "stand", 0.0f);
+      Frame standingFrame = ::getFrame(sprite, "stand", 0.0f);
       lerpFrames(
         standRun.getProgress<float>(),
         standingFrame,
-        getFrame(sprite, "run", anim.getProgressTime())
+        ::getFrame(sprite, "run", anim.getProgressTime())
       );
-      return standingFrame;
+      frame = standingFrame;
     }
   } else {
-    return getFrameStartingToRun(horiVel, delta);
+    setFrameStartingToRun(horiVel, delta);
   }
 }

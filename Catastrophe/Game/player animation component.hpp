@@ -18,9 +18,14 @@ public:
   PlayerAnimationComponent(Entity *, const Sprite &);
   
   void update(float) override;
+  const Shapes &getShapes() const override;
+  const Frame &getFrame() const override;
+  glm::mat3 getModelMat() const override;
 
 private:
   Sprite sprite;
+  Frame frame;
+  glm::mat3 model;
   Time::SimpleAnim<float> anim;
   Time::SimpleAnim<float> standRun;
   float lastDir = 1.0f;
@@ -36,10 +41,10 @@ private:
   float calcHoriScale(float);
   float calcAnimAdvance(float, float) const;
   
-  Frame getFrameStanding(float, float);
-  Frame getFrameStartingToRun(float, float);
-  Frame getFrameRunning(float, float);
-  Frame getFrameStartingToStand(float, float);
+  void setFrameStanding(float, float);
+  void setFrameStartingToRun(float, float);
+  void setFrameRunning(float, float);
+  void setFrameStartingToStand(float, float);
 };
 
 #endif

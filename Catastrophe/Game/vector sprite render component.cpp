@@ -10,7 +10,7 @@
 
 #include "entity.hpp"
 #include "vector render.hpp"
-#include "vector rendering state.hpp"
+#include "animation component.hpp"
 
 VectorRenderComponent::VectorRenderComponent(
   Entity *const entity,
@@ -21,9 +21,14 @@ VectorRenderComponent::VectorRenderComponent(
     size(std::make_shared<CameraZoomTarget>(width, height)) {}
     
 void VectorRenderComponent::render(NVGcontext *context) {
-  const auto &vectorRender = dynamic_cast<const VectorRenderingState &>(*getEntity().latestRenderingState);
-  rect->c = vectorRender.modelMat[2];
-  renderSprite(context, vectorRender.shapes, vectorRender.frame, vectorRender.modelMat);
+  const auto anim = getEntity().animation;
+  rect->c = anim->getModelMat()[2];
+  renderSprite(
+    context,
+    anim->getShapes(),
+    anim->getFrame(),
+    anim->getModelMat()
+  );
 }
 
 std::shared_ptr<const CameraMotionTarget> VectorRenderComponent::getMotionTarget() const {

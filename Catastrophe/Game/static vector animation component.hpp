@@ -9,7 +9,6 @@
 #ifndef static_vector_animation_component_hpp
 #define static_vector_animation_component_hpp
 
-#include "vector sprite.hpp"
 #include "animation component.hpp"
 
 class StaticVectorAnimationComponent final : public AnimationComponent {
@@ -17,9 +16,14 @@ public:
   StaticVectorAnimationComponent(Entity *, const Sprite &, glm::vec2);
   
   void update(float) override;
+  const Shapes &getShapes() const override;
+  const Frame &getFrame() const override;
+  glm::mat3 getModelMat() const override;
 
 private:
   Sprite sprite;
+  Frame frame;
+  glm::mat3 model;
   glm::vec2 scale;
 };
 

@@ -11,7 +11,6 @@
 #include "entity.hpp"
 #include "vector render.hpp"
 #include "physics component.hpp"
-#include "vector rendering state.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
 
@@ -24,10 +23,24 @@ StaticVectorAnimationComponent::StaticVectorAnimationComponent(
     scale(scale) {}
 
 void StaticVectorAnimationComponent::update(float) {
-  auto &vectorRender = dynamic_cast<VectorRenderingState &>(*getEntity().latestRenderingState);
-  
-  vectorRender.shapes = sprite.shapes;
-  vectorRender.frame = getFrame(sprite, "static", 0.0f);
-  vectorRender.modelMat = glm::translate({}, getEntity().physics->getPos());
-  vectorRender.modelMat = glm::scale(vectorRender.modelMat, scale);
+  frame = ::getFrame(sprite, "static", 0.0f);
+  model = glm::scale(
+    glm::translate(
+      {},
+      getEntity().physics->getPos()
+    ),
+    scale
+  );
+}
+
+const Shapes &StaticVectorAnimationComponent::getShapes() const {
+  return sprite.shapes;
+}
+
+const Frame &StaticVectorAnimationComponent::getFrame() const {
+  return frame;
+}
+
+glm::mat3 StaticVectorAnimationComponent::getModelMat() const {
+  return model;
 }

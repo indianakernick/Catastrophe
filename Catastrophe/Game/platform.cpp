@@ -14,7 +14,6 @@
 #include "physics file.hpp"
 #include "make physics comp.hpp"
 #include "platform constants.hpp"
-#include "vector rendering state.hpp"
 #include "simple physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include "vector sprite render component.hpp"
@@ -49,8 +48,6 @@ std::unique_ptr<Entity> makePlatform(
     rect.s.x, rect.s.y
   );
   systems.rendering.add(id, platform->render);
-  
-  platform->latestRenderingState = std::make_unique<VectorRenderingState>();
   
   return platform;
 }

@@ -13,9 +13,6 @@
 #include "component.hpp"
 
 class b2Body;
-struct b2Vec2;
-class PhysicsState;
-class InputCommands;
 
 class PhysicsComponent : public Component {
 public:

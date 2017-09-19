@@ -26,9 +26,7 @@
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
-		452FF9DE1F64C104003A98B1 /* rendering state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */; };
 		452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9DF1F64D219003A98B1 /* player animation component.cpp */; };
-		452FF9E71F64D39D003A98B1 /* vector rendering state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */; };
 		452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F31F6A70DC003A98B1 /* rect.yaml */; };
 		452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */; };
 		452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */; };
@@ -156,12 +154,8 @@
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
 		452FF9C51F63D05D003A98B1 /* animation system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation system.cpp"; sourceTree = "<group>"; };
 		452FF9C61F63D05D003A98B1 /* animation system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation system.hpp"; sourceTree = "<group>"; };
-		452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering state.cpp"; sourceTree = "<group>"; };
-		452FF9D01F63DB5A003A98B1 /* rendering state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering state.hpp"; sourceTree = "<group>"; };
 		452FF9DF1F64D219003A98B1 /* player animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player animation component.cpp"; sourceTree = "<group>"; };
 		452FF9E01F64D219003A98B1 /* player animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player animation component.hpp"; sourceTree = "<group>"; };
-		452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector rendering state.cpp"; sourceTree = "<group>"; };
-		452FF9E61F64D39D003A98B1 /* vector rendering state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector rendering state.hpp"; sourceTree = "<group>"; };
 		452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 glm cast.hpp"; sourceTree = "<group>"; };
 		452FF9F31F6A70DC003A98B1 /* rect.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rect.yaml; sourceTree = "<group>"; };
 		452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rect 2.yaml"; sourceTree = "<group>"; };
@@ -478,8 +472,6 @@
 				452FF9C31F63D053003A98B1 /* animation component.hpp */,
 				452FF9C51F63D05D003A98B1 /* animation system.cpp */,
 				452FF9C61F63D05D003A98B1 /* animation system.hpp */,
-				452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */,
-				452FF9D01F63DB5A003A98B1 /* rendering state.hpp */,
 			);
 			name = animation;
 			sourceTree = "<group>";
@@ -491,8 +483,6 @@
 				452FF9E01F64D219003A98B1 /* player animation component.hpp */,
 				45DE9FB41F6E02AF00B1DA72 /* static vector animation component.cpp */,
 				45DE9FB51F6E02AF00B1DA72 /* static vector animation component.hpp */,
-				452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */,
-				452FF9E61F64D39D003A98B1 /* vector rendering state.hpp */,
 			);
 			name = "animation components";
 			sourceTree = "<group>";
@@ -942,9 +932,7 @@
 				452FFA6F1F6BC50D003A98B1 /* b2CircleShape.cpp in Sources */,
 				452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */,
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
-				452FF9DE1F64C104003A98B1 /* rendering state.cpp in Sources */,
 				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
-				452FF9E71F64D39D003A98B1 /* vector rendering state.cpp in Sources */,
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
