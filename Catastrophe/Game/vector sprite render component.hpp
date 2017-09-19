@@ -13,7 +13,7 @@
 
 class VectorRenderComponent final : public RenderComponent {
 public:
-  VectorRenderComponent(Entity *, float, float);
+  VectorRenderComponent(Entity *, glm::vec2);
   
   void render(NVGcontext *) override;
   CameraMotionTargetCPtr getMotionTarget() const override;

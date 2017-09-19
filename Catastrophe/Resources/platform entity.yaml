@@ -1,7 +1,3 @@
-matrix:
-- [*width, 0.0, *pos_x]
-- [0.0, *height, *pos_y]
-
 physics:
   name: SimplePhysicsComponent
   args: {}

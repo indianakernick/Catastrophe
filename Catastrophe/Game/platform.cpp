@@ -43,10 +43,7 @@ std::unique_ptr<Entity> makePlatform(
   );
   systems.animation.add(id, platform->animation);
   
-  platform->render = std::make_shared<VectorRenderComponent>(
-    platform.get(),
-    rect.s.x, rect.s.y
-  );
+  platform->render = std::make_shared<VectorRenderComponent>(platform.get(), rect.s);
   systems.rendering.add(id, platform->render);
   
   return platform;

@@ -14,11 +14,10 @@
 
 VectorRenderComponent::VectorRenderComponent(
   Entity *const entity,
-  const float width,
-  const float height
+  const glm::vec2 size
 ) : RenderComponent(entity),
-    rect(makeMotionTarget(glm::vec2(), glm::vec2(width, height))),
-    size(makeZoomTarget(width, height)) {}
+    rect(makeMotionTarget(glm::vec2(), size)),
+    size(makeZoomTarget(size)) {}
     
 void VectorRenderComponent::render(NVGcontext *context) {
   const auto anim = getEntity().animation;

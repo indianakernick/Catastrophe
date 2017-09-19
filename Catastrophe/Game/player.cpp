@@ -45,7 +45,7 @@ std::unique_ptr<Entity> makePlayer(
   );
   systems.animation.add(id, player->animation);
   
-  player->render = std::make_shared<VectorRenderComponent>(player.get(), 1.0f, 1.0f);
+  player->render = std::make_shared<VectorRenderComponent>(player.get(), glm::vec2(1.0f, 1.0f));
   systems.rendering.add(id, player->render);
   
   return player;
