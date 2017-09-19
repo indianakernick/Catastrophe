@@ -1,19 +1,19 @@
 //
-//  static vector animation component.hpp
+//  static animation component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 17/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef static_vector_animation_component_hpp
-#define static_vector_animation_component_hpp
+#ifndef static_animation_component_hpp
+#define static_animation_component_hpp
 
 #include "animation component.hpp"
 
-class StaticVectorAnimationComponent final : public AnimationComponent {
+class StaticAnimationComponent final : public AnimationComponent {
 public:
-  StaticVectorAnimationComponent(Entity *, const Sprite &, glm::vec2);
+  StaticAnimationComponent(Entity *, const Sprite &, glm::vec2);
   
   void update(float) override;
   const Shapes &getShapes() const override;

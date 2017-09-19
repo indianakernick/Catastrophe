@@ -15,10 +15,10 @@
 #include "make physics comp.hpp"
 #include "platform constants.hpp"
 #include "simple physics component.hpp"
+#include "static animation component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include "vector sprite render component.hpp"
 #include <Simpleton/Platform/system info.hpp>
-#include "static vector animation component.hpp"
 
 std::unique_ptr<Entity> makePlatform(
   const EntityID id,
@@ -36,7 +36,7 @@ std::unique_ptr<Entity> makePlatform(
   systems.physics.add(id, platform->physics);
   body->SetTransform({rect.p.x, rect.p.y}, 0.0f);
   
-  platform->animation = std::make_shared<StaticVectorAnimationComponent>(
+  platform->animation = std::make_shared<StaticAnimationComponent>(
     platform.get(),
     loadSprite(Platform::getResDir() + "platform sprite.yaml"),
     rect.s

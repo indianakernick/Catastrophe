@@ -1,12 +1,12 @@
 //
-//  static vector animation component.cpp
+//  static animation component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 17/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "static vector animation component.hpp"
+#include "static animation component.hpp"
 
 #include "entity.hpp"
 #include "vector render.hpp"
@@ -14,7 +14,7 @@
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
 
-StaticVectorAnimationComponent::StaticVectorAnimationComponent(
+StaticAnimationComponent::StaticAnimationComponent(
   Entity *const entity,
   const Sprite &sprite,
   const glm::vec2 scale
@@ -22,7 +22,7 @@ StaticVectorAnimationComponent::StaticVectorAnimationComponent(
     sprite(sprite),
     scale(scale) {}
 
-void StaticVectorAnimationComponent::update(float) {
+void StaticAnimationComponent::update(float) {
   frame = ::getFrame(sprite, "static", 0.0f);
   model = glm::scale(
     glm::translate(
@@ -33,14 +33,14 @@ void StaticVectorAnimationComponent::update(float) {
   );
 }
 
-const Shapes &StaticVectorAnimationComponent::getShapes() const {
+const Shapes &StaticAnimationComponent::getShapes() const {
   return sprite.shapes;
 }
 
-const Frame &StaticVectorAnimationComponent::getFrame() const {
+const Frame &StaticAnimationComponent::getFrame() const {
   return frame;
 }
 
-glm::mat3 StaticVectorAnimationComponent::getModelMat() const {
+glm::mat3 StaticAnimationComponent::getModelMat() const {
   return model;
 }

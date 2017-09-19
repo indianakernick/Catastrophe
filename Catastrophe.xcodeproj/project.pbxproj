@@ -110,7 +110,7 @@
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
 		45DE9FAC1F6D102A00B1DA72 /* yaml param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FAA1F6D102A00B1DA72 /* yaml param.cpp */; };
 		45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */; };
-		45DE9FB61F6E02AF00B1DA72 /* static vector animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FB41F6E02AF00B1DA72 /* static vector animation component.cpp */; };
+		45DE9FB61F6E02AF00B1DA72 /* static animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FB41F6E02AF00B1DA72 /* static animation component.cpp */; };
 		45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FB81F6E394900B1DA72 /* player entity.yaml */; };
 		45DE9FBC1F6E467400B1DA72 /* tinyfiledialogs.c in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FBA1F6E467300B1DA72 /* tinyfiledialogs.c */; };
 		45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FC01F6F8C6500B1DA72 /* platform entity.yaml */; };
@@ -328,8 +328,8 @@
 		45DE9FB01F6DF5AF00B1DA72 /* systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = systems.hpp; sourceTree = "<group>"; };
 		45DE9FB11F6DF5B900B1DA72 /* systems fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "systems fwd.hpp"; sourceTree = "<group>"; };
 		45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.yaml"; sourceTree = "<group>"; };
-		45DE9FB41F6E02AF00B1DA72 /* static vector animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static vector animation component.cpp"; sourceTree = "<group>"; };
-		45DE9FB51F6E02AF00B1DA72 /* static vector animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static vector animation component.hpp"; sourceTree = "<group>"; };
+		45DE9FB41F6E02AF00B1DA72 /* static animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "static animation component.cpp"; sourceTree = "<group>"; };
+		45DE9FB51F6E02AF00B1DA72 /* static animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "static animation component.hpp"; sourceTree = "<group>"; };
 		45DE9FB71F6E1B0C00B1DA72 /* camera debug render constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera debug render constants.hpp"; sourceTree = "<group>"; };
 		45DE9FB81F6E394900B1DA72 /* player entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player entity.yaml"; sourceTree = "<group>"; };
 		45DE9FBA1F6E467300B1DA72 /* tinyfiledialogs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinyfiledialogs.c; sourceTree = "<group>"; };
@@ -481,8 +481,8 @@
 			children = (
 				452FF9DF1F64D219003A98B1 /* player animation component.cpp */,
 				452FF9E01F64D219003A98B1 /* player animation component.hpp */,
-				45DE9FB41F6E02AF00B1DA72 /* static vector animation component.cpp */,
-				45DE9FB51F6E02AF00B1DA72 /* static vector animation component.hpp */,
+				45DE9FB41F6E02AF00B1DA72 /* static animation component.cpp */,
+				45DE9FB51F6E02AF00B1DA72 /* static animation component.hpp */,
 			);
 			name = "animation components";
 			sourceTree = "<group>";
@@ -954,7 +954,7 @@
 				45DE9FAC1F6D102A00B1DA72 /* yaml param.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
-				45DE9FB61F6E02AF00B1DA72 /* static vector animation component.cpp in Sources */,
+				45DE9FB61F6E02AF00B1DA72 /* static animation component.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */,
