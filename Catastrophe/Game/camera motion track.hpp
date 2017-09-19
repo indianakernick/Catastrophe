@@ -13,6 +13,16 @@
 #include <Simpleton/Math/rect.hpp>
 
 using CameraMotionTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
+using CameraMotionTargetPtr = std::shared_ptr<CameraMotionTarget>;
+using CameraMotionTargetCPtr = std::shared_ptr<const CameraMotionTarget>;
+
+//Why doesn't C++ have function aliases?
+//using makeMotionTarget = std::make_shared<CameraMotionTarget>
+
+template <typename ...Args>
+CameraMotionTargetPtr makeMotionTarget(Args &&... args) {
+  return std::make_shared<CameraMotionTarget>(std::forward<Args>(args)...);
+}
 
 struct CameraProps;
 extern "C" struct NVGcontext;
@@ -21,7 +31,7 @@ class CameraMotionTrack {
 public:
   CameraMotionTrack();
   
-  void start(std::shared_ptr<const CameraMotionTarget>);
+  void start(CameraMotionTargetCPtr);
   void stop();
   
   void setLocal(CameraMotionTarget);
@@ -36,7 +46,7 @@ public:
   
 private:
   std::weak_ptr<const CameraMotionTarget> target;
-  std::shared_ptr<CameraMotionTarget> localTarget;
+  CameraMotionTargetPtr localTarget;
   glm::vec2 center;
   glm::vec2 size;
   

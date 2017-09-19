@@ -16,11 +16,11 @@
 
 CameraMotionTrack::CameraMotionTrack()
   : target(),
-    localTarget(std::make_shared<CameraMotionTarget>()),
+    localTarget(makeMotionTarget()),
     center(DEFAULT_TRACKING_BOUNDS_CENTER),
     size(DEFAULT_TRACKING_BOUNDS_SIZE) {}
 
-void CameraMotionTrack::start(const std::shared_ptr<const CameraMotionTarget> newTarget) {
+void CameraMotionTrack::start(const CameraMotionTargetCPtr newTarget) {
   target = newTarget;
 }
 

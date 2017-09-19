@@ -16,13 +16,13 @@
 
 CameraZoomTrack::CameraZoomTrack()
   : target(),
-    localTarget(std::make_shared<CameraZoomTarget>(
-      Math::middle(DEFAULT_ZOOM_MIN_SIZE, DEFAULT_ZOOM_MAX_SIZE))
-    ),
+    localTarget(makeZoomTarget(
+      Math::middle(DEFAULT_ZOOM_MIN_SIZE, DEFAULT_ZOOM_MAX_SIZE)
+    )),
     minSize(DEFAULT_ZOOM_MIN_SIZE),
     maxSize(DEFAULT_ZOOM_MAX_SIZE) {}
 
-void CameraZoomTrack::start(const std::shared_ptr<const CameraZoomTarget> newTarget) {
+void CameraZoomTrack::start(const CameraZoomTargetCPtr newTarget) {
   target = newTarget;
 }
 
