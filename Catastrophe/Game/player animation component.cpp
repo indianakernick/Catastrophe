@@ -17,9 +17,11 @@
 
 PlayerAnimationComponent::PlayerAnimationComponent(
   Entity *const entity,
-  const Sprite &sprite
+  const Sprite &sprite,
+  const glm::vec2 scale
 ) : AnimationComponent(entity),
     sprite(sprite),
+    scale(scale),
     anim(sprite.animations.at("run").durationSec),
     standRun(0.125),
     footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
@@ -51,7 +53,7 @@ void PlayerAnimationComponent::update(const float delta) {
       {},
       playerPhysics->getPos()
     ),
-    {calcHoriScale(horiVel), 1.0f}
+    {scale.x * calcHoriScale(horiVel), scale.y}
   );
 }
 

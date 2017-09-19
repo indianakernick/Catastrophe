@@ -3,7 +3,7 @@ physics:
   args: {}
 
 animation:
-  name: StaticVectorAnimationComponent
+  name: StaticAnimationComponent
   args: {}
 
 rendering:

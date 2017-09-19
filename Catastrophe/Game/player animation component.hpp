@@ -15,7 +15,7 @@
 
 class PlayerAnimationComponent final : public AnimationComponent {
 public:
-  PlayerAnimationComponent(Entity *, const Sprite &);
+  PlayerAnimationComponent(Entity *, const Sprite &, glm::vec2);
   
   void update(float) override;
   const Shapes &getShapes() const override;
@@ -26,6 +26,7 @@ private:
   Sprite sprite;
   Frame frame;
   glm::mat3 model;
+  glm::vec2 scale;
   Time::SimpleAnim<float> anim;
   Time::SimpleAnim<float> standRun;
   float lastDir = 1.0f;

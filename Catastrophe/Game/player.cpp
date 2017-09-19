@@ -41,7 +41,8 @@ std::unique_ptr<Entity> makePlayer(
   
   player->animation = std::make_shared<PlayerAnimationComponent>(
     player.get(),
-    loadSprite(Platform::getResDir() + "player sprite.yaml")
+    loadSprite(Platform::getResDir() + "player sprite.yaml"),
+    glm::vec2(1.0f, 1.0f)
   );
   systems.animation.add(id, player->animation);
   
