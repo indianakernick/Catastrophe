@@ -9,14 +9,16 @@
 #ifndef physics_component_hpp
 #define physics_component_hpp
 
+#include "component.hpp"
+
 class b2Body;
 struct b2Vec2;
 class PhysicsState;
 class InputCommands;
 
-class PhysicsComponent {
+class PhysicsComponent : public Component {
 public:
-  explicit PhysicsComponent(b2Body *);
+  PhysicsComponent(Entity *, b2Body *);
   virtual ~PhysicsComponent() = default;
   
   //Called before b2World::Step

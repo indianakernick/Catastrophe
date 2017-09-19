@@ -14,8 +14,11 @@
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 template <typename Component>
-std::shared_ptr<PhysicsComponent> makePhysicsComp(b2Body *body) {
-  auto component = std::make_shared<Component>(body);
+std::shared_ptr<PhysicsComponent> makePhysicsComp(
+  Entity *const entity,
+  b2Body *const body
+) {
+  auto component = std::make_shared<Component>(entity, body);
   body->SetUserData(component.get());
   return component;
 }

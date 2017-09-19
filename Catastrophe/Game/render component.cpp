@@ -7,3 +7,6 @@
 //
 
 #include "render component.hpp"
+
+RenderComponent::RenderComponent(Entity *const entity)
+  : Component(entity) {}

@@ -15,8 +15,10 @@
 #include <Simpleton/Math/clamp.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-PlayerPhysicsComponent::PlayerPhysicsComponent(b2Body *body)
-  : PhysicsComponent(body) {}
+PlayerPhysicsComponent::PlayerPhysicsComponent(
+  Entity *const entity,
+  b2Body *body
+) : PhysicsComponent(entity, body) {}
 
 void PlayerPhysicsComponent::preStep(
   PhysicsState &,

@@ -9,12 +9,14 @@
 #ifndef animation_component_hpp
 #define animation_component_hpp
 
+#include "component.hpp"
+
 class PhysicsState;
 class RenderingState;
 
-class AnimationComponent {
+class AnimationComponent : public Component {
 public:
-  AnimationComponent() = default;
+  explicit AnimationComponent(Entity *);
   virtual ~AnimationComponent() = default;
   
   virtual void update(RenderingState &, const PhysicsState &, float) = 0;

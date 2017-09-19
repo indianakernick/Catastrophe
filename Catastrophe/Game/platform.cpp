@@ -34,17 +34,19 @@ std::unique_ptr<Entity> makePlatform(
     systems.physics.getWorld(),
     glm::scale({}, rect.s)
   );
-  platform->physics = makePhysicsComp<SimplePhysicsComponent>(body);
+  platform->physics = makePhysicsComp<SimplePhysicsComponent>(platform.get(), body);
   systems.physics.add(id, platform->physics);
   body->SetTransform({rect.p.x, rect.p.y}, 0.0f);
   
   platform->animation = std::make_shared<StaticVectorAnimationComponent>(
+    platform.get(),
     loadSprite(Platform::getResDir() + "platform sprite.yaml"),
     rect.s
   );
   systems.animation.add(id, platform->animation);
   
   platform->render = std::make_shared<VectorRenderComponent>(
+    platform.get(),
     rect.s.x, rect.s.y
   );
   systems.rendering.add(id, platform->render);

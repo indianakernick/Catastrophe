@@ -11,8 +11,12 @@
 #include "vector render.hpp"
 #include "vector rendering state.hpp"
 
-VectorRenderComponent::VectorRenderComponent(const float width, const float height)
-  : rect(std::make_shared<CameraMotionTarget>(glm::vec2(), glm::vec2(width, height))),
+VectorRenderComponent::VectorRenderComponent(
+  Entity *const entity,
+  const float width,
+  const float height
+) : RenderComponent(entity),
+    rect(std::make_shared<CameraMotionTarget>(glm::vec2(), glm::vec2(width, height))),
     size(std::make_shared<CameraZoomTarget>(width, height)) {}
     
 void VectorRenderComponent::render(NVGcontext *context, const RenderingState &rendering) {

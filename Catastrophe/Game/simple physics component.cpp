@@ -11,8 +11,10 @@
 #include "physics state.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-SimplePhysicsComponent::SimplePhysicsComponent(b2Body *body)
-  : PhysicsComponent(body) {}
+SimplePhysicsComponent::SimplePhysicsComponent(
+  Entity *const entity,
+  b2Body *body
+) : PhysicsComponent(entity, body) {}
 
 void SimplePhysicsComponent::preStep(PhysicsState &, const InputCommands &, float) {}
 

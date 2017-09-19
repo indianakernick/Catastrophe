@@ -13,7 +13,7 @@
 
 class SimplePhysicsComponent final : public PhysicsComponent {
 public:
-  explicit SimplePhysicsComponent(b2Body *);
+  SimplePhysicsComponent(Entity *, b2Body *);
   
   void preStep(PhysicsState &, const InputCommands &, float) override;
   void postStep(PhysicsState &, const InputCommands &) override;

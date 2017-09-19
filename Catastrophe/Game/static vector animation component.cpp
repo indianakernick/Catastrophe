@@ -15,9 +15,11 @@
 #include <glm/gtx/matrix_transform_2d.hpp>
 
 StaticVectorAnimationComponent::StaticVectorAnimationComponent(
+  Entity *const entity,
   const Sprite &sprite,
   const glm::vec2 scale
-) : sprite(sprite),
+) : AnimationComponent(entity),
+    sprite(sprite),
     scale(scale) {}
 
 void StaticVectorAnimationComponent::update(

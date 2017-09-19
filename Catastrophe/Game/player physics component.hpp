@@ -16,7 +16,7 @@ class PlayerInputCommands;
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
-  explicit PlayerPhysicsComponent(b2Body *);
+  PlayerPhysicsComponent(Entity *, b2Body *);
   
   void preStep(PhysicsState &, const InputCommands &, float) override;
   void postStep(PhysicsState &, const InputCommands &) override;

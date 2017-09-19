@@ -10,15 +10,16 @@
 #define render_component_hpp
 
 #include "rect.hpp"
+#include "component.hpp"
 #include "camera zoom track.hpp"
 #include "camera motion track.hpp"
 
 class RenderingState;
 extern "C" struct NVGcontext;
 
-class RenderComponent {
+class RenderComponent : public Component {
 public:
-  RenderComponent() = default;
+  explicit RenderComponent(Entity *);
   virtual ~RenderComponent() = default;
 
   virtual void render(NVGcontext *, const RenderingState &) = 0;

@@ -9,48 +9,18 @@
 #ifndef input_component_hpp
 #define input_component_hpp
 
+#include "component.hpp"
+
 class Entity;
 class InputCommands;
 extern "C" union SDL_Event;
 
-class InputComponent {
+class InputComponent : public Component {
 public:
-  InputComponent() = default;
+  explicit InputComponent(Entity *);
   virtual ~InputComponent() = default;
   
   virtual bool handleEvent(InputCommands &, SDL_Event) = 0;
 };
-
-/*
-
-InputComponent creates InputCommands and passes that to PhysicsComponent
-
-struct InputCommands {
-  bool moveLeft;
-  bool moveRight;
-  bool jump;
-};
-
-PhysicsComponent applies forces to physics body based on InputCommands
-PhysicsComponent creates PhysicsState and passes that to AnimationComponent
-
-struct PhysicsState {
-  glm::vec2 center;
-  float horiVel;
-  bool onGround;
-};
-
-AnimationComponent uses PhysicsState to control animations
-AnimationComponent creates RenderingState and passes that to RenderComponent
-
-struct RenderingState {
-  std::shared_ptr<const Shapes> shapes;
-  std::shared_ptr<const Frame> frame;
-  glm::mat3 modelMat;
-};
-
-RenderComponent renders entity based on RenderingState
-
-*/
 
 #endif

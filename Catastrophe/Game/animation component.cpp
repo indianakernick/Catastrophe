@@ -7,3 +7,6 @@
 //
 
 #include "animation component.hpp"
+
+AnimationComponent::AnimationComponent(Entity *const entity)
+  : Component(entity) {}

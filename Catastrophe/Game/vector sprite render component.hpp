@@ -14,7 +14,7 @@
 
 class VectorRenderComponent final : public RenderComponent {
 public:
-  VectorRenderComponent(float, float);
+  VectorRenderComponent(Entity *, float, float);
   
   void render(NVGcontext *, const RenderingState &) override;
   std::shared_ptr<const CameraMotionTarget> getMotionTarget() const override;

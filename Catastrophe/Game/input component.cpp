@@ -7,3 +7,6 @@
 //
 
 #include "input component.hpp"
+
+InputComponent::InputComponent(Entity *const entity)
+  : Component(entity) {}

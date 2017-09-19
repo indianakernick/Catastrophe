@@ -30,7 +30,7 @@ std::unique_ptr<Entity> makePlayer(
 ) {
   std::unique_ptr<Entity> player = std::make_unique<Entity>(id);
   
-  player->input = std::make_shared<PlayerInputComponent>();
+  player->input = std::make_shared<PlayerInputComponent>(player.get());
   systems.input.add(id, player->input);
   
   b2Body *body = loadBody(
@@ -38,16 +38,17 @@ std::unique_ptr<Entity> makePlayer(
     systems.physics.getWorld(),
     {}
   );
-  player->physics = makePhysicsComp<PlayerPhysicsComponent>(body);
+  player->physics = makePhysicsComp<PlayerPhysicsComponent>(player.get(), body);
   systems.physics.add(id, player->physics);
   body->SetTransform(pos, 0.0f);
   
   player->animation = std::make_shared<PlayerAnimationComponent>(
+    player.get(),
     loadSprite(Platform::getResDir() + "player sprite.yaml")
   );
   systems.animation.add(id, player->animation);
   
-  player->render = std::make_shared<VectorRenderComponent>(1.0f, 1.0f);
+  player->render = std::make_shared<VectorRenderComponent>(player.get(), 1.0f, 1.0f);
   systems.rendering.add(id, player->render);
   
   player->latestInputCommands = std::make_unique<PlayerInputCommands>();

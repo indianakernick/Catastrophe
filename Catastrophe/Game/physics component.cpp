@@ -10,8 +10,11 @@
 
 #include <stdexcept>
 
-PhysicsComponent::PhysicsComponent(b2Body *const body)
-  : body(body) {
+PhysicsComponent::PhysicsComponent(
+  Entity *const entity,
+  b2Body *const body
+) : Component(entity),
+    body(body) {
   if (body == nullptr) {
     throw std::runtime_error("Null physics body passed to PhysicsComponent");
   }

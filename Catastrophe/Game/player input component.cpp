@@ -12,6 +12,9 @@
 #include "input constants.hpp"
 #include "player input commands.hpp"
 
+PlayerInputComponent::PlayerInputComponent(Entity *const entity)
+  : InputComponent(entity) {}
+
 bool PlayerInputComponent::handleEvent(InputCommands &commands, const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
     return handleKey(commands, event.key.keysym.scancode, true);

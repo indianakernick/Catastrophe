@@ -15,8 +15,11 @@
 #include "vector rendering state.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 
-PlayerAnimationComponent::PlayerAnimationComponent(const Sprite &sprite)
-  : sprite(sprite),
+PlayerAnimationComponent::PlayerAnimationComponent(
+  Entity *const entity,
+  const Sprite &sprite
+) : AnimationComponent(entity),
+    sprite(sprite),
     anim(sprite.animations.at("run").durationSec),
     standRun(0.125),
     footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}

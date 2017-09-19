@@ -14,7 +14,7 @@
 
 class PlayerInputComponent final : public InputComponent {
 public:
-  PlayerInputComponent() = default;
+  explicit PlayerInputComponent(Entity *);
   ~PlayerInputComponent() = default;
   
   bool handleEvent(InputCommands &, SDL_Event) override;
