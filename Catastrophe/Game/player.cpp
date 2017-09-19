@@ -15,7 +15,6 @@
 #include "player constants.hpp"
 #include "make physics comp.hpp"
 #include "player physics state.hpp"
-#include "player input commands.hpp"
 #include "vector rendering state.hpp"
 #include "player input component.hpp"
 #include "player physics component.hpp"
@@ -51,7 +50,6 @@ std::unique_ptr<Entity> makePlayer(
   player->render = std::make_shared<VectorRenderComponent>(player.get(), 1.0f, 1.0f);
   systems.rendering.add(id, player->render);
   
-  player->latestInputCommands = std::make_unique<PlayerInputCommands>();
   player->latestPhysicsState = std::make_unique<PlayerPhysicsState>();
   player->latestRenderingState = std::make_unique<VectorRenderingState>();
   

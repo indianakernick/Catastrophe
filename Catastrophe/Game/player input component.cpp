@@ -8,10 +8,8 @@
 
 #include "player input component.hpp"
 
-#include "entity.hpp"
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
-#include "player input commands.hpp"
 
 PlayerInputComponent::PlayerInputComponent(Entity *const entity)
   : InputComponent(entity) {}
@@ -26,29 +24,31 @@ bool PlayerInputComponent::handleEvent(const SDL_Event event) {
   }
 }
 
-bool PlayerInputComponent::handleKey(
-  const SDL_Scancode key,
-  const bool down
-) {
-  auto &playerCommands = dynamic_cast<PlayerInputCommands &>(*getEntity().latestInputCommands);
-  
+bool PlayerInputComponent::shouldMoveLeft() const {
+  return leftButton && !rightButton;
+}
+
+bool PlayerInputComponent::shouldMoveRight() const {
+  return rightButton && !leftButton;
+}
+
+bool PlayerInputComponent::shouldJump() const {
+  return jumpButton;
+}
+
+bool PlayerInputComponent::handleKey(const SDL_Scancode key, const bool down) {
   switch (key) {
     case PLAYER_LEFT_KEY:
       leftButton = down;
-      break;
+      return true;
     case PLAYER_RIGHT_KEY:
       rightButton = down;
-      break;
+      return true;
     case PLAYER_JUMP_KEY:
-      playerCommands.jump = down;
-      break;
+      jumpButton = down;
+      return true;
       
     default:
       return false;
   }
-
-  playerCommands.moveLeft  = leftButton  && !rightButton;
-  playerCommands.moveRight = rightButton && !leftButton;
-  
-  return true;
 }

@@ -24,8 +24,6 @@
 		4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9001F5E816F00927A19 /* yaml helper.cpp */; };
 		4509F9051F5E8EC200927A19 /* vector circle shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9031F5E8EC200927A19 /* vector circle shape.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
-		452FF9D81F64C104003A98B1 /* player input commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9D21F63DDF1003A98B1 /* player input commands.cpp */; };
-		452FF9D91F64C104003A98B1 /* input commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C91F63D829003A98B1 /* input commands.cpp */; };
 		452FF9DA1F64C104003A98B1 /* player physics state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9D51F63E394003A98B1 /* player physics state.cpp */; };
 		452FF9DB1F64C104003A98B1 /* physics state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9CC1F63DAC2003A98B1 /* physics state.cpp */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
@@ -160,14 +158,10 @@
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
 		452FF9C51F63D05D003A98B1 /* animation system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation system.cpp"; sourceTree = "<group>"; };
 		452FF9C61F63D05D003A98B1 /* animation system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation system.hpp"; sourceTree = "<group>"; };
-		452FF9C91F63D829003A98B1 /* input commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input commands.cpp"; sourceTree = "<group>"; };
-		452FF9CA1F63D829003A98B1 /* input commands.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input commands.hpp"; sourceTree = "<group>"; };
 		452FF9CC1F63DAC2003A98B1 /* physics state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics state.cpp"; sourceTree = "<group>"; };
 		452FF9CD1F63DAC2003A98B1 /* physics state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics state.hpp"; sourceTree = "<group>"; };
 		452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering state.cpp"; sourceTree = "<group>"; };
 		452FF9D01F63DB5A003A98B1 /* rendering state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering state.hpp"; sourceTree = "<group>"; };
-		452FF9D21F63DDF1003A98B1 /* player input commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player input commands.cpp"; sourceTree = "<group>"; };
-		452FF9D31F63DDF1003A98B1 /* player input commands.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player input commands.hpp"; sourceTree = "<group>"; };
 		452FF9D51F63E394003A98B1 /* player physics state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics state.cpp"; sourceTree = "<group>"; };
 		452FF9D61F63E394003A98B1 /* player physics state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics state.hpp"; sourceTree = "<group>"; };
 		452FF9DF1F64D219003A98B1 /* player animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player animation component.cpp"; sourceTree = "<group>"; };
@@ -411,8 +405,6 @@
 			children = (
 				453892E61F2C1A06007EBB5A /* player input component.cpp */,
 				453892E71F2C1A06007EBB5A /* player input component.hpp */,
-				452FF9D21F63DDF1003A98B1 /* player input commands.cpp */,
-				452FF9D31F63DDF1003A98B1 /* player input commands.hpp */,
 			);
 			name = "input components";
 			sourceTree = "<group>";
@@ -710,8 +702,6 @@
 				453892E11F2C1206007EBB5A /* input component.hpp */,
 				453892E31F2C1757007EBB5A /* input system.cpp */,
 				453892E41F2C1757007EBB5A /* input system.hpp */,
-				452FF9C91F63D829003A98B1 /* input commands.cpp */,
-				452FF9CA1F63D829003A98B1 /* input commands.hpp */,
 				4534A60F1F51289B00F3AC06 /* debug input.cpp */,
 				4534A6101F51289B00F3AC06 /* debug input.hpp */,
 			);
@@ -953,13 +943,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452FF9D81F64C104003A98B1 /* player input commands.cpp in Sources */,
 				452FFA771F6BC50D003A98B1 /* b2Timer.cpp in Sources */,
 				452FFA681F6BC50D003A98B1 /* b2CollideEdge.cpp in Sources */,
 				452FFA751F6BC50D003A98B1 /* b2Settings.cpp in Sources */,
 				452FFA711F6BC50D003A98B1 /* b2PolygonShape.cpp in Sources */,
 				452FFA831F6BC50D003A98B1 /* b2EdgeAndCircleContact.cpp in Sources */,
-				452FF9D91F64C104003A98B1 /* input commands.cpp in Sources */,
 				452FFA691F6BC50D003A98B1 /* b2CollidePolygon.cpp in Sources */,
 				452FF9DA1F64C104003A98B1 /* player physics state.cpp in Sources */,
 				452FFA6F1F6BC50D003A98B1 /* b2CircleShape.cpp in Sources */,

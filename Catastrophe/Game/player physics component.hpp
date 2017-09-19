@@ -12,7 +12,6 @@
 #include "physics component.hpp"
 
 class b2Fixture;
-class PlayerInputCommands;
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
@@ -30,8 +29,10 @@ private:
   
   bool onGround() const;
   void clampVel();
-  void handleMovement(const PlayerInputCommands &);
-  void handleJump(const PlayerInputCommands &, float);
+  void applyMoveForce(float);
+  void moveLeft();
+  void moveRight();
+  void jump(float);
 };
 
 #endif

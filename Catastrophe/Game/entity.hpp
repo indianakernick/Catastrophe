@@ -11,7 +11,6 @@
 
 #include <memory>
 #include "entity id.hpp"
-#include "input commands.hpp"
 #include "physics state.hpp"
 #include "rendering state.hpp"
 
@@ -29,7 +28,6 @@ public:
   std::shared_ptr<AnimationComponent> animation;
   std::shared_ptr<RenderComponent> render;
   
-  std::unique_ptr<InputCommands> latestInputCommands;
   std::unique_ptr<PhysicsState> latestPhysicsState;
   std::unique_ptr<RenderingState> latestRenderingState;
   

@@ -18,10 +18,15 @@ public:
   ~PlayerInputComponent() = default;
   
   bool handleEvent(SDL_Event) override;
-
+  
+  bool shouldMoveLeft() const;
+  bool shouldMoveRight() const;
+  bool shouldJump() const;
+  
 private:
   bool leftButton = false;
   bool rightButton = false;
+  bool jumpButton = false;
 
   bool handleKey(SDL_Scancode, bool);
 };
