@@ -80,7 +80,7 @@ float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
 }
 
 float PlayerAnimationComponent::calcAnimAdvance(const float horiVel, const float delta) const {
-  return delta * Math::abs(horiVel / footSpeed);
+  return delta * Math::abs((horiVel / footSpeed) / scale.x);
 }
 
 void PlayerAnimationComponent::setFrameStanding(const float horiVel, const float delta) {

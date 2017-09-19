@@ -9,5 +9,5 @@ animation:
   args: {}
 
 rendering:
-  name: VectorRenderingComponent
+  name: VectorRenderComponent
   args: {}

@@ -8,6 +8,7 @@
 
 #include "entity manager.hpp"
 
+#include "entity file.hpp"
 #include "input system.hpp"
 #include "physics system.hpp"
 #include "animation system.hpp"
@@ -31,6 +32,12 @@ void EntityManager::quit() {
   animation = nullptr;
   physics = nullptr;
   input = nullptr;
+}
+
+EntityID EntityManager::create(const std::string &filePath, const Transform transform) {
+  const EntityID id = idGen.make();
+  entities.emplace(id, loadEntity(filePath, id, getSystems(), transform));
+  return id;
 }
 
 void EntityManager::destroy(const EntityID id) {

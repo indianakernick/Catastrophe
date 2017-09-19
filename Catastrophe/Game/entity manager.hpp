@@ -12,6 +12,7 @@
 #include "entity.hpp"
 #include "systems.hpp"
 #include <unordered_map>
+#include "transform.hpp"
 #include <Simpleton/ID/local.hpp>
 
 class InputSystem;
@@ -27,18 +28,8 @@ public:
   void init(InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &);
   void quit();
   
-  template <typename ...Args>
-  using Factory = std::unique_ptr<Entity> (*) (EntityID, Systems, Args...);
-  
-  template <typename ...FunArgs, typename ...Args>
-  EntityID create(const Factory<FunArgs...> factory, Args &&... args) {
-    const EntityID id = idGen.make();
-    entities.emplace(id, factory(id, getSystems(), std::forward<Args>(args)...));
-    return id;
-  }
-  
+  EntityID create(const std::string &, Transform);
   void destroy(EntityID);
-  
   Entity &getEntity(EntityID);
   
 private:

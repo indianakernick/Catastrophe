@@ -8,15 +8,13 @@
 
 #include "app impl.hpp"
 
-#include "player.hpp"
-#include "platform.hpp"
 #include "debug input.hpp"
 #include "file constants.hpp"
 #include "camera constants.hpp"
 #include "framebuffer to png.hpp"
 #include "../Libraries/tinyfiledialogs.h"
 #include "register collision listeners.hpp"
-#include <Simpleton/Time/get.hpp>
+#include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<AppImpl> app = nullptr;
 
@@ -37,9 +35,13 @@ bool AppImpl::init() {
   
   const glm::vec2 WINDOW_METER_SIZE = static_cast<glm::vec2>(DEFAULT_WINDOW_PIXEL_SIZE) / DEFAULT_PIXELS_PER_METER;
   
-  player = entityManager.create(makePlayer, b2Vec2(WINDOW_METER_SIZE.x / 2.0f, 10.0f));
-  platform = entityManager.create(makePlatform,
-    Rect({WINDOW_METER_SIZE.x / 2.0f, 1.0f}, {WINDOW_METER_SIZE.x, 1.0f})
+  player = entityManager.create(Platform::getResDir() + "player entity.yaml", Transform({WINDOW_METER_SIZE.x / 2.0f, 10.0f}));
+  platform = entityManager.create(
+    Platform::getResDir() + "platform entity.yaml",
+    Transform(
+      {WINDOW_METER_SIZE.x / 2.0f, 1.0f},
+      {WINDOW_METER_SIZE.x, 1.0f}
+    )
   );
   
   renderingSystem.startMotionTrack(player);
