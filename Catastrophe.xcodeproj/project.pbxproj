@@ -24,8 +24,6 @@
 		4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9001F5E816F00927A19 /* yaml helper.cpp */; };
 		4509F9051F5E8EC200927A19 /* vector circle shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9031F5E8EC200927A19 /* vector circle shape.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
-		452FF9DA1F64C104003A98B1 /* player physics state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9D51F63E394003A98B1 /* player physics state.cpp */; };
-		452FF9DB1F64C104003A98B1 /* physics state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9CC1F63DAC2003A98B1 /* physics state.cpp */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
 		452FF9DE1F64C104003A98B1 /* rendering state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */; };
@@ -158,12 +156,8 @@
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
 		452FF9C51F63D05D003A98B1 /* animation system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation system.cpp"; sourceTree = "<group>"; };
 		452FF9C61F63D05D003A98B1 /* animation system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation system.hpp"; sourceTree = "<group>"; };
-		452FF9CC1F63DAC2003A98B1 /* physics state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics state.cpp"; sourceTree = "<group>"; };
-		452FF9CD1F63DAC2003A98B1 /* physics state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics state.hpp"; sourceTree = "<group>"; };
 		452FF9CF1F63DB5A003A98B1 /* rendering state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering state.cpp"; sourceTree = "<group>"; };
 		452FF9D01F63DB5A003A98B1 /* rendering state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering state.hpp"; sourceTree = "<group>"; };
-		452FF9D51F63E394003A98B1 /* player physics state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics state.cpp"; sourceTree = "<group>"; };
-		452FF9D61F63E394003A98B1 /* player physics state.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics state.hpp"; sourceTree = "<group>"; };
 		452FF9DF1F64D219003A98B1 /* player animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player animation component.cpp"; sourceTree = "<group>"; };
 		452FF9E01F64D219003A98B1 /* player animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player animation component.hpp"; sourceTree = "<group>"; };
 		452FF9E51F64D39D003A98B1 /* vector rendering state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector rendering state.cpp"; sourceTree = "<group>"; };
@@ -679,8 +673,6 @@
 				453892CF1F2AF7FE007EBB5A /* physics component.hpp */,
 				453892D11F2AF877007EBB5A /* physics system.cpp */,
 				453892D21F2AF877007EBB5A /* physics system.hpp */,
-				452FF9CC1F63DAC2003A98B1 /* physics state.cpp */,
-				452FF9CD1F63DAC2003A98B1 /* physics state.hpp */,
 				45FA99401F354C8D00F8C639 /* object types.hpp */,
 				45FA993D1F35476400F8C639 /* contact listener.cpp */,
 				45FA993E1F35476400F8C639 /* contact listener.hpp */,
@@ -826,8 +818,6 @@
 				45FA99141F330A1E00F8C639 /* player physics component.hpp */,
 				45FA99161F33104200F8C639 /* simple physics component.cpp */,
 				45FA99171F33104200F8C639 /* simple physics component.hpp */,
-				452FF9D51F63E394003A98B1 /* player physics state.cpp */,
-				452FF9D61F63E394003A98B1 /* player physics state.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -949,9 +939,7 @@
 				452FFA711F6BC50D003A98B1 /* b2PolygonShape.cpp in Sources */,
 				452FFA831F6BC50D003A98B1 /* b2EdgeAndCircleContact.cpp in Sources */,
 				452FFA691F6BC50D003A98B1 /* b2CollidePolygon.cpp in Sources */,
-				452FF9DA1F64C104003A98B1 /* player physics state.cpp in Sources */,
 				452FFA6F1F6BC50D003A98B1 /* b2CircleShape.cpp in Sources */,
-				452FF9DB1F64C104003A98B1 /* physics state.cpp in Sources */,
 				452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */,
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
 				452FF9DE1F64C104003A98B1 /* rendering state.cpp in Sources */,

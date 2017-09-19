@@ -10,8 +10,8 @@
 
 #include <algorithm>
 #include "entity.hpp"
+#include "b2 glm cast.hpp"
 #include "player constants.hpp"
-#include "player physics state.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
@@ -38,12 +38,11 @@ void PlayerPhysicsComponent::preStep(const float delta) {
 }
 
 void PlayerPhysicsComponent::postStep() {
-  clampVel();
-
-  auto &playerPhysics = dynamic_cast<PlayerPhysicsState &>(*getEntity().latestPhysicsState);
-  playerPhysics.pos = body->GetPosition();
-  playerPhysics.vel = body->GetLinearVelocity();
-  playerPhysics.onGround = onGround();
+  const b2Vec2 vel = body->GetLinearVelocity();
+  body->SetLinearVelocity({
+    Math::clampMag(vel.x, PLAYER_MAX_MOVE_SPEED),
+    vel.y
+  });
 }
 
 void PlayerPhysicsComponent::beginContactingGround() {
@@ -54,16 +53,12 @@ void PlayerPhysicsComponent::endContactingGround() {
   footContactCount--;
 }
 
-bool PlayerPhysicsComponent::onGround() const {
-  return footContactCount > 0;
+glm::vec2 PlayerPhysicsComponent::getVel() const {
+  return castToGLM(body->GetLinearVelocity());
 }
 
-void PlayerPhysicsComponent::clampVel() {
-  const b2Vec2 vel = body->GetLinearVelocity();
-  body->SetLinearVelocity({
-    Math::clampMag(vel.x, PLAYER_MAX_MOVE_SPEED),
-    vel.y
-  });
+bool PlayerPhysicsComponent::onGround() const {
+  return footContactCount > 0;
 }
 
 void PlayerPhysicsComponent::applyMoveForce(const float moveForceDir) {

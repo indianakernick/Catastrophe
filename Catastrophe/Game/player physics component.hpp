@@ -22,13 +22,14 @@ public:
   
   void beginContactingGround();
   void endContactingGround();
+  
+  glm::vec2 getVel() const;
+  bool onGround() const;
 
 private:
   int footContactCount = 0;
   float timeTillFinishJump = 0.0f;
-  
-  bool onGround() const;
-  void clampVel();
+
   void applyMoveForce(float);
   void moveLeft();
   void moveRight();

@@ -12,7 +12,6 @@
 #include "systems.hpp"
 #include "vector file.hpp"
 #include "physics file.hpp"
-#include "object types.hpp"
 #include "make physics comp.hpp"
 #include "platform constants.hpp"
 #include "vector rendering state.hpp"
@@ -51,7 +50,6 @@ std::unique_ptr<Entity> makePlatform(
   );
   systems.rendering.add(id, platform->render);
   
-  platform->latestPhysicsState = std::make_unique<PhysicsState>();
   platform->latestRenderingState = std::make_unique<VectorRenderingState>();
   
   return platform;

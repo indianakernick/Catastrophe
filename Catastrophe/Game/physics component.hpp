@@ -9,6 +9,7 @@
 #ifndef physics_component_hpp
 #define physics_component_hpp
 
+#include <glm/vec2.hpp>
 #include "component.hpp"
 
 class b2Body;
@@ -25,6 +26,8 @@ public:
   virtual void preStep(float) = 0;
   //Called after b2World::Step
   virtual void postStep() = 0;
+  
+  glm::vec2 getPos() const;
   
   b2Body *body = nullptr;
 };

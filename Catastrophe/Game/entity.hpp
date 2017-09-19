@@ -11,7 +11,6 @@
 
 #include <memory>
 #include "entity id.hpp"
-#include "physics state.hpp"
 #include "rendering state.hpp"
 
 class InputComponent;
@@ -28,7 +27,6 @@ public:
   std::shared_ptr<AnimationComponent> animation;
   std::shared_ptr<RenderComponent> render;
   
-  std::unique_ptr<PhysicsState> latestPhysicsState;
   std::unique_ptr<RenderingState> latestRenderingState;
   
   EntityID getID() const;

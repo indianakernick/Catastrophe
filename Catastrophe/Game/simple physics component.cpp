@@ -8,8 +8,6 @@
 
 #include "simple physics component.hpp"
 
-#include "entity.hpp"
-#include "physics state.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 SimplePhysicsComponent::SimplePhysicsComponent(
@@ -19,7 +17,4 @@ SimplePhysicsComponent::SimplePhysicsComponent(
 
 void SimplePhysicsComponent::preStep(float) {}
 
-void SimplePhysicsComponent::postStep() {
-  auto &physics = *getEntity().latestPhysicsState;
-  physics.pos = body->GetPosition();
-}
+void SimplePhysicsComponent::postStep() {}

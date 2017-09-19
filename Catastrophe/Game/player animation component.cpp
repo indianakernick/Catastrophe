@@ -9,12 +9,12 @@
 #include "player animation component.hpp"
 
 #include "entity.hpp"
-#include "b2 glm cast.hpp"
 #include "vector render.hpp"
-#include "player physics state.hpp"
 #include <Simpleton/Math/scale.hpp>
 #include "vector rendering state.hpp"
+#include "player physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
+#include <Simpleton/Utils/safe down cast.hpp>
 
 PlayerAnimationComponent::PlayerAnimationComponent(
   Entity *const entity,
@@ -27,11 +27,11 @@ PlayerAnimationComponent::PlayerAnimationComponent(
 
 void PlayerAnimationComponent::update(const float delta) {
   auto &vectorRender = dynamic_cast<VectorRenderingState &>(*getEntity().latestRenderingState);
-  const auto &playerPhysics = dynamic_cast<const PlayerPhysicsState &>(*getEntity().latestPhysicsState);
+  const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(getEntity().physics);
   
   vectorRender.shapes = sprite.shapes;
   
-  const float horiVel = playerPhysics.vel.x;
+  const float horiVel = playerPhysics->getVel().x;
   switch (state) {
     case State::STANDING:
       vectorRender.frame = getFrameStanding(horiVel, delta);
@@ -50,7 +50,7 @@ void PlayerAnimationComponent::update(const float delta) {
       assert(false);
   }
   
-  vectorRender.modelMat = glm::translate({}, castToGLM(playerPhysics.pos));
+  vectorRender.modelMat = glm::translate({}, playerPhysics->getPos());
   vectorRender.modelMat = glm::scale(vectorRender.modelMat, {calcHoriScale(horiVel), 1.0f});
 }
 
