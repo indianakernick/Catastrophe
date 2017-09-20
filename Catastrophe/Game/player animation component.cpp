@@ -18,10 +18,10 @@
 PlayerAnimationComponent::PlayerAnimationComponent(
   Entity *const entity,
   const Sprite &sprite,
-  const glm::vec2 scale
+  const Transform transform
 ) : AnimationComponent(entity),
     sprite(sprite),
-    scale(scale),
+    transform(transform),
     anim(sprite.animations.at("run").durationSec),
     standRun(0.125),
     footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
@@ -48,13 +48,9 @@ void PlayerAnimationComponent::update(const float delta) {
       assert(false);
   }
   
-  model = glm::scale(
-    glm::translate(
-      {},
-      playerPhysics->getPos()
-    ),
-    {scale.x * calcHoriScale(horiVel), scale.y}
-  );
+  transform.pos = playerPhysics->getPos();
+  transform.scale.x = std::abs(transform.scale.x) * calcHoriScale(horiVel);
+  model = transform.getMat3();
 }
 
 const Shapes &PlayerAnimationComponent::getShapes() const {
@@ -80,7 +76,7 @@ float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
 }
 
 float PlayerAnimationComponent::calcAnimAdvance(const float horiVel, const float delta) const {
-  return delta * Math::abs((horiVel / footSpeed) / scale.x);
+  return delta * Math::abs((horiVel / footSpeed) / transform.scale.x);
 }
 
 void PlayerAnimationComponent::setFrameStanding(const float horiVel, const float delta) {

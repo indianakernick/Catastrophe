@@ -8,6 +8,7 @@
 
 #include "level file.hpp"
 
+#include <glm/glm.hpp>
 #include "yaml helper.hpp"
 #include "entity file.hpp"
 #include "entity manager.hpp"
@@ -33,7 +34,7 @@ namespace {
     return {
       readVec(getChild(transformNode, "pos")),
       readVec(getChild(transformNode, "scale")),
-      getChild(transformNode, "rotation").as<float>()
+      glm::radians(getChild(transformNode, "rotation").as<float>())
     };
   }
 

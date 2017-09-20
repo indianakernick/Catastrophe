@@ -17,20 +17,15 @@
 StaticAnimationComponent::StaticAnimationComponent(
   Entity *const entity,
   const Sprite &sprite,
-  const glm::vec2 scale
+  const Transform transform
 ) : AnimationComponent(entity),
     sprite(sprite),
-    scale(scale) {}
+    transform(transform) {}
 
 void StaticAnimationComponent::update(float) {
   frame = ::getFrame(sprite, "static", 0.0f);
-  model = glm::scale(
-    glm::translate(
-      {},
-      getEntity().physics->getPos()
-    ),
-    scale
-  );
+  transform.pos = getEntity().physics->getPos();
+  model = transform.getMat3();
 }
 
 const Shapes &StaticAnimationComponent::getShapes() const {

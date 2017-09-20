@@ -9,13 +9,14 @@
 #ifndef player_animation_component_hpp
 #define player_animation_component_hpp
 
+#include "transform.hpp"
 #include "vector sprite.hpp"
 #include "animation component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
 
 class PlayerAnimationComponent final : public AnimationComponent {
 public:
-  PlayerAnimationComponent(Entity *, const Sprite &, glm::vec2);
+  PlayerAnimationComponent(Entity *, const Sprite &, Transform);
   
   void update(float) override;
   const Shapes &getShapes() const override;
@@ -25,8 +26,8 @@ public:
 private:
   Sprite sprite;
   Frame frame;
+  Transform transform;
   glm::mat3 model;
-  glm::vec2 scale;
   Time::SimpleAnim<float> anim;
   Time::SimpleAnim<float> standRun;
   float lastDir = 1.0f;

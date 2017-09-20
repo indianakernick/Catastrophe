@@ -53,7 +53,7 @@ namespace {
     const YAML::Node &animNode,
     Entity *const entity,
     AnimationSystem &animationSystem,
-    const glm::vec2 scale
+    const Transform transform
   ) {
     const std::string name = getChild(animNode, "name").as<std::string>();
     const std::string sprite = getChild(animNode, "sprite").as<std::string>();
@@ -61,7 +61,7 @@ namespace {
       name,
       entity,
       loadSprite(Platform::getResDir() + sprite),
-      scale
+      transform
     );
     animationSystem.add(entity->getID(), entity->animation);
   }
@@ -99,7 +99,7 @@ std::unique_ptr<Entity> loadEntity(
     readPhysicsComp(physics, entity.get(), systems.physics, transform);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    readAnimComp(anim, entity.get(), systems.animation, transform.scale);
+    readAnimComp(anim, entity.get(), systems.animation, transform);
   }
   if (const YAML::Node &render = root["rendering"]) {
     readRenderComp(render, entity.get(), systems.rendering, transform.scale);

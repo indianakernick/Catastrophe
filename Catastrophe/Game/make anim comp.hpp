@@ -10,6 +10,7 @@
 #define make_anim_comp_hpp
 
 #include <memory>
+#include "transform.hpp"
 #include "animation component.hpp"
 #include <experimental/string_view>
 
@@ -17,7 +18,7 @@ std::shared_ptr<AnimationComponent> makeAnimComp(
   std::experimental::string_view,
   Entity *,
   const Sprite &,
-  glm::vec2
+  Transform
 );
 
 #endif

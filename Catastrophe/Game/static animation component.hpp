@@ -9,11 +9,12 @@
 #ifndef static_animation_component_hpp
 #define static_animation_component_hpp
 
+#include "transform.hpp"
 #include "animation component.hpp"
 
 class StaticAnimationComponent final : public AnimationComponent {
 public:
-  StaticAnimationComponent(Entity *, const Sprite &, glm::vec2);
+  StaticAnimationComponent(Entity *, const Sprite &, Transform);
   
   void update(float) override;
   const Shapes &getShapes() const override;
@@ -23,8 +24,8 @@ public:
 private:
   Sprite sprite;
   Frame frame;
+  Transform transform;
   glm::mat3 model;
-  glm::vec2 scale;
 };
 
 #endif
