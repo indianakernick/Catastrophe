@@ -1,12 +1,12 @@
 player:
   file: player entity.yaml
-  pos: [0, 0]
+  pos: [0, 10]
   scale: [1, 1]
   rotation: 0
 
-objects:
+entities:
 - file: platform entity.yaml
   pos: [0, 0]
-  scale: [20, 2]
+  scale: [20, 1]
   rotation: 0
   args: {}

@@ -119,6 +119,7 @@
 		45DE9FD11F71015700B1DA72 /* make render comp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD01F71015700B1DA72 /* make render comp.cpp */; };
 		45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD21F71051D00B1DA72 /* entity file.cpp */; };
 		45DE9FD71F71063400B1DA72 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD51F71063400B1DA72 /* transform.cpp */; };
+		45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD81F71189D00B1DA72 /* level file.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -345,6 +346,8 @@
 		45DE9FD31F71051D00B1DA72 /* entity file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity file.hpp"; sourceTree = "<group>"; };
 		45DE9FD51F71063400B1DA72 /* transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
 		45DE9FD61F71063400B1DA72 /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
+		45DE9FD81F71189D00B1DA72 /* level file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "level file.cpp"; sourceTree = "<group>"; };
+		45DE9FD91F71189D00B1DA72 /* level file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "level file.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 				45DE9FC51F70894C00B1DA72 /* component.hpp */,
 				45DE9FD21F71051D00B1DA72 /* entity file.cpp */,
 				45DE9FD31F71051D00B1DA72 /* entity file.hpp */,
+				45DE9FD81F71189D00B1DA72 /* level file.cpp */,
+				45DE9FD91F71189D00B1DA72 /* level file.hpp */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1017,6 +1022,7 @@
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
+				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,
 				4509F8D21F5A414800927A19 /* vector file.cpp in Sources */,
 				452FFA8F1F6BC50D003A98B1 /* b2RevoluteJoint.cpp in Sources */,
 				452FFA721F6BC50D003A98B1 /* b2BlockAllocator.cpp in Sources */,

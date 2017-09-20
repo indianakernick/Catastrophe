@@ -30,6 +30,7 @@ public:
   
   EntityID create(const std::string &, Transform);
   void destroy(EntityID);
+  void destroyAll();
   Entity &getEntity(EntityID);
   
 private:

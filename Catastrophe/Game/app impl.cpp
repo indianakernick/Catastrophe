@@ -8,6 +8,7 @@
 
 #include "app impl.hpp"
 
+#include "level file.hpp"
 #include "debug input.hpp"
 #include "file constants.hpp"
 #include "camera constants.hpp"
@@ -33,16 +34,7 @@ bool AppImpl::init() {
   
   entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
   
-  const glm::vec2 WINDOW_METER_SIZE = static_cast<glm::vec2>(DEFAULT_WINDOW_PIXEL_SIZE) / DEFAULT_PIXELS_PER_METER;
-  
-  player = entityManager.create(Platform::getResDir() + "player entity.yaml", Transform({WINDOW_METER_SIZE.x / 2.0f, 10.0f}));
-  platform = entityManager.create(
-    Platform::getResDir() + "platform entity.yaml",
-    Transform(
-      {WINDOW_METER_SIZE.x / 2.0f, 1.0f},
-      {WINDOW_METER_SIZE.x, 1.0f}
-    )
-  );
+  player = loadLevel(Platform::getResDir() + "level 0.yaml", entityManager);
   
   renderingSystem.startMotionTrack(player);
   renderingSystem.startZoomTrack(player);

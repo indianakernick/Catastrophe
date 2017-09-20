@@ -48,6 +48,17 @@ void EntityManager::destroy(const EntityID id) {
   entities.erase(id);
 }
 
+void EntityManager::destroyAll() {
+  for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
+    const EntityID id = e->first;
+    rendering->rem(id);
+    animation->rem(id);
+    physics->rem(id);
+    input->rem(id);
+  }
+  entities.clear();
+}
+
 Entity &EntityManager::getEntity(const EntityID id) {
   auto iter = entities.find(id);
   if (iter == entities.end()) {

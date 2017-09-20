@@ -35,7 +35,6 @@ private:
   InputSystem inputSystem;
   
   EntityID player;
-  EntityID platform;
   
   static constexpr size_t SCREENSHOT_MEM_SIZE = 1920 * 1080 * 4; //7.9Mib
   std::unique_ptr<uint8_t []> screenshotMem;
