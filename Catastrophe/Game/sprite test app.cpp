@@ -77,7 +77,7 @@ void SpriteTestApp::render(const float delta) {
   
   anim.advance(delta);
   anim.repeatOnOverflow();
-  const Frame frame = getFrame(sprite, animName, 0.25f);
+  const Frame frame = getFrame(sprite, animName, anim.getProgressTime());
   renderSprite(renderingContext.getContext(), sprite.shapes, frame, {});
   
   renderingContext.postRender(ENABLE_FPS_RENDER);

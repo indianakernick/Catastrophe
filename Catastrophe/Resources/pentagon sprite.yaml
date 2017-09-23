@@ -1,0 +1,34 @@
+scale: 2
+anims:
+  static:
+    duration: 30.0
+    point frames:
+    - offset: 0.0
+      data:
+      # A pentagon rotated PI/2 radians (anti-clockwise)
+      - [0.0, 1.0]        # [cos(1/2 * PI), sin(1/2 * PI)]
+      - [-0.951, 0.309]   # [cos(9/10 * PI), sin(9/10 * PI)]
+      - [-0.587, -0.809]  # [cos(13/10 * PI), sin(13/10 * PI)]
+      - [0.587, -0.809]   # [cos(17/10 * PI), sin(17/10 * PI)]
+      - [0.951, 0.309]    # [cos(21/10 * PI), sin(21/10 * PI)]
+
+    scalar frames:
+    - offset: 0.0
+      data: []
+
+    color frames:
+    - offset: 0.0
+      data:
+      # bright pink
+      - [1, 0.0, 0.5, 1.0]
+
+shapes:
+- type: line
+  fill color: 0
+  points:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 0

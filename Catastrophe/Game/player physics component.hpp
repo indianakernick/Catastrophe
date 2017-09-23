@@ -13,8 +13,6 @@
 #include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
-class b2Fixture;
-
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
   PlayerPhysicsComponent(Entity *, b2Body *, const YAML::Node &);
