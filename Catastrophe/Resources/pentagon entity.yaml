@@ -1,0 +1,13 @@
+physics:
+  name: SimplePhysicsComponent
+  body: pentagon body.yaml
+  args: {}
+
+animation:
+  name: StaticAnimationComponent
+  sprite: pentagon sprite.yaml
+  args: {}
+
+rendering:
+  name: VectorRenderComponent
+  args: {}

@@ -1,0 +1,13 @@
+body:
+  type: static
+
+shapes:
+  main:
+    type: circle
+    pos: [0, 0]
+    radius: 0.5
+    
+fixtures:
+- shape: main
+  is sensor: true
+  user data: Pentagon

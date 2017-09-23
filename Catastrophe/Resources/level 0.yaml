@@ -18,3 +18,8 @@ entities:
     first: [-10, 2]
     second: [10, 2]
     vel: 1
+- file: pentagon entity.yaml
+  pos: [9.5, 1.1]
+  scale: [1, 1]
+  rotation: 0
+  args: {}

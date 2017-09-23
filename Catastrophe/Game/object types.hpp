@@ -37,12 +37,14 @@ namespace Symbol {
   MAKE_SYMBOL(PlayerBody);
   MAKE_SYMBOL(PlayerFoot);
   MAKE_SYMBOL(Platform);
+  MAKE_SYMBOL(Pentagon);
 };
 
 using Symbols = Utils::TypeList<
   Symbol::PlayerBody,
   Symbol::PlayerFoot,
-  Symbol::Platform
+  Symbol::Platform,
+  Symbol::Pentagon
 >;
 
 inline void *getUserData(const std::string &symbolName) {

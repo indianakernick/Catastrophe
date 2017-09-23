@@ -14,7 +14,7 @@ int main(int, char **) {
   const float timeStep = 1.0f / 60.0f;
   const uint32_t maxSteps = 16;
 
-  /*app = std::make_unique<AppImpl>();
+  app = std::make_unique<AppImpl>();
   
   #ifdef NDEBUG
   try {
@@ -25,10 +25,10 @@ int main(int, char **) {
   }
   #else
   app->mainLoop(timeStep, maxSteps);
-  #endif*/
+  #endif
   
-  SpriteTestApp test("pentagon sprite.yaml", "static");
-  test.mainLoop(timeStep, maxSteps);
+  //SpriteTestApp test("pentagon sprite.yaml", "static");
+  //test.mainLoop(timeStep, maxSteps);
   
   return 0;
 }

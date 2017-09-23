@@ -123,6 +123,8 @@
 		45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */; };
 		45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */; };
 		45DEA00D1F76453F00B1DA72 /* pentagon sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */; };
+		45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */; };
+		45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -355,6 +357,8 @@
 		45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "oscillating physics component.hpp"; sourceTree = "<group>"; };
 		45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "oscillating platform entity.yaml"; sourceTree = "<group>"; };
 		45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.yaml"; sourceTree = "<group>"; };
+		45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon body.yaml"; sourceTree = "<group>"; };
+		45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon entity.yaml"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -823,6 +827,7 @@
 				45DE9FB81F6E394900B1DA72 /* player entity.yaml */,
 				45DE9FC01F6F8C6500B1DA72 /* platform entity.yaml */,
 				45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */,
+				45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -842,6 +847,7 @@
 			children = (
 				45DE9FA01F6CAD4300B1DA72 /* player body.yaml */,
 				45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */,
+				45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */,
 			);
 			name = Bodies;
 			sourceTree = "<group>";
@@ -946,6 +952,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */,
+				45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */,
 				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
 				45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */,
 				45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */,
@@ -958,6 +965,7 @@
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
+				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,13 +2,13 @@ body:
   type: kinematic
 
 shapes:
-  body:
+  main:
     type: polygon
     half width: 0.5
     half height: 0.5
 
 fixtures:
-- shape: body
+- shape: main
   friction: 1.0
   user data: Platform
   
