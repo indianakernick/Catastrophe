@@ -12,6 +12,7 @@
 #include <memory>
 #include "entity.hpp"
 #include "transform.hpp"
+#include <yaml-cpp/node/node.h>
 
 struct Systems;
 
@@ -19,7 +20,8 @@ std::unique_ptr<Entity> loadEntity(
   const std::string &,
   EntityID,
   Systems,
-  Transform
+  Transform,
+  const YAML::Node &
 );
 
 

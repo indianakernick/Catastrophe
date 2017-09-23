@@ -120,6 +120,8 @@
 		45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD21F71051D00B1DA72 /* entity file.cpp */; };
 		45DE9FD71F71063400B1DA72 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD51F71063400B1DA72 /* transform.cpp */; };
 		45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD81F71189D00B1DA72 /* level file.cpp */; };
+		45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */; };
+		45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -348,6 +350,9 @@
 		45DE9FD61F71063400B1DA72 /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
 		45DE9FD81F71189D00B1DA72 /* level file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "level file.cpp"; sourceTree = "<group>"; };
 		45DE9FD91F71189D00B1DA72 /* level file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "level file.hpp"; sourceTree = "<group>"; };
+		45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "oscillating physics component.cpp"; sourceTree = "<group>"; };
+		45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "oscillating physics component.hpp"; sourceTree = "<group>"; };
+		45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "oscillating platform entity.yaml"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -448,15 +453,12 @@
 			isa = PBXGroup;
 			children = (
 				452FF9F31F6A70DC003A98B1 /* rect.yaml */,
-				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
-				4509F8D31F5A429800927A19 /* player sprite.yaml */,
 				452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */,
-				45DE9FA01F6CAD4300B1DA72 /* player body.yaml */,
-				45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */,
-				45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */,
-				45DE9FB81F6E394900B1DA72 /* player entity.yaml */,
-				45DE9FC01F6F8C6500B1DA72 /* platform entity.yaml */,
-				45DE9FC21F6F8C7900B1DA72 /* level 0.yaml */,
+				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
+				45DEA0091F76030F00B1DA72 /* Sprites */,
+				45DEA00A1F76032100B1DA72 /* Bodies */,
+				45DEA0081F7602F800B1DA72 /* Entities */,
+				45DEA00B1F76032800B1DA72 /* Levels */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -813,6 +815,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		45DEA0081F7602F800B1DA72 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				45DE9FB81F6E394900B1DA72 /* player entity.yaml */,
+				45DE9FC01F6F8C6500B1DA72 /* platform entity.yaml */,
+				45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		45DEA0091F76030F00B1DA72 /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				4509F8D31F5A429800927A19 /* player sprite.yaml */,
+				45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */,
+			);
+			name = Sprites;
+			sourceTree = "<group>";
+		};
+		45DEA00A1F76032100B1DA72 /* Bodies */ = {
+			isa = PBXGroup;
+			children = (
+				45DE9FA01F6CAD4300B1DA72 /* player body.yaml */,
+				45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */,
+			);
+			name = Bodies;
+			sourceTree = "<group>";
+		};
+		45DEA00B1F76032800B1DA72 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				45DE9FC21F6F8C7900B1DA72 /* level 0.yaml */,
+			);
+			name = Levels;
+			sourceTree = "<group>";
+		};
 		45FA99121F3309F800F8C639 /* physics components */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,6 +858,8 @@
 				45FA99141F330A1E00F8C639 /* player physics component.hpp */,
 				45FA99161F33104200F8C639 /* simple physics component.cpp */,
 				45FA99171F33104200F8C639 /* simple physics component.hpp */,
+				45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */,
+				45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -902,6 +942,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */,
 				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
 				45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */,
 				45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */,
@@ -952,6 +993,7 @@
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
+				45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */,
 				452FFA821F6BC50D003A98B1 /* b2ContactSolver.cpp in Sources */,
 				4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */,
 				452FFA7D1F6BC50D003A98B1 /* b2WorldCallbacks.cpp in Sources */,

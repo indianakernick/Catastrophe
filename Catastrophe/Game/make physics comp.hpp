@@ -10,13 +10,15 @@
 #define make_physics_comp_hpp
 
 #include <memory>
+#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 #include <experimental/string_view>
 
 std::shared_ptr<PhysicsComponent> makePhysicsComp(
   std::experimental::string_view,
   Entity *,
-  b2Body *
+  b2Body *,
+  const YAML::Node &
 );
 
 #endif

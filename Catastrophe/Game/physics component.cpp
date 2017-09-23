@@ -23,3 +23,7 @@ PhysicsComponent::PhysicsComponent(
 glm::vec2 PhysicsComponent::getPos() const {
   return castToGLM(body->GetPosition());
 }
+
+float PhysicsComponent::getAngle() const {
+  return body->GetAngle();
+}

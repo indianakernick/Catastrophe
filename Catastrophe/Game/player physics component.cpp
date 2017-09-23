@@ -19,7 +19,8 @@
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(
   Entity *const entity,
-  b2Body *body
+  b2Body *body,
+  const YAML::Node &
 ) : PhysicsComponent(entity, body) {}
 
 void PlayerPhysicsComponent::preStep(const float delta) {

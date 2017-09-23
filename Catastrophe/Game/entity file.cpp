@@ -33,7 +33,8 @@ namespace {
     const YAML::Node &physicsNode,
     Entity *const entity,
     PhysicsSystem &physicsSystem,
-    const Transform transform
+    const Transform transform,
+    const YAML::Node &args
   ) {
     const std::string name = getChild(physicsNode, "name").as<std::string>();
     const std::string body = getChild(physicsNode, "body").as<std::string>();
@@ -44,7 +45,8 @@ namespace {
         Platform::getResDir() + body,
         physicsSystem.getWorld(),
         transform
-      )
+      ),
+      args
     );
     physicsSystem.add(entity->getID(), entity->physics);
   }
@@ -86,7 +88,8 @@ std::unique_ptr<Entity> loadEntity(
   const std::string &filePath,
   const EntityID id,
   const Systems systems,
-  const Transform transform
+  const Transform transform,
+  const YAML::Node &args
 ) {
   const YAML::Node root = YAML::LoadFile(filePath);
   checkType(root, YAML::NodeType::Map);
@@ -96,7 +99,7 @@ std::unique_ptr<Entity> loadEntity(
     readInputComp(input, entity.get(), systems.input);
   }
   if (const YAML::Node &physics = root["physics"]) {
-    readPhysicsComp(physics, entity.get(), systems.physics, transform);
+    readPhysicsComp(physics, entity.get(), systems.physics, transform, args);
   }
   if (const YAML::Node &anim = root["animation"]) {
     readAnimComp(anim, entity.get(), systems.animation, transform);

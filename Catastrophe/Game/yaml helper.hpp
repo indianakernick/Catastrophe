@@ -14,4 +14,11 @@
 YAML::Node getChild(const YAML::Node &, const char *);
 void checkType(const YAML::Node &, YAML::NodeType::value);
 
+template <typename T>
+void getOptional(T &dst, const YAML::Node &node, const char *name) {
+  if (const YAML::Node &child = node[name]) {
+    dst = child.as<T>();
+  }
+}
+
 #endif

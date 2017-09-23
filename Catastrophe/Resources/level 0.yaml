@@ -10,3 +10,11 @@ entities:
   scale: [20, 1]
   rotation: 0
   args: {}
+- file: oscillating platform entity.yaml
+  pos: [0, 0]
+  scale: [4, 0.25]
+  rotation: 0
+  args:
+    first: [-10, 2]
+    second: [10, 2]
+    vel: 1

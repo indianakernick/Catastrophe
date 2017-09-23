@@ -39,26 +39,14 @@ namespace {
       );
     }
     
-    if (const YAML::Node &fixedRotation = bodyNode["fixed rotation"]) {
-      bodyDef.fixedRotation = fixedRotation.as<bool>();
-    }
-    if (const YAML::Node &bullet = bodyNode["bullet"]) {
-      bodyDef.bullet = bullet.as<bool>();
-    }
+    getOptional(bodyDef.linearDamping, bodyNode, "linear damping");
+    getOptional(bodyDef.angularDamping, bodyNode, "angular damping");
+    getOptional(bodyDef.allowSleep, bodyNode, "allow sleep");
+    getOptional(bodyDef.fixedRotation, bodyNode, "fixed rotation");
+    getOptional(bodyDef.bullet, bodyNode, "bullet");
+    getOptional(bodyDef.gravityScale, bodyNode, "gravity scale");
     
     return bodyDef;
-  }
-  
-  void readBodyProps(b2Body *body, const YAML::Node &bodyNode) {
-    if (const YAML::Node &linearDamping = bodyNode["linear damping"]) {
-      body->SetLinearDamping(linearDamping.as<float32>());
-    }
-    if (const YAML::Node &angularDamping = bodyNode["angular damping"]) {
-      body->SetAngularDamping(angularDamping.as<float32>());
-    }
-    if (const YAML::Node &gravityScale = bodyNode["gravity scale"]) {
-      body->SetGravityScale(gravityScale.as<float32>());
-    }
   }
   
   b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale) {
@@ -210,18 +198,11 @@ namespace {
     //CreateFixture copies the shape
     fixtureDef.shape = shape.get();
     
-    if (const YAML::Node &friction = fixtureNode["friction"]) {
-      fixtureDef.friction = friction.as<float32>();
-    }
-    if (const YAML::Node &restitution = fixtureNode["restitution"]) {
-      fixtureDef.restitution = restitution.as<float32>();
-    }
-    if (const YAML::Node &density = fixtureNode["density"]) {
-      fixtureDef.density = density.as<float32>();
-    }
-    if (const YAML::Node &isSensor = fixtureNode["is sensor"]) {
-      fixtureDef.isSensor = isSensor.as<bool>();
-    }
+    getOptional(fixtureDef.friction, fixtureNode, "friction");
+    getOptional(fixtureDef.restitution, fixtureNode, "restitution");
+    getOptional(fixtureDef.density, fixtureNode, "density");
+    getOptional(fixtureDef.isSensor, fixtureNode, "is sensor");
+    
     if (const YAML::Node &userData = fixtureNode["user data"]) {
       fixtureDef.userData = getUserData(userData.as<std::string>());
     }
@@ -256,7 +237,6 @@ b2Body *loadBody(
   const b2BodyDef bodyDef = readBodyDef(bodyNode);
   b2Body *body = world->CreateBody(&bodyDef);
   body->SetTransform(castToB2(transform.pos), transform.rotation);
-  readBodyProps(body, bodyNode);
   
   readFixtures(
     body,

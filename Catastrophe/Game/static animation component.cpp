@@ -25,6 +25,7 @@ StaticAnimationComponent::StaticAnimationComponent(
 void StaticAnimationComponent::update(float) {
   frame = ::getFrame(sprite, "static", 0.0f);
   transform.pos = getEntity().physics->getPos();
+  transform.rotation = getEntity().physics->getAngle();
   model = transform.getMat3();
 }
 

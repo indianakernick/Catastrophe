@@ -9,11 +9,12 @@
 #ifndef simple_physics_component_hpp
 #define simple_physics_component_hpp
 
+#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
 class SimplePhysicsComponent final : public PhysicsComponent {
 public:
-  SimplePhysicsComponent(Entity *, b2Body *);
+  SimplePhysicsComponent(Entity *, b2Body *, const YAML::Node &);
   
   void preStep(float) override;
   void postStep() override;

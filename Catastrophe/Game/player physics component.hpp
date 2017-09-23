@@ -9,13 +9,14 @@
 #ifndef player_physics_component_hpp
 #define player_physics_component_hpp
 
+#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
 class b2Fixture;
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
-  PlayerPhysicsComponent(Entity *, b2Body *);
+  PlayerPhysicsComponent(Entity *, b2Body *, const YAML::Node &);
   
   void preStep(float) override;
   void postStep() override;

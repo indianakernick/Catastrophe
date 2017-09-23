@@ -42,7 +42,8 @@ namespace {
     checkType(entityNode, YAML::NodeType::Map);
     const std::string file = getChild(entityNode, "file").as<std::string>();
     const Transform transform = readTransform(entityNode);
-    return entityMan.create(Platform::getResDir() + file, transform);
+    const YAML::Node &args = entityNode["args"];
+    return entityMan.create(Platform::getResDir() + file, transform, args);
   }
   
   void readEntities(const YAML::Node &entitiesNode, EntityManager &entityMan) {

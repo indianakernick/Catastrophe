@@ -12,7 +12,8 @@
 
 SimplePhysicsComponent::SimplePhysicsComponent(
   Entity *const entity,
-  b2Body *body
+  b2Body *body,
+  const YAML::Node &
 ) : PhysicsComponent(entity, body) {}
 
 void SimplePhysicsComponent::preStep(float) {}

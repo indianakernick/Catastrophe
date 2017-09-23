@@ -1,5 +1,5 @@
 body:
-  type: static
+  type: kinematic
 
 shapes:
   body:

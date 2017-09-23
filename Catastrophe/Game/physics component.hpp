@@ -25,6 +25,7 @@ public:
   virtual void postStep() = 0;
   
   glm::vec2 getPos() const;
+  float getAngle() const;
   
   b2Body *body = nullptr;
 };
