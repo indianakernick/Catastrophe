@@ -30,7 +30,7 @@ std::shared_ptr<PhysicsComponent> makePhysicsComp(
     return Utils::getValueByName<
       std::shared_ptr<PhysicsComponent>,
       PhysicsComps
-    >(name, [entity, body, args] (auto t) {
+    >(name, [entity, body, &args] (auto t) {
       auto component = std::make_shared<UTILS_TYPE(t)>(entity, body, args);
       body->SetUserData(component.get());
       return component;

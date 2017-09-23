@@ -11,12 +11,13 @@
 
 #include "transform.hpp"
 #include "vector sprite.hpp"
+#include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
 
 class PlayerAnimationComponent final : public AnimationComponent {
 public:
-  PlayerAnimationComponent(Entity *, const Sprite &, Transform);
+  PlayerAnimationComponent(Entity *, const Sprite &, Transform, const YAML::Node &);
   
   void update(float) override;
   const Shapes &getShapes() const override;

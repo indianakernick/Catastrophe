@@ -9,11 +9,12 @@
 #ifndef vector_render_component_hpp
 #define vector_render_component_hpp
 
+#include <yaml-cpp/node/node.h>
 #include "render component.hpp"
 
 class VectorRenderComponent final : public RenderComponent {
 public:
-  VectorRenderComponent(Entity *, glm::vec2);
+  VectorRenderComponent(Entity *, glm::vec2, const YAML::Node &);
   
   void preRender() override;
   void render(NVGcontext *) override;

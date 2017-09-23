@@ -21,17 +21,19 @@ std::shared_ptr<AnimationComponent> makeAnimComp(
   const std::experimental::string_view name,
   Entity *const entity,
   const Sprite &sprite,
-  const Transform transform
+  const Transform transform,
+  const YAML::Node &args
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<AnimationComponent>,
       AnimComps
-    >(name, [entity, sprite, transform] (auto t) {
-      return std::make_shared<typename decltype(t)::type>(
+    >(name, [entity, &sprite, transform, &args] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(
         entity,
         sprite,
-        transform
+        transform,
+        args
       );
     });
   } catch (Utils::TypeNotFound &) {

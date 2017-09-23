@@ -11,7 +11,7 @@
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
 
-PlayerInputComponent::PlayerInputComponent(Entity *const entity)
+PlayerInputComponent::PlayerInputComponent(Entity *const entity, const YAML::Node &)
   : InputComponent(entity) {}
 
 bool PlayerInputComponent::handleEvent(const SDL_Event event) {

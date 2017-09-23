@@ -11,10 +11,11 @@
 
 #include <SDL2/SDL_scancode.h>
 #include "input component.hpp"
+#include <yaml-cpp/node/node.h>
 
 class PlayerInputComponent final : public InputComponent {
 public:
-  explicit PlayerInputComponent(Entity *);
+  PlayerInputComponent(Entity *, const YAML::Node &);
   ~PlayerInputComponent() = default;
   
   bool handleEvent(SDL_Event) override;

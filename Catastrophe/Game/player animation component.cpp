@@ -18,7 +18,8 @@
 PlayerAnimationComponent::PlayerAnimationComponent(
   Entity *const entity,
   const Sprite &sprite,
-  const Transform transform
+  const Transform transform,
+  const YAML::Node &
 ) : AnimationComponent(entity),
     sprite(sprite),
     transform(transform),

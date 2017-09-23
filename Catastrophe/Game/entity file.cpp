@@ -22,10 +22,11 @@ namespace {
   void readInputComp(
     const YAML::Node &inputNode,
     Entity *const entity,
-    InputSystem &inputSystem
+    InputSystem &inputSystem,
+    const YAML::Node &args
   ) {
     const std::string name = getChild(inputNode, "name").as<std::string>();
-    entity->input = makeInputComp(name, entity);
+    entity->input = makeInputComp(name, entity, args);
     inputSystem.add(entity->getID(), entity->input);
   }
   
@@ -55,7 +56,8 @@ namespace {
     const YAML::Node &animNode,
     Entity *const entity,
     AnimationSystem &animationSystem,
-    const Transform transform
+    const Transform transform,
+    const YAML::Node &args
   ) {
     const std::string name = getChild(animNode, "name").as<std::string>();
     const std::string sprite = getChild(animNode, "sprite").as<std::string>();
@@ -63,7 +65,8 @@ namespace {
       name,
       entity,
       loadSprite(Platform::getResDir() + sprite),
-      transform
+      transform,
+      args
     );
     animationSystem.add(entity->getID(), entity->animation);
   }
@@ -72,13 +75,15 @@ namespace {
     const YAML::Node &renderNode,
     Entity *const entity,
     RenderingSystem &renderingSystem,
-    const glm::vec2 scale
+    const glm::vec2 scale,
+    const YAML::Node &args
   ) {
     const std::string name = getChild(renderNode, "name").as<std::string>();
     entity->render = makeRenderComp(
       name,
       entity,
-      scale
+      scale,
+      args
     );
     renderingSystem.add(entity->getID(), entity->render);
   }
@@ -96,16 +101,16 @@ std::unique_ptr<Entity> loadEntity(
   std::unique_ptr<Entity> entity = std::make_unique<Entity>(id);
   
   if (const YAML::Node &input = root["input"]) {
-    readInputComp(input, entity.get(), systems.input);
+    readInputComp(input, entity.get(), systems.input, args);
   }
   if (const YAML::Node &physics = root["physics"]) {
     readPhysicsComp(physics, entity.get(), systems.physics, transform, args);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    readAnimComp(anim, entity.get(), systems.animation, transform);
+    readAnimComp(anim, entity.get(), systems.animation, transform, args);
   }
   if (const YAML::Node &render = root["rendering"]) {
-    readRenderComp(render, entity.get(), systems.rendering, transform.scale);
+    readRenderComp(render, entity.get(), systems.rendering, transform.scale, args);
   }
   
   return entity;

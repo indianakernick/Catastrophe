@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "transform.hpp"
+#include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 #include <experimental/string_view>
 
@@ -18,7 +19,8 @@ std::shared_ptr<AnimationComponent> makeAnimComp(
   std::experimental::string_view,
   Entity *,
   const Sprite &,
-  Transform
+  Transform,
+  const YAML::Node &
 );
 
 #endif

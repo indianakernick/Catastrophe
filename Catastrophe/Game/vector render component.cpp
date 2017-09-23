@@ -14,7 +14,8 @@
 
 VectorRenderComponent::VectorRenderComponent(
   Entity *const entity,
-  const glm::vec2 size
+  const glm::vec2 size,
+  const YAML::Node &
 ) : RenderComponent(entity),
     rect(makeMotionTarget(glm::vec2(), size)),
     size(makeZoomTarget(size)) {}

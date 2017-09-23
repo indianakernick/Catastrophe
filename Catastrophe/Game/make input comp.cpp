@@ -17,14 +17,15 @@ using InputComps = Utils::TypeList<
 
 std::shared_ptr<InputComponent> makeInputComp(
   const std::experimental::string_view name,
-  Entity *const entity
+  Entity *const entity,
+  const YAML::Node &args
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<InputComponent>,
       InputComps
-    >(name, [entity] (auto t) {
-      return std::make_shared<typename decltype(t)::type>(entity);
+    >(name, [entity, &args] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(entity, args);
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid input component name");

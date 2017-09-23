@@ -10,11 +10,12 @@
 #define static_animation_component_hpp
 
 #include "transform.hpp"
+#include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 
 class StaticAnimationComponent final : public AnimationComponent {
 public:
-  StaticAnimationComponent(Entity *, const Sprite &, Transform);
+  StaticAnimationComponent(Entity *, const Sprite &, Transform, const YAML::Node &);
   
   void update(float) override;
   const Shapes &getShapes() const override;

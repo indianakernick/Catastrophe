@@ -18,14 +18,15 @@ using RenderComps = Utils::TypeList<
 std::shared_ptr<RenderComponent> makeRenderComp(
   const std::experimental::string_view name,
   Entity *const entity,
-  const glm::vec2 scale
+  const glm::vec2 scale,
+  const YAML::Node &args
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<RenderComponent>,
       RenderComps
-    >(name, [entity, scale] (auto t) {
-      return std::make_shared<typename decltype(t)::type>(entity, scale);
+    >(name, [entity, scale, &args] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(entity, scale, args);
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid render component name");
