@@ -18,18 +18,18 @@ Comp *getComponent(b2Fixture *fixture) {
   return reinterpret_cast<Comp *>(fixture->GetBody()->GetUserData());
 }
 
-void handlePlayerFootPlatformBegin(b2Fixture *, b2Fixture *playerFoot) {
+void handlePlayerFootPlatformBegin(b2Fixture *platform, b2Fixture *playerFoot) {
   static_assert(symbolLess<Symbol::Platform, Symbol::PlayerFoot>());
   
   auto *player = getComponent<PlayerPhysicsComponent>(playerFoot);
-  player->beginContactingGround();
+  player->beginContactingGround(platform->GetBody());
 }
 
-void handlePlayerFootPlatformEnd(b2Fixture *, b2Fixture *playerFoot) {
+void handlePlayerFootPlatformEnd(b2Fixture *platform, b2Fixture *playerFoot) {
   static_assert(symbolLess<Symbol::Platform, Symbol::PlayerFoot>());
   
   auto *player = getComponent<PlayerPhysicsComponent>(playerFoot);
-  player->endContactingGround();
+  player->endContactingGround(platform->GetBody());
 }
 
 void registerCollisionListeners(ContactListener &contactListener) {

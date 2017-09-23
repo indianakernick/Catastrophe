@@ -29,7 +29,7 @@ PlayerAnimationComponent::PlayerAnimationComponent(
 void PlayerAnimationComponent::update(const float delta) {
   const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(getEntity().physics);
   
-  const float horiVel = playerPhysics->getVel().x;
+  const float horiVel = playerPhysics->getRelVel().x;
   switch (state) {
     case State::STANDING:
       setFrameStanding(horiVel, delta);

@@ -9,6 +9,7 @@
 #ifndef player_physics_component_hpp
 #define player_physics_component_hpp
 
+#include <forward_list>
 #include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
@@ -21,19 +22,17 @@ public:
   void preStep(float) override;
   void postStep() override;
   
-  void beginContactingGround();
-  void endContactingGround();
+  void beginContactingGround(b2Body *);
+  void endContactingGround(b2Body *);
   
-  glm::vec2 getVel() const;
+  glm::vec2 getRelVel() const;
   bool onGround() const;
 
 private:
-  int footContactCount = 0;
+  std::forward_list<b2Body *> groundBodies;
   float timeTillFinishJump = 0.0f;
 
   void applyMoveForce(float);
-  void moveLeft();
-  void moveRight();
   void jump(float);
 };
 

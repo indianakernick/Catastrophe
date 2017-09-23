@@ -27,9 +27,9 @@ void PlayerPhysicsComponent::preStep(const float delta) {
   const auto playerInput = Utils::safeDownCast<const PlayerInputComponent>(getEntity().input);
   
          if (playerInput->shouldMoveLeft()) {
-    moveLeft();
+    applyMoveForce(-1.0f);
   } else if (playerInput->shouldMoveRight()) {
-    moveRight();
+    applyMoveForce(1.0f);
   }
   if (playerInput->shouldJump()) {
     jump(delta);
@@ -46,20 +46,25 @@ void PlayerPhysicsComponent::postStep() {
   });
 }
 
-void PlayerPhysicsComponent::beginContactingGround() {
-  footContactCount++;
+void PlayerPhysicsComponent::beginContactingGround(b2Body *groundBody) {
+  groundBodies.push_front(groundBody);
 }
 
-void PlayerPhysicsComponent::endContactingGround() {
-  footContactCount--;
+void PlayerPhysicsComponent::endContactingGround(b2Body *groundBody) {
+  groundBodies.remove(groundBody);
 }
 
-glm::vec2 PlayerPhysicsComponent::getVel() const {
-  return castToGLM(body->GetLinearVelocity());
+glm::vec2 PlayerPhysicsComponent::getRelVel() const {
+  if (groundBodies.empty()) {
+    return castToGLM(body->GetLinearVelocity());
+  } else {
+    const b2Vec2 groundVel = groundBodies.front()->GetLinearVelocity();
+    return castToGLM(body->GetLinearVelocity() - groundVel);
+  }
 }
 
 bool PlayerPhysicsComponent::onGround() const {
-  return footContactCount > 0;
+  return !groundBodies.empty();
 }
 
 void PlayerPhysicsComponent::applyMoveForce(const float moveForceDir) {
@@ -67,14 +72,6 @@ void PlayerPhysicsComponent::applyMoveForce(const float moveForceDir) {
                            ? PLAYER_MOVE_FORCE
                            : PLAYER_AIR_MOVE_FORCE;
   body->ApplyForceToCenter({moveForceMag * moveForceDir, 0.0f}, true);
-}
-
-void PlayerPhysicsComponent::moveLeft() {
-  applyMoveForce(-1.0f);
-}
-
-void PlayerPhysicsComponent::moveRight() {
-  applyMoveForce(1.0f);
 }
 
 void PlayerPhysicsComponent::jump(const float delta) {
