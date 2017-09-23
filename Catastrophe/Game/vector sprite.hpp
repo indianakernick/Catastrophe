@@ -50,12 +50,23 @@ public:
   Shape() = default;
   virtual ~Shape() = default;
   
-  virtual void load(const YAML::Node &, FrameSize) = 0;
+  virtual void load(const YAML::Node &, FrameSize);
   virtual void draw(NVGcontext *, const Frame &) const = 0;
 
 protected:
   static Index readIndex(const YAML::Node &, Index);
   static Indicies readIndicies(const YAML::Node &, Index);
+  
+  void preDraw(NVGcontext *, const Frame &) const;
+  void postDraw(NVGcontext *, const Frame &) const;
+
+private:
+  NVGlineCap cap = NVG_BUTT;
+  NVGlineCap join = NVG_MITER;
+  
+  Index strokeColor = NULL_INDEX;
+  Index fillColor = NULL_INDEX;
+  Index strokeWidth = NULL_INDEX;
 };
 using Shapes = std::vector<std::shared_ptr<Shape>>;
 

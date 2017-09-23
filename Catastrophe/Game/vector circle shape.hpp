@@ -19,9 +19,6 @@ public:
 private:
   Indicies points;
   Index radius = NULL_INDEX;
-  Index strokeColor = NULL_INDEX;
-  Index fillColor = NULL_INDEX;
-  Index strokeWidth = NULL_INDEX;
 };
 
 #endif

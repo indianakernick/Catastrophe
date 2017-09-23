@@ -18,11 +18,6 @@ public:
 
 private:
   Indicies points;
-  NVGlineCap cap = NVG_BUTT;
-  NVGlineCap join = NVG_MITER;
-  Index strokeColor = NULL_INDEX;
-  Index fillColor = NULL_INDEX;
-  Index strokeWidth = NULL_INDEX;
 };
 
 #endif
