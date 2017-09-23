@@ -15,6 +15,7 @@ class VectorRenderComponent final : public RenderComponent {
 public:
   VectorRenderComponent(Entity *, glm::vec2);
   
+  void preRender() override;
   void render(NVGcontext *) override;
   CameraMotionTargetCPtr getMotionTarget() const override;
   CameraZoomTargetCPtr getZoomTarget() const override;

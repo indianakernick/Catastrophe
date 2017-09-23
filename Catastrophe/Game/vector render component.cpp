@@ -18,10 +18,14 @@ VectorRenderComponent::VectorRenderComponent(
 ) : RenderComponent(entity),
     rect(makeMotionTarget(glm::vec2(), size)),
     size(makeZoomTarget(size)) {}
-    
-void VectorRenderComponent::render(NVGcontext *context) {
+
+void VectorRenderComponent::preRender() {
   const auto anim = getEntity().animation;
   rect->c = anim->getModelMat()[2];
+}
+
+void VectorRenderComponent::render(NVGcontext *context) {
+  const auto anim = getEntity().animation;
   renderSprite(
     context,
     anim->getShapes(),

@@ -22,6 +22,7 @@ public:
   explicit RenderComponent(Entity *);
   virtual ~RenderComponent() = default;
 
+  virtual void preRender() = 0;
   virtual void render(NVGcontext *) = 0;
   virtual CameraMotionTargetCPtr getMotionTarget() const = 0;
   virtual CameraZoomTargetCPtr getZoomTarget() const = 0;

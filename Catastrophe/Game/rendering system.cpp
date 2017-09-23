@@ -26,6 +26,7 @@ void RenderingSystem::update(const float delta) {
 
 void RenderingSystem::render(NVGcontext *context) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
+    c->second->preRender();
     if (camera.visibleMeters(c->second->getAABB())) {
       c->second->render(context);
     }
