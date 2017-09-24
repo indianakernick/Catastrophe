@@ -57,8 +57,6 @@ OscillatingPhysicsComponent::OscillatingPhysicsComponent(
 ) : PhysicsComponent(entity, body),
     first(readVec(getChild(args, "first"))),
     second(readVec(getChild(args, "second"))) {
-  
-  assert(body->GetType() == b2_kinematicBody);
   body->SetTransform(first, body->GetAngle());
   
   const float vel = getChild(args, "vel").as<float>();

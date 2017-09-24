@@ -72,3 +72,44 @@ shapes:
   - 5  # top right
   - 6  # bottom right
   - 0  # bottom left
+
+commands: |
+  begin
+  fill_color 0
+  move_to 0
+  line_to 1
+  line_to 5
+  line_to 6
+  fill
+
+  begin
+  line_cap butt
+  line_join bevel
+  stroke_width 0
+  stroke_color 1
+  move_to 0
+  line_to 2
+  line_to 8
+  line_to 4
+  line_to 6
+  stroke
+
+  begin
+  move_to 1
+  line_to 9
+  line_to 3
+  line_to 7
+  line_to 5
+  stroke
+
+  begin
+  line_cap square
+  line_join miter
+  stroke_width: 0
+  stroke_color: 2
+  move_to 0
+  line_to 1
+  line_to 5
+  line_to 6
+  line_to 0
+  stroke
