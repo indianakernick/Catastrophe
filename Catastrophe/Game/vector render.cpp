@@ -139,15 +139,15 @@ void lerpFrames(const float progress, Frame &lower, const Frame &upper) {
 
 void renderSprite(
   NVGcontext *context,
-  const Shapes &shapes,
+  const DrawCommands &drawCommands,
   const Frame &frame,
   const glm::mat3 model
 ) {
   nvgSave(context);
   nvgTransform(context, model);
   
-  for (auto s = shapes.cbegin(); s != shapes.cend(); ++s) {
-    (*s)->draw(context, frame);
+  for (auto c = drawCommands.cbegin(); c != drawCommands.cend(); ++c) {
+    (*c)->draw(context, frame);
   }
    
   nvgRestore(context);

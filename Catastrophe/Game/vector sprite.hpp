@@ -14,6 +14,7 @@
 #include <glm/vec2.hpp>
 #include <unordered_map>
 #include <nanovg/nanovg.h>
+#include <experimental/string_view>
 
 using TimeSec = float;
 using Coord = float;
@@ -39,36 +40,6 @@ struct FrameSize {
   Index numColors = NULL_INDEX;
   Index numScalars = NULL_INDEX;
 };
-
-namespace YAML {
-  class Node;
-}
-extern "C" struct NVGcontext;
-
-class Shape {
-public:
-  Shape() = default;
-  virtual ~Shape() = default;
-  
-  virtual void load(const YAML::Node &, FrameSize);
-  virtual void draw(NVGcontext *, const Frame &) const = 0;
-
-protected:
-  static Index readIndex(const YAML::Node &, Index);
-  static Indicies readIndicies(const YAML::Node &, Index);
-  
-  void preDraw(NVGcontext *, const Frame &) const;
-  void postDraw(NVGcontext *, const Frame &) const;
-
-private:
-  NVGlineCap cap = NVG_BUTT;
-  NVGlineCap join = NVG_MITER;
-  
-  Index strokeColor = NULL_INDEX;
-  Index fillColor = NULL_INDEX;
-  Index strokeWidth = NULL_INDEX;
-};
-using Shapes = std::vector<std::shared_ptr<Shape>>;
 
 struct PointKeyframe {
   TimeSec offsetSec;
@@ -98,9 +69,19 @@ struct Animation {
 };
 using Animations = std::unordered_map<std::string, Animation>;
 
+class DrawCommand {
+public:
+  DrawCommand() = default;
+  virtual ~DrawCommand() = default;
+  
+  virtual size_t load(std::experimental::string_view, FrameSize) = 0;
+  virtual void draw(NVGcontext *, const Frame &) const = 0;
+};
+using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
+
 struct Sprite {
   Animations animations;
-  Shapes shapes;
+  DrawCommands drawCommands;
 };
 
 #endif

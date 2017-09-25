@@ -14,6 +14,6 @@
 
 Frame getFrame(const Sprite &, const std::string &, float);
 void lerpFrames(float, Frame &, const Frame &);
-void renderSprite(NVGcontext *, const Shapes &, const Frame &, glm::mat3);
+void renderSprite(NVGcontext *, const DrawCommands &, const Frame &, glm::mat3);
 
 #endif

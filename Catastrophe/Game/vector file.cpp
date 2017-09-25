@@ -9,8 +9,7 @@
 #include "vector file.hpp"
 
 #include "yaml helper.hpp"
-#include "vector line shape.hpp"
-#include "vector circle shape.hpp"
+#include "command compiler.hpp"
 
 namespace {
   float readInvScale(const YAML::Node &scaleNode) {
@@ -204,44 +203,6 @@ namespace {
     
     return anims;
   }
-  
-  std::shared_ptr<Shape> readShapeType(const YAML::Node &shapeTypeNode) {
-    const std::string shapeTypeString = shapeTypeNode.as<std::string>();
-    
-           if (shapeTypeString == "line") {
-      return std::make_shared<ShapeLine>();
-    } else if (shapeTypeString == "circle") {
-      return std::make_shared<ShapeCircle>();
-    } else {
-      throw std::runtime_error("Invalid shape type");
-    }
-  }
-  
-  std::shared_ptr<Shape> readShape(
-    const YAML::Node &shapeNode,
-    const FrameSize frameSize
-  ) {
-    checkType(shapeNode, YAML::NodeType::Map);
-    
-    std::shared_ptr<Shape> shape = readShapeType(getChild(shapeNode, "type"));
-    shape->load(shapeNode, frameSize);
-    
-    return shape;
-  }
-  
-  Shapes readShapes(
-    const YAML::Node &shapesNode,
-    const FrameSize frameSize
-  ) {
-    checkType(shapesNode, YAML::NodeType::Sequence);
-    
-    Shapes shapes;
-    for (auto s = shapesNode.begin(); s != shapesNode.end(); ++s) {
-      shapes.emplace_back(readShape(*s, frameSize));
-    }
-    
-    return shapes;
-  }
 }
 
 Sprite loadSprite(const std::string &fileName, const Params &params) {
@@ -252,8 +213,15 @@ Sprite loadSprite(const std::string &fileName, const Params &params) {
   const float invScale = readInvScale(getChild(rootNode, "scale"));
   FrameSize frameSize;
   const Animations anims = readAnims(getChild(rootNode, "anims"), invScale, frameSize);
+  
+  const YAML::Node &commandsNode = getChild(rootNode, "commands");
+  LineCol commandStrStart;
+  const YAML::Mark mark = commandsNode.Mark();
+  commandStrStart.moveTo(mark.line, mark.column);
+  const std::string commandStr = commandsNode.as<std::string>();
+  
   return {
     anims,
-    readShapes(getChild(rootNode, "shapes"), frameSize)
+    compileDrawCommands(commandStr, frameSize, commandStrStart)
   };
 }
