@@ -74,18 +74,21 @@ namespace {
   }
   
   template <typename ...Args>
-  std::tuple<Args...> readArgs(std::experimental::string_view arguments) {
+  std::tuple<Args...> readArgs(size_t &numRead, std::experimental::string_view args) {
     std::tuple<Args...> output;
+    const char *argsData = args.data();
     
-    Utils::forEach(output, [arguments] (auto &element) mutable {
+    Utils::forEach(output, [args] (auto &element) mutable {
       using ElementType = std::decay_t<decltype(element)>;
-      nextArg(arguments);
+      nextArg(args);
       if constexpr (std::is_same<ElementType, std::string>::value) {
-        element = readString(arguments);
+        element = readString(args);
       } else if (std::is_integral<ElementType>::value) {
-        element = readNumber(arguments);
+        element = readNumber(args);
       }
     });
+    
+    numRead = args.data() - argsData;
     
     return output;
   }
@@ -99,44 +102,53 @@ namespace {
 
 //render styles
 
-void StrokeColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(color) = readArgs<Index>(args);
+size_t StrokeColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(color) = readArgs<Index>(numRead, args);
   checkIndex(color, frame.numColors);
+  return numRead;
 }
 
-void StrokeColorCommand::draw(NVGcontext *context, const Frame &frame) {
+void StrokeColorCommand::draw(NVGcontext *context, const Frame &frame) const {
   nvgStrokeColor(context, frame.colors[color]);
 }
 
-void FillColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(color) = readArgs<Index>(args);
+size_t FillColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(color) = readArgs<Index>(numRead, args);
   checkIndex(color, frame.numColors);
+  return numRead;
 }
 
-void FillColorCommand::draw(NVGcontext *context, const Frame &frame) {
+void FillColorCommand::draw(NVGcontext *context, const Frame &frame) const {
   nvgFillColor(context, frame.colors[color]);
 }
 
-void MiterLimitCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(limit) = readArgs<Index>(args);
+size_t MiterLimitCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(limit) = readArgs<Index>(numRead, args);
   checkIndex(limit, frame.numScalars);
+  return numRead;
 }
 
-void MiterLimitCommand::draw(NVGcontext *context, const Frame &frame) {
+void MiterLimitCommand::draw(NVGcontext *context, const Frame &frame) const {
   nvgMiterLimit(context, frame.scalars[limit]);
 }
 
-void StrokeWidthCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(width) = readArgs<Index>(args);
+size_t StrokeWidthCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(width) = readArgs<Index>(numRead, args);
   checkIndex(width, frame.numScalars);
+  return numRead;
 }
 
-void StrokeWidthCommand::draw(NVGcontext *context, const Frame &frame) {
+void StrokeWidthCommand::draw(NVGcontext *context, const Frame &frame) const {
   nvgStrokeWidth(context, frame.scalars[width]);
 }
 
-void LineCapCommand::load(const std::experimental::string_view args, FrameSize) {
-  const auto [capStr] = readArgs<std::string>(args);
+size_t LineCapCommand::load(const std::experimental::string_view args, FrameSize) {
+  size_t numRead;
+  const auto [capStr] = readArgs<std::string>(numRead, args);
          if (capStr == "butt") {
     cap = NVG_BUTT;
   } else if (capStr == "round") {
@@ -146,14 +158,16 @@ void LineCapCommand::load(const std::experimental::string_view args, FrameSize) 
   } else {
     throw DrawCommandError("Invalid line cap");
   }
+  return numRead;
 }
 
-void LineCapCommand::draw(NVGcontext *context, const Frame &) {
+void LineCapCommand::draw(NVGcontext *context, const Frame &) const {
   nvgLineCap(context, cap);
 }
 
-void LineJoinCommand::load(const std::experimental::string_view args, FrameSize) {
-  const auto [joinStr] = readArgs<std::string>(args);
+size_t LineJoinCommand::load(const std::experimental::string_view args, FrameSize) {
+  size_t numRead;
+  const auto [joinStr] = readArgs<std::string>(numRead, args);
          if (joinStr == "miter") {
     join = NVG_MITER;
   } else if (joinStr == "round") {
@@ -163,93 +177,110 @@ void LineJoinCommand::load(const std::experimental::string_view args, FrameSize)
   } else {
     throw DrawCommandError("Invalid line join");
   }
+  return numRead;
 }
 
-void LineJoinCommand::draw(NVGcontext *context, const Frame &) {
+void LineJoinCommand::draw(NVGcontext *context, const Frame &) const {
   nvgLineJoin(context, join);
 }
 
-void GlobalAlphaCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(alpha) = readArgs<Index>(args);
+size_t GlobalAlphaCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(alpha) = readArgs<Index>(numRead, args);
   checkIndex(alpha, frame.numScalars);
+  return numRead;
 }
 
-void GlobalAlphaCommand::draw(NVGcontext *context, const Frame &frame) {
+void GlobalAlphaCommand::draw(NVGcontext *context, const Frame &frame) const {
   nvgGlobalAlpha(context, frame.scalars[alpha]);
 }
 
 //paths
 
-void BeginPathCommand::load(std::experimental::string_view, FrameSize) {}
+size_t BeginPathCommand::load(std::experimental::string_view, FrameSize) {
+  return 0;
+}
 
-void BeginPathCommand::draw(NVGcontext *context, const Frame &) {
+void BeginPathCommand::draw(NVGcontext *context, const Frame &) const {
   nvgBeginPath(context);
 }
 
-void MoveToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(point) = readArgs<Index>(args);
+size_t MoveToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(point) = readArgs<Index>(numRead, args);
   checkIndex(point, frame.numPoints);
+  return numRead;
 }
 
-void MoveToCommand::draw(NVGcontext *context, const Frame &frame) {
+void MoveToCommand::draw(NVGcontext *context, const Frame &frame) const {
   //cant use structured bindings because glm::vec2 has an anonymous union member
   const glm::vec2 pointV = frame.points[point];
   nvgMoveTo(context, pointV.x, pointV.y);
 }
 
-void LineToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(point) = readArgs<Index>(args);
+size_t LineToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(point) = readArgs<Index>(numRead, args);
   checkIndex(point, frame.numPoints);
+  return numRead;
 }
 
-void LineToCommand::draw(NVGcontext *context, const Frame &frame) {
+void LineToCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 pointV = frame.points[point];
   nvgLineTo(context, pointV.x, pointV.y);
 }
 
-void BezierToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(control0, control1, end) = readArgs<Index, Index, Index>(args);
+size_t BezierToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(control0, control1, end) = readArgs<Index, Index, Index>(numRead, args);
   checkIndex(control0, frame.numPoints);
   checkIndex(control1, frame.numPoints);
   checkIndex(end, frame.numPoints);
+  return numRead;
 }
 
-void BezierToCommand::draw(NVGcontext *context, const Frame &frame) {
+void BezierToCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 control0V = frame.points[control0];
   const glm::vec2 control1V = frame.points[control1];
   const glm::vec2 endV = frame.points[end];
   nvgBezierTo(context, control0V.x, control0V.y, control1V.x, control1V.y, endV.x, endV.y);
 }
 
-void QuadToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(control, end) = readArgs<Index, Index>(args);
+size_t QuadToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(control, end) = readArgs<Index, Index>(numRead, args);
   checkIndex(control, frame.numPoints);
   checkIndex(end, frame.numPoints);
+  return numRead;
 }
 
-void QuadToCommand::draw(NVGcontext *context, const Frame &frame) {
+void QuadToCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 controlV = frame.points[control];
   const glm::vec2 endV = frame.points[end];
   nvgQuadTo(context, controlV.x, controlV.y, endV.x, endV.y);
 }
 
-void ArcToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(point0, point1, radius) = readArgs<Index, Index, Index>(args);
+size_t ArcToCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(point0, point1, radius) = readArgs<Index, Index, Index>(numRead, args);
   checkIndex(point0, frame.numPoints);
   checkIndex(point1, frame.numPoints);
   checkIndex(radius, frame.numScalars);
+  return numRead;
 }
 
-void ArcToCommand::draw(NVGcontext *context, const Frame &frame) {
+void ArcToCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 point0V = frame.points[point0];
   const glm::vec2 point1V = frame.points[point1];
   const float radiusS = frame.scalars[radius];
   nvgArcTo(context, point0V.x, point0V.y, point1V.x, point1V.y, radiusS);
 }
 
-void ClosePathCommand::load(std::experimental::string_view, FrameSize) {}
+size_t ClosePathCommand::load(std::experimental::string_view, FrameSize) {
+  return 0;
+}
 
-void ClosePathCommand::draw(NVGcontext *context, const Frame &) {
+void ClosePathCommand::draw(NVGcontext *context, const Frame &) const {
   nvgClosePath(context);
 }
 
@@ -265,27 +296,31 @@ namespace {
   }
 }
 
-void PathWindingCommand::load(const std::experimental::string_view args, FrameSize) {
-  const auto [windingStr] = readArgs<std::string>(args);
+size_t PathWindingCommand::load(const std::experimental::string_view args, FrameSize) {
+  size_t numRead;
+  const auto [windingStr] = readArgs<std::string>(numRead, args);
   winding = readWinding(windingStr);
+  return numRead;
 }
 
-void PathWindingCommand::draw(NVGcontext *context, const Frame &) {
+void PathWindingCommand::draw(NVGcontext *context, const Frame &) const {
   nvgPathWinding(context, winding);
 }
 
-void ArcCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+size_t ArcCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
   std::string windingStr;
   std::tie(center, radius, angle0, angle1, windingStr)
-    = readArgs<Index, Index, Index, Index, std::string>(args);
+    = readArgs<Index, Index, Index, Index, std::string>(numRead, args);
   winding = readWinding(windingStr);
   checkIndex(center, frame.numPoints);
   checkIndex(radius, frame.numScalars);
   checkIndex(angle0, frame.numScalars);
   checkIndex(angle1, frame.numScalars);
+  return numRead;
 }
 
-void ArcCommand::draw(NVGcontext *context, const Frame &frame) {
+void ArcCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 centerV = frame.points[center];
   const float radiusS = frame.scalars[radius];
   const float angle0S = frame.scalars[angle0];
@@ -293,44 +328,50 @@ void ArcCommand::draw(NVGcontext *context, const Frame &frame) {
   nvgArc(context, centerV.x, centerV.y, radiusS, angle0S, angle1S, winding);
 }
 
-void RectCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(corner, size) = readArgs<Index, Index>(args);
+size_t RectCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(corner, size) = readArgs<Index, Index>(numRead, args);
   checkIndex(corner, frame.numPoints);
   checkIndex(size, frame.numPoints);
+  return numRead;
 }
 
-void RectCommand::draw(NVGcontext *context, const Frame &frame) {
+void RectCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 cornerV = frame.points[corner];
   const glm::vec2 sizeV = frame.points[size];
   nvgRect(context, cornerV.x, cornerV.y, sizeV.x, sizeV.y);
 }
 
-void RoundedRectCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(corner, size, radius) = readArgs<Index, Index, Index>(args);
+size_t RoundedRectCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(corner, size, radius) = readArgs<Index, Index, Index>(numRead, args);
   checkIndex(corner, frame.numPoints);
   checkIndex(size, frame.numPoints);
   checkIndex(radius, frame.numScalars);
+  return numRead;
 }
 
-void RoundedRectCommand::draw(NVGcontext *context, const Frame &frame) {
+void RoundedRectCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 cornerV = frame.points[corner];
   const glm::vec2 sizeV = frame.points[size];
   const float radiusS = frame.scalars[radius];
   nvgRoundedRect(context, cornerV.x, cornerV.y, sizeV.x, sizeV.y, radiusS);
 }
 
-void RoundedRectVaryingCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+size_t RoundedRectVaryingCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
   std::tie(corner, size, radiusTL, radiusTR, radiusBR, radiusBL)
-    = readArgs<Index, Index, Index, Index, Index, Index>(args);
+    = readArgs<Index, Index, Index, Index, Index, Index>(numRead, args);
   checkIndex(corner, frame.numPoints);
   checkIndex(size, frame.numPoints);
   checkIndex(radiusTL, frame.numScalars);
   checkIndex(radiusTR, frame.numScalars);
   checkIndex(radiusBR, frame.numScalars);
   checkIndex(radiusBL, frame.numScalars);
+  return numRead;
 }
 
-void RoundedRectVaryingCommand::draw(NVGcontext *context, const Frame &frame) {
+void RoundedRectVaryingCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 cornerV = frame.points[corner];
   const glm::vec2 sizeV = frame.points[size];
   const float radiusTLS = frame.scalars[radiusTL];
@@ -340,38 +381,46 @@ void RoundedRectVaryingCommand::draw(NVGcontext *context, const Frame &frame) {
   nvgRoundedRectVarying(context, cornerV.x, cornerV.y, sizeV.x, sizeV.y, radiusTLS, radiusTRS, radiusBRS, radiusBLS);
 }
 
-void EllipseCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(center, radii) = readArgs<Index, Index>(args);
+size_t EllipseCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(center, radii) = readArgs<Index, Index>(numRead, args);
   checkIndex(center, frame.numPoints);
   checkIndex(radii, frame.numPoints);
+  return numRead;
 }
 
-void EllipseCommand::draw(NVGcontext *context, const Frame &frame) {
+void EllipseCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 centerV = frame.points[center];
   const glm::vec2 radiiV = frame.points[radii];
   nvgEllipse(context, centerV.x, centerV.y, radiiV.x, radiiV.y);
 }
 
-void CircleCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  std::tie(center, radius) = readArgs<Index, Index>(args);
+size_t CircleCommand::load(const std::experimental::string_view args, const FrameSize frame) {
+  size_t numRead;
+  std::tie(center, radius) = readArgs<Index, Index>(numRead, args);
   checkIndex(center, frame.numPoints);
   checkIndex(radius, frame.numScalars);
+  return numRead;
 }
 
-void CircleCommand::draw(NVGcontext *context, const Frame &frame) {
+void CircleCommand::draw(NVGcontext *context, const Frame &frame) const {
   const glm::vec2 centerV = frame.points[center];
   const float radiusS = frame.scalars[radius];
   nvgCircle(context, centerV.x, centerV.y, radiusS);
 }
 
-void FillCommand::load(std::experimental::string_view, FrameSize) {}
+size_t FillCommand::load(std::experimental::string_view, FrameSize) {
+  return 0;
+}
 
-void FillCommand::draw(NVGcontext *context, const Frame &) {
+void FillCommand::draw(NVGcontext *context, const Frame &) const {
   nvgFill(context);
 }
 
-void StrokeCommand::load(std::experimental::string_view, FrameSize) {}
+size_t StrokeCommand::load(std::experimental::string_view, FrameSize) {
+  return 0;
+}
 
-void StrokeCommand::draw(NVGcontext *context, const Frame &) {
+void StrokeCommand::draw(NVGcontext *context, const Frame &) const {
   nvgStroke(context);
 }

@@ -19,15 +19,15 @@ public:
 #define COMMAND_NO_MEMBERS(NAME)                                                \
 class NAME##Command final : public DrawCommand {                                \
 public:                                                                         \
-  void load(std::experimental::string_view, FrameSize) override;                \
-  void draw(NVGcontext *, const Frame &) override;                              \
+  size_t load(std::experimental::string_view, FrameSize) override;                \
+  void draw(NVGcontext *, const Frame &) const override;                              \
 }
 
 #define COMMAND(NAME, ...)                                                      \
 class NAME##Command final : public DrawCommand {                                \
 public:                                                                         \
-  void load(std::experimental::string_view, FrameSize) override;                \
-  void draw(NVGcontext *, const Frame &) override;                              \
+  size_t load(std::experimental::string_view, FrameSize) override;                \
+  void draw(NVGcontext *, const Frame &) const override;                              \
                                                                                 \
 private:                                                                        \
   __VA_ARGS__                                                                   \

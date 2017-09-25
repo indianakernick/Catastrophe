@@ -8,9 +8,101 @@
 
 #include "command compiler.hpp"
 
-DrawCommands compileDrawCommands(const std::string &string) {
+#include "draw commands.hpp"
+
+namespace {
+  constexpr std::experimental::string_view operator""_sv(const char *data, const size_t size) {
+    return {data, size};
+  }
+
+  std::unique_ptr<DrawCommand> identityCommand(
+    LineCol &lineCol,
+    std::experimental::string_view &view
+  ) {
+    while (std::isspace(view.front())) {
+      lineCol.putChar(view.front());
+      view.remove_prefix(1);
+    }
+    
+    if (view.size() == 0) {
+      return nullptr;
+    }
+    
+    #define COMMAND(STR, CLASS)                                                 \
+    if (const auto str = #STR##_sv; view == str) {                              \
+      lineCol.putString(str.data(), str.size());                                \
+      view.remove_prefix(str.size());                                           \
+      return std::make_unique<CLASS##Command>();                                \
+    } else
+    
+    //render styles
+    
+    COMMAND(stroke_color, StrokeColor)
+    COMMAND(fill_color, FillColor)
+    COMMAND(miter_limit, MiterLimit)
+    COMMAND(stroke_width, StrokeWidth)
+    COMMAND(line_cap, LineCap)
+    COMMAND(line_join, LineJoin)
+    COMMAND(global_alpha, GlobalAlpha)
+    
+    //paths
+    
+    COMMAND(begin_path, BeginPath)
+    COMMAND(move_to, MoveTo)
+    COMMAND(line_to, LineTo)
+    COMMAND(bezier_to, BezierTo)
+    COMMAND(quad_to, QuadTo)
+    COMMAND(arc_to, ArcTo)
+    COMMAND(close_path, ClosePath)
+    COMMAND(path_winding, PathWinding)
+    COMMAND(arc, Arc)
+    COMMAND(rect, Rect)
+    COMMAND(rounded_rect, RoundedRect)
+    COMMAND(rounded_rect_varying, RoundedRectVarying)
+    COMMAND(ellipse, Ellipse)
+    COMMAND(circle, Circle)
+    COMMAND(fill, Fill)
+    COMMAND(stroke, Stroke)
+    /* else */ {
+      throw DrawCommandError("Invalid command");
+    }
+    
+    #undef COMMAND
+  }
+}
+
+DrawCommands compileDrawCommands(
+  const std::string &string,
+  const FrameSize frameSize,
+  const LineCol startPos
+) {
   DrawCommands commands;
   commands.reserve(string.size() / 8);
+  
+  std::experimental::string_view view = string;
+  LineCol lineCol;
+  
+  try {
+    while (true) {
+      std::unique_ptr<DrawCommand> command = identityCommand(lineCol, view);
+      if (command == nullptr) {
+        break;
+      }
+      
+      commands.emplace_back(std::move(command));
+      size_t numRead = commands.back()->load(view, frameSize);
+      
+      lineCol.putString(view.data(), numRead);
+      view.remove_prefix(numRead);
+    }
+  } catch (DrawCommandError &e) {
+    lineCol.moveBy(startPos);
+    throw std::runtime_error(
+      std::string(lineCol.asStr())
+      + " - "
+      + e.what()
+    );
+  }
   
   return commands;
 }
