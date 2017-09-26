@@ -11,14 +11,14 @@
 
 #include <Simpleton/Platform/window.hpp>
 
-const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {512, 512};
+const glm::ivec2 DEFAULT_WINDOW_PIXEL_SIZE = {1280, 720};
 
 constexpr bool WINDOW_RESIZABLE = true;
 constexpr bool WINDOW_VSYNC = true;
 constexpr bool WINDOW_OPENGL = true;
 
 const Platform::Window::Desc WINDOW_DESC = {
-  "Catastrophe",
+  "The Legend of the Pink Pentagon",
   DEFAULT_WINDOW_PIXEL_SIZE,
   WINDOW_RESIZABLE,
   WINDOW_OPENGL
