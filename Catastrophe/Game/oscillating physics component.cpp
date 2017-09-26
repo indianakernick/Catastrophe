@@ -9,6 +9,7 @@
 #include "oscillating physics component.hpp"
 
 #include "yaml helper.hpp"
+#include <Simpleton/Math/interpolate.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 namespace {
@@ -57,7 +58,17 @@ OscillatingPhysicsComponent::OscillatingPhysicsComponent(
 ) : PhysicsComponent(entity, body),
     first(readVec(getChild(args, "first"))),
     second(readVec(getChild(args, "second"))) {
-  body->SetTransform(first, body->GetAngle());
+    
+  if (const YAML::Node &startNode = args["start"]) {
+    const float start = startNode.as<float>();
+    const b2Vec2 startPoint = {
+      Math::lerp(start, first.x, second.x),
+      Math::lerp(start, first.y, second.y)
+    };
+    body->SetTransform(startPoint, body->GetAngle());
+  } else {
+    body->SetTransform(first, body->GetAngle());
+  }
   
   const float vel = getChild(args, "vel").as<float>();
   toSecond = second - first;

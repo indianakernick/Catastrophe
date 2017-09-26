@@ -10,6 +10,7 @@ entities:
   scale: [20, 1]
   rotation: 0
   args: {}
+  
 - file: oscillating platform entity.yaml
   pos: [0, 0]
   scale: [4, 0.25]
@@ -24,9 +25,10 @@ entities:
   scale: [4, 0.25]
   rotation: 0
   args:
-    first: [-10, 3]
-    second: [10, 5]
-    vel: 1.2
+    first: [-10, 4]
+    second: [10, 4]
+    start: 0.5
+    vel: 1
 
 - file: pentagon entity.yaml
   pos: [9.5, 1.1]

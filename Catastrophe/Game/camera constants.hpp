@@ -14,7 +14,7 @@
 constexpr float DEFAULT_PIXELS_PER_METER = 64.0f;
 
 const glm::vec2 DEFAULT_TRACKING_BOUNDS_CENTER = {0.0f, 0.0f};
-const glm::vec2 DEFAULT_TRACKING_BOUNDS_SIZE = glm::vec2(1.0f, 1.0f) / 2.0f;
+const glm::vec2 DEFAULT_TRACKING_BOUNDS_SIZE = glm::vec2(1.0f, 1.0f) / 3.0f;
 
 constexpr float MIN_ZOOM = 8.0f;
 constexpr float MAX_ZOOM = 256.0f;
