@@ -72,6 +72,7 @@ bool AppImpl::input(float) {
   SDL_Event e;
   unsigned eventCount = 0;
   while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
+    PROFILE(Input event loop);
     if constexpr (ENABLE_DEBUG_INPUT_LOG) {
       printEvent(e);
     }
@@ -90,6 +91,7 @@ bool AppImpl::input(float) {
 
 bool AppImpl::update(const float delta) {
   PROFILE(Update);
+  
   physicsSystem.update(delta);
   return true;
 }
@@ -108,6 +110,7 @@ void AppImpl::render(const float delta) {
   }
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    PROFILE(Debug Physics Render);
     physicsSystem.debugRender();
   }
   if constexpr (ENABLE_GAME_RENDER) {
@@ -115,10 +118,13 @@ void AppImpl::render(const float delta) {
     renderingSystem.render(renderingContext.getContext());
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    PROFILE(Debug Camera Render);
     renderingSystem.cameraDebugRender(renderingContext.getContext());
   }
   
   if (takeScreenshot) {
+    PROFILE(Screenshot);
+    
     takeScreenshot = false;
     renderingContext.postRender(
       false,

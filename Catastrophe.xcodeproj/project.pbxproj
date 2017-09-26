@@ -99,7 +99,6 @@
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
-		4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
 		45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FA21F6CADA400B1DA72 /* physics file.cpp */; };
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
@@ -125,6 +124,7 @@
 		45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */; };
 		45DEA0141F7767D400B1DA72 /* command compiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0121F7767D400B1DA72 /* command compiler.cpp */; };
 		45DEA0171F776B2300B1DA72 /* draw commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0151F776B2300B1DA72 /* draw commands.cpp */; };
+		45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -377,6 +377,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */,
 				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
 				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
 				4509F8EE1F5D247D00927A19 /* IOKit.framework in Frameworks */,
@@ -384,7 +385,6 @@
 				4509F8EA1F5D247100927A19 /* CoreVideo.framework in Frameworks */,
 				4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
-				4592BAFA1F11D75200D1640D /* libSimpleton Engine.dylib in Frameworks */,
 				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

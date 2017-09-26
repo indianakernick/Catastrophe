@@ -13,7 +13,7 @@
 
 int main(int, char **) {
   const float timeStep = 1.0f / 60.0f;
-  const uint32_t maxSteps = 16;
+  const uint32_t maxSteps = 1;
 
   app = std::make_unique<AppImpl>();
   
@@ -28,7 +28,7 @@ int main(int, char **) {
   app->mainLoop(timeStep, maxSteps);
   #endif
   
-  //SpriteTestApp test("pentagon sprite.yaml", "static");
+  //SpriteTestApp test("player sprite.yaml", "run");
   //test.mainLoop(timeStep, maxSteps);
   
   PROFILER_INFO(stdout);
