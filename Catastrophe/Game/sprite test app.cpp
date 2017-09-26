@@ -46,6 +46,8 @@ bool SpriteTestApp::input(float) {
     
     if (e.type == SDL_QUIT) {
       return false;
+    } else {
+      screenshot.handleEvent(e);
     }
     eventCount++;
   }
@@ -80,5 +82,5 @@ void SpriteTestApp::render(const float delta) {
   const Frame frame = getFrame(sprite, animName, anim.getProgressTime());
   renderSprite(renderingContext.getContext(), sprite.drawCommands, frame, {});
   
-  renderingContext.postRender(ENABLE_FPS_RENDER);
+  screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }

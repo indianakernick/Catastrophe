@@ -9,6 +9,7 @@
 #ifndef sprite_test_app_hpp
 #define sprite_test_app_hpp
 
+#include "screenshot.hpp"
 #include "vector sprite.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
@@ -24,6 +25,7 @@ private:
   std::experimental::optional<Platform::WindowLibrary> windowLibrary;
   Platform::Window window;
   RenderingContext renderingContext;
+  Screenshot screenshot;
   
   Sprite sprite;
   Time::SimpleAnim<float> anim;
