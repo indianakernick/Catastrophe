@@ -54,7 +54,7 @@ namespace {
     
     for (end = begin; end != args.size(); ++end) {
       const char c = args[end];
-      if (c == ' ') {
+      if (std::isspace(c)) {
         break;
       } else {
         arg.push_back(c);
@@ -78,7 +78,7 @@ namespace {
     std::tuple<Args...> output;
     const char *argsData = args.data();
     
-    Utils::forEach(output, [args] (auto &element) mutable {
+    Utils::forEach(output, [&args] (auto &element) mutable {
       using ElementType = std::decay_t<decltype(element)>;
       nextArg(args);
       if constexpr (std::is_same<ElementType, std::string>::value) {

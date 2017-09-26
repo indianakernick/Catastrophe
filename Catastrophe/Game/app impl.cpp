@@ -13,6 +13,7 @@
 #include "file constants.hpp"
 #include "camera constants.hpp"
 #include "framebuffer to png.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 #include "../Libraries/tinyfiledialogs.h"
 #include "register collision listeners.hpp"
 #include <Simpleton/Platform/system info.hpp>
@@ -20,6 +21,8 @@
 std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
+  PROFILE(Init);
+
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
@@ -45,6 +48,8 @@ bool AppImpl::init() {
 }
 
 void AppImpl::quit() {
+  PROFILE(Quit);
+
   renderingSystem.stopZoomTrack();
   renderingSystem.stopMotionTrack();
 
@@ -62,6 +67,8 @@ void AppImpl::quit() {
 }
 
 bool AppImpl::input(float) {
+  PROFILE(Input);
+
   SDL_Event e;
   unsigned eventCount = 0;
   while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
@@ -82,20 +89,29 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
+  PROFILE(Update);
   physicsSystem.update(delta);
   return true;
 }
 
 void AppImpl::render(const float delta) {
-  animationSystem.update(delta);
-  renderingSystem.update(delta);
+  PROFILE(Render);
   
-  renderingContext.preRender(renderingSystem.getCamera().toPixels());
+  {
+    PROFILE(Anim);
+    animationSystem.update(delta);
+    renderingSystem.update(delta);
+  }
+  {
+    PROFILE(Pre Render);
+    renderingContext.preRender(renderingSystem.getCamera().toPixels());
+  }
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.debugRender();
   }
   if constexpr (ENABLE_GAME_RENDER) {
+    PROFILE(Game Render);
     renderingSystem.render(renderingContext.getContext());
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
@@ -125,6 +141,7 @@ void AppImpl::render(const float delta) {
       );
     }
   } else {
+    PROFILE(Post Render);
     renderingContext.postRender(ENABLE_FPS_RENDER);
   }
 }

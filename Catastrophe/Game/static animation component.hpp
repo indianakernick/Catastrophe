@@ -15,10 +15,10 @@
 
 class StaticAnimationComponent final : public AnimationComponent {
 public:
-  StaticAnimationComponent(Entity *, const Sprite &, Transform, const YAML::Node &);
+  StaticAnimationComponent(Entity *, Sprite &&, Transform, const YAML::Node &);
   
   void update(float) override;
-  const Shapes &getShapes() const override;
+  const DrawCommands &getDrawCommands() const override;
   const Frame &getFrame() const override;
   glm::mat3 getModelMat() const override;
 

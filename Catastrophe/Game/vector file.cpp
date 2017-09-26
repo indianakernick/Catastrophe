@@ -203,25 +203,35 @@ namespace {
     
     return anims;
   }
+  
+  std::string getFileName(const std::string &filePath) {
+    const size_t lastSlash = filePath.find_last_of('/');
+    return {filePath.c_str() + lastSlash + 1, filePath.find_last_of('.') - lastSlash - 1};
+  }
 }
 
-Sprite loadSprite(const std::string &fileName, const Params &params) {
-  std::unique_ptr<char []> fileStr = concatParamStringToFile(params, fileName);
+Sprite loadSprite(const std::string &filePath, const Params &params) {
+  std::unique_ptr<char []> fileStr = concatParamStringToFile(params, filePath);
   const YAML::Node rootNode = YAML::Load(fileStr.get());
   checkType(rootNode, YAML::NodeType::Map);
   
   const float invScale = readInvScale(getChild(rootNode, "scale"));
   FrameSize frameSize;
-  const Animations anims = readAnims(getChild(rootNode, "anims"), invScale, frameSize);
+  Animations anims = readAnims(getChild(rootNode, "anims"), invScale, frameSize);
   
   const YAML::Node &commandsNode = getChild(rootNode, "commands");
   LineCol commandStrStart;
   const YAML::Mark mark = commandsNode.Mark();
   commandStrStart.moveTo(mark.line, mark.column);
+  commandStrStart.putString("\n  ", 3);
   const std::string commandStr = commandsNode.as<std::string>();
   
-  return {
-    anims,
-    compileDrawCommands(commandStr, frameSize, commandStrStart)
-  };
+  try {
+    return {
+      std::move(anims),
+      compileDrawCommands(commandStr, frameSize, commandStrStart)
+    };
+  } catch (CommandCompilerError &e) {
+    throw std::runtime_error(getFileName(filePath) + ":" + e.what());
+  }
 }

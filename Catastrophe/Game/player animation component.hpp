@@ -17,10 +17,10 @@
 
 class PlayerAnimationComponent final : public AnimationComponent {
 public:
-  PlayerAnimationComponent(Entity *, const Sprite &, Transform, const YAML::Node &);
+  PlayerAnimationComponent(Entity *, Sprite &&, Transform, const YAML::Node &);
   
   void update(float) override;
-  const Shapes &getShapes() const override;
+  const DrawCommands &getDrawCommands() const override;
   const Frame &getFrame() const override;
   glm::mat3 getModelMat() const override;
 

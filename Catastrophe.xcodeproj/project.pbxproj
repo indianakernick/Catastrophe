@@ -1196,6 +1196,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					ENABLE_PROFILER,
+				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					"/usr/local/Cellar/sdl2_gfx/**",

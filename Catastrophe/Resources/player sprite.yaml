@@ -154,57 +154,42 @@ anims:
     color frames: *common_colors
     scalar frames: *common_scalars
 
-shapes:
-- type: line
-  cap: round
-  join: round
-  stroke color: 0
-  stroke width: 0
-  points:
-  - 1  # neck
-  - 3  # left elbow
-  - 4  # left hand
+commands: |
+  line_cap round
+  line_join round
+  stroke_width 0
+  stroke_color 0
 
-- type: line
-  cap: round
-  join: round
-  stroke color: 0
-  stroke width: 0
-  points:
-  - 2  # hip
-  - 7  # left knee
-  - 8  # left foot
+  begin_path
+  move_to 1
+  line_to 3
+  line_to 4
+  move_to 2
+  line_to 7
+  line_to 8
+  stroke
 
-- type: line
-  cap: round
-  join: round
-  stroke color: 1
-  stroke width: 0
-  points:
-  - 2  # hip
-  - 9  # right knee
-  - 10 # right foot
+  begin_path
+  stroke_color 1
+  move_to 2
+  line_to 9
+  line_to 10
+  stroke
 
-- type: line
-  cap: round
-  join: round
-  stroke color: 2
-  stroke width: 0
-  points:
-  - 1  # neck
-  - 2  # hip
+  begin_path
+  stroke_color 2
+  move_to 1
+  line_to 2
+  stroke
 
-- type: line
-  cap: round
-  join: round
-  stroke color: 1
-  stroke width: 0
-  points:
-  - 1  # neck
-  - 5  # right elbow
-  - 6  # right hand
+  begin_path
+  stroke_color 1
+  move_to 1
+  line_to 5
+  line_to 6
+  stroke
 
-- type: circle
-  radius: 1
-  fill color: 2
-  points: [0] # head
+  begin_path
+  fill_color 2
+  circle 0 1
+  fill

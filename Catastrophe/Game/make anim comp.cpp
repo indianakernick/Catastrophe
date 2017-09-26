@@ -20,7 +20,7 @@ using AnimComps = Utils::TypeList<
 std::shared_ptr<AnimationComponent> makeAnimComp(
   const std::experimental::string_view name,
   Entity *const entity,
-  const Sprite &sprite,
+  Sprite &&sprite,
   const Transform transform,
   const YAML::Node &args
 ) {
@@ -31,7 +31,7 @@ std::shared_ptr<AnimationComponent> makeAnimComp(
     >(name, [entity, &sprite, transform, &args] (auto t) {
       return std::make_shared<UTILS_TYPE(t)>(
         entity,
-        sprite,
+        std::move(sprite),
         transform,
         args
       );

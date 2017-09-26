@@ -17,15 +17,15 @@
 
 PlayerAnimationComponent::PlayerAnimationComponent(
   Entity *const entity,
-  const Sprite &sprite,
+  Sprite &&sprite,
   const Transform transform,
   const YAML::Node &
 ) : AnimationComponent(entity),
-    sprite(sprite),
+    sprite(std::move(sprite)),
     transform(transform),
-    anim(sprite.animations.at("run").durationSec),
+    anim(this->sprite.animations.at("run").durationSec),
     standRun(0.125),
-    footSpeed(sprite.animations.at("run").meta.at("foot speed")) {}
+    footSpeed(this->sprite.animations.at("run").meta.at("foot speed")) {}
 
 void PlayerAnimationComponent::update(const float delta) {
   const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(getEntity().physics);
@@ -54,8 +54,8 @@ void PlayerAnimationComponent::update(const float delta) {
   model = transform.getMat3();
 }
 
-const Shapes &PlayerAnimationComponent::getShapes() const {
-  return sprite.shapes;
+const DrawCommands &PlayerAnimationComponent::getDrawCommands() const {
+  return sprite.drawCommands;
 }
 
 const Frame &PlayerAnimationComponent::getFrame() const {

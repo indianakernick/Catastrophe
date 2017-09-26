@@ -28,53 +28,8 @@ anims:
       - [0.2, 0.2, 1.0, 1.0] # cross
       - [0.0, 0.0, 1.0, 1.0] # outline
 
-shapes:
-- type: line
-  fill color: 0
-  points:
-  - 0  # bottom left
-  - 1  # top left
-  - 5  # top right
-  - 6  # bottom right
-
-- type: line
-  cap: butt
-  join: bevel
-  stroke width: 0
-  stroke color: 1
-  points:
-  - 0  # bottom left
-  - 2  # top left mid
-  - 8  # bottom mid
-  - 4  # top right mid
-  - 6  # bottom right
-
-- type: line
-  cap: butt
-  join: bevel
-  stroke width: 0
-  stroke color: 1
-  points:
-  - 1  # top left
-  - 9  # bottom left mid
-  - 3  # top mid
-  - 7  # bottom right mid
-  - 5  # top right
-
-- type: line
-  cap: square
-  join: miter
-  stroke width: 0
-  stroke color: 2
-  points:
-  - 0  # bottom left
-  - 1  # top left
-  - 5  # top right
-  - 6  # bottom right
-  - 0  # bottom left
-
 commands: |
-  begin
+  begin_path
   fill_color 0
   move_to 0
   line_to 1
@@ -82,19 +37,17 @@ commands: |
   line_to 6
   fill
 
-  begin
+  stroke_width 0
+
+  begin_path
   line_cap butt
   line_join bevel
-  stroke_width 0
   stroke_color 1
   move_to 0
   line_to 2
   line_to 8
   line_to 4
   line_to 6
-  stroke
-
-  begin
   move_to 1
   line_to 9
   line_to 3
@@ -102,11 +55,10 @@ commands: |
   line_to 5
   stroke
 
-  begin
+  begin_path
   line_cap square
   line_join miter
-  stroke_width: 0
-  stroke_color: 2
+  stroke_color 2
   move_to 0
   line_to 1
   line_to 5

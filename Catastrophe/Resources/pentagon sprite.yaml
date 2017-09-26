@@ -22,13 +22,13 @@ anims:
       # bright pink
       - [1, 0.0, 0.5, 1.0]
 
-shapes:
-- type: line
-  fill color: 0
-  points:
-  - 0
-  - 1
-  - 2
-  - 3
-  - 4
-  - 0
+commands: |
+  begin_path
+  fill_color 0
+  move_to 0
+  line_to 1
+  line_to 2
+  line_to 3
+  line_to 4
+  line_to 0
+  fill

@@ -10,9 +10,24 @@
 
 #include "draw commands.hpp"
 
+CommandCompilerError::CommandCompilerError(const std::string &what)
+  : std::runtime_error(what) {}
+
 namespace {
   constexpr std::experimental::string_view operator""_sv(const char *data, const size_t size) {
     return {data, size};
+  }
+  
+  bool commandIs(
+    const std::experimental::string_view mainString,
+    const std::experimental::string_view commandName
+  ) {
+    if (mainString.size() < commandName.size()) {
+      return false;
+    } else {
+      using Traits = std::experimental::string_view::traits_type;
+      return Traits::compare(mainString.data(), commandName.data(), commandName.size()) == 0;
+    }
   }
 
   std::unique_ptr<DrawCommand> identityCommand(
@@ -29,7 +44,7 @@ namespace {
     }
     
     #define COMMAND(STR, CLASS)                                                 \
-    if (const auto str = #STR##_sv; view == str) {                              \
+    if (const auto str = #STR##_sv; commandIs(view, str)) {                     \
       lineCol.putString(str.data(), str.size());                                \
       view.remove_prefix(str.size());                                           \
       return std::make_unique<CLASS##Command>();                                \
@@ -97,7 +112,7 @@ DrawCommands compileDrawCommands(
     }
   } catch (DrawCommandError &e) {
     lineCol.moveBy(startPos);
-    throw std::runtime_error(
+    throw CommandCompilerError(
       std::string(lineCol.asStr())
       + " - "
       + e.what()

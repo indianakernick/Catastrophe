@@ -80,6 +80,13 @@ public:
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
 
 struct Sprite {
+  Sprite() = default;
+  Sprite(Sprite &&) = default;
+  Sprite &operator=(Sprite &&) = default;
+  
+  Sprite(Animations &&animations, DrawCommands &&drawCommands)
+    : animations(std::move(animations)), drawCommands(std::move(drawCommands)) {}
+  
   Animations animations;
   DrawCommands drawCommands;
 };

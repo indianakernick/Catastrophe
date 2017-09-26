@@ -9,6 +9,7 @@
 #include "app impl.hpp"
 #include "sprite test app.hpp"
 #include <SDL2/SDL_messagebox.h>
+#include <Simpleton/Utils/profiler.hpp>
 
 int main(int, char **) {
   const float timeStep = 1.0f / 60.0f;
@@ -29,6 +30,8 @@ int main(int, char **) {
   
   //SpriteTestApp test("pentagon sprite.yaml", "static");
   //test.mainLoop(timeStep, maxSteps);
+  
+  PROFILER_INFO(stdout);
   
   return 0;
 }

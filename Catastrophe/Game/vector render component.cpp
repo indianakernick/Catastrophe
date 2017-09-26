@@ -29,7 +29,7 @@ void VectorRenderComponent::render(NVGcontext *context) {
   const auto anim = getEntity().animation;
   renderSprite(
     context,
-    anim->getShapes(),
+    anim->getDrawCommands(),
     anim->getFrame(),
     anim->getModelMat()
   );

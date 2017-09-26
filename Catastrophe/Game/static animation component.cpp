@@ -16,11 +16,11 @@
 
 StaticAnimationComponent::StaticAnimationComponent(
   Entity *const entity,
-  const Sprite &sprite,
+  Sprite &&sprite,
   const Transform transform,
   const YAML::Node &
 ) : AnimationComponent(entity),
-    sprite(sprite),
+    sprite(std::move(sprite)),
     transform(transform) {}
 
 void StaticAnimationComponent::update(float) {
@@ -30,8 +30,8 @@ void StaticAnimationComponent::update(float) {
   model = transform.getMat3();
 }
 
-const Shapes &StaticAnimationComponent::getShapes() const {
-  return sprite.shapes;
+const DrawCommands &StaticAnimationComponent::getDrawCommands() const {
+  return sprite.drawCommands;
 }
 
 const Frame &StaticAnimationComponent::getFrame() const {

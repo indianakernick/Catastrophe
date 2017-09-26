@@ -18,7 +18,7 @@
 std::shared_ptr<AnimationComponent> makeAnimComp(
   std::experimental::string_view,
   Entity *,
-  const Sprite &,
+  Sprite &&,
   Transform,
   const YAML::Node &
 );
