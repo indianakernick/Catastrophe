@@ -8,110 +8,95 @@
 
 #include "draw commands.hpp"
 
-#include <Simpleton/Utils/type list.hpp>
-
 DrawCommandError::DrawCommandError(const char *what)
   : std::runtime_error(what) {}
 
-namespace {
-  //I pulled the next 4 functions out of the command interpreter for
-  //my password manager. It's on Github
+//I pulled the next 4 functions out of the command interpreter for
+//my password manager. It's on Github
 
-  Index readNumber(std::experimental::string_view &args) {
-    if (args.empty()) {
-      throw DrawCommandError("Expected number");
-    }
-    char *end;
-    const unsigned long long arg = std::strtoull(args.data(), &end, 0);
-    if (errno == ERANGE || arg > std::numeric_limits<Index>::max()) {
-      throw DrawCommandError("Number out of range");
-    }
-    if (arg == 0 && end[-1] != '0') {
-      throw DrawCommandError("Invalid number");
-    }
-    args.remove_prefix(end - args.data());
-    return static_cast<Index>(arg);
+Index readNumber(std::experimental::string_view &args) {
+  if (args.empty()) {
+    throw DrawCommandError("Expected number");
   }
+  char *end;
+  const unsigned long long arg = std::strtoull(args.data(), &end, 0);
+  if (errno == ERANGE || arg > std::numeric_limits<Index>::max()) {
+    throw DrawCommandError("Number out of range");
+  }
+  if (arg == 0 && end[-1] != '0') {
+    throw DrawCommandError("Invalid number");
+  }
+  args.remove_prefix(end - args.data());
+  return static_cast<Index>(arg);
+}
 
-  std::string readString(std::experimental::string_view &args) {
-    if (args.empty()) {
-      throw DrawCommandError("Expected string");
-    }
-    
-    size_t begin = 0;
-    for (; begin != args.size(); ++begin) {
-      if (args[begin] != ' ') {
-        break;
-      }
-    }
-    
-    if (begin == args.size()) {
-      throw DrawCommandError("Expected string");
-    }
-    
-    size_t end = 0;
-    std::string arg;
-    
-    for (end = begin; end != args.size(); ++end) {
-      const char c = args[end];
-      if (std::isspace(c)) {
-        break;
-      } else {
-        arg.push_back(c);
-      }
-    }
-    
-    args.remove_prefix(end);
-    
-    return arg;
+std::string readString(std::experimental::string_view &args) {
+  if (args.empty()) {
+    throw DrawCommandError("Expected string");
   }
   
-  void nextArg(std::experimental::string_view &args) {
-    if (args.empty() || args[0] != ' ') {
-      throw DrawCommandError("Not enough arguments");
+  size_t begin = 0;
+  for (; begin != args.size(); ++begin) {
+    if (args[begin] != ' ') {
+      break;
     }
-    args.remove_prefix(1);
   }
   
-  template <typename ...Args>
-  std::tuple<Args...> readArgs(size_t &numRead, std::experimental::string_view args) {
-    std::tuple<Args...> output;
-    const char *argsData = args.data();
-    
-    Utils::forEach(output, [&args] (auto &element) mutable {
-      using ElementType = std::decay_t<decltype(element)>;
-      nextArg(args);
-      if constexpr (std::is_same<ElementType, std::string>::value) {
-        element = readString(args);
-      } else if (std::is_integral<ElementType>::value) {
-        element = readNumber(args);
-      }
-    });
-    
-    numRead = args.data() - argsData;
-    
-    return output;
+  if (begin == args.size()) {
+    throw DrawCommandError("Expected string");
   }
   
-  void checkIndex(const Index index, const Index size) {
-    if (index >= size) {
-      throw DrawCommandError("Index out of range");
+  size_t end = 0;
+  std::string arg;
+  
+  for (end = begin; end != args.size(); ++end) {
+    const char c = args[end];
+    if (std::isspace(c)) {
+      break;
+    } else {
+      arg.push_back(c);
     }
+  }
+  
+  args.remove_prefix(end);
+  
+  return arg;
+}
+
+void nextArg(std::experimental::string_view &args) {
+  if (args.empty() || args[0] != ' ') {
+    throw DrawCommandError("Not enough arguments");
+  }
+  args.remove_prefix(1);
+}
+
+template <typename ...Args>
+std::tuple<Args...> readArgs(size_t &numRead, std::experimental::string_view args) {
+  std::tuple<Args...> output;
+  const char *argsData = args.data();
+  
+  Utils::forEach(output, [&args] (auto &element) mutable {
+    using ElementType = std::decay_t<decltype(element)>;
+    nextArg(args);
+    if constexpr (std::is_same<ElementType, std::string>::value) {
+      element = readString(args);
+    } else if constexpr (std::is_integral<ElementType>::value) {
+      element = readNumber(args);
+    }
+  });
+  
+  numRead = args.data() - argsData;
+  
+  return output;
+}
+
+void checkIndex(const Index index, const Index size) {
+  if (index >= size) {
+    throw DrawCommandError("Index out of range");
   }
 }
 
 //render styles
-
-size_t StrokeColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
-  size_t numRead;
-  std::tie(color) = readArgs<Index>(numRead, args);
-  checkIndex(color, frame.numColors);
-  return numRead;
-}
-
-void StrokeColorCommand::draw(NVGcontext *context, const Frame &frame) const {
-  nvgStrokeColor(context, frame.colors[color]);
-}
 
 size_t FillColorCommand::load(const std::experimental::string_view args, const FrameSize frame) {
   size_t numRead;
