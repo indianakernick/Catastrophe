@@ -1,4 +1,4 @@
-scale: 2
+scale: 1
 anims:
   static:
     duration: 30.0
@@ -11,6 +11,7 @@ anims:
       - [-0.587, -0.809]  # [cos(13/10 * PI), sin(13/10 * PI)]
       - [0.587, -0.809]   # [cos(17/10 * PI), sin(17/10 * PI)]
       - [0.951, 0.309]    # [cos(21/10 * PI), sin(21/10 * PI)]
+      - [0.5, 0.5]  # scale factor
 
     scalar frames:
     - offset: 0.0
@@ -23,6 +24,8 @@ anims:
       - [1, 0.0, 0.5, 1.0]
 
 commands: |
+  scale 5
+
   begin_path
   fill_color 0
   move_to 0

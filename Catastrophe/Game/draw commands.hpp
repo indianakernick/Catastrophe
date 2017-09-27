@@ -156,7 +156,6 @@ auto flatten(Tuple &&tuple) {
 
 Index readNumber(std::experimental::string_view &);
 std::string readString(std::experimental::string_view &);
-void nextArg(std::experimental::string_view &);
 void checkIndex(Index, Index);
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename List>
@@ -166,11 +165,15 @@ public:
     const char *argsData = args.data();
     
     Utils::forEachIndex<Utils::listSize<List>>([this, &args, frame] (const auto i) mutable {
+      if (args.empty() || args[0] != ' ') {
+        throw DrawCommandError("Not enough arguments");
+      }
+      args.remove_prefix(1);
+      
       constexpr size_t index = UTILS_VALUE(i);
       using ListType = Utils::AtIndex<List, index>;
       auto &arg = std::get<index>(data);
       using ArgType = std::tuple_element_t<index, decltype(data)>;
-      nextArg(args);
       
       if constexpr (std::is_same<ArgType, Index>::value) {
         arg = readNumber(args);
@@ -236,6 +239,14 @@ COMMAND(StrokeWidth, nvgStrokeWidth, ScalarType);
 COMMAND(LineCap, nvgLineCap, LineCap);
 COMMAND(LineJoin, nvgLineJoin, LineJoin);
 COMMAND(GlobalAlpha, nvgGlobalAlpha, ScalarType);
+
+//transforms
+
+COMMAND(Translate, nvgTranslate, PointType);
+COMMAND(Rotate, nvgRotate, ScalarType);
+COMMAND(SkewX, nvgSkewX, ScalarType);
+COMMAND(SkewY, nvgSkewY, ScalarType);
+COMMAND(Scale, nvgScale, PointType);
 
 //paths
 

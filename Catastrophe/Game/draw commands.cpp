@@ -11,7 +11,7 @@
 DrawCommandError::DrawCommandError(const char *what)
   : std::runtime_error(what) {}
 
-//I pulled the next 3 functions out of the command interpreter for
+//I pulled the next 2 functions out of the command interpreter for
 //my password manager. It's on Github
 
 Index readNumber(std::experimental::string_view &args) {
@@ -61,13 +61,6 @@ std::string readString(std::experimental::string_view &args) {
   args.remove_prefix(end);
   
   return arg;
-}
-
-void nextArg(std::experimental::string_view &args) {
-  if (args.empty() || args[0] != ' ') {
-    throw DrawCommandError("Not enough arguments");
-  }
-  args.remove_prefix(1);
 }
 
 void checkIndex(const Index index, const Index size) {

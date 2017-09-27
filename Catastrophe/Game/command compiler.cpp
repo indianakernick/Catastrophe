@@ -60,6 +60,14 @@ namespace {
     COMMAND(line_join, LineJoin)
     COMMAND(global_alpha, GlobalAlpha)
     
+    //transform
+    
+    COMMAND(translate, Translate)
+    COMMAND(rotate, Rotate)
+    COMMAND(skew_x, SkewX)
+    COMMAND(skew_y, SkewY)
+    COMMAND(scale, Scale)
+    
     //paths
     
     COMMAND(begin_path, BeginPath)
