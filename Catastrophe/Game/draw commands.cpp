@@ -11,56 +11,54 @@
 DrawCommandError::DrawCommandError(const char *what)
   : std::runtime_error(what) {}
 
-//I pulled the next 2 functions out of the command interpreter for
-//my password manager. It's on Github
-
-Index readNumber(std::experimental::string_view &args) {
-  if (args.empty()) {
-    throw DrawCommandError("Expected number");
+Index readIndex(ParseString &string) {
+  string.skipWhitespace();
+  if (string.empty()) {
+    throw DrawCommandError("Expected index");
   }
+  //@TODO std::from_chars
   char *end;
-  const unsigned long long arg = std::strtoull(args.data(), &end, 0);
+  const unsigned long long arg = std::strtoull(string.data(), &end, 0);
   if (errno == ERANGE || arg > std::numeric_limits<Index>::max()) {
-    throw DrawCommandError("Number out of range");
+    throw DrawCommandError("Index out of range");
   }
   if (arg == 0 && end[-1] != '0') {
-    throw DrawCommandError("Invalid number");
+    throw DrawCommandError("Invalid index");
   }
-  args.remove_prefix(end - args.data());
+  string.advance(end - string.data());
   return static_cast<Index>(arg);
 }
 
-std::string readString(std::experimental::string_view &args) {
-  if (args.empty()) {
-    throw DrawCommandError("Expected string");
+float readFloat(ParseString &string) {
+  string.skipWhitespace();
+  if (string.empty()) {
+    throw DrawCommandError("Expected float");
   }
-  
-  size_t begin = 0;
-  for (; begin != args.size(); ++begin) {
-    if (args[begin] != ' ') {
-      break;
-    }
+  //@TODO std::from_chars
+  char *end;
+  const float arg = std::strtof(string.data(), &end);
+  if (errno == ERANGE) {
+    throw DrawCommandError("Float out of range");
   }
-  
-  if (begin == args.size()) {
-    throw DrawCommandError("Expected string");
-  }
-  
-  size_t end = 0;
-  std::string arg;
-  
-  for (end = begin; end != args.size(); ++end) {
-    const char c = args[end];
-    if (std::isspace(c)) {
-      break;
-    } else {
-      arg.push_back(c);
-    }
-  }
-  
-  args.remove_prefix(end);
-  
+  string.advance(end - string.data());
   return arg;
+}
+
+glm::vec2 readPoint(ParseString &string) {
+  glm::vec2 point;
+  
+  string.skipWhitespace();
+  string.expect('[');
+  point.x = readFloat(string);
+  
+  string.skipWhitespace();
+  string.expect(',');
+  point.y = readFloat(string);
+  
+  string.skipWhitespace();
+  string.expect(']');
+  
+  return point;
 }
 
 void checkIndex(const Index index, const Index size) {

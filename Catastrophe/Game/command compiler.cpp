@@ -9,15 +9,12 @@
 #include "command compiler.hpp"
 
 #include "draw commands.hpp"
+#include "string view literal.hpp"
 
 CommandCompilerError::CommandCompilerError(const std::string &what)
   : std::runtime_error(what) {}
 
 namespace {
-  constexpr std::experimental::string_view operator""_sv(const char *data, const size_t size) {
-    return {data, size};
-  }
-  
   bool commandIs(
     const std::experimental::string_view mainString,
     const std::experimental::string_view commandName
@@ -30,23 +27,9 @@ namespace {
     }
   }
 
-  std::unique_ptr<DrawCommand> identityCommand(
-    LineCol &lineCol,
-    std::experimental::string_view &view
-  ) {
-    while (std::isspace(view.front())) {
-      lineCol.putChar(view.front());
-      view.remove_prefix(1);
-    }
-    
-    if (view.size() == 0) {
-      return nullptr;
-    }
-    
+  std::unique_ptr<DrawCommand> identityCommand(ParseString &parseStr) {
     #define COMMAND(STR, CLASS)                                                 \
-    if (const auto str = #STR##_sv; commandIs(view, str)) {                     \
-      lineCol.putString(str.data(), str.size());                                \
-      view.remove_prefix(str.size());                                           \
+    if (parseStr.check(#STR##_sv)) {                                            \
       return std::make_unique<CLASS##Command>();                                \
     } else
     
@@ -102,24 +85,21 @@ DrawCommands compileDrawCommands(
   DrawCommands commands;
   commands.reserve(string.size() / 8);
   
-  std::experimental::string_view view = string;
-  LineCol lineCol;
+  ParseString parseStr(string.data(), string.size());
   
   try {
     while (true) {
-      std::unique_ptr<DrawCommand> command = identityCommand(lineCol, view);
-      if (command == nullptr) {
+      parseStr.skipWhitespace();
+      if (parseStr.size() == 0) {
         break;
       }
-      
-      commands.emplace_back(std::move(command));
-      size_t numRead = commands.back()->load(view, frameSize);
-      
-      lineCol.putString(view.data(), numRead);
-      view.remove_prefix(numRead);
+      commands.emplace_back(identityCommand(parseStr));
+      commands.back()->load(parseStr, frameSize);
     }
   } catch (DrawCommandError &e) {
+    LineCol lineCol = parseStr.lineCol();
     lineCol.moveBy(startPos);
+    
     throw CommandCompilerError(
       std::string(lineCol.asStr())
       + " - "

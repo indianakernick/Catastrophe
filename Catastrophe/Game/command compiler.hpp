@@ -9,15 +9,13 @@
 #ifndef command_compiler_hpp
 #define command_compiler_hpp
 
+#include "parse string.hpp"
 #include "vector sprite.hpp"
-#include <Simpleton/Utils/line col.hpp>
 
 class CommandCompilerError final : public std::runtime_error {
 public:
   explicit CommandCompilerError(const std::string &);
 };
-
-using LineCol = Utils::LineCol<unsigned, unsigned>;
 
 DrawCommands compileDrawCommands(const std::string &, FrameSize, LineCol);
 

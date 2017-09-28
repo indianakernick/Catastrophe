@@ -14,7 +14,7 @@
 #include <glm/vec2.hpp>
 #include <unordered_map>
 #include <nanovg/nanovg.h>
-#include <experimental/string_view>
+#include "parse string.hpp"
 
 using TimeSec = float;
 using Coord = float;
@@ -74,7 +74,7 @@ public:
   DrawCommand() = default;
   virtual ~DrawCommand() = default;
   
-  virtual size_t load(std::experimental::string_view, FrameSize) = 0;
+  virtual void load(ParseString &, FrameSize) = 0;
   virtual void draw(NVGcontext *, const Frame &) const = 0;
 };
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;

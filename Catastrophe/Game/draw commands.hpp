@@ -11,6 +11,7 @@
 
 #include <experimental/tuple>
 #include "command compiler.hpp"
+#include "string view literal.hpp"
 #include <Simpleton/Utils/type list.hpp>
 
 class DrawCommandError final : public std::runtime_error {
@@ -27,12 +28,12 @@ struct ParseEnum;
 
 template <>
 struct ParseEnum<LineCap> {
-  static int parse(const std::string &capStr) {
-           if (capStr == "butt") {
+  static int parse(ParseString &capStr) {
+           if (capStr.check("butt"_sv)) {
       return NVG_BUTT;
-    } else if (capStr == "round") {
+    } else if (capStr.check("round"_sv)) {
       return NVG_ROUND;
-    } else if (capStr == "square") {
+    } else if (capStr.check("square"_sv)) {
       return NVG_SQUARE;
     } else {
       throw DrawCommandError("Invalid line cap");
@@ -42,12 +43,12 @@ struct ParseEnum<LineCap> {
 
 template <>
 struct ParseEnum<LineJoin> {
-  static int parse(const std::string &joinStr) {
-           if (joinStr == "miter") {
+  static int parse(ParseString &joinStr) {
+           if (joinStr.check("miter"_sv)) {
       return NVG_MITER;
-    } else if (joinStr == "round") {
+    } else if (joinStr.check("round"_sv)) {
       return NVG_ROUND;
-    } else if (joinStr == "bevel") {
+    } else if (joinStr.check("bevel"_sv)) {
       return NVG_BEVEL;
     } else {
       throw DrawCommandError("Invalid line join");
@@ -57,10 +58,10 @@ struct ParseEnum<LineJoin> {
 
 template <>
 struct ParseEnum<NVGwinding> {
-  static int parse(const std::string &windingStr) {
-           if (windingStr == "ccw" || windingStr == "solid") {
+  static int parse(ParseString &windingStr) {
+           if (windingStr.check("ccw"_sv) || windingStr.check("solid"_sv)) {
       return NVG_CCW;
-    } else if (windingStr == "cw" || windingStr == "hole") {
+    } else if (windingStr.check("cw"_sv) || windingStr.check("hole"_sv)) {
       return NVG_CW;
     } else {
       throw DrawCommandError("Invalid winding");
@@ -154,21 +155,18 @@ auto flatten(Tuple &&tuple) {
   return flattenHelper(tuple, std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>());
 }
 
-Index readNumber(std::experimental::string_view &);
-std::string readString(std::experimental::string_view &);
+Index readIndex(ParseString &);
 void checkIndex(Index, Index);
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename List>
 class DrawCommandImpl final : public DrawCommand {
 public:
-  size_t load(std::experimental::string_view args, const FrameSize frame) override {
-    const char *argsData = args.data();
-    
-    Utils::forEachIndex<Utils::listSize<List>>([this, &args, frame] (const auto i) mutable {
-      if (args.empty() || args[0] != ' ') {
+  void load(ParseString &string, const FrameSize frame) override {
+    Utils::forEachIndex<Utils::listSize<List>>([this, &string, frame] (const auto i) mutable {
+      if (string.empty() || string[0] != ' ') {
         throw DrawCommandError("Not enough arguments");
       }
-      args.remove_prefix(1);
+      string.advance();
       
       constexpr size_t index = UTILS_VALUE(i);
       using ListType = Utils::AtIndex<List, index>;
@@ -176,7 +174,7 @@ public:
       using ArgType = std::tuple_element_t<index, decltype(data)>;
       
       if constexpr (std::is_same<ArgType, Index>::value) {
-        arg = readNumber(args);
+        arg = readIndex(string);
         if constexpr (std::is_same<ListType, PointType>::value) {
           checkIndex(arg, frame.numPoints);
         } else if constexpr (std::is_same<ListType, ScalarType>::value) {
@@ -185,11 +183,10 @@ public:
           checkIndex(arg, frame.numColors);
         }
       } else if constexpr (std::is_same<ArgType, int>::value) {
-        arg = ParseEnum<ListType>::parse(readString(args));
+        string.skipWhitespace();
+        arg = ParseEnum<ListType>::parse(string);
       }
     });
-    
-    return args.data() - argsData;
   }
   
   void draw(NVGcontext *context, const Frame &frame) const override {
