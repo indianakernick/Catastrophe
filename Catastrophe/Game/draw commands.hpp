@@ -10,106 +10,12 @@
 #define draw_commands_hpp
 
 #include <array>
+#include "vector sprite.hpp"
+#include "parse nvg enum.hpp"
 #include <experimental/tuple>
-#include "command compiler.hpp"
-#include "string view literal.hpp"
+#include "command literals.hpp"
+#include "command arg types.hpp"
 #include <Simpleton/Utils/type list.hpp>
-
-class DrawCommandError final : public std::runtime_error {
-public:
-  explicit DrawCommandError(const char *);
-};
-
-//NanoVG doesn't distungish between line cap and line join enum
-class LineCap {};
-class LineJoin {};
-
-template <typename EnumType>
-struct ParseEnum;
-
-template <>
-struct ParseEnum<LineCap> {
-  static int parse(ParseString &capStr) {
-           if (capStr.check("butt"_sv)) {
-      return NVG_BUTT;
-    } else if (capStr.check("round"_sv)) {
-      return NVG_ROUND;
-    } else if (capStr.check("square"_sv)) {
-      return NVG_SQUARE;
-    } else {
-      throw DrawCommandError("Invalid line cap");
-    }
-  }
-};
-
-template <>
-struct ParseEnum<LineJoin> {
-  static int parse(ParseString &joinStr) {
-           if (joinStr.check("miter"_sv)) {
-      return NVG_MITER;
-    } else if (joinStr.check("round"_sv)) {
-      return NVG_ROUND;
-    } else if (joinStr.check("bevel"_sv)) {
-      return NVG_BEVEL;
-    } else {
-      throw DrawCommandError("Invalid line join");
-    }
-  }
-};
-
-template <>
-struct ParseEnum<NVGwinding> {
-  static int parse(ParseString &windingStr) {
-           if (windingStr.check("ccw"_sv) || windingStr.check("solid"_sv)) {
-      return NVG_CCW;
-    } else if (windingStr.check("cw"_sv) || windingStr.check("hole"_sv)) {
-      return NVG_CW;
-    } else {
-      throw DrawCommandError("Invalid winding");
-    }
-  }
-};
-
-class PointType {};
-class ScalarType {};
-class ColorType {};
-
-template <typename ArgType>
-struct GetArgType {
-  //enums
-  using type = std::tuple<int>;
-};
-
-template <>
-struct GetArgType<PointType> {
-  using type = std::tuple<float, float>;
-};
-
-template <>
-struct GetArgType<ScalarType> {
-  using type = std::tuple<float>;
-};
-
-template <>
-struct GetArgType<ColorType> {
-  using type = std::tuple<NVGcolor>;
-};
-
-inline std::tuple<int> getArg(const int arg) {
-  return std::tuple<int>(arg);
-}
-
-inline std::tuple<float, float> getArg(const glm::vec2 arg) {
-  return std::tuple<float, float>(arg.x, arg.y);
-}
-
-inline std::tuple<float> getArg(const float arg) {
-  return std::tuple<float>(arg);
-}
-
-inline std::tuple<NVGcolor> getArg(const NVGcolor arg) {
-  return std::tuple<NVGcolor>(arg);
-}
 
 template <typename Tuple>
 struct IsTuple : std::false_type {};
@@ -134,12 +40,6 @@ template <typename Tuple>
 auto flatten(Tuple &&tuple) {
   return flattenHelper(tuple, std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>());
 }
-
-Index readIndex(ParseString &, Index);
-bool isLiteral(ParseString &);
-glm::vec2 readPoint(ParseString &);
-float readScalar(ParseString &);
-NVGcolor readColor(ParseString &);
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {

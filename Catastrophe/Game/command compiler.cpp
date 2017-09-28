@@ -11,9 +11,6 @@
 #include "draw commands.hpp"
 #include "string view literal.hpp"
 
-CommandCompilerError::CommandCompilerError(const std::string &what)
-  : std::runtime_error(what) {}
-
 namespace {
   std::unique_ptr<DrawCommand> identityCommand(ParseString &parseStr) {
     #define COMMAND(STR, CLASS)                                                 \

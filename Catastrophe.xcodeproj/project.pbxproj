@@ -127,6 +127,8 @@
 		45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA01B1F7A43A500B1DA72 /* screenshot.cpp */; };
 		45DEA0201F7C85DE00B1DA72 /* parse string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA01E1F7C85DE00B1DA72 /* parse string.cpp */; };
+		45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0231F7CDDA500B1DA72 /* command errors.cpp */; };
+		45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0281F7CDF6800B1DA72 /* command literals.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -366,6 +368,13 @@
 		45DEA01E1F7C85DE00B1DA72 /* parse string.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "parse string.cpp"; sourceTree = "<group>"; };
 		45DEA01F1F7C85DE00B1DA72 /* parse string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "parse string.hpp"; sourceTree = "<group>"; };
 		45DEA0211F7C98DC00B1DA72 /* string view literal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "string view literal.hpp"; sourceTree = "<group>"; };
+		45DEA0221F7CDCFD00B1DA72 /* parse nvg enum.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "parse nvg enum.hpp"; sourceTree = "<group>"; };
+		45DEA0231F7CDDA500B1DA72 /* command errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "command errors.cpp"; sourceTree = "<group>"; };
+		45DEA0241F7CDDA500B1DA72 /* command errors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "command errors.hpp"; sourceTree = "<group>"; };
+		45DEA0261F7CDE6900B1DA72 /* command arg types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "command arg types.hpp"; sourceTree = "<group>"; };
+		45DEA0271F7CDE9500B1DA72 /* animation data types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "animation data types.hpp"; sourceTree = "<group>"; };
+		45DEA0281F7CDF6800B1DA72 /* command literals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "command literals.cpp"; sourceTree = "<group>"; };
+		45DEA0291F7CDF6800B1DA72 /* command literals.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "command literals.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -412,6 +421,13 @@
 				45DEA0131F7767D400B1DA72 /* command compiler.hpp */,
 				45DEA0151F776B2300B1DA72 /* draw commands.cpp */,
 				45DEA0161F776B2300B1DA72 /* draw commands.hpp */,
+				45DEA0221F7CDCFD00B1DA72 /* parse nvg enum.hpp */,
+				45DEA0231F7CDDA500B1DA72 /* command errors.cpp */,
+				45DEA0241F7CDDA500B1DA72 /* command errors.hpp */,
+				45DEA0261F7CDE6900B1DA72 /* command arg types.hpp */,
+				45DEA0271F7CDE9500B1DA72 /* animation data types.hpp */,
+				45DEA0281F7CDF6800B1DA72 /* command literals.cpp */,
+				45DEA0291F7CDF6800B1DA72 /* command literals.hpp */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1017,6 +1033,7 @@
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
+				45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */,
 				45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */,
 				452FFA821F6BC50D003A98B1 /* b2ContactSolver.cpp in Sources */,
 				4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */,
@@ -1087,6 +1104,7 @@
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
+				45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
 				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,

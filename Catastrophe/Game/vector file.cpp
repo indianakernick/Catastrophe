@@ -9,6 +9,7 @@
 #include "vector file.hpp"
 
 #include "yaml helper.hpp"
+#include "command errors.hpp"
 #include "command compiler.hpp"
 
 namespace {

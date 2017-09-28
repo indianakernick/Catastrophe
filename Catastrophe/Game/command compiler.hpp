@@ -12,11 +12,6 @@
 #include "parse string.hpp"
 #include "vector sprite.hpp"
 
-class CommandCompilerError final : public std::runtime_error {
-public:
-  explicit CommandCompilerError(const std::string &);
-};
-
 DrawCommands compileDrawCommands(const std::string &, FrameSize, LineCol);
 
 #endif
