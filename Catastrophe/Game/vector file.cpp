@@ -12,24 +12,12 @@
 #include "command compiler.hpp"
 
 namespace {
-  float readInvScale(const YAML::Node &scaleNode) {
-    const float scale = scaleNode.as<float>();
-    if (scale <= 0.0f) {
-      throw std::runtime_error(
-        "Scale at line "
-        + std::to_string(scaleNode.Mark().line)
-        + " is negative"
-      );
-    }
-    return 1.0f / scale;
-  }
-  
   template <typename Object>
   std::enable_if_t<false, Object> readObject(const YAML::Node &, float);
   
   template <typename Object>
   std::enable_if_t<std::is_same<Object, Point>::value, Point>
-  readObject(const YAML::Node &pointNode, const float invScale) {
+  readObject(const YAML::Node &pointNode) {
     checkType(pointNode, YAML::NodeType::Sequence);
     if (pointNode.size() != 2) {
       throw std::runtime_error(
@@ -39,14 +27,20 @@ namespace {
       );
     }
     return {
-      pointNode[0].as<Coord>() * invScale,
-      pointNode[1].as<Coord>() * invScale
+      pointNode[0].as<Coord>(),
+      pointNode[1].as<Coord>()
     };
   }
   
   template <typename Object>
+  std::enable_if_t<std::is_same<Object, Coord>::value, Coord>
+  readObject(const YAML::Node &scalarNode) {
+    return scalarNode.as<Coord>();
+  }
+  
+  template <typename Object>
   std::enable_if_t<std::is_same<Object, NVGcolor>::value, NVGcolor>
-  readObject(const YAML::Node &colorNode, float) {
+  readObject(const YAML::Node &colorNode) {
     checkType(colorNode, YAML::NodeType::Sequence);
     if (colorNode.size() != 4) {
       throw std::runtime_error(
@@ -61,12 +55,6 @@ namespace {
       colorNode[2].as<float>(),
       colorNode[3].as<float>()
     }}};
-  }
-  
-  template <typename Object>
-  std::enable_if_t<std::is_same<Object, Coord>::value, Coord>
-  readObject(const YAML::Node &scalarNode, const float invScale) {
-    return scalarNode.as<Coord>() * invScale;
   }
   
   class BadDataSize {};
@@ -91,7 +79,7 @@ namespace {
   }
   
   template <typename Objects>
-  Objects readObjects(const YAML::Node &objectsNode, const float invScale, FrameSize &frameSize) {
+  Objects readObjects(const YAML::Node &objectsNode, FrameSize &frameSize) {
     using Object = typename Objects::value_type;
     
     checkType(objectsNode, YAML::NodeType::Sequence);
@@ -107,19 +95,19 @@ namespace {
     
     Objects objects;
     for (auto o = objectsNode.begin(); o != objectsNode.end(); ++o) {
-      objects.emplace_back(readObject<Object>(*o, invScale));
+      objects.emplace_back(readObject<Object>(*o));
     }
     return objects;
   }
   
   template <typename Keyframe>
-  Keyframe readKeyframe(const YAML::Node &frameNode, const float invScale, FrameSize &frameSize) {
-    using Object = decltype(std::declval<Keyframe>().data);
+  Keyframe readKeyframe(const YAML::Node &frameNode, FrameSize &frameSize) {
+    using Objects = decltype(std::declval<Keyframe>().data);
     
     checkType(frameNode, YAML::NodeType::Map);
     return {
       getChild(frameNode, "offset").as<TimeSec>(),
-      readObjects<Object>(getChild(frameNode, "data"), invScale, frameSize)
+      readObjects<Objects>(getChild(frameNode, "data"), frameSize)
     };
   }
   
@@ -146,8 +134,14 @@ namespace {
   };
 
   template <typename Keyframes>
-  Keyframes readKeyframes(const YAML::Node &framesNode, const float invScale, FrameSize &frameSize) {
+  Keyframes readKeyframes(const YAML::Node &framesNode, FrameSize &frameSize) {
     using Keyframe = typename Keyframes::value_type;
+    if (!framesNode) {
+      checkFrameSize<decltype(std::declval<Keyframe>().data)>(frameSize, 0);
+      Keyframes keyframes(1);
+      keyframes.front().offsetSec = 0.0f;
+      return keyframes;
+    }
     
     checkType(framesNode, YAML::NodeType::Sequence);
     
@@ -157,11 +151,11 @@ namespace {
     if (framesNode.size() == 0) {
       return frames;
     }
-    frames.emplace_back(readKeyframe<Keyframe>(framesNode[0], invScale, frameSize));
+    frames.emplace_back(readKeyframe<Keyframe>(framesNode[0], frameSize));
     checker.first(frames.front().offsetSec);
     
     for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readKeyframe<Keyframe>(*f, invScale, frameSize));
+      frames.emplace_back(readKeyframe<Keyframe>(*f, frameSize));
       checker.check(frames.back().offsetSec);
     }
     
@@ -181,24 +175,24 @@ namespace {
     }
   }
   
-  Animation readAnim(const YAML::Node &animNode, const float invScale, FrameSize &frameSize) {
+  Animation readAnim(const YAML::Node &animNode, FrameSize &frameSize) {
     checkType(animNode, YAML::NodeType::Map);
     
     return {
       getChild(animNode, "duration").as<TimeSec>(),
-      readKeyframes<PointKeyframes>(getChild(animNode, "point frames"), invScale, frameSize),
-      readKeyframes<ColorKeyframes>(getChild(animNode, "color frames"), invScale, frameSize),
-      readKeyframes<ScalarKeyframes>(getChild(animNode, "scalar frames"), invScale, frameSize),
+      readKeyframes<PointKeyframes>(animNode["point frames"], frameSize),
+      readKeyframes<ColorKeyframes>(animNode["color frames"], frameSize),
+      readKeyframes<ScalarKeyframes>(animNode["scalar frames"], frameSize),
       readMetaData(animNode["meta"])
     };
   }
   
-  Animations readAnims(const YAML::Node &animsNode, const float invScale, FrameSize &frameSize) {
+  Animations readAnims(const YAML::Node &animsNode, FrameSize &frameSize) {
     checkType(animsNode, YAML::NodeType::Map);
     
     Animations anims;
     for (auto a = animsNode.begin(); a != animsNode.end(); ++a) {
-      anims.emplace(a->first.as<std::string>(), readAnim(a->second, invScale, frameSize));
+      anims.emplace(a->first.as<std::string>(), readAnim(a->second, frameSize));
     }
     
     return anims;
@@ -215,9 +209,8 @@ Sprite loadSprite(const std::string &filePath, const Params &params) {
   const YAML::Node rootNode = YAML::Load(fileStr.get());
   checkType(rootNode, YAML::NodeType::Map);
   
-  const float invScale = readInvScale(getChild(rootNode, "scale"));
   FrameSize frameSize;
-  Animations anims = readAnims(getChild(rootNode, "anims"), invScale, frameSize);
+  Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
   
   const YAML::Node &commandsNode = getChild(rootNode, "commands");
   LineCol commandStrStart;
