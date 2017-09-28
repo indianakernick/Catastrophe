@@ -48,6 +48,10 @@ float readFloat(ParseString &string) {
   return arg;
 }
 
+bool isLiteral(ParseString &string) {
+  return string.front() == '[';
+}
+
 glm::vec2 readPoint(ParseString &string) {
   glm::vec2 point;
   

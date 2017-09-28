@@ -15,18 +15,6 @@ CommandCompilerError::CommandCompilerError(const std::string &what)
   : std::runtime_error(what) {}
 
 namespace {
-  bool commandIs(
-    const std::experimental::string_view mainString,
-    const std::experimental::string_view commandName
-  ) {
-    if (mainString.size() < commandName.size()) {
-      return false;
-    } else {
-      using Traits = std::experimental::string_view::traits_type;
-      return Traits::compare(mainString.data(), commandName.data(), commandName.size()) == 0;
-    }
-  }
-
   std::unique_ptr<DrawCommand> identityCommand(ParseString &parseStr) {
     #define COMMAND(STR, CLASS)                                                 \
     if (parseStr.check(#STR##_sv)) {                                            \

@@ -156,16 +156,20 @@ auto flatten(Tuple &&tuple) {
 }
 
 Index readIndex(ParseString &, Index);
+bool isLiteral(ParseString &);
+glm::vec2 readPoint(ParseString &);
+float readScalar(ParseString &);
+NVGcolor readColor(ParseString &);
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename List>
 class DrawCommandImpl final : public DrawCommand {
 public:
   void load(ParseString &string, const FrameSize frame) override {
     Utils::forEachIndex<Utils::listSize<List>>([this, &string, frame] (const auto i) mutable {
-      if (string.empty() || string[0] != ' ') {
+      string.skipWhitespace();
+      if (string.empty()) {
         throw DrawCommandError("Not enough arguments");
       }
-      string.advance();
       
       constexpr size_t index = UTILS_VALUE(i);
       using ListType = Utils::AtIndex<List, index>;
@@ -197,7 +201,7 @@ public:
       const auto dataArg = std::get<index>(data);
       auto &funArg = std::get<index>(funArgs);
       
-      if constexpr (std::is_same<ListType, PointType>::value) {
+             if constexpr (std::is_same<ListType, PointType>::value) {
         funArg = getFunArg(frame.points[dataArg]);
       } else if constexpr (std::is_same<ListType, ScalarType>::value) {
         funArg = getFunArg(frame.scalars[dataArg]);
@@ -217,6 +221,7 @@ public:
 
 private:
   Utils::ListToTuple<Utils::TransformList<List, GetTupleType>> data;
+  Utils::ListToTuple<Utils::TransformList<List, GetFunArgType>> funArgs;
 };
 
 #define COMMAND(NAME, FUN, ...)                                                 \
