@@ -39,6 +39,7 @@ public:
   
   void skipWhitespace();
   void expect(char);
+  void expectAfterWhitespace(char);
   
   bool check(char);
   bool check(const char *, size_t);

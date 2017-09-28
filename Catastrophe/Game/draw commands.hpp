@@ -155,8 +155,7 @@ auto flatten(Tuple &&tuple) {
   return flattenHelper(tuple, std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>());
 }
 
-Index readIndex(ParseString &);
-void checkIndex(Index, Index);
+Index readIndex(ParseString &, Index);
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename List>
 class DrawCommandImpl final : public DrawCommand {
@@ -174,13 +173,12 @@ public:
       using ArgType = std::tuple_element_t<index, decltype(data)>;
       
       if constexpr (std::is_same<ArgType, Index>::value) {
-        arg = readIndex(string);
         if constexpr (std::is_same<ListType, PointType>::value) {
-          checkIndex(arg, frame.numPoints);
+          arg = readIndex(string, frame.numPoints);
         } else if constexpr (std::is_same<ListType, ScalarType>::value) {
-          checkIndex(arg, frame.numScalars);
+          arg = readIndex(string, frame.numScalars);
         } else if constexpr (std::is_same<ListType, ColorType>::value) {
-          checkIndex(arg, frame.numColors);
+          arg = readIndex(string, frame.numColors);
         }
       } else if constexpr (std::is_same<ArgType, int>::value) {
         string.skipWhitespace();

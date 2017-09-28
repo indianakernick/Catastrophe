@@ -11,7 +11,7 @@
 DrawCommandError::DrawCommandError(const char *what)
   : std::runtime_error(what) {}
 
-Index readIndex(ParseString &string) {
+Index readIndex(ParseString &string, const Index size) {
   string.skipWhitespace();
   if (string.empty()) {
     throw DrawCommandError("Expected index");
@@ -25,8 +25,12 @@ Index readIndex(ParseString &string) {
   if (arg == 0 && end[-1] != '0') {
     throw DrawCommandError("Invalid index");
   }
+  const Index index = static_cast<Index>(arg);
+  if (index >= size) {
+    throw DrawCommandError("Index out of range");
+  }
   string.advance(end - string.data());
-  return static_cast<Index>(arg);
+  return index;
 }
 
 float readFloat(ParseString &string) {
@@ -47,22 +51,44 @@ float readFloat(ParseString &string) {
 glm::vec2 readPoint(ParseString &string) {
   glm::vec2 point;
   
-  string.skipWhitespace();
-  string.expect('[');
+  string.expectAfterWhitespace('[');
   point.x = readFloat(string);
   
-  string.skipWhitespace();
-  string.expect(',');
+  string.expectAfterWhitespace(',');
   point.y = readFloat(string);
   
-  string.skipWhitespace();
-  string.expect(']');
+  string.expectAfterWhitespace(']');
   
   return point;
 }
 
-void checkIndex(const Index index, const Index size) {
-  if (index >= size) {
-    throw DrawCommandError("Index out of range");
-  }
+float readScalar(ParseString &string) {
+  float scalar;
+  
+  string.expectAfterWhitespace('[');
+  scalar = readFloat(string);
+  
+  string.expectAfterWhitespace(']');
+  
+  return scalar;
+}
+
+NVGcolor readColor(ParseString &string) {
+  NVGcolor color;
+  
+  string.expectAfterWhitespace('[');
+  color.r = readFloat(string);
+  
+  string.expectAfterWhitespace(',');
+  color.g = readFloat(string);
+  
+  string.expectAfterWhitespace(',');
+  color.b = readFloat(string);
+  
+  string.expectAfterWhitespace(',');
+  color.a = readFloat(string);
+  
+  string.expectAfterWhitespace(']');
+  
+  return color;
 }

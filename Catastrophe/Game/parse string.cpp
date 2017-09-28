@@ -90,6 +90,11 @@ void ParseString::expect(const char c) {
   advance();
 }
 
+void ParseString::expectAfterWhitespace(const char c) {
+  skipWhitespace();
+  expect(c);
+}
+
 bool ParseString::check(const char c) {
   if (mSize == 0 || *mData != c) {
     return false;
