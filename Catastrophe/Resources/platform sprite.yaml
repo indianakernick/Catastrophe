@@ -1,4 +1,4 @@
-scale: 4
+scale: 1
 anims:
   static:
     duration: 0.0
@@ -18,8 +18,7 @@ anims:
 
     scalar frames:
     - offset: 0.0
-      # 1/16
-      data: [0.0625]
+      data: []
 
     color frames:
     - offset: 0.0
@@ -29,6 +28,8 @@ anims:
       - [0.0, 0.0, 1.0, 1.0] # outline
 
 commands: |
+  scale [0.25, 0.25]
+
   begin_path
   fill_color 0
   move_to 0
@@ -37,7 +38,7 @@ commands: |
   line_to 6
   fill
 
-  stroke_width 0
+  stroke_width [0.0625]
 
   begin_path
   line_cap butt

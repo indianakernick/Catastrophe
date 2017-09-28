@@ -1,4 +1,4 @@
-scale: 16
+scale: 1
 anims:
   run:
     duration: 1.0
@@ -125,9 +125,7 @@ anims:
 
     scalar frames: &common_scalars
     - offset: 0.0
-      data:
-      - 1    # line width
-      - 1.5  # head radius
+      data: []
 
     meta:
       # Foot moves 0.25 scaled units in 0.125 seconds
@@ -155,9 +153,11 @@ anims:
     scalar frames: *common_scalars
 
 commands: |
+  scale [0.0625, 0.0625]
+
   line_cap round
   line_join round
-  stroke_width 0
+  stroke_width [1]
   stroke_color 0
 
   begin_path
@@ -191,5 +191,5 @@ commands: |
 
   begin_path
   fill_color 2
-  circle 0 1
+  circle 0 [1.5]
   fill

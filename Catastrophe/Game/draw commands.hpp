@@ -9,6 +9,7 @@
 #ifndef draw_commands_hpp
 #define draw_commands_hpp
 
+#include <array>
 #include <experimental/tuple>
 #include "command compiler.hpp"
 #include "string view literal.hpp"
@@ -74,60 +75,39 @@ class ScalarType {};
 class ColorType {};
 
 template <typename ArgType>
-struct GetTupleType {
-  //enums
-  using type = int;
-};
-
-template <>
-struct GetTupleType<PointType> {
-  using type = Index;
-};
-
-template <>
-struct GetTupleType<ScalarType> {
-  using type = Index;
-};
-
-template <>
-struct GetTupleType<ColorType> {
-  using type = Index;
-};
-
-template <typename ArgType>
-struct GetFunArgType {
+struct GetArgType {
   //enums
   using type = std::tuple<int>;
 };
 
 template <>
-struct GetFunArgType<PointType> {
+struct GetArgType<PointType> {
   using type = std::tuple<float, float>;
 };
 
 template <>
-struct GetFunArgType<ScalarType> {
+struct GetArgType<ScalarType> {
   using type = std::tuple<float>;
 };
 
 template <>
-struct GetFunArgType<ColorType> {
+struct GetArgType<ColorType> {
   using type = std::tuple<NVGcolor>;
 };
 
-inline std::tuple<int> getFunArg(const int arg) {
+inline std::tuple<int> getArg(const int arg) {
   return std::tuple<int>(arg);
 }
 
-inline std::tuple<float, float> getFunArg(const glm::vec2 arg) {
+inline std::tuple<float, float> getArg(const glm::vec2 arg) {
   return std::tuple<float, float>(arg.x, arg.y);
 }
 
-inline std::tuple<float> getFunArg(const float arg) {
+inline std::tuple<float> getArg(const float arg) {
   return std::tuple<float>(arg);
 }
 
-inline std::tuple<NVGcolor> getFunArg(const NVGcolor arg) {
+inline std::tuple<NVGcolor> getArg(const NVGcolor arg) {
   return std::tuple<NVGcolor>(arg);
 }
 
@@ -161,67 +141,74 @@ glm::vec2 readPoint(ParseString &);
 float readScalar(ParseString &);
 NVGcolor readColor(ParseString &);
 
-template <typename FunctionPtr, FunctionPtr FUNCTION, typename List>
+template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {
 public:
   void load(ParseString &string, const FrameSize frame) override {
-    Utils::forEachIndex<Utils::listSize<List>>([this, &string, frame] (const auto i) mutable {
+    Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame] (const auto i) mutable {
       string.skipWhitespace();
       if (string.empty()) {
         throw DrawCommandError("Not enough arguments");
       }
       
       constexpr size_t index = UTILS_VALUE(i);
-      using ListType = Utils::AtIndex<List, index>;
-      auto &arg = std::get<index>(data);
-      using ArgType = std::tuple_element_t<index, decltype(data)>;
+      using Type = Utils::AtIndex<Types, index>;
       
-      if constexpr (std::is_same<ArgType, Index>::value) {
-        if constexpr (std::is_same<ListType, PointType>::value) {
-          arg = readIndex(string, frame.numPoints);
-        } else if constexpr (std::is_same<ListType, ScalarType>::value) {
-          arg = readIndex(string, frame.numScalars);
-        } else if constexpr (std::is_same<ListType, ColorType>::value) {
-          arg = readIndex(string, frame.numColors);
+      indicies[index] = NULL_INDEX;
+      
+             if constexpr (std::is_same<Type, PointType>::value) {
+        if (isLiteral(string)) {
+          std::get<index>(args) = getArg(readPoint(string));
+        } else {
+          indicies[index] = readIndex(string, frame.numPoints);
         }
-      } else if constexpr (std::is_same<ArgType, int>::value) {
-        string.skipWhitespace();
-        arg = ParseEnum<ListType>::parse(string);
+      } else if constexpr (std::is_same<Type, ScalarType>::value) {
+        if (isLiteral(string)) {
+          std::get<index>(args) = getArg(readScalar(string));
+        } else {
+          indicies[index] = readIndex(string, frame.numScalars);
+        }
+      } else if constexpr (std::is_same<Type, ColorType>::value) {
+        if (isLiteral(string)) {
+          std::get<index>(args) = getArg(readColor(string));
+        } else {
+          indicies[index] = readIndex(string, frame.numColors);
+        }
+      } else {
+        std::get<index>(args) = getArg(ParseEnum<Type>::parse(string));
       }
     });
   }
   
-  void draw(NVGcontext *context, const Frame &frame) const override {
-    Utils::ListToTuple<Utils::TransformList<List, GetFunArgType>> funArgs;
-    constexpr size_t size = std::tuple_size<decltype(funArgs)>::value;
-    
-    Utils::forEachIndex<size>([this, &frame, &funArgs] (const auto i) {
+  void draw(NVGcontext *context, const Frame &frame) override {
+    Utils::forEachIndex<Utils::listSize<Types>>([this, &frame] (const auto i) {
       constexpr size_t index = UTILS_VALUE(i);
-      using ListType = Utils::AtIndex<List, index>;
-      const auto dataArg = std::get<index>(data);
-      auto &funArg = std::get<index>(funArgs);
+      using Type = Utils::AtIndex<Types, index>;
       
-             if constexpr (std::is_same<ListType, PointType>::value) {
-        funArg = getFunArg(frame.points[dataArg]);
-      } else if constexpr (std::is_same<ListType, ScalarType>::value) {
-        funArg = getFunArg(frame.scalars[dataArg]);
-      } else if constexpr (std::is_same<ListType, ColorType>::value) {
-        funArg = getFunArg(frame.colors[dataArg]);
-      } else {
-        funArg = getFunArg(dataArg);
+      if (indicies[index] == NULL_INDEX) {
+        // continue
+        return;
+      }
+      
+             if constexpr (std::is_same<Type, PointType>::value) {
+        std::get<index>(args) = getArg(frame.points[indicies[index]]);
+      } else if constexpr (std::is_same<Type, ScalarType>::value) {
+        std::get<index>(args) = getArg(frame.scalars[indicies[index]]);
+      } else if constexpr (std::is_same<Type, ColorType>::value) {
+        std::get<index>(args) = getArg(frame.colors[indicies[index]]);
       }
     });
     
-    const auto funArgsWithContext = std::tuple_cat(
+    const auto functionArgs = std::tuple_cat(
       std::make_tuple(context),
-      flatten(funArgs)
+      flatten(args)
     );
-    std::experimental::apply(FUNCTION, funArgsWithContext);
+    std::experimental::apply(FUNCTION, functionArgs);
   }
 
 private:
-  Utils::ListToTuple<Utils::TransformList<List, GetTupleType>> data;
-  Utils::ListToTuple<Utils::TransformList<List, GetFunArgType>> funArgs;
+  std::array<Index, Utils::listSize<Types>> indicies;
+  Utils::ListToTuple<Utils::TransformList<Types, GetArgType>> args;
 };
 
 #define COMMAND(NAME, FUN, ...)                                                 \

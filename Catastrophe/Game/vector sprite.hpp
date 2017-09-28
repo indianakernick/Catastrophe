@@ -75,7 +75,7 @@ public:
   virtual ~DrawCommand() = default;
   
   virtual void load(ParseString &, FrameSize) = 0;
-  virtual void draw(NVGcontext *, const Frame &) const = 0;
+  virtual void draw(NVGcontext *, const Frame &) = 0;
 };
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
 
