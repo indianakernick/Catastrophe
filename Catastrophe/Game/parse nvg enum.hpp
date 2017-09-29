@@ -64,4 +64,25 @@ struct ParseEnum<NVGwinding> {
   }
 };
 
+template <>
+struct ParseEnum<NVGimageFlags> {
+  static int parse(ParseString &flagsStr) {
+           if (flagsStr.check("generate_mipmaps")) {
+      return NVG_IMAGE_GENERATE_MIPMAPS;
+    } else if (flagsStr.check("repeat_x")) {
+      return NVG_IMAGE_REPEATX;
+    } else if (flagsStr.check("repeat_y")) {
+      return NVG_IMAGE_REPEATY;
+    } else if (flagsStr.check("flip_y")) {
+      return NVG_IMAGE_FLIPY;
+    } else if (flagsStr.check("premultiplied")) {
+      return NVG_IMAGE_PREMULTIPLIED;
+    } else if (flagsStr.check("nearest")) {
+      return NVG_IMAGE_NEAREST;
+    } else {
+      throw DrawCommandError("Invalid image flag");
+    }
+  }
+};
+
 #endif
