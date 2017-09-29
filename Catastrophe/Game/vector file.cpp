@@ -13,11 +13,11 @@
 #include "command compiler.hpp"
 
 namespace {
-  template <typename Object>
-  std::enable_if_t<false, Object> readObject(const YAML::Node &, float);
+  template <typename Tag>
+  std::enable_if_t<false, Tag> readObject(const YAML::Node &);
   
-  template <typename Object>
-  std::enable_if_t<std::is_same<Object, Point>::value, Point>
+  template <typename Tag>
+  std::enable_if_t<std::is_same<Tag, PointType>::value, glm::vec2>
   readObject(const YAML::Node &pointNode) {
     checkType(pointNode, YAML::NodeType::Sequence);
     if (pointNode.size() != 2) {
@@ -28,19 +28,19 @@ namespace {
       );
     }
     return {
-      pointNode[0].as<Coord>(),
-      pointNode[1].as<Coord>()
+      pointNode[0].as<float>(),
+      pointNode[1].as<float>()
     };
   }
   
-  template <typename Object>
-  std::enable_if_t<std::is_same<Object, Coord>::value, Coord>
+  template <typename Tag>
+  std::enable_if_t<std::is_same<Tag, ScalarType>::value, float>
   readObject(const YAML::Node &scalarNode) {
-    return scalarNode.as<Coord>();
+    return scalarNode.as<float>();
   }
   
-  template <typename Object>
-  std::enable_if_t<std::is_same<Object, NVGcolor>::value, NVGcolor>
+  template <typename Tag>
+  std::enable_if_t<std::is_same<Tag, ColorType>::value, glm::vec4>
   readObject(const YAML::Node &colorNode) {
     checkType(colorNode, YAML::NodeType::Sequence);
     if (colorNode.size() != 4) {
@@ -50,12 +50,12 @@ namespace {
         + " must have 4 components"
       );
     }
-    return {{{
+    return {
       colorNode[0].as<float>(),
       colorNode[1].as<float>(),
       colorNode[2].as<float>(),
       colorNode[3].as<float>()
-    }}};
+    };
   }
   
   class BadDataSize {};
@@ -68,25 +68,17 @@ namespace {
     }
   }
   
-  template <typename Objects>
+  template <typename Tag>
   void checkFrameSize(FrameSize &frameSize, const size_t numObjects) {
-           if constexpr (std::is_same<Objects, Points>::value) {
-      checkFrameSize(frameSize.numPoints, numObjects);
-    } else if constexpr (std::is_same<Objects, Colors>::value) {
-      checkFrameSize(frameSize.numColors, numObjects);
-    } else if constexpr (std::is_same<Objects, Scalars>::value) {
-      checkFrameSize(frameSize.numScalars, numObjects);
-    }
+    checkFrameSize(frameSize[tagIndex<Tag>], numObjects);
   }
   
-  template <typename Objects>
-  Objects readObjects(const YAML::Node &objectsNode, FrameSize &frameSize) {
-    using Object = typename Objects::value_type;
-    
+  template <typename Tag>
+  Objects<Tag> readObjects(const YAML::Node &objectsNode, FrameSize &frameSize) {
     checkType(objectsNode, YAML::NodeType::Sequence);
     
     try {
-      checkFrameSize<Objects>(frameSize, objectsNode.size());
+      checkFrameSize<Tag>(frameSize, objectsNode.size());
     } catch (BadDataSize &) {
       throw std::runtime_error(
         "Inconsistent data size at line "
@@ -94,21 +86,19 @@ namespace {
       );
     }
     
-    Objects objects;
+    Objects<Tag> objects;
     for (auto o = objectsNode.begin(); o != objectsNode.end(); ++o) {
-      objects.emplace_back(readObject<Object>(*o));
+      objects.emplace_back(readObject<Tag>(*o));
     }
     return objects;
   }
   
-  template <typename Keyframe>
-  Keyframe readKeyframe(const YAML::Node &frameNode, FrameSize &frameSize) {
-    using Objects = decltype(std::declval<Keyframe>().data);
-    
+  template <typename Tag>
+  auto readKeyframe(const YAML::Node &frameNode, FrameSize &frameSize) {
     checkType(frameNode, YAML::NodeType::Map);
-    return {
+    return Keyframe<Tag>{
       getChild(frameNode, "offset").as<TimeSec>(),
-      readObjects<Objects>(getChild(frameNode, "data"), frameSize)
+      readObjects<Tag>(getChild(frameNode, "data"), frameSize)
     };
   }
   
@@ -134,12 +124,11 @@ namespace {
     TimeSec prevOffset;
   };
 
-  template <typename Keyframes>
-  Keyframes readKeyframes(const YAML::Node &framesNode, FrameSize &frameSize) {
-    using Keyframe = typename Keyframes::value_type;
+  template <typename Tag>
+  auto readKeyframes(const YAML::Node &framesNode, FrameSize &frameSize) {
     if (!framesNode) {
-      checkFrameSize<decltype(std::declval<Keyframe>().data)>(frameSize, 0);
-      Keyframes keyframes(1);
+      checkFrameSize<Tag>(frameSize, 0);
+      Keyframes<Tag> keyframes(1);
       keyframes.front().offsetSec = 0.0f;
       return keyframes;
     }
@@ -147,16 +136,16 @@ namespace {
     checkType(framesNode, YAML::NodeType::Sequence);
     
     OffsetChecker checker;
-    Keyframes frames;
+    Keyframes<Tag> frames;
     
     if (framesNode.size() == 0) {
       return frames;
     }
-    frames.emplace_back(readKeyframe<Keyframe>(framesNode[0], frameSize));
+    frames.emplace_back(readKeyframe<Tag>(framesNode[0], frameSize));
     checker.first(frames.front().offsetSec);
     
     for (auto f = std::next(framesNode.begin()); f != framesNode.end(); ++f) {
-      frames.emplace_back(readKeyframe<Keyframe>(*f, frameSize));
+      frames.emplace_back(readKeyframe<Tag>(*f, frameSize));
       checker.check(frames.back().offsetSec);
     }
     
@@ -176,14 +165,21 @@ namespace {
     }
   }
   
+  KeyframeGroups readKeyframeGroups(const YAML::Node &animNode, FrameSize &frameSize) {
+    KeyframeGroups groups;
+    //@TODO make this generic
+    std::get<tagIndex<PointType>>(groups) = readKeyframes<PointType>(animNode["point frames"], frameSize);
+    std::get<tagIndex<ScalarType>>(groups) = readKeyframes<ScalarType>(animNode["scalar frames"], frameSize);
+    std::get<tagIndex<ColorType>>(groups) = readKeyframes<ColorType>(animNode["color frames"], frameSize);
+    return groups;
+  }
+  
   Animation readAnim(const YAML::Node &animNode, FrameSize &frameSize) {
     checkType(animNode, YAML::NodeType::Map);
     
     return {
       getChild(animNode, "duration").as<TimeSec>(),
-      readKeyframes<PointKeyframes>(animNode["point frames"], frameSize),
-      readKeyframes<ColorKeyframes>(animNode["color frames"], frameSize),
-      readKeyframes<ScalarKeyframes>(animNode["scalar frames"], frameSize),
+      readKeyframeGroups(animNode, frameSize),
       readMetaData(animNode["meta"])
     };
   }
@@ -205,12 +201,12 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &filePath, const Params &params) {
-  std::unique_ptr<char []> fileStr = concatParamStringToFile(params, filePath);
-  const YAML::Node rootNode = YAML::Load(fileStr.get());
+Sprite loadSprite(const std::string &filePath) {
+  const YAML::Node rootNode = YAML::LoadFile(filePath);
   checkType(rootNode, YAML::NodeType::Map);
   
   FrameSize frameSize;
+  frameSize.fill(NULL_INDEX);
   Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
   
   const YAML::Node &commandsNode = getChild(rootNode, "commands");

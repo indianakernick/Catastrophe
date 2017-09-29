@@ -17,7 +17,7 @@ Index readIndex(ParseString &, Index);
 bool isLiteral(ParseString &);
 glm::vec2 readPoint(ParseString &);
 float readScalar(ParseString &);
-NVGcolor readColor(ParseString &);
+glm::vec4 readColor(ParseString &);
 
 template <typename Type>
 auto readLiteral(ParseString &string) {

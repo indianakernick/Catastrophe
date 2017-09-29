@@ -47,8 +47,8 @@ inline std::tuple<float> getArg(const float arg) {
   return std::tuple<float>(arg);
 }
 
-inline std::tuple<NVGcolor> getArg(const NVGcolor arg) {
-  return std::tuple<NVGcolor>(arg);
+inline std::tuple<NVGcolor> getArg(const glm::vec4 arg) {
+  return std::tuple<NVGcolor>({{{arg.r, arg.g, arg.b, arg.a}}});
 }
 
 #endif

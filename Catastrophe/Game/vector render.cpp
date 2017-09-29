@@ -14,16 +14,16 @@
 #include <Simpleton/Math/interpolate.hpp>
 
 namespace {
-  Point lerpFun(const float prog, const Point lower, const Point upper) {
+  glm::vec2 lerpFun(const float prog, const glm::vec2 lower, const glm::vec2 upper) {
     return glm::mix(lower, upper, prog);
   }
   
-  NVGcolor lerpFun(const float prog, const NVGcolor lower, const NVGcolor upper) {
-    return nvgLerpRGBA(lower, upper, prog);
+  float lerpFun(const float prog, const float lower, const float upper) {
+    return Math::lerp(prog, lower, upper);
   }
   
-  Coord lerpFun(const float prog, const Coord lower, const Coord upper) {
-    return Math::lerp(prog, lower, upper);
+  glm::vec4 lerpFun(const float prog, const glm::vec4 lower, const glm::vec4 upper) {
+    return glm::mix(lower, upper, prog);
   }
 
   template <typename KeyframeData>
@@ -124,17 +124,19 @@ Frame getFrame(
   const float progressSec
 ) {
   const Animation &anim = sprite.animations.at(animName);
-  return {
-    lerpAllKeyframes(anim.pointFrames, progressSec),
-    lerpAllKeyframes(anim.colorFrames, progressSec),
-    lerpAllKeyframes(anim.scalarFrames, progressSec)
-  };
+  Frame frame;
+  Utils::forEachIndex<numTags>([&anim, &frame, progressSec] (auto i) {
+    constexpr size_t index = UTILS_VALUE(i);
+    std::get<index>(frame) = lerpAllKeyframes(std::get<index>(anim.keyframes), progressSec);
+  });
+  return frame;
 }
 
 void lerpFrames(const float progress, Frame &lower, const Frame &upper) {
-  lerpModify(progress, lower.points, upper.points);
-  lerpModify(progress, lower.colors, upper.colors);
-  lerpModify(progress, lower.scalars, upper.scalars);
+  Utils::forEachIndex<numTags>([progress, &lower, &upper] (auto i) {
+    constexpr size_t index = UTILS_VALUE(i);
+    lerpModify(progress, std::get<index>(lower), std::get<index>(upper));
+  });
 }
 
 void renderSprite(

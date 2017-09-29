@@ -76,8 +76,8 @@ float readScalar(ParseString &string) {
   return scalar;
 }
 
-NVGcolor readColor(ParseString &string) {
-  NVGcolor color;
+glm::vec4 readColor(ParseString &string) {
+  glm::vec4 color;
   
   string.expectAfterWhitespace('[');
   color.r = readFloat(string);

@@ -9,8 +9,32 @@
 #ifndef animation_data_types_hpp
 #define animation_data_types_hpp
 
-struct PointType {};
-struct ScalarType {};
-struct ColorType {};
+#include <glm/vec2.hpp>
+#include <glm/vec4.hpp>
+#include <Simpleton/Utils/type list.hpp>
+
+struct PointType {
+  using type = glm::vec2;
+};
+struct ScalarType {
+  using type = float;
+};
+struct ColorType {
+  using type = glm::vec4;
+};
+
+using AnimDataTypes = Utils::TypeList<
+  PointType,
+  ScalarType,
+  ColorType
+>;
+
+template <typename Tag>
+constexpr size_t tagIndex = Utils::indexOf<AnimDataTypes, Tag>;
+
+template <typename Tag>
+constexpr bool isTag = Utils::listContains<AnimDataTypes, Tag>;
+
+constexpr size_t numTags = Utils::listSize<AnimDataTypes>;
 
 #endif

@@ -54,25 +54,12 @@ public:
       constexpr size_t index = UTILS_VALUE(i);
       using Type = Utils::AtIndex<Types, index>;
       
-      indicies[index] = NULL_INDEX;
-      
-             if constexpr (std::is_same<Type, PointType>::value) {
+      if constexpr (isTag<Type>) {
         if (isLiteral(string)) {
-          std::get<index>(args) = getArg(readPoint(string));
+          std::get<index>(args) = getArg(readLiteral<Type>(string));
+          indicies[index] = NULL_INDEX;
         } else {
-          indicies[index] = readIndex(string, frame.numPoints);
-        }
-      } else if constexpr (std::is_same<Type, ScalarType>::value) {
-        if (isLiteral(string)) {
-          std::get<index>(args) = getArg(readScalar(string));
-        } else {
-          indicies[index] = readIndex(string, frame.numScalars);
-        }
-      } else if constexpr (std::is_same<Type, ColorType>::value) {
-        if (isLiteral(string)) {
-          std::get<index>(args) = getArg(readColor(string));
-        } else {
-          indicies[index] = readIndex(string, frame.numColors);
+          indicies[index] = readIndex(string, frame[tagIndex<Type>]);
         }
       } else {
         std::get<index>(args) = getArg(ParseEnum<Type>::parse(string));
@@ -90,12 +77,10 @@ public:
         return;
       }
       
-             if constexpr (std::is_same<Type, PointType>::value) {
-        std::get<index>(args) = getArg(frame.points[indicies[index]]);
-      } else if constexpr (std::is_same<Type, ScalarType>::value) {
-        std::get<index>(args) = getArg(frame.scalars[indicies[index]]);
-      } else if constexpr (std::is_same<Type, ColorType>::value) {
-        std::get<index>(args) = getArg(frame.colors[indicies[index]]);
+      if constexpr (isTag<Type>) {
+        std::get<index>(args) = getArg(
+          std::get<tagIndex<Type>>(frame)[indicies[index]]
+        );
       }
     });
     

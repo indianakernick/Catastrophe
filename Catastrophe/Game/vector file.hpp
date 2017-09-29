@@ -9,9 +9,8 @@
 #ifndef vector_file_hpp
 #define vector_file_hpp
 
-#include "yaml param.hpp"
 #include "vector sprite.hpp"
 
-Sprite loadSprite(const std::string &, const Params & = {});
+Sprite loadSprite(const std::string &);
 
 #endif
