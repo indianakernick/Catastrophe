@@ -9,6 +9,8 @@
 #include "vector file.hpp"
 
 #include "yaml helper.hpp"
+#include "sprite paints.hpp"
+#include "parse nvg enum.hpp"
 #include "command errors.hpp"
 #include "command compiler.hpp"
 
@@ -195,13 +197,46 @@ namespace {
     return anims;
   }
   
+  NVGimage readImage(const YAML::Node &imageNode, NVGcontext *ctx) {
+    checkType(imageNode, YAML::NodeType::Map);
+    const std::string path = getChild(imageNode, "path").as<std::string>();
+    int flags = 0;
+    if (const YAML::Node &flagsNode = imageNode["flags"]) {
+      checkType(flagsNode, YAML::NodeType::Sequence);
+      for (auto f = flagsNode.begin(); f != flagsNode.end(); ++f) {
+        try {
+          flags |= parseImageFlags(f->as<std::string>());
+        } catch (InvalidImageFlag &) {
+          throw std::runtime_error(
+            "Invalid image flag at line "
+            + std::to_string(f->Mark().line)
+          );
+        }
+      }
+    }
+    return NVGimage(ctx, path.c_str(), flags);
+  }
+  
+  Images readImages(const YAML::Node &imagesNode, NVGcontext *ctx) {
+    if (!imagesNode) {
+      return {};
+    }
+    
+    checkType(imagesNode, YAML::NodeType::Sequence);
+    Images images;
+    for (auto i = imagesNode.begin(); i != imagesNode.end(); ++i) {
+      images.emplace_back(readImage(*i, ctx));
+    }
+    return images;
+  }
+  
   std::string getFileName(const std::string &filePath) {
     const size_t lastSlash = filePath.find_last_of('/');
     return {filePath.c_str() + lastSlash + 1, filePath.find_last_of('.') - lastSlash - 1};
   }
 }
 
-Sprite loadSprite(const std::string &filePath) {
+Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
   const YAML::Node rootNode = YAML::LoadFile(filePath);
   checkType(rootNode, YAML::NodeType::Map);
   
@@ -219,7 +254,8 @@ Sprite loadSprite(const std::string &filePath) {
   try {
     return {
       std::move(anims),
-      compileDrawCommands(commandStr, frameSize, commandStrStart)
+      compileDrawCommands(commandStr, frameSize, commandStrStart),
+      readImages(rootNode["images"], ctx)
     };
   } catch (CommandCompilerError &e) {
     throw std::runtime_error(getFileName(filePath) + ":" + e.what());

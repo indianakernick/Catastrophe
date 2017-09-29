@@ -15,12 +15,14 @@
 #include <yaml-cpp/node/node.h>
 
 struct Systems;
+class RenderingContext;
 
 std::unique_ptr<Entity> loadEntity(
   const std::string &,
   EntityID,
   Systems,
   Transform,
+  RenderingContext &,
   const YAML::Node &
 );
 

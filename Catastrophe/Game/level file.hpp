@@ -13,7 +13,8 @@
 #include "entity id.hpp"
 
 class EntityManager;
+class RenderingContext;
 
-EntityID loadLevel(const std::string &, EntityManager &);
+EntityID loadLevel(const std::string &, EntityManager &, RenderingContext &);
 
 #endif

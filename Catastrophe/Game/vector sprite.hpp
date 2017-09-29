@@ -10,6 +10,7 @@
 #define vector_sprite_hpp
 
 #include "draw command.hpp"
+#include "sprite paints.hpp"
 #include "sprite animation.hpp"
 
 struct Sprite {
@@ -17,11 +18,14 @@ struct Sprite {
   Sprite(Sprite &&) = default;
   Sprite &operator=(Sprite &&) = default;
   
-  Sprite(Animations &&animations, DrawCommands &&drawCommands)
-    : animations(std::move(animations)), drawCommands(std::move(drawCommands)) {}
+  Sprite(Animations &&animations, DrawCommands &&drawCommands, Images &&images)
+    : animations(std::move(animations)),
+      drawCommands(std::move(drawCommands)),
+      images(std::move(images)) {}
   
   Animations animations;
   DrawCommands drawCommands;
+  Images images;
 };
 
 #endif

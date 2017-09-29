@@ -37,10 +37,13 @@ void EntityManager::quit() {
 EntityID EntityManager::create(
   const std::string &filePath,
   const Transform transform,
+  RenderingContext &renderer,
   const YAML::Node &args
 ) {
   const EntityID id = idGen.make();
-  entities.emplace(id, loadEntity(filePath, id, getSystems(), transform, args));
+  entities.emplace(id, loadEntity(
+    filePath, id, getSystems(), transform, renderer, args
+  ));
   return id;
 }
 

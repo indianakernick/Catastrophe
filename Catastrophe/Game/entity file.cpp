@@ -16,6 +16,7 @@
 #include "make input comp.hpp"
 #include "make render comp.hpp"
 #include "make physics comp.hpp"
+#include "rendering context.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
@@ -57,6 +58,7 @@ namespace {
     Entity *const entity,
     AnimationSystem &animationSystem,
     const Transform transform,
+    RenderingContext &renderer,
     const YAML::Node &args
   ) {
     const std::string name = getChild(animNode, "name").as<std::string>();
@@ -64,7 +66,7 @@ namespace {
     entity->animation = makeAnimComp(
       name,
       entity,
-      loadSprite(Platform::getResDir() + sprite),
+      loadSprite(Platform::getResDir() + sprite, renderer.getContext()),
       transform,
       args
     );
@@ -94,6 +96,7 @@ std::unique_ptr<Entity> loadEntity(
   const EntityID id,
   const Systems systems,
   const Transform transform,
+  RenderingContext &renderer,
   const YAML::Node &args
 ) {
   const YAML::Node root = YAML::LoadFile(filePath);
@@ -107,7 +110,7 @@ std::unique_ptr<Entity> loadEntity(
     readPhysicsComp(physics, entity.get(), systems.physics, transform, args);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    readAnimComp(anim, entity.get(), systems.animation, transform, args);
+    readAnimComp(anim, entity.get(), systems.animation, transform, renderer, args);
   }
   if (const YAML::Node &render = root["rendering"]) {
     readRenderComp(render, entity.get(), systems.rendering, transform.scale, args);

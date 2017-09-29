@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include "transform.hpp"
 #include <yaml-cpp/node/node.h>
+#include "rendering context.hpp"
 #include <Simpleton/ID/local.hpp>
 
 class InputSystem;
@@ -29,7 +30,7 @@ public:
   void init(InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &);
   void quit();
   
-  EntityID create(const std::string &, Transform, const YAML::Node &);
+  EntityID create(const std::string &, Transform, RenderingContext &, const YAML::Node &);
   void destroy(EntityID);
   void destroyAll();
   Entity &getEntity(EntityID);

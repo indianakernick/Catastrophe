@@ -11,6 +11,6 @@
 
 #include "vector sprite.hpp"
 
-Sprite loadSprite(const std::string &);
+Sprite loadSprite(const std::string &, NVGcontext *);
 
 #endif

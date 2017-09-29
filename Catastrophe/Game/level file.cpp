@@ -12,6 +12,7 @@
 #include "yaml helper.hpp"
 #include "entity file.hpp"
 #include "entity manager.hpp"
+#include "rendering context.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
@@ -38,28 +39,40 @@ namespace {
     };
   }
 
-  EntityID readEntity(const YAML::Node &entityNode, EntityManager &entityMan) {
+  EntityID readEntity(
+    const YAML::Node &entityNode,
+    EntityManager &entityMan,
+    RenderingContext &renderer
+  ) {
     checkType(entityNode, YAML::NodeType::Map);
     const std::string file = getChild(entityNode, "file").as<std::string>();
     const Transform transform = readTransform(entityNode);
     const YAML::Node &args = entityNode["args"];
-    return entityMan.create(Platform::getResDir() + file, transform, args);
+    return entityMan.create(Platform::getResDir() + file, transform, renderer, args);
   }
   
-  void readEntities(const YAML::Node &entitiesNode, EntityManager &entityMan) {
+  void readEntities(
+    const YAML::Node &entitiesNode,
+    EntityManager &entityMan,
+    RenderingContext &renderer
+  ) {
     checkType(entitiesNode, YAML::NodeType::Sequence);
     for (auto o = entitiesNode.begin(); o != entitiesNode.end(); ++o) {
-      readEntity(*o, entityMan);
+      readEntity(*o, entityMan, renderer);
     }
   }
 }
 
-EntityID loadLevel(const std::string &filePath, EntityManager &entityMan) {
+EntityID loadLevel(
+  const std::string &filePath,
+  EntityManager &entityMan,
+  RenderingContext &renderer
+) {
   const YAML::Node root = YAML::LoadFile(filePath);
   checkType(root, YAML::NodeType::Map);
   
-  const EntityID playerID = readEntity(getChild(root, "player"), entityMan);
-  readEntities(getChild(root, "entities"), entityMan);
+  const EntityID playerID = readEntity(getChild(root, "player"), entityMan, renderer);
+  readEntities(getChild(root, "entities"), entityMan, renderer);
   
   return playerID;
 }

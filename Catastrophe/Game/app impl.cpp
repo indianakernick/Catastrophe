@@ -35,7 +35,7 @@ bool AppImpl::init() {
   
   entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
   
-  player = loadLevel(Platform::getResDir() + "level 0.yaml", entityManager);
+  player = loadLevel(Platform::getResDir() + "level 0.yaml", entityManager, renderingContext);
   
   renderingSystem.startMotionTrack(player);
   renderingSystem.startZoomTrack(player);
