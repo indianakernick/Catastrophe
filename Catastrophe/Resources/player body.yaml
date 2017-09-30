@@ -7,7 +7,7 @@ shapes:
   body:
     type: polygon
     half width: 0.24
-    half height: 0.25
+    half height: 0.26
 
   leg:
     type: circle

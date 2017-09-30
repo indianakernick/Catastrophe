@@ -100,7 +100,7 @@ template <typename FunctionPtr, FunctionPtr FUNCTION>
 class SetPaintCommand final : public DrawCommand {
 public:
   void load(Utils::ParseString &string, FrameSize, const size_t numPaints) override {
-    index = readIndex(string, numPaints);
+    index = readIndex(string, static_cast<Index>(numPaints));
   }
   
   void draw(NVGcontext *context, const Frame &, const Paints &paints) override {
@@ -136,7 +136,7 @@ public:
           indicies[index] = readIndex(string, frame[tagIndex<Type>]);
         }
       } else if constexpr (std::is_same<Type, ImageType>::value) {
-        indicies[index] = readIndex(string, numImages);
+        indicies[index] = readIndex(string, static_cast<Index>(numImages));
       }
     });
   }
