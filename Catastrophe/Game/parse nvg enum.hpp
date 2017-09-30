@@ -10,9 +10,9 @@
 #define parse_nvg_enum_hpp
 
 #include <nanovg/nanovg.h>
-#include "parse string.hpp"
 #include "command errors.hpp"
 #include "string view literal.hpp"
+#include <Simpleton/Utils/parse string.hpp>
 
 //NanoVG doesn't distungish between line cap and line join enum
 class LineCap {};
@@ -23,7 +23,7 @@ struct ParseEnum;
 
 template <>
 struct ParseEnum<LineCap> {
-  static int parse(ParseString &capStr) {
+  static int parse(Utils::ParseString &capStr) {
            if (capStr.check("butt"_sv)) {
       return NVG_BUTT;
     } else if (capStr.check("round"_sv)) {
@@ -38,7 +38,7 @@ struct ParseEnum<LineCap> {
 
 template <>
 struct ParseEnum<LineJoin> {
-  static int parse(ParseString &joinStr) {
+  static int parse(Utils::ParseString &joinStr) {
            if (joinStr.check("miter"_sv)) {
       return NVG_MITER;
     } else if (joinStr.check("round"_sv)) {
@@ -53,7 +53,7 @@ struct ParseEnum<LineJoin> {
 
 template <>
 struct ParseEnum<NVGwinding> {
-  static int parse(ParseString &windingStr) {
+  static int parse(Utils::ParseString &windingStr) {
            if (windingStr.check("ccw"_sv) || windingStr.check("solid"_sv)) {
       return NVG_CCW;
     } else if (windingStr.check("cw"_sv) || windingStr.check("hole"_sv)) {

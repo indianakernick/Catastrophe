@@ -10,9 +10,9 @@
 #define draw_command_hpp
 
 #include <vector>
-#include "parse string.hpp"
 #include "sprite paints.hpp"
 #include "sprite animation data.hpp"
+#include <Simpleton/Utils/parse string.hpp>
 
 extern "C" struct NVGcontext;
 
@@ -21,7 +21,7 @@ public:
   DrawCommand() = default;
   virtual ~DrawCommand() = default;
   
-  virtual void load(ParseString &, FrameSize, size_t) = 0;
+  virtual void load(Utils::ParseString &, FrameSize, size_t) = 0;
   virtual void draw(NVGcontext *, const Frame &, const Paints &) = 0;
 };
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
@@ -31,7 +31,7 @@ public:
   CreatePaintCommand() = default;
   virtual ~CreatePaintCommand() = default;
   
-  virtual void load(ParseString &, FrameSize, size_t) = 0;
+  virtual void load(Utils::ParseString &, FrameSize, size_t) = 0;
   virtual NVGpaint create(NVGcontext *, const Frame &, const Images &) = 0;
 };
 using CreatePaintCommands = std::vector<std::unique_ptr<CreatePaintCommand>>;

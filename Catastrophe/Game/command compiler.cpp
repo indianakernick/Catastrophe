@@ -17,7 +17,7 @@ namespace {
       return std::make_unique<CLASS##Command>();                                \
     } else
 
-  std::unique_ptr<DrawCommand> identifyDrawCommand(ParseString &parseStr) {
+  std::unique_ptr<DrawCommand> identifyDrawCommand(Utils::ParseString &parseStr) {
     //render styles
     
     COMMAND(stroke_color, StrokeColor)
@@ -67,7 +67,7 @@ namespace {
     }
   }
   
-  std::unique_ptr<CreatePaintCommand> identifyPaintCommand(ParseString &parseStr) {
+  std::unique_ptr<CreatePaintCommand> identifyPaintCommand(Utils::ParseString &parseStr) {
     COMMAND(linear_gradient, LinearGradient)
     COMMAND(box_gradient, BoxGradient)
     COMMAND(radial_gradient, RadialGradient)
@@ -84,12 +84,12 @@ DrawCommands compileDrawCommands(
   const std::string &string,
   const FrameSize frameSize,
   const size_t numPaints,
-  const LineCol startPos
+  const Utils::ParseString::LineCol startPos
 ) {
   DrawCommands commands;
   commands.reserve(string.size() / 8);
   
-  ParseString parseStr(string);
+  Utils::ParseString parseStr(string);
   
   try {
     while (true) {
@@ -101,7 +101,7 @@ DrawCommands compileDrawCommands(
       commands.back()->load(parseStr, frameSize, numPaints);
     }
   } catch (DrawCommandError &e) {
-    LineCol lineCol = parseStr.lineCol();
+    Utils::ParseString::LineCol lineCol = parseStr.lineCol();
     lineCol.moveBy(startPos);
     
     throw CommandCompilerError(
@@ -118,14 +118,14 @@ CreatePaintCommands compilePaintCommands(
   const std::string &string,
   const FrameSize frameSize,
   const size_t numImages,
-  const LineCol startPos
+  const Utils::ParseString::LineCol startPos
 ) {
   //@TODO way too similar to compileDrawCommands
 
   CreatePaintCommands commands;
   commands.reserve(string.size() / 16);
   
-  ParseString parseStr(string);
+  Utils::ParseString parseStr(string);
   
   try {
     while (true) {
@@ -137,7 +137,7 @@ CreatePaintCommands compilePaintCommands(
       commands.back()->load(parseStr, frameSize, numImages);
     }
   } catch (DrawCommandError &e) {
-    LineCol lineCol = parseStr.lineCol();
+    Utils::ParseString::LineCol lineCol = parseStr.lineCol();
     lineCol.moveBy(startPos);
     
     throw CommandCompilerError(

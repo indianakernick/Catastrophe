@@ -9,18 +9,18 @@
 #ifndef command_literals_hpp
 #define command_literals_hpp
 
-#include "parse string.hpp"
 #include "vector sprite.hpp"
 #include "animation data types.hpp"
+#include <Simpleton/Utils/parse string.hpp>
 
-Index readIndex(ParseString &, Index);
-bool isLiteral(ParseString &);
-glm::vec2 readPoint(ParseString &);
-float readScalar(ParseString &);
-glm::vec4 readColor(ParseString &);
+Index readIndex(Utils::ParseString &, Index);
+bool isLiteral(Utils::ParseString &);
+glm::vec2 readPoint(Utils::ParseString &);
+float readScalar(Utils::ParseString &);
+glm::vec4 readColor(Utils::ParseString &);
 
 template <typename Type>
-auto readLiteral(ParseString &string) {
+auto readLiteral(Utils::ParseString &string) {
   if constexpr (std::is_same<Type, PointType>::value) {
     return readPoint(string);
   } else if constexpr (std::is_same<Type, ScalarType>::value) {

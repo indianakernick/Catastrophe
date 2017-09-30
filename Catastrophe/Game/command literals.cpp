@@ -10,7 +10,7 @@
 
 #include "command errors.hpp"
 
-Index readIndex(ParseString &string, const Index size) {
+Index readIndex(Utils::ParseString &string, const Index size) {
   string.skipWhitespace();
   if (string.empty()) {
     throw DrawCommandError("Expected index");
@@ -32,7 +32,7 @@ Index readIndex(ParseString &string, const Index size) {
   return index;
 }
 
-float readFloat(ParseString &string) {
+float readFloat(Utils::ParseString &string) {
   string.skipWhitespace();
   if (string.empty()) {
     throw DrawCommandError("Expected float");
@@ -47,11 +47,11 @@ float readFloat(ParseString &string) {
   return arg;
 }
 
-bool isLiteral(ParseString &string) {
+bool isLiteral(Utils::ParseString &string) {
   return string.front() == '[';
 }
 
-glm::vec2 readPoint(ParseString &string) {
+glm::vec2 readPoint(Utils::ParseString &string) {
   glm::vec2 point;
   
   string.expectAfterWhitespace('[');
@@ -65,7 +65,7 @@ glm::vec2 readPoint(ParseString &string) {
   return point;
 }
 
-float readScalar(ParseString &string) {
+float readScalar(Utils::ParseString &string) {
   float scalar;
   
   string.expectAfterWhitespace('[');
@@ -76,7 +76,7 @@ float readScalar(ParseString &string) {
   return scalar;
 }
 
-glm::vec4 readColor(ParseString &string) {
+glm::vec4 readColor(Utils::ParseString &string) {
   glm::vec4 color;
   
   string.expectAfterWhitespace('[');

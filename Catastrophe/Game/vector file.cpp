@@ -236,12 +236,12 @@ namespace {
     return {filePath.c_str() + lastSlash + 1, filePath.find_last_of('.') - lastSlash - 1};
   }
   
-  std::pair<std::string, LineCol> readCommands(const YAML::Node &commandsNode) {
+  std::pair<std::string, Utils::ParseString::LineCol> readCommands(const YAML::Node &commandsNode) {
     if (!commandsNode) {
       return {};
     }
     
-    LineCol commandStrStart;
+    Utils::ParseString::LineCol commandStrStart;
     const YAML::Mark mark = commandsNode.Mark();
     commandStrStart.moveTo(mark.line, mark.column);
     //Assumes commandsNode is a block string and is indented by 2 spaces

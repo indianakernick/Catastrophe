@@ -9,10 +9,10 @@
 #ifndef command_compiler_hpp
 #define command_compiler_hpp
 
-#include "parse string.hpp"
 #include "vector sprite.hpp"
+#include <Simpleton/Utils/parse string.hpp>
 
-DrawCommands compileDrawCommands(const std::string &, FrameSize, size_t, LineCol);
-CreatePaintCommands compilePaintCommands(const std::string &, FrameSize, size_t, LineCol);
+DrawCommands compileDrawCommands(const std::string &, FrameSize, size_t, Utils::ParseString::LineCol);
+CreatePaintCommands compilePaintCommands(const std::string &, FrameSize, size_t, Utils::ParseString::LineCol);
 
 #endif

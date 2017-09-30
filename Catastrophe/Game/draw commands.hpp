@@ -44,7 +44,7 @@ auto flatten(Tuple &&tuple) {
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {
 public:
-  void load(ParseString &string, const FrameSize frame, size_t) override {
+  void load(Utils::ParseString &string, const FrameSize frame, size_t) override {
     Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame] (const auto i) mutable {
       string.skipWhitespace();
       if (string.empty()) {
@@ -99,7 +99,7 @@ private:
 template <typename FunctionPtr, FunctionPtr FUNCTION>
 class SetPaintCommand final : public DrawCommand {
 public:
-  void load(ParseString &string, FrameSize, const size_t numPaints) override {
+  void load(Utils::ParseString &string, FrameSize, const size_t numPaints) override {
     index = readIndex(string, numPaints);
   }
   
@@ -116,7 +116,7 @@ class ImageType {};
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class CreatePaintCommandImpl final : public CreatePaintCommand {
 public:
-  void load(ParseString &string, const FrameSize frame, const size_t numImages) override {
+  void load(Utils::ParseString &string, const FrameSize frame, const size_t numImages) override {
     //@TODO this is way too similar to DrawCommandImpl
     
     Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame, numImages] (const auto i) {
