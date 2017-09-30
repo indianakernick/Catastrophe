@@ -13,6 +13,9 @@
 ParseStringError::ParseStringError(const char *what)
   : std::runtime_error(what) {}
 
+ParseString::ParseString(const std::string &string)
+  : mData(string.data()), mSize(string.size()) {}
+
 ParseString::ParseString(const std::experimental::string_view view)
   : mData(view.data()), mSize(view.size()) {
   assert(mData);
@@ -76,11 +79,13 @@ void ParseString::advance() {
 }
 
 void ParseString::skipWhitespace() {
-  size_t numSpace = 0;
-  while (numSpace < mSize && std::isspace(mData[numSpace])) {
-    ++numSpace;
-  }
-  advance(numSpace);
+  skip(isspace);
+}
+
+void ParseString::skipUntil(const char ch) {
+  skipUntil([ch] (const char c) {
+    return c == ch;
+  });
 }
 
 void ParseString::expect(const char c) {
