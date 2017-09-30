@@ -18,7 +18,7 @@ public:
   StaticAnimationComponent(Entity *, Sprite &&, Transform, const YAML::Node &);
   
   void update(float) override;
-  const DrawCommands &getDrawCommands() const override;
+  const Sprite &getSprite() const override;
   const Frame &getFrame() const override;
   glm::mat3 getModelMat() const override;
 

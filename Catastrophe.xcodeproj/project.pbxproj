@@ -123,7 +123,6 @@
 		45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */; };
 		45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */; };
 		45DEA0141F7767D400B1DA72 /* command compiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0121F7767D400B1DA72 /* command compiler.cpp */; };
-		45DEA0171F776B2300B1DA72 /* draw commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0151F776B2300B1DA72 /* draw commands.cpp */; };
 		45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA01B1F7A43A500B1DA72 /* screenshot.cpp */; };
 		45DEA0201F7C85DE00B1DA72 /* parse string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA01E1F7C85DE00B1DA72 /* parse string.cpp */; };
@@ -362,7 +361,6 @@
 		45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon entity.yaml"; sourceTree = "<group>"; };
 		45DEA0121F7767D400B1DA72 /* command compiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "command compiler.cpp"; sourceTree = "<group>"; };
 		45DEA0131F7767D400B1DA72 /* command compiler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "command compiler.hpp"; sourceTree = "<group>"; };
-		45DEA0151F776B2300B1DA72 /* draw commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "draw commands.cpp"; sourceTree = "<group>"; };
 		45DEA0161F776B2300B1DA72 /* draw commands.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "draw commands.hpp"; sourceTree = "<group>"; };
 		45DEA01B1F7A43A500B1DA72 /* screenshot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = screenshot.cpp; sourceTree = "<group>"; };
 		45DEA01C1F7A43A500B1DA72 /* screenshot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = screenshot.hpp; sourceTree = "<group>"; };
@@ -426,7 +424,6 @@
 				4509F8F51F5D359B00927A19 /* vector render.hpp */,
 				45DEA0121F7767D400B1DA72 /* command compiler.cpp */,
 				45DEA0131F7767D400B1DA72 /* command compiler.hpp */,
-				45DEA0151F776B2300B1DA72 /* draw commands.cpp */,
 				45DEA0161F776B2300B1DA72 /* draw commands.hpp */,
 				45DEA0221F7CDCFD00B1DA72 /* parse nvg enum.hpp */,
 				45DEA0231F7CDDA500B1DA72 /* command errors.cpp */,
@@ -1072,7 +1069,6 @@
 				45DE9FB61F6E02AF00B1DA72 /* static animation component.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
-				45DEA0171F776B2300B1DA72 /* draw commands.cpp in Sources */,
 				4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,

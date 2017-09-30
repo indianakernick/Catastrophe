@@ -18,14 +18,10 @@ struct Sprite {
   Sprite(Sprite &&) = default;
   Sprite &operator=(Sprite &&) = default;
   
-  Sprite(Animations &&animations, DrawCommands &&drawCommands, Images &&images)
-    : animations(std::move(animations)),
-      drawCommands(std::move(drawCommands)),
-      images(std::move(images)) {}
-  
   Animations animations;
   DrawCommands drawCommands;
   Images images;
+  CreatePaintCommands paintCommands;
 };
 
 #endif

@@ -22,11 +22,14 @@ anims:
       - [0.2, 0.2, 1.0, 1.0] # cross
       - [0.0, 0.0, 1.0, 1.0] # outline
 
+paints: |
+  linear_gradient [0, -2] [0, 2] [1, 0, 0, 1] [0, 0, 1, 1]
+
 commands: |
   scale [0.25, 0.25]
 
   begin_path
-  fill_color 0
+  fill_paint 0
   move_to 0
   line_to 1
   line_to 5
@@ -34,6 +37,8 @@ commands: |
   fill
 
   stroke_width [0.0625]
+
+  global_alpha [0]
 
   begin_path
   line_cap butt

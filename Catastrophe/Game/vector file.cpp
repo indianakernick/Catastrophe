@@ -13,6 +13,7 @@
 #include "parse nvg enum.hpp"
 #include "command errors.hpp"
 #include "command compiler.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   template <typename Tag>
@@ -214,7 +215,7 @@ namespace {
         }
       }
     }
-    return NVGimage(ctx, path.c_str(), flags);
+    return NVGimage(ctx, (Platform::getResDir() + path).c_str(), flags);
   }
   
   Images readImages(const YAML::Node &imagesNode, NVGcontext *ctx) {
@@ -234,6 +235,19 @@ namespace {
     const size_t lastSlash = filePath.find_last_of('/');
     return {filePath.c_str() + lastSlash + 1, filePath.find_last_of('.') - lastSlash - 1};
   }
+  
+  std::pair<std::string, LineCol> readCommands(const YAML::Node &commandsNode) {
+    if (!commandsNode) {
+      return {};
+    }
+    
+    LineCol commandStrStart;
+    const YAML::Mark mark = commandsNode.Mark();
+    commandStrStart.moveTo(mark.line, mark.column);
+    //Assumes commandsNode is a block string and is indented by 2 spaces
+    commandStrStart.putString("\n  ", 3);
+    return {commandsNode.as<std::string>(), commandStrStart};
+  }
 }
 
 Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
@@ -243,21 +257,29 @@ Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
   FrameSize frameSize;
   frameSize.fill(NULL_INDEX);
   Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
+  Images images = readImages(rootNode["images"], ctx);
+  DrawCommands drawCommands;
   
-  const YAML::Node &commandsNode = getChild(rootNode, "commands");
-  LineCol commandStrStart;
-  const YAML::Mark mark = commandsNode.Mark();
-  commandStrStart.moveTo(mark.line, mark.column);
-  commandStrStart.putString("\n  ", 3);
-  const std::string commandStr = commandsNode.as<std::string>();
+  CreatePaintCommands paintCommands;
   
   try {
-    return {
-      std::move(anims),
-      compileDrawCommands(commandStr, frameSize, commandStrStart),
-      readImages(rootNode["images"], ctx)
-    };
+    const auto [str, start] = readCommands(rootNode["paints"]);
+    paintCommands = compilePaintCommands(str, frameSize, images.size(), start);
   } catch (CommandCompilerError &e) {
     throw std::runtime_error(getFileName(filePath) + ":" + e.what());
   }
+  
+  try {
+    const auto [str, start] = readCommands(getChild(rootNode, "commands"));
+    drawCommands = compileDrawCommands(str, frameSize, paintCommands.size(), start);
+  } catch (CommandCompilerError &e) {
+    throw std::runtime_error(getFileName(filePath) + ":" + e.what());
+  }
+  
+  return {
+    std::move(anims),
+    std::move(drawCommands),
+    std::move(images),
+    std::move(paintCommands)
+  };
 }

@@ -12,6 +12,7 @@
 #include "parse string.hpp"
 #include "vector sprite.hpp"
 
-DrawCommands compileDrawCommands(const std::string &, FrameSize, LineCol);
+DrawCommands compileDrawCommands(const std::string &, FrameSize, size_t, LineCol);
+CreatePaintCommands compilePaintCommands(const std::string &, FrameSize, size_t, LineCol);
 
 #endif

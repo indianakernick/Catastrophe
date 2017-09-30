@@ -54,8 +54,8 @@ void PlayerAnimationComponent::update(const float delta) {
   model = transform.getMat3();
 }
 
-const DrawCommands &PlayerAnimationComponent::getDrawCommands() const {
-  return sprite.drawCommands;
+const Sprite &PlayerAnimationComponent::getSprite() const {
+  return sprite;
 }
 
 const Frame &PlayerAnimationComponent::getFrame() const {

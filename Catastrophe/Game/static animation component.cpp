@@ -30,8 +30,8 @@ void StaticAnimationComponent::update(float) {
   model = transform.getMat3();
 }
 
-const DrawCommands &StaticAnimationComponent::getDrawCommands() const {
-  return sprite.drawCommands;
+const Sprite &StaticAnimationComponent::getSprite() const {
+  return sprite;
 }
 
 const Frame &StaticAnimationComponent::getFrame() const {

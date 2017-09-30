@@ -80,7 +80,7 @@ void SpriteTestApp::render(const float delta) {
   anim.advance(delta);
   anim.repeatOnOverflow();
   const Frame frame = getFrame(sprite, animName, anim.getProgressTime());
-  renderSprite(renderingContext.getContext(), sprite.drawCommands, frame, {});
+  renderSprite(renderingContext.getContext(), sprite, frame, {});
   
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }

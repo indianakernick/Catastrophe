@@ -12,16 +12,18 @@
 #include "string view literal.hpp"
 
 namespace {
-  std::unique_ptr<DrawCommand> identityCommand(ParseString &parseStr) {
-    #define COMMAND(STR, CLASS)                                                 \
+  #define COMMAND(STR, CLASS)                                                 \
     if (parseStr.check(#STR##_sv)) {                                            \
       return std::make_unique<CLASS##Command>();                                \
     } else
-    
+
+  std::unique_ptr<DrawCommand> identifyDrawCommand(ParseString &parseStr) {
     //render styles
     
     COMMAND(stroke_color, StrokeColor)
+    COMMAND(stroke_paint, StrokePaint)
     COMMAND(fill_color, FillColor)
+    COMMAND(fill_paint, FillPaint)
     COMMAND(miter_limit, MiterLimit)
     COMMAND(stroke_width, StrokeWidth)
     COMMAND(line_cap, LineCap)
@@ -35,6 +37,12 @@ namespace {
     COMMAND(skew_x, SkewX)
     COMMAND(skew_y, SkewY)
     COMMAND(scale, Scale)
+    
+    //scissoring
+    
+    COMMAND(scissor, Scissor)
+    COMMAND(intersect_scissor, IntersectScissor)
+    COMMAND(reset_scissor, ResetScissor)
     
     //paths
     
@@ -57,20 +65,31 @@ namespace {
     /* else */ {
       throw DrawCommandError("Invalid command");
     }
-    
-    #undef COMMAND
   }
+  
+  std::unique_ptr<CreatePaintCommand> identifyPaintCommand(ParseString &parseStr) {
+    COMMAND(linear_gradient, LinearGradient)
+    COMMAND(box_gradient, BoxGradient)
+    COMMAND(radial_gradient, RadialGradient)
+    COMMAND(image_pattern, ImagePattern)
+    /* else */ {
+      throw DrawCommandError("Invalid paint");
+    }
+  }
+  
+  #undef COMMAND
 }
 
 DrawCommands compileDrawCommands(
   const std::string &string,
   const FrameSize frameSize,
+  const size_t numPaints,
   const LineCol startPos
 ) {
   DrawCommands commands;
   commands.reserve(string.size() / 8);
   
-  ParseString parseStr(string.data(), string.size());
+  ParseString parseStr(string);
   
   try {
     while (true) {
@@ -78,8 +97,44 @@ DrawCommands compileDrawCommands(
       if (parseStr.size() == 0) {
         break;
       }
-      commands.emplace_back(identityCommand(parseStr));
-      commands.back()->load(parseStr, frameSize);
+      commands.emplace_back(identifyDrawCommand(parseStr));
+      commands.back()->load(parseStr, frameSize, numPaints);
+    }
+  } catch (DrawCommandError &e) {
+    LineCol lineCol = parseStr.lineCol();
+    lineCol.moveBy(startPos);
+    
+    throw CommandCompilerError(
+      std::string(lineCol.asStr())
+      + " - "
+      + e.what()
+    );
+  }
+  
+  return commands;
+}
+
+CreatePaintCommands compilePaintCommands(
+  const std::string &string,
+  const FrameSize frameSize,
+  const size_t numImages,
+  const LineCol startPos
+) {
+  //@TODO way too similar to compileDrawCommands
+
+  CreatePaintCommands commands;
+  commands.reserve(string.size() / 16);
+  
+  ParseString parseStr(string);
+  
+  try {
+    while (true) {
+      parseStr.skipWhitespace();
+      if (parseStr.size() == 0) {
+        break;
+      }
+      commands.emplace_back(identifyPaintCommand(parseStr));
+      commands.back()->load(parseStr, frameSize, numImages);
     }
   } catch (DrawCommandError &e) {
     LineCol lineCol = parseStr.lineCol();

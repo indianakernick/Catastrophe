@@ -16,7 +16,7 @@
 
 template <typename ArgType>
 struct GetArgType {
-  //enums
+  //enums or image handles
   using type = std::tuple<int>;
 };
 
