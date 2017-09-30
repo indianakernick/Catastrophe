@@ -37,8 +37,7 @@ public:
   void startLocal();
   void setAndStartLocal(CameraZoomTarget);
   
-  void setMinMaxSize(float);
-  void setMinMaxSize(float, float);
+  void setRelSize(float);
   
   float calcZoomTarget(CameraProps) const;
   
@@ -47,8 +46,7 @@ public:
 private:
   std::weak_ptr<const CameraZoomTarget> target;
   std::shared_ptr<CameraZoomTarget> localTarget;
-  float minSize;
-  float maxSize;
+  float relSize;
 };
 
 #endif

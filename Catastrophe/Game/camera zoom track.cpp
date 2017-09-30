@@ -11,16 +11,13 @@
 #include <nanovg/nanovg.h>
 #include "camera props.hpp"
 #include "camera constants.hpp"
-#include <Simpleton/Math/interpolate.hpp>
+#include <Simpleton/Math/vectors.hpp>
 #include "camera debug render constants.hpp"
 
 CameraZoomTrack::CameraZoomTrack()
   : target(),
-    localTarget(makeZoomTarget(
-      Math::middle(DEFAULT_ZOOM_MIN_SIZE, DEFAULT_ZOOM_MAX_SIZE)
-    )),
-    minSize(DEFAULT_ZOOM_MIN_SIZE),
-    maxSize(DEFAULT_ZOOM_MAX_SIZE) {}
+    localTarget(makeZoomTarget(DEFAULT_ZOOM_SIZE)),
+    relSize(DEFAULT_ZOOM_SIZE) {}
 
 void CameraZoomTrack::start(const CameraZoomTargetCPtr newTarget) {
   target = newTarget;
@@ -43,19 +40,8 @@ void CameraZoomTrack::setAndStartLocal(const CameraZoomTarget newTarget) {
   startLocal();
 }
 
-void CameraZoomTrack::setMinMaxSize(const float newSize) {
-  minSize = newSize;
-  maxSize = newSize;
-}
-
-void CameraZoomTrack::setMinMaxSize(const float newMinSize, const float newMaxSize) {
-  if (newMinSize <= newMaxSize) {
-    minSize = newMinSize;
-    maxSize = newMaxSize;
-  } else {
-    minSize = newMaxSize;
-    maxSize = newMinSize;
-  }
+void CameraZoomTrack::setRelSize(const float newSize) {
+  relSize = newSize;
 }
 
 float CameraZoomTrack::calcZoomTarget(const CameraProps props) const {
@@ -65,38 +51,34 @@ float CameraZoomTrack::calcZoomTarget(const CameraProps props) const {
   }
   const CameraZoomTarget targetObj = *targetShared;
   
-  const glm::length_t maxAxis = targetObj.x < targetObj.y ? 1 : 0;
-  const float targetMaxAxis = targetObj[maxAxis];
-  const float windowMaxAxis = props.windowSize[maxAxis];
-  const float minSizeM = (minSize * windowMaxAxis) / props.pixelsPerMeter;
-  const float maxSizeM = (maxSize * windowMaxAxis) / props.pixelsPerMeter;
+  const float targetAspect = Math::aspectRatio<float>(targetObj);
+  const float windowAspect = Math::aspectRatio<float>(props.windowSize);
   
-  if (targetMaxAxis < minSizeM) {
-    return (minSize * windowMaxAxis) / targetMaxAxis;
-  } else if (targetMaxAxis > maxSizeM) {
-    return (maxSize * windowMaxAxis) / targetMaxAxis;
+  if (targetAspect > windowAspect) {
+    return (props.windowSize.x * relSize) / targetObj.x;
   } else {
-    return props.pixelsPerMeter;
+    return (props.windowSize.y * relSize) / targetObj.y;
   }
 }
 
 void CameraZoomTrack::debugRender(NVGcontext *context, const CameraProps props) const {
   nvgSave(context);
-    nvgResetTransform(context);
-    nvgScale(context, props.windowSize.x, -props.windowSize.y);
-    nvgTranslate(context, 0.5f, -1.0f);
   
-    nvgBeginPath(context);
-    nvgStrokeColor(context, CAMERA_SCALE_COLOR);
-    nvgStrokeWidth(context, CAMERA_SCALE_THICKNESS);
-    nvgLineCap(context, NVG_BUTT);
+  nvgResetTransform(context);
+  nvgScale(context, props.windowSize.x, -props.windowSize.y);
+  nvgTranslate(context, 0.5f, -1.0f);
+
+  nvgBeginPath(context);
+  nvgFillColor(context, CAMERA_SCALE_COLOR);
+  nvgRect(context, -relSize, 0, relSize, CAMERA_SCALE_THICKNESS);
+  nvgFill(context);
   
-    nvgMoveTo(context, -maxSize / 2.0f, CAMERA_SCALE_THICKNESS * 0.5f);
-    nvgLineTo(context, maxSize / 2.0f, CAMERA_SCALE_THICKNESS * 0.5f);
+  nvgTranslate(context, 0.5f, 0.5f);
   
-    nvgMoveTo(context, -minSize / 2.0f, CAMERA_SCALE_THICKNESS * 1.5f);
-    nvgLineTo(context, minSize / 2.0f, CAMERA_SCALE_THICKNESS * 1.5f);
+  nvgBeginPath(context);
+  nvgFillColor(context, CAMERA_SCALE_COLOR);
+  nvgRect(context, -CAMERA_SCALE_THICKNESS, relSize, CAMERA_SCALE_THICKNESS, relSize);
+  nvgFill(context);
   
-    nvgStroke(context);
   nvgRestore(context);
 }

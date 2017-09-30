@@ -295,7 +295,6 @@
 		453892EE1F2C2487007EBB5A /* rendering system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering system.hpp"; sourceTree = "<group>"; };
 		453892F91F2C4209007EBB5A /* entity manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity manager.cpp"; sourceTree = "<group>"; };
 		453892FA1F2C4209007EBB5A /* entity manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity manager.hpp"; sourceTree = "<group>"; };
-		453893061F2C572D007EBB5A /* platform constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "platform constants.hpp"; sourceTree = "<group>"; };
 		453893071F2D6F21007EBB5A /* debug draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "debug draw.cpp"; sourceTree = "<group>"; };
 		453893081F2D6F21007EBB5A /* debug draw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug draw.hpp"; sourceTree = "<group>"; };
 		4538930A1F2D6F5D007EBB5A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
@@ -508,7 +507,6 @@
 				453890701F2ADB13007EBB5A /* file constants.hpp */,
 				453890711F2ADB13007EBB5A /* window constants.hpp */,
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
-				453893061F2C572D007EBB5A /* platform constants.hpp */,
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
 				4541162B1F526DB200C2865B /* input constants.hpp */,
 				4541162D1F526DDB00C2865B /* physics constants.hpp */,
