@@ -66,7 +66,7 @@ namespace {
     entity->animation = makeAnimComp(
       name,
       entity,
-      loadSprite(Platform::getResDir() + sprite, renderer.getContext()),
+      loadSprite(Platform::getResDir() + sprite, renderer),
       transform,
       args
     );

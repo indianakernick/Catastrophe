@@ -11,6 +11,7 @@
 
 #include <glm/mat3x3.hpp>
 #include <Simpleton/Time/fps.hpp>
+#include "rendering resources.hpp"
 
 extern "C" struct NVGcontext;
 extern "C" struct SDL_Window;
@@ -25,17 +26,19 @@ public:
   void preRender(glm::mat3);
   void postRender(bool, uint8_t * = nullptr, size_t = 0);
   
+  RenderResMan &getResources();
   NVGcontext *getContext() const;
   glm::ivec2 getFramebufferSize() const;
   
 private:
+  RenderResMan renderResMan;
   SDL_Window *window = nullptr;
   //SDL_GLContext
   void *sdlGLContext = nullptr;
   NVGcontext *context = nullptr;
   Time::FPS fpsCounter;
   glm::ivec2 renderSize;
-  int fpsFontHandle = 0;
+  FontHandle fpsFontHandle;
   
   void renderFPS();
   void captureFrame(uint8_t *);

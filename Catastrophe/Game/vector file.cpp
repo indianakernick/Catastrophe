@@ -13,7 +13,6 @@
 #include "parse nvg enum.hpp"
 #include "command errors.hpp"
 #include "command compiler.hpp"
-#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   template <typename Tag>
@@ -198,7 +197,7 @@ namespace {
     return anims;
   }
   
-  NVGimage readImage(const YAML::Node &imageNode, NVGcontext *ctx) {
+  ImageHandle readImage(const YAML::Node &imageNode, RenderingContext &ctx) {
     checkType(imageNode, YAML::NodeType::Map);
     const std::string path = getChild(imageNode, "path").as<std::string>();
     int flags = 0;
@@ -215,10 +214,10 @@ namespace {
         }
       }
     }
-    return NVGimage(ctx, (Platform::getResDir() + path).c_str(), flags);
+    return ctx.getResources().loadImage(path, flags);
   }
   
-  Images readImages(const YAML::Node &imagesNode, NVGcontext *ctx) {
+  Images readImages(const YAML::Node &imagesNode, RenderingContext &ctx) {
     if (!imagesNode) {
       return {};
     }
@@ -250,7 +249,7 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
+Sprite loadSprite(const std::string &filePath, RenderingContext &ctx) {
   const YAML::Node rootNode = YAML::LoadFile(filePath);
   checkType(rootNode, YAML::NodeType::Map);
   

@@ -10,10 +10,10 @@
 #define sprite_paints_hpp
 
 #include <vector>
-#include "nvg image.hpp"
 #include <nanovg/nanovg.h>
+#include "rendering resources.hpp"
 
-using Images = std::vector<NVGimage>;
+using Images = std::vector<ImageHandle>;
 using Paints = std::vector<NVGpaint>;
 
 #endif

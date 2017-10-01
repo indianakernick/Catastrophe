@@ -16,7 +16,6 @@
 #include <nanovg/nanovg_gl.h>
 #include <Simpleton/Platform/sdl error.hpp>
 #include "nvg helper.hpp"
-#include <Simpleton/Platform/system info.hpp>
 #include "window constants.hpp"
 
 constexpr int DEPTH_BITS = 16;
@@ -66,16 +65,14 @@ void RenderingContext::init(SDL_Window *newWindow) {
     throw std::runtime_error("NanoVG init failed");
   }
   
-  fpsFontHandle = nvgCreateFont(
-    context,
-    "FPS font",
-    (Platform::getResDir() + "Consolas.ttf").c_str()
-  );
+  renderResMan.init(context);
+  fpsFontHandle = renderResMan.loadFont("Consolas.ttf");
   
   fpsCounter.init();
 }
 
 void RenderingContext::quit() {
+  renderResMan.quit();
   nvgDeleteGL3(context);
   context = nullptr;
   SDL_GL_DeleteContext(sdlGLContext);
@@ -122,6 +119,10 @@ void RenderingContext::postRender(
   SDL_GL_SwapWindow(window);
 }
 
+RenderResMan &RenderingContext::getResources() {
+  return renderResMan;
+}
+
 NVGcontext *RenderingContext::getContext() const {
   return context;
 }
@@ -134,7 +135,7 @@ void RenderingContext::renderFPS() {
   //@TODO use to_chars
   const std::string fpsStr = "FPS: " + std::to_string(fpsCounter.get());
   nvgResetTransform(context);
-  nvgFontFaceId(context, fpsFontHandle);
+  nvgFontFaceId(context, fpsFontHandle->id);
   nvgFontSize(context, 32.0f);
   nvgFillColor(context, nvgRGBAf(1.0f, 1.0f, 1.0f, 1.0f));
   nvgTextAlign(context, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);

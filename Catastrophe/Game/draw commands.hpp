@@ -59,7 +59,7 @@ public:
       using Type = Utils::AtIndex<Types, index>;
       
       if constexpr (std::is_same<Type, ImageType>::value) {
-        std::get<index>(args) = images[indicies[index]].get();
+        std::get<index>(args) = images[indicies[index]]->id;
         return; // continue
       } else if constexpr (std::is_same<Type, PaintUseType>::value) {
         std::get<index>(args) = paints[indicies[index]];
