@@ -20,82 +20,8 @@
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {
 public:
-  void load(Utils::ParseString &string, const FrameSize frame, size_t) override {
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame] (const auto i) mutable {
-      string.skipWhitespace();
-      if (string.empty()) {
-        throw DrawCommandError("Not enough arguments");
-      }
-      
-      constexpr size_t index = UTILS_VALUE(i);
-      using Type = Utils::AtIndex<Types, index>;
-      
-      if constexpr (isTag<Type>) {
-        if (isLiteral(string)) {
-          std::get<index>(args) = getArg(readLiteral<Type>(string));
-          indicies[index] = NULL_INDEX;
-        } else {
-          indicies[index] = readIndex(string, frame[tagIndex<Type>]);
-        }
-      } else {
-        std::get<index>(args) = getArg(ParseEnum<Type>::parse(string));
-      }
-    });
-  }
-  
-  void draw(NVGcontext *context, const Frame &frame, const Paints &) override {
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &frame] (const auto i) {
-      constexpr size_t index = UTILS_VALUE(i);
-      using Type = Utils::AtIndex<Types, index>;
-      
-      if (indicies[index] == NULL_INDEX) {
-        // continue
-        return;
-      }
-      
-      if constexpr (isTag<Type>) {
-        std::get<index>(args) = getArg(
-          std::get<tagIndex<Type>>(frame)[indicies[index]]
-        );
-      }
-    });
-    
-    const auto functionArgs = std::tuple_cat(
-      std::make_tuple(context),
-      Utils::flatten(args)
-    );
-    std::experimental::apply(FUNCTION, functionArgs);
-  }
-
-private:
-  std::array<Index, Utils::listSize<Types>> indicies;
-  Utils::ListToTuple<Utils::TransformList<Types, GetArgType>> args;
-};
-
-template <typename FunctionPtr, FunctionPtr FUNCTION>
-class SetPaintCommand final : public DrawCommand {
-public:
-  void load(Utils::ParseString &string, FrameSize, const size_t numPaints) override {
-    index = readIndex(string, static_cast<Index>(numPaints));
-  }
-  
-  void draw(NVGcontext *context, const Frame &, const Paints &paints) override {
-    FUNCTION(context, paints[index]);
-  }
-
-private:
-  Index index;
-};
-
-class ImageType {};
-
-template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
-class CreatePaintCommandImpl final : public CreatePaintCommand {
-public:
-  void load(Utils::ParseString &string, const FrameSize frame, const size_t numImages) override {
-    //@TODO this is way too similar to DrawCommandImpl
-    
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame, numImages] (const auto i) {
+  void load(Utils::ParseString &string, const FrameSize frame, const Index numImages, Index &numPaints) override {
+    Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame, numImages, &numPaints] (const auto i) mutable {
       string.skipWhitespace();
       if (string.empty()) {
         throw DrawCommandError("Not enough arguments");
@@ -112,24 +38,38 @@ public:
           indicies[index] = readIndex(string, frame[tagIndex<Type>]);
         }
       } else if constexpr (std::is_same<Type, ImageType>::value) {
-        indicies[index] = readIndex(string, static_cast<Index>(numImages));
+        indicies[index] = readIndex(string, numImages);
+      } else if constexpr (std::is_same<Type, PaintUseType>::value) {
+        indicies[index] = readIndex(string, numPaints);
+      } else if constexpr (std::is_same<Type, PaintMakeType>::value) {
+        const Index paintIndex = readIndex(string, std::numeric_limits<Index>::max());
+        if (paintIndex >= numPaints) {
+          numPaints = paintIndex + 1;
+        }
+        indicies[index] = paintIndex;
+      } else {
+        std::get<index>(args) = getArg(ParseEnum<Type>::parse(string));
       }
     });
   }
   
-  NVGpaint create(NVGcontext *context, const Frame &frame, const Images &images) override {
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &frame, &images] (const auto i) {
+  void draw(NVGcontext *context, const Frame &frame, const Images &images, Paints &paints) override {
+    Utils::forEachIndex<Utils::listSize<Types>>([this, &frame, &images, &paints] (const auto i) {
       constexpr size_t index = UTILS_VALUE(i);
       using Type = Utils::AtIndex<Types, index>;
       
       if constexpr (std::is_same<Type, ImageType>::value) {
         std::get<index>(args) = images[indicies[index]].get();
-        return;
+        return; // continue
+      } else if constexpr (std::is_same<Type, PaintUseType>::value) {
+        std::get<index>(args) = paints[indicies[index]];
+        return; // continue
+      } else if constexpr (std::is_same<Type, PaintMakeType>::value) {
+        return; // continue
       }
       
       if (indicies[index] == NULL_INDEX) {
-        // continue
-        return;
+        return; // continue
       }
       
       if constexpr (isTag<Type>) {
@@ -143,7 +83,11 @@ public:
       std::make_tuple(context),
       Utils::flatten(args)
     );
-    return std::experimental::apply(FUNCTION, functionArgs);
+    if constexpr (Utils::listContains<Types, PaintMakeType>) {
+      paints[indicies[Utils::indexOf<Types, PaintMakeType>]] = std::experimental::apply(FUNCTION, functionArgs);
+    } else {
+      std::experimental::apply(FUNCTION, functionArgs);
+    }
   }
 
 private:
@@ -157,19 +101,12 @@ private:
 #define COMMAND_NO_ARGS(NAME, FUN)                                              \
   using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, Utils::EmptyList>
 
-#define SET_PAINT_COMMAND(NAME, FUN)                                            \
-  using NAME##Command = SetPaintCommand<decltype(&FUN), &FUN>;
-
-#define CREATE_PAINT_COMMAND(NAME, FUN, ...)                                    \
-  using NAME##Command = CreatePaintCommandImpl<decltype(&FUN), &FUN, Utils::TypeList<__VA_ARGS__>>
-
-
 //render styles
 
 COMMAND(StrokeColor, nvgStrokeColor, ColorType);
-SET_PAINT_COMMAND(StrokePaint, nvgStrokePaint);
+COMMAND(StrokePaint, nvgStrokePaint, PaintUseType);
 COMMAND(FillColor, nvgFillColor, ColorType);
-SET_PAINT_COMMAND(FillPaint, nvgFillPaint);
+COMMAND(FillPaint, nvgFillPaint, PaintUseType);
 COMMAND(MiterLimit, nvgMiterLimit, ScalarType);
 COMMAND(StrokeWidth, nvgStrokeWidth, ScalarType);
 COMMAND(LineCap, nvgLineCap, LineCap);
@@ -186,10 +123,10 @@ COMMAND(Scale, nvgScale, PointType);
 
 //paints
 
-CREATE_PAINT_COMMAND(LinearGradient, nvgLinearGradient, PointType, PointType, ColorType, ColorType);
-CREATE_PAINT_COMMAND(BoxGradient, nvgBoxGradient, PointType, PointType, ScalarType, ScalarType, ColorType, ColorType);
-CREATE_PAINT_COMMAND(RadialGradient, nvgRadialGradient, PointType, ScalarType, ScalarType, ColorType, ColorType);
-CREATE_PAINT_COMMAND(ImagePattern, nvgImagePattern, PointType, PointType, ScalarType, ImageType, ScalarType);
+COMMAND(LinearGradient, nvgLinearGradient, PaintMakeType, PointType, PointType, ColorType, ColorType);
+COMMAND(BoxGradient, nvgBoxGradient, PaintMakeType, PointType, PointType, ScalarType, ScalarType, ColorType, ColorType);
+COMMAND(RadialGradient, nvgRadialGradient, PaintMakeType, PointType, ScalarType, ScalarType, ColorType, ColorType);
+COMMAND(ImagePattern, nvgImagePattern, PaintMakeType, PointType, PointType, ScalarType, ImageType, ScalarType);
 
 //scissoring
 
@@ -216,7 +153,6 @@ COMMAND(Circle, nvgCircle, PointType, ScalarType);
 COMMAND_NO_ARGS(Fill, nvgFill);
 COMMAND_NO_ARGS(Stroke, nvgStroke);
 
-#undef SET_PAINT_COMMAND
 #undef COMMAND_NO_ARGS
 #undef COMMAND
 

@@ -14,9 +14,13 @@
 #include <nanovg/nanovg.h>
 #include "animation data types.hpp"
 
+struct ImageType {};
+struct PaintMakeType {};
+struct PaintUseType {};
+
 template <typename ArgType>
 struct GetArgType {
-  //enums or image handles
+  //enums
   using type = std::tuple<int>;
 };
 
@@ -33,6 +37,21 @@ struct GetArgType<ScalarType> {
 template <>
 struct GetArgType<ColorType> {
   using type = std::tuple<NVGcolor>;
+};
+
+template <>
+struct GetArgType<ImageType> {
+  using type = std::tuple<int>;
+};
+
+template <>
+struct GetArgType<PaintMakeType> {
+  using type = std::tuple<>;
+};
+
+template <>
+struct GetArgType<PaintUseType> {
+  using type = std::tuple<NVGpaint>;
 };
 
 inline std::tuple<int> getArg(const int arg) {

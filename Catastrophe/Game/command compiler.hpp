@@ -12,7 +12,6 @@
 #include "vector sprite.hpp"
 #include <Simpleton/Utils/parse string.hpp>
 
-DrawCommands compileDrawCommands(const std::string &, FrameSize, size_t, Utils::ParseString::LineCol);
-CreatePaintCommands compilePaintCommands(const std::string &, FrameSize, size_t, Utils::ParseString::LineCol);
+DrawCommands compileDrawCommands(const std::string &, FrameSize, Index, Index &, Utils::ParseString::LineCol);
 
 #endif

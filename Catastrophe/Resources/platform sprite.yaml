@@ -22,11 +22,10 @@ anims:
       - [0.2, 0.2, 1.0, 1.0] # cross
       - [0.0, 0.0, 1.0, 1.0] # outline
 
-paints: |
-  linear_gradient [0, -2] [0, 2] [1, 0, 0, 1] [0, 0, 1, 1]
-
 commands: |
   scale [0.25, 0.25]
+
+  linear_gradient 0 [0, -2] [0, 2] [1, 0, 0, 1] [0, 0, 1, 1]
 
   begin_path
   fill_paint 0

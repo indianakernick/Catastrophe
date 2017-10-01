@@ -38,6 +38,13 @@ namespace {
     COMMAND(skew_y, SkewY)
     COMMAND(scale, Scale)
     
+    //paints
+    
+    COMMAND(linear_gradient, LinearGradient)
+    COMMAND(box_gradient, BoxGradient)
+    COMMAND(radial_gradient, RadialGradient)
+    COMMAND(image_pattern, ImagePattern)
+    
     //scissoring
     
     COMMAND(scissor, Scissor)
@@ -67,36 +74,18 @@ namespace {
     }
   }
   
-  std::unique_ptr<CreatePaintCommand> identifyPaintCommand(Utils::ParseString &parseStr) {
-    COMMAND(linear_gradient, LinearGradient)
-    COMMAND(box_gradient, BoxGradient)
-    COMMAND(radial_gradient, RadialGradient)
-    COMMAND(image_pattern, ImagePattern)
-    /* else */ {
-      throw DrawCommandError("Invalid paint");
-    }
-  }
-  
   #undef COMMAND
-
-  void rethrow(DrawCommandError &e, const Utils::ParseString::LineCol lineCol) {
-    throw CommandCompilerError(
-      std::string(lineCol.asStr())
-      + " - "
-      + e.what()
-    );
-  }
 }
 
 DrawCommands compileDrawCommands(
   const std::string &string,
   const FrameSize frameSize,
-  const size_t numPaints,
+  const Index numImages,
+  Index &numPaints,
   const Utils::ParseString::LineCol startPos
 ) {
   DrawCommands commands;
   commands.reserve(string.size() / 8);
-  
   Utils::ParseString parseStr(string);
   
   try {
@@ -106,39 +95,14 @@ DrawCommands compileDrawCommands(
         break;
       }
       commands.emplace_back(identifyDrawCommand(parseStr));
-      commands.back()->load(parseStr, frameSize, numPaints);
+      commands.back()->load(parseStr, frameSize, numImages, numPaints);
     }
   } catch (DrawCommandError &e) {
-    rethrow(e, parseStr.lineCol() + startPos);
-  }
-  
-  return commands;
-}
-
-CreatePaintCommands compilePaintCommands(
-  const std::string &string,
-  const FrameSize frameSize,
-  const size_t numImages,
-  const Utils::ParseString::LineCol startPos
-) {
-  //@TODO way too similar to compileDrawCommands
-
-  CreatePaintCommands commands;
-  commands.reserve(string.size() / 16);
-  
-  Utils::ParseString parseStr(string);
-  
-  try {
-    while (true) {
-      parseStr.skipWhitespace();
-      if (parseStr.size() == 0) {
-        break;
-      }
-      commands.emplace_back(identifyPaintCommand(parseStr));
-      commands.back()->load(parseStr, frameSize, numImages);
-    }
-  } catch (DrawCommandError &e) {
-    rethrow(e, parseStr.lineCol() + startPos);
+    throw CommandCompilerError(
+      std::string((parseStr.lineCol() + startPos).asStr())
+      + " - "
+      + e.what()
+    );
   }
   
   return commands;

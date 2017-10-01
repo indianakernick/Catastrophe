@@ -21,7 +21,7 @@ struct Sprite {
   Images images;
   Animations animations;
   DrawCommands drawCommands;
-  CreatePaintCommands paintCommands;
+  Index numPaints;
 };
 
 #endif

@@ -149,14 +149,12 @@ void renderSprite(
   nvgTransform(context, model);
   
   static Paints paints;
-  paints.clear();
-  
-  for (auto c = sprite.paintCommands.cbegin(); c != sprite.paintCommands.cend(); ++c) {
-    paints.push_back((*c)->create(context, frame, sprite.images));
+  if (paints.size() < sprite.numPaints) {
+    paints.resize(sprite.numPaints);
   }
   
   for (auto c = sprite.drawCommands.cbegin(); c != sprite.drawCommands.cend(); ++c) {
-    (*c)->draw(context, frame, paints);
+    (*c)->draw(context, frame, sprite.images, paints);
   }
    
   nvgRestore(context);

@@ -21,19 +21,9 @@ public:
   DrawCommand() = default;
   virtual ~DrawCommand() = default;
   
-  virtual void load(Utils::ParseString &, FrameSize, size_t) = 0;
-  virtual void draw(NVGcontext *, const Frame &, const Paints &) = 0;
+  virtual void load(Utils::ParseString &, FrameSize, Index, Index &) = 0;
+  virtual void draw(NVGcontext *, const Frame &, const Images &, Paints &) = 0;
 };
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
-
-class CreatePaintCommand {
-public:
-  CreatePaintCommand() = default;
-  virtual ~CreatePaintCommand() = default;
-  
-  virtual void load(Utils::ParseString &, FrameSize, size_t) = 0;
-  virtual NVGpaint create(NVGcontext *, const Frame &, const Images &) = 0;
-};
-using CreatePaintCommands = std::vector<std::unique_ptr<CreatePaintCommand>>;
 
 #endif

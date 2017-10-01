@@ -259,19 +259,11 @@ Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
   Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
   Images images = readImages(rootNode["images"], ctx);
   DrawCommands drawCommands;
-  
-  CreatePaintCommands paintCommands;
-  
-  try {
-    const auto [str, start] = readCommands(rootNode["paints"]);
-    paintCommands = compilePaintCommands(str, frameSize, images.size(), start);
-  } catch (CommandCompilerError &e) {
-    throw std::runtime_error(getFileName(filePath) + ":" + e.what());
-  }
+  Index numPaints = 0;
   
   try {
     const auto [str, start] = readCommands(getChild(rootNode, "commands"));
-    drawCommands = compileDrawCommands(str, frameSize, paintCommands.size(), start);
+    drawCommands = compileDrawCommands(str, frameSize, static_cast<Index>(images.size()), numPaints, start);
   } catch (CommandCompilerError &e) {
     throw std::runtime_error(getFileName(filePath) + ":" + e.what());
   }
@@ -280,6 +272,6 @@ Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
     std::move(images),
     std::move(anims),
     std::move(drawCommands),
-    std::move(paintCommands)
+    numPaints
   };
 }
