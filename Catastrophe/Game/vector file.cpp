@@ -277,9 +277,9 @@ Sprite loadSprite(const std::string &filePath, NVGcontext *ctx) {
   }
   
   return {
+    std::move(images),
     std::move(anims),
     std::move(drawCommands),
-    std::move(images),
     std::move(paintCommands)
   };
 }

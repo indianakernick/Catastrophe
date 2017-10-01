@@ -78,6 +78,14 @@ namespace {
   }
   
   #undef COMMAND
+
+  void rethrow(DrawCommandError &e, const Utils::ParseString::LineCol lineCol) {
+    throw CommandCompilerError(
+      std::string(lineCol.asStr())
+      + " - "
+      + e.what()
+    );
+  }
 }
 
 DrawCommands compileDrawCommands(
@@ -101,14 +109,7 @@ DrawCommands compileDrawCommands(
       commands.back()->load(parseStr, frameSize, numPaints);
     }
   } catch (DrawCommandError &e) {
-    Utils::ParseString::LineCol lineCol = parseStr.lineCol();
-    lineCol.moveBy(startPos);
-    
-    throw CommandCompilerError(
-      std::string(lineCol.asStr())
-      + " - "
-      + e.what()
-    );
+    rethrow(e, parseStr.lineCol() + startPos);
   }
   
   return commands;
@@ -137,14 +138,7 @@ CreatePaintCommands compilePaintCommands(
       commands.back()->load(parseStr, frameSize, numImages);
     }
   } catch (DrawCommandError &e) {
-    Utils::ParseString::LineCol lineCol = parseStr.lineCol();
-    lineCol.moveBy(startPos);
-    
-    throw CommandCompilerError(
-      std::string(lineCol.asStr())
-      + " - "
-      + e.what()
-    );
+    rethrow(e, parseStr.lineCol() + startPos);
   }
   
   return commands;

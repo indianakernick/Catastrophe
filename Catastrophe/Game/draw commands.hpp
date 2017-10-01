@@ -15,31 +15,7 @@
 #include <experimental/tuple>
 #include "command literals.hpp"
 #include "command arg types.hpp"
-#include <Simpleton/Utils/type list.hpp>
-
-template <typename Tuple>
-struct IsTuple : std::false_type {};
-template <typename ...Types>
-struct IsTuple<std::tuple<Types...>> : std::true_type {};
-
-template <typename T>
-auto getElement(T &&element) {
-  if constexpr (IsTuple<std::decay_t<T>>::value) {
-    return std::forward<T>(element);
-  } else {
-    return std::forward_as_tuple(element);
-  }
-}
-
-template <typename Tuple, size_t ...Is>
-auto flattenHelper(Tuple &&tuple, std::index_sequence<Is...>) {
-  return std::tuple_cat(getElement(std::get<Is>(tuple))...);
-}
-
-template <typename Tuple>
-auto flatten(Tuple &&tuple) {
-  return flattenHelper(tuple, std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>());
-}
+#include <Simpleton/Utils/tuple.hpp>
 
 template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {
@@ -86,7 +62,7 @@ public:
     
     const auto functionArgs = std::tuple_cat(
       std::make_tuple(context),
-      flatten(args)
+      Utils::flatten(args)
     );
     std::experimental::apply(FUNCTION, functionArgs);
   }
@@ -165,7 +141,7 @@ public:
     
     const auto functionArgs = std::tuple_cat(
       std::make_tuple(context),
-      flatten(args)
+      Utils::flatten(args)
     );
     return std::experimental::apply(FUNCTION, functionArgs);
   }

@@ -18,9 +18,9 @@ struct Sprite {
   Sprite(Sprite &&) = default;
   Sprite &operator=(Sprite &&) = default;
   
+  Images images;
   Animations animations;
   DrawCommands drawCommands;
-  Images images;
   CreatePaintCommands paintCommands;
 };
 
