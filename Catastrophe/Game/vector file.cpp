@@ -214,7 +214,7 @@ namespace {
         }
       }
     }
-    return ctx.getResources().loadImage(path, flags);
+    return ctx.getResources().getImage(path, flags);
   }
   
   Images readImages(const YAML::Node &imagesNode, RenderingContext &ctx) {

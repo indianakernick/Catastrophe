@@ -66,7 +66,7 @@ void RenderingContext::init(SDL_Window *newWindow) {
   }
   
   renderResMan.init(context);
-  fpsFontHandle = renderResMan.loadFont("Consolas.ttf");
+  fpsFontHandle = renderResMan.getFont("Consolas.ttf");
   
   fpsCounter.init();
 }

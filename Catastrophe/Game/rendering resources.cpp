@@ -16,6 +16,12 @@ void RenderResMan::init(NVGcontext *newContext) {
 }
 
 void RenderResMan::quit() {
+  unloadImages();
+  unloadFonts();
+  context = nullptr;
+}
+
+void RenderResMan::unloadImages() {
   for (auto i = images.cbegin(); i != images.cend();) {
     nvgDeleteImage(context, i->second->id);
     if (i->second.use_count() == 1) {
@@ -25,7 +31,9 @@ void RenderResMan::quit() {
       ++i;
     }
   }
-  
+}
+
+void RenderResMan::unloadFonts() {
   for (auto f = fonts.cbegin(); f != fonts.cend();) {
     if (f->second.use_count() == 1) {
       f = fonts.erase(f);
@@ -34,61 +42,34 @@ void RenderResMan::quit() {
       ++f;
     }
   }
-  
-  context = nullptr;
 }
 
-ImageHandle RenderResMan::loadImage(const std::string &name, const int flags) {
+ImageHandle RenderResMan::getImage(const std::string &name) {
   auto [begin, end] = images.equal_range(name);
   for (; begin != end; ++begin) {
-    if (begin->second->getFlags() == flags) {
+    if (begin->second->id != 0) {
       return begin->second;
     }
   }
-  
-  const std::string path = Platform::getResDir() + name;
-  const int id = nvgCreateImage(context, path.c_str(), flags);
-  if (id == 0) {
-    throw std::runtime_error("Failed to load image");
+  if (begin == end) {
+    return loadImage(name, 0);
+  } else {
+    begin->second->id = createImage(name, begin->second->getFlags());
+    return begin->second;
   }
-  const ImageHandle handle = std::make_shared<Image>(id, flags);
-  images.insert({name, handle});
-  return handle;
-}
-
-FontHandle RenderResMan::loadFont(const std::string &name) {
-  auto iter = fonts.find(name);
-  if (iter != fonts.end()) {
-    return iter->second;
-  }
-
-  const std::string path = Platform::getResDir() + name;
-  const int id = nvgCreateFont(context, name.c_str(), path.c_str());
-  if (id == -1) {
-    throw std::runtime_error("Failed to load font");
-  }
-  const FontHandle handle = std::make_shared<Font>(id);
-  fonts.insert({name, handle});
-  return handle;
 }
 
 ImageHandle RenderResMan::getImage(const std::string &name, const int flags) {
-  if (flags == -1) {
-    auto iter = images.find(name);
-    if (iter == images.end()) {
-      return loadImage(name, -1);
-    } else {
-      return iter->second;
-    }
-  } else {
-    auto [begin, end] = images.equal_range(name);
-    for (; begin != end; ++begin) {
-      if (begin->second->getFlags() == flags) {
-        return begin->second;
+  auto [begin, end] = images.equal_range(name);
+  for (; begin != end; ++begin) {
+    if (begin->second->getFlags() == flags) {
+      if (begin->second->id == 0) {
+        begin->second->id = createImage(name, flags);
       }
+      return begin->second;
     }
-    return loadImage(name, flags);
   }
+  return loadImage(name, flags);
 }
 
 FontHandle RenderResMan::getFont(const std::string &name) {
@@ -96,6 +77,39 @@ FontHandle RenderResMan::getFont(const std::string &name) {
   if (iter == fonts.end()) {
     return loadFont(name);
   } else {
+    if (iter->second->id == 0) {
+      iter->second->id = createFont(name);
+    }
     return iter->second;
   }
+}
+
+int RenderResMan::createImage(const std::string &name, const int flags) const {
+  const std::string path = Platform::getResDir() + name;
+  const int id = nvgCreateImage(context, path.c_str(), flags);
+  if (id == 0) {
+    throw std::runtime_error("Failed to load image");
+  }
+  return id;
+}
+
+int RenderResMan::createFont(const std::string &name) const {
+  const std::string path = Platform::getResDir() + name;
+  const int id = nvgCreateFont(context, name.c_str(), path.c_str());
+  if (id == -1) {
+    throw std::runtime_error("Failed to load font");
+  }
+  return id;
+}
+
+ImageHandle RenderResMan::loadImage(const std::string &name, const int flags) {
+  const ImageHandle handle = std::make_shared<Image>(createImage(name, flags), flags);
+  images.emplace(name, handle);
+  return handle;
+}
+
+FontHandle RenderResMan::loadFont(const std::string &name) {
+  const FontHandle handle = std::make_shared<Font>(createFont(name));
+  fonts.emplace(name, handle);
+  return handle;
 }

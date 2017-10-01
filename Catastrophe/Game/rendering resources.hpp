@@ -46,16 +46,23 @@ public:
   void init(NVGcontext *);
   void quit();
   
-  ImageHandle loadImage(const std::string &, int);
-  FontHandle loadFont(const std::string &);
+  void unloadImages();
+  void unloadFonts();
   
-  ImageHandle getImage(const std::string &, int = -1);
+  ImageHandle getImage(const std::string &);
+  ImageHandle getImage(const std::string &, int);
   FontHandle getFont(const std::string &);
   
 private:
   NVGcontext *context = nullptr;
   std::unordered_multimap<std::string, ImageHandle> images;
   std::unordered_map<std::string, FontHandle> fonts;
+  
+  int createImage(const std::string &, int) const;
+  int createFont(const std::string &) const;
+  
+  ImageHandle loadImage(const std::string &, int);
+  FontHandle loadFont(const std::string &);
 };
 
 #endif
