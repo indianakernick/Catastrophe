@@ -11,40 +11,11 @@
 #include "command errors.hpp"
 
 Index readIndex(Utils::ParseString &string, const Index size) {
-  string.skipWhitespace();
-  if (string.empty()) {
-    throw DrawCommandError("Expected index");
-  }
-  //@TODO std::from_chars
-  char *end;
-  const unsigned long long arg = std::strtoull(string.data(), &end, 0);
-  if (errno == ERANGE || arg > std::numeric_limits<Index>::max()) {
-    throw DrawCommandError("Index out of range");
-  }
-  if (arg == 0 && end[-1] != '0') {
-    throw DrawCommandError("Invalid index");
-  }
-  const Index index = static_cast<Index>(arg);
+  const Index index = string.parseNumber<Index>();
   if (index >= size) {
     throw DrawCommandError("Index out of range");
   }
-  string.advance(end - string.data());
   return index;
-}
-
-float readFloat(Utils::ParseString &string) {
-  string.skipWhitespace();
-  if (string.empty()) {
-    throw DrawCommandError("Expected float");
-  }
-  //@TODO std::from_chars
-  char *end;
-  const float arg = std::strtof(string.data(), &end);
-  if (errno == ERANGE) {
-    throw DrawCommandError("Float out of range");
-  }
-  string.advance(end - string.data());
-  return arg;
 }
 
 bool isLiteral(Utils::ParseString &string) {
@@ -55,10 +26,10 @@ glm::vec2 readPoint(Utils::ParseString &string) {
   glm::vec2 point;
   
   string.expectAfterWhitespace('[');
-  point.x = readFloat(string);
+  string.parseNumber(point.x);
   
   string.expectAfterWhitespace(',');
-  point.y = readFloat(string);
+  string.parseNumber(point.y);
   
   string.expectAfterWhitespace(']');
   
@@ -69,7 +40,7 @@ float readScalar(Utils::ParseString &string) {
   float scalar;
   
   string.expectAfterWhitespace('[');
-  scalar = readFloat(string);
+  string.parseNumber(scalar);
   
   string.expectAfterWhitespace(']');
   
@@ -80,16 +51,16 @@ glm::vec4 readColor(Utils::ParseString &string) {
   glm::vec4 color;
   
   string.expectAfterWhitespace('[');
-  color.r = readFloat(string);
+  string.parseNumber(color.r);
   
   string.expectAfterWhitespace(',');
-  color.g = readFloat(string);
+  string.parseNumber(color.g);
   
   string.expectAfterWhitespace(',');
-  color.b = readFloat(string);
+  string.parseNumber(color.b);
   
   string.expectAfterWhitespace(',');
-  color.a = readFloat(string);
+  string.parseNumber(color.a);
   
   string.expectAfterWhitespace(']');
   
