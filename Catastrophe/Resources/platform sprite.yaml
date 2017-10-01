@@ -15,17 +15,17 @@ anims:
       - [0, -2]   # 8 bottom mid
       - [-1, -2]  # 9 bottom left mid
 
-    color frames:
-    - offset: 0.0
-      data:
-      - [0.0, 0.0, 0.5, 1.0] # back
-      - [0.2, 0.2, 1.0, 1.0] # cross
-      - [0.0, 0.0, 1.0, 1.0] # outline
+images:
+- path: platform image.png
+  flags:
+  - nearest
+  - repeat_x
+  - repeat_y
 
 commands: |
   scale [0.25, 0.25]
 
-  linear_gradient 0 [0, -2] [0, 2] [1, 0, 0, 1] [0, 0, 1, 1]
+  image_pattern 0 [-2, -2] [2, 2] [0] 0 [1.0]
 
   begin_path
   fill_paint 0
@@ -36,13 +36,15 @@ commands: |
   fill
 
   stroke_width [0.0625]
+  scissor [-2, -2] [4, 4]
+  linear_gradient 0 [0, -2] [0, 2] [0, 0, 1.0, 1] [0.2, 0, 1.0, 1]
 
   global_alpha [0]
 
   begin_path
   line_cap butt
   line_join bevel
-  stroke_color 1
+  stroke_paint 0
   move_to 0
   line_to 2
   line_to 8
@@ -55,10 +57,16 @@ commands: |
   line_to 5
   stroke
 
+  global_alpha [1]
+
+  stroke_width [0.125]
+
+  linear_gradient 0 [0, -2] [0, 2] [0.2, 0, 1.0, 1] [0.4, 0, 1.0, 1]
+
   begin_path
   line_cap square
   line_join miter
-  stroke_color 2
+  stroke_paint 0
   move_to 0
   line_to 1
   line_to 5

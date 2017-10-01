@@ -31,7 +31,7 @@ entities:
     vel: 1
 
 - file: pentagon entity.yaml
-  pos: [9.5, 1.1]
+  pos: [9.5, 1.0]
   scale: [1, 1]
   rotation: 0
   args: {}

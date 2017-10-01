@@ -128,6 +128,7 @@
 		45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0231F7CDDA500B1DA72 /* command errors.cpp */; };
 		45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0281F7CDF6800B1DA72 /* command literals.cpp */; };
 		45DEA0301F7E246B00B1DA72 /* nvg image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA02E1F7E246B00B1DA72 /* nvg image.cpp */; };
+		45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0391F80CBE400B1DA72 /* platform image.png */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -376,6 +377,7 @@
 		45DEA02E1F7E246B00B1DA72 /* nvg image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "nvg image.cpp"; sourceTree = "<group>"; };
 		45DEA02F1F7E246B00B1DA72 /* nvg image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "nvg image.hpp"; sourceTree = "<group>"; };
 		45DEA0311F7E2E3200B1DA72 /* sprite paints.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "sprite paints.hpp"; sourceTree = "<group>"; };
+		45DEA0391F80CBE400B1DA72 /* platform image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "platform image.png"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -866,6 +868,7 @@
 		45DEA0091F76030F00B1DA72 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				45DEA0391F80CBE400B1DA72 /* platform image.png */,
 				4509F8D31F5A429800927A19 /* player sprite.yaml */,
 				45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */,
 				45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */,
@@ -995,6 +998,7 @@
 				45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */,
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
+				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
 				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
 			);
