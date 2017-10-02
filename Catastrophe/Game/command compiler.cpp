@@ -94,6 +94,10 @@ DrawCommands compileDrawCommands(
       if (parseStr.size() == 0) {
         break;
       }
+      if (parseStr.front() == '#') {
+        parseStr.skipUntil('\n');
+        continue;
+      }
       commands.emplace_back(identifyDrawCommand(parseStr));
       commands.back()->load(parseStr, frameSize, numImages, numPaints);
     }
