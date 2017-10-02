@@ -29,7 +29,7 @@ private:
 using ImageHandle = std::shared_ptr<Image>;
 
 struct Font {
-  Font(const int id)
+  explicit Font(const int id)
     : id(id) {}
 
   int id;

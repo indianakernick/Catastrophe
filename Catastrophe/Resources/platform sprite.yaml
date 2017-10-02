@@ -25,7 +25,7 @@ images:
 commands: |
   scale [0.25, 0.25]
 
-  image_pattern 0 [-2, -2] [2, 2] [0] 0 [1.0]
+  image_pattern 0 [-2, -2] [0.25, 1] [0] 0 [1.0]
 
   begin_path
   fill_paint 0
