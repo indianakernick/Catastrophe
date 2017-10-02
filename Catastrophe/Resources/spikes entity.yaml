@@ -1,0 +1,13 @@
+physics:
+  name: SimplePhysicsComponent
+  body: spikes body.yaml
+  args: {}
+
+animation:
+  name: StaticAnimationComponent
+  sprite: spikes sprite.yaml
+  args: {}
+
+rendering:
+  name: VectorRenderComponent
+  args: {}

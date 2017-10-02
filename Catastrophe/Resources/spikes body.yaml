@@ -1,0 +1,15 @@
+body:
+  type: static
+
+shapes:
+  main:
+    type: polygon
+    verts:
+    - [-0.5, -0.5]
+    - [0.5, -0.5]
+    - [0.5, 0.0]
+    - [-0.5, 0.0]
+
+fixtures:
+- shape: main
+  user data: Deadly
