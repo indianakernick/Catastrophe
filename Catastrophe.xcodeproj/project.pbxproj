@@ -132,6 +132,7 @@
 		45DEA03F1F82FCBA00B1DA72 /* spikes sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */; };
 		45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */; };
 		45DEA0431F82FF2D00B1DA72 /* spikes entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */; };
+		45DEA0471F83364400B1DA72 /* particle system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0451F83364400B1DA72 /* particle system.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -384,6 +385,8 @@
 		45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.yaml"; sourceTree = "<group>"; };
 		45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes body.yaml"; sourceTree = "<group>"; };
 		45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes entity.yaml"; sourceTree = "<group>"; };
+		45DEA0451F83364400B1DA72 /* particle system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "particle system.cpp"; sourceTree = "<group>"; };
+		45DEA0461F83364400B1DA72 /* particle system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "particle system.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -491,6 +494,8 @@
 				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 				45DEA03B1F80D34C00B1DA72 /* rendering resources.cpp */,
 				45DEA03C1F80D34C00B1DA72 /* rendering resources.hpp */,
+				45DEA0451F83364400B1DA72 /* particle system.cpp */,
+				45DEA0461F83364400B1DA72 /* particle system.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";
@@ -1126,6 +1131,7 @@
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
 				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,
+				45DEA0471F83364400B1DA72 /* particle system.cpp in Sources */,
 				4509F8D21F5A414800927A19 /* vector file.cpp in Sources */,
 				452FFA8F1F6BC50D003A98B1 /* b2RevoluteJoint.cpp in Sources */,
 				452FFA721F6BC50D003A98B1 /* b2BlockAllocator.cpp in Sources */,
