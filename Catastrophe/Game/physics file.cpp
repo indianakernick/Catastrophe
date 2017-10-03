@@ -13,7 +13,7 @@
 #include "object types.hpp"
 
 namespace {
-  b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale) {
+  b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale = {1.0f, 1.0f}) {
     checkType(vecNode, YAML::NodeType::Sequence);
     
     if (vecNode.size() != 2) {
@@ -28,6 +28,12 @@ namespace {
       vecNode[0].as<float32>() * scale.x,
       vecNode[1].as<float32>() * scale.y
     };
+  }
+  
+  void getOptionalVec(b2Vec2 &vec, const YAML::Node &node, const char *name) {
+    if (const YAML::Node &vecNode = node[name]) {
+      vec = readVec(vecNode, {1.0f, 1.0f});
+    }
   }
   
   class BadBodyDef {};
@@ -56,10 +62,7 @@ namespace {
       );
     }
     
-    if (const YAML::Node &velNode = bodyNode["linear velocity"]) {
-      bodyDef.linearVelocity = readVec(velNode, {1.0f, 1.0f});
-    }
-    
+    getOptionalVec(bodyDef.linearVelocity, bodyNode, "linear velocity");
     getOptional(bodyDef.angularVelocity, bodyNode, "angular velocity");
     getOptional(bodyDef.linearDamping, bodyNode, "linear damping");
     getOptional(bodyDef.angularDamping, bodyNode, "angular damping");
@@ -252,4 +255,186 @@ b2Body *loadBody(
   );
   
   return body;
+}
+
+namespace {
+  #define READ_ANCHOR                                                           \
+  getOptionalVec(def.localAnchorA, node, "local anchor A");                     \
+  getOptionalVec(def.localAnchorB, node, "local anchor B");
+  
+  #define READ_FREQ_DAMP                                                        \
+  getOptional(def.frequencyHz, node, "frequency");                              \
+  getOptional(def.dampingRatio, node, "damping ratio");
+
+  b2RevoluteJointDef *readRevolute(const YAML::Node &node) {
+    static b2RevoluteJointDef def;
+    
+    READ_ANCHOR
+    getOptional(def.referenceAngle, node, "reference angle");
+    getOptional(def.lowerAngle, node, "lower angle");
+    getOptional(def.upperAngle, node, "upper angle");
+    getOptional(def.maxMotorTorque, node, "max motor torque");
+    getOptional(def.motorSpeed, node, "motor speed");
+    getOptional(def.enableLimit, node, "enable limit");
+    getOptional(def.enableMotor, node, "enable moter");
+    
+    return &def;
+  }
+  
+  b2PrismaticJointDef *readPrismatic(const YAML::Node &node) {
+    static b2PrismaticJointDef def;
+    
+    READ_ANCHOR
+    getOptionalVec(def.localAxisA, node, "local axis A");
+    getOptional(def.referenceAngle, node, "reference angle");
+    getOptional(def.enableLimit, node, "enable limit");
+    getOptional(def.lowerTranslation, node, "lower translation");
+    getOptional(def.upperTranslation, node, "upper translation");
+    getOptional(def.enableMotor, node, "enable moter");
+    getOptional(def.maxMotorForce, node, "max motor force");
+    getOptional(def.motorSpeed, node, "motor speed");
+    
+    return &def;
+  }
+  
+  b2DistanceJointDef *readDistance(const YAML::Node &node) {
+    static b2DistanceJointDef def;
+    
+    READ_ANCHOR
+    READ_FREQ_DAMP
+    getOptional(def.length, node, "length");
+    
+    return &def;
+  }
+  
+  b2PulleyJointDef *readPulley(const YAML::Node &node) {
+    static b2PulleyJointDef def;
+    
+    READ_ANCHOR
+    getOptionalVec(def.groundAnchorA, node, "ground anchor A");
+    getOptionalVec(def.groundAnchorB, node, "ground anchor B");
+    getOptional(def.lengthA, node, "length A");
+    getOptional(def.lengthB, node, "length B");
+    getOptional(def.ratio, node, "ratio");
+    
+    return &def;
+  }
+  
+  b2MouseJointDef *readMouse(const YAML::Node &node) {
+    static b2MouseJointDef def;
+    
+    READ_FREQ_DAMP
+    getOptionalVec(def.target, node, "target");
+    getOptional(def.maxForce, node, "max force");
+    
+    return &def;
+  }
+  
+  b2WheelJointDef *readWheel(const YAML::Node &node) {
+    static b2WheelJointDef def;
+    
+    READ_ANCHOR
+    READ_FREQ_DAMP
+    getOptionalVec(def.localAxisA, node, "local axis A");
+    getOptional(def.enableMotor, node, "enable motor");
+    getOptional(def.maxMotorTorque, node, "max motor torque");
+    getOptional(def.motorSpeed, node, "motor speed");
+    
+    return &def;
+  }
+  
+  b2WeldJointDef *readWeld(const YAML::Node &node) {
+    static b2WeldJointDef def;
+    
+    READ_ANCHOR
+    READ_FREQ_DAMP
+    getOptional(def.referenceAngle, node, "reference angle");
+    
+    return &def;
+  }
+  
+  b2FrictionJointDef *readFriction(const YAML::Node &node) {
+    static b2FrictionJointDef def;
+    
+    READ_ANCHOR
+    getOptional(def.maxForce, node, "max force");
+    getOptional(def.maxTorque, node, "max torque");
+    
+    return &def;
+  }
+  
+  b2RopeJointDef *readRope(const YAML::Node &node) {
+    static b2RopeJointDef def;
+    
+    READ_ANCHOR
+    getOptional(def.maxLength, node, "max length");
+    
+    return &def;
+  }
+  
+  b2MotorJointDef *readMotor(const YAML::Node &node) {
+    static b2MotorJointDef def;
+    
+    getOptionalVec(def.linearOffset, node, "linear offset");
+    getOptional(def.angularOffset, node, "angular offset");
+    getOptional(def.maxForce, node, "max force");
+    getOptional(def.maxTorque, node, "max torque");
+    getOptional(def.correctionFactor, node, "correction factor");
+    
+    return &def;
+  }
+
+  class BadJointType {};
+
+  b2JointDef *readJointDef(const std::string &type, const YAML::Node &node) {
+           if (type == "revolute") {
+      return readRevolute(node);
+    } else if (type == "prismatic") {
+      return readPrismatic(node);
+    } else if (type == "distance") {
+      return readDistance(node);
+    } else if (type == "pulley") {
+      return readPulley(node);
+    } else if (type == "mouse") {
+      return readMouse(node);
+    } else if (type == "wheel") {
+      return readWheel(node);
+    } else if (type == "weld") {
+      return readWeld(node);
+    } else if (type == "friction") {
+      return readFriction(node);
+    } else if (type == "rope") {
+      return readRope(node);
+    } else if (type == "motor") {
+      return readMotor(node);
+    } else {
+      throw BadJointType();
+    }
+  }
+}
+
+b2Joint *loadJoint(
+  const std::string &fileName,
+  b2World *const world,
+  b2Body *const bodyA,
+  b2Body *const bodyB
+) {
+  const YAML::Node rootNode = YAML::LoadFile(fileName);
+  checkType(rootNode, YAML::NodeType::Map);
+  
+  const YAML::Node &typeNode = getChild(rootNode, "type");
+  const std::string type = typeNode.as<std::string>();
+  b2JointDef *def;
+  try {
+    def = readJointDef(type, rootNode);
+  } catch (BadJointType &) {
+    throw std::runtime_error(
+      std::string("Bad joint type at line ")
+      + std::to_string(typeNode.Mark().line)
+    );
+  }
+  def->bodyA = bodyA;
+  def->bodyB = bodyB;
+  getOptional(def->collideConnected, rootNode, "collide connected");
+  return world->CreateJoint(def);
 }

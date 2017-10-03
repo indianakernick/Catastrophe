@@ -13,5 +13,6 @@
 #include "../Libraries/Box2D/Box2D.h"
 
 b2Body *loadBody(const std::string &, b2World *, Transform);
+b2Joint *loadJoint(const std::string &, b2World *, b2Body *, b2Body *);
 
 #endif
