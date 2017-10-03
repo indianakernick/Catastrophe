@@ -95,6 +95,30 @@ private:
   Utils::ListToTuple<Utils::TransformList<Types, GetArgType>> args;
 };
 
+class RepeatCommand : public NestedDrawCommand {
+public:
+  void load(Utils::ParseString &string, FrameSize, Index, Index &) override {
+    string.skipWhitespace();
+    if (string.empty()) {
+      throw DrawCommandError("Not enough arguments");
+    }
+    string.parseNumber(count);
+    string.expectAfterWhitespace('{');
+  }
+  
+  void draw(NVGcontext *context, const Frame &frame, const Images &images, Paints &paints) override {
+    Index numRepeats = count;
+    while (numRepeats--) {
+      for (auto c = commands.cbegin(); c != commands.cend(); ++c) {
+        (*c)->draw(context, frame, images, paints);
+      }
+    }
+  }
+
+private:
+  Index count;
+};
+
 #define COMMAND(NAME, FUN, ...)                                                 \
   using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, Utils::TypeList<__VA_ARGS__>>
 

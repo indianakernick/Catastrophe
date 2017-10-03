@@ -8,6 +8,7 @@
 
 #include "command compiler.hpp"
 
+#include <stack>
 #include "draw commands.hpp"
 #include "string view literal.hpp"
 
@@ -74,19 +75,27 @@ namespace {
     }
   }
   
+  std::unique_ptr<NestedDrawCommand> identifyNestedCommand(Utils::ParseString &parseStr) {
+    COMMAND(repeat, Repeat)
+    /* else */ {
+      return nullptr;
+    }
+  }
+  
   #undef COMMAND
 }
 
-DrawCommands compileDrawCommands(
+std::unique_ptr<RootDrawCommand> compileDrawCommands(
   const std::string &string,
   const FrameSize frameSize,
   const Index numImages,
   Index &numPaints,
   const Utils::ParseString::LineCol startPos
 ) {
-  DrawCommands commands;
-  commands.reserve(string.size() / 8);
+  auto root = std::make_unique<RootDrawCommand>();
   Utils::ParseString parseStr(string);
+  std::stack<NestedDrawCommand *> nestedCommands;
+  nestedCommands.push(root.get());
   
   try {
     while (true) {
@@ -98,10 +107,23 @@ DrawCommands compileDrawCommands(
         parseStr.skipUntil('\n');
         continue;
       }
-      commands.emplace_back(identifyDrawCommand(parseStr));
-      commands.back()->load(parseStr, frameSize, numImages, numPaints);
+      if (nestedCommands.size() > 1 && nestedCommands.top()->close(parseStr)) {
+        nestedCommands.pop();
+        continue;
+      }
+      if (std::unique_ptr<NestedDrawCommand> nested = identifyNestedCommand(parseStr)) {
+        nested->load(parseStr, frameSize, numImages, numPaints);
+        NestedDrawCommand *const nestedPtr = nested.get();
+        nestedCommands.top()->pushCommand(std::move(nested));
+        nestedCommands.push(nestedPtr);
+        continue;
+      } else {
+        std::unique_ptr<DrawCommand> command = identifyDrawCommand(parseStr);
+        command->load(parseStr, frameSize, numImages, numPaints);
+        nestedCommands.top()->pushCommand(std::move(command));
+      }
     }
-  } catch (DrawCommandError &e) {
+  } catch (std::exception &e) {
     throw CommandCompilerError(
       std::string((parseStr.lineCol() + startPos).asStr())
       + " - "
@@ -109,5 +131,5 @@ DrawCommands compileDrawCommands(
     );
   }
   
-  return commands;
+  return root;
 }

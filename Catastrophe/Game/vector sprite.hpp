@@ -20,7 +20,7 @@ struct Sprite {
   
   Images images;
   Animations animations;
-  DrawCommands drawCommands;
+  std::unique_ptr<RootDrawCommand> drawCommand;
   Index numPaints;
 };
 

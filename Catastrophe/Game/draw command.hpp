@@ -26,4 +26,30 @@ public:
 };
 using DrawCommands = std::vector<std::unique_ptr<DrawCommand>>;
 
+class NestedDrawCommand : public DrawCommand {
+public:
+  NestedDrawCommand() = default;
+  virtual ~NestedDrawCommand() = default;
+  
+  void pushCommand(std::unique_ptr<DrawCommand> &&command) {
+    commands.emplace_back(std::move(command));
+  }
+  bool close(Utils::ParseString &string) const {
+    return string.check('}');
+  }
+  
+protected:
+  DrawCommands commands;
+};
+
+class RootDrawCommand : public NestedDrawCommand {
+public:
+  void load(Utils::ParseString &, FrameSize, Index, Index &) override {}
+  void draw(NVGcontext *context, const Frame &frame, const Images &images, Paints &paints) override {
+    for (auto c = commands.cbegin(); c != commands.cend(); ++c) {
+      (*c)->draw(context, frame, images, paints);
+    }
+  }
+};
+
 #endif

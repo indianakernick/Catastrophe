@@ -153,9 +153,7 @@ void renderSprite(
     paints.resize(sprite.numPaints);
   }
   
-  for (auto c = sprite.drawCommands.cbegin(); c != sprite.drawCommands.cend(); ++c) {
-    (*c)->draw(context, frame, sprite.images, paints);
-  }
+  sprite.drawCommand->draw(context, frame, sprite.images, paints);
    
   nvgRestore(context);
 }

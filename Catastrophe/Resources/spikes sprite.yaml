@@ -12,40 +12,14 @@ commands: |
   scale [0.125, 0.125]
   linear_gradient 0 [-4, 0] [-2, 0] [0.8, 0.8, 0.8, 1.0] [0.2, 0.2, 0.2, 1.0]
 
-  begin_path
-  fill_paint 0
-  move_to 0
-  line_to 1
-  line_to 2
-  line_to 0
-  fill
+  repeat 4 {
+    begin_path
+    fill_paint 0
+    move_to 0
+    line_to 1
+    line_to 2
+    line_to 0
+    fill
 
-  translate [2, 0]
-
-  begin_path
-  fill_paint 0
-  move_to 0
-  line_to 1
-  line_to 2
-  line_to 0
-  fill
-
-  translate [2, 0]
-
-  begin_path
-  fill_paint 0
-  move_to 0
-  line_to 1
-  line_to 2
-  line_to 0
-  fill
-
-  translate [2, 0]
-
-  begin_path
-  fill_paint 0
-  move_to 0
-  line_to 1
-  line_to 2
-  line_to 0
-  fill
+    translate [2, 0]
+  }

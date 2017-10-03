@@ -257,12 +257,12 @@ Sprite loadSprite(const std::string &filePath, RenderingContext &ctx) {
   frameSize.fill(NULL_INDEX);
   Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
   Images images = readImages(rootNode["images"], ctx);
-  DrawCommands drawCommands;
+  std::unique_ptr<RootDrawCommand> drawCommand;
   Index numPaints = 0;
   
   try {
     const auto [str, start] = readCommands(getChild(rootNode, "commands"));
-    drawCommands = compileDrawCommands(str, frameSize, static_cast<Index>(images.size()), numPaints, start);
+    drawCommand = compileDrawCommands(str, frameSize, static_cast<Index>(images.size()), numPaints, start);
   } catch (CommandCompilerError &e) {
     throw std::runtime_error(getFileName(filePath) + ":" + e.what());
   }
@@ -270,7 +270,7 @@ Sprite loadSprite(const std::string &filePath, RenderingContext &ctx) {
   return {
     std::move(images),
     std::move(anims),
-    std::move(drawCommands),
+    std::move(drawCommand),
     numPaints
   };
 }
