@@ -41,3 +41,9 @@ entities:
   scale: [1, 1]
   rotation: 0
   args: {}
+
+- file: spinning blade entity.yaml
+  pos: [-5, 1.0]
+  scale: [1, 1]
+  rotation: 0
+  args: {}

@@ -13,6 +13,23 @@
 #include "object types.hpp"
 
 namespace {
+  b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale) {
+    checkType(vecNode, YAML::NodeType::Sequence);
+    
+    if (vecNode.size() != 2) {
+      throw std::runtime_error(
+        "Vector at line "
+        + std::to_string(vecNode.Mark().line)
+        + " must have 2 components"
+      );
+    }
+    
+    return {
+      vecNode[0].as<float32>() * scale.x,
+      vecNode[1].as<float32>() * scale.y
+    };
+  }
+  
   class BadBodyDef {};
   
   b2BodyType readBodyType(const std::string &typeName) {
@@ -39,31 +56,20 @@ namespace {
       );
     }
     
+    if (const YAML::Node &velNode = bodyNode["linear velocity"]) {
+      bodyDef.linearVelocity = readVec(velNode, {1.0f, 1.0f});
+    }
+    
+    getOptional(bodyDef.angularVelocity, bodyNode, "angular velocity");
     getOptional(bodyDef.linearDamping, bodyNode, "linear damping");
     getOptional(bodyDef.angularDamping, bodyNode, "angular damping");
     getOptional(bodyDef.allowSleep, bodyNode, "allow sleep");
+    getOptional(bodyDef.awake, bodyNode, "awake");
     getOptional(bodyDef.fixedRotation, bodyNode, "fixed rotation");
     getOptional(bodyDef.bullet, bodyNode, "bullet");
     getOptional(bodyDef.gravityScale, bodyNode, "gravity scale");
     
     return bodyDef;
-  }
-  
-  b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale) {
-    checkType(vecNode, YAML::NodeType::Sequence);
-    
-    if (vecNode.size() != 2) {
-      throw std::runtime_error(
-        "Vector at line "
-        + std::to_string(vecNode.Mark().line)
-        + " must have 2 components"
-      );
-    }
-    
-    return {
-      vecNode[0].as<float32>() * scale.x,
-      vecNode[1].as<float32>() * scale.y
-    };
   }
   
   std::vector<b2Vec2> readVecs(const YAML::Node &vecsNode, const glm::vec2 scale) {
