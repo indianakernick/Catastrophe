@@ -45,7 +45,7 @@ namespace {
     RenderingContext &renderer
   ) {
     checkType(entityNode, YAML::NodeType::Map);
-    const std::string file = getChild(entityNode, "file").as<std::string>();
+    const std::string &file = getChild(entityNode, "file").Scalar();
     const Transform transform = readTransform(entityNode);
     const YAML::Node &args = entityNode["args"];
     return entityMan.create(Platform::getResDir() + file, transform, renderer, args);

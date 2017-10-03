@@ -54,7 +54,7 @@ namespace {
     b2BodyDef bodyDef;
     
     try {
-      bodyDef.type = readBodyType(getChild(bodyNode, "type").as<std::string>());
+      bodyDef.type = readBodyType(getChild(bodyNode, "type").Scalar());
     } catch (BadBodyDef &) {
       throw std::runtime_error(
         "Invalid body type at line: "
@@ -176,8 +176,8 @@ namespace {
   std::unique_ptr<b2Shape> readShape(const YAML::Node &shapeNode, const glm::vec2 scale) {
     checkType(shapeNode, YAML::NodeType::Map);
     
-    const std::string typeName = getChild(shapeNode, "type").as<std::string>();
-    if (typeName == "circle") {
+    const std::string &typeName = getChild(shapeNode, "type").Scalar();
+           if (typeName == "circle") {
       return readCircle(shapeNode, scale);
     } else if (typeName == "edge") {
       return readEdge(shapeNode, scale);
@@ -199,7 +199,7 @@ namespace {
     const YAML::Node &fixtureNode,
     const glm::vec2 scale
   ) {
-    const std::string shapeName = getChild(fixtureNode, "shape").as<std::string>();
+    const std::string &shapeName = getChild(fixtureNode, "shape").Scalar();
     const YAML::Node &shapeNode = getChild(shapesNode, shapeName.c_str());
     std::unique_ptr<b2Shape> shape = readShape(shapeNode, scale);
     
@@ -213,7 +213,7 @@ namespace {
     getOptional(fixtureDef.isSensor, fixtureNode, "is sensor");
     
     if (const YAML::Node &userData = fixtureNode["user data"]) {
-      fixtureDef.userData = getUserData(userData.as<std::string>());
+      fixtureDef.userData = getUserData(userData.Scalar());
     }
     
     body->CreateFixture(&fixtureDef);
@@ -423,7 +423,7 @@ b2Joint *loadJoint(
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &typeNode = getChild(rootNode, "type");
-  const std::string type = typeNode.as<std::string>();
+  const std::string &type = typeNode.Scalar();
   b2JointDef *def;
   try {
     def = readJointDef(type, rootNode);

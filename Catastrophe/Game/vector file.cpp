@@ -159,7 +159,7 @@ namespace {
       checkType(metaNode, YAML::NodeType::Map);
       MetaData meta;
       for (auto m = metaNode.begin(); m != metaNode.end(); ++m) {
-        meta.insert({m->first.as<std::string>(), m->second.as<float>()});
+        meta.insert({m->first.Scalar(), m->second.as<float>()});
       }
       return meta;
     } else {
@@ -191,7 +191,7 @@ namespace {
     
     Animations anims;
     for (auto a = animsNode.begin(); a != animsNode.end(); ++a) {
-      anims.emplace(a->first.as<std::string>(), readAnim(a->second, frameSize));
+      anims.emplace(a->first.Scalar(), readAnim(a->second, frameSize));
     }
     
     return anims;
@@ -199,13 +199,13 @@ namespace {
   
   ImageHandle readImage(const YAML::Node &imageNode, RenderingContext &ctx) {
     checkType(imageNode, YAML::NodeType::Map);
-    const std::string path = getChild(imageNode, "path").as<std::string>();
+    const std::string &path = getChild(imageNode, "path").Scalar();
     int flags = 0;
     if (const YAML::Node &flagsNode = imageNode["flags"]) {
       checkType(flagsNode, YAML::NodeType::Sequence);
       for (auto f = flagsNode.begin(); f != flagsNode.end(); ++f) {
         try {
-          flags |= parseImageFlags(f->as<std::string>());
+          flags |= parseImageFlags(f->Scalar());
         } catch (InvalidImageFlag &) {
           throw std::runtime_error(
             "Invalid image flag at line "
@@ -245,7 +245,7 @@ namespace {
     commandStrStart.moveTo(mark.line, mark.column);
     //Assumes commandsNode is a block string and is indented by 2 spaces
     commandStrStart.putString("\n  ", 3);
-    return {commandsNode.as<std::string>(), commandStrStart};
+    return {commandsNode.Scalar(), commandStrStart};
   }
 }
 

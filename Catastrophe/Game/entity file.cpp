@@ -26,7 +26,7 @@ namespace {
     InputSystem &inputSystem,
     const YAML::Node &args
   ) {
-    const std::string name = getChild(inputNode, "name").as<std::string>();
+    const std::string &name = getChild(inputNode, "name").Scalar();
     entity->input = makeInputComp(name, entity, args);
     inputSystem.add(entity->getID(), entity->input);
   }
@@ -38,8 +38,8 @@ namespace {
     const Transform transform,
     const YAML::Node &args
   ) {
-    const std::string name = getChild(physicsNode, "name").as<std::string>();
-    const std::string body = getChild(physicsNode, "body").as<std::string>();
+    const std::string &name = getChild(physicsNode, "name").Scalar();
+    const std::string &body = getChild(physicsNode, "body").Scalar();
     entity->physics = makePhysicsComp(
       name,
       entity,
@@ -61,8 +61,8 @@ namespace {
     RenderingContext &renderer,
     const YAML::Node &args
   ) {
-    const std::string name = getChild(animNode, "name").as<std::string>();
-    const std::string sprite = getChild(animNode, "sprite").as<std::string>();
+    const std::string &name = getChild(animNode, "name").Scalar();
+    const std::string &sprite = getChild(animNode, "sprite").Scalar();
     entity->animation = makeAnimComp(
       name,
       entity,
@@ -80,7 +80,7 @@ namespace {
     const glm::vec2 scale,
     const YAML::Node &args
   ) {
-    const std::string name = getChild(renderNode, "name").as<std::string>();
+    const std::string &name = getChild(renderNode, "name").Scalar();
     entity->render = makeRenderComp(
       name,
       entity,
