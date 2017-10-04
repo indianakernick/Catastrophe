@@ -22,12 +22,12 @@
 PlayerPhysicsComponent::PlayerPhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level,
-  b2World *world
+  PhysicsSystem &physics
 ) {
   Transform transform;
   transform.pos = readGLMvec(getChild(level, "pos"));
   transform.scale = readGLMvec(getChild(node, "scale"));
-  body = loadBody(getChild(node, "body").Scalar(), world, transform);
+  body = loadBody(getChild(node, "body").Scalar(), physics.getWorld(), transform);
   body->SetUserData(this);
   
   moveForce = getChild(node, "move force").as<float>();
@@ -53,10 +53,13 @@ void PlayerPhysicsComponent::preStep(const float delta) {
 }
 
 void PlayerPhysicsComponent::postStep() {
-  const b2Vec2 vel = body->GetLinearVelocity();
+  const b2Vec2 groundVel = groundBodies.empty()
+                         ? b2Vec2(0.0f, 0.0f)
+                         : groundBodies.front()->GetLinearVelocity();
+  const b2Vec2 relVel = body->GetLinearVelocity() - groundVel;
   body->SetLinearVelocity({
-    Math::clampMag(vel.x, maxMoveSpeed),
-    vel.y
+    Math::clampMag(relVel.x, maxMoveSpeed) + groundVel.x,
+    relVel.y + groundVel.y
   });
 }
 

@@ -18,7 +18,7 @@ std::shared_ptr<PhysicsComponent> makePhysicsComp(
   std::experimental::string_view,
   const YAML::Node &,
   const YAML::Node &,
-  b2World *
+  PhysicsSystem &
 );
 
 #endif

@@ -37,7 +37,7 @@ namespace {
     PhysicsSystem &physicsSystem
   ) {
     const std::string &name = getChild(physicsNode, "name").Scalar();
-    entity->physics = makePhysicsComp(name, physicsNode, levelArgs, physicsSystem.getWorld());
+    entity->physics = makePhysicsComp(name, physicsNode, levelArgs, physicsSystem);
     entity->physics->setEntity(entity);
     physicsSystem.add(entity->getID(), entity->physics);
   }

@@ -15,9 +15,13 @@
 SimplePhysicsComponent::SimplePhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level,
-  b2World *const world
+  PhysicsSystem &physics
 ) {
-  body = loadBody(getChild(node, "body").Scalar(), world, readTransform(level));
+  body = loadBody(
+    getChild(node, "body").Scalar(),
+    physics.getWorld(),
+    readTransform(level)
+  );
   body->SetUserData(this);
 }
 

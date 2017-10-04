@@ -51,6 +51,15 @@ void PhysicsSystem::rem(const EntityID entityID) {
   components.erase(iter);
 }
 
+std::weak_ptr<PhysicsComponent> PhysicsSystem::get(const EntityID entityID) {
+  auto iter = components.find(entityID);
+  if (iter == components.cend()) {
+    return {};
+  } else {
+    return iter->second;
+  }
+}
+
 void PhysicsSystem::update(const float delta) {
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     c->second->preStep(delta);

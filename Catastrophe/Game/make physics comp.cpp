@@ -24,14 +24,14 @@ std::shared_ptr<PhysicsComponent> makePhysicsComp(
   const std::experimental::string_view name,
   const YAML::Node &node,
   const YAML::Node &level,
-  b2World *const world
+  PhysicsSystem &physics
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<PhysicsComponent>,
       PhysicsComps
-    >(name, [&node, &level, world] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level, world);
+    >(name, [&node, &level, &physics] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(node, level, physics);
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid physics component name");

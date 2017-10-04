@@ -38,9 +38,13 @@ namespace {
 OscillatingPhysicsComponent::OscillatingPhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level,
-  b2World *const world
+  PhysicsSystem &physics
 ) {
-  body = loadBody(getChild(node, "body").Scalar(), world, readTransform(level));
+  body = loadBody(
+    getChild(node, "body").Scalar(),
+    physics.getWorld(),
+    readTransform(level)
+  );
   body->SetUserData(this);
   first = readB2vec(getChild(level, "first"));
   second = readB2vec(getChild(level, "second"));

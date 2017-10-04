@@ -30,6 +30,7 @@ public:
   
   void add(EntityID, std::shared_ptr<PhysicsComponent>);
   void rem(EntityID);
+  std::weak_ptr<PhysicsComponent> get(EntityID);
   
   void update(float);
   void debugRender();
