@@ -269,6 +269,7 @@ namespace {
 
   b2RevoluteJointDef *readRevolute(const YAML::Node &node) {
     static b2RevoluteJointDef def;
+    def = {};
     
     READ_ANCHOR
     getOptional(def.referenceAngle, node, "reference angle");
@@ -284,6 +285,7 @@ namespace {
   
   b2PrismaticJointDef *readPrismatic(const YAML::Node &node) {
     static b2PrismaticJointDef def;
+    def = {};
     
     READ_ANCHOR
     getOptionalVec(def.localAxisA, node, "local axis A");
@@ -300,6 +302,7 @@ namespace {
   
   b2DistanceJointDef *readDistance(const YAML::Node &node) {
     static b2DistanceJointDef def;
+    def = {};
     
     READ_ANCHOR
     READ_FREQ_DAMP
@@ -310,6 +313,7 @@ namespace {
   
   b2PulleyJointDef *readPulley(const YAML::Node &node) {
     static b2PulleyJointDef def;
+    def = {};
     
     READ_ANCHOR
     getOptionalVec(def.groundAnchorA, node, "ground anchor A");
@@ -323,6 +327,7 @@ namespace {
   
   b2MouseJointDef *readMouse(const YAML::Node &node) {
     static b2MouseJointDef def;
+    def = {};
     
     READ_FREQ_DAMP
     getOptionalVec(def.target, node, "target");
@@ -333,6 +338,7 @@ namespace {
   
   b2WheelJointDef *readWheel(const YAML::Node &node) {
     static b2WheelJointDef def;
+    def = {};
     
     READ_ANCHOR
     READ_FREQ_DAMP
@@ -346,6 +352,7 @@ namespace {
   
   b2WeldJointDef *readWeld(const YAML::Node &node) {
     static b2WeldJointDef def;
+    def = {};
     
     READ_ANCHOR
     READ_FREQ_DAMP
@@ -356,6 +363,7 @@ namespace {
   
   b2FrictionJointDef *readFriction(const YAML::Node &node) {
     static b2FrictionJointDef def;
+    def = {};
     
     READ_ANCHOR
     getOptional(def.maxForce, node, "max force");
@@ -366,6 +374,7 @@ namespace {
   
   b2RopeJointDef *readRope(const YAML::Node &node) {
     static b2RopeJointDef def;
+    def = {};
     
     READ_ANCHOR
     getOptional(def.maxLength, node, "max length");
@@ -375,6 +384,7 @@ namespace {
   
   b2MotorJointDef *readMotor(const YAML::Node &node) {
     static b2MotorJointDef def;
+    def = {};
     
     getOptionalVec(def.linearOffset, node, "linear offset");
     getOptional(def.angularOffset, node, "angular offset");
@@ -414,12 +424,7 @@ namespace {
   }
 }
 
-b2Joint *loadJoint(
-  const std::string &fileName,
-  b2World *const world,
-  b2Body *const bodyA,
-  b2Body *const bodyB
-) {
+b2JointDef *loadJoint(const std::string &fileName) {
   const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
@@ -434,8 +439,6 @@ b2Joint *loadJoint(
       + std::to_string(typeNode.Mark().line)
     );
   }
-  def->bodyA = bodyA;
-  def->bodyB = bodyB;
   getOptional(def->collideConnected, rootNode, "collide connected");
-  return world->CreateJoint(def);
+  return def;
 }
