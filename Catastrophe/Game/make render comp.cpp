@@ -10,9 +10,11 @@
 
 #include "vector render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
+#include "invisible render component.hpp"
 
 using RenderComps = Utils::TypeList<
-  VectorRenderComponent
+  VectorRenderComponent,
+  InvisibleRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(

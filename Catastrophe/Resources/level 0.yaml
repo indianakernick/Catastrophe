@@ -25,15 +25,27 @@ entities:
 
 - id: 4
   file: pentagon entity.yaml
-  pos: [9.5, 1.0]
+  pos: [9.5, 1]
   scale: [1, 1]
 
 - id: 5
   file: spikes entity.yaml
-  pos: [0, 1.0]
+  pos: [0, 1]
   scale: [1, 1]
 
 - id: 6
   file: spinning blade entity.yaml
-  pos: [-5, 1.0]
+  pos: [-5, 1]
   scale: [1, 1]
+
+- id: 7
+  file: dynamic platform entity.yaml
+  pos: [5, 1]
+  scale: [1, 0.1]
+
+- id: 8
+  file: spring board entity.yaml
+  body A: 1
+  body B: 7
+  local anchor A: [5, 0.5]
+  local anchor B: [0, 0]

@@ -1,5 +1,5 @@
 body:
-  type: kinematic
+  type: dynamic
 
 shapes:
   main:

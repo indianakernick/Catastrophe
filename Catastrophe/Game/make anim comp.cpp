@@ -11,10 +11,12 @@
 #include <Simpleton/Utils/type list.hpp>
 #include "player animation component.hpp"
 #include "static animation component.hpp"
+#include "invisible animation component.hpp"
 
 using AnimComps = Utils::TypeList<
   PlayerAnimationComponent,
-  StaticAnimationComponent
+  StaticAnimationComponent,
+  InvisibleAnimationComponent
 >;
 
 std::shared_ptr<AnimationComponent> makeAnimComp(

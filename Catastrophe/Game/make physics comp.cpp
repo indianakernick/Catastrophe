@@ -12,12 +12,14 @@
 #include "simple physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "oscillating physics component.hpp"
+#include "spring board physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
   SimplePhysicsComponent,
-  OscillatingPhysicsComponent
+  OscillatingPhysicsComponent,
+  SpringBoardPhysicsComponent
 >;
 
 std::shared_ptr<PhysicsComponent> makePhysicsComp(

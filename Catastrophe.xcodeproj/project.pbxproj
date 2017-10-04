@@ -137,6 +137,13 @@
 		45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */; };
 		45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */; };
 		45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0521F8461DC00B1DA72 /* input file.cpp */; };
+		45DEA0571F8482EA00B1DA72 /* spring board entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0561F8482EA00B1DA72 /* spring board entity.yaml */; };
+		45DEA05A1F8483E900B1DA72 /* spring board joint.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0591F8483E900B1DA72 /* spring board joint.yaml */; };
+		45DEA05D1F848B3D00B1DA72 /* invisible render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */; };
+		45DEA0601F848D7800B1DA72 /* invisible animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */; };
+		45DEA0631F84941F00B1DA72 /* spring board physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0611F84941F00B1DA72 /* spring board physics component.cpp */; };
+		45DEA0651F84A39600B1DA72 /* dynamic platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */; };
+		45DEA0671F84A40900B1DA72 /* dynamic platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -395,6 +402,16 @@
 		45DEA0521F8461DC00B1DA72 /* input file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input file.cpp"; sourceTree = "<group>"; };
 		45DEA0531F8461DC00B1DA72 /* input file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input file.hpp"; sourceTree = "<group>"; };
 		45DEA0551F84627F00B1DA72 /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
+		45DEA0561F8482EA00B1DA72 /* spring board entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spring board entity.yaml"; sourceTree = "<group>"; };
+		45DEA0591F8483E900B1DA72 /* spring board joint.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spring board joint.yaml"; sourceTree = "<group>"; };
+		45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "invisible render component.cpp"; sourceTree = "<group>"; };
+		45DEA05C1F848B3D00B1DA72 /* invisible render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "invisible render component.hpp"; sourceTree = "<group>"; };
+		45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "invisible animation component.cpp"; sourceTree = "<group>"; };
+		45DEA05F1F848D7800B1DA72 /* invisible animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "invisible animation component.hpp"; sourceTree = "<group>"; };
+		45DEA0611F84941F00B1DA72 /* spring board physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spring board physics component.cpp"; sourceTree = "<group>"; };
+		45DEA0621F84941F00B1DA72 /* spring board physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spring board physics component.hpp"; sourceTree = "<group>"; };
+		45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dynamic platform body.yaml"; sourceTree = "<group>"; };
+		45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dynamic platform entity.yaml"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -514,6 +531,7 @@
 				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
 				45DEA0091F76030F00B1DA72 /* Sprites */,
 				45DEA00A1F76032100B1DA72 /* Bodies */,
+				45DEA0581F8483C300B1DA72 /* Joints */,
 				45DEA0081F7602F800B1DA72 /* Entities */,
 				45DEA00B1F76032800B1DA72 /* Levels */,
 			);
@@ -552,6 +570,8 @@
 				452FF9E01F64D219003A98B1 /* player animation component.hpp */,
 				45DE9FB41F6E02AF00B1DA72 /* static animation component.cpp */,
 				45DE9FB51F6E02AF00B1DA72 /* static animation component.hpp */,
+				45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */,
+				45DEA05F1F848D7800B1DA72 /* invisible animation component.hpp */,
 			);
 			name = "animation components";
 			sourceTree = "<group>";
@@ -768,6 +788,8 @@
 			children = (
 				4509F8E01F5BB23600927A19 /* vector render component.cpp */,
 				4509F8E11F5BB23600927A19 /* vector render component.hpp */,
+				45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */,
+				45DEA05C1F848B3D00B1DA72 /* invisible render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -883,6 +905,8 @@
 				45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */,
 				45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */,
 				45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */,
+				45DEA0561F8482EA00B1DA72 /* spring board entity.yaml */,
+				45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -908,6 +932,7 @@
 				45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */,
 				45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */,
 				45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */,
+				45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */,
 			);
 			name = Bodies;
 			sourceTree = "<group>";
@@ -920,6 +945,14 @@
 			name = Levels;
 			sourceTree = "<group>";
 		};
+		45DEA0581F8483C300B1DA72 /* Joints */ = {
+			isa = PBXGroup;
+			children = (
+				45DEA0591F8483E900B1DA72 /* spring board joint.yaml */,
+			);
+			name = Joints;
+			sourceTree = "<group>";
+		};
 		45FA99121F3309F800F8C639 /* physics components */ = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +962,8 @@
 				45FA99171F33104200F8C639 /* simple physics component.hpp */,
 				45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */,
 				45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */,
+				45DEA0611F84941F00B1DA72 /* spring board physics component.cpp */,
+				45DEA0621F84941F00B1DA72 /* spring board physics component.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -1018,13 +1053,17 @@
 				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
 				45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */,
 				45DEA03F1F82FCBA00B1DA72 /* spikes sprite.yaml in Resources */,
+				45DEA05A1F8483E900B1DA72 /* spring board joint.yaml in Resources */,
 				45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */,
 				452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */,
 				4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */,
 				45DEA00D1F76453F00B1DA72 /* pentagon sprite.yaml in Resources */,
 				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */,
+				45DEA0671F84A40900B1DA72 /* dynamic platform entity.yaml in Resources */,
+				45DEA0651F84A39600B1DA72 /* dynamic platform body.yaml in Resources */,
 				45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */,
+				45DEA0571F8482EA00B1DA72 /* spring board entity.yaml in Resources */,
 				45DE9FC31F6F8C7900B1DA72 /* level 0.yaml in Resources */,
 				45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */,
 				45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */,
@@ -1070,6 +1109,7 @@
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
 				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
+				45DEA05D1F848B3D00B1DA72 /* invisible render component.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
 				45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */,
@@ -1094,6 +1134,7 @@
 				45DE9FCD1F71001A00B1DA72 /* make physics comp.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
+				45DEA0601F848D7800B1DA72 /* invisible animation component.cpp in Sources */,
 				45DE9FB61F6E02AF00B1DA72 /* static animation component.cpp in Sources */,
 				45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
@@ -1111,6 +1152,7 @@
 				452FFA861F6BC50D003A98B1 /* b2PolygonContact.cpp in Sources */,
 				452FFA901F6BC50D003A98B1 /* b2RopeJoint.cpp in Sources */,
 				452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */,
+				45DEA0631F84941F00B1DA72 /* spring board physics component.cpp in Sources */,
 				454116351F5622D700C2865B /* camera zoom track.cpp in Sources */,
 				452FFA001F6BBF41003A98B1 /* stb_image_write.c in Sources */,
 				45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */,
