@@ -9,11 +9,6 @@
 #ifndef player_constants_hpp
 #define player_constants_hpp
 
-constexpr float PLAYER_MOVE_FORCE = 60.0f;
-constexpr float PLAYER_AIR_MOVE_FORCE = 40.0f;
-constexpr float PLAYER_MAX_MOVE_SPEED = 4.0f;
-
-constexpr float PLAYER_JUMP_FORCE = 120.0f;
-constexpr float PLAYER_MAX_JUMP_DUR = 0.3f;
+constexpr EntityID PLAYER_ID = 0;
 
 #endif

@@ -25,6 +25,9 @@ public:
   bool shouldJump() const;
   
 private:
+  SDL_Scancode leftKey = SDL_SCANCODE_A;
+  SDL_Scancode rightKey = SDL_SCANCODE_D;
+  SDL_Scancode jumpKey = SDL_SCANCODE_W;
   bool leftButton = false;
   bool rightButton = false;
   bool jumpButton = false;

@@ -12,6 +12,7 @@
 #include "yaml helper.hpp"
 #include "make anim comp.hpp"
 #include "make input comp.hpp"
+#include "player constants.hpp"
 #include "make render comp.hpp"
 #include "make physics comp.hpp"
 #include <Simpleton/Platform/system info.hpp>
@@ -67,7 +68,7 @@ namespace {
   }
   
   EntityID readEntityID(const YAML::Node &levelArgs) {
-    EntityID id = 0;
+    EntityID id = PLAYER_ID;
     getOptional(id, levelArgs, "id");
     return id;
   }

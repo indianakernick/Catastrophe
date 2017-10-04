@@ -1,10 +1,16 @@
 input:
   name: PlayerInputComponent
+  keys: key bindings.txt
 
 physics:
   name: PlayerPhysicsComponent
   body: player body.yaml
   scale: &scale [1, 1]
+  move force: 60
+  air move force: 40
+  max move speed: 4
+  jump force: 120
+  max jump duration: 0.3
 
 animation:
   name: PlayerAnimationComponent

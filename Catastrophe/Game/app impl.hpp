@@ -35,8 +35,6 @@ private:
   PhysicsSystem physicsSystem;
   InputSystem inputSystem;
   Screenshot screenshot;
-  
-  EntityID player;
 
   bool init() override;
   void quit() override;

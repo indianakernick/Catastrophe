@@ -8,10 +8,25 @@
 
 #include "player input component.hpp"
 
+#include "input file.hpp"
+#include "yaml helper.hpp"
 #include <SDL2/SDL_events.h>
-#include "input constants.hpp"
 
-PlayerInputComponent::PlayerInputComponent(const YAML::Node &, const YAML::Node &) {}
+namespace {
+  void getOptional(SDL_Scancode &code, const KeyBindings &bindings, const char *name) {
+    auto iter = bindings.find(name);
+    if (iter != bindings.cend()) {
+      code = iter->second;
+    }
+  }
+}
+
+PlayerInputComponent::PlayerInputComponent(const YAML::Node &node, const YAML::Node &) {
+  const KeyBindings bindings = loadInputs(getChild(node, "keys").Scalar());
+  getOptional(leftKey, bindings, "left");
+  getOptional(rightKey, bindings, "right");
+  getOptional(jumpKey, bindings, "jump");
+}
 
 bool PlayerInputComponent::handleEvent(const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
@@ -36,18 +51,16 @@ bool PlayerInputComponent::shouldJump() const {
 }
 
 bool PlayerInputComponent::handleKey(const SDL_Scancode key, const bool down) {
-  switch (key) {
-    case PLAYER_LEFT_KEY:
-      leftButton = down;
-      return true;
-    case PLAYER_RIGHT_KEY:
-      rightButton = down;
-      return true;
-    case PLAYER_JUMP_KEY:
-      jumpButton = down;
-      return true;
-      
-    default:
-      return false;
+         if (key == leftKey) {
+    leftButton = down;
+    return true;
+  } else if (key == rightKey) {
+    rightButton = down;
+    return true;
+  } else if (key == jumpKey) {
+    jumpButton = down;
+    return true;
+  } else {
+    return false;
   }
 }

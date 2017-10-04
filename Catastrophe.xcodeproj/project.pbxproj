@@ -136,6 +136,7 @@
 		45DEA04A1F8343CB00B1DA72 /* spinning blade sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */; };
 		45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */; };
 		45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */; };
+		45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0521F8461DC00B1DA72 /* input file.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -278,7 +279,6 @@
 		4534A6101F51289B00F3AC06 /* debug input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "debug input.hpp"; sourceTree = "<group>"; };
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
 		4538906F1F2ADB13007EBB5A /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
-		453890701F2ADB13007EBB5A /* file constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
 		453890711F2ADB13007EBB5A /* window constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "window constants.hpp"; sourceTree = "<group>"; };
 		453890781F2ADB4B007EBB5A /* rect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rect.hpp; sourceTree = "<group>"; };
 		453890791F2ADB4B007EBB5A /* string to scancode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "string to scancode.cpp"; sourceTree = "<group>"; };
@@ -315,7 +315,6 @@
 		4541161F1F523DA400C2865B /* camera motion track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera motion track.hpp"; sourceTree = "<group>"; };
 		454116281F5255CD00C2865B /* camera window size.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera window size.cpp"; sourceTree = "<group>"; };
 		454116291F5255CD00C2865B /* camera window size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera window size.hpp"; sourceTree = "<group>"; };
-		4541162B1F526DB200C2865B /* input constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input constants.hpp"; sourceTree = "<group>"; };
 		4541162D1F526DDB00C2865B /* physics constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics constants.hpp"; sourceTree = "<group>"; };
 		4541162E1F5405FD00C2865B /* camera props.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera props.cpp"; sourceTree = "<group>"; };
 		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
@@ -393,6 +392,9 @@
 		45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.yaml"; sourceTree = "<group>"; };
 		45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade body.yaml"; sourceTree = "<group>"; };
 		45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade entity.yaml"; sourceTree = "<group>"; };
+		45DEA0521F8461DC00B1DA72 /* input file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input file.cpp"; sourceTree = "<group>"; };
+		45DEA0531F8461DC00B1DA72 /* input file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input file.hpp"; sourceTree = "<group>"; };
+		45DEA0551F84627F00B1DA72 /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -470,8 +472,6 @@
 				45DE9FAA1F6D102A00B1DA72 /* yaml param.cpp */,
 				45DE9FAB1F6D102A00B1DA72 /* yaml param.hpp */,
 				453890781F2ADB4B007EBB5A /* rect.hpp */,
-				453890791F2ADB4B007EBB5A /* string to scancode.cpp */,
-				4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */,
 				452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */,
 				452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */,
 				452FF9FD1F6BBF26003A98B1 /* framebuffer to png.hpp */,
@@ -523,11 +523,10 @@
 		452FF9C01F63D007003A98B1 /* constants */ = {
 			isa = PBXGroup;
 			children = (
-				453890701F2ADB13007EBB5A /* file constants.hpp */,
+				45DEA0551F84627F00B1DA72 /* file constants.hpp */,
 				453890711F2ADB13007EBB5A /* window constants.hpp */,
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
-				4541162B1F526DB200C2865B /* input constants.hpp */,
 				4541162D1F526DDB00C2865B /* physics constants.hpp */,
 				45DE9FB71F6E1B0C00B1DA72 /* camera debug render constants.hpp */,
 			);
@@ -756,6 +755,10 @@
 				453892E41F2C1757007EBB5A /* input system.hpp */,
 				4534A60F1F51289B00F3AC06 /* debug input.cpp */,
 				4534A6101F51289B00F3AC06 /* debug input.hpp */,
+				453890791F2ADB4B007EBB5A /* string to scancode.cpp */,
+				4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */,
+				45DEA0521F8461DC00B1DA72 /* input file.cpp */,
+				45DEA0531F8461DC00B1DA72 /* input file.hpp */,
 			);
 			name = input;
 			sourceTree = "<group>";
@@ -1119,6 +1122,7 @@
 				45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */,
 				45DE9FBC1F6E467400B1DA72 /* tinyfiledialogs.c in Sources */,
 				45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */,
+				45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */,
 				452FFA871F6BC50D003A98B1 /* b2DistanceJoint.cpp in Sources */,
 				452FFA6C1F6BC50D003A98B1 /* b2DynamicTree.cpp in Sources */,
 				452FFA8B1F6BC50D003A98B1 /* b2MotorJoint.cpp in Sources */,

@@ -29,6 +29,11 @@ public:
 private:
   std::forward_list<b2Body *> groundBodies;
   float timeTillFinishJump = 0.0f;
+  float moveForce;
+  float airMoveForce;
+  float maxMoveSpeed;
+  float jumpForce;
+  float maxJumpDur;
 
   void applyMoveForce(float);
   void jump(float);

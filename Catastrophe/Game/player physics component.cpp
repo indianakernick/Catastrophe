@@ -29,6 +29,12 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(
   transform.scale = readGLMvec(getChild(node, "scale"));
   body = loadBody(getChild(node, "body").Scalar(), world, transform);
   body->SetUserData(this);
+  
+  moveForce = getChild(node, "move force").as<float>();
+  airMoveForce = getChild(node, "air move force").as<float>();
+  maxMoveSpeed = getChild(node, "max move speed").as<float>();
+  jumpForce = getChild(node, "jump force").as<float>();
+  maxJumpDur = getChild(node, "max jump duration").as<float>();
 }
 
 void PlayerPhysicsComponent::preStep(const float delta) {
@@ -49,7 +55,7 @@ void PlayerPhysicsComponent::preStep(const float delta) {
 void PlayerPhysicsComponent::postStep() {
   const b2Vec2 vel = body->GetLinearVelocity();
   body->SetLinearVelocity({
-    Math::clampMag(vel.x, PLAYER_MAX_MOVE_SPEED),
+    Math::clampMag(vel.x, maxMoveSpeed),
     vel.y
   });
 }
@@ -76,18 +82,16 @@ bool PlayerPhysicsComponent::onGround() const {
 }
 
 void PlayerPhysicsComponent::applyMoveForce(const float moveForceDir) {
-  const float moveForceMag = onGround()
-                           ? PLAYER_MOVE_FORCE
-                           : PLAYER_AIR_MOVE_FORCE;
+  const float moveForceMag = onGround() ? moveForce : airMoveForce;
   body->ApplyForceToCenter({moveForceMag * moveForceDir, 0.0f}, true);
 }
 
 void PlayerPhysicsComponent::jump(const float delta) {
   if (onGround() && timeTillFinishJump == 0.0f) {
-    timeTillFinishJump = PLAYER_MAX_JUMP_DUR;
+    timeTillFinishJump = maxJumpDur;
   }
   if (timeTillFinishJump > 0.0f) {
-    body->ApplyForceToCenter({0.0f, PLAYER_JUMP_FORCE}, true);
+    body->ApplyForceToCenter({0.0f, jumpForce}, true);
     timeTillFinishJump = std::max(timeTillFinishJump - delta, 0.0f);
   }
 }

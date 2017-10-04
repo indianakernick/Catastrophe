@@ -10,7 +10,7 @@
 
 #include "level file.hpp"
 #include "debug input.hpp"
-#include "file constants.hpp"
+#include "player constants.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 #include "register collision listeners.hpp"
@@ -36,8 +36,8 @@ bool AppImpl::init() {
   
   loadLevel("level 0.yaml", entityManager, renderingContext);
   
-  renderingSystem.startMotionTrack(player);
-  renderingSystem.startZoomTrack(player);
+  renderingSystem.startMotionTrack(PLAYER_ID);
+  renderingSystem.startZoomTrack(PLAYER_ID);
   
   return true;
 }
