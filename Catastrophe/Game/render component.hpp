@@ -14,12 +14,11 @@
 #include "camera zoom track.hpp"
 #include "camera motion track.hpp"
 
-class RenderingState;
 extern "C" struct NVGcontext;
 
 class RenderComponent : public Component {
 public:
-  explicit RenderComponent(Entity *);
+  RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
   virtual void preRender() = 0;

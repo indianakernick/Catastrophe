@@ -1,13 +1,10 @@
 physics:
   name: OscillatingPhysicsComponent
   body: platform body.yaml
-  args: {}
 
 animation:
   name: StaticAnimationComponent
   sprite: platform sprite.yaml
-  args: {}
 
 rendering:
   name: VectorRenderComponent
-  args: {}

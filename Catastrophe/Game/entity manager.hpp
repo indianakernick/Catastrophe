@@ -30,7 +30,7 @@ public:
   void init(InputSystem &, PhysicsSystem &, AnimationSystem &, RenderingSystem &);
   void quit();
   
-  EntityID create(const std::string &, Transform, RenderingContext &, const YAML::Node &);
+  void create(const std::string &, const YAML::Node &, RenderingContext &);
   void destroy(EntityID);
   void destroyAll();
   Entity &getEntity(EntityID);
@@ -42,7 +42,6 @@ private:
   RenderingSystem *rendering = nullptr;
 
   std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;
-  ID::Local<EntityID> idGen;
   
   Systems getSystems() const;
 };

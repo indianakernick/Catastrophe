@@ -8,47 +8,21 @@
 
 #include "level file.hpp"
 
-#include <glm/glm.hpp>
 #include "yaml helper.hpp"
 #include "entity file.hpp"
 #include "entity manager.hpp"
-#include "rendering context.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
-  glm::vec2 readVec(const YAML::Node &vecNode) {
-    checkType(vecNode, YAML::NodeType::Sequence);
-    if (vecNode.size() != 2) {
-      throw std::runtime_error(
-        "Vector at line "
-        + std::to_string(vecNode.Mark().line)
-        + " must have 2 components"
-      );
-    }
-    return {
-      vecNode[0].as<float>(),
-      vecNode[1].as<float>()
-    };
-  }
-  
-  Transform readTransform(const YAML::Node &transformNode) {
-    return {
-      readVec(getChild(transformNode, "pos")),
-      readVec(getChild(transformNode, "scale")),
-      glm::radians(getChild(transformNode, "rotation").as<float>())
-    };
-  }
-
-  EntityID readEntity(
+  void readEntity(
     const YAML::Node &entityNode,
     EntityManager &entityMan,
     RenderingContext &renderer
   ) {
     checkType(entityNode, YAML::NodeType::Map);
+    
     const std::string &file = getChild(entityNode, "file").Scalar();
-    const Transform transform = readTransform(entityNode);
-    const YAML::Node &args = entityNode["args"];
-    return entityMan.create(Platform::getResDir() + file, transform, renderer, args);
+    entityMan.create(file, entityNode, renderer);
   }
   
   void readEntities(
@@ -63,16 +37,14 @@ namespace {
   }
 }
 
-EntityID loadLevel(
-  const std::string &filePath,
+void loadLevel(
+  const std::string &fileName,
   EntityManager &entityMan,
   RenderingContext &renderer
 ) {
-  const YAML::Node root = YAML::LoadFile(filePath);
+  const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
   
-  const EntityID playerID = readEntity(getChild(root, "player"), entityMan, renderer);
+  readEntity(getChild(root, "player"), entityMan, renderer);
   readEntities(getChild(root, "entities"), entityMan, renderer);
-  
-  return playerID;
 }

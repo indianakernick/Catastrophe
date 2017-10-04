@@ -14,7 +14,6 @@
 #include "camera constants.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 #include "register collision listeners.hpp"
-#include <Simpleton/Platform/system info.hpp>
 
 std::unique_ptr<AppImpl> app = nullptr;
 
@@ -35,7 +34,7 @@ bool AppImpl::init() {
   
   entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
   
-  player = loadLevel(Platform::getResDir() + "level 0.yaml", entityManager, renderingContext);
+  loadLevel("level 0.yaml", entityManager, renderingContext);
   
   renderingSystem.startMotionTrack(player);
   renderingSystem.startZoomTrack(player);

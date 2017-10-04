@@ -11,12 +11,11 @@
 
 #include "component.hpp"
 
-class Entity;
 extern "C" union SDL_Event;
 
 class InputComponent : public Component {
 public:
-  explicit InputComponent(Entity *);
+  InputComponent() = default;
   virtual ~InputComponent() = default;
   
   virtual bool handleEvent(SDL_Event) = 0;

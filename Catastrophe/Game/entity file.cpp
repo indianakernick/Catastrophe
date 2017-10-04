@@ -10,110 +10,90 @@
 
 #include "systems.hpp"
 #include "yaml helper.hpp"
-#include "vector file.hpp"
-#include "physics file.hpp"
 #include "make anim comp.hpp"
 #include "make input comp.hpp"
 #include "make render comp.hpp"
 #include "make physics comp.hpp"
-#include "rendering context.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
   void readInputComp(
     const YAML::Node &inputNode,
+    const YAML::Node &levelArgs,
     Entity *const entity,
-    InputSystem &inputSystem,
-    const YAML::Node &args
+    InputSystem &inputSystem
   ) {
     const std::string &name = getChild(inputNode, "name").Scalar();
-    entity->input = makeInputComp(name, entity, args);
+    entity->input = makeInputComp(name, inputNode, levelArgs);
+    entity->input->setEntity(entity);
     inputSystem.add(entity->getID(), entity->input);
   }
   
   void readPhysicsComp(
     const YAML::Node &physicsNode,
+    const YAML::Node &levelArgs,
     Entity *const entity,
-    PhysicsSystem &physicsSystem,
-    const Transform transform,
-    const YAML::Node &args
+    PhysicsSystem &physicsSystem
   ) {
     const std::string &name = getChild(physicsNode, "name").Scalar();
-    const std::string &body = getChild(physicsNode, "body").Scalar();
-    entity->physics = makePhysicsComp(
-      name,
-      entity,
-      loadBody(
-        Platform::getResDir() + body,
-        physicsSystem.getWorld(),
-        transform
-      ),
-      args
-    );
+    entity->physics = makePhysicsComp(name, physicsNode, levelArgs, physicsSystem.getWorld());
+    entity->physics->setEntity(entity);
     physicsSystem.add(entity->getID(), entity->physics);
   }
   
   void readAnimComp(
     const YAML::Node &animNode,
+    const YAML::Node &levelArgs,
     Entity *const entity,
     AnimationSystem &animationSystem,
-    const Transform transform,
-    RenderingContext &renderer,
-    const YAML::Node &args
+    RenderingContext &renderer
   ) {
     const std::string &name = getChild(animNode, "name").Scalar();
-    const std::string &sprite = getChild(animNode, "sprite").Scalar();
-    entity->animation = makeAnimComp(
-      name,
-      entity,
-      loadSprite(Platform::getResDir() + sprite, renderer),
-      transform,
-      args
-    );
+    entity->animation = makeAnimComp(name, animNode, levelArgs, renderer);
+    entity->animation->setEntity(entity);
     animationSystem.add(entity->getID(), entity->animation);
   }
   
   void readRenderComp(
     const YAML::Node &renderNode,
+    const YAML::Node &levelArgs,
     Entity *const entity,
-    RenderingSystem &renderingSystem,
-    const glm::vec2 scale,
-    const YAML::Node &args
+    RenderingSystem &renderingSystem
   ) {
     const std::string &name = getChild(renderNode, "name").Scalar();
-    entity->render = makeRenderComp(
-      name,
-      entity,
-      scale,
-      args
-    );
+    entity->render = makeRenderComp(name, renderNode, levelArgs);
+    entity->render->setEntity(entity);
     renderingSystem.add(entity->getID(), entity->render);
+  }
+  
+  EntityID readEntityID(const YAML::Node &levelArgs) {
+    EntityID id = 0;
+    getOptional(id, levelArgs, "id");
+    return id;
   }
 }
 
 std::unique_ptr<Entity> loadEntity(
-  const std::string &filePath,
-  const EntityID id,
-  const Systems systems,
-  const Transform transform,
+  const std::string &fileName,
+  const YAML::Node &levelArgs,
   RenderingContext &renderer,
-  const YAML::Node &args
+  const Systems systems
 ) {
-  const YAML::Node root = YAML::LoadFile(filePath);
+  const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
-  std::unique_ptr<Entity> entity = std::make_unique<Entity>(id);
+  std::unique_ptr<Entity> entity = std::make_unique<Entity>(readEntityID(levelArgs));
   
   if (const YAML::Node &input = root["input"]) {
-    readInputComp(input, entity.get(), systems.input, args);
+    readInputComp(input, levelArgs, entity.get(), systems.input);
   }
   if (const YAML::Node &physics = root["physics"]) {
-    readPhysicsComp(physics, entity.get(), systems.physics, transform, args);
+    readPhysicsComp(physics, levelArgs, entity.get(), systems.physics);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    readAnimComp(anim, entity.get(), systems.animation, transform, renderer, args);
+    readAnimComp(anim, levelArgs, entity.get(), systems.animation, renderer);
   }
   if (const YAML::Node &render = root["rendering"]) {
-    readRenderComp(render, entity.get(), systems.rendering, transform.scale, args);
+    readRenderComp(render, levelArgs, entity.get(), systems.rendering);
   }
   
   return entity;

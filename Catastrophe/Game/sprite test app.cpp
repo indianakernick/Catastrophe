@@ -24,7 +24,7 @@ bool SpriteTestApp::init() {
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
-  sprite = loadSprite(Platform::getResDir() + spriteFile, renderingContext);
+  sprite = loadSprite(spriteFile, renderingContext);
   anim.setDuration(sprite.animations.at(animName).durationSec);
   
   return true;

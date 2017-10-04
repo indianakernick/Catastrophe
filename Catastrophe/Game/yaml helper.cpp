@@ -9,6 +9,8 @@
 #include "yaml helper.hpp"
 
 #include <stdexcept>
+#include <glm/glm.hpp>
+#include "b2 glm cast.hpp"
 
 YAML::Node getChild(const YAML::Node &parent, const char *name) {
   const YAML::Node child = parent[name];
@@ -59,4 +61,38 @@ void checkType(const YAML::Node &node, const YAML::NodeType::value type) {
     );
     throw std::runtime_error(str);
   }
+}
+
+glm::vec2 readGLMvec(const YAML::Node &vecNode) {
+  checkType(vecNode, YAML::NodeType::Sequence);
+  if (vecNode.size() != 2) {
+    throw std::runtime_error(
+      "Vector at line "
+      + std::to_string(vecNode.Mark().line)
+      + " must have 2 components"
+    );
+  }
+  return {
+    vecNode[0].as<float>(),
+    vecNode[1].as<float>()
+  };
+}
+
+b2Vec2 readB2vec(const YAML::Node &vecNode) {
+  return castToB2(readGLMvec(vecNode));
+}
+
+Transform readTransform(const YAML::Node &transformNode) {
+  Transform transform;
+  if (const YAML::Node &posNode = transformNode["pos"]) {
+    transform.pos = readGLMvec(posNode);
+  }
+  if (const YAML::Node &scaleNode = transformNode["scale"]) {
+    transform.scale = readGLMvec(scaleNode);
+  }
+  if (const YAML::Node &rotationNode = transformNode["rotation"]) {
+    transform.rotation = -glm::radians(rotationNode.as<float>());
+  }
+
+  return transform;
 }

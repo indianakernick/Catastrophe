@@ -1,49 +1,39 @@
 player:
   file: player entity.yaml
   pos: [0, 5]
-  scale: [1, 1]
-  rotation: 0
 
 entities:
-- file: platform entity.yaml
+- id: 1
+  file: platform entity.yaml
   pos: [0, 0]
   scale: [20, 1]
-  rotation: 0
-  args: {}
   
-- file: oscillating platform entity.yaml
-  pos: [0, 0]
+- id: 2
+  file: oscillating platform entity.yaml
   scale: [4, 0.25]
-  rotation: 0
-  args:
-    first: [-10, 2]
-    second: [10, 2]
-    vel: 1
+  first: [-10, 2]
+  second: [10, 2]
+  vel: 1
 
-- file: oscillating platform entity.yaml
-  pos: [0, 0]
+- id: 3
+  file: oscillating platform entity.yaml
   scale: [4, 0.25]
-  rotation: 0
-  args:
-    first: [-10, 4]
-    second: [10, 4]
-    start: 0.5
-    vel: 1
+  first: [-10, 4]
+  second: [10, 4]
+  start: 0.5
+  vel: 1
 
-- file: pentagon entity.yaml
+- id: 4
+  file: pentagon entity.yaml
   pos: [9.5, 1.0]
   scale: [1, 1]
-  rotation: 0
-  args: {}
 
-- file: spikes entity.yaml
+- id: 5
+  file: spikes entity.yaml
   pos: [0, 1.0]
   scale: [1, 1]
-  rotation: 0
-  args: {}
 
-- file: spinning blade entity.yaml
+- id: 6
+  file: spinning blade entity.yaml
   pos: [-5, 1.0]
   scale: [1, 1]
-  rotation: 0
-  args: {}

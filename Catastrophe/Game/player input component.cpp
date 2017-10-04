@@ -11,8 +11,7 @@
 #include <SDL2/SDL_events.h>
 #include "input constants.hpp"
 
-PlayerInputComponent::PlayerInputComponent(Entity *const entity, const YAML::Node &)
-  : InputComponent(entity) {}
+PlayerInputComponent::PlayerInputComponent(const YAML::Node &, const YAML::Node &) {}
 
 bool PlayerInputComponent::handleEvent(const SDL_Event event) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {

@@ -35,6 +35,7 @@ fixtures:
   user data: PlayerBody
 
 - shape: head
+  friction: 0.0
   density: 6.0
   user data: PlayerBody
 

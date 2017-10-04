@@ -13,10 +13,12 @@
 #include "component.hpp"
 
 class b2Body;
+class b2Joint;
+class b2World;
 
 class PhysicsComponent : public Component {
 public:
-  PhysicsComponent(Entity *, b2Body *);
+  PhysicsComponent() = default;
   virtual ~PhysicsComponent() = default;
   
   //Called before b2World::Step
@@ -28,6 +30,7 @@ public:
   float getAngle() const;
   
   b2Body *body = nullptr;
+  b2Joint *joint = nullptr;
 };
 
 #endif

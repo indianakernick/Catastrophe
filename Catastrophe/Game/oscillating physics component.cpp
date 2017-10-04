@@ -9,27 +9,11 @@
 #include "oscillating physics component.hpp"
 
 #include "yaml helper.hpp"
+#include "physics file.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 namespace {
-  b2Vec2 readVec(const YAML::Node &vecNode) {
-    checkType(vecNode, YAML::NodeType::Sequence);
-    
-    if (vecNode.size() != 2) {
-      throw std::runtime_error(
-        "Vector at line "
-        + std::to_string(vecNode.Mark().line)
-        + " must have 2 components"
-      );
-    }
-    
-    return {
-      vecNode[0].as<float32>(),
-      vecNode[1].as<float32>()
-    };
-  }
-  
   int quadrant(const b2Vec2 vec) {
     if (vec.x >= 0) {
       if (vec.y >= 0) {
@@ -52,14 +36,16 @@ namespace {
 }
 
 OscillatingPhysicsComponent::OscillatingPhysicsComponent(
-  Entity *const entity,
-  b2Body *const body,
-  const YAML::Node &args
-) : PhysicsComponent(entity, body),
-    first(readVec(getChild(args, "first"))),
-    second(readVec(getChild(args, "second"))) {
-    
-  if (const YAML::Node &startNode = args["start"]) {
+  const YAML::Node &node,
+  const YAML::Node &level,
+  b2World *const world
+) {
+  body = loadBody(getChild(node, "body").Scalar(), world, readTransform(level));
+  body->SetUserData(this);
+  first = readB2vec(getChild(level, "first"));
+  second = readB2vec(getChild(level, "second"));
+  
+  if (const YAML::Node &startNode = level["start"]) {
     const float start = startNode.as<float>();
     const b2Vec2 startPoint = {
       Math::lerp(start, first.x, second.x),
@@ -70,7 +56,7 @@ OscillatingPhysicsComponent::OscillatingPhysicsComponent(
     body->SetTransform(first, body->GetAngle());
   }
   
-  const float vel = getChild(args, "vel").as<float>();
+  const float vel = getChild(level, "vel").as<float>();
   toSecond = second - first;
   toSecond.Normalize();
   toSecond *= vel;

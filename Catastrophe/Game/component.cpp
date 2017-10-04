@@ -10,12 +10,13 @@
 
 #include <cassert>
 
-Component::Component(Entity *const entity)
-  : entity(entity) {
-  assert(entity);
-}
-
 Component::~Component() {}
+
+void Component::setEntity(Entity *const newEntity) {
+  assert(entity == nullptr);
+  assert(newEntity != nullptr);
+  entity = newEntity;
+}
 
 Entity &Component::getEntity() const {
   return *entity;

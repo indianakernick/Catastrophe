@@ -8,13 +8,18 @@
 
 #include "simple physics component.hpp"
 
+#include "yaml helper.hpp"
+#include "physics file.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 SimplePhysicsComponent::SimplePhysicsComponent(
-  Entity *const entity,
-  b2Body *body,
-  const YAML::Node &
-) : PhysicsComponent(entity, body) {}
+  const YAML::Node &node,
+  const YAML::Node &level,
+  b2World *const world
+) {
+  body = loadBody(getChild(node, "body").Scalar(), world, readTransform(level));
+  body->SetUserData(this);
+}
 
 void SimplePhysicsComponent::preStep(float) {}
 

@@ -13,6 +13,7 @@
 #include "parse nvg enum.hpp"
 #include "command errors.hpp"
 #include "command compiler.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   template <typename Tag>
@@ -230,11 +231,6 @@ namespace {
     return images;
   }
   
-  std::string getFileName(const std::string &filePath) {
-    const size_t lastSlash = filePath.find_last_of('/');
-    return {filePath.c_str() + lastSlash + 1, filePath.find_last_of('.') - lastSlash - 1};
-  }
-  
   std::pair<std::string, Utils::ParseString::LineCol> readCommands(const YAML::Node &commandsNode) {
     if (!commandsNode) {
       return {};
@@ -249,8 +245,8 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &filePath, RenderingContext &ctx) {
-  const YAML::Node rootNode = YAML::LoadFile(filePath);
+Sprite loadSprite(const std::string &fileName, RenderingContext &ctx) {
+  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   FrameSize frameSize;
@@ -264,7 +260,7 @@ Sprite loadSprite(const std::string &filePath, RenderingContext &ctx) {
     const auto [str, start] = readCommands(getChild(rootNode, "commands"));
     drawCommand = compileDrawCommands(str, frameSize, static_cast<Index>(images.size()), numPaints, start);
   } catch (CommandCompilerError &e) {
-    throw std::runtime_error(getFileName(filePath) + ":" + e.what());
+    throw std::runtime_error(fileName + ":" + e.what());
   }
   
   return {

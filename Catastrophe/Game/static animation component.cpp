@@ -9,19 +9,21 @@
 #include "static animation component.hpp"
 
 #include "entity.hpp"
+#include "yaml helper.hpp"
+#include "vector file.hpp"
 #include "vector render.hpp"
 #include "physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
 
 StaticAnimationComponent::StaticAnimationComponent(
-  Entity *const entity,
-  Sprite &&sprite,
-  const Transform transform,
-  const YAML::Node &
-) : AnimationComponent(entity),
-    sprite(std::move(sprite)),
-    transform(transform) {}
+  const YAML::Node &node,
+  const YAML::Node &level,
+  RenderingContext &renderer
+) {
+  sprite = loadSprite(getChild(node, "sprite").Scalar(), renderer);
+  transform.scale = readGLMvec(getChild(level, "scale"));
+}
 
 void StaticAnimationComponent::update(float) {
   frame = ::getFrame(sprite, "static", 0.0f);

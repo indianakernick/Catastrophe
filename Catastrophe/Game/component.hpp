@@ -13,14 +13,16 @@ class Entity;
 
 class Component {
 public:
-  explicit Component(Entity *);
+  Component() = default;
   virtual ~Component() = 0;
+  
+  void setEntity(Entity *);
   
 protected:
   Entity &getEntity() const;
 
 private:
-  Entity *entity;
+  Entity *entity = nullptr;
 };
 
 #endif

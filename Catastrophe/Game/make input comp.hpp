@@ -16,7 +16,7 @@
 
 std::shared_ptr<InputComponent> makeInputComp(
   std::experimental::string_view,
-  Entity *,
+  const YAML::Node &,
   const YAML::Node &
 );
 

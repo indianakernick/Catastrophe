@@ -1,13 +1,10 @@
 physics:
   name: SimplePhysicsComponent
   body: spinning blade body.yaml
-  args: {}
 
 animation:
   name: StaticAnimationComponent
   sprite: spinning blade sprite.yaml
-  args: {}
 
 rendering:
   name: VectorRenderComponent
-  args: {}

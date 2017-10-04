@@ -15,7 +15,7 @@
 
 class PlayerInputComponent final : public InputComponent {
 public:
-  PlayerInputComponent(Entity *, const YAML::Node &);
+  PlayerInputComponent(const YAML::Node &, const YAML::Node &);
   ~PlayerInputComponent() = default;
   
   bool handleEvent(SDL_Event) override;

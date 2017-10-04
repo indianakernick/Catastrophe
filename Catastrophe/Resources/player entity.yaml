@@ -1,17 +1,16 @@
 input:
   name: PlayerInputComponent
-  args: {}
 
 physics:
   name: PlayerPhysicsComponent
   body: player body.yaml
-  args: {}
+  scale: &scale [1, 1]
 
 animation:
   name: PlayerAnimationComponent
   sprite: player sprite.yaml
-  args: {}
+  scale: *scale
 
 rendering:
   name: VectorRenderComponent
-  args: {}
+  scale: *scale

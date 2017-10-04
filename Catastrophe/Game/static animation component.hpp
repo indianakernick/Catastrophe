@@ -15,7 +15,7 @@
 
 class StaticAnimationComponent final : public AnimationComponent {
 public:
-  StaticAnimationComponent(Entity *, Sprite &&, Transform, const YAML::Node &);
+  StaticAnimationComponent(const YAML::Node &, const YAML::Node &, RenderingContext &);
   
   void update(float) override;
   const Sprite &getSprite() const override;

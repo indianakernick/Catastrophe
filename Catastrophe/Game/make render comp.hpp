@@ -16,8 +16,7 @@
 
 std::shared_ptr<RenderComponent> makeRenderComp(
   std::experimental::string_view,
-  Entity *,
-  glm::vec2,
+  const YAML::Node &,
   const YAML::Node &
 );
 

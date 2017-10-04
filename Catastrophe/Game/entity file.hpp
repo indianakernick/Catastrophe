@@ -19,11 +19,9 @@ class RenderingContext;
 
 std::unique_ptr<Entity> loadEntity(
   const std::string &,
-  EntityID,
-  Systems,
-  Transform,
+  const YAML::Node &,
   RenderingContext &,
-  const YAML::Node &
+  Systems
 );
 
 

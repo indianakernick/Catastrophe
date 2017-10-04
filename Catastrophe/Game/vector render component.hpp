@@ -14,7 +14,7 @@
 
 class VectorRenderComponent final : public RenderComponent {
 public:
-  VectorRenderComponent(Entity *, glm::vec2, const YAML::Node &);
+  VectorRenderComponent(const YAML::Node &, const YAML::Node &);
   
   void preRender() override;
   void render(NVGcontext *) override;

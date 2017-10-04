@@ -15,6 +15,6 @@
 class EntityManager;
 class RenderingContext;
 
-EntityID loadLevel(const std::string &, EntityManager &, RenderingContext &);
+void loadLevel(const std::string &, EntityManager &, RenderingContext &);
 
 #endif

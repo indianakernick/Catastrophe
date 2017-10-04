@@ -9,16 +9,24 @@
 #include "vector render component.hpp"
 
 #include "entity.hpp"
+#include "yaml helper.hpp"
 #include "vector render.hpp"
 #include "animation component.hpp"
 
 VectorRenderComponent::VectorRenderComponent(
-  Entity *const entity,
-  const glm::vec2 size,
-  const YAML::Node &
-) : RenderComponent(entity),
-    rect(makeMotionTarget(glm::vec2(), size)),
-    size(makeZoomTarget(size)) {}
+  const YAML::Node &node,
+  const YAML::Node &level
+) {
+  glm::vec2 scale = {1.0f, 1.0f};
+  if (const YAML::Node &sizeNode = node["scale"]) {
+    scale = readGLMvec(sizeNode);
+  }
+  if (const YAML::Node &sizeNode = level["scale"]) {
+    scale = readGLMvec(sizeNode);
+  }
+  rect = makeMotionTarget(glm::vec2(), scale);
+  size = makeZoomTarget(scale);
+}
 
 void VectorRenderComponent::preRender() {
   const auto anim = getEntity().animation;

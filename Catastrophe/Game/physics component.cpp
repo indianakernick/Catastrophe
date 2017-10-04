@@ -12,18 +12,12 @@
 #include "b2 glm cast.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-PhysicsComponent::PhysicsComponent(
-  Entity *const entity,
-  b2Body *const body
-) : Component(entity),
-    body(body) {
-  assert(body);
-}
-
 glm::vec2 PhysicsComponent::getPos() const {
+  assert(body);
   return castToGLM(body->GetPosition());
 }
 
 float PhysicsComponent::getAngle() const {
+  assert(body);
   return body->GetAngle();
 }

@@ -14,7 +14,7 @@
 
 class SimplePhysicsComponent final : public PhysicsComponent {
 public:
-  SimplePhysicsComponent(Entity *, b2Body *, const YAML::Node &);
+  SimplePhysicsComponent(const YAML::Node &, const YAML::Node &, b2World *);
   
   void preStep(float) override;
   void postStep() override;

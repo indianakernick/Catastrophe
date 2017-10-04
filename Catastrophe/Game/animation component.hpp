@@ -13,9 +13,11 @@
 #include <glm/mat3x3.hpp>
 #include "vector sprite.hpp"
 
+class RenderingContext;
+
 class AnimationComponent : public Component {
 public:
-  explicit AnimationComponent(Entity *);
+  AnimationComponent() = default;
   virtual ~AnimationComponent() = default;
   
   virtual void update(float) = 0;

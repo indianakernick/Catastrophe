@@ -10,7 +10,9 @@
 
 #include <algorithm>
 #include "entity.hpp"
+#include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
+#include "physics file.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
@@ -18,10 +20,16 @@
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(
-  Entity *const entity,
-  b2Body *body,
-  const YAML::Node &
-) : PhysicsComponent(entity, body) {}
+  const YAML::Node &node,
+  const YAML::Node &level,
+  b2World *world
+) {
+  Transform transform;
+  transform.pos = readGLMvec(getChild(level, "pos"));
+  transform.scale = readGLMvec(getChild(node, "scale"));
+  body = loadBody(getChild(node, "body").Scalar(), world, transform);
+  body->SetUserData(this);
+}
 
 void PlayerPhysicsComponent::preStep(const float delta) {
   const auto playerInput = Utils::safeDownCast<const PlayerInputComponent>(getEntity().input);

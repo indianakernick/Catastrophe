@@ -11,6 +11,7 @@
 #include "b2 glm cast.hpp"
 #include "yaml helper.hpp"
 #include "object types.hpp"
+#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale = {1.0f, 1.0f}) {
@@ -239,7 +240,7 @@ b2Body *loadBody(
   b2World *const world,
   const Transform transform
 ) {
-  const YAML::Node rootNode = YAML::LoadFile(fileName);
+  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &bodyNode = getChild(rootNode, "body");
@@ -419,7 +420,7 @@ b2Joint *loadJoint(
   b2Body *const bodyA,
   b2Body *const bodyB
 ) {
-  const YAML::Node rootNode = YAML::LoadFile(fileName);
+  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &typeNode = getChild(rootNode, "type");

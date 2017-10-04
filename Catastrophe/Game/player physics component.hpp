@@ -15,7 +15,7 @@
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
-  PlayerPhysicsComponent(Entity *, b2Body *, const YAML::Node &);
+  PlayerPhysicsComponent(const YAML::Node &, const YAML::Node &, b2World *);
   
   void preStep(float) override;
   void postStep() override;

@@ -9,6 +9,8 @@
 #include "player animation component.hpp"
 
 #include "entity.hpp"
+#include "yaml helper.hpp"
+#include "vector file.hpp"
 #include "vector render.hpp"
 #include <Simpleton/Math/scale.hpp>
 #include "player physics component.hpp"
@@ -16,13 +18,12 @@
 #include <Simpleton/Utils/safe down cast.hpp>
 
 PlayerAnimationComponent::PlayerAnimationComponent(
-  Entity *const entity,
-  Sprite &&sprite,
-  const Transform transform,
-  const YAML::Node &
-) : AnimationComponent(entity),
-    sprite(std::move(sprite)),
-    transform(transform) {
+  const YAML::Node &node,
+  const YAML::Node &,
+  RenderingContext &renderer
+) {
+  sprite = loadSprite(getChild(node, "sprite").Scalar(), renderer);
+  transform.scale = readGLMvec(getChild(node, "scale"));
   const Animation &runAnim = this->sprite.animations.at("run");
   runningAnim.setDuration(runAnim.durationSec);
   standRunAnim.setDuration(runAnim.meta.at("foot time"));

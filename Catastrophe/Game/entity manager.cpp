@@ -34,17 +34,14 @@ void EntityManager::quit() {
   input = nullptr;
 }
 
-EntityID EntityManager::create(
+void EntityManager::create(
   const std::string &filePath,
-  const Transform transform,
-  RenderingContext &renderer,
-  const YAML::Node &args
+  const YAML::Node &levelArgs,
+  RenderingContext &renderer
 ) {
-  const EntityID id = idGen.make();
-  entities.emplace(id, loadEntity(
-    filePath, id, getSystems(), transform, renderer, args
-  ));
-  return id;
+  std::unique_ptr<Entity> entity = loadEntity(filePath, levelArgs, renderer, getSystems());
+  const EntityID id = entity->getID();
+  entities.emplace(id, std::move(entity));
 }
 
 void EntityManager::destroy(const EntityID id) {

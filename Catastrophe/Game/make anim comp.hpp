@@ -10,17 +10,17 @@
 #define make_anim_comp_hpp
 
 #include <memory>
-#include "transform.hpp"
 #include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 #include <experimental/string_view>
 
+class RenderingContext;
+
 std::shared_ptr<AnimationComponent> makeAnimComp(
   std::experimental::string_view,
-  Entity *,
-  Sprite &&,
-  Transform,
-  const YAML::Node &
+  const YAML::Node &,
+  const YAML::Node &,
+  RenderingContext &
 );
 
 #endif
