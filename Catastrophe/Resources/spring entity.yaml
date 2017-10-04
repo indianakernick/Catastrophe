@@ -1,6 +1,6 @@
 physics:
-  name: SpringBoardPhysicsComponent
-  joint: spring board joint.yaml
+  name: JointPhysicsComponent
+  joint: spring joint.yaml
 
 animation:
   name: InvisibleAnimationComponent

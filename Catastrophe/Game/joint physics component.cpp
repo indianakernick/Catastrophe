@@ -1,18 +1,17 @@
 //
-//  spring board physics component.cpp
+//  joint physics component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 4/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "spring board physics component.hpp"
+#include "joint physics component.hpp"
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
-#include "../Libraries/Box2D/Dynamics/Joints/b2DistanceJoint.h"
 
-SpringBoardPhysicsComponent::SpringBoardPhysicsComponent(
+JointPhysicsComponent::JointPhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level,
   PhysicsSystem &physics
@@ -43,21 +42,11 @@ SpringBoardPhysicsComponent::SpringBoardPhysicsComponent(
   jointDef->bodyA = compA->body;
   jointDef->bodyB = compB->body;
   
-  if (jointDef->type != b2JointType::e_distanceJoint) {
-    throw std::runtime_error(
-      "Expected joint at file at line "
-      + std::to_string(jointNode.Mark().line)
-      + " to be a distance joint"
-    );
-  }
+  readJoint(jointDef, level);
   
-  b2DistanceJointDef *distJointDef = static_cast<b2DistanceJointDef *>(jointDef);
-  distJointDef->localAnchorA = readB2vec(getChild(level, "local anchor A"));
-  distJointDef->localAnchorB = readB2vec(getChild(level, "local anchor B"));
-  
-  joint = physics.getWorld()->CreateJoint(distJointDef);
+  joint = physics.getWorld()->CreateJoint(jointDef);
 }
 
-void SpringBoardPhysicsComponent::preStep(float) {}
+void JointPhysicsComponent::preStep(float) {}
 
-void SpringBoardPhysicsComponent::postStep() {}
+void JointPhysicsComponent::postStep() {}

@@ -260,169 +260,142 @@ b2Body *loadBody(
 
 namespace {
   #define READ_ANCHOR                                                           \
-  getOptionalVec(def.localAnchorA, node, "local anchor A");                     \
-  getOptionalVec(def.localAnchorB, node, "local anchor B");
+  getOptionalVec(def->localAnchorA, node, "local anchor A");                    \
+  getOptionalVec(def->localAnchorB, node, "local anchor B");
   
   #define READ_FREQ_DAMP                                                        \
-  getOptional(def.frequencyHz, node, "frequency");                              \
-  getOptional(def.dampingRatio, node, "damping ratio");
+  getOptional(def->frequencyHz, node, "frequency");                              \
+  getOptional(def->dampingRatio, node, "damping ratio");
 
-  b2RevoluteJointDef *readRevolute(const YAML::Node &node) {
-    static b2RevoluteJointDef def;
-    def = {};
-    
+  void readRevolute(b2RevoluteJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
-    getOptional(def.referenceAngle, node, "reference angle");
-    getOptional(def.lowerAngle, node, "lower angle");
-    getOptional(def.upperAngle, node, "upper angle");
-    getOptional(def.maxMotorTorque, node, "max motor torque");
-    getOptional(def.motorSpeed, node, "motor speed");
-    getOptional(def.enableLimit, node, "enable limit");
-    getOptional(def.enableMotor, node, "enable moter");
-    
-    return &def;
+    getOptional(def->referenceAngle, node, "reference angle");
+    getOptional(def->lowerAngle, node, "lower angle");
+    getOptional(def->upperAngle, node, "upper angle");
+    getOptional(def->maxMotorTorque, node, "max motor torque");
+    getOptional(def->motorSpeed, node, "motor speed");
+    getOptional(def->enableLimit, node, "enable limit");
+    getOptional(def->enableMotor, node, "enable moter");
   }
   
-  b2PrismaticJointDef *readPrismatic(const YAML::Node &node) {
-    static b2PrismaticJointDef def;
-    def = {};
-    
+  void readPrismatic(b2PrismaticJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
-    getOptionalVec(def.localAxisA, node, "local axis A");
-    getOptional(def.referenceAngle, node, "reference angle");
-    getOptional(def.enableLimit, node, "enable limit");
-    getOptional(def.lowerTranslation, node, "lower translation");
-    getOptional(def.upperTranslation, node, "upper translation");
-    getOptional(def.enableMotor, node, "enable moter");
-    getOptional(def.maxMotorForce, node, "max motor force");
-    getOptional(def.motorSpeed, node, "motor speed");
-    
-    return &def;
+    getOptionalVec(def->localAxisA, node, "local axis A");
+    getOptional(def->referenceAngle, node, "reference angle");
+    getOptional(def->enableLimit, node, "enable limit");
+    getOptional(def->lowerTranslation, node, "lower translation");
+    getOptional(def->upperTranslation, node, "upper translation");
+    getOptional(def->enableMotor, node, "enable moter");
+    getOptional(def->maxMotorForce, node, "max motor force");
+    getOptional(def->motorSpeed, node, "motor speed");
   }
   
-  b2DistanceJointDef *readDistance(const YAML::Node &node) {
-    static b2DistanceJointDef def;
-    def = {};
-    
+  void readDistance(b2DistanceJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
     READ_FREQ_DAMP
-    getOptional(def.length, node, "length");
-    
-    return &def;
+    getOptional(def->length, node, "length");
   }
   
-  b2PulleyJointDef *readPulley(const YAML::Node &node) {
-    static b2PulleyJointDef def;
-    def = {};
-    
+  void readPulley(b2PulleyJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
-    getOptionalVec(def.groundAnchorA, node, "ground anchor A");
-    getOptionalVec(def.groundAnchorB, node, "ground anchor B");
-    getOptional(def.lengthA, node, "length A");
-    getOptional(def.lengthB, node, "length B");
-    getOptional(def.ratio, node, "ratio");
-    
-    return &def;
+    getOptionalVec(def->groundAnchorA, node, "ground anchor A");
+    getOptionalVec(def->groundAnchorB, node, "ground anchor B");
+    getOptional(def->lengthA, node, "length A");
+    getOptional(def->lengthB, node, "length B");
+    getOptional(def->ratio, node, "ratio");
   }
   
-  b2MouseJointDef *readMouse(const YAML::Node &node) {
-    static b2MouseJointDef def;
-    def = {};
-    
+  void readMouse(b2MouseJointDef *def, const YAML::Node &node) {
     READ_FREQ_DAMP
-    getOptionalVec(def.target, node, "target");
-    getOptional(def.maxForce, node, "max force");
-    
-    return &def;
+    getOptionalVec(def->target, node, "target");
+    getOptional(def->maxForce, node, "max force");
   }
   
-  b2WheelJointDef *readWheel(const YAML::Node &node) {
-    static b2WheelJointDef def;
-    def = {};
-    
+  void readWheel(b2WheelJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
     READ_FREQ_DAMP
-    getOptionalVec(def.localAxisA, node, "local axis A");
-    getOptional(def.enableMotor, node, "enable motor");
-    getOptional(def.maxMotorTorque, node, "max motor torque");
-    getOptional(def.motorSpeed, node, "motor speed");
-    
-    return &def;
+    getOptionalVec(def->localAxisA, node, "local axis A");
+    getOptional(def->enableMotor, node, "enable motor");
+    getOptional(def->maxMotorTorque, node, "max motor torque");
+    getOptional(def->motorSpeed, node, "motor speed");
   }
   
-  b2WeldJointDef *readWeld(const YAML::Node &node) {
-    static b2WeldJointDef def;
-    def = {};
-    
+  void readWeld(b2WeldJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
     READ_FREQ_DAMP
-    getOptional(def.referenceAngle, node, "reference angle");
-    
-    return &def;
+    getOptional(def->referenceAngle, node, "reference angle");
   }
   
-  b2FrictionJointDef *readFriction(const YAML::Node &node) {
-    static b2FrictionJointDef def;
-    def = {};
-    
+  void readFriction(b2FrictionJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
-    getOptional(def.maxForce, node, "max force");
-    getOptional(def.maxTorque, node, "max torque");
-    
-    return &def;
+    getOptional(def->maxForce, node, "max force");
+    getOptional(def->maxTorque, node, "max torque");
   }
   
-  b2RopeJointDef *readRope(const YAML::Node &node) {
-    static b2RopeJointDef def;
-    def = {};
-    
+  void readRope(b2RopeJointDef *def, const YAML::Node &node) {
     READ_ANCHOR
-    getOptional(def.maxLength, node, "max length");
-    
-    return &def;
+    getOptional(def->maxLength, node, "max length");
   }
   
-  b2MotorJointDef *readMotor(const YAML::Node &node) {
-    static b2MotorJointDef def;
-    def = {};
-    
-    getOptionalVec(def.linearOffset, node, "linear offset");
-    getOptional(def.angularOffset, node, "angular offset");
-    getOptional(def.maxForce, node, "max force");
-    getOptional(def.maxTorque, node, "max torque");
-    getOptional(def.correctionFactor, node, "correction factor");
-    
-    return &def;
+  void readMotor(b2MotorJointDef *def, const YAML::Node &node) {
+    getOptionalVec(def->linearOffset, node, "linear offset");
+    getOptional(def->angularOffset, node, "angular offset");
+    getOptional(def->maxForce, node, "max force");
+    getOptional(def->maxTorque, node, "max torque");
+    getOptional(def->correctionFactor, node, "correction factor");
   }
 
   class BadJointType {};
 
+  #define JOINTS                                                                \
+    JOINT(Revolute, revolute)                                                   \
+    JOINT(Prismatic, prismatic)                                                 \
+    JOINT(Distance, distance)                                                   \
+    JOINT(Pulley, pulley)                                                       \
+    JOINT(Mouse, mouse)                                                         \
+    JOINT(Wheel, wheel)                                                         \
+    JOINT(Weld, weld)                                                           \
+    JOINT(Friction, friction)                                                   \
+    JOINT(Rope, rope)                                                           \
+    JOINT(Motor, motor)
+
   b2JointDef *readJointDef(const std::string &type, const YAML::Node &node) {
-           if (type == "revolute") {
-      return readRevolute(node);
-    } else if (type == "prismatic") {
-      return readPrismatic(node);
-    } else if (type == "distance") {
-      return readDistance(node);
-    } else if (type == "pulley") {
-      return readPulley(node);
-    } else if (type == "mouse") {
-      return readMouse(node);
-    } else if (type == "wheel") {
-      return readWheel(node);
-    } else if (type == "weld") {
-      return readWeld(node);
-    } else if (type == "friction") {
-      return readFriction(node);
-    } else if (type == "rope") {
-      return readRope(node);
-    } else if (type == "motor") {
-      return readMotor(node);
-    } else {
+    #define JOINT(CLASS, NAME)                                                  \
+      if (type == #NAME) {                                                      \
+        static b2##CLASS##JointDef def;                                         \
+        def = {};                                                               \
+        read##CLASS(&def, node);                                                \
+        return &def;                                                            \
+      } else
+    
+    JOINTS
+    /* else */ {
       throw BadJointType();
     }
+    
+    #undef JOINT
   }
 }
+
+void readJoint(b2JointDef *def, const YAML::Node &node) {
+  #define JOINT(CLASS, NAME)                                                    \
+    case b2JointType::e_##NAME##Joint:                                          \
+      read##CLASS(static_cast<b2##CLASS##JointDef *>(def), node);               \
+      break;
+
+  getOptional(def->collideConnected, node, "collide connected");
+
+  switch (def->type) {
+    JOINTS
+    
+    default:
+      throw BadJointType();
+  }
+  
+  #undef JOINT
+}
+
+#undef JOINTS
 
 b2JointDef *loadJoint(const std::string &fileName) {
   const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);

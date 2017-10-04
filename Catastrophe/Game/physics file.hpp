@@ -10,9 +10,11 @@
 #define physics_file_hpp
 
 #include "transform.hpp"
+#include <yaml-cpp/node/node.h>
 #include "../Libraries/Box2D/Box2D.h"
 
 b2Body *loadBody(const std::string &, b2World *, Transform);
+void readJoint(b2JointDef *, const YAML::Node &);
 b2JointDef *loadJoint(const std::string &);
 
 #endif

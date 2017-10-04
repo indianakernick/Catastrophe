@@ -8,18 +8,18 @@
 
 #include "make physics comp.hpp"
 
+#include "joint physics component.hpp"
 #include "player physics component.hpp"
 #include "simple physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "oscillating physics component.hpp"
-#include "spring board physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
   SimplePhysicsComponent,
   OscillatingPhysicsComponent,
-  SpringBoardPhysicsComponent
+  JointPhysicsComponent
 >;
 
 std::shared_ptr<PhysicsComponent> makePhysicsComp(
