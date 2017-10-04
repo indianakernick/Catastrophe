@@ -3,7 +3,7 @@ physics:
   body: dynamic platform body.yaml
 
 animation:
-  name: StaticAnimationComponent
+  name: SimpleAnimationComponent
   sprite: platform sprite.yaml
 
 rendering:

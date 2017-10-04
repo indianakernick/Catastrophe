@@ -3,7 +3,7 @@ physics:
   body: spikes body.yaml
 
 animation:
-  name: StaticAnimationComponent
+  name: SimpleAnimationComponent
   sprite: spikes sprite.yaml
 
 rendering:

@@ -1,5 +1,5 @@
 anims:
-  static:
+  main:
     duration: 30.0
     point frames:
     - offset: 0.0

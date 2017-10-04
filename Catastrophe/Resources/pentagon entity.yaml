@@ -3,7 +3,7 @@ physics:
   body: pentagon body.yaml
 
 animation:
-  name: StaticAnimationComponent
+  name: SimpleAnimationComponent
   sprite: pentagon sprite.yaml
 
 rendering:

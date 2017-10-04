@@ -3,7 +3,7 @@ physics:
   body: spinning blade body.yaml
 
 animation:
-  name: StaticAnimationComponent
+  name: SimpleAnimationComponent
   sprite: spinning blade sprite.yaml
 
 rendering:
