@@ -22,15 +22,14 @@ using AnimComps = Utils::TypeList<
 std::shared_ptr<AnimationComponent> makeAnimComp(
   const std::experimental::string_view name,
   const YAML::Node &node,
-  const YAML::Node &level,
-  RenderingContext &renderer
+  const YAML::Node &level
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<AnimationComponent>,
       AnimComps
-    >(name, [&node, &level, &renderer] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level, renderer);
+    >(name, [&node, &level] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(node, level);
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid animation component name");

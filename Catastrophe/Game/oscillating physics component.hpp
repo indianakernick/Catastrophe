@@ -15,7 +15,7 @@
 
 class OscillatingPhysicsComponent final : public PhysicsComponent {
 public:
-  OscillatingPhysicsComponent(const YAML::Node &, const YAML::Node &, PhysicsSystem &);
+  OscillatingPhysicsComponent(const YAML::Node &, const YAML::Node &);
   
   void preStep(float) override;
   void postStep() override;

@@ -10,6 +10,7 @@
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
+#include "systems registry.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -37,12 +38,11 @@ namespace {
 
 OscillatingPhysicsComponent::OscillatingPhysicsComponent(
   const YAML::Node &node,
-  const YAML::Node &level,
-  PhysicsSystem &physics
+  const YAML::Node &level
 ) {
   body = loadBody(
     getChild(node, "body").Scalar(),
-    physics.getWorld(),
+    Systems::physics->getWorld(),
     readTransform(level)
   );
   body->SetUserData(this);

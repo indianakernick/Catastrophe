@@ -13,8 +13,6 @@
 #include <glm/mat3x3.hpp>
 #include "vector sprite.hpp"
 
-class RenderingContext;
-
 class AnimationComponent : public Component {
 public:
   AnimationComponent() = default;

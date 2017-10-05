@@ -14,7 +14,7 @@
 
 class InvisibleAnimationComponent final : public AnimationComponent {
 public:
-  InvisibleAnimationComponent(const YAML::Node &, const YAML::Node &, RenderingContext &);
+  InvisibleAnimationComponent(const YAML::Node &, const YAML::Node &);
   
   void update(float) override;
   const Sprite &getSprite() const override;

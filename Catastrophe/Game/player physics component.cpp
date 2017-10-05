@@ -13,6 +13,7 @@
 #include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
 #include "physics file.hpp"
+#include "systems registry.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
@@ -21,13 +22,12 @@
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(
   const YAML::Node &node,
-  const YAML::Node &level,
-  PhysicsSystem &physics
+  const YAML::Node &level
 ) {
   Transform transform;
   transform.pos = readGLMvec(getChild(level, "pos"));
   transform.scale = readGLMvec(getChild(node, "scale"));
-  body = loadBody(getChild(node, "body").Scalar(), physics.getWorld(), transform);
+  body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
   body->SetUserData(this);
   
   moveForce = getChild(node, "move force").as<float>();

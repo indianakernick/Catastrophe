@@ -11,7 +11,6 @@
 
 #include <glm/vec2.hpp>
 #include "component.hpp"
-#include "physics system.hpp"
 
 class b2Body;
 class b2Joint;

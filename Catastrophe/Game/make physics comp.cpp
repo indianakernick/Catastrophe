@@ -12,28 +12,31 @@
 #include "player physics component.hpp"
 #include "simple physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
+#include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
+#include "proximity sensor physics component.hpp"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
   SimplePhysicsComponent,
   OscillatingPhysicsComponent,
-  JointPhysicsComponent
+  JointPhysicsComponent,
+  ProximitySensorPhysicsComponent,
+  LauncherPhysicsComponent
 >;
 
 std::shared_ptr<PhysicsComponent> makePhysicsComp(
   const std::experimental::string_view name,
   const YAML::Node &node,
-  const YAML::Node &level,
-  PhysicsSystem &physics
+  const YAML::Node &level
 ) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<PhysicsComponent>,
       PhysicsComps
-    >(name, [&node, &level, &physics] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level, physics);
+    >(name, [&node, &level] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>(node, level);
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid physics component name");

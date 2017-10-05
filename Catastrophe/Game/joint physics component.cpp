@@ -10,18 +10,18 @@
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
+#include "systems registry.hpp"
 
 JointPhysicsComponent::JointPhysicsComponent(
   const YAML::Node &node,
-  const YAML::Node &level,
-  PhysicsSystem &physics
+  const YAML::Node &level
 ) {
   const YAML::Node &nodeA = getChild(level, "body A");
   const YAML::Node &nodeB = getChild(level, "body B");
   const EntityID idA = nodeA.as<EntityID>();
   const EntityID idB = nodeB.as<EntityID>();
-  std::shared_ptr<PhysicsComponent> compA = physics.get(idA).lock();
-  std::shared_ptr<PhysicsComponent> compB = physics.get(idB).lock();
+  std::shared_ptr<PhysicsComponent> compA = Systems::physics->get(idA).lock();
+  std::shared_ptr<PhysicsComponent> compB = Systems::physics->get(idB).lock();
   
   if (!compA || !compA->body) {
     throw std::runtime_error(
@@ -44,7 +44,7 @@ JointPhysicsComponent::JointPhysicsComponent(
   
   readJoint(jointDef, level);
   
-  joint = physics.getWorld()->CreateJoint(jointDef);
+  joint = Systems::physics->getWorld()->CreateJoint(jointDef);
 }
 
 void JointPhysicsComponent::preStep(float) {}

@@ -12,9 +12,9 @@
 #include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
-class JointPhysicsComponent final : public PhysicsComponent {
+class JointPhysicsComponent : public PhysicsComponent {
 public:
-  JointPhysicsComponent(const YAML::Node &, const YAML::Node &, PhysicsSystem &);
+  JointPhysicsComponent(const YAML::Node &, const YAML::Node &);
   
   void preStep(float) override;
   void postStep() override;

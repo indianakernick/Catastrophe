@@ -12,6 +12,7 @@
 #include "yaml helper.hpp"
 #include "vector file.hpp"
 #include "vector render.hpp"
+#include "systems registry.hpp"
 #include <Simpleton/Math/scale.hpp>
 #include "player physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
@@ -19,10 +20,9 @@
 
 PlayerAnimationComponent::PlayerAnimationComponent(
   const YAML::Node &node,
-  const YAML::Node &,
-  RenderingContext &renderer
+  const YAML::Node &
 ) {
-  sprite = loadSprite(getChild(node, "sprite").Scalar(), renderer);
+  sprite = loadSprite(getChild(node, "sprite").Scalar(), *Systems::renderer);
   transform.scale = readGLMvec(getChild(node, "scale"));
   const Animation &runAnim = this->sprite.animations.at("run");
   runningAnim.setDuration(runAnim.durationSec);

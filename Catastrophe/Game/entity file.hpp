@@ -14,15 +14,7 @@
 #include "transform.hpp"
 #include <yaml-cpp/node/node.h>
 
-struct Systems;
-class RenderingContext;
-
-std::unique_ptr<Entity> loadEntity(
-  const std::string &,
-  const YAML::Node &,
-  RenderingContext &,
-  Systems
-);
+std::unique_ptr<Entity> loadEntity(const std::string &, const YAML::Node &);
 
 
 #endif

@@ -275,7 +275,7 @@ namespace {
     getOptional(def->maxMotorTorque, node, "max motor torque");
     getOptional(def->motorSpeed, node, "motor speed");
     getOptional(def->enableLimit, node, "enable limit");
-    getOptional(def->enableMotor, node, "enable moter");
+    getOptional(def->enableMotor, node, "enable motor");
   }
   
   void readPrismatic(b2PrismaticJointDef *def, const YAML::Node &node) {
@@ -285,7 +285,7 @@ namespace {
     getOptional(def->enableLimit, node, "enable limit");
     getOptional(def->lowerTranslation, node, "lower translation");
     getOptional(def->upperTranslation, node, "upper translation");
-    getOptional(def->enableMotor, node, "enable moter");
+    getOptional(def->enableMotor, node, "enable motor");
     getOptional(def->maxMotorForce, node, "max motor force");
     getOptional(def->motorSpeed, node, "motor speed");
   }

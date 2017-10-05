@@ -17,7 +17,7 @@
 
 class PlayerAnimationComponent final : public AnimationComponent {
 public:
-  PlayerAnimationComponent(const YAML::Node &, const YAML::Node &, RenderingContext &);
+  PlayerAnimationComponent(const YAML::Node &, const YAML::Node &);
   
   void update(float) override;
   const Sprite &getSprite() const override;

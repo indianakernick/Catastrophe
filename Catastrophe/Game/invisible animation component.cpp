@@ -13,8 +13,7 @@ const Frame InvisibleAnimationComponent::frame = {};
 
 InvisibleAnimationComponent::InvisibleAnimationComponent(
   const YAML::Node &,
-  const YAML::Node &,
-  RenderingContext &
+  const YAML::Node &
 ) {}
 
 void InvisibleAnimationComponent::update(float) {}

@@ -44,9 +44,15 @@ entities:
   scale: [1, 0.1]
 
 - id: 8
-  file: spring entity.yaml
+  file: proximity sensor entity.yaml
+  pos: [5, 0.75]
+  scale: [0.5, 0.5]
+
+- id: 9
+  file: launch entity.yaml
+  trigger: 8
   body A: 1
   body B: 7
-  local anchor A: [5, 1.5]
+  local anchor A: [5, 0.5]
   local anchor B: [0, 0]
   local axis A: [0, 1]

@@ -1,6 +1,6 @@
 physics:
-  name: JointPhysicsComponent
-  joint: spring joint.yaml
+  name: ProximitySensorPhysicsComponent
+  body: proximity sensor body.yaml
 
 animation:
   name: InvisibleAnimationComponent

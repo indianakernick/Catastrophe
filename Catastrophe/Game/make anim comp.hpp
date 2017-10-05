@@ -14,13 +14,10 @@
 #include "animation component.hpp"
 #include <experimental/string_view>
 
-class RenderingContext;
-
 std::shared_ptr<AnimationComponent> makeAnimComp(
   std::experimental::string_view,
   const YAML::Node &,
-  const YAML::Node &,
-  RenderingContext &
+  const YAML::Node &
 );
 
 #endif

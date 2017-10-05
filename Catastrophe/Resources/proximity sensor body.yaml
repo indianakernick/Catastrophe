@@ -1,6 +1,5 @@
 body:
-  type: dynamic
-  bullet: YES
+  type: static
 
 shapes:
   main:
@@ -10,5 +9,5 @@ shapes:
 
 fixtures:
 - shape: main
-  friction: 1.0
-  user data: Platform
+  is sensor: YES
+  user data: ProximitySensor

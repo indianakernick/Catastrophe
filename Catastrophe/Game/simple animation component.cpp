@@ -12,16 +12,16 @@
 #include "yaml helper.hpp"
 #include "vector file.hpp"
 #include "vector render.hpp"
+#include "systems registry.hpp"
 #include "physics component.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
 
 SimpleAnimationComponent::SimpleAnimationComponent(
   const YAML::Node &node,
-  const YAML::Node &level,
-  RenderingContext &renderer
+  const YAML::Node &level
 ) {
-  sprite = loadSprite(getChild(node, "sprite").Scalar(), renderer);
+  sprite = loadSprite(getChild(node, "sprite").Scalar(), *Systems::renderer);
   transform.scale = readGLMvec(getChild(level, "scale"));
   anim.setDuration(sprite.animations.at("main").durationSec);
 }

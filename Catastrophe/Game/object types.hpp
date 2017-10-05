@@ -39,6 +39,7 @@ namespace Symbol {
   MAKE_SYMBOL(Platform);
   MAKE_SYMBOL(Pentagon);
   MAKE_SYMBOL(Deadly);
+  MAKE_SYMBOL(ProximitySensor);
 };
 
 using Symbols = Utils::TypeList<
@@ -46,7 +47,8 @@ using Symbols = Utils::TypeList<
   Symbol::PlayerFoot,
   Symbol::Platform,
   Symbol::Pentagon,
-  Symbol::Deadly
+  Symbol::Deadly,
+  Symbol::ProximitySensor
 >;
 
 inline void *getUserData(const std::string &symbolName) {

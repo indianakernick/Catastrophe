@@ -1,7 +1,0 @@
-type: wheel
-collide connected: YES
-frequency: 2
-damping ratio: 0.2
-enable motor: YES
-max motor torque: 10000
-motor speed: 0

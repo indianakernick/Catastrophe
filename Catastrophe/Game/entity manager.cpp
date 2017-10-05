@@ -9,56 +9,35 @@
 #include "entity manager.hpp"
 
 #include "entity file.hpp"
-#include "input system.hpp"
-#include "physics system.hpp"
-#include "animation system.hpp"
-#include "rendering system.hpp"
+#include "systems registry.hpp"
 
-void EntityManager::init(
-  InputSystem &newInput,
-  PhysicsSystem &newPhysics,
-  AnimationSystem &newAnimation,
-  RenderingSystem &newRendering
-) {
-  input = &newInput;
-  physics = &newPhysics;
-  animation = &newAnimation;
-  rendering = &newRendering;
-}
+void EntityManager::init() {}
 
 void EntityManager::quit() {
   entities.clear();
-  rendering = nullptr;
-  animation = nullptr;
-  physics = nullptr;
-  input = nullptr;
 }
 
-void EntityManager::create(
-  const std::string &filePath,
-  const YAML::Node &levelArgs,
-  RenderingContext &renderer
-) {
-  std::unique_ptr<Entity> entity = loadEntity(filePath, levelArgs, renderer, getSystems());
+void EntityManager::create(const std::string &filePath, const YAML::Node &levelArgs) {
+  std::unique_ptr<Entity> entity = loadEntity(filePath, levelArgs);
   const EntityID id = entity->getID();
   entities.emplace(id, std::move(entity));
 }
 
 void EntityManager::destroy(const EntityID id) {
-  rendering->rem(id);
-  animation->rem(id);
-  physics->rem(id);
-  input->rem(id);
+  Systems::rendering->rem(id);
+  Systems::animation->rem(id);
+  Systems::physics->rem(id);
+  Systems::input->rem(id);
   entities.erase(id);
 }
 
 void EntityManager::destroyAll() {
   for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
     const EntityID id = e->first;
-    rendering->rem(id);
-    animation->rem(id);
-    physics->rem(id);
-    input->rem(id);
+    Systems::rendering->rem(id);
+    Systems::animation->rem(id);
+    Systems::physics->rem(id);
+    Systems::input->rem(id);
   }
   entities.clear();
 }
@@ -70,13 +49,4 @@ Entity &EntityManager::getEntity(const EntityID id) {
   } else {
     return *(iter->second);
   }
-}
-
-Systems EntityManager::getSystems() const {
-  return {
-    *input,
-    *physics,
-    *animation,
-    *rendering
-  };
 }

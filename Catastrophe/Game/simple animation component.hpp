@@ -16,7 +16,7 @@
 
 class SimpleAnimationComponent final : public AnimationComponent {
 public:
-  SimpleAnimationComponent(const YAML::Node &, const YAML::Node &, RenderingContext &);
+  SimpleAnimationComponent(const YAML::Node &, const YAML::Node &);
   
   void update(float) override;
   const Sprite &getSprite() const override;

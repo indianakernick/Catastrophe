@@ -11,6 +11,7 @@
 #include "object types.hpp"
 #include "contact listener.hpp"
 #include "player physics component.hpp"
+#include "proximity sensor physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
 template <typename Comp>
@@ -32,12 +33,33 @@ void handlePlayerFootPlatformEnd(b2Fixture *platform, b2Fixture *playerFoot) {
   player->endContactingGround(platform->GetBody());
 }
 
+void handleProximityPlayerBodyBegin(b2Fixture *sensor, b2Fixture *) {
+  static_assert(symbolLess<Symbol::ProximitySensor, Symbol::PlayerBody>());
+  
+  auto *proxSensor = getComponent<ProximitySensorPhysicsComponent>(sensor);
+  proxSensor->beginContactingPlayer();
+}
+
+void handleProximityPlayerBodyEnd(b2Fixture *sensor, b2Fixture *) {
+  static_assert(symbolLess<Symbol::ProximitySensor, Symbol::PlayerBody>());
+  
+  auto *proxSensor = getComponent<ProximitySensorPhysicsComponent>(sensor);
+  proxSensor->endContactingPlayer();
+}
+
 void registerCollisionListeners(ContactListener &contactListener) {
   contactListener.addListener(
     getUserData<Symbol::Platform, Symbol::PlayerFoot>(),
     {
       &handlePlayerFootPlatformBegin,
       &handlePlayerFootPlatformEnd
+    }
+  );
+  contactListener.addListener(
+    getUserData<Symbol::ProximitySensor, Symbol::PlayerBody>(),
+    {
+      &handleProximityPlayerBodyBegin,
+      &handleProximityPlayerBodyEnd
     }
   );
 }

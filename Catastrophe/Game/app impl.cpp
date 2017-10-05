@@ -11,7 +11,7 @@
 #include "level file.hpp"
 #include "debug input.hpp"
 #include "player constants.hpp"
-#include "camera constants.hpp"
+#include "systems registry.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 #include "register collision listeners.hpp"
 
@@ -19,6 +19,13 @@ std::unique_ptr<AppImpl> app = nullptr;
 
 bool AppImpl::init() {
   PROFILE(Init);
+
+  Systems::input = &inputSystem;
+  Systems::physics = &physicsSystem;
+  Systems::animation = &animationSystem;
+  Systems::rendering = &renderingSystem;
+  Systems::entities = &entityManager;
+  Systems::renderer = &renderingContext;
 
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
@@ -32,9 +39,9 @@ bool AppImpl::init() {
   
   renderingSystem.getCamera().windowSize.attachWindow(window.get());
   
-  entityManager.init(inputSystem, physicsSystem, animationSystem, renderingSystem);
+  entityManager.init();
   
-  loadLevel("level 0.yaml", entityManager, renderingContext);
+  loadLevel("level 0.yaml");
   
   renderingSystem.startMotionTrack(PLAYER_ID);
   renderingSystem.startZoomTrack(PLAYER_ID);
@@ -59,6 +66,13 @@ void AppImpl::quit() {
   renderingContext.quit();
   window.reset();
   windowLibrary = std::experimental::nullopt;
+  
+  Systems::renderer = nullptr;
+  Systems::entities = nullptr;
+  Systems::rendering = nullptr;
+  Systems::animation = nullptr;
+  Systems::physics = nullptr;
+  Systems::input = nullptr;
 }
 
 bool AppImpl::input(float) {

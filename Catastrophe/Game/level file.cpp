@@ -10,41 +10,29 @@
 
 #include "yaml helper.hpp"
 #include "entity file.hpp"
-#include "entity manager.hpp"
+#include "systems registry.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
-  void readEntity(
-    const YAML::Node &entityNode,
-    EntityManager &entityMan,
-    RenderingContext &renderer
-  ) {
+  void readEntity(const YAML::Node &entityNode) {
     checkType(entityNode, YAML::NodeType::Map);
     
     const std::string &file = getChild(entityNode, "file").Scalar();
-    entityMan.create(file, entityNode, renderer);
+    Systems::entities->create(file, entityNode);
   }
   
-  void readEntities(
-    const YAML::Node &entitiesNode,
-    EntityManager &entityMan,
-    RenderingContext &renderer
-  ) {
+  void readEntities(const YAML::Node &entitiesNode) {
     checkType(entitiesNode, YAML::NodeType::Sequence);
     for (auto o = entitiesNode.begin(); o != entitiesNode.end(); ++o) {
-      readEntity(*o, entityMan, renderer);
+      readEntity(*o);
     }
   }
 }
 
-void loadLevel(
-  const std::string &fileName,
-  EntityManager &entityMan,
-  RenderingContext &renderer
-) {
+void loadLevel(const std::string &fileName) {
   const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
   
-  readEntity(getChild(root, "player"), entityMan, renderer);
-  readEntities(getChild(root, "entities"), entityMan, renderer);
+  readEntity(getChild(root, "player"));
+  readEntities(getChild(root, "entities"));
 }
