@@ -9,6 +9,7 @@
 #ifndef rendering_system_hpp
 #define rendering_system_hpp
 
+#include <vector>
 #include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
@@ -38,7 +39,11 @@ public:
 private:
   Camera camera;
   
-  std::unordered_map<EntityID, std::shared_ptr<RenderComponent>> components;
+  using CompPtr = std::shared_ptr<RenderComponent>;
+  using IDtoCompPtr = std::unordered_map<EntityID, CompPtr>;
+  std::vector<IDtoCompPtr> layers;
+  
+  CompPtr findComp(EntityID);
 };
 
 #endif

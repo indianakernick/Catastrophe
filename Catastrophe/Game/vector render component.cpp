@@ -10,6 +10,7 @@
 
 #include "entity.hpp"
 #include "yaml helper.hpp"
+#include "layer names.hpp"
 #include "vector render.hpp"
 #include "animation component.hpp"
 
@@ -23,6 +24,13 @@ VectorRenderComponent::VectorRenderComponent(
   }
   if (const YAML::Node &sizeNode = level["scale"]) {
     scale = readGLMvec(sizeNode);
+  }
+  layer = 0;
+  if (const YAML::Node &layerNode = node["layer"]) {
+    layer = getLayerIndex(layerNode.Scalar());
+  }
+  if (const YAML::Node &layerNode = level["layer"]) {
+    layer = getLayerIndex(layerNode.Scalar());
   }
   rect = makeMotionTarget(glm::vec2(), scale);
   size = makeZoomTarget(scale);
@@ -52,4 +60,8 @@ CameraZoomTargetCPtr VectorRenderComponent::getZoomTarget() const {
 
 Rect VectorRenderComponent::getAABB() const {
   return static_cast<Rect>(*rect);
+}
+
+size_t VectorRenderComponent::getLayer() const {
+  return layer;
 }

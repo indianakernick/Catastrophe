@@ -26,6 +26,7 @@ public:
   virtual CameraMotionTargetCPtr getMotionTarget() const = 0;
   virtual CameraZoomTargetCPtr getZoomTarget() const = 0;
   virtual Rect getAABB() const = 0;
+  virtual size_t getLayer() const = 0;
 };
 
 #endif

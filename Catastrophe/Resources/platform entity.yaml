@@ -8,3 +8,4 @@ animation:
 
 rendering:
   name: VectorRenderComponent
+  layer: over player 2

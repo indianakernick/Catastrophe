@@ -20,7 +20,11 @@ void checkType(const YAML::Node &, YAML::NodeType::value);
 template <typename T>
 void getOptional(T &dst, const YAML::Node &node, const char *name) {
   if (const YAML::Node &child = node[name]) {
-    dst = child.as<T>();
+    if constexpr (std::is_same<T, std::string>::value) {
+      dst = child.Scalar();
+    } else {
+      dst = child.as<T>();
+    }
   }
 }
 

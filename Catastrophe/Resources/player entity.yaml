@@ -20,3 +20,4 @@ animation:
 rendering:
   name: VectorRenderComponent
   scale: *scale
+  layer: player

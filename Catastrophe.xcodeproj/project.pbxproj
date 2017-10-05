@@ -151,6 +151,7 @@
 		45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */; };
 		45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */; };
 		45DEA0821F85DD4900B1DA72 /* launcher animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */; };
+		45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0831F85F87600B1DA72 /* layer names.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
@@ -429,6 +430,8 @@
 		45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.yaml"; sourceTree = "<group>"; };
 		45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher animation component.cpp"; sourceTree = "<group>"; };
 		45DEA0811F85DD4900B1DA72 /* launcher animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher animation component.hpp"; sourceTree = "<group>"; };
+		45DEA0831F85F87600B1DA72 /* layer names.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "layer names.cpp"; sourceTree = "<group>"; };
+		45DEA0841F85F87600B1DA72 /* layer names.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "layer names.hpp"; sourceTree = "<group>"; };
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
@@ -536,6 +539,8 @@
 				45DEA03C1F80D34C00B1DA72 /* rendering resources.hpp */,
 				45DEA0451F83364400B1DA72 /* particle system.cpp */,
 				45DEA0461F83364400B1DA72 /* particle system.hpp */,
+				45DEA0831F85F87600B1DA72 /* layer names.cpp */,
+				45DEA0841F85F87600B1DA72 /* layer names.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";
@@ -1214,6 +1219,7 @@
 				45DE9FD11F71015700B1DA72 /* make render comp.cpp in Sources */,
 				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,
 				45DE9FCB1F70FE9100B1DA72 /* make input comp.cpp in Sources */,
+				45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */,
 				452FFA8C1F6BC50D003A98B1 /* b2MouseJoint.cpp in Sources */,
 				452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */,
 				452FFA931F6BC50D003A98B1 /* b2Rope.cpp in Sources */,

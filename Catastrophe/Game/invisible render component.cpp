@@ -28,3 +28,7 @@ Rect InvisibleRenderComponent::getAABB() const {
   rect.s = {0.0f, 0.0f};
   return rect;
 }
+
+size_t InvisibleRenderComponent::getLayer() const {
+  return 0;
+}

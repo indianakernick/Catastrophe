@@ -21,10 +21,12 @@ public:
   CameraMotionTargetCPtr getMotionTarget() const override;
   CameraZoomTargetCPtr getZoomTarget() const override;
   Rect getAABB() const override;
+  size_t getLayer() const override;
 
 private:
   CameraMotionTargetPtr rect;
   CameraZoomTargetPtr size;
+  size_t layer;
 };
 
 #endif
