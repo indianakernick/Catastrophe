@@ -29,8 +29,7 @@ VectorRenderComponent::VectorRenderComponent(
 }
 
 void VectorRenderComponent::preRender() {
-  const auto anim = getEntity().animation;
-  rect->c = anim->getModelMat()[2];
+  rect->c = getEntity().animation->getModelMat()[2];
 }
 
 void VectorRenderComponent::render(NVGcontext *context) {

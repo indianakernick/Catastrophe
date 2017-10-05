@@ -140,8 +140,8 @@
 		45DEA05D1F848B3D00B1DA72 /* invisible render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */; };
 		45DEA0601F848D7800B1DA72 /* invisible animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */; };
 		45DEA0631F84941F00B1DA72 /* joint physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0611F84941F00B1DA72 /* joint physics component.cpp */; };
-		45DEA0651F84A39600B1DA72 /* dynamic platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */; };
-		45DEA0671F84A40900B1DA72 /* dynamic platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */; };
+		45DEA0651F84A39600B1DA72 /* launcher platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */; };
+		45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */; };
 		45DEA06D1F8589CB00B1DA72 /* launcher joint.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */; };
 		45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */; };
 		45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0711F85915B00B1DA72 /* systems registry.cpp */; };
@@ -414,8 +414,8 @@
 		45DEA05F1F848D7800B1DA72 /* invisible animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "invisible animation component.hpp"; sourceTree = "<group>"; };
 		45DEA0611F84941F00B1DA72 /* joint physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "joint physics component.cpp"; sourceTree = "<group>"; };
 		45DEA0621F84941F00B1DA72 /* joint physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "joint physics component.hpp"; sourceTree = "<group>"; };
-		45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dynamic platform body.yaml"; sourceTree = "<group>"; };
-		45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dynamic platform entity.yaml"; sourceTree = "<group>"; };
+		45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher platform body.yaml"; sourceTree = "<group>"; };
+		45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher platform entity.yaml"; sourceTree = "<group>"; };
 		45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher joint.yaml"; sourceTree = "<group>"; };
 		45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher entity.yaml"; sourceTree = "<group>"; };
 		45DEA0711F85915B00B1DA72 /* systems registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "systems registry.cpp"; sourceTree = "<group>"; };
@@ -924,7 +924,7 @@
 				45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */,
 				45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */,
 				45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */,
-				45DEA0661F84A40900B1DA72 /* dynamic platform entity.yaml */,
+				45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */,
 				45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */,
 				45DEA0791F85A73100B1DA72 /* proximity sensor entity.yaml */,
 			);
@@ -953,7 +953,7 @@
 				45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */,
 				45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */,
 				45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */,
-				45DEA0641F84A39500B1DA72 /* dynamic platform body.yaml */,
+				45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */,
 				45DEA0741F859D3100B1DA72 /* proximity sensor body.yaml */,
 			);
 			name = Bodies;
@@ -1096,8 +1096,8 @@
 				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */,
 				45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */,
-				45DEA0671F84A40900B1DA72 /* dynamic platform entity.yaml in Resources */,
-				45DEA0651F84A39600B1DA72 /* dynamic platform body.yaml in Resources */,
+				45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */,
+				45DEA0651F84A39600B1DA72 /* launcher platform body.yaml in Resources */,
 				45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */,
 				45DE9FC31F6F8C7900B1DA72 /* level 0.yaml in Resources */,
 				45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */,

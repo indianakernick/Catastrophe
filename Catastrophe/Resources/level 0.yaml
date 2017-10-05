@@ -39,14 +39,14 @@ entities:
   scale: [1, 1]
 
 - id: 7
-  file: dynamic platform entity.yaml
+  file: launcher platform entity.yaml
   pos: [5, 1]
   scale: [1, 0.1]
 
 - id: 8
   file: proximity sensor entity.yaml
   pos: [5, 0.75]
-  scale: [0.5, 0.5]
+  scale: [0.25, 0.5]
 
 - id: 9
   file: launcher entity.yaml
@@ -54,5 +54,5 @@ entities:
   body A: 1
   body B: 7
   local anchor A: [5, 0.5]
-  local anchor B: [0, 0]
+  local anchor B: [0, -0.05]
   local axis A: [0, 1]

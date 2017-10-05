@@ -1,6 +1,6 @@
 physics:
   name: SimplePhysicsComponent
-  body: dynamic platform body.yaml
+  body: launcher platform body.yaml
 
 animation:
   name: SimpleAnimationComponent
