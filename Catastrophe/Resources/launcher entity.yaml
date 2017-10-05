@@ -1,0 +1,10 @@
+physics:
+  name: LauncherPhysicsComponent
+  joint: launcher joint.yaml
+
+animation:
+  name: LauncherAnimationComponent
+  sprite: launcher sprite.yaml
+
+rendering:
+  name: VectorRenderComponent

@@ -2,7 +2,7 @@ type: prismatic
 local axis A: [0, 1]
 enable limit: YES
 lower translation: 0
-upper translation: 0.8
+upper translation: 1.0
 enable motor: NO
 max motor force: 1000
 motor speed: 50

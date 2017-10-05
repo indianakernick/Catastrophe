@@ -28,7 +28,7 @@ int main(int, char **) {
   app->mainLoop(timeStep, maxSteps);
   #endif
   
-  //SpriteTestApp test("blade sprite.yaml", "static");
+  //SpriteTestApp test("launcher sprite.yaml", "main");
   //test.mainLoop(timeStep, maxSteps);
   
   PROFILER_INFO(stdout);

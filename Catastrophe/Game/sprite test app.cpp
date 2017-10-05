@@ -73,12 +73,25 @@ void SpriteTestApp::render(const float delta) {
     {0.5f, 0.5f}
   );
   
-  mat = glm::scale(mat, {0.875f, 0.875f});
+  //mat = glm::scale(mat, {0.875f, 0.875f});
+  //mat = glm::scale(mat, {0.1f, 0.1f});
   
   renderingContext.preRender(mat);
   
-  anim.advance(delta);
-  anim.repeatOnOverflow();
+  static float dir = 1.0f;
+  
+  anim.advance(delta * 0.0625 * dir);
+  if (dir == 1.0f) {
+    if (anim.overflow()) {
+      anim.toEnd();
+      dir = -1.0f;
+    }
+  } else if (dir == -1.0f) {
+    if (anim.underflow()) {
+      anim.toBegin();
+      dir = 1.0f;
+    }
+  }
   const Frame frame = getFrame(sprite, animName, anim.getProgressTime());
   renderSprite(renderingContext.getContext(), sprite, frame, {});
   

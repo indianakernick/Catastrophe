@@ -8,8 +8,12 @@
 
 #include "launcher physics component.hpp"
 
+#include "b2 glm cast.hpp"
 #include "yaml helper.hpp"
 #include "systems registry.hpp"
+#include <Simpleton/Math/clamp.hpp>
+#include <Simpleton/Math/interpolate.hpp>
+#include <Simpleton/Utils/safe down cast.hpp>
 #include "proximity sensor physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/Joints/b2PrismaticJoint.h"
 
@@ -29,10 +33,7 @@ void LauncherPhysicsComponent::preStep(float) {
   if (!comp) {
     throw std::runtime_error("Invalid trigger entity ID");
   }
-  auto proxComp = std::dynamic_pointer_cast<ProximitySensorPhysicsComponent>(comp);
-  if (!proxComp) {
-    throw std::runtime_error("Entity ID doesn't refer to a proximity sensor");
-  }
+  auto proxComp = Utils::safeDownCast<ProximitySensorPhysicsComponent>(comp);
   if (proxComp->playerIsClose()) {
     prisJoint->EnableMotor(true);
   } else {
@@ -41,3 +42,48 @@ void LauncherPhysicsComponent::preStep(float) {
 }
 
 void LauncherPhysicsComponent::postStep() {}
+
+float LauncherPhysicsComponent::getRelTranslation() const {
+  return Math::clamp(
+    Math::invLerp<float>(
+      prisJoint->GetJointTranslation(),
+      prisJoint->GetLowerLimit(),
+      prisJoint->GetUpperLimit()
+    ),
+    0.0f,
+    1.0f
+  );
+}
+
+float LauncherPhysicsComponent::getLimitSize() const {
+  return prisJoint->GetUpperLimit() - prisJoint->GetLowerLimit();
+}
+
+namespace {
+  b2Vec2 rotate(const b2Vec2 v, const float a) {
+    return {
+      v.x * std::cos(a) - v.y * std::sin(a),
+      v.x * std::sin(a) + v.y * std::cos(a)
+    };
+  }
+  
+  float angle(const b2Vec2 v) {
+    return std::atan2(v.y, v.x);
+  }
+}
+
+glm::vec2 LauncherPhysicsComponent::getCenter() const {
+  const float middleTranslation = Math::middle(
+    prisJoint->GetLowerLimit(),
+    prisJoint->GetUpperLimit()
+  );
+  const b2Vec2 axisA = rotate(
+    prisJoint->GetLocalAxisA(),
+    prisJoint->GetBodyA()->GetAngle()
+  );
+  return castToGLM(prisJoint->GetAnchorA() + middleTranslation * axisA);
+}
+
+float LauncherPhysicsComponent::getRotation() const {
+  return prisJoint->GetBodyA()->GetAngle() + angle(prisJoint->GetLocalAxisA());
+}

@@ -1,9 +1,0 @@
-physics:
-  name: LauncherPhysicsComponent
-  joint: launch joint.yaml
-
-animation:
-  name: InvisibleAnimationComponent
-
-rendering:
-  name: InvisibleRenderComponent

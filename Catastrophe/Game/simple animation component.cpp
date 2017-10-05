@@ -14,8 +14,6 @@
 #include "vector render.hpp"
 #include "systems registry.hpp"
 #include "physics component.hpp"
-#include <glm/gtx/matrix_transform_2d.hpp>
-#include <Simpleton/Utils/safe down cast.hpp>
 
 SimpleAnimationComponent::SimpleAnimationComponent(
   const YAML::Node &node,

@@ -9,6 +9,7 @@
 #ifndef launcher_physics_component_hpp
 #define launcher_physics_component_hpp
 
+#include <glm/vec2.hpp>
 #include "entity id.hpp"
 #include "joint physics component.hpp"
 
@@ -20,6 +21,11 @@ public:
   
   void preStep(float) override;
   void postStep() override;
+  
+  float getRelTranslation() const;
+  float getLimitSize() const;
+  glm::vec2 getCenter() const;
+  float getRotation() const;
   
 private:
   EntityID trigger;
