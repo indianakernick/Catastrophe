@@ -137,8 +137,6 @@
 		45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */; };
 		45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */; };
 		45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0521F8461DC00B1DA72 /* input file.cpp */; };
-		45DEA05D1F848B3D00B1DA72 /* invisible render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */; };
-		45DEA0601F848D7800B1DA72 /* invisible animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */; };
 		45DEA0631F84941F00B1DA72 /* joint physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0611F84941F00B1DA72 /* joint physics component.cpp */; };
 		45DEA0651F84A39600B1DA72 /* launcher platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */; };
 		45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */; };
@@ -409,10 +407,6 @@
 		45DEA0521F8461DC00B1DA72 /* input file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input file.cpp"; sourceTree = "<group>"; };
 		45DEA0531F8461DC00B1DA72 /* input file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "input file.hpp"; sourceTree = "<group>"; };
 		45DEA0551F84627F00B1DA72 /* file constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "file constants.hpp"; sourceTree = "<group>"; };
-		45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "invisible render component.cpp"; sourceTree = "<group>"; };
-		45DEA05C1F848B3D00B1DA72 /* invisible render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "invisible render component.hpp"; sourceTree = "<group>"; };
-		45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "invisible animation component.cpp"; sourceTree = "<group>"; };
-		45DEA05F1F848D7800B1DA72 /* invisible animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "invisible animation component.hpp"; sourceTree = "<group>"; };
 		45DEA0611F84941F00B1DA72 /* joint physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "joint physics component.cpp"; sourceTree = "<group>"; };
 		45DEA0621F84941F00B1DA72 /* joint physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "joint physics component.hpp"; sourceTree = "<group>"; };
 		45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher platform body.yaml"; sourceTree = "<group>"; };
@@ -592,8 +586,6 @@
 				452FF9E01F64D219003A98B1 /* player animation component.hpp */,
 				45DE9FB41F6E02AF00B1DA72 /* simple animation component.cpp */,
 				45DE9FB51F6E02AF00B1DA72 /* simple animation component.hpp */,
-				45DEA05E1F848D7800B1DA72 /* invisible animation component.cpp */,
-				45DEA05F1F848D7800B1DA72 /* invisible animation component.hpp */,
 				45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */,
 				45DEA0811F85DD4900B1DA72 /* launcher animation component.hpp */,
 			);
@@ -812,8 +804,6 @@
 			children = (
 				4509F8E01F5BB23600927A19 /* vector render component.cpp */,
 				4509F8E11F5BB23600927A19 /* vector render component.hpp */,
-				45DEA05B1F848B3D00B1DA72 /* invisible render component.cpp */,
-				45DEA05C1F848B3D00B1DA72 /* invisible render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1152,7 +1142,6 @@
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
 				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
-				45DEA05D1F848B3D00B1DA72 /* invisible render component.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
 				45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */,
@@ -1178,7 +1167,6 @@
 				45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
-				45DEA0601F848D7800B1DA72 /* invisible animation component.cpp in Sources */,
 				45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */,
 				45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,

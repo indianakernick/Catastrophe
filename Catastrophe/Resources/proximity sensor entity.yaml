@@ -1,9 +1,3 @@
 physics:
   name: ProximitySensorPhysicsComponent
   body: proximity sensor body.yaml
-
-animation:
-  name: InvisibleAnimationComponent
-
-rendering:
-  name: InvisibleRenderComponent
