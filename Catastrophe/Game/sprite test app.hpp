@@ -17,6 +17,8 @@
 #include <Simpleton/Time/simple anim.hpp>
 #include <Simpleton/Platform/window library.hpp>
 
+#include "render script.hpp"
+
 class SpriteTestApp : public Game::App<std::chrono::duration<float>> {
 public:
   SpriteTestApp(const char *, const char *);
@@ -26,6 +28,8 @@ private:
   Platform::Window window;
   RenderingContext renderingContext;
   Screenshot screenshot;
+  
+  RenderScript script;
   
   Sprite sprite;
   Time::SimpleAnim<float> anim;

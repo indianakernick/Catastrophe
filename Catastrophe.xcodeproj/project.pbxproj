@@ -97,6 +97,9 @@
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
+		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
+		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
+		457619F41F870C9100A6A792 /* test sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F31F870C9100A6A792 /* test sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -333,6 +336,10 @@
 		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
 		454116331F5622D600C2865B /* camera zoom track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom track.cpp"; sourceTree = "<group>"; };
 		454116341F5622D700C2865B /* camera zoom track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom track.hpp"; sourceTree = "<group>"; };
+		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
+		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
+		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
+		457619F31F870C9100A6A792 /* test sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test sprite.lua"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -444,6 +451,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */,
 				45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */,
 				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
 				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
@@ -502,6 +510,8 @@
 				4509F9011F5E816F00927A19 /* yaml helper.hpp */,
 				45DE9FAA1F6D102A00B1DA72 /* yaml param.cpp */,
 				45DE9FAB1F6D102A00B1DA72 /* yaml param.hpp */,
+				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
+				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 				453890781F2ADB4B007EBB5A /* rect.hpp */,
 				452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */,
 				452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */,
@@ -527,14 +537,12 @@
 				453892EE1F2C2487007EBB5A /* rendering system.hpp */,
 				4509F8E41F5CE20000927A19 /* rendering context.cpp */,
 				4509F8E51F5CE20000927A19 /* rendering context.hpp */,
-				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
-				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 				45DEA03B1F80D34C00B1DA72 /* rendering resources.cpp */,
 				45DEA03C1F80D34C00B1DA72 /* rendering resources.hpp */,
-				45DEA0451F83364400B1DA72 /* particle system.cpp */,
-				45DEA0461F83364400B1DA72 /* particle system.hpp */,
 				45DEA0831F85F87600B1DA72 /* layer names.cpp */,
 				45DEA0841F85F87600B1DA72 /* layer names.hpp */,
+				457619F01F86FB5E00A6A792 /* render script.cpp */,
+				457619F11F86FB5E00A6A792 /* render script.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";
@@ -844,6 +852,15 @@
 			name = camera;
 			sourceTree = "<group>";
 		};
+		457619ED1F8611D200A6A792 /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				45DEA0451F83364400B1DA72 /* particle system.cpp */,
+				45DEA0461F83364400B1DA72 /* particle system.hpp */,
+			);
+			name = particles;
+			sourceTree = "<group>";
+		};
 		4592BAC81F11B48F00D1640D = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +905,7 @@
 				453892F61F2C4053007EBB5A /* physics */,
 				452FF9C11F63D018003A98B1 /* animation */,
 				45103F591F2497CD001B24E2 /* rendering */,
+				457619ED1F8611D200A6A792 /* particles */,
 				453892FD1F2C4B70007EBB5A /* factory */,
 				45FA99461F36C9F000F8C639 /* entity */,
 			);
@@ -897,6 +915,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				457619EE1F86FA9B00A6A792 /* liblua.a */,
 				4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */,
 				4509F8EF1F5D248500927A19 /* OpenGL.framework */,
 				4509F8ED1F5D247D00927A19 /* IOKit.framework */,
@@ -936,6 +955,7 @@
 				45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */,
 				45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */,
 				45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */,
+				457619F31F870C9100A6A792 /* test sprite.lua */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -1102,6 +1122,7 @@
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DEA07A1F85A73100B1DA72 /* proximity sensor entity.yaml in Resources */,
 				45DEA0751F859D3100B1DA72 /* proximity sensor body.yaml in Resources */,
+				457619F41F870C9100A6A792 /* test sprite.lua in Resources */,
 				45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
 				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
@@ -1140,6 +1161,7 @@
 				452FFA6F1F6BC50D003A98B1 /* b2CircleShape.cpp in Sources */,
 				452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */,
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
+				457619F21F86FB5E00A6A792 /* render script.cpp in Sources */,
 				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,

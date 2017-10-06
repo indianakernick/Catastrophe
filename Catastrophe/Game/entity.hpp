@@ -16,6 +16,7 @@ class InputComponent;
 class PhysicsComponent;
 class AnimationComponent;
 class RenderComponent;
+class ParticleEffectComponent;
 
 class Entity {
 public:
@@ -25,6 +26,7 @@ public:
   std::shared_ptr<PhysicsComponent> physics;
   std::shared_ptr<AnimationComponent> animation;
   std::shared_ptr<RenderComponent> render;
+  std::shared_ptr<ParticleEffectComponent> particles;
   
   EntityID getID() const;
 
