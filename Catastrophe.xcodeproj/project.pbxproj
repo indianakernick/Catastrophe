@@ -100,6 +100,7 @@
 		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
 		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
 		457619F41F870C9100A6A792 /* test sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F31F870C9100A6A792 /* test sprite.lua */; };
+		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -340,6 +341,7 @@
 		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
 		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
 		457619F31F870C9100A6A792 /* test sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test sprite.lua"; sourceTree = "<group>"; };
+		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 				45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */,
 				45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */,
 				457619F31F870C9100A6A792 /* test sprite.lua */,
+				457619F51F875CAD00A6A792 /* pentagon sprite.lua */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -1096,6 +1099,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */,
 				45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */,
 				45DEA04A1F8343CB00B1DA72 /* spinning blade sprite.yaml in Resources */,
 				45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */,
