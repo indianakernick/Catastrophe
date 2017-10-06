@@ -263,7 +263,7 @@ RenderScript ScriptManager::loadScript(const std::string &name) {
   
   env["init"]();
   
-  return RenderScript(env);
+  return RenderScript(env, context);
 }
 
 ImageHandle ScriptManager::loadImage(const std::string &name, const int flags) {
@@ -271,14 +271,16 @@ ImageHandle ScriptManager::loadImage(const std::string &name, const int flags) {
   return resMan->getImage(name, flags);
 }
 
-RenderScript::RenderScript(const sol::environment &env)
-  : env(env) {
+RenderScript::RenderScript(const sol::environment &env, NVGcontext *context)
+  : env(env), context(context) {
   drawFun = env["draw"];
   dataFun = env["getData"];
 }
 
 void RenderScript::draw(const float progress, const int id) {
+  nvgSave(context);
   drawFun(progress, id);
+  nvgRestore(context);
 }
 
 float RenderScript::getData(const std::string &name, const int id) {

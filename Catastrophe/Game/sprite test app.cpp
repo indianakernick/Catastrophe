@@ -25,6 +25,7 @@ bool SpriteTestApp::init() {
   renderingContext.init(window.get());
   
   script = renderingContext.loadScript(spriteFile);
+  anim.setDuration(1.0f);
   return true;
 }
 
@@ -76,9 +77,7 @@ void SpriteTestApp::render(const float delta) {
   
   renderingContext.preRender(mat);
   
-  script.draw(0.0f);
-  
-  /*static float dir = 1.0f;
+  static float dir = 1.0f;
   
   anim.advance(delta * 0.0625 * dir);
   if (dir == 1.0f) {
@@ -91,6 +90,7 @@ void SpriteTestApp::render(const float delta) {
       anim.toBegin();
       dir = 1.0f;
     }
-  }*/
+  }
+  script.draw(anim.getProgressTime());
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }

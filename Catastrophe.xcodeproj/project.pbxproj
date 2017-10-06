@@ -99,8 +99,8 @@
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
 		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
-		457619F41F870C9100A6A792 /* test sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F31F870C9100A6A792 /* test sprite.lua */; };
 		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
+		457619F81F87605700A6A792 /* launcher sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F71F87605700A6A792 /* launcher sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -340,8 +340,8 @@
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
 		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
 		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
-		457619F31F870C9100A6A792 /* test sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test sprite.lua"; sourceTree = "<group>"; };
 		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; };
+		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -957,8 +957,8 @@
 				45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */,
 				45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */,
 				45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */,
-				457619F31F870C9100A6A792 /* test sprite.lua */,
 				457619F51F875CAD00A6A792 /* pentagon sprite.lua */,
+				457619F71F87605700A6A792 /* launcher sprite.lua */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -1126,10 +1126,10 @@
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DEA07A1F85A73100B1DA72 /* proximity sensor entity.yaml in Resources */,
 				45DEA0751F859D3100B1DA72 /* proximity sensor body.yaml in Resources */,
-				457619F41F870C9100A6A792 /* test sprite.lua in Resources */,
 				45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
 				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
+				457619F81F87605700A6A792 /* launcher sprite.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

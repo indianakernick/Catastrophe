@@ -40,7 +40,7 @@ private:
 class RenderScript {
 public:
   RenderScript() = default;
-  explicit RenderScript(const sol::environment &);
+  RenderScript(const sol::environment &, NVGcontext *);
 
   void draw(float, int = 0);
   float getData(const std::string &, int = 0);
@@ -49,6 +49,7 @@ private:
   sol::environment env;
   sol::function drawFun;
   sol::function dataFun;
+  NVGcontext *context = nullptr;
 };
 
 #endif
