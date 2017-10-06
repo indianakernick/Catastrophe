@@ -9,27 +9,46 @@
 #ifndef render_script_hpp
 #define render_script_hpp
 
-#include <vector>
+#define SOL_CHECK_ARGUMENTS 1
 #include <sol.hpp>
 #include "rendering resources.hpp"
 
 extern "C" struct NVGcontext;
-struct Functions;
+
+class RenderScript;
+
+class ScriptManager {
+public:
+  ScriptManager() = default;
+  
+  void init(RenderResMan &, NVGcontext *);
+  void quit();
+  
+  RenderScript loadScript(const std::string &);
+  
+private:
+  sol::state state;
+  RenderResMan *resMan = nullptr;
+  NVGcontext *context = nullptr;
+  
+  template <typename FunPtr, FunPtr FUNCTION, typename ...Types>
+  auto drawFunction(Types...);
+  
+  ImageHandle loadImage(const std::string &, int);
+};
 
 class RenderScript {
 public:
-  explicit RenderScript(const std::string &);
-  ~RenderScript();
+  RenderScript() = default;
+  explicit RenderScript(const sol::environment &);
 
-  void init(RenderResMan &);
-  void draw(NVGcontext *);
+  void draw(float, int = 0);
+  float getData(const std::string &, int = 0);
 
 private:
-  std::vector<ImageHandle> images;
-  sol::state script;
+  sol::environment env;
   sol::function drawFun;
-  
-  std::unique_ptr<Functions> functions;
+  sol::function dataFun;
 };
 
 #endif

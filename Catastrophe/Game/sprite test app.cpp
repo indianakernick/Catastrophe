@@ -17,16 +17,14 @@
 #include <Simpleton/Platform/system info.hpp>
 
 SpriteTestApp::SpriteTestApp(const char *spriteFile, const char *animName)
-  : spriteFile(spriteFile), animName(animName), script(spriteFile) {}
+  : spriteFile(spriteFile), animName(animName) {}
 
 bool SpriteTestApp::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
-  //sprite = loadSprite(spriteFile, renderingContext);
-  //anim.setDuration(sprite.animations.at(animName).durationSec);
-  
+  script = renderingContext.loadScript(spriteFile);
   return true;
 }
 
@@ -78,7 +76,7 @@ void SpriteTestApp::render(const float delta) {
   
   renderingContext.preRender(mat);
   
-  script.draw(renderingContext.getContext());
+  script.draw(0.0f);
   
   /*static float dir = 1.0f;
   
@@ -93,9 +91,6 @@ void SpriteTestApp::render(const float delta) {
       anim.toBegin();
       dir = 1.0f;
     }
-  }
-  const Frame frame = getFrame(sprite, animName, anim.getProgressTime());
-  renderSprite(renderingContext.getContext(), sprite, frame, {});*/
-  
+  }*/
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }
