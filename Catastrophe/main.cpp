@@ -28,7 +28,7 @@ int main(int, char **) {
   app->mainLoop(timeStep, maxSteps);
   #endif*/
   
-  SpriteTestApp test("launcher sprite.lua", "main");
+  SpriteTestApp test("spikes sprite.lua", "main");
   test.mainLoop(timeStep, maxSteps);
   
   PROFILER_INFO(stdout);
