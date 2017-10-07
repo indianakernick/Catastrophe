@@ -103,6 +103,7 @@
 		457619F81F87605700A6A792 /* launcher sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F71F87605700A6A792 /* launcher sprite.lua */; };
 		457619FA1F876C8600A6A792 /* spikes sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F91F876C8600A6A792 /* spikes sprite.lua */; };
 		457619FC1F884A2500A6A792 /* platform sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FB1F884A2500A6A792 /* platform sprite.lua */; };
+		457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FD1F884E2100A6A792 /* spinning blade sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -346,6 +347,7 @@
 		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; };
 		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; };
 		457619FB1F884A2500A6A792 /* platform sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.lua"; sourceTree = "<group>"; };
+		457619FD1F884E2100A6A792 /* spinning blade sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.lua"; sourceTree = "<group>"; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 				457619F71F87605700A6A792 /* launcher sprite.lua */,
 				457619F91F876C8600A6A792 /* spikes sprite.lua */,
 				457619FB1F884A2500A6A792 /* platform sprite.lua */,
+				457619FD1F884E2100A6A792 /* spinning blade sprite.lua */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */,
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
+				457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */,
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DEA07A1F85A73100B1DA72 /* proximity sensor entity.yaml in Resources */,
 				45DEA0751F859D3100B1DA72 /* proximity sensor body.yaml in Resources */,
