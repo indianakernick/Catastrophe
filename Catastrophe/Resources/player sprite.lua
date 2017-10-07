@@ -83,30 +83,14 @@ local runAnim = {
   }
 };
 
-function angleLength(angle, length)
-  angle = math.rad(-angle);
-  return Vec2.new(
-    math.cos(angle) * length,
-    math.sin(angle) * length
-  );
-end
-
 function calcPoints(points, pose, node, pos, angle)
   angle = angle + pose[node.index];
-  local newPos = pos + angleLength(angle, node.length);
+  local newPos = pos + Vec2.angleLength(math.rad(-angle), node.length);
   points[node.index] = newPos;
   for c = 1, #node.children do
     calcPoints(points, pose, node.children[c], newPos, angle);
   end
   return points;
-end
-
-function lerp(t, min, max)
-  return min + (max - min) * t;
-end
-
-function invLerp(value, min, max)
-  return (value - min) / (max - min);
 end
 
 function lerpPose(t, min, max)

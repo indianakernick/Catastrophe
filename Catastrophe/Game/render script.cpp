@@ -13,12 +13,21 @@
 #include <experimental/tuple>
 #include <Simpleton/Utils/tuple.hpp>
 #include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Math/interpolate.hpp>
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
+  glm::vec2 angleLength(const float angle, const float length) {
+    return {
+      std::cos(angle) * length,
+      std::sin(angle) * length
+    };
+  }
+
   void exportVec2(sol::state &script) {
     script.new_usertype<glm::vec2>("Vec2",
       sol::constructors<glm::vec2(), glm::vec2(float), glm::vec2(float, float)>(),
+      "angleLength", sol::factories(angleLength),
       
       "x", &glm::vec2::x,
       "y", &glm::vec2::y,
@@ -91,6 +100,15 @@ namespace {
       "FLIP_Y", NVG_IMAGE_FLIPY,
       "PREMULTIPLIED", NVG_IMAGE_PREMULTIPLIED,
       "NEAREST", NVG_IMAGE_NEAREST
+    );
+  }
+  
+  void exportMathFunctions(sol::state &script) {
+    script.set_function("lerp",
+      static_cast<float (*)(float, float, float)>(&Math::lerp<float, float>)
+    );
+    script.set_function("invLerp",
+      static_cast<float (*)(float, float, float)>(&Math::invLerp<float, float>)
     );
   }
   
@@ -186,6 +204,7 @@ void ScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
   exportLineCap(state);
   exportLineJoin(state);
   exportImageFlags(state);
+  exportMathFunctions(state);
   state.open_libraries(sol::lib::base);
   state.open_libraries(sol::lib::math);
   
