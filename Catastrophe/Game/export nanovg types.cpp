@@ -9,19 +9,13 @@
 #include "export nanovg types.hpp"
 
 #include <glm/vec2.hpp>
+#include <Simpleton/Math/vectors.hpp>
 
 namespace {
-  glm::vec2 angleLength(const float angle, const float length) {
-    return {
-      std::cos(angle) * length,
-      std::sin(angle) * length
-    };
-  }
-
   void exportVec2(sol::state &state) {
     state.new_usertype<glm::vec2>("Vec2",
       sol::constructors<glm::vec2(), glm::vec2(float), glm::vec2(float, float)>(),
-      "angleLength", sol::factories(angleLength),
+      "angleMag", sol::factories(Math::angleMag<float, float>),
       
       "x", &glm::vec2::x,
       "y", &glm::vec2::y,

@@ -8,6 +8,8 @@
 
 #include "export animations.hpp"
 
+#include <glm/glm.hpp>
+#include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 
 namespace {
@@ -60,13 +62,11 @@ namespace {
     state.new_usertype<PoseAngles>("PoseAngles",
       sol::constructors<PoseAngles(int), PoseAngles(const sol::table &)>(),
       sol::meta_function::length, &PoseAngles::size,
-      
       "get", &PoseAngles::get
     );
     state.new_usertype<PoseLengths>("PoseLengths",
       sol::constructors<PoseLengths(int), PoseLengths(const sol::table &)>(),
       sol::meta_function::length, &PoseLengths::size,
-      
       "get", &PoseLengths::get
     );
   }
@@ -102,6 +102,85 @@ namespace {
     state.new_usertype<Animation>("Animation",
       sol::constructors<Animation(float, const sol::table &)>()
     );
+  }
+  
+  struct PivotNode {
+    PivotNode() = default;
+    PivotNode(const int index, const sol::table &table)
+      : children(table.size()), index(index) {
+      copyTable(children, table);
+    }
+    
+    int getChildIndex(const int child) const {
+      return children[child - 1].index;
+    }
+    
+    int getIndex() const {
+      return index;
+    }
+    
+    std::vector<PivotNode> children;
+    int index;
+  };
+  
+  void exportPivotNode(sol::state &state) {
+    state.new_usertype<PivotNode>("PivotNode",
+      sol::constructors<PivotNode(int, const sol::table &)>(),
+      "index", &PivotNode::getIndex,
+      "childIndex", &PivotNode::getChildIndex
+    );
+  }
+  
+  struct Points {
+    explicit Points(const int size)
+      : data(size) {}
+    
+    glm::vec2 get(const PivotNode &node) const {
+      return data[node.index - 1];
+    }
+    int size() const {
+      return static_cast<int>(data.size());
+    }
+    
+    std::vector<glm::vec2> data;
+  };
+  
+  void exportPoints(sol::state &state) {
+    state.new_usertype<Points>("Points",
+      sol::constructors<Points(int)>(),
+      sol::meta_function::length, &Points::size,
+      "get", &Points::get
+    );
+  }
+  
+  void pivotPoints(
+    Points &points,
+    const PoseAngles &angles,
+    const PoseLengths &lengths,
+    const PivotNode &node,
+    const glm::vec2 pos,
+    float angle
+  ) {
+    if (angles.data.size() != lengths.data.size()) {
+      throw std::runtime_error("Angles and lengths must be of equal size");
+    }
+    if (points.data.size() != angles.data.size()) {
+      throw std::runtime_error("Points and pose data must be of equal size");
+    }
+    //node.index is 1-based
+    if (node.index > static_cast<int>(points.data.size()) || node.index < 1) {
+      throw std::runtime_error("Node index out of range");
+    }
+  
+    angle += angles.get(node.index);
+    const glm::vec2 newPos = pos + Math::angleMag(
+      glm::radians(-angle),
+      lengths.get(node.index)
+    );
+    points.data[node.index - 1] = newPos;
+    for (auto &c : node.children) {
+      pivotPoints(points, angles, lengths, c, newPos, angle);
+    }
   }
   
   //exposed to LUA
@@ -181,6 +260,7 @@ namespace {
   }
   
   void exportFunctions(sol::state &state) {
+    state.set_function("pivotPoints", pivotPoints);
     state.set_function("lerpPose",
       sol::overload(lerpPose<PoseAngles>, lerpPose<PoseLengths>)
     );
@@ -194,5 +274,7 @@ void exportAnimations(sol::state &state) {
   exportPose(state);
   exportKeyframe(state);
   exportAnimation(state);
+  exportPivotNode(state);
+  exportPoints(state);
   exportFunctions(state);
 }

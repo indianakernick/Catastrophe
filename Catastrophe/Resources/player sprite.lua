@@ -12,26 +12,11 @@ end
 
 function init() end
 
-local rightFoot = {
-  index = 5,
-  children = {}
-};
-local rightKnee = {
-  index = 4,
-  children = {rightFoot}
-};
-local leftFoot = {
-  index = 3,
-  children = {}
-};
-local leftKnee = {
-  index = 2,
-  children = {leftFoot}
-};
-local hip = {
-  index = 1,
-  children = {leftKnee, rightKnee}
-};
+local rightFoot = PivotNode.new(5, {});
+local rightKnee = PivotNode.new(4, {rightFoot});
+local leftFoot = PivotNode.new(3, {});
+local leftKnee = PivotNode.new(2, {leftFoot});
+local hip = PivotNode.new(1, {leftKnee, rightKnee});
 
 local poseLengths = PoseLengths.new({
   0,
@@ -73,24 +58,12 @@ local runAnim = Animation.new(1.0, {
   })
 });
 
-function calcPoints(points, poseA, poseL, node, pos, angle)
-  angle = angle + poseA:get(node.index);
-  local newPos = pos + Vec2.angleLength(
-    math.rad(-angle),
-    poseL:get(node.index)
-  );
-  points[node.index] = newPos;
-  for c = 1, #node.children do
-    calcPoints(points, poseA, poseL, node.children[c], newPos, angle);
-  end
-  return points;
-end
-
 local poseAngles = PoseAngles.new(5);
+local points = Points.new(5);
 
 function draw(progress)
   lerpAnimation(poseAngles, progress, runAnim);
-  local points = calcPoints({}, poseAngles, poseLengths, hip, Vec2.new(0, 0), -90);
+  pivotPoints(points, poseAngles, poseLengths, hip, Vec2.new(0, 0), -90);
 
   scale(Vec2.new(0.0625));
   line_cap(LineCap.ROUND);
@@ -98,16 +71,16 @@ function draw(progress)
   stroke_color(Color.new(1, 1, 1));
 
   begin_path();
-  move_to(points[hip.index]);
-  line_to(points[rightKnee.index]);
-  line_to(points[rightFoot.index]);
+  move_to(points:get(hip));
+  line_to(points:get(rightKnee));
+  line_to(points:get(rightFoot));
   stroke();
 
   stroke_color(Color.new(0.5, 0.5, 0.5));
 
   begin_path();
-  move_to(points[hip.index]);
-  line_to(points[leftKnee.index]);
-  line_to(points[leftFoot.index]);
+  move_to(points:get(hip));
+  line_to(points:get(leftKnee));
+  line_to(points:get(leftFoot));
   stroke();
 end
