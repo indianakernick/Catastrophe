@@ -12,11 +12,17 @@ end
 
 function init() end
 
-local rightFoot = PivotNode.new(5, {});
-local rightKnee = PivotNode.new(4, {rightFoot});
-local leftFoot = PivotNode.new(3, {});
-local leftKnee = PivotNode.new(2, {leftFoot});
-local hip = PivotNode.new(1, {leftKnee, rightKnee});
+      local rightHand = PivotNode.new(11, {});
+    local rightElbow =  PivotNode.new(10, {rightHand});
+    local head =        PivotNode.new(9,  {});
+      local leftHand =  PivotNode.new(8,  {});
+    local leftElbow =   PivotNode.new(7,  {leftHand});
+  local neck =          PivotNode.new(6,  {leftElbow, head, rightElbow});
+    local rightFoot =   PivotNode.new(5,  {});
+  local rightKnee =     PivotNode.new(4,  {rightFoot});
+    local leftFoot =    PivotNode.new(3,  {});
+  local leftKnee =      PivotNode.new(2,  {leftFoot});
+local hip =             PivotNode.new(1,  {leftKnee, rightKnee, neck});
 
 local poseLengths = PoseLengths.new({
   0,
