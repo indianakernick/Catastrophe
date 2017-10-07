@@ -50,7 +50,7 @@ local standPose = {
   45
 };
 
-local runPoses = {
+local runAnim = {
   {
     offset = 0,
     data = {
@@ -91,39 +91,73 @@ function angleLength(angle, length)
   );
 end
 
-function calcPositions(positions, pose, node, pos, angle)
+function calcPoints(points, pose, node, pos, angle)
   angle = angle + pose[node.index];
   local newPos = pos + angleLength(angle, node.length);
-  positions[node.index] = newPos;
+  points[node.index] = newPos;
   for c = 1, #node.children do
-    calcPositions(positions, pose, node.children[c], newPos, angle);
+    calcPoints(points, pose, node.children[c], newPos, angle);
   end
-  return positions;
+  return points;
 end
 
-function lerp(t, a, b)
-  return a + (b - a) * t;
+function lerp(t, min, max)
+  return min + (max - min) * t;
 end
 
-function lerpPoses(t, a, b)
+function invLerp(value, min, max)
+  return (value - min) / (max - min);
+end
+
+function lerpPose(t, min, max)
+  if (#min ~= #max) then
+    error("Cannot interpolate poses of different sizes");
+  end
+
   local newPose = {};
-  for i = 1, #a.data do
-    newPose[i] = lerp(t, a.data[i], b.data[i]);
+  for i = 1, #min do
+    newPose[i] = lerp(t, min[i], max[i]);
   end
   return newPose;
 end
 
-function lerpAllPoses(t, poses)
-  if t <= 0.5 then
-    return lerpPoses(t * 2, poses[1], poses[2]);
-  else
-    return lerpPoses((t - 0.5) * 2, poses[2], poses[3]);
+function lerpKeyframe(t, min, max)
+  return lerpPose(
+    invLerp(t, min.offset, max.offset),
+    min.data,
+    max.data
+  );
+end
+
+function lerpAnimation(t, keyframes)
+  local size = #keyframes;
+
+  if (size == 0) then
+    error("Cannot interpolate 0 keyframes");
+  elseif (size == 1) then
+    return poses[1].data;
+  elseif (size == 2) then
+    return lerpKeyframe(t, keyframes[1], keyframes[2]);
   end
+  
+  if (t < keyframes[1].offset) then
+    return lerpKeyframe(t, keyframes[1], keyframes[2]);
+  elseif (t > keyframes[size].offset) then
+    return lerpKeyframe(t, keyframes[size - 1], keyframes[size]);
+  end
+  
+  for k = 2, size do
+    if (keyframes[k].offset >= t) then
+      return lerpKeyframe(t, keyframes[k - 1], keyframes[k]);
+    end
+  end
+  
+  error("Unsorted keyframe offsets");
 end
 
 function draw(progress)
-  local pose = lerpAllPoses(progress, runPoses);
-  local positions = calcPositions({}, pose, hip, Vec2.new(0, 0), -90);
+  local pose = lerpAnimation(progress, runAnim);
+  local points = calcPoints({}, pose, hip, Vec2.new(0, 0), -90);
 
   scale(Vec2.new(0.0625));
   line_cap(LineCap.ROUND);
@@ -131,16 +165,16 @@ function draw(progress)
   stroke_color(Color.new(1, 1, 1));
 
   begin_path();
-  move_to(positions[hip.index]);
-  line_to(positions[rightKnee.index]);
-  line_to(positions[rightFoot.index]);
+  move_to(points[hip.index]);
+  line_to(points[rightKnee.index]);
+  line_to(points[rightFoot.index]);
   stroke();
 
   stroke_color(Color.new(0.5, 0.5, 0.5));
 
   begin_path();
-  move_to(positions[hip.index]);
-  line_to(positions[leftKnee.index]);
-  line_to(positions[leftFoot.index]);
+  move_to(points[hip.index]);
+  line_to(points[leftKnee.index]);
+  line_to(points[leftFoot.index]);
   stroke();
 end

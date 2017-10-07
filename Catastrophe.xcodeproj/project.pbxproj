@@ -349,7 +349,7 @@
 		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; };
 		457619FB1F884A2500A6A792 /* platform sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.lua"; sourceTree = "<group>"; };
 		457619FD1F884E2100A6A792 /* spinning blade sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.lua"; sourceTree = "<group>"; };
-		457619FF1F8851F100A6A792 /* player sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.lua"; sourceTree = "<group>"; };
+		457619FF1F8851F100A6A792 /* player sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };

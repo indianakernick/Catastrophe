@@ -77,20 +77,15 @@ void SpriteTestApp::render(const float delta) {
   
   renderingContext.preRender(mat);
   
-  static float dir = 1.0f;
+  /*static float dir = 1.0f;
   
   anim.advance(delta * 0.0625 * dir);
-  if (dir == 1.0f) {
-    if (anim.overflow()) {
-      anim.toEnd();
-      dir = -1.0f;
-    }
-  } else if (dir == -1.0f) {
-    if (anim.underflow()) {
-      anim.toBegin();
-      dir = 1.0f;
-    }
+  if (anim.reverseOnOverflow() || anim.forwardOnUnderflow()) {
+    dir = -dir;
   }
+  */
+  anim.advance(delta);
+  anim.repeatOnOverflow();
   script.draw(anim.getProgressTime());
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }
