@@ -5,8 +5,7 @@ local image;
 function init()
   image = load_image("platform image.png",
     ImageFlags.NEAREST |
-    ImageFlags.REPEAT_X |
-    ImageFlags.REPEAT_Y
+    ImageFlags.REPEAT
   );
 end
 
