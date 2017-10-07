@@ -10,6 +10,7 @@
 
 #include <glm/vec2.hpp>
 #include <experimental/tuple>
+#include "export animations.hpp"
 #include "export nanovg types.hpp"
 #include <Simpleton/Utils/tuple.hpp>
 #include <Simpleton/Utils/type list.hpp>
@@ -112,6 +113,7 @@ auto ScriptManager::drawFunction(Types... funArgs) {
 void ScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
   resMan = &newResMan;
   context = newContext;
+  exportAnimations(state);
   exportNanoVGtypes(state);
   exportMathFunctions(state);
   state.open_libraries(sol::lib::base);
