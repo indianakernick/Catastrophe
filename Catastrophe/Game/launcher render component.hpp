@@ -23,7 +23,6 @@ private:
   static constexpr float MAX_ARM_HEIGHT_2 = 1.0f / (NUM_LEVELS * NUM_LEVELS);
   static constexpr float ARM_THICKNESS = 1.0f/32.0f;
   static constexpr float HINGE_RADIUS = 1.0f/128.0f;
-  
   static constexpr NVGcolor ARM_COLOR = {{{0.7f, 0.7f, 0.7f, 1.0f}}};
   static constexpr NVGcolor HINGE_COLOR = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
 };

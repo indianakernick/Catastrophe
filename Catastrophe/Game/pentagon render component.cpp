@@ -9,7 +9,6 @@
 #include "pentagon render component.hpp"
 
 #include <glm/glm.hpp>
-#include <nanovg/nanovg.h>
 #include <Simpleton/Math/vectors.hpp>
 
 PentagonRenderComponent::PentagonRenderComponent(

@@ -9,7 +9,6 @@
 #include "launcher render component.hpp"
 
 #include "entity.hpp"
-#include <nanovg/nanovg.h>
 #include "launcher animation component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 
