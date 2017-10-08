@@ -208,6 +208,7 @@ RenderScript::RenderScript(const sol::environment &env, NVGcontext *context)
 }
 
 void RenderScript::draw(const float progress, const int id) {
+  assert(context);
   nvgSave(context);
   drawFun(progress, id);
   nvgRestore(context);

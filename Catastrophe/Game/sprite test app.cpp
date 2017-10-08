@@ -24,8 +24,9 @@ bool SpriteTestApp::init() {
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
-  script = renderingContext.loadScript(spriteFile);
-  anim.setDuration(1.0f);
+  sprite = loadSprite("player sprite.yaml", renderingContext);
+  script = renderingContext.loadScript("player sprite.lua");
+  anim.setDuration(0.0f);
   return true;
 }
 
@@ -72,7 +73,7 @@ void SpriteTestApp::render(const float delta) {
     {0.5f, 0.5f}
   );
   
-  //mat = glm::scale(mat, {0.875f, 0.875f});
+  mat = glm::scale(mat, {0.875f, 0.875f});
   //mat = glm::scale(mat, {0.1f, 0.1f});
   
   renderingContext.preRender(mat);
@@ -84,8 +85,23 @@ void SpriteTestApp::render(const float delta) {
     dir = -dir;
   }
   */
+  NVGcontext *ctx = renderingContext.getContext();
+  
   anim.advance(delta);
   anim.repeatOnOverflow();
   script.draw(anim.getProgressTime());
+  //renderSprite(ctx, sprite, getFrame(sprite, animName, 1.0f), {});
+  
+  nvgBeginPath(ctx);
+  nvgStrokeColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));
+  nvgStrokeWidth(ctx, 0.01);
+  nvgRect(ctx, -0.5f, -0.5f, 1.0f, 1.0f);
+  
+  for (float i = -7.0f; i <= 7.0f; ++i) {
+    nvgMoveTo(ctx, i / 16.0f, -0.55f);
+    nvgLineTo(ctx, i / 16.0f, -0.45f);
+  }
+  nvgStroke(ctx);
+  
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }
