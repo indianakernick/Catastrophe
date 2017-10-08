@@ -25,78 +25,74 @@ function init() end
 local hip =             PivotNode.new(1,  {leftKnee, rightKnee, neck});
 local root = hip;
 
+function swapLeftAndRight(angles)
+  return PoseAngles.new({
+    angles:get(1),
+    angles:get(4),
+    angles:get(5),
+    angles:get(2),
+    angles:get(3),
+    angles:get(6),
+    angles:get(10),
+    angles:get(11),
+    angles:get(9),
+    angles:get(7),
+    angles:get(8)
+  });
+end
+
 local poseLengths = PoseLengths.new({
-  0,
-  4,
-  3,
-  4,
-  3,
-  5,
-  2,
-  2,
-  1,
-  2,
-  2
+  0,    -- hip
+  4,    -- leftKnee
+  3,    -- leftFoot
+  4,    -- rightKnee
+  3,    -- rightFoot
+  5,    -- neck
+  2,    -- leftElbow
+  2,    -- leftHand
+  1,    -- head
+  2,    -- rightElbow
+  2     -- rightHand
 });
 
 local standPos = Vec2.new(1, -1);
 local standLeft = PoseAngles.new({
-  0,
-  165,
-  15,
-  180,
-  20,
-  0,
-  -155,
-  -25,
-  0,
-  180,
-  -25
+  0,    -- hip
+  165,  -- leftKnee
+  15,   -- leftFoot
+  180,  -- rightKnee
+  20,   -- rightFoot
+  0,    -- neck
+  -155, -- leftElbow
+  -25,  -- leftHand
+  0,    -- head
+  180,  -- rightElbow
+  -25   -- rightHand
 });
-local standRight = PoseAngles.new({
-  0,
-  180,
-  20,
-  165,
-  15,
-  0,
-  180,
-  -25,
-  0,
-  -155,
-  -25
-});
+local standRight = swapLeftAndRight(standLeft);
 
-local runAnim = Animation.new(1.0, {
-  Keyframe.new(0, {
-    0,
-    225,
-    -45,
-    135,
-    45
-  }),
-  Keyframe.new(0.5, {
-    0,
-    135,
-    45,
-    225,
-    -45
-  }),
-  Keyframe.new(1.0, {
-    0,
-    225,
-    -45,
-    135,
-    45
-  })
+local standJumpPos = Vec2.new(0, 0);
+local standJumpLeft = PoseAngles.new({
+  0,    -- hip
+  75,   -- leftKnee
+  105,  -- leftFoot
+  105,  -- rightKnee
+  150,  -- rightFoot
+  0,    -- neck
+  -135, -- leftElbow
+  -45,  -- leftHand
+  0,    -- head
+  135,  -- rightElbow
+  -90   -- rightHand
 });
+local standJumpRight = swapLeftAndRight(standJumpLeft);
 
 local poseAngles = PoseAngles.new(5);
 local points = Points.new(11);
 
 function draw(progress)
   --lerpAnimation(poseAngles, progress, runAnim);
-  pivotPoints(points, standRight, poseLengths, root, standPos, -90);
+  pivotPoints(points, standJumpRight, poseLengths, root, standJumpPos, -90);
 
   scale(Vec2.new(0.0625));
   line_cap(LineCap.ROUND);
