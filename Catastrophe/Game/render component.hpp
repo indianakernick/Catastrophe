@@ -14,6 +14,7 @@
 #include "camera zoom track.hpp"
 #include "camera motion track.hpp"
 
+class RenderResMan;
 extern "C" struct NVGcontext;
 
 class RenderComponent : public Component {
@@ -21,6 +22,7 @@ public:
   RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
+  virtual void init(NVGcontext *, RenderResMan &) = 0;
   virtual void preRender() = 0;
   virtual void render(NVGcontext *) = 0;
   virtual CameraMotionTargetCPtr getMotionTarget() const = 0;

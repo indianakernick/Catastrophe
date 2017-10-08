@@ -37,7 +37,7 @@ bool AppImpl::init() {
   }
   registerCollisionListeners(physicsSystem.getContactListener());
   
-  renderingSystem.getCamera().windowSize.attachWindow(window.get());
+  renderingSystem.init(renderingContext);
   
   entityManager.init();
   
@@ -56,7 +56,7 @@ void AppImpl::quit() {
   renderingSystem.stopMotionTrack();
 
   entityManager.quit();
-  renderingSystem.getCamera().windowSize.detachWindow();
+  renderingSystem.quit();
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.detachRenderer();
@@ -122,11 +122,11 @@ void AppImpl::render(const float delta) {
   }
   if constexpr (ENABLE_GAME_RENDER) {
     PROFILE(Game Render);
-    renderingSystem.render(renderingContext.getContext());
+    renderingSystem.render();
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     PROFILE(Debug Camera Render);
-    renderingSystem.cameraDebugRender(renderingContext.getContext());
+    renderingSystem.cameraDebugRender();
   }
   
   {

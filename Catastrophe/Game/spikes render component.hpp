@@ -16,7 +16,7 @@ class SpikesRenderComponent final : public BasicRenderComponent {
 public:
   SpikesRenderComponent(const YAML::Node &, const YAML::Node &);
   
-  void render(NVGcontext *);
+  void render(NVGcontext *) override;
   
 private:
   static constexpr int NUM_SPIKES = 4;

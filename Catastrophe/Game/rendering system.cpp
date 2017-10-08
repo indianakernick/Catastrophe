@@ -11,13 +11,28 @@
 #include "camera.hpp"
 #include "entity manager.hpp"
 #include "render component.hpp"
+#include "rendering context.hpp"
+
+void RenderingSystem::init(RenderingContext &newRenderer) {
+  assert(!renderer);
+  renderer = &newRenderer;
+  camera.windowSize.attachWindow(renderer->getWindow());
+}
+
+void RenderingSystem::quit() {
+  assert(renderer);
+  camera.windowSize.detachWindow();
+  renderer = nullptr;
+}
 
 void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
+  assert(renderer);
   const size_t layer = comp->getLayer();
   while (layers.size() <= layer) {
     layers.emplace_back();
   }
   layers[layer].emplace(id, comp);
+  comp->init(renderer->getContext(), renderer->getResources());
 }
 
 void RenderingSystem::rem(const EntityID id) {
@@ -30,19 +45,20 @@ void RenderingSystem::update(const float delta) {
   camera.update(delta);
 }
 
-void RenderingSystem::render(NVGcontext *const context) {
+void RenderingSystem::render() {
+  NVGcontext *const ctx = renderer->getContext();
   for (auto &layer : layers) {
     for (auto &pair : layer) {
       pair.second->preRender();
       if (camera.visibleMeters(pair.second->getAABB())) {
-        pair.second->render(context);
+        pair.second->render(ctx);
       }
     }
   }
 }
 
-void RenderingSystem::cameraDebugRender(NVGcontext *context) {
-  camera.debugRender(context);
+void RenderingSystem::cameraDebugRender() {
+  camera.debugRender(renderer->getContext());
 }
 
 void RenderingSystem::startMotionTrack(const EntityID id) {

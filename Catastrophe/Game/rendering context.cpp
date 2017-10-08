@@ -130,6 +130,10 @@ NVGcontext *RenderingContext::getContext() const {
   return context;
 }
 
+SDL_Window *RenderingContext::getWindow() const {
+  return window;
+}
+
 glm::ivec2 RenderingContext::getFramebufferSize() const {
   return renderSize;
 }

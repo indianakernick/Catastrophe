@@ -12,7 +12,7 @@
 #include <nanovg/nanovg.h>
 #include "basic render component.hpp"
 
-class LauncherRenderComponent final : BasicRenderComponent {
+class LauncherRenderComponent final : public BasicRenderComponent {
 public:
   LauncherRenderComponent(const YAML::Node &, const YAML::Node &);
   

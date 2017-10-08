@@ -29,6 +29,7 @@ public:
   
   RenderResMan &getResources();
   NVGcontext *getContext() const;
+  SDL_Window *getWindow() const;
   glm::ivec2 getFramebufferSize() const;
   RenderScript loadScript(const std::string &);
   

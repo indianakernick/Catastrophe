@@ -13,12 +13,12 @@
 #include "rendering resources.hpp"
 #include "basic render component.hpp"
 
-class PlatformRenderComponent final : BasicRenderComponent {
+class PlatformRenderComponent final : public BasicRenderComponent {
 public:
   PlatformRenderComponent(const YAML::Node &, const YAML::Node &);
   
-  void init(NVGcontext *, RenderResMan &);
-  void render(NVGcontext *);
+  void init(NVGcontext *, RenderResMan &) override;
+  void render(NVGcontext *) override;
 
 private:
   ImageHandle image;

@@ -16,7 +16,7 @@ class SpinningBladeRenderComponent final : public BasicRenderComponent {
 public:
   SpinningBladeRenderComponent(const YAML::Node &, const YAML::Node &);
   
-  void render(NVGcontext *);
+  void render(NVGcontext *) override;
 
 private:
   static constexpr int NUM_SPIKES = 32;

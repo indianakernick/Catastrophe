@@ -15,18 +15,22 @@
 #include <unordered_map>
 
 class RenderComponent;
+class RenderingContext;
 
 class RenderingSystem {
 public:
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
+  void init(RenderingContext &);
+  void quit();
+  
   void add(EntityID, std::shared_ptr<RenderComponent>);
   void rem(EntityID);
   
   void update(float);
-  void render(NVGcontext *);
-  void cameraDebugRender(NVGcontext *);
+  void render();
+  void cameraDebugRender();
   
   void startMotionTrack(EntityID);
   void stopMotionTrack();
@@ -37,6 +41,7 @@ public:
   Camera &getCamera();
 
 private:
+  RenderingContext *renderer = nullptr;
   Camera camera;
   
   using CompPtr = std::shared_ptr<RenderComponent>;

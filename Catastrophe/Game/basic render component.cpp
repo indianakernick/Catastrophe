@@ -36,6 +36,8 @@ BasicRenderComponent::BasicRenderComponent(
   size = makeZoomTarget(scale);
 }
 
+void BasicRenderComponent::init(NVGcontext *, RenderResMan &) {}
+
 void BasicRenderComponent::preRender() {
   rect->c = getEntity().animation->getModelMat()[2];
 }

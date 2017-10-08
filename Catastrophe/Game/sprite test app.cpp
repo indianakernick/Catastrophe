@@ -87,7 +87,7 @@ void SpriteTestApp::render(const float delta) {
   
   anim.advance(delta * 0.0625);
   anim.repeatOnOverflow();
-  script.draw(anim.getProgressTime());
+  //script.draw(anim.getProgressTime());
   //renderSprite(ctx, sprite, getFrame(sprite, "run", 0.375), {});
   
   nvgBeginPath(ctx);
