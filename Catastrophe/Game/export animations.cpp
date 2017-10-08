@@ -20,99 +20,11 @@ namespace {
     }
   }
   
-  struct PoseAngles {
-    explicit PoseAngles(const int size)
-      : data(size) {}
-    explicit PoseAngles(const sol::table &table)
-      : data(table.size()) {
-      copyTable(data, table);
-    }
-  
-    float get(const int i) const {
-      return data[i - 1];
-    }
-    
-    int size() const {
-      return static_cast<int>(data.size());
-    }
-  
-    std::vector<float> data;
-  };
-  
-  struct PoseLengths {
-    explicit PoseLengths(const int size)
-      : data(size) {}
-    explicit PoseLengths(const sol::table &table)
-      : data(table.size()) {
-      copyTable(data, table);
-    }
-  
-    float get(const int i) const {
-      return data[i - 1];
-    }
-    
-    int size() const {
-      return static_cast<int>(data.size());
-    }
-  
-    std::vector<float> data;
-  };
-  
-  void exportPose(sol::state &state) {
-    state.new_usertype<PoseAngles>("PoseAngles",
-      sol::constructors<PoseAngles(int), PoseAngles(const sol::table &)>(),
-      sol::meta_function::length, &PoseAngles::size,
-      "get", &PoseAngles::get
-    );
-    state.new_usertype<PoseLengths>("PoseLengths",
-      sol::constructors<PoseLengths(int), PoseLengths(const sol::table &)>(),
-      sol::meta_function::length, &PoseLengths::size,
-      "get", &PoseLengths::get
-    );
-  }
-  
-  struct Keyframe {
-    Keyframe() = default;
-    Keyframe(const float offset, const sol::table &table)
-      : data(table.size()), offset(offset) {
-      copyTable(data, table);
-    }
-  
-    std::vector<float> data;
-    float offset;
-  };
-  
-  void exportKeyframe(sol::state &state) {
-    state.new_usertype<Keyframe>("Keyframe",
-      sol::constructors<Keyframe(float, const sol::table &)>()
-    );
-  }
-  
-  struct Animation {
-    Animation(const float duration, const sol::table &table)
-      : keyframes(table.size()), duration(duration) {
-      copyTable(keyframes, table);
-    }
-    
-    std::vector<Keyframe> keyframes;
-    float duration;
-  };
-  
-  void exportAnimation(sol::state &state) {
-    state.new_usertype<Animation>("Animation",
-      sol::constructors<Animation(float, const sol::table &)>()
-    );
-  }
-  
   struct PivotNode {
     PivotNode() = default;
     PivotNode(const int index, const sol::table &table)
       : children(table.size()), index(index) {
       copyTable(children, table);
-    }
-    
-    int getChildIndex(const int child) const {
-      return children[child - 1].index;
     }
     
     int getIndex() const {
@@ -126,37 +38,107 @@ namespace {
   void exportPivotNode(sol::state &state) {
     state.new_usertype<PivotNode>("PivotNode",
       sol::constructors<PivotNode(int, const sol::table &)>(),
-      "index", &PivotNode::getIndex,
-      "childIndex", &PivotNode::getChildIndex
+      "index", &PivotNode::getIndex
     );
   }
   
-  struct Points {
-    explicit Points(const int size)
+  template <typename Data>
+  struct ReadOnlyArray {
+    explicit ReadOnlyArray(const int size)
       : data(size) {}
-    
-    glm::vec2 get(const PivotNode &node) const {
+    explicit ReadOnlyArray(const sol::table &table)
+      : data(table.size()) {
+      copyTable(data, table);
+    }
+  
+    Data getIndex(const int i) const {
+      return data[i - 1];
+    }
+    Data getNode(const PivotNode &node) const {
       return data[node.index - 1];
     }
+    
     int size() const {
       return static_cast<int>(data.size());
     }
-    
-    std::vector<glm::vec2> data;
+  
+    std::vector<Data> data;
   };
   
-  void exportPoints(sol::state &state) {
-    state.new_usertype<Points>("Points",
-      sol::constructors<Points(int)>(),
-      sol::meta_function::length, &Points::size,
-      "get", &Points::get
+  template <typename Data>
+  void exportArray(sol::state &state, const char *const name) {
+    using Array = ReadOnlyArray<Data>;
+    state.new_usertype<Array>(name,
+      sol::constructors<Array(int), Array(const sol::table &)>(),
+      sol::meta_function::length, &Array::size,
+      "geti", &Array::getIndex,
+      "get", &Array::getNode
     );
   }
   
+  void exportArray(sol::state &state) {
+    exportArray<float>(state, "FloatArray");
+    exportArray<glm::vec2>(state, "Vec2Array");
+  }
+  
+  template <typename Data>
+  struct Keyframe {
+    Keyframe() = default;
+    Keyframe(const float offset, const sol::table &table)
+      : data(table.size()), offset(offset) {
+      copyTable(data, table);
+    }
+    Keyframe(const float offset, const ReadOnlyArray<Data> &array)
+      : data(array.data), offset(offset) {}
+  
+    std::vector<Data> data;
+    float offset;
+  };
+  
+  template <typename Data>
+  void exportKeyframe(sol::state &state, const char *const name) {
+    using Keyframe = Keyframe<Data>;
+    state.new_usertype<Keyframe>(name,
+      sol::constructors<
+        Keyframe(float, const sol::table &),
+        Keyframe(float, const ReadOnlyArray<Data> &)
+      >()
+    );
+  }
+  
+  void exportKeyframe(sol::state &state) {
+    exportKeyframe<float>(state, "FloatKeyframe");
+    exportKeyframe<glm::vec2>(state, "Vec2Keyframe");
+  }
+  
+  template <typename Data>
+  struct Animation {
+    Animation(const float duration, const sol::table &table)
+      : keyframes(table.size()), duration(duration) {
+      copyTable(keyframes, table);
+    }
+    
+    std::vector<Keyframe<Data>> keyframes;
+    float duration;
+  };
+  
+  template <typename Data>
+  void exportAnimation(sol::state &state, const char *const name) {
+    using Animation = Animation<Data>;
+    state.new_usertype<Animation>(name,
+      sol::constructors<Animation(float, const sol::table &)>()
+    );
+  }
+  
+  void exportAnimation(sol::state &state) {
+    exportAnimation<float>(state, "FloatAnimation");
+    exportAnimation<glm::vec2>(state, "Vec2Animation");
+  }
+  
   void pivotPoints(
-    Points &points,
-    const PoseAngles &angles,
-    const PoseLengths &lengths,
+    ReadOnlyArray<glm::vec2> &points,
+    const ReadOnlyArray<float> &angles,
+    const ReadOnlyArray<float> &lengths,
     const PivotNode &node,
     const glm::vec2 pos,
     float angle
@@ -172,10 +154,10 @@ namespace {
       throw std::runtime_error("Node index out of range");
     }
   
-    angle += angles.get(node.index);
+    angle += angles.getNode(node);
     const glm::vec2 newPos = pos + Math::angleMag(
       glm::radians(-angle),
-      lengths.get(node.index)
+      lengths.getNode(node)
     );
     points.data[node.index - 1] = newPos;
     for (auto &c : node.children) {
@@ -184,10 +166,10 @@ namespace {
   }
   
   //exposed to LUA
-  template <typename Pose>
-  void lerpPose(const float t, Pose &min, const Pose &max) {
+  template <typename Data>
+  void lerpReadOnlyArray(const float t, ReadOnlyArray<Data> &min, const ReadOnlyArray<Data> &max) {
     if (min.data.size() != max.data.size()) {
-      throw std::runtime_error("Cannot interpolate poses of different sizes");
+      throw std::runtime_error("Cannot interpolate arrays of different sizes");
     }
     for (size_t i = 0; i != min.data.size(); ++i) {
       min.data[i] = Math::lerp(t, min.data[i], max.data[i]);
@@ -195,14 +177,15 @@ namespace {
   }
   
   //used by lerpAnimation
-  void lerpPose(
-    std::vector<float> &dst,
+  template <typename Data>
+  void lerpArray(
+    std::vector<Data> &dst,
     const float t,
-    const std::vector<float> &min,
-    const std::vector<float> &max
+    const std::vector<Data> &min,
+    const std::vector<Data> &max
   ) {
     if (min.size() != max.size()) {
-      throw std::runtime_error("Cannot interpolate poses of different sizes");
+      throw std::runtime_error("Cannot interpolate arrays of different sizes");
     }
     if (dst.size() != min.size()) {
       throw std::runtime_error("Destination size not equal to input size");
@@ -212,13 +195,14 @@ namespace {
     }
   }
   
+  template <typename Data>
   void lerpKeyframe(
-    std::vector<float> &dst,
+    std::vector<Data> &dst,
     const float t,
-    const Keyframe &min,
-    const Keyframe &max
+    const Keyframe<Data> &min,
+    const Keyframe<Data> &max
   ) {
-    return lerpPose(
+    return lerpArray(
       dst,
       Math::invLerp<float>(t, min.offset, max.offset),
       min.data,
@@ -226,25 +210,25 @@ namespace {
     );
   }
   
-  template <typename Pose>
-  void lerpAnimation(Pose &pose, const float t, const Animation &anim) {
+  template <typename Data>
+  void lerpAnimation(ReadOnlyArray<Data> &dst, const float t, const Animation<Data> &anim) {
     const size_t size = anim.keyframes.size();
     
     if (size == 0) {
       throw std::runtime_error("Cannot interpolate an animation with no keyframes");
     } else if (size == 1) {
-      pose.data = anim.keyframes[0].data;
+      dst.data = anim.keyframes[0].data;
       return;
     } else if (size == 2) {
-      lerpKeyframe(pose.data, t, anim.keyframes[0], anim.keyframes[1]);
+      lerpKeyframe(dst.data, t, anim.keyframes[0], anim.keyframes[1]);
       return;
     }
     
     if (t < anim.keyframes[0].offset) {
-      lerpKeyframe(pose.data, t, anim.keyframes[0], anim.keyframes[1]);
+      lerpKeyframe(dst.data, t, anim.keyframes[0], anim.keyframes[1]);
       return;
     } else if (t > anim.keyframes[size - 1].offset) {
-      lerpKeyframe(pose.data, t, anim.keyframes[size - 2], anim.keyframes[size - 1]);
+      lerpKeyframe(dst.data, t, anim.keyframes[size - 2], anim.keyframes[size - 1]);
       return;
     }
     
@@ -252,7 +236,7 @@ namespace {
     //typically won't be many keyframes
     for (size_t k = 1; k != size; ++k) {
       if (anim.keyframes[k].offset >= t) {
-        lerpKeyframe(pose.data, t, anim.keyframes[k - 1], anim.keyframes[k]);
+        lerpKeyframe(dst.data, t, anim.keyframes[k - 1], anim.keyframes[k]);
         return;
       }
     }
@@ -261,20 +245,19 @@ namespace {
   
   void exportFunctions(sol::state &state) {
     state.set_function("pivotPoints", pivotPoints);
-    state.set_function("lerpPose",
-      sol::overload(lerpPose<PoseAngles>, lerpPose<PoseLengths>)
+    state.set_function("lerpArray",
+      sol::overload(lerpReadOnlyArray<float>, lerpReadOnlyArray<glm::vec2>)
     );
     state.set_function("lerpAnimation",
-      sol::overload(lerpAnimation<PoseAngles>, lerpAnimation<PoseLengths>)
+      sol::overload(lerpAnimation<float>, lerpAnimation<glm::vec2>)
     );
   }
 }
 
 void exportAnimations(sol::state &state) {
-  exportPose(state);
+  exportArray(state);
   exportKeyframe(state);
   exportAnimation(state);
   exportPivotNode(state);
-  exportPoints(state);
   exportFunctions(state);
 }

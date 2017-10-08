@@ -26,22 +26,22 @@ local hip =             PivotNode.new(1,  {leftKnee, rightKnee, neck});
 local root = hip;
 
 function swapLeftAndRight(angles)
-  return PoseAngles.new({
-    angles:get(1),
-    angles:get(4),
-    angles:get(5),
-    angles:get(2),
-    angles:get(3),
-    angles:get(6),
-    angles:get(10),
-    angles:get(11),
-    angles:get(9),
-    angles:get(7),
-    angles:get(8)
+  return FloatArray.new({
+    angles:geti(1),
+    angles:geti(4),
+    angles:geti(5),
+    angles:geti(2),
+    angles:geti(3),
+    angles:geti(6),
+    angles:geti(10),
+    angles:geti(11),
+    angles:geti(9),
+    angles:geti(7),
+    angles:geti(8)
   });
 end
 
-local poseLengths = PoseLengths.new({
+local poseLengths = FloatArray.new({
   0,    -- hip
   4,    -- leftKnee
   3,    -- leftFoot
@@ -56,7 +56,7 @@ local poseLengths = PoseLengths.new({
 });
 
 local standPos = Vec2.new(1, -1);
-local standLeft = PoseAngles.new({
+local standLeft = FloatArray.new({
   0,    -- hip
   165,  -- leftKnee
   15,   -- leftFoot
@@ -72,7 +72,7 @@ local standLeft = PoseAngles.new({
 local standRight = swapLeftAndRight(standLeft);
 
 local runJumpPos = Vec2.new(0, 0);
-local runJumpLeft = PoseAngles.new({
+local runJumpLeft = FloatArray.new({
   0,    -- hip
   105,  -- leftKnee
   20,   -- leftFoot
@@ -88,7 +88,7 @@ local runJumpLeft = PoseAngles.new({
 local runJumpRight = swapLeftAndRight(runJumpLeft);
 
 local standJumpPos = Vec2.new(0, 0);
-local standJumpLeft = PoseAngles.new({
+local standJumpLeft = FloatArray.new({
   0,    -- hip
   75,   -- leftKnee
   105,  -- leftFoot
@@ -103,8 +103,8 @@ local standJumpLeft = PoseAngles.new({
 });
 local standJumpRight = swapLeftAndRight(standJumpLeft);
 
-local poseAngles = PoseAngles.new(5);
-local points = Points.new(11);
+local poseAngles = FloatArray.new(11);
+local points = Vec2Array.new(11);
 
 function draw(progress)
   --lerpAnimation(poseAngles, progress, runAnim);
