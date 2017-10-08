@@ -8,11 +8,13 @@
 
 #include "make render comp.hpp"
 
-#include "vector render component.hpp"
+#include "pentagon render component.hpp"
+#include "launcher render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 
 using RenderComps = Utils::TypeList<
-  VectorRenderComponent
+  PentagonRenderComponent,
+  LauncherRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(

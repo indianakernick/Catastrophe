@@ -20,11 +20,13 @@ public:
   const Sprite &getSprite() const override;
   const Frame &getFrame() const override;
   glm::mat3 getModelMat() const override;
+  float getProgress() const;
 
 private:
   Sprite sprite;
   Frame frame;
   glm::mat3 model;
+  float progress = 0.0f;
 };
 
 #endif

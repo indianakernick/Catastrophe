@@ -25,14 +25,14 @@ namespace {
 }
 
 void PentagonRenderComponent::render(NVGcontext *const ctx) {
-  const float sides = 5.0f;
+  const float sides = SIDES;
   
   nvgBeginPath(ctx);
-  nvgFillColor(ctx, nvgRGBf(1.0f, 0.0f, 0.5f));
+  nvgFillColor(ctx, COLOR);
   
   glm::vec2 point = getCirclePoint(0.0f);
   nvgMoveTo(ctx, point.x, point.y);
-  for (float s = 1.0f; s != sides; ++s) {
+  for (float s = 1.0f; s < sides; ++s) {
     point = getCirclePoint(s / sides);
     nvgLineTo(ctx, point.x, point.y);
   }

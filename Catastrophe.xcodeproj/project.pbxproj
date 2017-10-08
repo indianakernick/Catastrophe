@@ -100,6 +100,7 @@
 		4568D3071F88B47C0037268B /* export nanovg types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3051F88B47C0037268B /* export nanovg types.cpp */; };
 		4568D30A1F88BC050037268B /* export animations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3081F88BC050037268B /* export animations.cpp */; };
 		4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* pentagon render component.cpp */; };
+		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
 		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
 		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
@@ -350,6 +351,8 @@
 		4568D3091F88BC050037268B /* export animations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "export animations.hpp"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* pentagon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "pentagon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* pentagon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "pentagon render component.hpp"; sourceTree = "<group>"; };
+		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
+		4568D3191F89F0690037268B /* launcher render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher render component.hpp"; sourceTree = "<group>"; };
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
 		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
 		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
@@ -837,6 +840,8 @@
 				4509F8E11F5BB23600927A19 /* basic render component.hpp */,
 				4568D3151F89EAA00037268B /* pentagon render component.cpp */,
 				4568D3161F89EAA00037268B /* pentagon render component.hpp */,
+				4568D3181F89F0690037268B /* launcher render component.cpp */,
+				4568D3191F89F0690037268B /* launcher render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1207,6 +1212,7 @@
 				4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */,
 				452FFA7D1F6BC50D003A98B1 /* b2WorldCallbacks.cpp in Sources */,
 				452FFA6A1F6BC50D003A98B1 /* b2Collision.cpp in Sources */,
+				4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */,
 				4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */,
 				452FFA891F6BC50D003A98B1 /* b2GearJoint.cpp in Sources */,
 				45DE9FC61F70894C00B1DA72 /* component.cpp in Sources */,

@@ -24,7 +24,7 @@ LauncherAnimationComponent::LauncherAnimationComponent(
 
 void LauncherAnimationComponent::update(float) {
   const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(getEntity().physics);
-  frame = ::getFrame(sprite, "main", physics->getRelTranslation());
+  progress = physics->getRelTranslation();
   Transform transform;
   transform.pos = physics->getCenter();
   //the sprite is pointing in the +y direction but getRotation returns an angle
@@ -44,4 +44,8 @@ const Frame &LauncherAnimationComponent::getFrame() const {
 
 glm::mat3 LauncherAnimationComponent::getModelMat() const {
   return model;
+}
+
+float LauncherAnimationComponent::getProgress() const {
+  return progress;
 }
