@@ -26,7 +26,7 @@ bool SpriteTestApp::init() {
   
   sprite = loadSprite("player sprite.yaml", renderingContext);
   script = renderingContext.loadScript("player sprite.lua");
-  anim.setDuration(0.125f);
+  anim.setDuration(0.25f);
   return true;
 }
 

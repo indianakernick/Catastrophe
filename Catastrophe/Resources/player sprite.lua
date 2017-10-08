@@ -129,17 +129,30 @@ local runAngles = FloatAnimation.new(1, {
     -15,  -- head
     165,  -- rightElbow
     -90   -- rightHand
-  })
+  }),
+  FloatKeyframe.new(1/4, {
+    0,    -- hip
+    135,  -- leftKnee
+    20,   -- leftFoot
+    225,  -- rightKnee
+    50,   -- rightFoot
+    15,   -- neck
+    210,  -- leftElbow
+    -90,  -- leftHand
+    -15,  -- head
+    160,  -- rightElbow
+    -90   -- rightHand
+  });
 });
 
 local runPoint = Vec2Animation.new(1, {
   Vec2Keyframe.new(0,   {Vec2.new(0, -2)}),
   Vec2Keyframe.new(1/8, {Vec2.new(0, 0)}),
-  Vec2Keyframe.new(2/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(1/4, {Vec2.new(0, -2)}),
   Vec2Keyframe.new(3/8, {Vec2.new(0, -2)}),
-  Vec2Keyframe.new(4/8, {Vec2.new(0, -2)}),
+  Vec2Keyframe.new(1/2, {Vec2.new(0, -2)}),
   Vec2Keyframe.new(5/8, {Vec2.new(0, 0)}),
-  Vec2Keyframe.new(6/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(3/4, {Vec2.new(0, -2)}),
   Vec2Keyframe.new(7/8, {Vec2.new(0, -2)}),
   Vec2Keyframe.new(1,   {Vec2.new(0, -2)})
 });
