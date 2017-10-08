@@ -63,7 +63,7 @@ local standLeft = FloatArray.new({
   180,  -- rightKnee
   20,   -- rightFoot
   0,    -- neck
-  -155, -- leftElbow
+  205, -- leftElbow
   -25,  -- leftHand
   0,    -- head
   180,  -- rightElbow
@@ -95,7 +95,7 @@ local standJumpLeft = FloatArray.new({
   105,  -- rightKnee
   150,  -- rightFoot
   0,    -- neck
-  -135, -- leftElbow
+  225,  -- leftElbow
   -45,  -- leftHand
   0,    -- head
   135,  -- rightElbow
@@ -103,12 +103,42 @@ local standJumpLeft = FloatArray.new({
 });
 local standJumpRight = swapLeftAndRight(standJumpLeft);
 
+local runAngles = FloatAnimation.new(1, {
+  FloatKeyframe.new(0, {
+    0,    -- hip
+    140,  -- leftKnee
+    120,  -- leftFoot
+    205,  -- rightKnee
+    20,   -- rightFoot
+    15,   -- neck
+    210,  -- leftElbow
+    -90,  -- leftHand
+    -15,  -- head
+    210,  -- rightElbow
+    -90   -- rightHand
+  })
+});
+
+local runPoint = Vec2Animation.new(1, {
+  Vec2Keyframe.new(0,   {Vec2.new(0, -2)}),
+  Vec2Keyframe.new(1/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(2/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(3/8, {Vec2.new(0, -2)}),
+  Vec2Keyframe.new(4/8, {Vec2.new(0, -2)}),
+  Vec2Keyframe.new(5/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(6/8, {Vec2.new(0, 0)}),
+  Vec2Keyframe.new(7/8, {Vec2.new(0, -2)}),
+  Vec2Keyframe.new(1,   {Vec2.new(0, -2)})
+});
+
 local poseAngles = FloatArray.new(11);
+local posePoint = Vec2Array.new(1);
 local points = Vec2Array.new(11);
 
 function draw(progress)
-  --lerpAnimation(poseAngles, progress, runAnim);
-  pivotPoints(points, runJumpLeft, poseLengths, root, runJumpPos, -90);
+  lerpAnimation(poseAngles, progress, runAngles);
+  lerpAnimation(posePoint, progress, runPoint);
+  pivotPoints(points, poseAngles, poseLengths, root, posePoint:geti(1), -90);
 
   scale(Vec2.new(0.0625));
   line_cap(LineCap.ROUND);
