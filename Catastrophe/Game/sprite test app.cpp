@@ -26,7 +26,7 @@ bool SpriteTestApp::init() {
   
   sprite = loadSprite("player sprite.yaml", renderingContext);
   script = renderingContext.loadScript("player sprite.lua");
-  anim.setDuration(0.25f);
+  anim.setDuration(0.375f);
   return true;
 }
 
@@ -89,7 +89,7 @@ void SpriteTestApp::render(const float delta) {
   //anim.advance(delta * 0.0625);
   //anim.repeatOnOverflow();
   script.draw(anim.getProgressTime());
-  //renderSprite(ctx, sprite, getFrame(sprite, "run", anim.getProgressTime()), {});
+  //renderSprite(ctx, sprite, getFrame(sprite, "run", 0.375), {});
   
   nvgBeginPath(ctx);
   nvgStrokeColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));
