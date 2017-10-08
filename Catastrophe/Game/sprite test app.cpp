@@ -90,7 +90,7 @@ void SpriteTestApp::render(const float delta) {
   anim.advance(delta);
   anim.repeatOnOverflow();
   script.draw(anim.getProgressTime());
-  //renderSprite(ctx, sprite, getFrame(sprite, "stand jump", 0.0f), {});
+  //renderSprite(ctx, sprite, getFrame(sprite, "run jump", 0.0f), {});
   
   nvgBeginPath(ctx);
   nvgStrokeColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));

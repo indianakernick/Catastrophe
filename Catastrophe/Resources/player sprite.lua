@@ -71,6 +71,22 @@ local standLeft = PoseAngles.new({
 });
 local standRight = swapLeftAndRight(standLeft);
 
+local runJumpPos = Vec2.new(0, 0);
+local runJumpLeft = PoseAngles.new({
+  0,    -- hip
+  105,  -- leftKnee
+  20,   -- leftFoot
+  225,  -- rightKnee
+  20,   -- rightFoot
+  15,   -- neck
+  230,  -- leftElbow
+  -45,  -- leftHand
+  -15,  -- head
+  140,  -- rightElbow
+  -110, -- rightHand
+});
+local runJumpRight = swapLeftAndRight(runJumpLeft);
+
 local standJumpPos = Vec2.new(0, 0);
 local standJumpLeft = PoseAngles.new({
   0,    -- hip
@@ -92,7 +108,7 @@ local points = Points.new(11);
 
 function draw(progress)
   --lerpAnimation(poseAngles, progress, runAnim);
-  pivotPoints(points, standJumpRight, poseLengths, root, standJumpPos, -90);
+  pivotPoints(points, runJumpLeft, poseLengths, root, runJumpPos, -90);
 
   scale(Vec2.new(0.0625));
   line_cap(LineCap.ROUND);
