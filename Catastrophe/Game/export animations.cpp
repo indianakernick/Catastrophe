@@ -50,6 +50,8 @@ namespace {
       : data(table.size()) {
       copyTable(data, table);
     }
+    explicit ReadOnlyArray(const std::vector<Data> &data)
+      : data(data) {}
   
     Data getIndex(const int i) const {
       return data[i - 1];
@@ -60,6 +62,9 @@ namespace {
     
     int size() const {
       return static_cast<int>(data.size());
+    }
+    ReadOnlyArray copy() const {
+      return ReadOnlyArray(data);
     }
   
     std::vector<Data> data;
@@ -72,7 +77,8 @@ namespace {
       sol::constructors<Array(int), Array(const sol::table &)>(),
       sol::meta_function::length, &Array::size,
       "geti", &Array::getIndex,
-      "get", &Array::getNode
+      "get", &Array::getNode,
+      "copy", &Array::copy
     );
   }
   

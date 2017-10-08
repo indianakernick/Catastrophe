@@ -88,7 +88,7 @@ namespace {
 }
 
 template <typename FunPtr, FunPtr FUNCTION, typename ...Types>
-auto ScriptManager::drawFunction(Types... funArgs) {
+auto RenderScriptManager::drawFunction(Types... funArgs) {
   assert(context);
 
   std::tuple<Types...> inputTuple(funArgs...);
@@ -110,7 +110,7 @@ auto ScriptManager::drawFunction(Types... funArgs) {
   return std::experimental::apply(FUNCTION, applyTuple);
 }
 
-void ScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
+void RenderScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
   resMan = &newResMan;
   context = newContext;
   exportAnimations(state);
@@ -120,7 +120,7 @@ void ScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
   state.open_libraries(sol::lib::math);
   
   #define FUNCTION(NAME, FUN, ...)                                            \
-    state.set_function(#NAME, &ScriptManager::drawFunction<decltype(&FUN), &FUN,##__VA_ARGS__>, this)
+    state.set_function(#NAME, &RenderScriptManager::drawFunction<decltype(&FUN), &FUN,##__VA_ARGS__>, this)
   
   FUNCTION(stroke_color, nvgStrokeColor, NVGcolor);
   FUNCTION(stroke_paint, nvgStrokePaint, NVGpaint);
@@ -174,15 +174,15 @@ void ScriptManager::init(RenderResMan &newResMan, NVGcontext *newContext) {
   
   #undef FUNCTION
   
-  state.set_function("load_image", &ScriptManager::loadImage, this);
+  state.set_function("load_image", &RenderScriptManager::loadImage, this);
 }
 
-void ScriptManager::quit() {
+void RenderScriptManager::quit() {
   context = nullptr;
   resMan = nullptr;
 }
 
-RenderScript ScriptManager::loadScript(const std::string &name) {
+RenderScript RenderScriptManager::loadScript(const std::string &name) {
   sol::environment env(state, sol::create, state.globals());
   
   sol::protected_function_result result = state.do_file(Platform::getResDir() + name, env);
@@ -196,7 +196,7 @@ RenderScript ScriptManager::loadScript(const std::string &name) {
   return RenderScript(env, context);
 }
 
-ImageHandle ScriptManager::loadImage(const std::string &name, const int flags) {
+ImageHandle RenderScriptManager::loadImage(const std::string &name, const int flags) {
   assert(resMan);
   return resMan->getImage(name, flags);
 }
@@ -207,10 +207,10 @@ RenderScript::RenderScript(const sol::environment &env, NVGcontext *context)
   dataFun = env["getData"];
 }
 
-void RenderScript::draw(const float progress, const int id) {
+void RenderScript::draw(const sol::table &args) {
   assert(context);
   nvgSave(context);
-  drawFun(progress, id);
+  drawFun(args);
   nvgRestore(context);
 }
 

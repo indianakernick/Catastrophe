@@ -1,12 +1,12 @@
 //
-//  vector render component.cpp
+//  basic render component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 3/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "vector render component.hpp"
+#include "basic render component.hpp"
 
 #include "entity.hpp"
 #include "yaml helper.hpp"
@@ -14,7 +14,7 @@
 #include "vector render.hpp"
 #include "animation component.hpp"
 
-VectorRenderComponent::VectorRenderComponent(
+BasicRenderComponent::BasicRenderComponent(
   const YAML::Node &node,
   const YAML::Node &level
 ) {
@@ -36,32 +36,22 @@ VectorRenderComponent::VectorRenderComponent(
   size = makeZoomTarget(scale);
 }
 
-void VectorRenderComponent::preRender() {
+void BasicRenderComponent::preRender() {
   rect->c = getEntity().animation->getModelMat()[2];
 }
 
-void VectorRenderComponent::render(NVGcontext *context) {
-  const auto anim = getEntity().animation;
-  renderSprite(
-    context,
-    anim->getSprite(),
-    anim->getFrame(),
-    anim->getModelMat()
-  );
-}
-
-CameraMotionTargetCPtr VectorRenderComponent::getMotionTarget() const {
+CameraMotionTargetCPtr BasicRenderComponent::getMotionTarget() const {
   return rect;
 }
 
-CameraZoomTargetCPtr VectorRenderComponent::getZoomTarget() const {
+CameraZoomTargetCPtr BasicRenderComponent::getZoomTarget() const {
   return size;
 }
 
-Rect VectorRenderComponent::getAABB() const {
+Rect BasicRenderComponent::getAABB() const {
   return static_cast<Rect>(*rect);
 }
 
-size_t VectorRenderComponent::getLayer() const {
+size_t BasicRenderComponent::getLayer() const {
   return layer;
 }

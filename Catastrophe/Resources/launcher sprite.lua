@@ -2,7 +2,8 @@ function getData() end
 
 function init() end
 
-function draw(progress)
+function draw(args)
+  local progress = args.progress;
   local numLevels = 2;
   local armHeight = progress / numLevels;
   local maxArmHeight = 1 / numLevels;

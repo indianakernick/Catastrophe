@@ -41,7 +41,7 @@ private:
   Time::FPS fpsCounter;
   glm::ivec2 renderSize;
   FontHandle fpsFontHandle;
-  ScriptManager scriptManager;
+  RenderScriptManager scriptManager;
   
   void renderFPS();
   void captureFrame(uint8_t *);

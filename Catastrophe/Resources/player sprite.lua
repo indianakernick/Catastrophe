@@ -182,7 +182,7 @@ local runAngles = FloatAnimation.new(1, {
   FloatKeyframe.new(1, run0)
 });
 
-local runPoint = Vec2Animation.new(1, {
+local runPos = Vec2Animation.new(1, {
   Vec2Keyframe.new(0,   {Vec2.new(0, -2)}),
   Vec2Keyframe.new(1/8, {Vec2.new(0, -1)}),
   Vec2Keyframe.new(1/4, {Vec2.new(0, -2)}),
@@ -194,13 +194,41 @@ local runPoint = Vec2Animation.new(1, {
   Vec2Keyframe.new(1,   {Vec2.new(0, -2)})
 });
 
-local poseAngles = FloatArray.new(11);
-local posePoint = Vec2Array.new(1);
+local runningAngles = FloatArray.new(11);
+local runningPos = Vec2Array.new(1);
+local runJumpAngles = FloatArray.new(11);
 local points = Vec2Array.new(11);
 
-function draw(progress)
-  lerpAnimation(poseAngles, progress, runAngles);
-  lerpAnimation(posePoint, progress, runPoint);
+function draw(args)
+  local leftLeg = args.leftLeg;
+  local groundJumpProg = args.groundJumpProg;
+  local standRunProg = args.standRunProg;
+  local runningProg = args.runningProg;
+  
+  local poseAngles = (leftLeg and standLeft or standRight).copy();
+  lerpArray(
+    groundJumpProg,
+    poseAngles,
+    (leftLeg and standJumpLeft or standJumpRight)
+  );
+  local posePos = lerp(groundJumpProg, standPos, standJumpPos);
+  
+  lerpAnimation(runningAngles, runningProg, runAngles);
+  lerpAnimation(runningPos, runningProg, runPos);
+  lerpArray(
+    groundJumpProg,
+    runningAngles,
+    (leftLeg and runJumpLeft or runJumpRight)
+  );
+  local runJumpPosition = lerp(groundJumpProg, runningPos, runJumpPos);
+  
+  lerpArray(
+    standRunProg,
+    standJumpAngles,
+    runJumpAngles
+  );
+  local pos = lerp(standRunProg, standJumpPos, );
+
   pivotPoints(points, poseAngles, poseLengths, root, posePoint:geti(1), -90);
 
   scale(Vec2.new(0.0625));

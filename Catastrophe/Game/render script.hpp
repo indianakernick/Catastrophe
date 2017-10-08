@@ -17,9 +17,9 @@ extern "C" struct NVGcontext;
 
 class RenderScript;
 
-class ScriptManager {
+class RenderScriptManager {
 public:
-  ScriptManager() = default;
+  RenderScriptManager() = default;
   
   void init(RenderResMan &, NVGcontext *);
   void quit();
@@ -42,7 +42,7 @@ public:
   RenderScript() = default;
   RenderScript(const sol::environment &, NVGcontext *);
 
-  void draw(float, int = 0);
+  void draw(const sol::table &);
   float getData(const std::string &, int = 0);
 
 private:

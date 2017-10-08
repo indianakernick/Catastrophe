@@ -10,7 +10,7 @@
 		4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8CD1F5A395100927A19 /* vector sprite.cpp */; };
 		4509F8D21F5A414800927A19 /* vector file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8D01F5A414800927A19 /* vector file.cpp */; };
 		4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4509F8D31F5A429800927A19 /* player sprite.yaml */; };
-		4509F8E21F5BB23600927A19 /* vector render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E01F5BB23600927A19 /* vector render component.cpp */; };
+		4509F8E21F5BB23600927A19 /* basic render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E01F5BB23600927A19 /* basic render component.cpp */; };
 		4509F8E61F5CE20000927A19 /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E41F5CE20000927A19 /* rendering context.cpp */; };
 		4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8E71F5CE2AE00927A19 /* libnanovg.a */; };
 		4509F8EA1F5D247100927A19 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8E91F5D247100927A19 /* CoreVideo.framework */; };
@@ -99,6 +99,7 @@
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		4568D3071F88B47C0037268B /* export nanovg types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3051F88B47C0037268B /* export nanovg types.cpp */; };
 		4568D30A1F88BC050037268B /* export animations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3081F88BC050037268B /* export animations.cpp */; };
+		4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* pentagon render component.cpp */; };
 		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
 		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
 		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
@@ -173,8 +174,8 @@
 		4509F8D01F5A414800927A19 /* vector file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector file.cpp"; sourceTree = "<group>"; };
 		4509F8D11F5A414800927A19 /* vector file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector file.hpp"; sourceTree = "<group>"; };
 		4509F8D31F5A429800927A19 /* player sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.yaml"; sourceTree = "<group>"; };
-		4509F8E01F5BB23600927A19 /* vector render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector render component.cpp"; sourceTree = "<group>"; };
-		4509F8E11F5BB23600927A19 /* vector render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector render component.hpp"; sourceTree = "<group>"; };
+		4509F8E01F5BB23600927A19 /* basic render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "basic render component.cpp"; sourceTree = "<group>"; };
+		4509F8E11F5BB23600927A19 /* basic render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "basic render component.hpp"; sourceTree = "<group>"; };
 		4509F8E41F5CE20000927A19 /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
 		4509F8E51F5CE20000927A19 /* rendering context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering context.hpp"; sourceTree = "<group>"; };
 		4509F8E71F5CE2AE00927A19 /* libnanovg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnanovg.a; path = ../../../../../../../usr/local/lib/libnanovg.a; sourceTree = "<group>"; };
@@ -347,14 +348,16 @@
 		4568D3061F88B47C0037268B /* export nanovg types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "export nanovg types.hpp"; sourceTree = "<group>"; };
 		4568D3081F88BC050037268B /* export animations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "export animations.cpp"; sourceTree = "<group>"; };
 		4568D3091F88BC050037268B /* export animations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "export animations.hpp"; sourceTree = "<group>"; };
+		4568D3151F89EAA00037268B /* pentagon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "pentagon render component.cpp"; sourceTree = "<group>"; };
+		4568D3161F89EAA00037268B /* pentagon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "pentagon render component.hpp"; sourceTree = "<group>"; };
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
 		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
 		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
-		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; };
-		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; };
-		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; };
-		457619FB1F884A2500A6A792 /* platform sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.lua"; sourceTree = "<group>"; };
-		457619FD1F884E2100A6A792 /* spinning blade sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.lua"; sourceTree = "<group>"; };
+		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		457619FB1F884A2500A6A792 /* platform sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		457619FD1F884E2100A6A792 /* spinning blade sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		457619FF1F8851F100A6A792 /* player sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -830,8 +833,10 @@
 		453892F81F2C417F007EBB5A /* render components */ = {
 			isa = PBXGroup;
 			children = (
-				4509F8E01F5BB23600927A19 /* vector render component.cpp */,
-				4509F8E11F5BB23600927A19 /* vector render component.hpp */,
+				4509F8E01F5BB23600927A19 /* basic render component.cpp */,
+				4509F8E11F5BB23600927A19 /* basic render component.hpp */,
+				4568D3151F89EAA00037268B /* pentagon render component.cpp */,
+				4568D3161F89EAA00037268B /* pentagon render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1267,7 +1272,7 @@
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4509F8E61F5CE20000927A19 /* rendering context.cpp in Sources */,
 				45DE9FD71F71063400B1DA72 /* transform.cpp in Sources */,
-				4509F8E21F5BB23600927A19 /* vector render component.cpp in Sources */,
+				4509F8E21F5BB23600927A19 /* basic render component.cpp in Sources */,
 				452FFA881F6BC50D003A98B1 /* b2FrictionJoint.cpp in Sources */,
 				452FFA6E1F6BC50D003A98B1 /* b2ChainShape.cpp in Sources */,
 				45DEA0781F859F7200B1DA72 /* proximity sensor physics component.cpp in Sources */,
@@ -1287,6 +1292,7 @@
 				45DE9FCF1F71008600B1DA72 /* make anim comp.cpp in Sources */,
 				452FFA671F6BC50D003A98B1 /* b2CollideCircle.cpp in Sources */,
 				452FFA7A1F6BC50D003A98B1 /* b2Fixture.cpp in Sources */,
+				4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */,
 				452FFA8A1F6BC50D003A98B1 /* b2Joint.cpp in Sources */,
 				452FFA851F6BC50D003A98B1 /* b2PolygonAndCircleContact.cpp in Sources */,
 				453892CC1F2AF420007EBB5A /* render component.cpp in Sources */,
