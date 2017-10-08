@@ -13,12 +13,14 @@
 #include "launcher render component.hpp"
 #include "platform render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
+#include "spinning blade render component.hpp"
 
 using RenderComps = Utils::TypeList<
   PentagonRenderComponent,
   LauncherRenderComponent,
   SpikesRenderComponent,
-  PlatformRenderComponent
+  PlatformRenderComponent,
+  SpinningBladeRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(

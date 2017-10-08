@@ -103,6 +103,7 @@
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
 		4568D3201F89FB150037268B /* platform render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31E1F89FB150037268B /* platform render component.cpp */; };
+		4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3211F8A010F0037268B /* spinning blade render component.cpp */; };
 		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
 		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
 		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
@@ -359,6 +360,8 @@
 		4568D31C1F89F7E80037268B /* spikes render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spikes render component.hpp"; sourceTree = "<group>"; };
 		4568D31E1F89FB150037268B /* platform render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "platform render component.cpp"; sourceTree = "<group>"; };
 		4568D31F1F89FB150037268B /* platform render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "platform render component.hpp"; sourceTree = "<group>"; };
+		4568D3211F8A010F0037268B /* spinning blade render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spinning blade render component.cpp"; sourceTree = "<group>"; };
+		4568D3221F8A010F0037268B /* spinning blade render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spinning blade render component.hpp"; sourceTree = "<group>"; };
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
 		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
 		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
@@ -852,6 +855,8 @@
 				4568D31C1F89F7E80037268B /* spikes render component.hpp */,
 				4568D31E1F89FB150037268B /* platform render component.cpp */,
 				4568D31F1F89FB150037268B /* platform render component.hpp */,
+				4568D3211F8A010F0037268B /* spinning blade render component.cpp */,
+				4568D3221F8A010F0037268B /* spinning blade render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1235,6 +1240,7 @@
 				452FFA661F6BC50D003A98B1 /* b2BroadPhase.cpp in Sources */,
 				452FFA781F6BC50D003A98B1 /* b2Body.cpp in Sources */,
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
+				4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */,
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
 				45DE9FAC1F6D102A00B1DA72 /* yaml param.cpp in Sources */,
 				45DE9FCD1F71001A00B1DA72 /* make physics comp.cpp in Sources */,

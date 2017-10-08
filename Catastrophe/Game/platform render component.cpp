@@ -8,6 +8,8 @@
 
 #include "platform render component.hpp"
 
+const std::string PlatformRenderComponent::IMAGE_PATH = "platform image.png";
+
 PlatformRenderComponent::PlatformRenderComponent(
   const YAML::Node &node,
   const YAML::Node &level
