@@ -88,8 +88,6 @@ namespace {
       : data(table.size()), offset(offset) {
       copyTable(data, table);
     }
-    Keyframe(const float offset, const ReadOnlyArray<Data> &array)
-      : data(array.data), offset(offset) {}
   
     std::vector<Data> data;
     float offset;
@@ -99,10 +97,7 @@ namespace {
   void exportKeyframe(sol::state &state, const char *const name) {
     using Keyframe = Keyframe<Data>;
     state.new_usertype<Keyframe>(name,
-      sol::constructors<
-        Keyframe(float, const sol::table &),
-        Keyframe(float, const ReadOnlyArray<Data> &)
-      >()
+      sol::constructors<Keyframe(float, const sol::table &)>()
     );
   }
   

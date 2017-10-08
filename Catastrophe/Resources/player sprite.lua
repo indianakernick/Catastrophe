@@ -25,7 +25,7 @@ function init() end
 local hip =             PivotNode.new(1,  {leftKnee, rightKnee, neck});
 local root = hip;
 
-function swapLeftAndRight(angles)
+function swapLeftAndRightArray(angles)
   return FloatArray.new({
     angles:geti(1),
     angles:geti(4),
@@ -39,6 +39,21 @@ function swapLeftAndRight(angles)
     angles:geti(7),
     angles:geti(8)
   });
+end
+function swapLeftAndRight(angles)
+  return {
+    angles[1],
+    angles[4],
+    angles[5],
+    angles[2],
+    angles[3],
+    angles[6],
+    angles[10],
+    angles[11],
+    angles[9],
+    angles[7],
+    angles[8]
+  };
 end
 
 local poseLengths = FloatArray.new({
@@ -69,7 +84,7 @@ local standLeft = FloatArray.new({
   180,  -- rightElbow
   -25   -- rightHand
 });
-local standRight = swapLeftAndRight(standLeft);
+local standRight = swapLeftAndRightArray(standLeft);
 
 local runJumpPos = Vec2.new(0, 0);
 local runJumpLeft = FloatArray.new({
@@ -85,7 +100,7 @@ local runJumpLeft = FloatArray.new({
   140,  -- rightElbow
   -110, -- rightHand
 });
-local runJumpRight = swapLeftAndRight(runJumpLeft);
+local runJumpRight = swapLeftAndRightArray(runJumpLeft);
 
 local standJumpPos = Vec2.new(0, 0);
 local standJumpLeft = FloatArray.new({
@@ -101,61 +116,70 @@ local standJumpLeft = FloatArray.new({
   135,  -- rightElbow
   -90   -- rightHand
 });
-local standJumpRight = swapLeftAndRight(standJumpLeft);
+local standJumpRight = swapLeftAndRightArray(standJumpLeft);
 
+local run0 = {
+  0,    -- hip
+  140,  -- leftKnee
+  120,  -- leftFoot
+  205,  -- rightKnee
+  20,   -- rightFoot
+  15,   -- neck
+  200,  -- leftElbow
+  -90,  -- leftHand
+  -15,  -- head
+  200,  -- rightElbow
+  -90   -- rightHand
+};
+local run1 = {
+  0,    -- hip
+  120,  -- leftKnee
+  20,   -- leftFoot
+  210,  -- rightKnee
+  60,   -- rightFoot
+  15,   -- neck
+  230,  -- leftElbow
+  -90,  -- leftHand
+  -15,  -- head
+  165,  -- rightElbow
+  -90   -- rightHand
+};
+local run2 = {
+  0,    -- hip
+  135,  -- leftKnee
+  20,   -- leftFoot
+  225,  -- rightKnee
+  50,   -- rightFoot
+  15,   -- neck
+  210,  -- leftElbow
+  -90,  -- leftHand
+  -15,  -- head
+  160,  -- rightElbow
+  -90   -- rightHand
+};
+local run3 = {
+  0,    -- hip
+  160,  -- leftKnee
+  40,   -- leftFoot
+  200,  -- rightKnee
+  90,   -- rightFoot
+  15,   -- neck
+  225,  -- leftElbow
+  -90,  -- leftHand
+  -15,  -- head
+  165,  -- rightElbow
+  -90   -- rightHand
+};
 local runAngles = FloatAnimation.new(1, {
-  FloatKeyframe.new(0, {
-    0,    -- hip
-    140,  -- leftKnee
-    120,  -- leftFoot
-    205,  -- rightKnee
-    20,   -- rightFoot
-    15,   -- neck
-    200,  -- leftElbow
-    -90,  -- leftHand
-    -15,  -- head
-    200,  -- rightElbow
-    -90   -- rightHand
-  }),
-  FloatKeyframe.new(1/8, {
-    0,    -- hip
-    120,  -- leftKnee
-    20,   -- leftFoot
-    210,  -- rightKnee
-    60,   -- rightFoot
-    15,   -- neck
-    230,  -- leftElbow
-    -90,  -- leftHand
-    -15,  -- head
-    165,  -- rightElbow
-    -90   -- rightHand
-  }),
-  FloatKeyframe.new(1/4, {
-    0,    -- hip
-    135,  -- leftKnee
-    20,   -- leftFoot
-    225,  -- rightKnee
-    50,   -- rightFoot
-    15,   -- neck
-    210,  -- leftElbow
-    -90,  -- leftHand
-    -15,  -- head
-    160,  -- rightElbow
-    -90   -- rightHand
-  }),
-  FloatKeyframe.new(3/8, {
-    0,    -- hip
-    160,  -- leftKnee
-    40,   -- leftFoot
-    200,  -- rightKnee
-    90,   -- rightFoot
-    15,   -- neck
-    225,  -- leftElbow
-    -90,  -- leftHand
-    -15,  -- head
-    165,  -- rightElbow
-    -90   -- rightHand
-  })
+  FloatKeyframe.new(0, run0),
+  FloatKeyframe.new(1/8, run1),
+  FloatKeyframe.new(1/4, run2),
+  FloatKeyframe.new(3/8, run3),
+  FloatKeyframe.new(1/2, swapLeftAndRight(run0)),
+  FloatKeyframe.new(5/8, swapLeftAndRight(run1)),
+  FloatKeyframe.new(3/4, swapLeftAndRight(run2)),
+  FloatKeyframe.new(7/8, swapLeftAndRight(run3)),
+  FloatKeyframe.new(1, run0)
 });
 
 local runPoint = Vec2Animation.new(1, {
