@@ -19,26 +19,22 @@ SimpleAnimationComponent::SimpleAnimationComponent(
   const YAML::Node &node,
   const YAML::Node &level
 ) {
-  sprite = loadSprite(getChild(node, "sprite").Scalar(), *Systems::renderer);
   transform.scale = readGLMvec(getChild(level, "scale"));
-  anim.setDuration(sprite.animations.at("main").durationSec);
+  if (const YAML::Node &durationNode = node["duration"]) {
+    anim.setDuration(durationNode.as<float>());
+  }
 }
 
 void SimpleAnimationComponent::update(const float delta) {
   anim.advance(delta);
   anim.repeatOnOverflow();
-  frame = ::getFrame(sprite, "main", anim.getProgressTime());
   transform.pos = getEntity().physics->getPos();
   transform.rotation = getEntity().physics->getAngle();
   model = transform.getMat3();
 }
 
-const Sprite &SimpleAnimationComponent::getSprite() const {
-  return sprite;
-}
-
-const Frame &SimpleAnimationComponent::getFrame() const {
-  return frame;
+float SimpleAnimationComponent::getProgress() const {
+  return anim.getProgressTime();
 }
 
 glm::mat3 SimpleAnimationComponent::getModelMat() const {

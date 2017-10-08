@@ -19,13 +19,10 @@ public:
   SimpleAnimationComponent(const YAML::Node &, const YAML::Node &);
   
   void update(float) override;
-  const Sprite &getSprite() const override;
-  const Frame &getFrame() const override;
+  float getProgress() const override;
   glm::mat3 getModelMat() const override;
 
 private:
-  Sprite sprite;
-  Frame frame;
   Transform transform;
   glm::mat3 model;
   Time::SimpleAnim<float> anim;

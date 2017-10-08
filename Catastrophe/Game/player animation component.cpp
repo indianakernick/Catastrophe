@@ -44,12 +44,8 @@ void PlayerAnimationComponent::update(const float delta) {
   model = transform.getMat3();
 }
 
-const Sprite &PlayerAnimationComponent::getSprite() const {
-  return sprite;
-}
-
-const Frame &PlayerAnimationComponent::getFrame() const {
-  return frame;
+float PlayerAnimationComponent::getProgress() const {
+  return 0.0f;
 }
 
 glm::mat3 PlayerAnimationComponent::getModelMat() const {

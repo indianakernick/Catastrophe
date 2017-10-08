@@ -19,8 +19,7 @@ public:
   virtual ~AnimationComponent() = default;
   
   virtual void update(float) = 0;
-  virtual const Sprite &getSprite() const = 0;
-  virtual const Frame &getFrame() const = 0;
+  virtual float getProgress() const = 0;
   virtual glm::mat3 getModelMat() const = 0;
 };
 

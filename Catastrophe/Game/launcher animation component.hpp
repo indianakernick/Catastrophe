@@ -17,10 +17,8 @@ public:
   LauncherAnimationComponent(const YAML::Node &, const YAML::Node &);
 
   void update(float) override;
-  const Sprite &getSprite() const override;
-  const Frame &getFrame() const override;
+  float getProgress() const override;
   glm::mat3 getModelMat() const override;
-  float getProgress() const;
 
 private:
   Sprite sprite;

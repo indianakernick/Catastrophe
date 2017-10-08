@@ -9,18 +9,14 @@
 #include "launcher animation component.hpp"
 
 #include "yaml helper.hpp"
-#include "vector file.hpp"
-#include "vector render.hpp"
 #include "systems registry.hpp"
 #include "launcher physics component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 
 LauncherAnimationComponent::LauncherAnimationComponent(
-  const YAML::Node &node,
+  const YAML::Node &,
   const YAML::Node &
-) {
-  sprite = loadSprite(getChild(node, "sprite").Scalar(), *Systems::renderer);
-}
+) {}
 
 void LauncherAnimationComponent::update(float) {
   const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(getEntity().physics);
@@ -34,18 +30,11 @@ void LauncherAnimationComponent::update(float) {
   model = transform.getMat3();
 }
 
-const Sprite &LauncherAnimationComponent::getSprite() const {
-  return sprite;
-}
 
-const Frame &LauncherAnimationComponent::getFrame() const {
-  return frame;
+float LauncherAnimationComponent::getProgress() const {
+  return progress;
 }
 
 glm::mat3 LauncherAnimationComponent::getModelMat() const {
   return model;
-}
-
-float LauncherAnimationComponent::getProgress() const {
-  return progress;
 }
