@@ -14,15 +14,12 @@ SpikesRenderComponent::SpikesRenderComponent(
 ) : BasicRenderComponent(node, level) {}
 
 void SpikesRenderComponent::render(NVGcontext *const ctx) {
-  if (!setGradient) {
-    setGradient = true;
-    gradient = nvgLinearGradient(ctx,
-      -4.0f, 0.0f,
-      -4.0f + SPIKE_WIDTH, 0.0f,
-      LEFT_COLOR,
-      RIGHT_COLOR
-    );
-  }
+  const NVGpaint gradient = nvgLinearGradient(ctx,
+    -4.0f, 0.0f,
+    -4.0f + SPIKE_WIDTH, 0.0f,
+    LEFT_COLOR,
+    RIGHT_COLOR
+  );
   
   nvgScale(ctx, 0.125f, 0.125f);
   

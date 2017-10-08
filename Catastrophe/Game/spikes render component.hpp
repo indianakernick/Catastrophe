@@ -19,9 +19,6 @@ public:
   void render(NVGcontext *);
   
 private:
-  NVGpaint gradient;
-  bool setGradient = false;
-  
   static constexpr int NUM_SPIKES = 4;
   static constexpr float SPIKE_WIDTH = 8.0f / NUM_SPIKES;
   static constexpr float HALF_SPIKE_WIDTH = SPIKE_WIDTH / 2.0f;
