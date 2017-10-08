@@ -111,10 +111,23 @@ local runAngles = FloatAnimation.new(1, {
     205,  -- rightKnee
     20,   -- rightFoot
     15,   -- neck
-    210,  -- leftElbow
+    200,  -- leftElbow
     -90,  -- leftHand
     -15,  -- head
-    210,  -- rightElbow
+    200,  -- rightElbow
+    -90   -- rightHand
+  }),
+  FloatKeyframe.new(1/8, {
+    0,    -- hip
+    120,  -- leftKnee
+    20,   -- leftFoot
+    210,  -- rightKnee
+    60,   -- rightFoot
+    15,   -- neck
+    230,  -- leftElbow
+    -90,  -- leftHand
+    -15,  -- head
+    165,  -- rightElbow
     -90   -- rightHand
   })
 });
