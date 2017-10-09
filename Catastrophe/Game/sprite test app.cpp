@@ -10,6 +10,7 @@
 
 #include "debug input.hpp"
 #include "vector file.hpp"
+#include <yaml-cpp/yaml.h>
 #include "vector render.hpp"
 #include "window constants.hpp"
 #include "framebuffer to png.hpp"

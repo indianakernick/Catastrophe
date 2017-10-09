@@ -8,9 +8,10 @@
 
 #include "launcher animation component.hpp"
 
-#include "yaml helper.hpp"
-#include "systems registry.hpp"
+#include "entity.hpp"
+#include "transform.hpp"
 #include "launcher physics component.hpp"
+#include "../Libraries/Box2D/Common/b2Math.h"
 #include <Simpleton/Utils/safe down cast.hpp>
 
 LauncherAnimationComponent::LauncherAnimationComponent(
@@ -29,7 +30,6 @@ void LauncherAnimationComponent::update(float) {
   transform.scale = glm::vec2(physics->getLimitSize());
   model = transform.getMat3();
 }
-
 
 float LauncherAnimationComponent::getProgress() const {
   return progress;
