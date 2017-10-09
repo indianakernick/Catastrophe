@@ -17,15 +17,15 @@
 #include <Simpleton/Platform/system info.hpp>
 
 SpriteTestApp::SpriteTestApp(const char *spriteFile, const char *animName)
-  : spriteFile(spriteFile), animName(animName) {}
+  : spriteFile(spriteFile), animName(animName), renderComp({}, {}) {}
 
 bool SpriteTestApp::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
-  sprite = loadSprite("player sprite.yaml", renderingContext.getResources());
-  script = renderingContext.loadScript("player sprite.lua");
+  //sprite = loadSprite("player sprite.yaml", renderingContext.getResources());
+  //script = renderingContext.loadScript("player sprite.lua");
   anim.setDuration(1.0f);
   return true;
 }
@@ -87,19 +87,22 @@ void SpriteTestApp::render(const float delta) {
   
   anim.advance(delta * 0.0625);
   anim.repeatOnOverflow();
+  nvgSave(ctx);
+  renderComp.render(ctx);
+  nvgRestore(ctx);
   //script.draw(anim.getProgressTime());
   //renderSprite(ctx, sprite, getFrame(sprite, "run", 0.375), {});
   
-  nvgBeginPath(ctx);
+  /*nvgBeginPath(ctx);
   nvgStrokeColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));
   nvgStrokeWidth(ctx, 0.01);
   nvgRect(ctx, -0.5f, -0.5f, 1.0f, 1.0f);
   
-  for (float i = -7.0f; i <= 7.0f; ++i) {
-    nvgMoveTo(ctx, i / 16.0f, -0.55f);
-    nvgLineTo(ctx, i / 16.0f, -0.45f);
+  for (float i = -1.0f; i <= 1.0f; ++i) {
+    nvgMoveTo(ctx, i / 4.0f, -0.55f);
+    nvgLineTo(ctx, i / 4.0f, -0.45f);
   }
-  nvgStroke(ctx);
+  nvgStroke(ctx);*/
   
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }

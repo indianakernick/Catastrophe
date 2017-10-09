@@ -11,9 +11,6 @@
 #include <vector>
 #include "entity.hpp"
 #include <glm/glm.hpp>
-#include "vector file.hpp"
-#include "yaml helper.hpp"
-#include "vector render.hpp"
 #include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 #include "player animation component.hpp"
@@ -22,12 +19,7 @@
 PlayerRenderComponent::PlayerRenderComponent(
   const YAML::Node &node,
   const YAML::Node &level
-) : BasicRenderComponent(node, level),
-    spriteName(getChild(node, "sprite").Scalar()) {}
-
-void PlayerRenderComponent::init(NVGcontext *, RenderResMan &resMan) {
-  sprite = loadSprite(spriteName, resMan);
-}
+) : BasicRenderComponent(node, level) {}
 
 namespace {
   struct PivotJoint;
@@ -81,14 +73,14 @@ namespace {
   const std::vector<float> commonLengths = {
     0.0f, // hip
     4.0f, // leftKnee
-    3.0f, // leftFoot
+    4.0f, // leftFoot
     4.0f, // rightKnee
-    3.0f, // rightFoot
+    4.0f, // rightFoot
     5.0f, // neck
-    2.0f, // leftElbow
+    3.0f, // leftElbow
     2.0f, // leftHand
     1.0f, // head
-    2.0f, // rightElbow
+    3.0f, // rightElbow
     2.0f  // rightHand
   };
   
@@ -98,13 +90,13 @@ namespace {
   };
   
   const Pose standLeftPose = {
-    {1.0f, -1.0f},
+    {1.0f, 0.0f},
     {
       0,    // hip
       165,  // leftKnee
       15,   // leftFoot
       180,  // rightKnee
-      20,   // rightFoot
+      15,   // rightFoot
       0,    // neck
       205,  // leftElbow
       -25,  // leftHand
@@ -114,7 +106,7 @@ namespace {
     }
   };
   const Pose standRightPose = {
-    {1.0f, -1.0f},
+    standLeftPose.pos,
     swapLeftAndRight(standLeftPose.angles)
   };
   
@@ -135,7 +127,7 @@ namespace {
     }
   };
   const Pose runJumpRightPose = {
-    {0.0f, 0.0f},
+    runJumpLeftPose.pos,
     swapLeftAndRight(runJumpLeftPose.angles)
   };
   
@@ -156,7 +148,7 @@ namespace {
     }
   };
   const Pose standJumpRightPose = {
-    {0.0f, 0.0f},
+    standJumpLeftPose.pos,
     swapLeftAndRight(standJumpLeftPose.angles)
   };
   
@@ -172,23 +164,23 @@ namespace {
   
   const Animation runAnimation = [] () -> Animation {
     const Pose run0 = {
-      {0.0f, -2.0f},
+      {0.0f, -1.0f},
       {
         0,    // hip
         140,  // leftKnee
-        120,  // leftFoot
-        205,  // rightKnee
+        110,  // leftFoot
+        200,  // rightKnee
         20,   // rightFoot
         15,   // neck
-        200,  // leftElbow
+        190,  // leftElbow
         -90,  // leftHand
         -15,  // head
-        200,  // rightElbow
+        190,  // rightElbow
         -90   // rightHand
       }
     };
     const Pose run1 = {
-      {0.0f, -1.0f},
+      {0.0f, 0.0f},
       {
         0,    // hip
         120,  // leftKnee
@@ -196,15 +188,15 @@ namespace {
         210,  // rightKnee
         60,   // rightFoot
         15,   // neck
-        230,  // leftElbow
+        220,  // leftElbow
         -90,  // leftHand
         -15,  // head
-        165,  // rightElbow
+        160,  // rightElbow
         -90   // rightHand
       }
     };
     const Pose run2 = {
-      {0.0f, -2.0f},
+      {0.0f, 0.0f},
       {
         0,    // hip
         135,  // leftKnee
@@ -212,10 +204,10 @@ namespace {
         225,  // rightKnee
         50,   // rightFoot
         15,   // neck
-        210,  // leftElbow
+        250,  // leftElbow
         -90,  // leftHand
         -15,  // head
-        160,  // rightElbow
+        130,  // rightElbow
         -90   // rightHand
       }
     };
@@ -223,15 +215,15 @@ namespace {
       {0.0f, -1.0f},
       {
         0,    // hip
-        160,  // leftKnee
-        40,   // leftFoot
+        150,  // leftKnee
+        60,   // leftFoot
         200,  // rightKnee
         90,   // rightFoot
         15,   // neck
-        225,  // leftElbow
+        220,  // leftElbow
         -90,  // leftHand
         -15,  // head
-        165,  // rightElbow
+        160,  // rightElbow
         -90   // rightHand
       }
     };

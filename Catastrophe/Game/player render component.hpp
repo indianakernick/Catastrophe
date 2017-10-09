@@ -16,12 +16,7 @@ class PlayerRenderComponent final : public BasicRenderComponent {
 public:
   PlayerRenderComponent(const YAML::Node &, const YAML::Node &);
   
-  void init(NVGcontext *, RenderResMan &) override;
   void render(NVGcontext *) override;
-
-private:
-  std::string spriteName;
-  Sprite sprite;
 };
 
 #endif
