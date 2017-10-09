@@ -337,6 +337,7 @@
 		4538930B1F2D6F5D007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		453A0AAF1F8AF1E70042B23B /* player render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player render component.cpp"; sourceTree = "<group>"; };
 		453A0AB01F8AF1E70042B23B /* player render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player render component.hpp"; sourceTree = "<group>"; };
+		453A0AB21F8B46DD0042B23B /* animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation.hpp; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
 		454116191F523D7400C2865B /* camera pos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera pos.hpp"; sourceTree = "<group>"; };
 		4541161B1F523D8200C2865B /* camera zoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom.cpp"; sourceTree = "<group>"; };
@@ -576,6 +577,7 @@
 				4568D3061F88B47C0037268B /* export nanovg types.hpp */,
 				4568D3081F88BC050037268B /* export animations.cpp */,
 				4568D3091F88BC050037268B /* export animations.hpp */,
+				453A0AB21F8B46DD0042B23B /* animation.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";

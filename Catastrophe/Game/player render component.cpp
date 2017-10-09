@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "entity.hpp"
+#include "animation.hpp"
 #include "nvg helper.hpp"
 #include <glm/trigonometric.hpp>
 #include <Simpleton/Math/vectors.hpp>
@@ -153,15 +154,8 @@ namespace {
     swapLeftAndRight(standJumpLeftPose.angles)
   };
   
-  struct Keyframe {
-    float offset;
-    Pose data;
-  };
-  
-  struct Animation {
-    float duration;
-    std::vector<Keyframe> keyframes;
-  };
+  using Keyframe = Keyframe<Pose>;
+  using Animation = Animation<Pose>;
   
   const Animation runAnimation = [] () -> Animation {
     const Pose run0 = {
@@ -270,70 +264,22 @@ namespace {
       pivotPoints(points, angles, lengths, *c, newPos, angle);
     }
   }
-  
-  void lerpPose(
+}
+
+template <>
+struct Interpolator<Pose> {
+  static void lerp(
     Pose &dst,
     const float t,
     const Pose &min,
     const Pose &max
   ) {
-    if (min.angles.size() != max.angles.size()) {
-      throw std::runtime_error("Cannot interpolate poses of different sizes");
-    }
-    if (dst.angles.size() != min.angles.size()) {
-      dst.angles.resize(min.angles.size());
-    }
-    dst.pos = Math::lerp(t, min.pos, max.pos);
-    for (size_t a = 0; a != dst.angles.size(); ++a) {
-      dst.angles[a] = Math::lerp(t, min.angles[a], max.angles[a]);
-    }
+    Interpolator<glm::vec2>::lerp(dst.pos, t, min.pos, max.pos);
+    Interpolator<std::vector<float>>::lerp(dst.angles, t, min.angles, max.angles);
   }
-  
-  void lerpKeyframe(
-    Pose &dst,
-    const float t,
-    const Keyframe &min,
-    const Keyframe &max
-  ) {
-    return lerpPose(
-      dst,
-      Math::invLerp<float>(t, min.offset, max.offset),
-      min.data,
-      max.data
-    );
-  }
-  
-  void lerpAnimation(Pose &dst, const float t, const Animation &anim) {
-    const size_t size = anim.keyframes.size();
-    
-    if (size == 0) {
-      throw std::runtime_error("Cannot interpolate an animation with no keyframes");
-    } else if (size == 1) {
-      dst = anim.keyframes[0].data;
-      return;
-    } else if (size == 2) {
-      lerpKeyframe(dst, t, anim.keyframes[0], anim.keyframes[1]);
-      return;
-    }
-    
-    if (t < anim.keyframes[0].offset) {
-      lerpKeyframe(dst, t, anim.keyframes[0], anim.keyframes[1]);
-      return;
-    } else if (t > anim.keyframes[size - 1].offset) {
-      lerpKeyframe(dst, t, anim.keyframes[size - 2], anim.keyframes[size - 1]);
-      return;
-    }
-    
-    //Probably don't need to bother with std::lower_bound
-    for (size_t k = 1; k != size; ++k) {
-      if (anim.keyframes[k].offset >= t) {
-        lerpKeyframe(dst, t, anim.keyframes[k - 1], anim.keyframes[k]);
-        return;
-      }
-    }
-    throw std::runtime_error("Unsorted keyframe offsets");
-  }
-}
+};
+
+using LerpPose = Interpolator<Pose>;
 
 void PlayerRenderComponent::render(NVGcontext *const ctx) {
   const auto animComp = Utils::safeDownCast<PlayerAnimationComponent>(
@@ -341,7 +287,7 @@ void PlayerRenderComponent::render(NVGcontext *const ctx) {
   );
   
   static Pose standGroundJump;
-  lerpPose(
+  LerpPose::lerp(
     standGroundJump,
     animComp->getGroundJumpProg(),
     animComp->getRightLeg() ? standRightPose : standLeftPose,
@@ -352,7 +298,7 @@ void PlayerRenderComponent::render(NVGcontext *const ctx) {
   lerpAnimation(running, animComp->getRunningProg(), runAnimation);
   
   static Pose runningGroundJump;
-  lerpPose(
+  LerpPose::lerp(
     runningGroundJump,
     animComp->getGroundJumpProg(),
     running,
@@ -360,7 +306,7 @@ void PlayerRenderComponent::render(NVGcontext *const ctx) {
   );
   
   static Pose pose;
-  lerpPose(
+  LerpPose::lerp(
     pose,
     animComp->getStandRunProg(),
     standGroundJump,

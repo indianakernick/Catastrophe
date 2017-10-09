@@ -11,7 +11,6 @@
 
 #include "component.hpp"
 #include <glm/mat3x3.hpp>
-#include "vector sprite.hpp"
 
 class AnimationComponent : public Component {
 public:

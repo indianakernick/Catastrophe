@@ -9,7 +9,6 @@
 #ifndef player_render_component_hpp
 #define player_render_component_hpp
 
-#include "vector sprite.hpp"
 #include "basic render component.hpp"
 
 class PlayerRenderComponent final : public BasicRenderComponent {
