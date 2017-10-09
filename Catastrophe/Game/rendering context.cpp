@@ -68,13 +68,10 @@ void RenderingContext::init(SDL_Window *newWindow) {
   renderResMan.init(context);
   fpsFontHandle = renderResMan.getFont("Consolas.ttf");
   
-  scriptManager.init(renderResMan, context);
-  
   fpsCounter.init();
 }
 
 void RenderingContext::quit() {
-  scriptManager.quit();
   renderResMan.quit();
   nvgDeleteGL3(context);
   context = nullptr;
@@ -136,10 +133,6 @@ SDL_Window *RenderingContext::getWindow() const {
 
 glm::ivec2 RenderingContext::getFramebufferSize() const {
   return renderSize;
-}
-
-RenderScript RenderingContext::loadScript(const std::string &name) {
-  return scriptManager.loadScript(name);
 }
 
 void RenderingContext::renderFPS() {

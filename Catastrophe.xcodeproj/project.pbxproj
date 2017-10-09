@@ -98,15 +98,11 @@
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
-		4568D3071F88B47C0037268B /* export nanovg types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3051F88B47C0037268B /* export nanovg types.cpp */; };
-		4568D30A1F88BC050037268B /* export animations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3081F88BC050037268B /* export animations.cpp */; };
 		4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* pentagon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
 		4568D3201F89FB150037268B /* platform render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31E1F89FB150037268B /* platform render component.cpp */; };
 		4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3211F8A010F0037268B /* spinning blade render component.cpp */; };
-		457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 457619EE1F86FA9B00A6A792 /* liblua.a */; };
-		457619F21F86FB5E00A6A792 /* render script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457619F01F86FB5E00A6A792 /* render script.cpp */; };
 		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
 		457619F81F87605700A6A792 /* launcher sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F71F87605700A6A792 /* launcher sprite.lua */; };
 		457619FA1F876C8600A6A792 /* spikes sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F91F876C8600A6A792 /* spikes sprite.lua */; };
@@ -351,10 +347,6 @@
 		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
 		454116331F5622D600C2865B /* camera zoom track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom track.cpp"; sourceTree = "<group>"; };
 		454116341F5622D700C2865B /* camera zoom track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom track.hpp"; sourceTree = "<group>"; };
-		4568D3051F88B47C0037268B /* export nanovg types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "export nanovg types.cpp"; sourceTree = "<group>"; };
-		4568D3061F88B47C0037268B /* export nanovg types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "export nanovg types.hpp"; sourceTree = "<group>"; };
-		4568D3081F88BC050037268B /* export animations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "export animations.cpp"; sourceTree = "<group>"; };
-		4568D3091F88BC050037268B /* export animations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "export animations.hpp"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* pentagon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "pentagon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* pentagon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "pentagon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
@@ -366,8 +358,6 @@
 		4568D3211F8A010F0037268B /* spinning blade render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spinning blade render component.cpp"; sourceTree = "<group>"; };
 		4568D3221F8A010F0037268B /* spinning blade render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spinning blade render component.hpp"; sourceTree = "<group>"; };
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
-		457619F01F86FB5E00A6A792 /* render script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render script.cpp"; sourceTree = "<group>"; };
-		457619F11F86FB5E00A6A792 /* render script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "render script.hpp"; sourceTree = "<group>"; };
 		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
@@ -483,7 +473,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457619EF1F86FA9B00A6A792 /* liblua.a in Frameworks */,
 				45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */,
 				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
 				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
@@ -571,12 +560,6 @@
 				45DEA03C1F80D34C00B1DA72 /* rendering resources.hpp */,
 				45DEA0831F85F87600B1DA72 /* layer names.cpp */,
 				45DEA0841F85F87600B1DA72 /* layer names.hpp */,
-				457619F01F86FB5E00A6A792 /* render script.cpp */,
-				457619F11F86FB5E00A6A792 /* render script.hpp */,
-				4568D3051F88B47C0037268B /* export nanovg types.cpp */,
-				4568D3061F88B47C0037268B /* export nanovg types.hpp */,
-				4568D3081F88BC050037268B /* export animations.cpp */,
-				4568D3091F88BC050037268B /* export animations.hpp */,
 				453A0AB21F8B46DD0042B23B /* animation.hpp */,
 			);
 			name = rendering;
@@ -1218,7 +1201,6 @@
 				452FFA6F1F6BC50D003A98B1 /* b2CircleShape.cpp in Sources */,
 				452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */,
 				452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */,
-				457619F21F86FB5E00A6A792 /* render script.cpp in Sources */,
 				4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */,
 				452FFA7F1F6BC50D003A98B1 /* b2ChainAndPolygonContact.cpp in Sources */,
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
@@ -1252,7 +1234,6 @@
 				45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */,
 				45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
-				4568D3071F88B47C0037268B /* export nanovg types.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
@@ -1306,7 +1287,6 @@
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
 				45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
-				4568D30A1F88BC050037268B /* export animations.cpp in Sources */,
 				4568D3201F89FB150037268B /* platform render component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
 				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,

@@ -10,7 +10,6 @@
 #define rendering_context_hpp
 
 #include <glm/mat3x3.hpp>
-#include "render script.hpp"
 #include <Simpleton/Time/fps.hpp>
 #include "rendering resources.hpp"
 
@@ -31,7 +30,6 @@ public:
   NVGcontext *getContext() const;
   SDL_Window *getWindow() const;
   glm::ivec2 getFramebufferSize() const;
-  RenderScript loadScript(const std::string &);
   
 private:
   RenderResMan renderResMan;
@@ -42,7 +40,6 @@ private:
   Time::FPS fpsCounter;
   glm::ivec2 renderSize;
   FontHandle fpsFontHandle;
-  RenderScriptManager scriptManager;
   
   void renderFPS();
   void captureFrame(uint8_t *);
