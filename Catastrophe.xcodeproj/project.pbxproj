@@ -27,7 +27,7 @@
 		452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9DF1F64D219003A98B1 /* player animation component.cpp */; };
 		452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F31F6A70DC003A98B1 /* rect.yaml */; };
 		452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */; };
-		452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */; };
+		452FF9F91F6BB83E003A98B1 /* test app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9F71F6BB83E003A98B1 /* test app.cpp */; };
 		452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */; };
 		452FFA001F6BBF41003A98B1 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9FF1F6BBF41003A98B1 /* stb_image_write.c */; };
 		452FFA661F6BC50D003A98B1 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FFA041F6BC50D003A98B1 /* b2BroadPhase.cpp */; };
@@ -201,8 +201,8 @@
 		452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 glm cast.hpp"; sourceTree = "<group>"; };
 		452FF9F31F6A70DC003A98B1 /* rect.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rect.yaml; sourceTree = "<group>"; };
 		452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rect 2.yaml"; sourceTree = "<group>"; };
-		452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "sprite test app.cpp"; sourceTree = "<group>"; };
-		452FF9F81F6BB83E003A98B1 /* sprite test app.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "sprite test app.hpp"; sourceTree = "<group>"; };
+		452FF9F71F6BB83E003A98B1 /* test app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test app.cpp"; sourceTree = "<group>"; };
+		452FF9F81F6BB83E003A98B1 /* test app.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "test app.hpp"; sourceTree = "<group>"; };
 		452FF9FB1F6BBEFA003A98B1 /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
 		452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "framebuffer to png.cpp"; sourceTree = "<group>"; };
 		452FF9FD1F6BBF26003A98B1 /* framebuffer to png.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "framebuffer to png.hpp"; sourceTree = "<group>"; };
@@ -929,8 +929,8 @@
 			children = (
 				4538906E1F2ADB13007EBB5A /* app impl.cpp */,
 				4538906F1F2ADB13007EBB5A /* app impl.hpp */,
-				452FF9F71F6BB83E003A98B1 /* sprite test app.cpp */,
-				452FF9F81F6BB83E003A98B1 /* sprite test app.hpp */,
+				452FF9F71F6BB83E003A98B1 /* test app.cpp */,
+				452FF9F81F6BB83E003A98B1 /* test app.hpp */,
 				45DEA0701F85912B00B1DA72 /* registries */,
 				452FF9C01F63D007003A98B1 /* constants */,
 				45103F411F2432D2001B24E2 /* utils */,
@@ -1251,7 +1251,7 @@
 				452FFA8D1F6BC50D003A98B1 /* b2PrismaticJoint.cpp in Sources */,
 				452FFA861F6BC50D003A98B1 /* b2PolygonContact.cpp in Sources */,
 				452FFA901F6BC50D003A98B1 /* b2RopeJoint.cpp in Sources */,
-				452FF9F91F6BB83E003A98B1 /* sprite test app.cpp in Sources */,
+				452FF9F91F6BB83E003A98B1 /* test app.cpp in Sources */,
 				45DEA0631F84941F00B1DA72 /* joint physics component.cpp in Sources */,
 				454116351F5622D700C2865B /* camera zoom track.cpp in Sources */,
 				452FFA001F6BBF41003A98B1 /* stb_image_write.c in Sources */,
@@ -1364,7 +1364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1414,7 +1414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

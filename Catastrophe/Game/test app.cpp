@@ -1,12 +1,12 @@
 //
-//  sprite test app.cpp
+//  test app.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 15/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "sprite test app.hpp"
+#include "test app.hpp"
 
 #include "debug input.hpp"
 #include "vector file.hpp"
@@ -17,10 +17,10 @@
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Platform/system info.hpp>
 
-SpriteTestApp::SpriteTestApp(const char *spriteFile, const char *animName)
+TestApp::TestApp(const char *spriteFile, const char *animName)
   : spriteFile(spriteFile), animName(animName), renderComp({}, {}) {}
 
-bool SpriteTestApp::init() {
+bool TestApp::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
@@ -31,13 +31,13 @@ bool SpriteTestApp::init() {
   return true;
 }
 
-void SpriteTestApp::quit() {
+void TestApp::quit() {
   renderingContext.quit();
   window.reset();
   windowLibrary = std::experimental::nullopt;
 }
 
-bool SpriteTestApp::input(float) {
+bool TestApp::input(float) {
   SDL_Event e;
   unsigned eventCount = 0;
   while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
@@ -55,11 +55,11 @@ bool SpriteTestApp::input(float) {
   return true;
 }
 
-bool SpriteTestApp::update(const float) {
+bool TestApp::update(const float) {
   return true;
 }
 
-void SpriteTestApp::render(const float delta) {
+void TestApp::render(const float delta) {
   glm::mat3 mat = glm::translate(
     glm::scale(
       glm::translate(

@@ -7,7 +7,7 @@
 //
 
 #include "app impl.hpp"
-#include "sprite test app.hpp"
+#include "test app.hpp"
 #include <SDL2/SDL_messagebox.h>
 #include <Simpleton/Utils/profiler.hpp>
 
@@ -33,7 +33,7 @@ int main(int, char **) {
   
 #else
 
-  SpriteTestApp test("player sprite.lua", "main");
+  TestApp test("player sprite.lua", "main");
   test.mainLoop(timeStep, maxSteps);
   
 #endif

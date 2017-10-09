@@ -1,13 +1,13 @@
 //
-//  sprite test app.hpp
+//  test app.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 15/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef sprite_test_app_hpp
-#define sprite_test_app_hpp
+#ifndef test_app_hpp
+#define test_app_hpp
 
 #include "screenshot.hpp"
 #include "vector sprite.hpp"
@@ -18,9 +18,9 @@
 #include <Simpleton/Time/simple anim.hpp>
 #include <Simpleton/Platform/window library.hpp>
 
-class SpriteTestApp : public Game::App<std::chrono::duration<float>> {
+class TestApp : public Game::App<std::chrono::duration<float>> {
 public:
-  SpriteTestApp(const char *, const char *);
+  TestApp(const char *, const char *);
   
 private:
   std::experimental::optional<Platform::WindowLibrary> windowLibrary;
