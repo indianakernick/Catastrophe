@@ -11,6 +11,7 @@
 #include "nvg helper.hpp"
 #include <nanovg/nanovg.h>
 #include "vector sprite.hpp"
+#include <Simpleton/Utils/tuple.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 
 namespace {

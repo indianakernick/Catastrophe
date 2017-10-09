@@ -10,13 +10,13 @@
 
 #include <vector>
 #include "entity.hpp"
-#include "animation.hpp"
 #include "nvg helper.hpp"
 #include <glm/trigonometric.hpp>
 #include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 #include "player animation component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
+#include <Simpleton/Graphics/keyframe animation.hpp>
 
 PlayerRenderComponent::PlayerRenderComponent(
   const YAML::Node &node,
@@ -154,8 +154,8 @@ namespace {
     swapLeftAndRight(standJumpLeftPose.angles)
   };
   
-  using Keyframe = Keyframe<Pose>;
-  using Animation = Animation<Pose>;
+  using Keyframe = Graphics::Keyframe<Pose>;
+  using Animation = Graphics::Animation<Pose>;
   
   const Animation runAnimation = [] () -> Animation {
     const Pose run0 = {
@@ -267,7 +267,7 @@ namespace {
 }
 
 template <>
-struct Interpolator<Pose> {
+struct Graphics::Interpolator<Pose> {
   static void lerp(
     Pose &dst,
     const float t,
@@ -279,7 +279,7 @@ struct Interpolator<Pose> {
   }
 };
 
-using LerpPose = Interpolator<Pose>;
+using LerpPose = Graphics::Interpolator<Pose>;
 
 void PlayerRenderComponent::render(NVGcontext *const ctx) {
   const auto animComp = Utils::safeDownCast<PlayerAnimationComponent>(
