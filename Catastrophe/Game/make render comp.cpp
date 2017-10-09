@@ -14,6 +14,7 @@
 #include "launcher render component.hpp"
 #include "platform render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
+#include "vector sprite render component.hpp"
 #include "spinning blade render component.hpp"
 
 using RenderComps = Utils::TypeList<
@@ -22,7 +23,8 @@ using RenderComps = Utils::TypeList<
   SpikesRenderComponent,
   PlatformRenderComponent,
   SpinningBladeRenderComponent,
-  PlayerRenderComponent
+  PlayerRenderComponent,
+  VectorSpriteRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(

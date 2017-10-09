@@ -92,6 +92,7 @@
 		453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453893071F2D6F21007EBB5A /* debug draw.cpp */; };
 		4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538930A1F2D6F5D007EBB5A /* camera.cpp */; };
 		453A0AB11F8AF1E70042B23B /* player render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453A0AAF1F8AF1E70042B23B /* player render component.cpp */; };
+		453A0ABC1F8B5F450042B23B /* vector sprite render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453A0ABA1F8B5F450042B23B /* vector sprite render component.cpp */; };
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
 		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
@@ -333,6 +334,8 @@
 		4538930B1F2D6F5D007EBB5A /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 		453A0AAF1F8AF1E70042B23B /* player render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player render component.cpp"; sourceTree = "<group>"; };
 		453A0AB01F8AF1E70042B23B /* player render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player render component.hpp"; sourceTree = "<group>"; };
+		453A0ABA1F8B5F450042B23B /* vector sprite render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector sprite render component.cpp"; sourceTree = "<group>"; };
+		453A0ABB1F8B5F450042B23B /* vector sprite render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector sprite render component.hpp"; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
 		454116191F523D7400C2865B /* camera pos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera pos.hpp"; sourceTree = "<group>"; };
 		4541161B1F523D8200C2865B /* camera zoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom.cpp"; sourceTree = "<group>"; };
@@ -840,6 +843,8 @@
 				4568D3221F8A010F0037268B /* spinning blade render component.hpp */,
 				453A0AAF1F8AF1E70042B23B /* player render component.cpp */,
 				453A0AB01F8AF1E70042B23B /* player render component.hpp */,
+				453A0ABA1F8B5F450042B23B /* vector sprite render component.cpp */,
+				453A0ABB1F8B5F450042B23B /* vector sprite render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1234,6 +1239,7 @@
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */,
+				453A0ABC1F8B5F450042B23B /* vector sprite render component.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
 				452FFA731F6BC50D003A98B1 /* b2Draw.cpp in Sources */,
