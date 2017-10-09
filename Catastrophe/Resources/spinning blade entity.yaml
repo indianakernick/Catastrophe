@@ -4,8 +4,8 @@ physics:
 
 animation:
   name: SimpleAnimationComponent
-  sprite: spinning blade sprite.yaml
+  duration: 1.0
 
 rendering:
-  name: VectorRenderComponent
+  name: SpinningBladeRenderComponent
   layer: over player 1

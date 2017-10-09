@@ -29,7 +29,6 @@ private:
                                      NVG_IMAGE_REPEATY;
   static constexpr NVGcolor COLOR = {{{0.5f, 0.0f, 1.0f, 1.0f}}};
   static constexpr float THICKNESS = 0.125f;
-  static constexpr float HALF_THICKNESS = THICKNESS / 2.0f;
 };
 
 #endif

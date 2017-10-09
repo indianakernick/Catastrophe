@@ -19,8 +19,9 @@ public:
   void render(NVGcontext *) override;
 
 private:
-  static constexpr int NUM_SPIKES = 32;
-  static constexpr float INNER_RADIUS = 0.375f;
+  static constexpr float ROTATIONS_PER_SECOND = 0.75f;
+  static constexpr int NUM_SPIKES = 12;
+  static constexpr float INNER_RADIUS = 0.25f;
   static constexpr float OUTER_RADIUS = 0.5f;
   static constexpr NVGcolor COLOR = {{{0.7f, 0.7f, 0.7f, 1.0f}}};
   

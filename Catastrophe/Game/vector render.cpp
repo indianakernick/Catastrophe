@@ -142,18 +142,12 @@ void lerpFrames(const float progress, Frame &lower, const Frame &upper) {
 void renderSprite(
   NVGcontext *context,
   const Sprite &sprite,
-  const Frame &frame,
-  const glm::mat3 model
+  const Frame &frame
 ) {
-  nvgSave(context);
-  nvgTransform(context, model);
-  
   static Paints paints;
   if (paints.size() < sprite.numPaints) {
     paints.resize(sprite.numPaints);
   }
   
   sprite.drawCommand->draw(context, frame, sprite.images, paints);
-   
-  nvgRestore(context);
 }

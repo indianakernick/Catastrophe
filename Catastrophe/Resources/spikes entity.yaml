@@ -4,8 +4,7 @@ physics:
 
 animation:
   name: SimpleAnimationComponent
-  sprite: spikes sprite.yaml
 
 rendering:
-  name: VectorRenderComponent
+  name: SpikesRenderComponent
   layer: over player 1

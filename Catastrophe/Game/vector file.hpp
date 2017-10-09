@@ -10,8 +10,9 @@
 #define vector_file_hpp
 
 #include "vector sprite.hpp"
-#include "rendering context.hpp"
 
-Sprite loadSprite(const std::string &, RenderingContext &);
+class RenderResMan;
+
+Sprite loadSprite(const std::string &, RenderResMan &);
 
 #endif

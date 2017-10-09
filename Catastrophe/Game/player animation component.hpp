@@ -10,7 +10,6 @@
 #define player_animation_component_hpp
 
 #include "transform.hpp"
-#include "vector sprite.hpp"
 #include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
@@ -22,10 +21,13 @@ public:
   void update(float) override;
   float getProgress() const override;
   glm::mat3 getModelMat() const override;
+  
+  bool getRightLeg() const;
+  float getGroundJumpProg() const;
+  float getStandRunProg() const;
+  float getRunningProg() const;
 
 private:
-  Sprite sprite;
-  Frame frame;
   Transform transform;
   glm::mat3 model;
   Time::SimpleAnim<float> runningAnim;
@@ -53,7 +55,6 @@ private:
   float calcLegOffset(bool);
   float calcRunAdvance(float, float) const;
   
-  void setFrame(float, bool, float);
   void handleMove(float, bool, float);
   void handleJump(bool, float);
   

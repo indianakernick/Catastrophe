@@ -23,6 +23,9 @@ public:
   Rect getAABB() const override;
   size_t getLayer() const override;
 
+protected:
+  void setModelTransform(NVGcontext *);
+
 private:
   CameraMotionTargetPtr rect;
   CameraZoomTargetPtr size;

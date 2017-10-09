@@ -4,8 +4,7 @@ physics:
 
 animation:
   name: LauncherAnimationComponent
-  sprite: launcher sprite.yaml
 
 rendering:
-  name: VectorRenderComponent
+  name: LauncherRenderComponent
   layer: over player 1

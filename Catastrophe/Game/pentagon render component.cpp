@@ -24,6 +24,8 @@ namespace {
 }
 
 void PentagonRenderComponent::render(NVGcontext *const ctx) {
+  setModelTransform(ctx);
+  
   const float sides = SIDES;
   
   nvgBeginPath(ctx);

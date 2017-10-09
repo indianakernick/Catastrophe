@@ -8,6 +8,8 @@
 
 #include "spinning blade render component.hpp"
 
+#include "entity.hpp"
+#include "animation component.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
 SpinningBladeRenderComponent::SpinningBladeRenderComponent(
@@ -16,6 +18,10 @@ SpinningBladeRenderComponent::SpinningBladeRenderComponent(
 ) : BasicRenderComponent(node, level) {}
 
 void SpinningBladeRenderComponent::render(NVGcontext *const ctx) {
+  setModelTransform(ctx);
+  
+  nvgRotate(ctx, 2.0f * NVG_PI * ROTATIONS_PER_SECOND * getEntity().animation->getProgress());
+  
   nvgFillColor(ctx, COLOR);
   
   const glm::vec2 pos = Math::angleMag(SPIKE_ANGLE, INNER_RADIUS);

@@ -9,6 +9,7 @@
 #include "make render comp.hpp"
 
 #include "spikes render component.hpp"
+#include "player render component.hpp"
 #include "pentagon render component.hpp"
 #include "launcher render component.hpp"
 #include "platform render component.hpp"
@@ -20,7 +21,8 @@ using RenderComps = Utils::TypeList<
   LauncherRenderComponent,
   SpikesRenderComponent,
   PlatformRenderComponent,
-  SpinningBladeRenderComponent
+  SpinningBladeRenderComponent,
+  PlayerRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(

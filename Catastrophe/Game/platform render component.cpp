@@ -20,6 +20,8 @@ void PlatformRenderComponent::init(NVGcontext *, RenderResMan &resMan) {
 }
 
 void PlatformRenderComponent::render(NVGcontext *const ctx) {
+  setModelTransform(ctx);
+  
   const NVGpaint pattern = nvgImagePattern(ctx,
     -2.0f, -2.0f,
     0.25f, 1.0f,
@@ -35,14 +37,13 @@ void PlatformRenderComponent::render(NVGcontext *const ctx) {
   nvgRect(ctx, -2.0f, -2.0f, 4.0f, 4.0f);
   nvgFill(ctx);
   
+  nvgScissor(ctx, -2.0f, -2.0f, 4.0f, 4.0f);
+  
   nvgBeginPath(ctx);
   nvgStrokeWidth(ctx, THICKNESS);
   nvgStrokeColor(ctx, COLOR);
   nvgLineCap(ctx, NVG_SQUARE);
   nvgLineJoin(ctx, NVG_MITER);
-  nvgRect(ctx,
-    -2.0f + HALF_THICKNESS, -2.0f + HALF_THICKNESS,
-    4.0f - THICKNESS, 4.0f - THICKNESS
-  );
+  nvgRect(ctx, -2.0f, -2.0f, 4.0f, 4.0f);
   nvgStroke(ctx);
 }

@@ -18,6 +18,8 @@ LauncherRenderComponent::LauncherRenderComponent(
 ) : BasicRenderComponent(node, level) {}
 
 void LauncherRenderComponent::render(NVGcontext *const ctx) {
+  setModelTransform(ctx);
+  
   const auto animComp = Utils::safeDownCast<LauncherAnimationComponent>(
     getEntity().animation
   );

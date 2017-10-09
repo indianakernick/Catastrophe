@@ -1,6 +1,5 @@
 body:
-  type: kinematic
-  angular velocity: 6.282 #  2 * PI
+  type: static
 
 shapes:
   main:

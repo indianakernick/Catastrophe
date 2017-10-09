@@ -10,25 +10,19 @@
 
 #include "entity.hpp"
 #include "yaml helper.hpp"
-#include "vector file.hpp"
-#include "vector render.hpp"
-#include "systems registry.hpp"
 #include <Simpleton/Math/scale.hpp>
 #include "player physics component.hpp"
-#include <glm/gtx/matrix_transform_2d.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
 
 PlayerAnimationComponent::PlayerAnimationComponent(
   const YAML::Node &node,
   const YAML::Node &
 ) {
-  sprite = loadSprite(getChild(node, "sprite").Scalar(), *Systems::renderer);
   transform.scale = readGLMvec(getChild(node, "scale"));
-  const Animation &runAnim = this->sprite.animations.at("run");
-  runningAnim.setDuration(runAnim.durationSec);
-  standRunAnim.setDuration(runAnim.meta.at("foot time"));
-  groundJumpAnim.setDuration(runAnim.meta.at("jump time"));
-  footSpeed = runAnim.meta.at("foot speed");
+  runningAnim.setDuration(getChild(node, "run duration").as<float>());
+  standRunAnim.setDuration(getChild(node, "foot time").as<float>());
+  groundJumpAnim.setDuration(getChild(node, "jump time").as<float>());
+  footSpeed = getChild(node, "foot speed").as<float>();
 }
 
 void PlayerAnimationComponent::update(const float delta) {
@@ -37,7 +31,8 @@ void PlayerAnimationComponent::update(const float delta) {
   const float horiVel = playerPhysics->getRelVel().x;
   const bool onGround = playerPhysics->onGround();
   
-  setFrame(horiVel, onGround, delta);
+  handleMove(horiVel, onGround, delta);
+  handleJump(onGround, delta);
   
   transform.pos = playerPhysics->getPos();
   transform.scale.x = std::abs(transform.scale.x) * calcHoriScale(horiVel);
@@ -52,6 +47,22 @@ glm::mat3 PlayerAnimationComponent::getModelMat() const {
   return model;
 }
 
+bool PlayerAnimationComponent::getRightLeg() const {
+  return rightLeg;
+}
+
+float PlayerAnimationComponent::getGroundJumpProg() const {
+  return groundJumpAnim.getProgress<float>();
+}
+
+float PlayerAnimationComponent::getStandRunProg() const {
+  return standRunAnim.getProgress<float>();
+}
+
+float PlayerAnimationComponent::getRunningProg() const {
+  return runningAnim.getProgressTime();
+}
+
 float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
   if (std::abs(horiVel) < 0.01f) {
     return lastDir;
@@ -64,37 +75,6 @@ float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
 
 float PlayerAnimationComponent::calcRunAdvance(const float horiVel, const float delta) const {
   return delta * Math::abs((horiVel / footSpeed) / transform.scale.x);
-}
-
-void PlayerAnimationComponent::setFrame(
-  const float horiVel,
-  const bool onGround,
-  const float delta
-) {
-  handleMove(horiVel, onGround, delta);
-  handleJump(onGround, delta);
-  
-  const float leg = rightLeg ? 1.0f : 0.0f;
-  
-  frame = ::getFrame(sprite, "stand", leg);
-  lerpFrames(
-    groundJumpAnim.getProgress<float>(),
-    frame,
-    ::getFrame(sprite, "stand jump", leg)
-  );
-  
-  Frame runningFrame = ::getFrame(sprite, "run", runningAnim.getProgressTime());
-  lerpFrames(
-    groundJumpAnim.getProgress<float>(),
-    runningFrame,
-    ::getFrame(sprite, "run jump", leg)
-  );
-  
-  lerpFrames(
-    standRunAnim.getProgress<float>(),
-    frame,
-    runningFrame
-  );
 }
 
 void PlayerAnimationComponent::handleMove(

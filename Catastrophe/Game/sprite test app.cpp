@@ -24,7 +24,7 @@ bool SpriteTestApp::init() {
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
-  sprite = loadSprite("player sprite.yaml", renderingContext);
+  sprite = loadSprite("player sprite.yaml", renderingContext.getResources());
   script = renderingContext.loadScript("player sprite.lua");
   anim.setDuration(1.0f);
   return true;

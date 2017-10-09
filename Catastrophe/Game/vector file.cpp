@@ -13,6 +13,7 @@
 #include "parse nvg enum.hpp"
 #include "command errors.hpp"
 #include "command compiler.hpp"
+#include "rendering resources.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
@@ -198,7 +199,7 @@ namespace {
     return anims;
   }
   
-  ImageHandle readImage(const YAML::Node &imageNode, RenderingContext &ctx) {
+  ImageHandle readImage(const YAML::Node &imageNode, RenderResMan &resMan) {
     checkType(imageNode, YAML::NodeType::Map);
     const std::string &path = getChild(imageNode, "path").Scalar();
     int flags = 0;
@@ -215,10 +216,10 @@ namespace {
         }
       }
     }
-    return ctx.getResources().getImage(path, flags);
+    return resMan.getImage(path, flags);
   }
   
-  Images readImages(const YAML::Node &imagesNode, RenderingContext &ctx) {
+  Images readImages(const YAML::Node &imagesNode, RenderResMan &resMan) {
     if (!imagesNode) {
       return {};
     }
@@ -226,7 +227,7 @@ namespace {
     checkType(imagesNode, YAML::NodeType::Sequence);
     Images images;
     for (auto i = imagesNode.begin(); i != imagesNode.end(); ++i) {
-      images.emplace_back(readImage(*i, ctx));
+      images.emplace_back(readImage(*i, resMan));
     }
     return images;
   }
@@ -245,14 +246,14 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &fileName, RenderingContext &ctx) {
+Sprite loadSprite(const std::string &fileName, RenderResMan &resMan) {
   const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   FrameSize frameSize;
   frameSize.fill(NULL_INDEX);
   Animations anims = readAnims(getChild(rootNode, "anims"), frameSize);
-  Images images = readImages(rootNode["images"], ctx);
+  Images images = readImages(rootNode["images"], resMan);
   std::unique_ptr<RootDrawCommand> drawCommand;
   Index numPaints = 0;
   

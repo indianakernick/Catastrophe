@@ -14,10 +14,14 @@ physics:
 
 animation:
   name: PlayerAnimationComponent
-  sprite: player sprite.yaml
   scale: *scale
+  foot speed: 2
+  foot time: 0.125
+  jump time: 0.125
+  run duration: 1
 
 rendering:
-  name: VectorRenderComponent
+  name: PlayerRenderComponent
+  sprite: player sprite.yaml
   scale: *scale
   layer: player

@@ -4,8 +4,7 @@ physics:
 
 animation:
   name: SimpleAnimationComponent
-  sprite: platform sprite.yaml
 
 rendering:
-  name: VectorRenderComponent
+  name: PlatformRenderComponent
   layer: over player 2

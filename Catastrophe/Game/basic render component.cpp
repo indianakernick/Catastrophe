@@ -9,9 +9,9 @@
 #include "basic render component.hpp"
 
 #include "entity.hpp"
+#include "nvg helper.hpp"
 #include "yaml helper.hpp"
 #include "layer names.hpp"
-#include "vector render.hpp"
 #include "animation component.hpp"
 
 BasicRenderComponent::BasicRenderComponent(
@@ -56,4 +56,8 @@ Rect BasicRenderComponent::getAABB() const {
 
 size_t BasicRenderComponent::getLayer() const {
   return layer;
+}
+
+void BasicRenderComponent::setModelTransform(NVGcontext *const ctx) {
+  nvgTransform(ctx, getEntity().animation->getModelMat());
 }

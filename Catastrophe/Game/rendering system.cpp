@@ -9,6 +9,7 @@
 #include "rendering system.hpp"
 
 #include "camera.hpp"
+#include <nanovg/nanovg.h>
 #include "entity manager.hpp"
 #include "render component.hpp"
 #include "rendering context.hpp"
@@ -51,7 +52,9 @@ void RenderingSystem::render() {
     for (auto &pair : layer) {
       pair.second->preRender();
       if (camera.visibleMeters(pair.second->getAABB())) {
+        nvgSave(ctx);
         pair.second->render(ctx);
+        nvgRestore(ctx);
       }
     }
   }
