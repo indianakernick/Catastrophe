@@ -10,7 +10,8 @@
 
 #include <vector>
 #include "entity.hpp"
-#include <glm/glm.hpp>
+#include "nvg helper.hpp"
+#include <glm/trigonometric.hpp>
 #include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 #include "player animation component.hpp"
@@ -331,16 +332,6 @@ namespace {
       }
     }
     throw std::runtime_error("Unsorted keyframe offsets");
-  }
-  
-  void nvgMoveTo(NVGcontext *const ctx, const glm::vec2 point) {
-    nvgMoveTo(ctx, point.x, point.y);
-  }
-  void nvgLineTo(NVGcontext *const ctx, const glm::vec2 point) {
-    nvgLineTo(ctx, point.x, point.y);
-  }
-  void nvgCircle(NVGcontext *const ctx, const glm::vec2 point, const float radius) {
-    nvgCircle(ctx, point.x, point.y, radius);
   }
 }
 

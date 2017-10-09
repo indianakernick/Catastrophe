@@ -8,7 +8,7 @@
 
 #include "pentagon render component.hpp"
 
-#include <glm/glm.hpp>
+#include "nvg helper.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
 PentagonRenderComponent::PentagonRenderComponent(
@@ -18,8 +18,7 @@ PentagonRenderComponent::PentagonRenderComponent(
 
 namespace {
   glm::vec2 getCirclePoint(const float turn) {
-    const float rot = 0.25;
-    return Math::angleMag((turn + rot) * NVG_PI * 2.0f, 0.5f);
+    return Math::angleMag((turn + 0.25) * NVG_PI * 2.0f, 0.5f);
   }
 }
 
@@ -31,11 +30,9 @@ void PentagonRenderComponent::render(NVGcontext *const ctx) {
   nvgBeginPath(ctx);
   nvgFillColor(ctx, COLOR);
   
-  glm::vec2 point = getCirclePoint(0.0f);
-  nvgMoveTo(ctx, point.x, point.y);
+  nvgMoveTo(ctx, getCirclePoint(0.0f));
   for (float s = 1.0f; s < sides; ++s) {
-    point = getCirclePoint(s / sides);
-    nvgLineTo(ctx, point.x, point.y);
+    nvgLineTo(ctx, getCirclePoint(s / sides));
   }
   nvgClosePath(ctx);
   
