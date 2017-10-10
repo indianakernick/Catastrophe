@@ -33,23 +33,28 @@ std::pair<void *, void *> getUserData() {
   }
 }
 
+#define SYMBOLS                                                                 \
+  SYMBOL(PlayerBody)                                                            \
+  SYMBOL(PlayerFoot)                                                            \
+  SYMBOL(Platform)                                                              \
+  SYMBOL(Pentagon)                                                              \
+  SYMBOL(Deadly)                                                                \
+  SYMBOL(TouchSensor)
+
 namespace Symbol {
-  MAKE_SYMBOL(PlayerBody);
-  MAKE_SYMBOL(PlayerFoot);
-  MAKE_SYMBOL(Platform);
-  MAKE_SYMBOL(Pentagon);
-  MAKE_SYMBOL(Deadly);
-  MAKE_SYMBOL(ProximitySensor);
+  #define SYMBOL(NAME) MAKE_SYMBOL(NAME);
+  SYMBOLS
+  #undef SYMBOL
 };
 
 using Symbols = Utils::TypeList<
-  Symbol::PlayerBody,
-  Symbol::PlayerFoot,
-  Symbol::Platform,
-  Symbol::Pentagon,
-  Symbol::Deadly,
-  Symbol::ProximitySensor
+  #define SYMBOL(NAME) Symbol::NAME,
+  SYMBOLS
+  #undef SYMBOL
+  void //trailing comma
 >;
+
+#undef SYMBOLS
 
 inline void *getUserData(const std::string &symbolName) {
   try {

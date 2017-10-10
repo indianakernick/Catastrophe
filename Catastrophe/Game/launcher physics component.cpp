@@ -12,9 +12,9 @@
 #include "yaml helper.hpp"
 #include "systems registry.hpp"
 #include <Simpleton/Math/clamp.hpp>
+#include "button physics component.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include <Simpleton/Utils/safe down cast.hpp>
-#include "proximity sensor physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/Joints/b2PrismaticJoint.h"
 
 LauncherPhysicsComponent::LauncherPhysicsComponent(
@@ -33,8 +33,8 @@ void LauncherPhysicsComponent::preStep(float) {
   if (!comp) {
     throw std::runtime_error("Invalid trigger entity ID");
   }
-  auto proxComp = Utils::safeDownCast<ProximitySensorPhysicsComponent>(comp);
-  if (proxComp->playerIsClose()) {
+  auto buttonComp = Utils::safeDownCast<ButtonPhysicsComponent>(comp);
+  if (buttonComp->playerOnButton()) {
     prisJoint->EnableMotor(true);
   } else {
     prisJoint->EnableMotor(false);

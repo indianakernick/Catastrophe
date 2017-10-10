@@ -155,9 +155,9 @@
 		45DEA06D1F8589CB00B1DA72 /* launcher joint.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */; };
 		45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */; };
 		45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0711F85915B00B1DA72 /* systems registry.cpp */; };
-		45DEA0751F859D3100B1DA72 /* proximity sensor body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0741F859D3100B1DA72 /* proximity sensor body.yaml */; };
-		45DEA0781F859F7200B1DA72 /* proximity sensor physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0761F859F7200B1DA72 /* proximity sensor physics component.cpp */; };
-		45DEA07A1F85A73100B1DA72 /* proximity sensor entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0791F85A73100B1DA72 /* proximity sensor entity.yaml */; };
+		45DEA0751F859D3100B1DA72 /* button body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0741F859D3100B1DA72 /* button body.yaml */; };
+		45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0761F859F7200B1DA72 /* button physics component.cpp */; };
+		45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */; };
 		45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */; };
 		45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */; };
 		45DEA0821F85DD4900B1DA72 /* launcher animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */; };
@@ -450,10 +450,10 @@
 		45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher entity.yaml"; sourceTree = "<group>"; };
 		45DEA0711F85915B00B1DA72 /* systems registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "systems registry.cpp"; sourceTree = "<group>"; };
 		45DEA0721F85915B00B1DA72 /* systems registry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "systems registry.hpp"; sourceTree = "<group>"; };
-		45DEA0741F859D3100B1DA72 /* proximity sensor body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "proximity sensor body.yaml"; sourceTree = "<group>"; };
-		45DEA0761F859F7200B1DA72 /* proximity sensor physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "proximity sensor physics component.cpp"; sourceTree = "<group>"; };
-		45DEA0771F859F7200B1DA72 /* proximity sensor physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "proximity sensor physics component.hpp"; sourceTree = "<group>"; };
-		45DEA0791F85A73100B1DA72 /* proximity sensor entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "proximity sensor entity.yaml"; sourceTree = "<group>"; };
+		45DEA0741F859D3100B1DA72 /* button body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "button body.yaml"; sourceTree = "<group>"; };
+		45DEA0761F859F7200B1DA72 /* button physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "button physics component.cpp"; sourceTree = "<group>"; };
+		45DEA0771F859F7200B1DA72 /* button physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "button physics component.hpp"; sourceTree = "<group>"; };
+		45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invisible button entity.yaml"; sourceTree = "<group>"; };
 		45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher physics component.cpp"; sourceTree = "<group>"; };
 		45DEA07C1F85A82C00B1DA72 /* launcher physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher physics component.hpp"; sourceTree = "<group>"; };
 		45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.yaml"; sourceTree = "<group>"; };
@@ -989,7 +989,7 @@
 				45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */,
 				45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */,
 				45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */,
-				45DEA0791F85A73100B1DA72 /* proximity sensor entity.yaml */,
+				45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1023,7 +1023,7 @@
 				45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */,
 				45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */,
 				45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */,
-				45DEA0741F859D3100B1DA72 /* proximity sensor body.yaml */,
+				45DEA0741F859D3100B1DA72 /* button body.yaml */,
 			);
 			name = Bodies;
 			sourceTree = "<group>";
@@ -1064,8 +1064,8 @@
 				45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */,
 				45DEA0611F84941F00B1DA72 /* joint physics component.cpp */,
 				45DEA0621F84941F00B1DA72 /* joint physics component.hpp */,
-				45DEA0761F859F7200B1DA72 /* proximity sensor physics component.cpp */,
-				45DEA0771F859F7200B1DA72 /* proximity sensor physics component.hpp */,
+				45DEA0761F859F7200B1DA72 /* button physics component.cpp */,
+				45DEA0771F859F7200B1DA72 /* button physics component.hpp */,
 				45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */,
 				45DEA07C1F85A82C00B1DA72 /* launcher physics component.hpp */,
 			);
@@ -1179,8 +1179,8 @@
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 				457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */,
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
-				45DEA07A1F85A73100B1DA72 /* proximity sensor entity.yaml in Resources */,
-				45DEA0751F859D3100B1DA72 /* proximity sensor body.yaml in Resources */,
+				45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */,
+				45DEA0751F859D3100B1DA72 /* button body.yaml in Resources */,
 				45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
 				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
@@ -1301,7 +1301,7 @@
 				4509F8E21F5BB23600927A19 /* basic render component.cpp in Sources */,
 				452FFA881F6BC50D003A98B1 /* b2FrictionJoint.cpp in Sources */,
 				452FFA6E1F6BC50D003A98B1 /* b2ChainShape.cpp in Sources */,
-				45DEA0781F859F7200B1DA72 /* proximity sensor physics component.cpp in Sources */,
+				45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */,
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,

@@ -1,0 +1,3 @@
+physics:
+  name: ButtonPhysicsComponent
+  body: button body.yaml

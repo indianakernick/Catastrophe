@@ -10,4 +10,4 @@ shapes:
 fixtures:
 - shape: main
   is sensor: YES
-  user data: ProximitySensor
+  user data: TouchSensor

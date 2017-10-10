@@ -44,7 +44,7 @@ entities:
   scale: [1, 0.1]
 
 - id: 8
-  file: proximity sensor entity.yaml
+  file: invisible button entity.yaml
   pos: [5, 0.75]
   scale: [0.25, 0.5]
 

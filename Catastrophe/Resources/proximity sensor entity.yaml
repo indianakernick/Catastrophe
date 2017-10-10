@@ -1,3 +1,0 @@
-physics:
-  name: ProximitySensorPhysicsComponent
-  body: proximity sensor body.yaml

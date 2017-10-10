@@ -22,7 +22,7 @@ std::unique_ptr<AppImpl> app = nullptr;
 Mines
 Switches
 Missle launchers
- Missles
+  Missles
 Air Drones
 Ground Drones
 Droppers

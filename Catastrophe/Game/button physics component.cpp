@@ -1,18 +1,18 @@
 //
-//  proximity sensor physics component.cpp
+//  button physics component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 5/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "proximity sensor physics component.hpp"
+#include "button physics component.hpp"
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
 #include "systems registry.hpp"
 
-ProximitySensorPhysicsComponent::ProximitySensorPhysicsComponent(
+ButtonPhysicsComponent::ButtonPhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level
 ) {
@@ -21,18 +21,18 @@ ProximitySensorPhysicsComponent::ProximitySensorPhysicsComponent(
   body->SetUserData(this);
 }
 
-void ProximitySensorPhysicsComponent::preStep(float) {}
+void ButtonPhysicsComponent::preStep(float) {}
 
-void ProximitySensorPhysicsComponent::postStep() {}
+void ButtonPhysicsComponent::postStep() {}
 
-void ProximitySensorPhysicsComponent::beginContactingPlayer() {
+void ButtonPhysicsComponent::beginContactingPlayer() {
   contacting = true;
 }
 
-void ProximitySensorPhysicsComponent::endContactingPlayer() {
+void ButtonPhysicsComponent::endContactingPlayer() {
   contacting = false;
 }
 
-bool ProximitySensorPhysicsComponent::playerIsClose() const {
+bool ButtonPhysicsComponent::playerOnButton() const {
   return contacting;
 }

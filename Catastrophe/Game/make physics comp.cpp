@@ -11,18 +11,18 @@
 #include "joint physics component.hpp"
 #include "player physics component.hpp"
 #include "simple physics component.hpp"
+#include "button physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
-#include "proximity sensor physics component.hpp"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
   SimplePhysicsComponent,
   OscillatingPhysicsComponent,
   JointPhysicsComponent,
-  ProximitySensorPhysicsComponent,
+  ButtonPhysicsComponent,
   LauncherPhysicsComponent
 >;
 
