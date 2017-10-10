@@ -17,6 +17,19 @@
 
 std::unique_ptr<AppImpl> app = nullptr;
 
+/*
+
+Mines
+Switches
+Missle launchers
+ Missles
+Air Drones
+Ground Drones
+Droppers
+Coins
+
+*/
+
 bool AppImpl::init() {
   PROFILE(Init);
 

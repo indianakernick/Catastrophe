@@ -9,10 +9,8 @@
 #ifndef yaml_helper_hpp
 #define yaml_helper_hpp
 
-#include <glm/vec2.hpp>
-#include "transform.hpp"
+#include "yaml read.hpp"
 #include <yaml-cpp/yaml.h>
-#include "../Libraries/Box2D/Common/b2Math.h"
 
 YAML::Node getChild(const YAML::Node &, const char *);
 void checkType(const YAML::Node &, YAML::NodeType::value);
@@ -28,8 +26,10 @@ void getOptional(T &dst, const YAML::Node &node, const char *name) {
   }
 }
 
-glm::vec2 readGLMvec(const YAML::Node &);
-b2Vec2 readB2vec(const YAML::Node &);
-Transform readTransform(const YAML::Node &);
+template <typename T>
+void getOptional(T &dst, const YAML::Node &node0, const YAML::Node &node1, const char *name) {
+  getOptional(dst, node0, name);
+  getOptional(dst, node1, name);
+}
 
 #endif

@@ -43,11 +43,11 @@ OscillatingPhysicsComponent::OscillatingPhysicsComponent(
   body = loadBody(
     getChild(node, "body").Scalar(),
     Systems::physics->getWorld(),
-    readTransform(level)
+    level.as<Transform>()
   );
   body->SetUserData(this);
-  first = readB2vec(getChild(level, "first"));
-  second = readB2vec(getChild(level, "second"));
+  first = getChild(level, "first").as<b2Vec2>();
+  second = getChild(level, "second").as<b2Vec2>();
   
   if (const YAML::Node &startNode = level["start"]) {
     const float start = startNode.as<float>();

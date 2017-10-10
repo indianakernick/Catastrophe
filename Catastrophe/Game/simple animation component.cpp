@@ -19,10 +19,10 @@ SimpleAnimationComponent::SimpleAnimationComponent(
   const YAML::Node &node,
   const YAML::Node &level
 ) {
-  transform.scale = readGLMvec(getChild(level, "scale"));
-  if (const YAML::Node &durationNode = node["duration"]) {
-    anim.setDuration(durationNode.as<float>());
-  }
+  transform.scale = getChild(level, "scale").as<glm::vec2>();
+  float duration = 1.0f;
+  getOptional(duration, node, "duration");
+  anim.setDuration(duration);
 }
 
 void SimpleAnimationComponent::update(const float delta) {

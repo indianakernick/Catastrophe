@@ -20,7 +20,7 @@ SimplePhysicsComponent::SimplePhysicsComponent(
   body = loadBody(
     getChild(node, "body").Scalar(),
     Systems::physics->getWorld(),
-    readTransform(level)
+    level.as<Transform>()
   );
   body->SetUserData(this);
 }

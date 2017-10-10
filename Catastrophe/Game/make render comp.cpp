@@ -10,7 +10,7 @@
 
 #include "spikes render component.hpp"
 #include "player render component.hpp"
-#include "pentagon render component.hpp"
+#include "polygon render component.hpp"
 #include "launcher render component.hpp"
 #include "platform render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
@@ -18,7 +18,7 @@
 #include "spinning blade render component.hpp"
 
 using RenderComps = Utils::TypeList<
-  PentagonRenderComponent,
+  PolygonRenderComponent,
   LauncherRenderComponent,
   SpikesRenderComponent,
   PlatformRenderComponent,

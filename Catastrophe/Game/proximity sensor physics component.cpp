@@ -16,7 +16,7 @@ ProximitySensorPhysicsComponent::ProximitySensorPhysicsComponent(
   const YAML::Node &node,
   const YAML::Node &level
 ) {
-  Transform transform = readTransform(level);
+  Transform transform = level.as<Transform>();
   body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
   body->SetUserData(this);
 }

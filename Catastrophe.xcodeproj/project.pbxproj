@@ -99,7 +99,7 @@
 		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
-		4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* pentagon render component.cpp */; };
+		4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* polygon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
 		4568D3201F89FB150037268B /* platform render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31E1F89FB150037268B /* platform render component.cpp */; };
@@ -351,8 +351,9 @@
 		454116341F5622D700C2865B /* camera zoom track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom track.hpp"; sourceTree = "<group>"; };
 		4545DE961F8C4E2B000A54AA /* nanovg.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = nanovg.hpp; sourceTree = "<group>"; };
 		4545DE971F8C4E95000A54AA /* tinyfiledialogs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyfiledialogs.h; sourceTree = "<group>"; };
-		4568D3151F89EAA00037268B /* pentagon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "pentagon render component.cpp"; sourceTree = "<group>"; };
-		4568D3161F89EAA00037268B /* pentagon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "pentagon render component.hpp"; sourceTree = "<group>"; };
+		4545DE981F8C5C81000A54AA /* yaml read.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "yaml read.hpp"; sourceTree = "<group>"; };
+		4568D3151F89EAA00037268B /* polygon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "polygon render component.cpp"; sourceTree = "<group>"; };
+		4568D3161F89EAA00037268B /* polygon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "polygon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
 		4568D3191F89F0690037268B /* launcher render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher render component.hpp"; sourceTree = "<group>"; };
 		4568D31B1F89F7E80037268B /* spikes render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spikes render component.cpp"; sourceTree = "<group>"; };
@@ -534,6 +535,7 @@
 			children = (
 				4509F9001F5E816F00927A19 /* yaml helper.cpp */,
 				4509F9011F5E816F00927A19 /* yaml helper.hpp */,
+				4545DE981F8C5C81000A54AA /* yaml read.hpp */,
 				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
 				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
 				453890781F2ADB4B007EBB5A /* rect.hpp */,
@@ -834,8 +836,8 @@
 			children = (
 				4509F8E01F5BB23600927A19 /* basic render component.cpp */,
 				4509F8E11F5BB23600927A19 /* basic render component.hpp */,
-				4568D3151F89EAA00037268B /* pentagon render component.cpp */,
-				4568D3161F89EAA00037268B /* pentagon render component.hpp */,
+				4568D3151F89EAA00037268B /* polygon render component.cpp */,
+				4568D3161F89EAA00037268B /* polygon render component.hpp */,
 				4568D3181F89F0690037268B /* launcher render component.cpp */,
 				4568D3191F89F0690037268B /* launcher render component.hpp */,
 				4568D31B1F89F7E80037268B /* spikes render component.cpp */,
@@ -1316,7 +1318,7 @@
 				45DE9FCF1F71008600B1DA72 /* make anim comp.cpp in Sources */,
 				452FFA671F6BC50D003A98B1 /* b2CollideCircle.cpp in Sources */,
 				452FFA7A1F6BC50D003A98B1 /* b2Fixture.cpp in Sources */,
-				4568D3171F89EAA00037268B /* pentagon render component.cpp in Sources */,
+				4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */,
 				452FFA8A1F6BC50D003A98B1 /* b2Joint.cpp in Sources */,
 				452FFA851F6BC50D003A98B1 /* b2PolygonAndCircleContact.cpp in Sources */,
 				453892CC1F2AF420007EBB5A /* render component.cpp in Sources */,

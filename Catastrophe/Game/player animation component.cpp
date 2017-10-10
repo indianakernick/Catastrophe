@@ -18,7 +18,7 @@ PlayerAnimationComponent::PlayerAnimationComponent(
   const YAML::Node &node,
   const YAML::Node &
 ) {
-  transform.scale = readGLMvec(getChild(node, "scale"));
+  transform.scale = getChild(node, "scale").as<glm::vec2>();
   runningAnim.setDuration(getChild(node, "run duration").as<float>());
   standRunAnim.setDuration(getChild(node, "foot time").as<float>());
   groundJumpAnim.setDuration(getChild(node, "jump time").as<float>());

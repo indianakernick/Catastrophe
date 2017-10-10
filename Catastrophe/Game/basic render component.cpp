@@ -19,12 +19,7 @@ BasicRenderComponent::BasicRenderComponent(
   const YAML::Node &level
 ) {
   glm::vec2 scale = {1.0f, 1.0f};
-  if (const YAML::Node &sizeNode = node["scale"]) {
-    scale = readGLMvec(sizeNode);
-  }
-  if (const YAML::Node &sizeNode = level["scale"]) {
-    scale = readGLMvec(sizeNode);
-  }
+  getOptional(scale, node, level, "scale");
   layer = 0;
   if (const YAML::Node &layerNode = node["layer"]) {
     layer = getLayerIndex(layerNode.Scalar());

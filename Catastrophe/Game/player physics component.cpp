@@ -25,8 +25,8 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(
   const YAML::Node &level
 ) {
   Transform transform;
-  transform.pos = readGLMvec(getChild(level, "pos"));
-  transform.scale = readGLMvec(getChild(node, "scale"));
+  transform.pos = getChild(level, "pos").as<glm::vec2>();
+  transform.scale = getChild(node, "scale").as<glm::vec2>();
   body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
   body->SetUserData(this);
   
