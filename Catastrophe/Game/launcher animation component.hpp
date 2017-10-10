@@ -14,8 +14,9 @@
 
 class LauncherAnimationComponent final : public AnimationComponent {
 public:
-  LauncherAnimationComponent(const YAML::Node &, const YAML::Node &);
-
+  LauncherAnimationComponent() = default;
+  
+  void init(const YAML::Node &) override;
   void update(float) override;
   float getProgress() const override;
   glm::mat3 getModelMat() const override;

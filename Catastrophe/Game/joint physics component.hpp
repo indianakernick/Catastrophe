@@ -9,13 +9,13 @@
 #ifndef joint_physics_component_hpp
 #define joint_physics_component_hpp
 
-#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
 class JointPhysicsComponent : public PhysicsComponent {
 public:
-  JointPhysicsComponent(const YAML::Node &, const YAML::Node &);
+  JointPhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
 };

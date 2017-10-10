@@ -10,14 +10,10 @@
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
-#include "systems registry.hpp"
 
-ButtonPhysicsComponent::ButtonPhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
-  Transform transform = level.as<Transform>();
-  body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
+void ButtonPhysicsComponent::init(b2World &world, const YAML::Node &node) {
+  Transform transform = node.as<Transform>();
+  body = loadBody(getChild(node, "body").Scalar(), world, transform);
   body->SetUserData(this);
 }
 

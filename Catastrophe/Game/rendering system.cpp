@@ -26,14 +26,18 @@ void RenderingSystem::quit() {
   renderer = nullptr;
 }
 
-void RenderingSystem::add(const EntityID id, const std::shared_ptr<RenderComponent> comp) {
+void RenderingSystem::add(
+  const EntityID id,
+  const CompPtr comp,
+  const YAML::Node &node
+) {
   assert(renderer);
   const size_t layer = comp->getLayer();
   while (layers.size() <= layer) {
     layers.emplace_back();
   }
   layers[layer].emplace(id, comp);
-  comp->init(renderer->getContext(), renderer->getResources());
+  comp->init(*renderer, node);
 }
 
 void RenderingSystem::rem(const EntityID id) {

@@ -8,15 +8,13 @@
 
 #include "platform render component.hpp"
 
+#include "rendering context.hpp"
+
 const std::string PlatformRenderComponent::IMAGE_PATH = "platform image.png";
 
-PlatformRenderComponent::PlatformRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {}
-
-void PlatformRenderComponent::init(NVGcontext *, RenderResMan &resMan) {
-  image = resMan.getImage(IMAGE_PATH, IMAGE_FLAGS);
+void PlatformRenderComponent::init(RenderingContext &renderer, const YAML::Node &node) {
+  BasicRenderComponent::init(renderer, node);
+  image = renderer.getResources().getImage(IMAGE_PATH, IMAGE_FLAGS);
 }
 
 void PlatformRenderComponent::render(NVGcontext *const ctx) {

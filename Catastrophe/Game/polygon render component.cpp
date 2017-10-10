@@ -14,14 +14,12 @@
 #include "animation component.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-PolygonRenderComponent::PolygonRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {
-  getOptional(numSides, node, level, "sides");
-  getOptional(color, node, level, "color");
-  getOptional(rotPerSecond, node, level, "rotations per second");
-  getOptional(rotationOffset, node, level, "rotation");
+void PolygonRenderComponent::init(RenderingContext &renderer, const YAML::Node &node) {
+  BasicRenderComponent::init(renderer, node);
+  getOptional(numSides, node, "sides");
+  getOptional(color, node, "color");
+  getOptional(rotPerSecond, node, "rotations per second");
+  getOptional(rotationOffset, node, "rotation");
 }
 
 void PolygonRenderComponent::render(NVGcontext *const ctx) {

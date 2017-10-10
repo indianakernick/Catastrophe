@@ -12,12 +12,9 @@
 #include "physics file.hpp"
 #include "systems registry.hpp"
 
-JointPhysicsComponent::JointPhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
-  const YAML::Node &nodeA = getChild(level, "body A");
-  const YAML::Node &nodeB = getChild(level, "body B");
+void JointPhysicsComponent::init(b2World &world, const YAML::Node &node) {
+  const YAML::Node &nodeA = getChild(node, "body A");
+  const YAML::Node &nodeB = getChild(node, "body B");
   const EntityID idA = nodeA.as<EntityID>();
   const EntityID idB = nodeB.as<EntityID>();
   std::shared_ptr<PhysicsComponent> compA = Systems::physics->get(idA).lock();
@@ -42,9 +39,9 @@ JointPhysicsComponent::JointPhysicsComponent(
   jointDef->bodyA = compA->body;
   jointDef->bodyB = compB->body;
   
-  readJoint(jointDef, level);
+  readJoint(jointDef, node);
   
-  joint = Systems::physics->getWorld()->CreateJoint(jointDef);
+  joint = world.CreateJoint(jointDef);
 }
 
 void JointPhysicsComponent::preStep(float) {}

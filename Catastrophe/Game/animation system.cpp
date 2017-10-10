@@ -13,9 +13,11 @@
 
 void AnimationSystem::add(
   const EntityID entityID,
-  const std::shared_ptr<AnimationComponent> comp
+  const CompPtr comp,
+  const YAML::Node &node
 ) {
   components.emplace(entityID, comp);
+  comp->init(node);
 }
 
 void AnimationSystem::rem(const EntityID entityID) {

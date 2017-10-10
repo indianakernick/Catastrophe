@@ -17,15 +17,13 @@
 #include <Simpleton/Utils/safe down cast.hpp>
 #include "../Libraries/Box2D/Dynamics/Joints/b2PrismaticJoint.h"
 
-LauncherPhysicsComponent::LauncherPhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : JointPhysicsComponent(node, level) {
+void LauncherPhysicsComponent::init(b2World &world, const YAML::Node &node) {
+  JointPhysicsComponent::init(world, node);
   if (joint->GetType() != b2JointType::e_prismaticJoint) {
     throw std::runtime_error("Launcher entity should be a prismatic joint");
   }
   prisJoint = static_cast<b2PrismaticJoint *>(joint);
-  trigger = getChild(level, "trigger").as<EntityID>();
+  trigger = getChild(node, "trigger").as<EntityID>();
 }
 
 void LauncherPhysicsComponent::preStep(float) {

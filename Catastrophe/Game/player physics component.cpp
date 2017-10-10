@@ -13,21 +13,17 @@
 #include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
 #include "physics file.hpp"
-#include "systems registry.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-PlayerPhysicsComponent::PlayerPhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+void PlayerPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   Transform transform;
-  transform.pos = getChild(level, "pos").as<glm::vec2>();
+  transform.pos = getChild(node, "pos").as<glm::vec2>();
   transform.scale = getChild(node, "scale").as<glm::vec2>();
-  body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
+  body = loadBody(getChild(node, "body").Scalar(), world, transform);
   body->SetUserData(this);
   
   moveForce = getChild(node, "move force").as<float>();

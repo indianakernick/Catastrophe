@@ -9,13 +9,13 @@
 #ifndef button_physics_component_hpp
 #define button_physics_component_hpp
 
-#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
 class ButtonPhysicsComponent final : public PhysicsComponent {
 public:
-  ButtonPhysicsComponent(const YAML::Node &, const YAML::Node &);
+  ButtonPhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
   

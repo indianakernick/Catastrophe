@@ -15,9 +15,9 @@
 
 class PlatformRenderComponent final : public BasicRenderComponent {
 public:
-  PlatformRenderComponent(const YAML::Node &, const YAML::Node &);
+  PlatformRenderComponent() = default;
   
-  void init(NVGcontext *, RenderResMan &) override;
+  void init(RenderingContext &, const YAML::Node &) override;
   void render(NVGcontext *) override;
 
 private:

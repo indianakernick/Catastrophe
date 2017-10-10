@@ -18,15 +18,34 @@
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
+  YAML::Node merge(const YAML::Node &level, const YAML::Node &entity) {
+    //level overrides entity
+    //With std::experimental::map::merge I can just do this
+    //return level.merge(entity);
+    //but yaml-cpp is a pre-c++11 library
+    YAML::Node out = level;
+    YAML::Node inserted;
+    for (auto n : entity) {
+      const YAML::Node &node = level[n.first];
+      if (!node) {
+        inserted.force_insert(n.first, n.second);
+      }
+    }
+    for (auto n : inserted) {
+      out.force_insert(n.first, n.second);
+    }
+    return out;
+  }
+
   void readInputComp(
     const YAML::Node &inputNode,
     const YAML::Node &levelArgs,
     Entity *const entity
   ) {
     const std::string &name = getChild(inputNode, "name").Scalar();
-    entity->input = makeInputComp(name, inputNode, levelArgs);
+    entity->input = makeInputComp(name);
     entity->input->setEntity(entity);
-    Systems::input->add(entity->getID(), entity->input);
+    Systems::input->add(entity->getID(), entity->input, merge(levelArgs, inputNode));
   }
   
   void readPhysicsComp(
@@ -35,9 +54,9 @@ namespace {
     Entity *const entity
   ) {
     const std::string &name = getChild(physicsNode, "name").Scalar();
-    entity->physics = makePhysicsComp(name, physicsNode, levelArgs);
+    entity->physics = makePhysicsComp(name);
     entity->physics->setEntity(entity);
-    Systems::physics->add(entity->getID(), entity->physics);
+    Systems::physics->add(entity->getID(), entity->physics, merge(levelArgs, physicsNode));
   }
   
   void readAnimComp(
@@ -46,9 +65,9 @@ namespace {
     Entity *const entity
   ) {
     const std::string &name = getChild(animNode, "name").Scalar();
-    entity->animation = makeAnimComp(name, animNode, levelArgs);
+    entity->animation = makeAnimComp(name);
     entity->animation->setEntity(entity);
-    Systems::animation->add(entity->getID(), entity->animation);
+    Systems::animation->add(entity->getID(), entity->animation, merge(levelArgs, animNode));
   }
   
   void readRenderComp(
@@ -57,9 +76,9 @@ namespace {
     Entity *const entity
   ) {
     const std::string &name = getChild(renderNode, "name").Scalar();
-    entity->render = makeRenderComp(name, renderNode, levelArgs);
+    entity->render = makeRenderComp(name);
     entity->render->setEntity(entity);
-    Systems::rendering->add(entity->getID(), entity->render);
+    Systems::rendering->add(entity->getID(), entity->render, merge(levelArgs, renderNode));
   }
   
   EntityID readEntityID(const YAML::Node &levelArgs) {

@@ -11,13 +11,8 @@
 
 #include <memory>
 #include "input component.hpp"
-#include <yaml-cpp/node/node.h>
 #include <experimental/string_view>
 
-std::shared_ptr<InputComponent> makeInputComp(
-  std::experimental::string_view,
-  const YAML::Node &,
-  const YAML::Node &
-);
+std::shared_ptr<InputComponent> makeInputComp(std::experimental::string_view);
 
 #endif

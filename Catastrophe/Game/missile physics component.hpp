@@ -9,13 +9,13 @@
 #ifndef missile_physics_component_hpp
 #define missile_physics_component_hpp
 
-#include <yaml-cpp/yaml.h>
 #include "physics component.hpp"
 
 class MissilePhysicsComponent final : public PhysicsComponent {
 public:
-  MissilePhysicsComponent(const YAML::Node &, const YAML::Node &);
+  MissilePhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
   

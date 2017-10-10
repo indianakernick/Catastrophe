@@ -10,6 +10,7 @@
 #define input_component_hpp
 
 #include "component.hpp"
+#include <yaml-cpp/yaml.h>
 
 extern "C" union SDL_Event;
 
@@ -18,6 +19,7 @@ public:
   InputComponent() = default;
   virtual ~InputComponent() = default;
   
+  virtual void init(const YAML::Node &) = 0;
   virtual bool handleEvent(SDL_Event) = 0;
 };
 

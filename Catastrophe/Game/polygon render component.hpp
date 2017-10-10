@@ -14,8 +14,9 @@
 
 class PolygonRenderComponent final : public BasicRenderComponent {
 public:
-  PolygonRenderComponent(const YAML::Node &, const YAML::Node &);
+  PolygonRenderComponent() = default;
   
+  void init(RenderingContext &, const YAML::Node &) override;
   void render(NVGcontext *) override;
 
 private:

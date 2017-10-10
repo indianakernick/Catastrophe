@@ -11,15 +11,18 @@
 
 #include <glm/vec2.hpp>
 #include "component.hpp"
+#include <yaml-cpp/yaml.h>
 
 class b2Body;
 class b2Joint;
+class b2World;
 
 class PhysicsComponent : public Component {
 public:
   PhysicsComponent() = default;
   virtual ~PhysicsComponent() = default;
   
+  virtual void init(b2World &, const YAML::Node &) = 0;
   //Called before b2World::Step
   virtual void preStep(float) = 0;
   //Called after b2World::Step

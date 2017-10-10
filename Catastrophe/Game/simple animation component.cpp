@@ -15,11 +15,8 @@
 #include "systems registry.hpp"
 #include "physics component.hpp"
 
-SimpleAnimationComponent::SimpleAnimationComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
-  transform.scale = getChild(level, "scale").as<glm::vec2>();
+void SimpleAnimationComponent::init(const YAML::Node &node) {
+  transform.scale = getChild(node, "scale").as<glm::vec2>();
   float duration = 1.0f;
   getOptional(duration, node, "duration");
   anim.setDuration(duration);

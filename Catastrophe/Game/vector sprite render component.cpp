@@ -13,16 +13,12 @@
 #include "yaml helper.hpp"
 #include "vector file.hpp"
 #include "vector render.hpp"
+#include "rendering context.hpp"
 #include "animation component.hpp"
 
-VectorSpriteRenderComponent::VectorSpriteRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level),
-    spriteName(getChild(node, "sprite").Scalar()) {}
-
-void VectorSpriteRenderComponent::init(NVGcontext *, RenderResMan &resMan) {
-  sprite = loadSprite(spriteName, resMan);
+void VectorSpriteRenderComponent::init(RenderingContext &renderer, const YAML::Node &node) {
+  BasicRenderComponent::init(renderer, node);
+  sprite = loadSprite(getChild(node, "sprite").Scalar(), renderer.getResources());
 }
 
 void VectorSpriteRenderComponent::render(NVGcontext *const ctx) {

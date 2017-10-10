@@ -17,8 +17,9 @@ class b2PrismaticJoint;
 
 class LauncherPhysicsComponent final : public JointPhysicsComponent {
 public:
-  LauncherPhysicsComponent(const YAML::Node &, const YAML::Node &);
+  LauncherPhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
   

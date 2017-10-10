@@ -12,11 +12,6 @@
 #include "launcher animation component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 
-LauncherRenderComponent::LauncherRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {}
-
 void LauncherRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   

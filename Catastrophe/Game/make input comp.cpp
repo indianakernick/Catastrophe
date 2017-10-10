@@ -15,17 +15,13 @@ using InputComps = Utils::TypeList<
   PlayerInputComponent
 >;
 
-std::shared_ptr<InputComponent> makeInputComp(
-  const std::experimental::string_view name,
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+std::shared_ptr<InputComponent> makeInputComp(const std::experimental::string_view name) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<InputComponent>,
       InputComps
-    >(name, [&node, &level] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level);
+    >(name, [] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>();
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid input component name");

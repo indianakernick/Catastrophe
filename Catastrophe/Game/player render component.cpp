@@ -18,11 +18,6 @@
 #include <Simpleton/Utils/safe down cast.hpp>
 #include <Simpleton/Graphics/keyframe animation.hpp>
 
-PlayerRenderComponent::PlayerRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {}
-
 namespace {
   struct PivotJoint;
   

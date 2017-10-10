@@ -12,21 +12,24 @@
 #include <memory>
 #include <unordered_map>
 #include "entity id.hpp"
+#include <yaml-cpp/yaml.h>
 
 class AnimationComponent;
 
 class AnimationSystem {
 public:
+  using CompPtr = std::shared_ptr<AnimationComponent>;
+
   AnimationSystem() = default;
   ~AnimationSystem() = default;
   
-  void add(EntityID, std::shared_ptr<AnimationComponent>);
+  void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
   
   void update(float);
   
 private:
-  std::unordered_map<EntityID, std::shared_ptr<AnimationComponent>> components;
+  std::unordered_map<EntityID, CompPtr> components;
 };
 
 #endif

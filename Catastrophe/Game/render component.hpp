@@ -11,10 +11,11 @@
 
 #include "rect.hpp"
 #include "component.hpp"
+#include <yaml-cpp/yaml.h>
 #include "camera zoom track.hpp"
 #include "camera motion track.hpp"
 
-class RenderResMan;
+class RenderingContext;
 extern "C" struct NVGcontext;
 
 class RenderComponent : public Component {
@@ -22,7 +23,7 @@ public:
   RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
-  virtual void init(NVGcontext *, RenderResMan &) = 0;
+  virtual void init(RenderingContext &, const YAML::Node &) = 0;
   virtual void preRender() = 0;
   virtual void render(NVGcontext *) = 0;
   virtual CameraMotionTargetCPtr getMotionTarget() const = 0;

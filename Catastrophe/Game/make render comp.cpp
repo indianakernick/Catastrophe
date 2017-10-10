@@ -27,17 +27,13 @@ using RenderComps = Utils::TypeList<
   VectorSpriteRenderComponent
 >;
 
-std::shared_ptr<RenderComponent> makeRenderComp(
-  const std::experimental::string_view name,
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+std::shared_ptr<RenderComponent> makeRenderComp(const std::experimental::string_view name) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<RenderComponent>,
       RenderComps
-    >(name, [&node, &level] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level);
+    >(name, [] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>();
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid render component name");

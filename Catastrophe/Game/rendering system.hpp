@@ -13,19 +13,22 @@
 #include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
+#include <yaml-cpp/yaml.h>
 
 class RenderComponent;
 class RenderingContext;
 
 class RenderingSystem {
 public:
+  using CompPtr = std::shared_ptr<RenderComponent>;
+  
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
   void init(RenderingContext &);
   void quit();
   
-  void add(EntityID, std::shared_ptr<RenderComponent>);
+  void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
   
   void update(float);
@@ -44,7 +47,6 @@ private:
   RenderingContext *renderer = nullptr;
   Camera camera;
   
-  using CompPtr = std::shared_ptr<RenderComponent>;
   using IDtoCompPtr = std::unordered_map<EntityID, CompPtr>;
   std::vector<IDtoCompPtr> layers;
   

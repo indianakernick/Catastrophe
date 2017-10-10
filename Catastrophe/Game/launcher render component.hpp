@@ -14,7 +14,7 @@
 
 class LauncherRenderComponent final : public BasicRenderComponent {
 public:
-  LauncherRenderComponent(const YAML::Node &, const YAML::Node &);
+  LauncherRenderComponent() = default;
   
   void render(NVGcontext *) override;
 

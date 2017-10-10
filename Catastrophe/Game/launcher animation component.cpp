@@ -14,10 +14,7 @@
 #include "../Libraries/Box2D/Common/b2Math.h"
 #include <Simpleton/Utils/safe down cast.hpp>
 
-LauncherAnimationComponent::LauncherAnimationComponent(
-  const YAML::Node &,
-  const YAML::Node &
-) {}
+void LauncherAnimationComponent::init(const YAML::Node &) {}
 
 void LauncherAnimationComponent::update(float) {
   const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(getEntity().physics);

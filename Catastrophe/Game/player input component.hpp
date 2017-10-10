@@ -11,13 +11,12 @@
 
 #include <SDL2/SDL_scancode.h>
 #include "input component.hpp"
-#include <yaml-cpp/node/node.h>
 
 class PlayerInputComponent final : public InputComponent {
 public:
-  PlayerInputComponent(const YAML::Node &, const YAML::Node &);
-  ~PlayerInputComponent() = default;
+  PlayerInputComponent() = default;
   
+  void init(const YAML::Node &) override;
   bool handleEvent(SDL_Event) override;
   
   bool shouldMoveLeft() const;

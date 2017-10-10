@@ -12,6 +12,7 @@
 #include <memory>
 #include <unordered_map>
 #include "entity id.hpp"
+#include <yaml-cpp/yaml.h>
 #include <Simpleton/Utils/dispatcher.hpp>
 
 extern "C" union SDL_Event;
@@ -22,11 +23,12 @@ public:
   using Dispatcher = Utils::Handlable<uint32_t, const SDL_Event &>;
   using Listener = typename Dispatcher::Listener;
   using ListenerID = typename Dispatcher::ListenerID;
+  using CompPtr = std::shared_ptr<InputComponent>;
 
   InputSystem() = default;
   ~InputSystem() = default;
   
-  void add(EntityID, std::shared_ptr<InputComponent>);
+  void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
   
   void handleEvent(SDL_Event);
@@ -35,7 +37,7 @@ public:
   void remListener(ListenerID);
 
 private:
-  std::unordered_map<EntityID, std::shared_ptr<InputComponent>> components;
+  std::unordered_map<EntityID, CompPtr> components;
   Dispatcher dispatcher;
 };
 

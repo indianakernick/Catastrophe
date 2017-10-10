@@ -13,7 +13,7 @@
 
 class PlayerRenderComponent final : public BasicRenderComponent {
 public:
-  PlayerRenderComponent(const YAML::Node &, const YAML::Node &);
+  PlayerRenderComponent() = default;
   
   void render(NVGcontext *) override;
 };

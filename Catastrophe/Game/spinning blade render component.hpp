@@ -14,7 +14,7 @@
 
 class SpinningBladeRenderComponent final : public BasicRenderComponent {
 public:
-  SpinningBladeRenderComponent(const YAML::Node &, const YAML::Node &);
+  SpinningBladeRenderComponent() = default;
   
   void render(NVGcontext *) override;
 

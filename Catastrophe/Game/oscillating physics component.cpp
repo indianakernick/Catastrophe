@@ -10,7 +10,6 @@
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
-#include "systems registry.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -36,20 +35,17 @@ namespace {
   }
 }
 
-OscillatingPhysicsComponent::OscillatingPhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+void OscillatingPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   body = loadBody(
     getChild(node, "body").Scalar(),
-    Systems::physics->getWorld(),
-    level.as<Transform>()
+    world,
+    node.as<Transform>()
   );
   body->SetUserData(this);
-  first = getChild(level, "first").as<b2Vec2>();
-  second = getChild(level, "second").as<b2Vec2>();
+  first = getChild(node, "first").as<b2Vec2>();
+  second = getChild(node, "second").as<b2Vec2>();
   
-  if (const YAML::Node &startNode = level["start"]) {
+  if (const YAML::Node &startNode = node["start"]) {
     const float start = startNode.as<float>();
     const b2Vec2 startPoint = {
       Math::lerp(start, first.x, second.x),
@@ -60,7 +56,7 @@ OscillatingPhysicsComponent::OscillatingPhysicsComponent(
     body->SetTransform(first, body->GetAngle());
   }
   
-  const float vel = getChild(level, "vel").as<float>();
+  const float vel = getChild(node, "vel").as<float>();
   toSecond = second - first;
   toSecond.Normalize();
   toSecond *= vel;

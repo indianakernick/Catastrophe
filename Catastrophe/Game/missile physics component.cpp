@@ -15,17 +15,14 @@
 #include "player constants.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-MissilePhysicsComponent::MissilePhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
-  Transform transform = level.as<Transform>();
-  body = loadBody(getChild(node, "body").Scalar(), Systems::physics->getWorld(), transform);
+void MissilePhysicsComponent::init(b2World &world, const YAML::Node &node) {
+  Transform transform = node.as<Transform>();
+  body = loadBody(getChild(node, "body").Scalar(), world, transform);
   body->SetUserData(this);
-  getOptional(moveSpeed, node, level, "move speed");
+  getOptional(moveSpeed, node, "move speed");
 }
 
-void MissilePhysicsComponent::preStep(const float delta) {
+void MissilePhysicsComponent::preStep(float) {
   std::shared_ptr<PhysicsComponent> comp = Systems::physics->get(PLAYER_ID).lock();
   if (!comp) {
     return;

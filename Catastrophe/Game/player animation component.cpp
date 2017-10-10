@@ -14,10 +14,7 @@
 #include "player physics component.hpp"
 #include <Simpleton/Utils/safe down cast.hpp>
 
-PlayerAnimationComponent::PlayerAnimationComponent(
-  const YAML::Node &node,
-  const YAML::Node &
-) {
+void PlayerAnimationComponent::init(const YAML::Node &node) {
   transform.scale = getChild(node, "scale").as<glm::vec2>();
   runningAnim.setDuration(getChild(node, "run duration").as<float>());
   standRunAnim.setDuration(getChild(node, "foot time").as<float>());

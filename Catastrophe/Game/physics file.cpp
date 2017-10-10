@@ -237,7 +237,7 @@ namespace {
 
 b2Body *loadBody(
   const std::string &fileName,
-  b2World *const world,
+  b2World &world,
   const Transform transform
 ) {
   const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
@@ -245,7 +245,7 @@ b2Body *loadBody(
   
   const YAML::Node &bodyNode = getChild(rootNode, "body");
   const b2BodyDef bodyDef = readBodyDef(bodyNode);
-  b2Body *body = world->CreateBody(&bodyDef);
+  b2Body *body = world.CreateBody(&bodyDef);
   body->SetTransform(castToB2(transform.pos), transform.rotation);
   
   readFixtures(

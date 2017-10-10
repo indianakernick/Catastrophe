@@ -11,8 +11,9 @@
 #include <SDL2/SDL_events.h>
 #include "input component.hpp"
 
-void InputSystem::add(const EntityID id, const std::shared_ptr<InputComponent> comp) {
+void InputSystem::add(const EntityID id, const CompPtr comp, const YAML::Node &node) {
   components.emplace(id, comp);
+  comp->init(node);
 }
 
 void InputSystem::rem(const EntityID id) {

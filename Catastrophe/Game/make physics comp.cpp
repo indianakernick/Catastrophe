@@ -28,17 +28,13 @@ using PhysicsComps = Utils::TypeList<
   MissilePhysicsComponent
 >;
 
-std::shared_ptr<PhysicsComponent> makePhysicsComp(
-  const std::experimental::string_view name,
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+std::shared_ptr<PhysicsComponent> makePhysicsComp(const std::experimental::string_view name) {
   try {
     return Utils::getValueByName<
       std::shared_ptr<PhysicsComponent>,
       PhysicsComps
-    >(name, [&node, &level] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>(node, level);
+    >(name, [] (auto t) {
+      return std::make_shared<UTILS_TYPE(t)>();
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid physics component name");

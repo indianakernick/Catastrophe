@@ -14,13 +14,12 @@
 
 class VectorSpriteRenderComponent final : public BasicRenderComponent {
 public:
-  VectorSpriteRenderComponent(const YAML::Node &, const YAML::Node &);
+  VectorSpriteRenderComponent() = default;
   
-  void init(NVGcontext *, RenderResMan &);
-  void render(NVGcontext *);
+  void init(RenderingContext &, const YAML::Node &) override;
+  void render(NVGcontext *) override;
 
 private:
-  std::string spriteName;
   Sprite sprite;
 };
 

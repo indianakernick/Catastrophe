@@ -8,11 +8,6 @@
 
 #include "spikes render component.hpp"
 
-SpikesRenderComponent::SpikesRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {}
-
 void SpikesRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   

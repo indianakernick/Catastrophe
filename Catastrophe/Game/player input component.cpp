@@ -21,7 +21,7 @@ namespace {
   }
 }
 
-PlayerInputComponent::PlayerInputComponent(const YAML::Node &node, const YAML::Node &) {
+void PlayerInputComponent::init(const YAML::Node &node) {
   const KeyBindings bindings = loadInputs(getChild(node, "keys").Scalar());
   getOptional(leftKey, bindings, "left");
   getOptional(rightKey, bindings, "right");

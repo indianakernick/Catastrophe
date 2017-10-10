@@ -14,7 +14,7 @@
 
 class SpikesRenderComponent final : public BasicRenderComponent {
 public:
-  SpikesRenderComponent(const YAML::Node &, const YAML::Node &);
+  SpikesRenderComponent() = default;
   
   void render(NVGcontext *) override;
   

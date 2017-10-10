@@ -14,24 +14,16 @@
 #include "layer names.hpp"
 #include "animation component.hpp"
 
-BasicRenderComponent::BasicRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
+void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
   glm::vec2 scale = {1.0f, 1.0f};
-  getOptional(scale, node, level, "scale");
+  getOptional(scale, node, "scale");
   layer = 0;
   if (const YAML::Node &layerNode = node["layer"]) {
-    layer = getLayerIndex(layerNode.Scalar());
-  }
-  if (const YAML::Node &layerNode = level["layer"]) {
     layer = getLayerIndex(layerNode.Scalar());
   }
   rect = makeMotionTarget(glm::vec2(), scale);
   size = makeZoomTarget(scale);
 }
-
-void BasicRenderComponent::init(NVGcontext *, RenderResMan &) {}
 
 void BasicRenderComponent::preRender() {
   rect->c = getEntity().animation->getModelMat()[2];

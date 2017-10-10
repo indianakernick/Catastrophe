@@ -10,18 +10,10 @@
 
 #include "yaml helper.hpp"
 #include "physics file.hpp"
-#include "systems registry.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
-SimplePhysicsComponent::SimplePhysicsComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) {
-  body = loadBody(
-    getChild(node, "body").Scalar(),
-    Systems::physics->getWorld(),
-    level.as<Transform>()
-  );
+void SimplePhysicsComponent::init(b2World &world, const YAML::Node &node) {
+  body = loadBody(getChild(node, "body").Scalar(), world, node.as<Transform>());
   body->SetUserData(this);
 }
 

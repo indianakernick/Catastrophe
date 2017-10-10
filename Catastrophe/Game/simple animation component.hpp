@@ -16,8 +16,9 @@
 
 class SimpleAnimationComponent final : public AnimationComponent {
 public:
-  SimpleAnimationComponent(const YAML::Node &, const YAML::Node &);
+  SimpleAnimationComponent() = default;
   
+  void init(const YAML::Node &) override;
   void update(float) override;
   float getProgress() const override;
   glm::mat3 getModelMat() const override;

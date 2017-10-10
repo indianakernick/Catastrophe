@@ -34,9 +34,12 @@ b2World *PhysicsSystem::getWorld() {
 
 void PhysicsSystem::add(
   const EntityID entityID,
-  const std::shared_ptr<PhysicsComponent> comp
+  const CompPtr comp,
+  const YAML::Node &node
 ) {
+  assert(world);
   components.emplace(entityID, comp);
+  comp->init(*world, node);
 }
 
 void PhysicsSystem::rem(const EntityID entityID) {

@@ -10,14 +10,9 @@
 #define make_anim_comp_hpp
 
 #include <memory>
-#include <yaml-cpp/node/node.h>
 #include "animation component.hpp"
 #include <experimental/string_view>
 
-std::shared_ptr<AnimationComponent> makeAnimComp(
-  std::experimental::string_view,
-  const YAML::Node &,
-  const YAML::Node &
-);
+std::shared_ptr<AnimationComponent> makeAnimComp(std::experimental::string_view);
 
 #endif

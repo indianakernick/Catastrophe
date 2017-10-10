@@ -14,8 +14,9 @@
 
 class SimplePhysicsComponent final : public PhysicsComponent {
 public:
-  SimplePhysicsComponent(const YAML::Node &, const YAML::Node &);
+  SimplePhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
 };

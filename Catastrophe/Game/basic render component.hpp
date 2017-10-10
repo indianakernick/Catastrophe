@@ -14,9 +14,9 @@
 
 class BasicRenderComponent : public RenderComponent {
 public:
-  BasicRenderComponent(const YAML::Node &, const YAML::Node &);
+  BasicRenderComponent() = default;
   
-  void init(NVGcontext *, RenderResMan &) override;
+  void init(RenderingContext &, const YAML::Node &) override;
   void preRender() override;
   CameraMotionTargetCPtr getMotionTarget() const override;
   CameraZoomTargetCPtr getZoomTarget() const override;

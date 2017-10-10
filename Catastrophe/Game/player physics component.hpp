@@ -10,13 +10,13 @@
 #define player_physics_component_hpp
 
 #include <forward_list>
-#include <yaml-cpp/node/node.h>
 #include "physics component.hpp"
 
 class PlayerPhysicsComponent final : public PhysicsComponent {
 public:
-  PlayerPhysicsComponent(const YAML::Node &, const YAML::Node &);
+  PlayerPhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
   

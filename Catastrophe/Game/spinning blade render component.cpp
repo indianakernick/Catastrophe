@@ -12,11 +12,6 @@
 #include "animation component.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-SpinningBladeRenderComponent::SpinningBladeRenderComponent(
-  const YAML::Node &node,
-  const YAML::Node &level
-) : BasicRenderComponent(node, level) {}
-
 void SpinningBladeRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
