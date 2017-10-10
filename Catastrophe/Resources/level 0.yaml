@@ -56,3 +56,8 @@ entities:
   local anchor A: [5, 0.5]
   local anchor B: [0, -0.05]
   local axis A: [0, 1]
+
+- id: 10
+  file: missile entity.yaml
+  pos: [0, 10]
+  scale: [0.25, 0.125]

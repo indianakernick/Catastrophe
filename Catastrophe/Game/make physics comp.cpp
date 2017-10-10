@@ -12,6 +12,7 @@
 #include "player physics component.hpp"
 #include "simple physics component.hpp"
 #include "button physics component.hpp"
+#include "missile physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
@@ -23,7 +24,8 @@ using PhysicsComps = Utils::TypeList<
   OscillatingPhysicsComponent,
   JointPhysicsComponent,
   ButtonPhysicsComponent,
-  LauncherPhysicsComponent
+  LauncherPhysicsComponent,
+  MissilePhysicsComponent
 >;
 
 std::shared_ptr<PhysicsComponent> makePhysicsComp(

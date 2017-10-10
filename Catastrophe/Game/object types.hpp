@@ -39,6 +39,7 @@ std::pair<void *, void *> getUserData() {
   SYMBOL(Platform)                                                              \
   SYMBOL(Pentagon)                                                              \
   SYMBOL(Deadly)                                                                \
+  SYMBOL(FragileDeadly)                                                         \
   SYMBOL(TouchSensor)
 
 namespace Symbol {
