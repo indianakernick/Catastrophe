@@ -8,7 +8,7 @@
 
 #include "camera zoom track.hpp"
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "camera props.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Math/vectors.hpp>

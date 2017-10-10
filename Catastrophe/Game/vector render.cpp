@@ -9,7 +9,7 @@
 #include "vector render.hpp"
 
 #include "nvg helper.hpp"
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "vector sprite.hpp"
 #include <Simpleton/Utils/tuple.hpp>
 #include <Simpleton/Math/interpolate.hpp>

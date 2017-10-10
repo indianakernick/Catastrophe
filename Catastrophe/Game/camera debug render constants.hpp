@@ -9,7 +9,7 @@
 #ifndef camera_debug_render_constants_hpp
 #define camera_debug_render_constants_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 
 const NVGcolor CAMERA_TARGET_COLOR = nvgRGBAf(1.0f, 1.0f, 0.0f, 0.5f);
 const NVGcolor CAMERA_TRACK_COLOR = nvgRGBAf(0.0f, 1.0f, 0.0f, 0.5f);

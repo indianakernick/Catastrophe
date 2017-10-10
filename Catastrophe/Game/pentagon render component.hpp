@@ -9,7 +9,7 @@
 #ifndef pentagon_render_component_hpp
 #define pentagon_render_component_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "basic render component.hpp"
 
 class PentagonRenderComponent final : public BasicRenderComponent {

@@ -9,7 +9,7 @@
 #ifndef parse_nvg_enum_hpp
 #define parse_nvg_enum_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "command errors.hpp"
 #include "string view literal.hpp"
 #include <Simpleton/Utils/parse string.hpp>

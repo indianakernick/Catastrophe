@@ -11,7 +11,7 @@
 
 #include <tuple>
 #include <glm/vec2.hpp>
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "animation data types.hpp"
 
 struct ImageType {};

@@ -9,7 +9,7 @@
 #ifndef launcher_render_component_hpp
 #define launcher_render_component_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "basic render component.hpp"
 
 class LauncherRenderComponent final : public BasicRenderComponent {

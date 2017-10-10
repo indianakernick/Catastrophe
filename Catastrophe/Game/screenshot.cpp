@@ -11,7 +11,7 @@
 #include <SDL2/SDL_events.h>
 #include "rendering context.hpp"
 #include "framebuffer to png.hpp"
-#include "../Libraries/tinyfiledialogs.h"
+#include "tinyfiledialogs.h"
 
 Screenshot::Screenshot()
   : framebuffer(std::make_unique<uint8_t []>(MAX_FRAMEBUFFER_SIZE)) {}

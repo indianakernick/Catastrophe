@@ -9,7 +9,7 @@
 #ifndef platform_render_component_hpp
 #define platform_render_component_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "rendering resources.hpp"
 #include "basic render component.hpp"
 

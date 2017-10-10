@@ -10,7 +10,7 @@
 #define sprite_paints_hpp
 
 #include <vector>
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "rendering resources.hpp"
 
 using Images = std::vector<ImageHandle>;

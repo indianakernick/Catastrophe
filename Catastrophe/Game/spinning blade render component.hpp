@@ -9,7 +9,7 @@
 #ifndef spinning_blade_render_component_hpp
 #define spinning_blade_render_component_hpp
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "basic render component.hpp"
 
 class SpinningBladeRenderComponent final : public BasicRenderComponent {

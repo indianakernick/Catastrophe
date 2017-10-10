@@ -12,8 +12,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #define NANOVG_GL3_IMPLEMENTATION
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-parameter"
 #include <nanovg/nanovg_gl.h>
+#pragma clang diagnostic pop
 #include <Simpleton/Platform/sdl error.hpp>
 #include "nvg helper.hpp"
 #include "window constants.hpp"
@@ -23,21 +26,24 @@ constexpr int STENCIL_BITS = 8;
 constexpr int COLOR_BITS = 32;
 
 namespace {
-  void setSDLGLcontextAttribs() {
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, DEPTH_BITS);
-    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, STENCIL_BITS);
-    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, COLOR_BITS);
+  const char *glErrorString(const GLenum error) {
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return reinterpret_cast<const char *>(gluErrorString(error));
+    #pragma clang diagnostic pop
   }
 }
 
 void RenderingContext::init(SDL_Window *newWindow) {
   window = newWindow;
   
-  setSDLGLcontextAttribs();
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, DEPTH_BITS);
+  SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, STENCIL_BITS);
+  SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, COLOR_BITS);
   
   sdlGLContext = SDL_GL_CreateContext(window);
   if (sdlGLContext == nullptr) {
@@ -53,7 +59,7 @@ void RenderingContext::init(SDL_Window *newWindow) {
   
   const GLenum glError = glGetError();
   if (glError != GL_NO_ERROR) {
-    throw std::runtime_error(reinterpret_cast<const char *>(gluErrorString(glError)));
+    throw std::runtime_error(glErrorString(glError));
   }
   
   int nvgCreateFlags = NVG_ANTIALIAS | NVG_STENCIL_STROKES;
@@ -160,7 +166,7 @@ void RenderingContext::captureFrame(uint8_t *const data) {
   if (error != GL_NO_ERROR) {
     throw std::runtime_error(
       std::string("Failed to copy framebuffer into RAM: ") +
-      reinterpret_cast<const char *>(gluErrorString(error))
+      glErrorString(error)
     );
   }
 }

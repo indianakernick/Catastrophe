@@ -9,7 +9,7 @@
 #include "rendering system.hpp"
 
 #include "camera.hpp"
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "entity manager.hpp"
 #include "render component.hpp"
 #include "rendering context.hpp"

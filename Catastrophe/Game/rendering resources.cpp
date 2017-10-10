@@ -8,7 +8,7 @@
 
 #include "rendering resources.hpp"
 
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 void RenderResMan::init(NVGcontext *newContext) {

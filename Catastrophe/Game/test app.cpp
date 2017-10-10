@@ -18,7 +18,7 @@
 #include <Simpleton/Platform/system info.hpp>
 
 TestApp::TestApp(const char *spriteFile, const char *animName)
-  : spriteFile(spriteFile), animName(animName), renderComp({}, {}) {}
+  : renderComp({}, {}), spriteFile(spriteFile), animName(animName) {}
 
 bool TestApp::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);

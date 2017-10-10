@@ -10,7 +10,7 @@
 
 #include <cmath>
 #include <glm/vec2.hpp>
-#include <nanovg/nanovg.h>
+#include "nanovg.hpp"
 #include "physics constants.hpp"
 
 namespace {
