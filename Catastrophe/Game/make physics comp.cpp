@@ -10,7 +10,6 @@
 
 #include "joint physics component.hpp"
 #include "player physics component.hpp"
-#include "simple physics component.hpp"
 #include "button physics component.hpp"
 #include "missile physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
@@ -20,7 +19,7 @@
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
-  SimplePhysicsComponent,
+  BodyPhysicsComponent,
   OscillatingPhysicsComponent,
   JointPhysicsComponent,
   ButtonPhysicsComponent,

@@ -1,5 +1,5 @@
 physics:
-  name: SimplePhysicsComponent
+  name: BodyPhysicsComponent
   body: spinning blade body.yaml
 
 animation:

@@ -9,7 +9,6 @@
 #include "oscillating physics component.hpp"
 
 #include "yaml helper.hpp"
-#include "physics file.hpp"
 #include <Simpleton/Math/interpolate.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -36,12 +35,7 @@ namespace {
 }
 
 void OscillatingPhysicsComponent::init(b2World &world, const YAML::Node &node) {
-  body = loadBody(
-    getChild(node, "body").Scalar(),
-    world,
-    node.as<Transform>()
-  );
-  body->SetUserData(this);
+  BodyPhysicsComponent::init(world, node);
   first = getChild(node, "first").as<b2Vec2>();
   second = getChild(node, "second").as<b2Vec2>();
   
@@ -63,8 +57,6 @@ void OscillatingPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   
   body->SetLinearVelocity(toSecond);
 }
-
-void OscillatingPhysicsComponent::preStep(float) {}
 
 void OscillatingPhysicsComponent::postStep() {
   const b2Vec2 pos = body->GetPosition();

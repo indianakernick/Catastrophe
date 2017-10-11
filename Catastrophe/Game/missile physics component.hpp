@@ -9,9 +9,9 @@
 #ifndef missile_physics_component_hpp
 #define missile_physics_component_hpp
 
-#include "physics component.hpp"
+#include "body physics component.hpp"
 
-class MissilePhysicsComponent final : public PhysicsComponent {
+class MissilePhysicsComponent final : public BodyPhysicsComponent {
 public:
   MissilePhysicsComponent() = default;
   

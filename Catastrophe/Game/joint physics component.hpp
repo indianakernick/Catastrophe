@@ -11,13 +11,22 @@
 
 #include "physics component.hpp"
 
+class b2Joint;
+
 class JointPhysicsComponent : public PhysicsComponent {
 public:
   JointPhysicsComponent() = default;
   
   void init(b2World &, const YAML::Node &) override;
-  void preStep(float) override;
-  void postStep() override;
+  void quit(b2World &) override;
+  void preStep(float) override {}
+  void postStep() override {}
+
+  b2Joint *getJoint();
+  const b2Joint *getJoint() const;
+  
+protected:
+  b2Joint *joint = nullptr;
 };
 
 #endif

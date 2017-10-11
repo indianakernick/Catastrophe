@@ -11,39 +11,45 @@
 #include "yaml helper.hpp"
 #include "physics file.hpp"
 #include "systems registry.hpp"
+#include "body physics component.hpp"
+
+namespace {
+  std::shared_ptr<BodyPhysicsComponent> getBodyComp(const YAML::Node &node) {
+    const EntityID id = node.as<EntityID>();
+    auto comp = Systems::physics->get(id).lock();
+    if (!comp) {
+      throw std::runtime_error(
+        "Invalid entity ID at line "
+        + std::to_string(node.Mark().line)
+      );
+    }
+    auto bodyComp = std::dynamic_pointer_cast<BodyPhysicsComponent>(comp);
+    if (!bodyComp || !bodyComp->getBody()) {
+      throw std::runtime_error(
+        "Expected entity at line "
+        + std::to_string(node.Mark().line)
+        + " to be a physics body"
+      );
+    }
+    return bodyComp;
+  }
+}
 
 void JointPhysicsComponent::init(b2World &world, const YAML::Node &node) {
-  const YAML::Node &nodeA = getChild(node, "body A");
-  const YAML::Node &nodeB = getChild(node, "body B");
-  const EntityID idA = nodeA.as<EntityID>();
-  const EntityID idB = nodeB.as<EntityID>();
-  std::shared_ptr<PhysicsComponent> compA = Systems::physics->get(idA).lock();
-  std::shared_ptr<PhysicsComponent> compB = Systems::physics->get(idB).lock();
-  
-  if (!compA || !compA->body) {
-    throw std::runtime_error(
-      "Invalid entity ID at line"
-      + std::to_string(nodeA.Mark().line)
-    );
-  }
-  if (!compB || !compB->body) {
-    throw std::runtime_error(
-      "Invalid entity ID at line"
-      + std::to_string(nodeB.Mark().line)
-    );
-  }
+  const auto bodyCompA = getBodyComp(getChild(node, "body A"));
+  const auto bodyCompB = getBodyComp(getChild(node, "body B"));
   
   const YAML::Node &jointNode = getChild(node, "joint");
   b2JointDef *jointDef = loadJoint(jointNode.Scalar());
   jointDef->userData = this;
-  jointDef->bodyA = compA->body;
-  jointDef->bodyB = compB->body;
+  jointDef->bodyA = bodyCompA->getBody();
+  jointDef->bodyB = bodyCompB->getBody();
   
   readJoint(jointDef, node);
   
   joint = world.CreateJoint(jointDef);
 }
 
-void JointPhysicsComponent::preStep(float) {}
-
-void JointPhysicsComponent::postStep() {}
+void JointPhysicsComponent::quit(b2World &) {
+  //a joint is destroyed when either of the bodies is destroyed
+}

@@ -13,7 +13,7 @@
 #include "vector file.hpp"
 #include "vector render.hpp"
 #include "systems registry.hpp"
-#include "physics component.hpp"
+#include "body physics component.hpp"
 
 void SimpleAnimationComponent::init(const YAML::Node &node) {
   transform.scale = getChild(node, "scale").as<glm::vec2>();
@@ -25,8 +25,12 @@ void SimpleAnimationComponent::init(const YAML::Node &node) {
 void SimpleAnimationComponent::update(const float delta) {
   anim.advance(delta);
   anim.repeatOnOverflow();
-  transform.pos = getEntity().physics->getPos();
-  transform.rotation = getEntity().physics->getAngle();
+  const auto bodyComp
+  = std::dynamic_pointer_cast<BodyPhysicsComponent>(getEntity().physics);
+  if (bodyComp) {
+    transform.pos = bodyComp->getPos();
+    transform.rotation = bodyComp->getAngle();
+  }
   model = transform.getMat3();
 }
 

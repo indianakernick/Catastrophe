@@ -10,24 +10,25 @@
 
 #include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
-#include "physics file.hpp"
 #include "systems registry.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
 void MissilePhysicsComponent::init(b2World &world, const YAML::Node &node) {
-  Transform transform = node.as<Transform>();
-  body = loadBody(getChild(node, "body").Scalar(), world, transform);
-  body->SetUserData(this);
+  BodyPhysicsComponent::init(world, node);
   getOptional(moveSpeed, node, "move speed");
 }
 
 void MissilePhysicsComponent::preStep(float) {
-  std::shared_ptr<PhysicsComponent> comp = Systems::physics->get(PLAYER_ID).lock();
+  const auto comp = Systems::physics->get(PLAYER_ID).lock();
   if (!comp) {
     return;
   }
-  const b2Vec2 playerPos = comp->body->GetPosition();
+  const auto bodyComp = std::dynamic_pointer_cast<BodyPhysicsComponent>(comp);
+  if (!bodyComp || !bodyComp->getBody()) {
+    return;
+  }
+  const b2Vec2 playerPos = bodyComp->getBody()->GetPosition();
   const b2Vec2 missilePos = body->GetPosition();
   const b2Vec2 missileToPlayer = playerPos - missilePos;
   const float newAngle = Math::angle(missileToPlayer);

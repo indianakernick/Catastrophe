@@ -12,7 +12,6 @@
 #include "entity.hpp"
 #include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
-#include "physics file.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
@@ -20,12 +19,7 @@
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 void PlayerPhysicsComponent::init(b2World &world, const YAML::Node &node) {
-  Transform transform;
-  transform.pos = getChild(node, "pos").as<glm::vec2>();
-  transform.scale = getChild(node, "scale").as<glm::vec2>();
-  body = loadBody(getChild(node, "body").Scalar(), world, transform);
-  body->SetUserData(this);
-  
+  BodyPhysicsComponent::init(world, node);
   moveForce = getChild(node, "move force").as<float>();
   airMoveForce = getChild(node, "air move force").as<float>();
   maxMoveSpeed = getChild(node, "max move speed").as<float>();

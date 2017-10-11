@@ -10,9 +10,9 @@
 #define player_physics_component_hpp
 
 #include <forward_list>
-#include "physics component.hpp"
+#include "body physics component.hpp"
 
-class PlayerPhysicsComponent final : public PhysicsComponent {
+class PlayerPhysicsComponent final : public BodyPhysicsComponent {
 public:
   PlayerPhysicsComponent() = default;
   

@@ -21,7 +21,6 @@ public:
   
   void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
-  void postStep() override;
   
   float getRelTranslation() const;
   float getLimitSize() const;
@@ -30,7 +29,7 @@ public:
   
 private:
   EntityID trigger;
-  b2PrismaticJoint *prisJoint;
+  b2PrismaticJoint *prisJoint = nullptr;
 };
 
 #endif

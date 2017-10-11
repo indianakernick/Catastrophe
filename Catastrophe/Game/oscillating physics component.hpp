@@ -9,15 +9,14 @@
 #ifndef oscillating_physics_component_hpp
 #define oscillating_physics_component_hpp
 
-#include "physics component.hpp"
+#include "body physics component.hpp"
 #include "../Libraries/Box2D/Common/b2Math.h"
 
-class OscillatingPhysicsComponent final : public PhysicsComponent {
+class OscillatingPhysicsComponent final : public BodyPhysicsComponent {
 public:
   OscillatingPhysicsComponent() = default;
   
   void init(b2World &, const YAML::Node &) override;
-  void preStep(float) override;
   void postStep() override;
   
 private:

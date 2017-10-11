@@ -9,15 +9,11 @@
 #ifndef button_physics_component_hpp
 #define button_physics_component_hpp
 
-#include "physics component.hpp"
+#include "body physics component.hpp"
 
-class ButtonPhysicsComponent final : public PhysicsComponent {
+class ButtonPhysicsComponent final : public BodyPhysicsComponent {
 public:
   ButtonPhysicsComponent() = default;
-  
-  void init(b2World &, const YAML::Node &) override;
-  void preStep(float) override;
-  void postStep() override;
   
   void beginContactingPlayer();
   void endContactingPlayer();

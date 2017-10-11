@@ -102,6 +102,7 @@
 		4545DE9C1F8C76CC000A54AA /* missile body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DE9B1F8C76CC000A54AA /* missile body.yaml */; };
 		4545DE9F1F8C787D000A54AA /* missile physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DE9D1F8C787D000A54AA /* missile physics component.cpp */; };
 		4545DEA11F8C81DB000A54AA /* missile entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEA01F8C81DB000A54AA /* missile entity.yaml */; };
+		4545DEA41F8DAA62000A54AA /* body physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEA21F8DAA62000A54AA /* body physics component.cpp */; };
 		4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* polygon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
@@ -167,7 +168,6 @@
 		45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0831F85F87600B1DA72 /* layer names.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
-		45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99161F33104200F8C639 /* simple physics component.cpp */; };
 		45FA993F1F35476400F8C639 /* contact listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA993D1F35476400F8C639 /* contact listener.cpp */; };
 		45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99431F36A12A00F8C639 /* register collision listeners.cpp */; };
 /* End PBXBuildFile section */
@@ -359,6 +359,8 @@
 		4545DE9D1F8C787D000A54AA /* missile physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "missile physics component.cpp"; sourceTree = "<group>"; };
 		4545DE9E1F8C787D000A54AA /* missile physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "missile physics component.hpp"; sourceTree = "<group>"; };
 		4545DEA01F8C81DB000A54AA /* missile entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "missile entity.yaml"; sourceTree = "<group>"; };
+		4545DEA21F8DAA62000A54AA /* body physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "body physics component.cpp"; sourceTree = "<group>"; };
+		4545DEA31F8DAA62000A54AA /* body physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "body physics component.hpp"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* polygon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "polygon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* polygon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "polygon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
@@ -471,8 +473,6 @@
 		45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.5.3.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.5.3/lib/libyaml-cpp.0.5.3.dylib"; sourceTree = "<group>"; };
 		45FA99131F330A1E00F8C639 /* player physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player physics component.cpp"; sourceTree = "<group>"; };
 		45FA99141F330A1E00F8C639 /* player physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player physics component.hpp"; sourceTree = "<group>"; };
-		45FA99161F33104200F8C639 /* simple physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple physics component.cpp"; sourceTree = "<group>"; };
-		45FA99171F33104200F8C639 /* simple physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple physics component.hpp"; sourceTree = "<group>"; };
 		45FA993D1F35476400F8C639 /* contact listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "contact listener.cpp"; sourceTree = "<group>"; };
 		45FA993E1F35476400F8C639 /* contact listener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "contact listener.hpp"; sourceTree = "<group>"; };
 		45FA99401F354C8D00F8C639 /* object types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "object types.hpp"; sourceTree = "<group>"; };
@@ -1065,14 +1065,14 @@
 		45FA99121F3309F800F8C639 /* physics components */ = {
 			isa = PBXGroup;
 			children = (
-				45FA99131F330A1E00F8C639 /* player physics component.cpp */,
-				45FA99141F330A1E00F8C639 /* player physics component.hpp */,
-				45FA99161F33104200F8C639 /* simple physics component.cpp */,
-				45FA99171F33104200F8C639 /* simple physics component.hpp */,
-				45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */,
-				45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */,
+				4545DEA21F8DAA62000A54AA /* body physics component.cpp */,
+				4545DEA31F8DAA62000A54AA /* body physics component.hpp */,
 				45DEA0611F84941F00B1DA72 /* joint physics component.cpp */,
 				45DEA0621F84941F00B1DA72 /* joint physics component.hpp */,
+				45FA99131F330A1E00F8C639 /* player physics component.cpp */,
+				45FA99141F330A1E00F8C639 /* player physics component.hpp */,
+				45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */,
+				45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */,
 				45DEA0761F859F7200B1DA72 /* button physics component.cpp */,
 				45DEA0771F859F7200B1DA72 /* button physics component.hpp */,
 				45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */,
@@ -1275,6 +1275,7 @@
 				452FFA741F6BC50D003A98B1 /* b2Math.cpp in Sources */,
 				4545DE9F1F8C787D000A54AA /* missile physics component.cpp in Sources */,
 				452FFA7C1F6BC50D003A98B1 /* b2World.cpp in Sources */,
+				4545DEA41F8DAA62000A54AA /* body physics component.cpp in Sources */,
 				452FFA8E1F6BC50D003A98B1 /* b2PulleyJoint.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,
 				453892FB1F2C4209007EBB5A /* entity manager.cpp in Sources */,
@@ -1293,7 +1294,6 @@
 				452FFA7E1F6BC50D003A98B1 /* b2ChainAndCircleContact.cpp in Sources */,
 				454116301F5405FD00C2865B /* camera props.cpp in Sources */,
 				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,
-				45FA99181F33104200F8C639 /* simple physics component.cpp in Sources */,
 				45DE9FBC1F6E467400B1DA72 /* tinyfiledialogs.c in Sources */,
 				45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */,
 				45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */,

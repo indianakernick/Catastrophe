@@ -44,14 +44,9 @@ void PhysicsSystem::add(
 
 void PhysicsSystem::rem(const EntityID entityID) {
   auto iter = components.find(entityID);
-  if (iter == components.cend()) {
-    return;
+  if (iter != components.cend()) {
+    components.erase(iter);
   }
-  b2Body *const body = iter->second->body;
-  if (body) {
-    world->DestroyBody(body);
-  }
-  components.erase(iter);
 }
 
 std::weak_ptr<PhysicsComponent> PhysicsSystem::get(const EntityID entityID) {

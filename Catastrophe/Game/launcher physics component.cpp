@@ -39,8 +39,6 @@ void LauncherPhysicsComponent::preStep(float) {
   }
 }
 
-void LauncherPhysicsComponent::postStep() {}
-
 float LauncherPhysicsComponent::getRelTranslation() const {
   return Math::clamp(
     Math::invLerp<float>(
