@@ -1,6 +1,7 @@
 body:
   type: dynamic
   linear damping: 0.8
+  gravity scale: 0
 
 shapes:
   main:
@@ -19,9 +20,9 @@ shapes:
 
 fixtures:
 - shape: main
-  density: 5
+  density: 0
   user data: FragileDeadly
 
 - shape: nose
-  density: 1
+  density: 0
   user data: FragileDeadly
