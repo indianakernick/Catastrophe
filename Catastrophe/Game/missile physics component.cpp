@@ -16,7 +16,20 @@
 
 void MissilePhysicsComponent::init(b2World &world, const YAML::Node &node) {
   BodyPhysicsComponent::init(world, node);
-  getOptional(moveSpeed, node, "move speed");
+  getOptional(moveForce, node, "move force");
+  getOptional(turnTorque, node, "turn torque");
+}
+
+namespace {
+  float relativeAngle(float abs) {
+    while (abs > b2_pi) {
+      abs -= b2_pi;
+    }
+    while (abs < -b2_pi) {
+      abs += b2_pi;
+    }
+    return abs;
+  }
 }
 
 void MissilePhysicsComponent::preStep(float) {
@@ -28,12 +41,15 @@ void MissilePhysicsComponent::preStep(float) {
   if (!bodyComp || !bodyComp->getBody()) {
     return;
   }
-  const b2Vec2 playerPos = bodyComp->getBody()->GetPosition();
-  const b2Vec2 missilePos = body->GetPosition();
-  const b2Vec2 missileToPlayer = playerPos - missilePos;
-  const float newAngle = Math::angle(missileToPlayer);
-  body->SetTransform(missilePos, newAngle);
-  body->SetLinearVelocity(castToB2(Math::angleMag(newAngle, moveSpeed)));
+  b2Vec2 missileToPlayer = bodyComp->getBody()->GetPosition() - body->GetPosition();
+  missileToPlayer.Normalize();
+  missileToPlayer *= TOP_SPEED;
+  const float targetAngle = Math::angle(missileToPlayer - body->GetLinearVelocity());
+  body->SetTransform(body->GetPosition(), targetAngle);
+  const float force = moveForce * (1.0f - std::abs(relativeAngle(targetAngle - Math::angle(missileToPlayer))) / b2_pi);
+  
+  const glm::vec2 forceVec = Math::angleMag(targetAngle, force);
+  body->ApplyForceToCenter(castToB2(forceVec), true);
 }
 
 void MissilePhysicsComponent::postStep() {

@@ -22,7 +22,10 @@ public:
   void beginContact();
 
 private:
-  float moveSpeed = 0.5f;
+  static constexpr float TOP_SPEED = 20.0f;
+
+  float moveForce = 10.0f;
+  float turnTorque = 1.0f;
   bool contacted = false;
 };
 
