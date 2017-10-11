@@ -14,6 +14,7 @@
 #include "launcher render component.hpp"
 #include "platform render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
+#include "ground drone render component.hpp"
 #include "vector sprite render component.hpp"
 #include "spinning blade render component.hpp"
 
@@ -24,7 +25,8 @@ using RenderComps = Utils::TypeList<
   PlatformRenderComponent,
   SpinningBladeRenderComponent,
   PlayerRenderComponent,
-  VectorSpriteRenderComponent
+  VectorSpriteRenderComponent,
+  GroundDroneRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(const std::experimental::string_view name) {

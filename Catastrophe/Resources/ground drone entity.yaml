@@ -1,0 +1,10 @@
+physics:
+  name: OscillatingPhysicsComponent
+  body: ground drone body.yaml
+
+animation:
+  name: SimpleAnimationComponent
+  
+rendering:
+  name: GroundDroneRenderComponent
+  layer: under player -1

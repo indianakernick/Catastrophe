@@ -1,4 +1,4 @@
 physics:
   name: MissilePhysicsComponent
   body: missile body.yaml
-  move force: 10.0
+  move force: 20.0

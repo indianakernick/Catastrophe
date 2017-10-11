@@ -103,6 +103,9 @@
 		4545DE9F1F8C787D000A54AA /* missile physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DE9D1F8C787D000A54AA /* missile physics component.cpp */; };
 		4545DEA11F8C81DB000A54AA /* missile entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEA01F8C81DB000A54AA /* missile entity.yaml */; };
 		4545DEA41F8DAA62000A54AA /* body physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEA21F8DAA62000A54AA /* body physics component.cpp */; };
+		4545DEAA1F8DD260000A54AA /* ground drone render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEA81F8DD260000A54AA /* ground drone render component.cpp */; };
+		4545DEAC1F8DD355000A54AA /* ground drone entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */; };
+		4545DEAE1F8DD3B6000A54AA /* ground drone body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */; };
 		4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* polygon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
@@ -361,6 +364,10 @@
 		4545DEA01F8C81DB000A54AA /* missile entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "missile entity.yaml"; sourceTree = "<group>"; };
 		4545DEA21F8DAA62000A54AA /* body physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "body physics component.cpp"; sourceTree = "<group>"; };
 		4545DEA31F8DAA62000A54AA /* body physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "body physics component.hpp"; sourceTree = "<group>"; };
+		4545DEA81F8DD260000A54AA /* ground drone render component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground drone render component.cpp"; sourceTree = "<group>"; };
+		4545DEA91F8DD260000A54AA /* ground drone render component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground drone render component.hpp"; sourceTree = "<group>"; };
+		4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ground drone entity.yaml"; sourceTree = "<group>"; };
+		4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ground drone body.yaml"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* polygon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "polygon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* polygon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "polygon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
@@ -857,6 +864,8 @@
 				453A0AB01F8AF1E70042B23B /* player render component.hpp */,
 				453A0ABA1F8B5F450042B23B /* vector sprite render component.cpp */,
 				453A0ABB1F8B5F450042B23B /* vector sprite render component.hpp */,
+				4545DEA81F8DD260000A54AA /* ground drone render component.cpp */,
+				4545DEA91F8DD260000A54AA /* ground drone render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -998,6 +1007,7 @@
 				45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */,
 				45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */,
 				4545DEA01F8C81DB000A54AA /* missile entity.yaml */,
+				4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1033,6 +1043,7 @@
 				45DEA0641F84A39500B1DA72 /* launcher platform body.yaml */,
 				45DEA0741F859D3100B1DA72 /* button body.yaml */,
 				4545DE9B1F8C76CC000A54AA /* missile body.yaml */,
+				4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */,
 			);
 			name = Bodies;
 			sourceTree = "<group>";
@@ -1164,6 +1175,7 @@
 				457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */,
 				45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */,
 				45DEA04A1F8343CB00B1DA72 /* spinning blade sprite.yaml in Resources */,
+				4545DEAC1F8DD355000A54AA /* ground drone entity.yaml in Resources */,
 				45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */,
 				45DEA0431F82FF2D00B1DA72 /* spikes entity.yaml in Resources */,
 				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
@@ -1191,6 +1203,7 @@
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
 				457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */,
+				4545DEAE1F8DD3B6000A54AA /* ground drone body.yaml in Resources */,
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */,
 				45DEA0751F859D3100B1DA72 /* button body.yaml in Resources */,
@@ -1302,6 +1315,7 @@
 				452FFA8B1F6BC50D003A98B1 /* b2MotorJoint.cpp in Sources */,
 				452FFA6B1F6BC50D003A98B1 /* b2Distance.cpp in Sources */,
 				45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */,
+				4545DEAA1F8DD260000A54AA /* ground drone render component.cpp in Sources */,
 				45DE9FD11F71015700B1DA72 /* make render comp.cpp in Sources */,
 				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,
 				45DE9FCB1F70FE9100B1DA72 /* make input comp.cpp in Sources */,
