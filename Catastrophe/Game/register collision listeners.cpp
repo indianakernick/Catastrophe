@@ -12,39 +12,71 @@
 #include "contact listener.hpp"
 #include "player physics component.hpp"
 #include "button physics component.hpp"
+#include "missile physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
 template <typename Comp>
-Comp *getComponent(b2Fixture *fixture) {
-  return reinterpret_cast<Comp *>(fixture->GetBody()->GetUserData());
+Comp *getComponent(b2Fixture *const fixture) {
+  return dynamic_cast<Comp *>(
+    reinterpret_cast<BodyPhysicsComponent *>(
+      fixture->GetBody()->GetUserData()
+    )
+  );
 }
 
 void handlePlayerFootPlatformBegin(b2Fixture *platform, b2Fixture *playerFoot) {
   static_assert(symbolLess<Symbol::Platform, Symbol::PlayerFoot>());
   
   auto *player = getComponent<PlayerPhysicsComponent>(playerFoot);
-  player->beginContactingGround(platform->GetBody());
+  if (player) {
+    player->beginContactingGround(platform->GetBody());
+  }
 }
 
 void handlePlayerFootPlatformEnd(b2Fixture *platform, b2Fixture *playerFoot) {
   static_assert(symbolLess<Symbol::Platform, Symbol::PlayerFoot>());
   
   auto *player = getComponent<PlayerPhysicsComponent>(playerFoot);
-  player->endContactingGround(platform->GetBody());
+  if (player) {
+    player->endContactingGround(platform->GetBody());
+  }
 }
 
 void handleProximityPlayerBodyBegin(b2Fixture *, b2Fixture *sensor) {
   static_assert(symbolLess<Symbol::PlayerBody, Symbol::TouchSensor>());
   
   auto *button = getComponent<ButtonPhysicsComponent>(sensor);
-  button->beginContactingPlayer();
+  if (button) {
+    button->beginContactingPlayer();
+  }
 }
 
 void handleProximityPlayerBodyEnd(b2Fixture *, b2Fixture *sensor) {
   static_assert(symbolLess<Symbol::PlayerBody, Symbol::TouchSensor>());
   
   auto *button = getComponent<ButtonPhysicsComponent>(sensor);
-  button->endContactingPlayer();
+  if (button) {
+    button->endContactingPlayer();
+  }
+}
+
+void handleMissileBegin(b2Fixture *fixtureA, b2Fixture *fixtureB) {
+  void *const missile = getUserData<Symbol::FragileDeadly>();
+  if (fixtureB->GetUserData() == missile) {
+    std::swap(fixtureA, fixtureB);
+  } else if (fixtureA->GetUserData() != missile) {
+    return;
+  }
+  //fixtureA is now FragileDeadly
+  auto *missileComp = getComponent<MissilePhysicsComponent>(fixtureA);
+  if (missileComp == nullptr) {
+    return;
+  }
+  missileComp->beginContact();
+}
+
+void handleMissileEnd(b2Fixture *, b2Fixture *) {
+
 }
 
 void registerCollisionListeners(ContactListener &contactListener) {
@@ -62,4 +94,8 @@ void registerCollisionListeners(ContactListener &contactListener) {
       &handleProximityPlayerBodyEnd
     }
   );
+  contactListener.addGenericListener({
+    &handleMissileBegin,
+    &handleMissileEnd
+  });
 }

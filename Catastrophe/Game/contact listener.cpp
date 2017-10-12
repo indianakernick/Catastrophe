@@ -20,12 +20,24 @@ void ContactListener::BeginContact(b2Contact *contact) {
   if (iter != listeners.cend() && iter->second.begin) {
     iter->second.begin(fixtureA, fixtureB);
   }
+  
+  for (auto &l : genericListeners) {
+    if (l.begin) {
+      l.begin(fixtureA, fixtureB);
+    }
+  }
 }
 
 void ContactListener::EndContact(b2Contact *contact) {
   const auto [fixtureA, fixtureB, iter] = getListener(contact);
   if (iter != listeners.cend() && iter->second.end) {
     iter->second.end(fixtureA, fixtureB);
+  }
+  
+  for (auto &l : genericListeners) {
+    if (l.end) {
+      l.end(fixtureA, fixtureB);
+    }
   }
 }
 
@@ -35,6 +47,10 @@ void ContactListener::addListener(
 ) {
   assert(key.first < key.second);
   listeners.emplace(key, listener);
+}
+
+void ContactListener::addGenericListener(const CollisionListener listener) {
+  genericListeners.push_back(listener);
 }
 
 ContactListener::ListenerData ContactListener::getListener(

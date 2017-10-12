@@ -58,7 +58,7 @@ entities:
   local axis A: [0, 1]
 
 - id: 10
-  file: missile spawner entity.yaml
+  file: missile entity.yaml
   pos: [-20, 10]
 
 - id: 11
