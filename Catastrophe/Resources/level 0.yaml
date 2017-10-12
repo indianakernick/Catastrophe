@@ -60,7 +60,7 @@ entities:
 - id: 10
   file: missile spawner entity.yaml
   pos: [-20, 10]
-  spawn time: 30
+  spawn time: 20
   entity:
     file: missile entity.yaml
     pos: [-20, 10]

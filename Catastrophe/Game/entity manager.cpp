@@ -20,9 +20,9 @@ void EntityManager::quit() {
 
 EntityID EntityManager::create(const std::string &fileName, const YAML::Node &levelArgs) {
   std::unique_ptr<Entity> entity = loadEntity(fileName, levelArgs);
-  const EntityID id = entity->getID();
-  entities.emplace(id, std::move(entity));
-  return id;
+  lastID = entity->getID();
+  entities.emplace(lastID, std::move(entity));
+  return lastID;
 }
 
 void EntityManager::destroy(const EntityID id) {

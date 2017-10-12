@@ -67,7 +67,18 @@ void SpawnSystem::update(const float delta) {
     entityMan->destroy(id);
   }
   for (size_t e = 0; e != entityFiles.size(); ++e) {
-    levelNodes[e].force_insert("id", entityMan->getLastID() + 1);
+    const EntityID id = entityMan->getLastID() + 1;
+    YAML::Node &levelNode = levelNodes[e];
+    //I just found out that a YAML::Node holds a boost::shared_ptr to the
+    //actual data. That's so weird! There are a few layers of functions
+    //that just forward their arguments to other functions. I'm thinking
+    //about writing my own yaml parser/emitter after I finish this game because
+    //I think I can do better than yaml-cpp.
+    if (YAML::Node idNode = levelNode["id"]) {
+      idNode = id;
+    } else {
+      levelNode.force_insert("id", id);
+    }
     entityMan->create(entityFiles[e], levelNodes[e]);
   }
 }

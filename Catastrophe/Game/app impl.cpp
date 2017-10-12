@@ -27,6 +27,9 @@ Ground Drones
 Droppers
 Coins
 
+Pink pentagon was stolen from a museum
+Main character hired to steal the pink pentagon back
+
 */
 
 bool AppImpl::init() {
