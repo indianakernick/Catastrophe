@@ -9,11 +9,13 @@
 #ifndef spawn_component_list_hpp
 #define spawn_component_list_hpp
 
+#include "periodic spawn component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "destroyable spawn component.hpp"
 
 using SpawnComps = Utils::TypeList<
-  DestroyableSpawnComponent
+  DestroyableSpawnComponent,
+  PeriodicSpawnComponent
 >;
 
 #endif
