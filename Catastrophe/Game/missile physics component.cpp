@@ -13,6 +13,7 @@
 #include "systems registry.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/vectors.hpp>
+#include "destroyable spawn component.hpp"
 
 void MissilePhysicsComponent::init(b2World &world, const YAML::Node &node) {
   BodyPhysicsComponent::init(world, node);
@@ -54,7 +55,10 @@ void MissilePhysicsComponent::preStep(float) {
 
 void MissilePhysicsComponent::postStep() {
   if (contacted) {
-    //@TODO destroy self
+    const auto spawnComp = std::dynamic_pointer_cast<DestroyableSpawnComponent>(
+      getEntity().get<SpawnComponent>()
+    );
+    spawnComp->kill();
   }
 }
 

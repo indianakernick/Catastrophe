@@ -1,3 +1,6 @@
+spawn:
+  name: DestroyableSpawnComponent
+
 physics:
   name: MissilePhysicsComponent
   body: missile body.yaml

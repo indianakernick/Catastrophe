@@ -59,5 +59,6 @@ void EntityManager::destroyComponents(const EntityID id) const {
   Systems::rendering->rem(id);
   Systems::animation->rem(id);
   Systems::physics->rem(id);
+  Systems::spawn->rem(id);
   Systems::input->rem(id);
 }

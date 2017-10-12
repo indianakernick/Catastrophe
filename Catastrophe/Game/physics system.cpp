@@ -45,6 +45,7 @@ void PhysicsSystem::add(
 void PhysicsSystem::rem(const EntityID entityID) {
   auto iter = components.find(entityID);
   if (iter != components.cend()) {
+    iter->second->quit(*world);
     components.erase(iter);
   }
 }
