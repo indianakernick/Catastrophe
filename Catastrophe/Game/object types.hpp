@@ -40,19 +40,22 @@ std::pair<void *, void *> getUserData() {
   SYMBOL(Pentagon)                                                              \
   SYMBOL(Deadly)                                                                \
   SYMBOL(FragileDeadly)                                                         \
-  SYMBOL(TouchSensor)
+  LAST_SYMBOL(TouchSensor)
 
 namespace Symbol {
   #define SYMBOL(NAME) MAKE_SYMBOL(NAME);
+  #define LAST_SYMBOL(NAME) SYMBOL(NAME)
   SYMBOLS
+  #undef LAST_SYMBOL
   #undef SYMBOL
 };
 
 using Symbols = Utils::TypeList<
   #define SYMBOL(NAME) Symbol::NAME,
+  #define LAST_SYMBOL(NAME) Symbol::NAME
   SYMBOLS
+  #undef LAST_SYMBOL
   #undef SYMBOL
-  void //trailing comma
 >;
 
 #undef SYMBOLS
