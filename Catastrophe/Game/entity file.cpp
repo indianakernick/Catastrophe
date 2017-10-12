@@ -66,6 +66,9 @@ std::unique_ptr<Entity> loadEntity(const std::string &fileName, const YAML::Node
   if (const YAML::Node &input = root["input"]) {
     readComp<InputComponent>(input, levelArgs, entity.get(), Systems::input);
   }
+  if (const YAML::Node &spawn = root["spawn"]) {
+    readComp<SpawnComponent>(spawn, levelArgs, entity.get(), Systems::spawn);
+  }
   if (const YAML::Node &physics = root["physics"]) {
     readComp<PhysicsComponent>(physics, levelArgs, entity.get(), Systems::physics);
   }

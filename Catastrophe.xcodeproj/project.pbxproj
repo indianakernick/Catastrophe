@@ -21,6 +21,7 @@
 		4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8F41F5D359B00927A19 /* vector render.cpp */; };
 		4509F8F91F5D3DD000927A19 /* nvg helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8F71F5D3DD000927A19 /* nvg helper.cpp */; };
 		4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9001F5E816F00927A19 /* yaml helper.cpp */; };
+		451CC0CB1F8F21C90000E424 /* destroyable spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0C91F8F21C90000E424 /* destroyable spawn component.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -199,6 +200,8 @@
 		4509F8F81F5D3DD000927A19 /* nvg helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "nvg helper.hpp"; sourceTree = "<group>"; };
 		4509F9001F5E816F00927A19 /* yaml helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "yaml helper.cpp"; sourceTree = "<group>"; };
 		4509F9011F5E816F00927A19 /* yaml helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "yaml helper.hpp"; sourceTree = "<group>"; };
+		451CC0C91F8F21C90000E424 /* destroyable spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "destroyable spawn component.cpp"; sourceTree = "<group>"; };
+		451CC0CA1F8F21C90000E424 /* destroyable spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "destroyable spawn component.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -1017,6 +1020,8 @@
 		45C545FD1F8F137700217406 /* spawn components */ = {
 			isa = PBXGroup;
 			children = (
+				451CC0C91F8F21C90000E424 /* destroyable spawn component.cpp */,
+				451CC0CA1F8F21C90000E424 /* destroyable spawn component.hpp */,
 			);
 			name = "spawn components";
 			sourceTree = "<group>";
@@ -1308,6 +1313,7 @@
 				4541161A1F523D7400C2865B /* camera pos.cpp in Sources */,
 				452FFA661F6BC50D003A98B1 /* b2BroadPhase.cpp in Sources */,
 				452FFA781F6BC50D003A98B1 /* b2Body.cpp in Sources */,
+				451CC0CB1F8F21C90000E424 /* destroyable spawn component.cpp in Sources */,
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
 				4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */,
 				45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */,
