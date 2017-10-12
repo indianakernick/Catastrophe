@@ -278,7 +278,7 @@ using LerpPose = Graphics::Interpolator<Pose>;
 
 void PlayerRenderComponent::render(NVGcontext *const ctx) {
   const auto animComp = Utils::safeDownCast<PlayerAnimationComponent>(
-    getEntity().animation
+    getEntity().get<AnimationComponent>()
   );
   
   static Pose standGroundJump;

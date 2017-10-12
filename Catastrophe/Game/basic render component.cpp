@@ -26,7 +26,7 @@ void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
 }
 
 void BasicRenderComponent::preRender() {
-  rect->c = getEntity().animation->getModelMat()[2];
+  rect->c = getEntity().get<AnimationComponent>()->getModelMat()[2];
 }
 
 CameraMotionTargetCPtr BasicRenderComponent::getMotionTarget() const {
@@ -46,5 +46,5 @@ size_t BasicRenderComponent::getLayer() const {
 }
 
 void BasicRenderComponent::setModelTransform(NVGcontext *const ctx) {
-  nvgTransform(ctx, getEntity().animation->getModelMat());
+  nvgTransform(ctx, getEntity().get<AnimationComponent>()->getModelMat());
 }

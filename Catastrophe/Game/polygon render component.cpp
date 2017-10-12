@@ -26,7 +26,7 @@ void PolygonRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   if (rotPerSecond != 0.0f) {
-    const float progress = getEntity().animation->getProgress();
+    const float progress = getEntity().get<AnimationComponent>()->getProgress();
     rotation = progress * rotPerSecond;
   }
   

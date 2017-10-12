@@ -11,26 +11,28 @@
 
 #include <memory>
 #include "entity id.hpp"
-
-class InputComponent;
-class PhysicsComponent;
-class AnimationComponent;
-class RenderComponent;
-class ParticleEffectComponent;
+#include "components.hpp"
 
 class Entity {
 public:
   explicit Entity(EntityID);
   
-  std::shared_ptr<InputComponent> input;
-  std::shared_ptr<PhysicsComponent> physics;
-  std::shared_ptr<AnimationComponent> animation;
-  std::shared_ptr<RenderComponent> render;
-  std::shared_ptr<ParticleEffectComponent> particles;
-  
+  template <typename Comp>
+  auto &get() {
+    return std::get<COMPONENT_ID<Comp>>(components);
+  }
+  template <typename Comp>
+  const auto &get() const {
+    return std::get<COMPONENT_ID<Comp>>(components);
+  }
+  template <typename Comp>
+  void set(const std::shared_ptr<Comp> comp) {
+    std::get<COMPONENT_ID<Comp>>(components) = comp;
+  }
   EntityID getID() const;
 
 private:
+  ComponentTuple components;
   EntityID id;
 };
 

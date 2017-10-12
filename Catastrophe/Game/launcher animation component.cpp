@@ -17,7 +17,9 @@
 void LauncherAnimationComponent::init(const YAML::Node &) {}
 
 void LauncherAnimationComponent::update(float) {
-  const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(getEntity().physics);
+  const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(
+    getEntity().get<PhysicsComponent>()
+  );
   progress = physics->getRelTranslation();
   Transform transform;
   transform.pos = physics->getCenter();

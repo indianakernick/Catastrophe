@@ -1,12 +1,13 @@
 //
-//  make render comp.cpp
+//  rendering component list.hpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 19/9/17.
+//  Created by Indi Kernick on 12/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "make render comp.hpp"
+#ifndef rendering_component_list_hpp
+#define rendering_component_list_hpp
 
 #include "spikes render component.hpp"
 #include "player render component.hpp"
@@ -33,15 +34,4 @@ using RenderComps = Utils::TypeList<
   MissileSpawnerRenderComponent
 >;
 
-std::shared_ptr<RenderComponent> makeRenderComp(const std::experimental::string_view name) {
-  try {
-    return Utils::getValueByName<
-      std::shared_ptr<RenderComponent>,
-      RenderComps
-    >(name, [] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>();
-    });
-  } catch (Utils::TypeNotFound &) {
-    throw std::runtime_error("Invalid render component name");
-  }
-}
+#endif

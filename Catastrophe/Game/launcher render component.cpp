@@ -16,7 +16,7 @@ void LauncherRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   const auto animComp = Utils::safeDownCast<LauncherAnimationComponent>(
-    getEntity().animation
+    getEntity().get<AnimationComponent>()
   );
   const float progress = animComp->getProgress();
   const float armHeight = progress / NUM_LEVELS;

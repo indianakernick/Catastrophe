@@ -23,7 +23,9 @@ void PlayerAnimationComponent::init(const YAML::Node &node) {
 }
 
 void PlayerAnimationComponent::update(const float delta) {
-  const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(getEntity().physics);
+  const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(
+    getEntity().get<PhysicsComponent>()
+  );
   
   const float horiVel = playerPhysics->getRelVel().x;
   const bool onGround = playerPhysics->onGround();

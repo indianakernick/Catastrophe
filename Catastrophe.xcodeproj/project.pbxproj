@@ -109,6 +109,7 @@
 		4545DEB11F8EE4D1000A54AA /* missile render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEAF1F8EE4D1000A54AA /* missile render component.cpp */; };
 		4545DEB31F8EEDCC000A54AA /* missile spawner entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */; };
 		4545DEB61F8EEE64000A54AA /* missile spawner render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEB41F8EEE64000A54AA /* missile spawner render component.cpp */; };
+		4545DEBC1F8EFBAD000A54AA /* make component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEBA1F8EFBAD000A54AA /* make component.cpp */; };
 		4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* polygon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
@@ -132,10 +133,6 @@
 		45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FC01F6F8C6500B1DA72 /* platform entity.yaml */; };
 		45DE9FC31F6F8C7900B1DA72 /* level 0.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FC21F6F8C7900B1DA72 /* level 0.yaml */; };
 		45DE9FC61F70894C00B1DA72 /* component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FC41F70894C00B1DA72 /* component.cpp */; };
-		45DE9FCB1F70FE9100B1DA72 /* make input comp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FCA1F70FE9100B1DA72 /* make input comp.cpp */; };
-		45DE9FCD1F71001A00B1DA72 /* make physics comp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FCC1F71001A00B1DA72 /* make physics comp.cpp */; };
-		45DE9FCF1F71008600B1DA72 /* make anim comp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FCE1F71008600B1DA72 /* make anim comp.cpp */; };
-		45DE9FD11F71015700B1DA72 /* make render comp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD01F71015700B1DA72 /* make render comp.cpp */; };
 		45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD21F71051D00B1DA72 /* entity file.cpp */; };
 		45DE9FD71F71063400B1DA72 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD51F71063400B1DA72 /* transform.cpp */; };
 		45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD81F71189D00B1DA72 /* level file.cpp */; };
@@ -376,6 +373,13 @@
 		4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "missile spawner entity.yaml"; sourceTree = "<group>"; };
 		4545DEB41F8EEE64000A54AA /* missile spawner render component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "missile spawner render component.cpp"; sourceTree = "<group>"; };
 		4545DEB51F8EEE64000A54AA /* missile spawner render component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "missile spawner render component.hpp"; sourceTree = "<group>"; };
+		4545DEB81F8EF4F0000A54AA /* components.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = components.hpp; sourceTree = "<group>"; };
+		4545DEBA1F8EFBAD000A54AA /* make component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "make component.cpp"; sourceTree = "<group>"; };
+		4545DEBB1F8EFBAD000A54AA /* make component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "make component.hpp"; sourceTree = "<group>"; };
+		4545DEBE1F8EFD89000A54AA /* input component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "input component list.hpp"; sourceTree = "<group>"; };
+		4545DEBF1F8EFDAE000A54AA /* physics component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics component list.hpp"; sourceTree = "<group>"; };
+		4545DEC01F8EFDD5000A54AA /* animation component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "animation component list.hpp"; sourceTree = "<group>"; };
+		4545DEC11F8EFDF3000A54AA /* rendering component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "rendering component list.hpp"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* polygon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "polygon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* polygon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "polygon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
@@ -403,7 +407,6 @@
 		45DE9FA01F6CAD4300B1DA72 /* player body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player body.yaml"; sourceTree = "<group>"; };
 		45DE9FA21F6CADA400B1DA72 /* physics file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics file.cpp"; sourceTree = "<group>"; };
 		45DE9FA31F6CADA400B1DA72 /* physics file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics file.hpp"; sourceTree = "<group>"; };
-		45DE9FA61F6D01F800B1DA72 /* make physics comp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "make physics comp.hpp"; sourceTree = "<group>"; };
 		45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform body.yaml"; sourceTree = "<group>"; };
 		45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.yaml"; sourceTree = "<group>"; };
 		45DE9FB41F6E02AF00B1DA72 /* simple animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple animation component.cpp"; sourceTree = "<group>"; };
@@ -416,13 +419,6 @@
 		45DE9FC21F6F8C7900B1DA72 /* level 0.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "level 0.yaml"; sourceTree = "<group>"; };
 		45DE9FC41F70894C00B1DA72 /* component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = component.cpp; sourceTree = "<group>"; };
 		45DE9FC51F70894C00B1DA72 /* component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = component.hpp; sourceTree = "<group>"; };
-		45DE9FC71F70F75900B1DA72 /* make input comp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "make input comp.hpp"; sourceTree = "<group>"; };
-		45DE9FC81F70FA4100B1DA72 /* make anim comp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "make anim comp.hpp"; sourceTree = "<group>"; };
-		45DE9FC91F70FBC300B1DA72 /* make render comp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "make render comp.hpp"; sourceTree = "<group>"; };
-		45DE9FCA1F70FE9100B1DA72 /* make input comp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "make input comp.cpp"; sourceTree = "<group>"; };
-		45DE9FCC1F71001A00B1DA72 /* make physics comp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "make physics comp.cpp"; sourceTree = "<group>"; };
-		45DE9FCE1F71008600B1DA72 /* make anim comp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "make anim comp.cpp"; sourceTree = "<group>"; };
-		45DE9FD01F71015700B1DA72 /* make render comp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "make render comp.cpp"; sourceTree = "<group>"; };
 		45DE9FD21F71051D00B1DA72 /* entity file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "entity file.cpp"; sourceTree = "<group>"; };
 		45DE9FD31F71051D00B1DA72 /* entity file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "entity file.hpp"; sourceTree = "<group>"; };
 		45DE9FD51F71063400B1DA72 /* transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
@@ -882,21 +878,6 @@
 			name = "render components";
 			sourceTree = "<group>";
 		};
-		453892FD1F2C4B70007EBB5A /* factory */ = {
-			isa = PBXGroup;
-			children = (
-				45DE9FCA1F70FE9100B1DA72 /* make input comp.cpp */,
-				45DE9FC71F70F75900B1DA72 /* make input comp.hpp */,
-				45DE9FCC1F71001A00B1DA72 /* make physics comp.cpp */,
-				45DE9FA61F6D01F800B1DA72 /* make physics comp.hpp */,
-				45DE9FCE1F71008600B1DA72 /* make anim comp.cpp */,
-				45DE9FC81F70FA4100B1DA72 /* make anim comp.hpp */,
-				45DE9FD01F71015700B1DA72 /* make render comp.cpp */,
-				45DE9FC91F70FBC300B1DA72 /* make render comp.hpp */,
-			);
-			name = factory;
-			sourceTree = "<group>";
-		};
 		454116211F523DAC00C2865B /* camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +897,22 @@
 				454116291F5255CD00C2865B /* camera window size.hpp */,
 			);
 			name = camera;
+			sourceTree = "<group>";
+		};
+		4545DEBD1F8EFD19000A54AA /* components */ = {
+			isa = PBXGroup;
+			children = (
+				4545DEB81F8EF4F0000A54AA /* components.hpp */,
+				4545DEBA1F8EFBAD000A54AA /* make component.cpp */,
+				4545DEBB1F8EFBAD000A54AA /* make component.hpp */,
+				45DE9FC41F70894C00B1DA72 /* component.cpp */,
+				45DE9FC51F70894C00B1DA72 /* component.hpp */,
+				4545DEBE1F8EFD89000A54AA /* input component list.hpp */,
+				4545DEBF1F8EFDAE000A54AA /* physics component list.hpp */,
+				4545DEC01F8EFDD5000A54AA /* animation component list.hpp */,
+				4545DEC11F8EFDF3000A54AA /* rendering component list.hpp */,
+			);
+			name = components;
 			sourceTree = "<group>";
 		};
 		457619ED1F8611D200A6A792 /* particles */ = {
@@ -973,8 +970,8 @@
 				452FF9C11F63D018003A98B1 /* animation */,
 				45103F591F2497CD001B24E2 /* rendering */,
 				457619ED1F8611D200A6A792 /* particles */,
-				453892FD1F2C4B70007EBB5A /* factory */,
 				45FA99461F36C9F000F8C639 /* entity */,
+				4545DEBD1F8EFD19000A54AA /* components */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -1115,8 +1112,6 @@
 				453892D51F2B0074007EBB5A /* entity.hpp */,
 				453892F91F2C4209007EBB5A /* entity manager.cpp */,
 				453892FA1F2C4209007EBB5A /* entity manager.hpp */,
-				45DE9FC41F70894C00B1DA72 /* component.cpp */,
-				45DE9FC51F70894C00B1DA72 /* component.hpp */,
 				45DE9FD21F71051D00B1DA72 /* entity file.cpp */,
 				45DE9FD31F71051D00B1DA72 /* entity file.hpp */,
 				45DE9FD81F71189D00B1DA72 /* level file.cpp */,
@@ -1277,6 +1272,7 @@
 				4538907B1F2ADB4B007EBB5A /* string to scancode.cpp in Sources */,
 				452FFA891F6BC50D003A98B1 /* b2GearJoint.cpp in Sources */,
 				45DE9FC61F70894C00B1DA72 /* component.cpp in Sources */,
+				4545DEBC1F8EFBAD000A54AA /* make component.cpp in Sources */,
 				453890721F2ADB13007EBB5A /* app impl.cpp in Sources */,
 				452FFA7B1F6BC50D003A98B1 /* b2Island.cpp in Sources */,
 				452FFA841F6BC50D003A98B1 /* b2EdgeAndPolygonContact.cpp in Sources */,
@@ -1287,7 +1283,6 @@
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
 				4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */,
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
-				45DE9FCD1F71001A00B1DA72 /* make physics comp.cpp in Sources */,
 				45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
@@ -1331,9 +1326,7 @@
 				452FFA6B1F6BC50D003A98B1 /* b2Distance.cpp in Sources */,
 				45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */,
 				4545DEAA1F8DD260000A54AA /* ground drone render component.cpp in Sources */,
-				45DE9FD11F71015700B1DA72 /* make render comp.cpp in Sources */,
 				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,
-				45DE9FCB1F70FE9100B1DA72 /* make input comp.cpp in Sources */,
 				45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */,
 				452FFA8C1F6BC50D003A98B1 /* b2MouseJoint.cpp in Sources */,
 				452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */,
@@ -1359,7 +1352,6 @@
 				452FFA8F1F6BC50D003A98B1 /* b2RevoluteJoint.cpp in Sources */,
 				452FFA721F6BC50D003A98B1 /* b2BlockAllocator.cpp in Sources */,
 				452FFA6D1F6BC50D003A98B1 /* b2TimeOfImpact.cpp in Sources */,
-				45DE9FCF1F71008600B1DA72 /* make anim comp.cpp in Sources */,
 				452FFA671F6BC50D003A98B1 /* b2CollideCircle.cpp in Sources */,
 				452FFA7A1F6BC50D003A98B1 /* b2Fixture.cpp in Sources */,
 				4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */,

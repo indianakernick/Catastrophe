@@ -1,12 +1,13 @@
 //
-//  make physics comp.cpp
+//  physics component list.hpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 19/9/17.
+//  Created by Indi Kernick on 12/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "make physics comp.hpp"
+#ifndef physics_component_list_hpp
+#define physics_component_list_hpp
 
 #include "joint physics component.hpp"
 #include "player physics component.hpp"
@@ -15,7 +16,6 @@
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
-#include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
@@ -27,15 +27,4 @@ using PhysicsComps = Utils::TypeList<
   MissilePhysicsComponent
 >;
 
-std::shared_ptr<PhysicsComponent> makePhysicsComp(const std::experimental::string_view name) {
-  try {
-    return Utils::getValueByName<
-      std::shared_ptr<PhysicsComponent>,
-      PhysicsComps
-    >(name, [] (auto t) {
-      return std::make_shared<UTILS_TYPE(t)>();
-    });
-  } catch (Utils::TypeNotFound &) {
-    throw std::runtime_error("Invalid physics component name");
-  }
-}
+#endif

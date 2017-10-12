@@ -28,7 +28,9 @@ void PlayerPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 }
 
 void PlayerPhysicsComponent::preStep(const float delta) {
-  const auto playerInput = Utils::safeDownCast<const PlayerInputComponent>(getEntity().input);
+  const auto playerInput = Utils::safeDownCast<const PlayerInputComponent>(
+    getEntity().get<InputComponent>()
+  );
   
          if (playerInput->shouldMoveLeft()) {
     applyMoveForce(-1.0f);

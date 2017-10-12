@@ -9,12 +9,9 @@
 #include "entity file.hpp"
 
 #include "yaml helper.hpp"
-#include "make anim comp.hpp"
-#include "make input comp.hpp"
+#include "make component.hpp"
 #include "systems registry.hpp"
 #include "player constants.hpp"
-#include "make render comp.hpp"
-#include "make physics comp.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
@@ -36,49 +33,22 @@ namespace {
     }
     return out;
   }
-
-  void readInputComp(
-    const YAML::Node &inputNode,
-    const YAML::Node &levelArgs,
-    Entity *const entity
-  ) {
-    const std::string &name = getChild(inputNode, "name").Scalar();
-    entity->input = makeInputComp(name);
-    entity->input->setEntity(entity);
-    Systems::input->add(entity->getID(), entity->input, merge(levelArgs, inputNode));
-  }
   
-  void readPhysicsComp(
-    const YAML::Node &physicsNode,
-    const YAML::Node &levelArgs,
-    Entity *const entity
+  template <typename Comp, typename System>
+  void readComp(
+    const YAML::Node &compNode,
+    const YAML::Node &levelNode,
+    Entity *const entity,
+    System *system
   ) {
-    const std::string &name = getChild(physicsNode, "name").Scalar();
-    entity->physics = makePhysicsComp(name);
-    entity->physics->setEntity(entity);
-    Systems::physics->add(entity->getID(), entity->physics, merge(levelArgs, physicsNode));
-  }
-  
-  void readAnimComp(
-    const YAML::Node &animNode,
-    const YAML::Node &levelArgs,
-    Entity *const entity
-  ) {
-    const std::string &name = getChild(animNode, "name").Scalar();
-    entity->animation = makeAnimComp(name);
-    entity->animation->setEntity(entity);
-    Systems::animation->add(entity->getID(), entity->animation, merge(levelArgs, animNode));
-  }
-  
-  void readRenderComp(
-    const YAML::Node &renderNode,
-    const YAML::Node &levelArgs,
-    Entity *const entity
-  ) {
-    const std::string &name = getChild(renderNode, "name").Scalar();
-    entity->render = makeRenderComp(name);
-    entity->render->setEntity(entity);
-    Systems::rendering->add(entity->getID(), entity->render, merge(levelArgs, renderNode));
+    const std::string &name = getChild(compNode, "name").Scalar();
+    entity->set(makeComp<Comp>(name));
+    entity->get<Comp>()->setEntity(entity);
+    system->add(
+      entity->getID(),
+      entity->get<Comp>(),
+      merge(levelNode, compNode)
+    );
   }
   
   EntityID readEntityID(const YAML::Node &levelArgs) {
@@ -94,16 +64,16 @@ std::unique_ptr<Entity> loadEntity(const std::string &fileName, const YAML::Node
   std::unique_ptr<Entity> entity = std::make_unique<Entity>(readEntityID(levelArgs));
   
   if (const YAML::Node &input = root["input"]) {
-    readInputComp(input, levelArgs, entity.get());
+    readComp<InputComponent>(input, levelArgs, entity.get(), Systems::input);
   }
   if (const YAML::Node &physics = root["physics"]) {
-    readPhysicsComp(physics, levelArgs, entity.get());
+    readComp<PhysicsComponent>(physics, levelArgs, entity.get(), Systems::physics);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    readAnimComp(anim, levelArgs, entity.get());
+    readComp<AnimationComponent>(anim, levelArgs, entity.get(), Systems::animation);
   }
   if (const YAML::Node &render = root["rendering"]) {
-    readRenderComp(render, levelArgs, entity.get());
+    readComp<RenderComponent>(render, levelArgs, entity.get(), Systems::rendering);
   }
   
   return entity;

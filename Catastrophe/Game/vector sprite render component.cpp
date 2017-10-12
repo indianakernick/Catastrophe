@@ -22,7 +22,7 @@ void VectorSpriteRenderComponent::init(RenderingContext &renderer, const YAML::N
 }
 
 void VectorSpriteRenderComponent::render(NVGcontext *const ctx) {
-  const auto animComp = getEntity().animation;
+  const auto animComp = getEntity().get<AnimationComponent>();
   nvgTransform(ctx, animComp->getModelMat());
   renderSprite(ctx, sprite, getFrame(sprite, "main", animComp->getProgress()));
 }

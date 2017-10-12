@@ -26,7 +26,7 @@ void SimpleAnimationComponent::update(const float delta) {
   anim.advance(delta);
   anim.repeatOnOverflow();
   const auto bodyComp
-  = std::dynamic_pointer_cast<BodyPhysicsComponent>(getEntity().physics);
+  = std::dynamic_pointer_cast<BodyPhysicsComponent>(getEntity().get<PhysicsComponent>());
   if (bodyComp) {
     transform.pos = bodyComp->getPos();
     transform.rotation = bodyComp->getAngle();
