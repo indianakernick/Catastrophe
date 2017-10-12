@@ -2,3 +2,10 @@ physics:
   name: MissilePhysicsComponent
   body: missile body.yaml
   move force: 6.0
+
+animation:
+  name: SimpleAnimationComponent
+
+rendering:
+  name: MissileRenderComponent
+  layer: over player 1

@@ -20,7 +20,7 @@ shapes:
 
 fixtures:
 - shape: main
-  density: 0
+  density: 5
   user data: FragileDeadly
 
 - shape: nose
