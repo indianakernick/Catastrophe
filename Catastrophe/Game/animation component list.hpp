@@ -14,7 +14,7 @@
 #include "simple animation component.hpp"
 #include "launcher animation component.hpp"
 
-using AnimComps = Utils::TypeList<
+using AnimationComps = Utils::TypeList<
   PlayerAnimationComponent,
   SimpleAnimationComponent,
   LauncherAnimationComponent

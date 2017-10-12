@@ -16,13 +16,19 @@
 #include "animation component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 
-//Must be in the same order as AllComps in "make component.cpp"
+#define COMPONENTS                                                              \
+  COMPONENT(Input)                                                              \
+  COMPONENT(Physics)                                                            \
+  COMPONENT(Animation)                                                          \
+  LAST_COMPONENT(Render)
+
+#define COMPONENT(NAME) NAME##Component,
+#define LAST_COMPONENT(NAME) NAME##Component
 using ComponentList = Utils::TypeList<
-  InputComponent,
-  PhysicsComponent,
-  AnimationComponent,
-  RenderComponent
+  COMPONENTS
 >;
+#undef LAST_COMPONENT
+#undef COMPONENT
 
 template <typename Comp>
 struct SmartPointer {

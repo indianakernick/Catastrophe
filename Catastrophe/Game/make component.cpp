@@ -14,13 +14,13 @@
 #include "animation component list.hpp"
 #include "rendering component list.hpp"
 
-//Must be in the same order as ComponentList in "components.hpp"
+#define COMPONENT(NAME) NAME##Comps,
+#define LAST_COMPONENT(NAME) NAME##Comps
 using AllComps = Utils::TypeList<
-  InputComps,
-  PhysicsComps,
-  AnimComps,
-  RenderComps
+  COMPONENTS
 >;
+#undef LAST_COMPONENT
+#undef COMPONENT
 
 template <typename List, typename Comp>
 std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
@@ -41,7 +41,9 @@ std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
   >(name);
 }
 
-template std::shared_ptr<InputComponent> makeComp(std::experimental::string_view);
-template std::shared_ptr<PhysicsComponent> makeComp(std::experimental::string_view);
-template std::shared_ptr<AnimationComponent> makeComp(std::experimental::string_view);
-template std::shared_ptr<RenderComponent> makeComp(std::experimental::string_view);
+#define COMPONENT(NAME)                                                         \
+  template std::shared_ptr<NAME##Component> makeComp(std::experimental::string_view);
+#define LAST_COMPONENT(NAME) COMPONENT(NAME)
+COMPONENTS
+#undef LAST_COMPONENT
+#undef COMPONENT
