@@ -33,6 +33,7 @@ bool AppImpl::init() {
   PROFILE(Init);
 
   Systems::input = &inputSystem;
+  Systems::spawn = &spawnSystem;
   Systems::physics = &physicsSystem;
   Systems::animation = &animationSystem;
   Systems::rendering = &renderingSystem;
@@ -54,6 +55,8 @@ bool AppImpl::init() {
   entityManager.init();
   entityManager.loadLevel("level 0.yaml");
   
+  spawnSystem.init(entityManager);
+  
   renderingSystem.startMotionTrack(PLAYER_ID);
   renderingSystem.startZoomTrack(PLAYER_ID);
   
@@ -65,6 +68,8 @@ void AppImpl::quit() {
 
   renderingSystem.stopZoomTrack();
   renderingSystem.stopMotionTrack();
+  
+  spawnSystem.quit();
 
   entityManager.quit();
   renderingSystem.quit();
@@ -83,6 +88,7 @@ void AppImpl::quit() {
   Systems::rendering = nullptr;
   Systems::animation = nullptr;
   Systems::physics = nullptr;
+  Systems::spawn = nullptr;
   Systems::input = nullptr;
 }
 
@@ -108,6 +114,7 @@ bool AppImpl::input(float) {
 bool AppImpl::update(const float delta) {
   PROFILE(Update);
   
+  spawnSystem.update(delta);
   physicsSystem.update(delta);
   return true;
 }

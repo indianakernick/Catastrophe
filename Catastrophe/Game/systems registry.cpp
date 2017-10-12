@@ -9,6 +9,7 @@
 #include "systems registry.hpp"
 
 InputSystem *Systems::input = nullptr;
+SpawnSystem *Systems::spawn = nullptr;
 PhysicsSystem *Systems::physics = nullptr;
 AnimationSystem *Systems::animation = nullptr;
 RenderingSystem *Systems::rendering = nullptr;

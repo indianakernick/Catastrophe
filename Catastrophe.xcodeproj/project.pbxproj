@@ -123,6 +123,8 @@
 		45761A001F8851F100A6A792 /* player sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FF1F8851F100A6A792 /* player sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
+		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
+		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
 		45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FA21F6CADA400B1DA72 /* physics file.cpp */; };
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
@@ -403,6 +405,11 @@
 		4592BAE31F11B51400D1640D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
+		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
+		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
+		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
+		45C545FB1F8F11E500217406 /* spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn component.hpp"; sourceTree = "<group>"; };
+		45C546011F8F19F400217406 /* spawn component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn component list.hpp"; sourceTree = "<group>"; };
 		45C999261F8C438800EF5DF0 /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
 		45DE9FA01F6CAD4300B1DA72 /* player body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player body.yaml"; sourceTree = "<group>"; };
 		45DE9FA21F6CADA400B1DA72 /* physics file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics file.cpp"; sourceTree = "<group>"; };
@@ -911,6 +918,7 @@
 				4545DEBF1F8EFDAE000A54AA /* physics component list.hpp */,
 				4545DEC01F8EFDD5000A54AA /* animation component list.hpp */,
 				4545DEC11F8EFDF3000A54AA /* rendering component list.hpp */,
+				45C546011F8F19F400217406 /* spawn component list.hpp */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -966,6 +974,7 @@
 				452FF9C01F63D007003A98B1 /* constants */,
 				45103F411F2432D2001B24E2 /* utils */,
 				453892F71F2C4061007EBB5A /* input */,
+				45C545F61F8F0D9B00217406 /* spawn */,
 				453892F61F2C4053007EBB5A /* physics */,
 				452FF9C11F63D018003A98B1 /* animation */,
 				45103F591F2497CD001B24E2 /* rendering */,
@@ -991,6 +1000,25 @@
 				4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45C545F61F8F0D9B00217406 /* spawn */ = {
+			isa = PBXGroup;
+			children = (
+				45C545FD1F8F137700217406 /* spawn components */,
+				45C545F71F8F0DCD00217406 /* spawn system.cpp */,
+				45C545F81F8F0DCD00217406 /* spawn system.hpp */,
+				45C545FA1F8F11E500217406 /* spawn component.cpp */,
+				45C545FB1F8F11E500217406 /* spawn component.hpp */,
+			);
+			name = spawn;
+			sourceTree = "<group>";
+		};
+		45C545FD1F8F137700217406 /* spawn components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "spawn components";
 			sourceTree = "<group>";
 		};
 		45C999251F8C406900EF5DF0 /* libraries */ = {
@@ -1282,6 +1310,7 @@
 				452FFA781F6BC50D003A98B1 /* b2Body.cpp in Sources */,
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
 				4568D3231F8A010F0037268B /* spinning blade render component.cpp in Sources */,
+				45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */,
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
 				45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
@@ -1341,6 +1370,7 @@
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
+				45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */,
 				45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */,
 				4545DEB11F8EE4D1000A54AA /* missile render component.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,

@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "input component.hpp"
+#include "spawn component.hpp"
 #include "render component.hpp"
 #include "physics component.hpp"
 #include "animation component.hpp"
@@ -18,6 +19,7 @@
 
 #define COMPONENTS                                                              \
   COMPONENT(Input)                                                              \
+  COMPONENT(Spawn)                                                              \
   COMPONENT(Physics)                                                            \
   COMPONENT(Animation)                                                          \
   LAST_COMPONENT(Render)

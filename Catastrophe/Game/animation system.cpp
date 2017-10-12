@@ -8,7 +8,6 @@
 
 #include "animation system.hpp"
 
-#include "entity manager.hpp"
 #include "animation component.hpp"
 
 void AnimationSystem::add(

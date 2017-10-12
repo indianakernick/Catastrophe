@@ -11,6 +11,7 @@
 
 #include "screenshot.hpp"
 #include "input system.hpp"
+#include "spawn system.hpp"
 #include "physics system.hpp"
 #include "entity manager.hpp"
 #include "rendering system.hpp"
@@ -33,6 +34,7 @@ private:
   RenderingSystem renderingSystem;
   AnimationSystem animationSystem;
   PhysicsSystem physicsSystem;
+  SpawnSystem spawnSystem;
   InputSystem inputSystem;
   Screenshot screenshot;
 

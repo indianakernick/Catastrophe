@@ -10,6 +10,7 @@
 #define systems_registry_hpp
 
 #include "input system.hpp"
+#include "spawn system.hpp"
 #include "physics system.hpp"
 #include "entity manager.hpp"
 #include "animation system.hpp"
@@ -18,6 +19,7 @@
 
 struct Systems {
   static InputSystem *input;
+  static SpawnSystem *spawn;
   static PhysicsSystem *physics;
   static AnimationSystem *animation;
   static RenderingSystem *rendering;
