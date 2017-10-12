@@ -39,8 +39,7 @@ void TestApp::quit() {
 
 bool TestApp::input(float) {
   SDL_Event e;
-  unsigned eventCount = 0;
-  while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
+  while (SDL_PollEvent(&e)) {
     if constexpr (ENABLE_DEBUG_INPUT_LOG) {
       printEvent(e);
     }
@@ -50,7 +49,6 @@ bool TestApp::input(float) {
     } else {
       screenshot.handleEvent(e);
     }
-    eventCount++;
   }
   return true;
 }

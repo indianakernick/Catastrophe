@@ -90,8 +90,7 @@ bool AppImpl::input(float) {
   PROFILE(Input);
 
   SDL_Event e;
-  unsigned eventCount = 0;
-  while (eventCount != MAX_INPUT_EVENTS_PER_FRAME && SDL_PollEvent(&e)) {
+  while (SDL_PollEvent(&e)) {
     PROFILE(Input event loop);
     if constexpr (ENABLE_DEBUG_INPUT_LOG) {
       printEvent(e);
@@ -102,7 +101,6 @@ bool AppImpl::input(float) {
     } else if (!screenshot.handleEvent(e)){
       inputSystem.handleEvent(e);
     }
-    eventCount++;
   }
   return true;
 }
