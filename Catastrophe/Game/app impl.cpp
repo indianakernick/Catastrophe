@@ -8,7 +8,6 @@
 
 #include "app impl.hpp"
 
-#include "level file.hpp"
 #include "debug input.hpp"
 #include "player constants.hpp"
 #include "systems registry.hpp"
@@ -53,8 +52,7 @@ bool AppImpl::init() {
   renderingSystem.init(renderingContext);
   
   entityManager.init();
-  
-  loadLevel("level 0.yaml");
+  entityManager.loadLevel("level 0.yaml");
   
   renderingSystem.startMotionTrack(PLAYER_ID);
   renderingSystem.startZoomTrack(PLAYER_ID);

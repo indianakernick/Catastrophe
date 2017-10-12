@@ -18,6 +18,7 @@
 #include "ground drone render component.hpp"
 #include "vector sprite render component.hpp"
 #include "spinning blade render component.hpp"
+#include "missile spawner render component.hpp"
 
 using RenderComps = Utils::TypeList<
   PolygonRenderComponent,
@@ -28,7 +29,8 @@ using RenderComps = Utils::TypeList<
   PlayerRenderComponent,
   VectorSpriteRenderComponent,
   GroundDroneRenderComponent,
-  MissileRenderComponent
+  MissileRenderComponent,
+  MissileSpawnerRenderComponent
 >;
 
 std::shared_ptr<RenderComponent> makeRenderComp(const std::experimental::string_view name) {

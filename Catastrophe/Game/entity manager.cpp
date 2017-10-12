@@ -8,6 +8,7 @@
 
 #include "entity manager.hpp"
 
+#include "level file.hpp"
 #include "entity file.hpp"
 #include "systems registry.hpp"
 
@@ -17,27 +18,21 @@ void EntityManager::quit() {
   entities.clear();
 }
 
-void EntityManager::create(const std::string &filePath, const YAML::Node &levelArgs) {
-  std::unique_ptr<Entity> entity = loadEntity(filePath, levelArgs);
+EntityID EntityManager::create(const std::string &fileName, const YAML::Node &levelArgs) {
+  std::unique_ptr<Entity> entity = loadEntity(fileName, levelArgs);
   const EntityID id = entity->getID();
   entities.emplace(id, std::move(entity));
+  return id;
 }
 
 void EntityManager::destroy(const EntityID id) {
-  Systems::rendering->rem(id);
-  Systems::animation->rem(id);
-  Systems::physics->rem(id);
-  Systems::input->rem(id);
+  destroyComponents(id);
   entities.erase(id);
 }
 
 void EntityManager::destroyAll() {
-  for (auto e = entities.cbegin(); e != entities.cend(); ++e) {
-    const EntityID id = e->first;
-    Systems::rendering->rem(id);
-    Systems::animation->rem(id);
-    Systems::physics->rem(id);
-    Systems::input->rem(id);
+  for (auto &e : entities) {
+    destroyComponents(e.first);
   }
   entities.clear();
 }
@@ -49,4 +44,20 @@ Entity &EntityManager::getEntity(const EntityID id) {
   } else {
     return *(iter->second);
   }
+}
+
+EntityID EntityManager::loadLevel(const std::string &fileName) {
+  lastID = ::loadLevel(fileName, *this);
+  return lastID;
+}
+
+EntityID EntityManager::getLastID() const {
+  return lastID;
+}
+
+void EntityManager::destroyComponents(const EntityID id) const {
+  Systems::rendering->rem(id);
+  Systems::animation->rem(id);
+  Systems::physics->rem(id);
+  Systems::input->rem(id);
 }

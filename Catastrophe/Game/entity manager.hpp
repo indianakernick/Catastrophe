@@ -21,13 +21,20 @@ public:
   void init();
   void quit();
   
-  void create(const std::string &, const YAML::Node &);
+  EntityID create(const std::string &, const YAML::Node &);
   void destroy(EntityID);
   void destroyAll();
   Entity &getEntity(EntityID);
   
+  EntityID loadLevel(const std::string &);
+  
+  EntityID getLastID() const;
+  
 private:
   std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;
+  EntityID lastID = -1;
+  
+  void destroyComponents(EntityID) const;
 };
 
 #endif

@@ -106,7 +106,9 @@
 		4545DEAA1F8DD260000A54AA /* ground drone render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEA81F8DD260000A54AA /* ground drone render component.cpp */; };
 		4545DEAC1F8DD355000A54AA /* ground drone entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */; };
 		4545DEAE1F8DD3B6000A54AA /* ground drone body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */; };
-		4545DEB11F8EE4D1000A54AA /* missile rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEAF1F8EE4D1000A54AA /* missile rendering component.cpp */; };
+		4545DEB11F8EE4D1000A54AA /* missile render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEAF1F8EE4D1000A54AA /* missile render component.cpp */; };
+		4545DEB31F8EEDCC000A54AA /* missile spawner entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */; };
+		4545DEB61F8EEE64000A54AA /* missile spawner render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4545DEB41F8EEE64000A54AA /* missile spawner render component.cpp */; };
 		4568D3171F89EAA00037268B /* polygon render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3151F89EAA00037268B /* polygon render component.cpp */; };
 		4568D31A1F89F0690037268B /* launcher render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3181F89F0690037268B /* launcher render component.cpp */; };
 		4568D31D1F89F7E80037268B /* spikes render component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes render component.cpp */; };
@@ -369,8 +371,11 @@
 		4545DEA91F8DD260000A54AA /* ground drone render component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground drone render component.hpp"; sourceTree = "<group>"; };
 		4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ground drone entity.yaml"; sourceTree = "<group>"; };
 		4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ground drone body.yaml"; sourceTree = "<group>"; };
-		4545DEAF1F8EE4D1000A54AA /* missile rendering component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "missile rendering component.cpp"; sourceTree = "<group>"; };
+		4545DEAF1F8EE4D1000A54AA /* missile render component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "missile render component.cpp"; sourceTree = "<group>"; };
 		4545DEB01F8EE4D1000A54AA /* missile render component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "missile render component.hpp"; sourceTree = "<group>"; };
+		4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "missile spawner entity.yaml"; sourceTree = "<group>"; };
+		4545DEB41F8EEE64000A54AA /* missile spawner render component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "missile spawner render component.cpp"; sourceTree = "<group>"; };
+		4545DEB51F8EEE64000A54AA /* missile spawner render component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "missile spawner render component.hpp"; sourceTree = "<group>"; };
 		4568D3151F89EAA00037268B /* polygon render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "polygon render component.cpp"; sourceTree = "<group>"; };
 		4568D3161F89EAA00037268B /* polygon render component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "polygon render component.hpp"; sourceTree = "<group>"; };
 		4568D3181F89F0690037268B /* launcher render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher render component.cpp"; sourceTree = "<group>"; };
@@ -869,8 +874,10 @@
 				453A0ABB1F8B5F450042B23B /* vector sprite render component.hpp */,
 				4545DEA81F8DD260000A54AA /* ground drone render component.cpp */,
 				4545DEA91F8DD260000A54AA /* ground drone render component.hpp */,
-				4545DEAF1F8EE4D1000A54AA /* missile rendering component.cpp */,
+				4545DEAF1F8EE4D1000A54AA /* missile render component.cpp */,
 				4545DEB01F8EE4D1000A54AA /* missile render component.hpp */,
+				4545DEB41F8EEE64000A54AA /* missile spawner render component.cpp */,
+				4545DEB51F8EEE64000A54AA /* missile spawner render component.hpp */,
 			);
 			name = "render components";
 			sourceTree = "<group>";
@@ -1013,6 +1020,7 @@
 				45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */,
 				4545DEA01F8C81DB000A54AA /* missile entity.yaml */,
 				4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */,
+				4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1184,6 +1192,7 @@
 				45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */,
 				45DEA0431F82FF2D00B1DA72 /* spikes entity.yaml in Resources */,
 				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
+				4545DEB31F8EEDCC000A54AA /* missile spawner entity.yaml in Resources */,
 				45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */,
 				457619FA1F876C8600A6A792 /* spikes sprite.lua in Resources */,
 				4545DE9C1F8C76CC000A54AA /* missile body.yaml in Resources */,
@@ -1256,6 +1265,7 @@
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				453A0AB11F8AF1E70042B23B /* player render component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
+				4545DEB61F8EEE64000A54AA /* missile spawner render component.cpp in Sources */,
 				45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */,
 				45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */,
 				452FFA821F6BC50D003A98B1 /* b2ContactSolver.cpp in Sources */,
@@ -1339,7 +1349,7 @@
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
 				45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */,
-				4545DEB11F8EE4D1000A54AA /* missile rendering component.cpp in Sources */,
+				4545DEB11F8EE4D1000A54AA /* missile render component.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				4568D3201F89FB150037268B /* platform render component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,

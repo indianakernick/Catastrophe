@@ -16,7 +16,7 @@
 #include "body physics component.hpp"
 
 void SimpleAnimationComponent::init(const YAML::Node &node) {
-  transform.scale = getChild(node, "scale").as<glm::vec2>();
+  transform = node.as<Transform>();
   float duration = 1.0f;
   getOptional(duration, node, "duration");
   anim.setDuration(duration);
