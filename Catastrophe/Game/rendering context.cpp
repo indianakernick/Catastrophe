@@ -11,15 +11,18 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
+
 #define NANOVG_GL3_IMPLEMENTATION
 #include "nanovg.hpp"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-parameter"
 #include <nanovg/nanovg_gl.h>
 #pragma clang diagnostic pop
-#include <Simpleton/Platform/sdl error.hpp>
+
 #include "nvg helper.hpp"
 #include "window constants.hpp"
+#include <Simpleton/Utils/profiler.hpp>
+#include <Simpleton/Platform/sdl error.hpp>
 
 constexpr int DEPTH_BITS = 16;
 constexpr int STENCIL_BITS = 8;
@@ -35,6 +38,8 @@ namespace {
 }
 
 void RenderingContext::init(SDL_Window *newWindow) {
+  PROFILE(RenderingContext init);
+
   window = newWindow;
   
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -78,6 +83,8 @@ void RenderingContext::init(SDL_Window *newWindow) {
 }
 
 void RenderingContext::quit() {
+  PROFILE(RenderingContext quit);
+
   renderResMan.quit();
   nvgDeleteGL3(context);
   context = nullptr;
@@ -87,6 +94,8 @@ void RenderingContext::quit() {
 }
 
 void RenderingContext::preRender(const glm::mat3 viewProj) {
+  PROFILE(RenderingContext preRender);
+
   int windowWidth, windowHeight;
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
   SDL_GL_GetDrawableSize(window, &renderSize.x, &renderSize.y);
@@ -110,6 +119,8 @@ void RenderingContext::postRender(
   uint8_t *const data,
   const size_t size
 ) {
+  PROFILE(RenderingContext postRender);
+  
   fpsCounter.frame();
   
   if (printFPS) {
@@ -142,6 +153,8 @@ glm::ivec2 RenderingContext::getFramebufferSize() const {
 }
 
 void RenderingContext::renderFPS() {
+  PROFILE(RenderingContext renderFPS);
+
   //@TODO use to_chars
   const std::string fpsStr = "FPS: " + std::to_string(fpsCounter.get());
   nvgResetTransform(context);
@@ -153,6 +166,8 @@ void RenderingContext::renderFPS() {
 }
 
 void RenderingContext::captureFrame(uint8_t *const data) {
+  PROFILE(RenderingContext captureFrame);
+  
   while (glGetError() != GL_NO_ERROR);
   glReadPixels(
     0, 0,

@@ -9,9 +9,9 @@
 #include "screenshot.hpp"
 
 #include <SDL2/SDL_events.h>
+#include "tinyfiledialogs.h"
 #include "rendering context.hpp"
 #include "framebuffer to png.hpp"
-#include "tinyfiledialogs.h"
 
 Screenshot::Screenshot()
   : framebuffer(std::make_unique<uint8_t []>(MAX_FRAMEBUFFER_SIZE)) {}
