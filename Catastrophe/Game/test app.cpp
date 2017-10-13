@@ -72,7 +72,7 @@ void TestApp::render(const float delta) {
     {0.5f, 0.5f}
   );
   
-  mat = glm::scale(mat, {0.875f, 0.875f});
+  //mat = glm::scale(mat, {0.875f, 0.875f});
   //mat = glm::scale(mat, {0.1f, 0.1f});
   
   renderingContext.preRender(mat);
@@ -85,23 +85,29 @@ void TestApp::render(const float delta) {
   NVGcontext *ctx = renderingContext.getContext();
   
   anim.advance(delta * 0.0625);
-  anim.repeatOnOverflow();
-  nvgSave(ctx);
-  renderComp.render(ctx);
-  nvgRestore(ctx);
-  //script.draw(anim.getProgressTime());
-  //renderSprite(ctx, sprite, getFrame(sprite, "run", 0.375), {});
   
-  /*nvgBeginPath(ctx);
-  nvgStrokeColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));
-  nvgStrokeWidth(ctx, 0.01);
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, nvgRGBf(1.0f, 1.0f, 1.0f));
   nvgRect(ctx, -0.5f, -0.5f, 1.0f, 1.0f);
+  nvgFill(ctx);
   
-  for (float i = -1.0f; i <= 1.0f; ++i) {
-    nvgMoveTo(ctx, i / 4.0f, -0.55f);
-    nvgLineTo(ctx, i / 4.0f, -0.45f);
-  }
-  nvgStroke(ctx);*/
+  nvgStrokeColor(ctx, nvgRGBf(0.0f, 0.0f, 0.0f));
+  nvgStrokeWidth(ctx, 0.01f);
+  
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, nvgRGBf(1.0f, 0.0f, 0.0f));
+  nvgCircle(ctx, 0.15f, 0.0f, 0.3f);
+  nvgFill(ctx);
+  
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, nvgRGBf(0.0f, 0.0f, 1.0f));
+  nvgCircle(ctx, -0.15f, 0.0f, 0.3f);
+  nvgFill(ctx);
+  nvgStroke(ctx);
+  
+  nvgBeginPath(ctx);
+  nvgCircle(ctx, 0.15f, 0.0f, 0.3f);
+  nvgStroke(ctx);
   
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }
