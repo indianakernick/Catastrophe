@@ -19,6 +19,7 @@ void BodyPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 }
 
 void BodyPhysicsComponent::quit(b2World &world) {
+  body->SetUserData(nullptr);
   world.DestroyBody(body);
   body = nullptr;
 }

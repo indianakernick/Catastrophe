@@ -11,6 +11,7 @@
 #include "entity manager.hpp"
 #include "physics constants.hpp"
 #include "physics component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void PhysicsSystem::init() {
   world.emplace(GRAVITY);
@@ -61,6 +62,8 @@ std::weak_ptr<PhysicsComponent> PhysicsSystem::get(const EntityID entityID) {
 }
 
 void PhysicsSystem::update(const float delta) {
+  PROFILE(PhysicsSystem::update);
+  
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     c->second->preStep(delta);
   }

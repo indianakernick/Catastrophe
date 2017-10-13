@@ -22,18 +22,20 @@ public:
   void quit();
   
   EntityID create(const std::string &, const YAML::Node &);
+  EntityID createPlayer(const std::string &, const YAML::Node &);
   void destroy(EntityID);
   void destroyAll();
   Entity &getEntity(EntityID);
   
-  EntityID loadLevel(const std::string &);
+  void loadLevel(const std::string &);
   
-  EntityID getLastID() const;
+  EntityID getNextID() const;
   
 private:
   std::unordered_map<EntityID, std::unique_ptr<Entity>> entities;
-  EntityID lastID = -1;
+  EntityID nextID = 0;
   
+  void createImpl(EntityID, const std::string &, const YAML::Node &);
   void destroyComponents(EntityID) const;
 };
 

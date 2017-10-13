@@ -10,6 +10,7 @@
 
 #include "level file.hpp"
 #include "entity file.hpp"
+#include "player constants.hpp"
 #include "systems registry.hpp"
 
 void EntityManager::init() {}
@@ -19,10 +20,21 @@ void EntityManager::quit() {
 }
 
 EntityID EntityManager::create(const std::string &fileName, const YAML::Node &levelArgs) {
-  std::unique_ptr<Entity> entity = loadEntity(fileName, levelArgs);
-  lastID = entity->getID();
-  entities.emplace(lastID, std::move(entity));
-  return lastID;
+  EntityID id = nextID;
+  if (const YAML::Node &idNode = levelArgs["id"]) {
+    id = idNode.as<EntityID>();
+    if (id < nextID) {
+      throw std::runtime_error("Invalid ID in level file");
+    }
+  }
+  nextID = id + 1;
+  createImpl(id, fileName, levelArgs);
+  return id;
+}
+
+EntityID EntityManager::createPlayer(const std::string &fileName, const YAML::Node &levelArgs) {
+  createImpl(PLAYER_ID, fileName, levelArgs);
+  return PLAYER_ID;
 }
 
 void EntityManager::destroy(const EntityID id) {
@@ -46,13 +58,23 @@ Entity &EntityManager::getEntity(const EntityID id) {
   }
 }
 
-EntityID EntityManager::loadLevel(const std::string &fileName) {
-  lastID = ::loadLevel(fileName, *this);
-  return lastID;
+void EntityManager::loadLevel(const std::string &fileName) {
+  ::loadLevel(fileName, *this);
 }
 
-EntityID EntityManager::getLastID() const {
-  return lastID;
+EntityID EntityManager::getNextID() const {
+  return nextID;
+}
+
+void EntityManager::createImpl(
+  const EntityID id,
+  const std::string &fileName,
+  const YAML::Node &levelArgs
+) {
+  auto entity = std::make_unique<Entity>(id);
+  loadEntity(entity.get(), fileName, levelArgs);
+  const auto [iter, inserted] = entities.emplace(id, std::move(entity));
+  assert(inserted);
 }
 
 void EntityManager::destroyComponents(const EntityID id) const {

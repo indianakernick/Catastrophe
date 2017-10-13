@@ -11,10 +11,9 @@
 
 #include <memory>
 #include "entity.hpp"
-#include "transform.hpp"
 #include <yaml-cpp/node/node.h>
 
-std::unique_ptr<Entity> loadEntity(const std::string &, const YAML::Node &);
+void loadEntity(Entity *, const std::string &, const YAML::Node &);
 
 
 #endif

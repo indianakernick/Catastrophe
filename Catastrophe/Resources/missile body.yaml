@@ -21,8 +21,8 @@ shapes:
 fixtures:
 - shape: main
   density: 5
-  user data: FragileDeadly
+  user data: Missile
 
 - shape: nose
   density: 0
-  user data: FragileDeadly
+  user data: Missile

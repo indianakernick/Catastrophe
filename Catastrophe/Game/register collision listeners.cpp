@@ -61,8 +61,10 @@ void handleProximityPlayerBodyEnd(b2Fixture *, b2Fixture *sensor) {
 }
 
 void handleMissileBegin(b2Fixture *fixtureA, b2Fixture *fixtureB) {
-  void *const missile = getUserData<Symbol::FragileDeadly>();
-  if (fixtureB->GetUserData() == missile) {
+  void *const missile = getUserData<Symbol::Missile>();
+  if (fixtureA->GetUserData() == fixtureB->GetUserData()) {
+    return;
+  } else if (fixtureB->GetUserData() == missile) {
     std::swap(fixtureA, fixtureB);
   } else if (fixtureA->GetUserData() != missile) {
     return;

@@ -9,6 +9,7 @@
 #include "animation system.hpp"
 
 #include "animation component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void AnimationSystem::add(
   const EntityID entityID,
@@ -24,6 +25,8 @@ void AnimationSystem::rem(const EntityID entityID) {
 }
 
 void AnimationSystem::update(const float delta) {
+  PROFILE(AnimationSystem::update);
+ 
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     c->second->update(delta);
   }

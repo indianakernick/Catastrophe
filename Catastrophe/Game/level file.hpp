@@ -14,6 +14,6 @@
 
 class EntityManager;
 
-EntityID loadLevel(const std::string &, EntityManager &);
+void loadLevel(const std::string &, EntityManager &);
 
 #endif

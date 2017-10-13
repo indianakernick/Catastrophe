@@ -13,6 +13,7 @@
 #include "entity manager.hpp"
 #include "render component.hpp"
 #include "rendering context.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void RenderingSystem::init(RenderingContext &newRenderer) {
   assert(!renderer);
@@ -51,6 +52,8 @@ void RenderingSystem::update(const float delta) {
 }
 
 void RenderingSystem::render() {
+  PROFILE(RenderingSystem::render);
+
   NVGcontext *const ctx = renderer->getContext();
   for (auto &layer : layers) {
     for (auto &pair : layer) {
