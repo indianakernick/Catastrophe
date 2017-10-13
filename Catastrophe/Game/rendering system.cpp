@@ -58,7 +58,7 @@ void RenderingSystem::render() {
   for (auto &layer : layers) {
     for (auto &pair : layer) {
       pair.second->preRender();
-      if (camera.visibleMeters(pair.second->getAABB())) {
+      if (camera.transform.visibleMeters(pair.second->getAABB())) {
         nvgSave(ctx);
         pair.second->render(ctx);
         nvgRestore(ctx);

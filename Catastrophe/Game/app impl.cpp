@@ -132,7 +132,7 @@ void AppImpl::render(const float delta) {
   }
   {
     PROFILE(Pre Render);
-    renderingContext.preRender(renderingSystem.getCamera().toPixels());
+    renderingContext.preRender(renderingSystem.getCamera().transform.toPixels());
   }
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {

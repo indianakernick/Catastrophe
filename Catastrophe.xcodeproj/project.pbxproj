@@ -24,6 +24,7 @@
 		451CC0CB1F8F21C90000E424 /* destroyable spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0C91F8F21C90000E424 /* destroyable spawn component.cpp */; };
 		451CC0CE1F8F333E0000E424 /* periodic spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CC1F8F333E0000E424 /* periodic spawn component.cpp */; };
 		451CC0D11F905DCB0000E424 /* b2 helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CF1F905DCB0000E424 /* b2 helper.cpp */; };
+		451CC0D41F90836B0000E424 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0D21F90836B0000E424 /* camera transform.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -208,6 +209,8 @@
 		451CC0CD1F8F333E0000E424 /* periodic spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "periodic spawn component.hpp"; sourceTree = "<group>"; };
 		451CC0CF1F905DCB0000E424 /* b2 helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "b2 helper.cpp"; sourceTree = "<group>"; };
 		451CC0D01F905DCB0000E424 /* b2 helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 helper.hpp"; sourceTree = "<group>"; };
+		451CC0D21F90836B0000E424 /* camera transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "camera transform.cpp"; sourceTree = "<group>"; };
+		451CC0D31F90836B0000E424 /* camera transform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera transform.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -913,6 +916,8 @@
 				454116341F5622D700C2865B /* camera zoom track.hpp */,
 				454116281F5255CD00C2865B /* camera window size.cpp */,
 				454116291F5255CD00C2865B /* camera window size.hpp */,
+				451CC0D21F90836B0000E424 /* camera transform.cpp */,
+				451CC0D31F90836B0000E424 /* camera transform.hpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -1396,6 +1401,7 @@
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
 				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,
 				45DEA0471F83364400B1DA72 /* particle system.cpp in Sources */,
+				451CC0D41F90836B0000E424 /* camera transform.cpp in Sources */,
 				4509F8D21F5A414800927A19 /* vector file.cpp in Sources */,
 				452FFA8F1F6BC50D003A98B1 /* b2RevoluteJoint.cpp in Sources */,
 				452FFA721F6BC50D003A98B1 /* b2BlockAllocator.cpp in Sources */,
