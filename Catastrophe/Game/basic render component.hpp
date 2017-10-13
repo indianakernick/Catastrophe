@@ -18,9 +18,9 @@ public:
   
   void init(RenderingContext &, const YAML::Node &) override;
   void preRender() override;
-  CameraMotionTargetCPtr getMotionTarget() const override;
-  CameraZoomTargetCPtr getZoomTarget() const override;
-  Rect getAABB() const override;
+  CameraMotionTargetCPtr getMotionTarget() const override final;
+  CameraZoomTargetCPtr getZoomTarget() const override final;
+  AABB getAABB() const override;
   size_t getLayer() const override;
 
 protected:

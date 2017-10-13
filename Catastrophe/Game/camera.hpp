@@ -9,7 +9,7 @@
 #ifndef camera_hpp
 #define camera_hpp
 
-#include "rect.hpp"
+#include "aabb.hpp"
 #include <glm/mat3x3.hpp>
 #include "camera pos.hpp"
 #include "camera zoom.hpp"
@@ -24,7 +24,7 @@ public:
   
   glm::mat3 toPixels() const;
   glm::mat3 toMeters() const;
-  bool visibleMeters(Rect) const;
+  bool visibleMeters(AABB) const;
 
   CameraMotionTrack motionTrack;
   CameraZoomTrack zoomTrack;
@@ -34,9 +34,14 @@ public:
   void debugRender(NVGcontext *);
 
 private:
+  glm::mat3 toPixelsMat;
+  glm::mat3 toMetersMat;
+  AABB windowBounds;
   CameraPos pos;
   CameraProps props;
   CameraZoom zoom;
+  
+  void updateMatricies();
 };
 
 #endif

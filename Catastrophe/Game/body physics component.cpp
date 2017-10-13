@@ -9,6 +9,7 @@
 #include "body physics component.hpp"
 
 #include <cassert>
+#include "b2 helper.hpp"
 #include "b2 glm cast.hpp"
 #include "yaml helper.hpp"
 #include "physics file.hpp"
@@ -22,6 +23,14 @@ void BodyPhysicsComponent::quit(b2World &world) {
   body->SetUserData(nullptr);
   world.DestroyBody(body);
   body = nullptr;
+}
+
+AABB BodyPhysicsComponent::getAABB() const {
+  const b2AABB aabb = bodyAABB(body);
+  return {
+    castToGLM(aabb.lowerBound),
+    castToGLM(aabb.upperBound)
+  };
 }
 
 glm::vec2 BodyPhysicsComponent::getPos() const {

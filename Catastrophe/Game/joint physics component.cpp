@@ -8,6 +8,7 @@
 
 #include "joint physics component.hpp"
 
+#include "b2 helper.hpp"
 #include "yaml helper.hpp"
 #include "physics file.hpp"
 #include "systems registry.hpp"
@@ -52,4 +53,13 @@ void JointPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 
 void JointPhysicsComponent::quit(b2World &) {
   //a joint is destroyed when either of the bodies is destroyed
+}
+
+AABB JointPhysicsComponent::getAABB() const {
+  b2AABB aabb = bodyAABB(joint->GetBodyA());
+  aabb.Combine(bodyAABB(joint->GetBodyB()));
+  return {
+    castToGLM(aabb.lowerBound),
+    castToGLM(aabb.upperBound)
+  };
 }

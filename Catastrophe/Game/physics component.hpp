@@ -9,6 +9,7 @@
 #ifndef physics_component_hpp
 #define physics_component_hpp
 
+#include "aabb.hpp"
 #include "component.hpp"
 #include <yaml-cpp/yaml.h>
 
@@ -25,6 +26,7 @@ public:
   virtual void preStep(float) = 0;
   //Called after b2World::Step
   virtual void postStep() = 0;
+  virtual AABB getAABB() const = 0;
 };
 
 #endif

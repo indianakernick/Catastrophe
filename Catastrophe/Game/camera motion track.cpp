@@ -8,7 +8,6 @@
 
 #include "camera motion track.hpp"
 
-#include "rect.hpp"
 #include "camera pos.hpp"
 #include "camera props.hpp"
 #include "camera constants.hpp"
@@ -102,7 +101,7 @@ void CameraMotionTrack::debugRender(NVGcontext *context, const CameraProps props
   const auto targetShared = target.lock();
   
   if (targetShared) {
-    const Rect targetRect = static_cast<Rect>(*targetShared);
+    const auto targetRect = static_cast<Math::RectPS<float>>(*targetShared);
   
     nvgBeginPath(context);
     nvgFillColor(context, CAMERA_TARGET_COLOR);

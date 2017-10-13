@@ -21,6 +21,7 @@ public:
   void quit(b2World &) override;
   void preStep(float) override {}
   void postStep() override {}
+  AABB getAABB() const override final;
 
   b2Joint *getJoint();
   const b2Joint *getJoint() const;

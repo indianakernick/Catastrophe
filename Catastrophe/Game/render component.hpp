@@ -9,7 +9,7 @@
 #ifndef render_component_hpp
 #define render_component_hpp
 
-#include "rect.hpp"
+#include "aabb.hpp"
 #include "component.hpp"
 #include <yaml-cpp/yaml.h>
 #include "camera zoom track.hpp"
@@ -28,7 +28,7 @@ public:
   virtual void render(NVGcontext *) = 0;
   virtual CameraMotionTargetCPtr getMotionTarget() const = 0;
   virtual CameraZoomTargetCPtr getZoomTarget() const = 0;
-  virtual Rect getAABB() const = 0;
+  virtual AABB getAABB() const = 0;
   virtual size_t getLayer() const = 0;
 };
 

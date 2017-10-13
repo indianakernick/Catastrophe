@@ -23,6 +23,7 @@
 		4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F9001F5E816F00927A19 /* yaml helper.cpp */; };
 		451CC0CB1F8F21C90000E424 /* destroyable spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0C91F8F21C90000E424 /* destroyable spawn component.cpp */; };
 		451CC0CE1F8F333E0000E424 /* periodic spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CC1F8F333E0000E424 /* periodic spawn component.cpp */; };
+		451CC0D11F905DCB0000E424 /* b2 helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CF1F905DCB0000E424 /* b2 helper.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -205,6 +206,8 @@
 		451CC0CA1F8F21C90000E424 /* destroyable spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "destroyable spawn component.hpp"; sourceTree = "<group>"; };
 		451CC0CC1F8F333E0000E424 /* periodic spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "periodic spawn component.cpp"; sourceTree = "<group>"; };
 		451CC0CD1F8F333E0000E424 /* periodic spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "periodic spawn component.hpp"; sourceTree = "<group>"; };
+		451CC0CF1F905DCB0000E424 /* b2 helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "b2 helper.cpp"; sourceTree = "<group>"; };
+		451CC0D01F905DCB0000E424 /* b2 helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 helper.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -319,7 +322,7 @@
 		4538906E1F2ADB13007EBB5A /* app impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "app impl.cpp"; sourceTree = "<group>"; };
 		4538906F1F2ADB13007EBB5A /* app impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "app impl.hpp"; sourceTree = "<group>"; };
 		453890711F2ADB13007EBB5A /* window constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "window constants.hpp"; sourceTree = "<group>"; };
-		453890781F2ADB4B007EBB5A /* rect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rect.hpp; sourceTree = "<group>"; };
+		453890781F2ADB4B007EBB5A /* aabb.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = aabb.hpp; sourceTree = "<group>"; };
 		453890791F2ADB4B007EBB5A /* string to scancode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "string to scancode.cpp"; sourceTree = "<group>"; };
 		4538907A1F2ADB4B007EBB5A /* string to scancode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "string to scancode.hpp"; sourceTree = "<group>"; };
 		453892CA1F2AF41F007EBB5A /* render component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "render component.cpp"; sourceTree = "<group>"; };
@@ -569,7 +572,7 @@
 				4545DE981F8C5C81000A54AA /* yaml read.hpp */,
 				4509F8F71F5D3DD000927A19 /* nvg helper.cpp */,
 				4509F8F81F5D3DD000927A19 /* nvg helper.hpp */,
-				453890781F2ADB4B007EBB5A /* rect.hpp */,
+				453890781F2ADB4B007EBB5A /* aabb.hpp */,
 				452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */,
 				452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */,
 				452FF9FD1F6BBF26003A98B1 /* framebuffer to png.hpp */,
@@ -578,6 +581,8 @@
 				45DEA01B1F7A43A500B1DA72 /* screenshot.cpp */,
 				45DEA01C1F7A43A500B1DA72 /* screenshot.hpp */,
 				45DEA0211F7C98DC00B1DA72 /* string view literal.hpp */,
+				451CC0CF1F905DCB0000E424 /* b2 helper.cpp */,
+				451CC0D01F905DCB0000E424 /* b2 helper.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1012,10 +1017,10 @@
 			isa = PBXGroup;
 			children = (
 				45C545FD1F8F137700217406 /* spawn components */,
-				45C545F71F8F0DCD00217406 /* spawn system.cpp */,
-				45C545F81F8F0DCD00217406 /* spawn system.hpp */,
 				45C545FA1F8F11E500217406 /* spawn component.cpp */,
 				45C545FB1F8F11E500217406 /* spawn component.hpp */,
+				45C545F71F8F0DCD00217406 /* spawn system.cpp */,
+				45C545F81F8F0DCD00217406 /* spawn system.hpp */,
 			);
 			name = spawn;
 			sourceTree = "<group>";
@@ -1332,6 +1337,7 @@
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
 				4509F8F61F5D359B00927A19 /* vector render.cpp in Sources */,
 				453A0ABC1F8B5F450042B23B /* vector sprite render component.cpp in Sources */,
+				451CC0D11F905DCB0000E424 /* b2 helper.cpp in Sources */,
 				453892EF1F2C2487007EBB5A /* rendering system.cpp in Sources */,
 				453892E51F2C1757007EBB5A /* input system.cpp in Sources */,
 				452FFA731F6BC50D003A98B1 /* b2Draw.cpp in Sources */,

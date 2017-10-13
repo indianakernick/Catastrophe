@@ -12,6 +12,7 @@
 #include "nvg helper.hpp"
 #include "yaml helper.hpp"
 #include "layer names.hpp"
+#include "physics component.hpp"
 #include "animation component.hpp"
 
 void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
@@ -26,7 +27,9 @@ void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
 }
 
 void BasicRenderComponent::preRender() {
-  rect->c = getEntity().get<AnimationComponent>()->getModelMat()[2];
+  const AABB aabb = getAABB();
+  *rect = static_cast<CameraMotionTarget>(aabb);
+  *size = aabb.size();
 }
 
 CameraMotionTargetCPtr BasicRenderComponent::getMotionTarget() const {
@@ -37,8 +40,18 @@ CameraZoomTargetCPtr BasicRenderComponent::getZoomTarget() const {
   return size;
 }
 
-Rect BasicRenderComponent::getAABB() const {
-  return static_cast<Rect>(*rect);
+AABB BasicRenderComponent::getAABB() const {
+  if (const auto physicsComp = getEntity().get<PhysicsComponent>()) {
+    return physicsComp->getAABB();
+  } else if (const auto animComp = getEntity().get<AnimationComponent>()) {
+    const glm::mat3 modelMat = animComp->getModelMat();
+    Math::RectCS<float> rectcs;
+    rectcs.center = modelMat[2];
+    rectcs.halfSize = {modelMat[0][0] / 2.0f, modelMat[1][1] / 2.0f};
+    return static_cast<AABB>(rectcs);
+  } else {
+    return {};
+  }
 }
 
 size_t BasicRenderComponent::getLayer() const {
@@ -46,5 +59,7 @@ size_t BasicRenderComponent::getLayer() const {
 }
 
 void BasicRenderComponent::setModelTransform(NVGcontext *const ctx) {
-  nvgTransform(ctx, getEntity().get<AnimationComponent>()->getModelMat());
+  const auto animComp = getEntity().get<AnimationComponent>();
+  assert(animComp);
+  nvgTransform(ctx, animComp->getModelMat());
 }
