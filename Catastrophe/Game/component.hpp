@@ -22,16 +22,24 @@ public:
 protected:
   Entity &getEntity() const;
   
-  template <typename Comp>
-  auto getComp() {
-    assert(entity);
-    return entity->get<Comp>();
-  }
-  template <typename Comp>
-  auto getCompImpl() {
-    assert(entity);
-    return entity->getImpl<Comp>();
-  }
+  #define FORWARD(ENTITY_NAME, NAME)                                            \
+    template <typename Comp>                                                    \
+    auto NAME() {                                                               \
+      assert(entity);                                                           \
+      return entity->ENTITY_NAME<Comp>();                                       \
+    }                                                                           \
+    template <typename Comp>                                                    \
+    auto NAME() const {                                                         \
+      assert(entity);                                                           \
+      return entity->ENTITY_NAME<Comp>();                                       \
+    }
+  
+  FORWARD(get, getComp)
+  FORWARD(getExpected, getExpectedComp)
+  FORWARD(getImpl, getCompImpl)
+  FORWARD(getExpectedImpl, getExpectedCompImpl)
+  
+  #undef FORWARD
   
 private:
   Entity *entity = nullptr;

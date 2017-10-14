@@ -33,9 +33,7 @@ void MissileSpawnerRenderComponent::render(NVGcontext *const ctx) {
 }
 
 AABB MissileSpawnerRenderComponent::getAABB() const {
-  const auto animComp = getEntity().get<AnimationComponent>();
-  assert(animComp);
-  const glm::mat3 modelMat = animComp->getModelMat();
+  const glm::mat3 modelMat = getExpectedComp<AnimationComponent>()->getModelMat();
   return {
     modelMat * glm::vec3(-1.0f, -1.0f, 1.0f),
     modelMat * glm::vec3(1.0f, 1.0f, 1.0f)

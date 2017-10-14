@@ -55,9 +55,7 @@ void MissilePhysicsComponent::preStep(float) {
 
 void MissilePhysicsComponent::postStep() {
   if (contacted) {
-    const auto spawnComp = std::dynamic_pointer_cast<DestroyableSpawnComponent>(
-      getEntity().get<SpawnComponent>()
-    );
+    const auto spawnComp = getExpectedCompImpl<DestroyableSpawnComponent>();
     spawnComp->kill();
   }
 }

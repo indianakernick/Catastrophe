@@ -15,7 +15,7 @@
 void SpinningBladeRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
-  const float prog = getEntity().get<AnimationComponent>()->getProgress();
+  const float prog = getExpectedCompImpl<AnimationComponent>()->getProgress();
   nvgRotate(ctx, 2.0f * NVG_PI * ROTATIONS_PER_SECOND * prog);
   
   nvgFillColor(ctx, COLOR);

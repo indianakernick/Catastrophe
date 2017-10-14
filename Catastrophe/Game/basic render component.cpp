@@ -41,9 +41,9 @@ CameraZoomTargetCPtr BasicRenderComponent::getZoomTarget() const {
 }
 
 AABB BasicRenderComponent::getAABB() const {
-  if (const auto physicsComp = getEntity().get<PhysicsComponent>()) {
+  if (const auto physicsComp = getComp<PhysicsComponent>()) {
     return physicsComp->getAABB();
-  } else if (const auto animComp = getEntity().get<AnimationComponent>()) {
+  } else if (const auto animComp = getComp<AnimationComponent>()) {
     const glm::mat3 modelMat = animComp->getModelMat();
     Math::RectCS<float> rectcs;
     rectcs.center = modelMat[2];
@@ -59,7 +59,5 @@ size_t BasicRenderComponent::getLayer() const {
 }
 
 void BasicRenderComponent::setModelTransform(NVGcontext *const ctx) {
-  const auto animComp = getEntity().get<AnimationComponent>();
-  assert(animComp);
-  nvgTransform(ctx, animComp->getModelMat());
+  nvgTransform(ctx, getExpectedComp<AnimationComponent>()->getModelMat());
 }

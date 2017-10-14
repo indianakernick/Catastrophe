@@ -18,11 +18,9 @@ void TurretAnimationComponent::init(const YAML::Node &node) {
 }
 
 void TurretAnimationComponent::update(float) {
-  const auto turretComp = std::dynamic_pointer_cast<TurretPhysicsComponent>(getEntity().get<PhysicsComponent>());
-  if (turretComp) {
-    transform.pos = turretComp->getPos();
-    transform.rotation = turretComp->getAngle();
-  }
+  const auto turretComp = getExpectedCompImpl<const TurretPhysicsComponent>();
+  transform.pos = turretComp->getPos();
+  transform.rotation = turretComp->getAngle();
   model = transform.getMat3();
 }
 

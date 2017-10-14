@@ -15,7 +15,6 @@
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
-#include <Simpleton/Utils/safe down cast.hpp>
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 void PlayerPhysicsComponent::init(b2World &world, const YAML::Node &node) {
@@ -28,9 +27,7 @@ void PlayerPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 }
 
 void PlayerPhysicsComponent::preStep(const float delta) {
-  const auto playerInput = Utils::safeDownCast<const PlayerInputComponent>(
-    getEntity().get<InputComponent>()
-  );
+  const auto playerInput = getExpectedCompImpl<const PlayerInputComponent>();
   
          if (playerInput->shouldMoveLeft()) {
     applyMoveForce(-1.0f);

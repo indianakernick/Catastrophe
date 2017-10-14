@@ -10,14 +10,11 @@
 
 #include "entity.hpp"
 #include "launcher animation component.hpp"
-#include <Simpleton/Utils/safe down cast.hpp>
 
 void LauncherRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
-  const auto animComp = Utils::safeDownCast<LauncherAnimationComponent>(
-    getEntity().get<AnimationComponent>()
-  );
+  const auto animComp = getExpectedCompImpl<LauncherAnimationComponent>();
   const float progress = animComp->getProgress();
   const float armHeight = progress / NUM_LEVELS;
   const float armWidth = std::sqrt(2.0f * MAX_ARM_HEIGHT_2 - armHeight * armHeight);

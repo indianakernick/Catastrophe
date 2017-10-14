@@ -15,7 +15,6 @@
 #include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 #include "player animation component.hpp"
-#include <Simpleton/Utils/safe down cast.hpp>
 #include <Simpleton/Graphics/keyframe animation.hpp>
 
 namespace {
@@ -277,9 +276,7 @@ struct Graphics::Interpolator<Pose> {
 using LerpPose = Graphics::Interpolator<Pose>;
 
 void PlayerRenderComponent::render(NVGcontext *const ctx) {
-  const auto animComp = Utils::safeDownCast<PlayerAnimationComponent>(
-    getEntity().get<AnimationComponent>()
-  );
+  const auto animComp = getExpectedCompImpl<PlayerAnimationComponent>();
   
   static Pose standGroundJump;
   LerpPose::lerp(

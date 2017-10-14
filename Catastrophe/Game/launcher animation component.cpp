@@ -12,14 +12,11 @@
 #include "transform.hpp"
 #include "launcher physics component.hpp"
 #include "../Libraries/Box2D/Common/b2Math.h"
-#include <Simpleton/Utils/safe down cast.hpp>
 
 void LauncherAnimationComponent::init(const YAML::Node &) {}
 
 void LauncherAnimationComponent::update(float) {
-  const auto physics = Utils::safeDownCast<LauncherPhysicsComponent>(
-    getEntity().get<PhysicsComponent>()
-  );
+  const auto physics = getExpectedCompImpl<LauncherPhysicsComponent>();
   progress = physics->getRelTranslation();
   Transform transform;
   transform.pos = physics->getCenter();

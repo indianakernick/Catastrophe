@@ -12,7 +12,6 @@
 #include "yaml helper.hpp"
 #include <Simpleton/Math/scale.hpp>
 #include "player physics component.hpp"
-#include <Simpleton/Utils/safe down cast.hpp>
 
 void PlayerAnimationComponent::init(const YAML::Node &node) {
   transform.scale = getChild(node, "scale").as<glm::vec2>();
@@ -23,9 +22,7 @@ void PlayerAnimationComponent::init(const YAML::Node &node) {
 }
 
 void PlayerAnimationComponent::update(const float delta) {
-  const auto playerPhysics = Utils::safeDownCast<const PlayerPhysicsComponent>(
-    getEntity().get<PhysicsComponent>()
-  );
+  const auto playerPhysics = getExpectedCompImpl<const PlayerPhysicsComponent>();
   
   const float horiVel = playerPhysics->getRelVel().x;
   const bool onGround = playerPhysics->onGround();

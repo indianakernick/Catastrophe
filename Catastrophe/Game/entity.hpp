@@ -12,22 +12,34 @@
 #include <memory>
 #include "entity id.hpp"
 #include "components fwd.hpp"
+#include <Simpleton/Utils/type name.hpp>
 
 class Entity {
 public:
   explicit Entity(EntityID);
   
   template <typename Comp>
+  void set(const std::shared_ptr<Comp> comp) {
+    std::get<COMPONENT_ID<Comp>>(components) = comp;
+  }
+  
+  template <typename Comp>
   std::shared_ptr<Comp> get() {
     return std::get<COMPONENT_ID<Comp>>(components);
   }
   template <typename Comp>
-  std::shared_ptr<const Comp> get() const {
+  std::shared_ptr<const std::remove_const_t<Comp>> get() const {
     return std::get<COMPONENT_ID<Comp>>(components);
   }
+  
   template <typename Comp>
-  void set(const std::shared_ptr<Comp> comp) {
-    std::get<COMPONENT_ID<Comp>>(components) = comp;
+  auto getExpected() {
+    return expect(get<Comp>());
+  }
+  
+  template <typename Comp>
+  auto getExpected() const {
+    return expect(get<Comp>());
   }
   
   template <typename Comp>
@@ -38,11 +50,20 @@ public:
     );
   }
   template <typename Comp>
-  std::shared_ptr<const Comp> getImpl() const {
+  std::shared_ptr<const std::remove_const_t<Comp>> getImpl() const {
     using Base = typename Comp::ComponentBase;
     return std::dynamic_pointer_cast<const Comp>(
       std::get<COMPONENT_ID<Base>>(components)
     );
+  }
+  
+  template <typename Comp>
+  auto getExpectedImpl() {
+    return expect(getImpl<Comp>());
+  }
+  template <typename Comp>
+  auto getExpectedImpl() const {
+    return expect(getImpl<Comp>());
   }
   
   EntityID getID() const;
@@ -50,6 +71,18 @@ public:
 private:
   ComponentTuple components;
   EntityID id;
+  
+  template <typename Comp>
+  std::shared_ptr<Comp> expect(const std::shared_ptr<Comp> comp) const {
+    if (comp) {
+      return comp;
+    } else {
+      throw std::runtime_error(
+        "Expected entity to contain "
+        + Utils::typeName<std::remove_cv_t<Comp>>().to_string()
+      );
+    }
+  }
 };
 
 #endif
