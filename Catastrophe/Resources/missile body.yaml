@@ -6,23 +6,11 @@ body:
 shapes:
   main:
     type: polygon
-    verts:
-    - [0.3, -0.5]
-    - [0.3, 0.5]
-    - [-0.5, 0.5]
-    - [-0.5, -0.5]
-  nose:
-    type: polygon
-    verts:
-    - [0.5, 0]
-    - [0.3, 0.5]
-    - [0.3, -0.5]
+    half width: 0.5
+    half height: 0.5
 
 fixtures:
 - shape: main
-  density: 5
+  density: 20
   user data: Missile
 
-- shape: nose
-  density: 0
-  user data: Missile
