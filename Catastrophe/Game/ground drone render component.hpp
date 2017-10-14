@@ -9,6 +9,7 @@
 #ifndef ground_drone_render_component_hpp
 #define ground_drone_render_component_hpp
 
+#include "nanovg.hpp"
 #include "basic render component.hpp"
 
 class GroundDroneRenderComponent final : public BasicRenderComponent {
@@ -16,6 +17,10 @@ public:
   GroundDroneRenderComponent() = default;
   
   void render(NVGcontext *) override;
+
+private:
+  static const NVGcolor OUTLINE;
+  static const NVGcolor FILL;
 };
 
 #endif

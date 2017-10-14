@@ -75,4 +75,4 @@ entities:
   scale: [0.5, 0.5]
   first: [-30, 0.75]
   second: [-10, 0.75]
-  vel: 5
+  vel: 8
