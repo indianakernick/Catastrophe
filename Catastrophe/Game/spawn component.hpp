@@ -15,7 +15,10 @@
 
 class SpawnComponent : public Component {
 public:
+  using ComponentBase = SpawnComponent;
+
   SpawnComponent() = default;
+  virtual ~SpawnComponent() = default;
   
   virtual void init(const YAML::Node &) = 0;
   virtual void update(float) = 0;

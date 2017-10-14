@@ -8,8 +8,6 @@
 
 #include "component.hpp"
 
-#include <cassert>
-
 Component::~Component() {}
 
 void Component::setEntity(Entity *const newEntity) {
@@ -19,5 +17,6 @@ void Component::setEntity(Entity *const newEntity) {
 }
 
 Entity &Component::getEntity() const {
+  assert(entity);
   return *entity;
 }

@@ -9,7 +9,8 @@
 #ifndef component_hpp
 #define component_hpp
 
-class Entity;
+#include <cassert>
+#include "entity.hpp"
 
 class Component {
 public:
@@ -20,7 +21,18 @@ public:
   
 protected:
   Entity &getEntity() const;
-
+  
+  template <typename Comp>
+  auto getComp() {
+    assert(entity);
+    return entity->get<Comp>();
+  }
+  template <typename Comp>
+  auto getCompImpl() {
+    assert(entity);
+    return entity->getImpl<Comp>();
+  }
+  
 private:
   Entity *entity = nullptr;
 };

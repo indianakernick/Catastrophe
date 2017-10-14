@@ -11,24 +11,40 @@
 
 #include <memory>
 #include "entity id.hpp"
-#include "components.hpp"
+#include "components fwd.hpp"
 
 class Entity {
 public:
   explicit Entity(EntityID);
   
   template <typename Comp>
-  auto &get() {
+  std::shared_ptr<Comp> get() {
     return std::get<COMPONENT_ID<Comp>>(components);
   }
   template <typename Comp>
-  const auto &get() const {
+  std::shared_ptr<const Comp> get() const {
     return std::get<COMPONENT_ID<Comp>>(components);
   }
   template <typename Comp>
   void set(const std::shared_ptr<Comp> comp) {
     std::get<COMPONENT_ID<Comp>>(components) = comp;
   }
+  
+  template <typename Comp>
+  std::shared_ptr<Comp> getImpl() {
+    using Base = typename Comp::ComponentBase;
+    return std::dynamic_pointer_cast<Comp>(
+      std::get<COMPONENT_ID<Base>>(components)
+    );
+  }
+  template <typename Comp>
+  std::shared_ptr<const Comp> getImpl() const {
+    using Base = typename Comp::ComponentBase;
+    return std::dynamic_pointer_cast<const Comp>(
+      std::get<COMPONENT_ID<Base>>(components)
+    );
+  }
+  
   EntityID getID() const;
 
 private:

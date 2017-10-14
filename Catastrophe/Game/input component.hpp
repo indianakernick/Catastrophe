@@ -16,6 +16,8 @@ extern "C" union SDL_Event;
 
 class InputComponent : public Component {
 public:
+  using ComponentBase = InputComponent;
+
   InputComponent() = default;
   virtual ~InputComponent() = default;
   

@@ -8,6 +8,7 @@
 
 #include "entity file.hpp"
 
+#include "components.hpp"
 #include "yaml helper.hpp"
 #include "make component.hpp"
 #include "systems registry.hpp"

@@ -15,6 +15,8 @@
 
 class AnimationComponent : public Component {
 public:
+  using ComponentBase = AnimationComponent;
+
   AnimationComponent() = default;
   virtual ~AnimationComponent() = default;
   

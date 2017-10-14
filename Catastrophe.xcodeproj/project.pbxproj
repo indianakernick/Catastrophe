@@ -217,6 +217,7 @@
 		451CC0D61F91D6F60000E424 /* turret physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "turret physics component.hpp"; sourceTree = "<group>"; };
 		451CC0DA1F91DEA60000E424 /* turret animation component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "turret animation component.cpp"; sourceTree = "<group>"; };
 		451CC0DB1F91DEA60000E424 /* turret animation component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "turret animation component.hpp"; sourceTree = "<group>"; };
+		451CC0DD1F91EF350000E424 /* components fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "components fwd.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -934,6 +935,7 @@
 			isa = PBXGroup;
 			children = (
 				4545DEB81F8EF4F0000A54AA /* components.hpp */,
+				451CC0DD1F91EF350000E424 /* components fwd.hpp */,
 				4545DEBA1F8EFBAD000A54AA /* make component.cpp */,
 				4545DEBB1F8EFBAD000A54AA /* make component.hpp */,
 				45DE9FC41F70894C00B1DA72 /* component.cpp */,

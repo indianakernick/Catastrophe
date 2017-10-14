@@ -17,6 +17,8 @@ class b2World;
 
 class PhysicsComponent : public Component {
 public:
+  using ComponentBase = PhysicsComponent;
+
   PhysicsComponent() = default;
   virtual ~PhysicsComponent() = default;
   

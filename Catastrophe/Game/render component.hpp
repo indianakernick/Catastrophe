@@ -20,6 +20,8 @@ extern "C" struct NVGcontext;
 
 class RenderComponent : public Component {
 public:
+  using ComponentBase = RenderComponent;
+
   RenderComponent() = default;
   virtual ~RenderComponent() = default;
 
