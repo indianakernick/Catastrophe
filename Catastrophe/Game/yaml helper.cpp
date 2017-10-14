@@ -12,9 +12,6 @@
 #include <glm/glm.hpp>
 #include "b2 glm cast.hpp"
 
-#include "yaml read.hpp"
-
-
 YAML::Node getChild(const YAML::Node &parent, const char *name) {
   const YAML::Node child = parent[name];
   if (child) {

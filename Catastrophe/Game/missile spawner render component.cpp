@@ -8,13 +8,36 @@
 
 #include "missile spawner render component.hpp"
 
+#include "entity.hpp"
 #include "nanovg.hpp"
+#include "animation component.hpp"
+
+namespace {
+  const NVGcolor BARREL = nvgRGBf(0.6f, 0.6f, 0.6f);
+  const NVGcolor BASE = nvgRGBf(0.2f, 0.2f, 0.2f);
+}
 
 void MissileSpawnerRenderComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   nvgBeginPath(ctx);
-  nvgFillColor(ctx, nvgRGBf(0.0f, 0.0f, 1.0f));
-  nvgCircle(ctx, 0.0f, 0.0f, 0.5f);
+  nvgFillColor(ctx, BASE);
+  nvgCircle(ctx, 0.0f, 0.0f, 0.25f);
   nvgFill(ctx);
+  
+  nvgScale(ctx, 1.0f, 0.125f);
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, BARREL);
+  nvgRect(ctx, -0.5f, -0.5f, 1.0f, 1.0f);
+  nvgFill(ctx);
+}
+
+AABB MissileSpawnerRenderComponent::getAABB() const {
+  const auto animComp = getEntity().get<AnimationComponent>();
+  assert(animComp);
+  const glm::mat3 modelMat = animComp->getModelMat();
+  return {
+    modelMat * glm::vec3(-1.0f, -1.0f, 1.0f),
+    modelMat * glm::vec3(1.0f, 1.0f, 1.0f)
+  };
 }

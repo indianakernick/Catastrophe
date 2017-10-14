@@ -59,11 +59,11 @@ entities:
 
 - id: 10
   file: missile spawner entity.yaml
-  pos: [-20, 10]
+  pos: [-20, 5]
   spawn time: 10
   entity:
     file: missile entity.yaml
-    pos: [-20, 10]
+    pos: [-20, 5]
 
 - id: 11
   file: platform entity.yaml

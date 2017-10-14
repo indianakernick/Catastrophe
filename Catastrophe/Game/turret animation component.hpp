@@ -1,21 +1,20 @@
 //
-//  simple animation component.hpp
+//  turret animation component.hpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 17/9/17.
+//  Created by Indi Kernick on 14/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef simple_animation_component_hpp
-#define simple_animation_component_hpp
+#ifndef turret_animation_component_hpp
+#define turret_animation_component_hpp
 
 #include "transform.hpp"
 #include "animation component.hpp"
-#include <Simpleton/Time/simple anim.hpp>
 
-class SimpleAnimationComponent final : public AnimationComponent {
+class TurretAnimationComponent final : public AnimationComponent {
 public:
-  SimpleAnimationComponent() = default;
+  TurretAnimationComponent() = default;
   
   void init(const YAML::Node &) override;
   void update(float) override;
@@ -25,7 +24,6 @@ public:
 private:
   Transform transform;
   glm::mat3 model;
-  Time::SimpleAnim<float> anim;
 };
 
 #endif

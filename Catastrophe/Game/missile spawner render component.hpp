@@ -16,6 +16,7 @@ public:
   MissileSpawnerRenderComponent() = default;
   
   void render(NVGcontext *) override;
+  AABB getAABB() const override;
 };
 
 #endif

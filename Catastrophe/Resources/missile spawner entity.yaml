@@ -1,11 +1,13 @@
 spawn:
   name: PeriodicSpawnComponent
 
+physics:
+  name: TurretPhysicsComponent
+
 animation:
-  name: SimpleAnimationComponent
-  scale: &scale [0.5, 0.5]
+  name: TurretAnimationComponent
+  scale: [1, 1]
 
 rendering:
   name: MissileSpawnerRenderComponent
-  scale: *scale
-  layer: under player -1
+  layer: over player 2

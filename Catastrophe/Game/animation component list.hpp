@@ -12,12 +12,14 @@
 #include <Simpleton/Utils/type list.hpp>
 #include "player animation component.hpp"
 #include "simple animation component.hpp"
+#include "turret animation component.hpp"
 #include "launcher animation component.hpp"
 
 using AnimationComps = Utils::TypeList<
   PlayerAnimationComponent,
   SimpleAnimationComponent,
-  LauncherAnimationComponent
+  LauncherAnimationComponent,
+  TurretAnimationComponent
 >;
 
 #endif

@@ -25,6 +25,8 @@
 		451CC0CE1F8F333E0000E424 /* periodic spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CC1F8F333E0000E424 /* periodic spawn component.cpp */; };
 		451CC0D11F905DCB0000E424 /* b2 helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0CF1F905DCB0000E424 /* b2 helper.cpp */; };
 		451CC0D41F90836B0000E424 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0D21F90836B0000E424 /* camera transform.cpp */; };
+		451CC0D71F91D6F60000E424 /* turret physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0D51F91D6F60000E424 /* turret physics component.cpp */; };
+		451CC0DC1F91DEA60000E424 /* turret animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0DA1F91DEA60000E424 /* turret animation component.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -211,6 +213,10 @@
 		451CC0D01F905DCB0000E424 /* b2 helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 helper.hpp"; sourceTree = "<group>"; };
 		451CC0D21F90836B0000E424 /* camera transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "camera transform.cpp"; sourceTree = "<group>"; };
 		451CC0D31F90836B0000E424 /* camera transform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera transform.hpp"; sourceTree = "<group>"; };
+		451CC0D51F91D6F60000E424 /* turret physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "turret physics component.cpp"; sourceTree = "<group>"; };
+		451CC0D61F91D6F60000E424 /* turret physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "turret physics component.hpp"; sourceTree = "<group>"; };
+		451CC0DA1F91DEA60000E424 /* turret animation component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "turret animation component.cpp"; sourceTree = "<group>"; };
+		451CC0DB1F91DEA60000E424 /* turret animation component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "turret animation component.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -659,6 +665,8 @@
 				45DE9FB51F6E02AF00B1DA72 /* simple animation component.hpp */,
 				45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */,
 				45DEA0811F85DD4900B1DA72 /* launcher animation component.hpp */,
+				451CC0DA1F91DEA60000E424 /* turret animation component.cpp */,
+				451CC0DB1F91DEA60000E424 /* turret animation component.hpp */,
 			);
 			name = "animation components";
 			sourceTree = "<group>";
@@ -1148,6 +1156,8 @@
 				45DEA07C1F85A82C00B1DA72 /* launcher physics component.hpp */,
 				4545DE9D1F8C787D000A54AA /* missile physics component.cpp */,
 				4545DE9E1F8C787D000A54AA /* missile physics component.hpp */,
+				451CC0D51F91D6F60000E424 /* turret physics component.cpp */,
+				451CC0D61F91D6F60000E424 /* turret physics component.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -1295,6 +1305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				452FFA771F6BC50D003A98B1 /* b2Timer.cpp in Sources */,
+				451CC0D71F91D6F60000E424 /* turret physics component.cpp in Sources */,
 				452FFA681F6BC50D003A98B1 /* b2CollideEdge.cpp in Sources */,
 				452FFA751F6BC50D003A98B1 /* b2Settings.cpp in Sources */,
 				452FFA711F6BC50D003A98B1 /* b2PolygonShape.cpp in Sources */,
@@ -1350,6 +1361,7 @@
 				4545DE9F1F8C787D000A54AA /* missile physics component.cpp in Sources */,
 				452FFA7C1F6BC50D003A98B1 /* b2World.cpp in Sources */,
 				4545DEA41F8DAA62000A54AA /* body physics component.cpp in Sources */,
+				451CC0DC1F91DEA60000E424 /* turret animation component.cpp in Sources */,
 				452FFA8E1F6BC50D003A98B1 /* b2PulleyJoint.cpp in Sources */,
 				451CC0CE1F8F333E0000E424 /* periodic spawn component.cpp in Sources */,
 				453892E21F2C1206007EBB5A /* input component.cpp in Sources */,

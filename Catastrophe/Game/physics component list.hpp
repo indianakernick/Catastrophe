@@ -12,6 +12,7 @@
 #include "joint physics component.hpp"
 #include "player physics component.hpp"
 #include "button physics component.hpp"
+#include "turret physics component.hpp"
 #include "missile physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
@@ -24,7 +25,8 @@ using PhysicsComps = Utils::TypeList<
   JointPhysicsComponent,
   ButtonPhysicsComponent,
   LauncherPhysicsComponent,
-  MissilePhysicsComponent
+  MissilePhysicsComponent,
+  TurretPhysicsComponent
 >;
 
 #endif
