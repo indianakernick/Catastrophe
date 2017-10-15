@@ -9,49 +9,36 @@
 #include "particle system.hpp"
 
 ParticleSystem::ParticleSystem()
-  : particles(MAX_PARTICLES),
-    effects(MAX_GROUPS) {}
+  : particles(GROUPS) {}
 
 void ParticleSystem::draw(NVGcontext *const context, const float delta) {
-  Particle *begin = particles.begin();
-  Particle *end = begin + GROUP_SIZE;
-  
-  for (std::unique_ptr<ParticleEffect> &effect : effects) {
-    if (effect) {
-      effect->move(delta, begin, end);
-      if (!effect->alive()) {
-        effect.reset();
-      }
+  effects.remove_if([this, delta] (const EffectData &effect) {
+    effect.effect->move(delta, effect.firstParticle, effect.firstParticle + GROUP_SIZE);
+    if (!effect.effect->alive()) {
+      particles.free(effect.firstParticle);
+      return true;
+    } else {
+      return false;
     }
-    begin = end;
-    end += GROUP_SIZE;
-  }
+  });
   
-  begin = particles.begin();
-  end = begin + GROUP_SIZE;
-  
-  for (std::unique_ptr<ParticleEffect> &effect : effects) {
-    if (effect) {
-      effect->draw(context, begin, end);
-    }
-    begin = end;
-    end += GROUP_SIZE;
+  for (auto &e : effects) {
+    e.effect->draw(context, e.firstParticle, e.firstParticle + GROUP_SIZE);
   }
 }
 
 bool ParticleSystem::createEffect(std::unique_ptr<ParticleEffect> &&effect) {
-  for (size_t e = 0; e != effects.size(); ++e) {
-    if (!effects[e]) {
-      Particle *begin = particles.begin() + e * GROUP_SIZE;
-      Particle *end = begin + GROUP_SIZE;
-      effect->init(begin, end);
-      if (effect->alive()) {
-        effects[e] = std::move(effect);
-        return true;
-      } else {
-        break;
-      }
-    }
+  Particle *particleGroup;
+  try {
+    particleGroup = particles.alloc();
+  } catch (std::bad_alloc &) {
+    return false;
   }
-  return false;
+  effect->init(particleGroup, particleGroup + GROUP_SIZE);
+  if (effect->alive()) {
+    effects.push_front({std::move(effect), particleGroup});
+    return true;
+  } else {
+    return false;
+  }
 }

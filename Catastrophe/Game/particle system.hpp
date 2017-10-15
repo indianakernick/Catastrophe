@@ -9,16 +9,20 @@
 #ifndef particle_system_hpp
 #define particle_system_hpp
 
+#include <forward_list>
 #include <Simpleton/Utils/int least.hpp>
-#include <Simpleton/Memory/object pool.hpp>
+#include <Simpleton/Memory/block allocator.hpp>
 
 extern "C" struct NVGcontext;
 
+struct SimpleVec {
+  float x;
+  float y;
+};
+
 struct Particle {
-  float posX;
-  float posY;
-  float velX;
-  float velY;
+  SimpleVec pos;
+  SimpleVec vel;
   
   union {
     float f[4];
@@ -39,11 +43,9 @@ public:
 
 class ParticleSystem {
 public:
-  static constexpr size_t MAX_PARTICLES = 1024;
-  static constexpr size_t MAX_GROUPS = 8;
-  static constexpr size_t GROUP_SIZE = MAX_PARTICLES / MAX_GROUPS;
+  static constexpr size_t GROUPS = 32;
+  static constexpr size_t GROUP_SIZE = 128;
   
-  static_assert(GROUP_SIZE * MAX_GROUPS == MAX_PARTICLES);
   static_assert(std::is_pod<Particle>::value);
 
   ParticleSystem();
@@ -58,8 +60,16 @@ public:
   }
   
 private:
-  Memory::ObjectPool<Particle> particles;
-  std::vector<std::unique_ptr<ParticleEffect>> effects;
+  using EffectPtr = std::unique_ptr<ParticleEffect>;
+  struct EffectData {
+    EffectPtr effect;
+    Particle *firstParticle;
+  };
+
+  using ParticleAllocator = Memory::BlockAllocator<Particle, GROUP_SIZE>;
+
+  ParticleAllocator particles;
+  std::forward_list<EffectData> effects;
   
   bool createEffect(std::unique_ptr<ParticleEffect> &&);
 };
