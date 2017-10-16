@@ -18,13 +18,19 @@ public:
   RenderManager();
   ~RenderManager() = default;
   
+  void init(RenderingContext &);
+  void quit();
+  
   void addJob(size_t, std::shared_ptr<RenderJob>);
-  void render(RenderingContext &);
+  void render();
+  
+  RenderingContext &getRenderingContext() const;
   
 private:
   using Layer = std::vector<std::shared_ptr<RenderJob>>;
   using Layers = std::vector<Layer>;
   Layers layers;
+  RenderingContext *renderingContext = nullptr;
 };
 
 #endif

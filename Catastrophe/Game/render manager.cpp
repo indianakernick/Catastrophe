@@ -8,6 +8,7 @@
 
 #include "render manager.hpp"
 
+#include <cassert>
 #include "layer names.hpp"
 
 RenderManager::RenderManager()
@@ -19,6 +20,16 @@ RenderManager::RenderManager()
   }
 }
 
+void RenderManager::init(RenderingContext &newRenderingContext) {
+  assert(renderingContext == nullptr);
+  renderingContext = &newRenderingContext;
+}
+
+void RenderManager::quit() {
+  assert(renderingContext != nullptr);
+  renderingContext = nullptr;
+}
+
 void RenderManager::addJob(const size_t layer, const std::shared_ptr<RenderJob> job) {
   if (!job->alive()) {
     return;
@@ -26,15 +37,20 @@ void RenderManager::addJob(const size_t layer, const std::shared_ptr<RenderJob> 
   layers[layer].push_back(job);
 }
 
-void RenderManager::render(RenderingContext &ctx) {
+void RenderManager::render() {
   for (auto &layer : layers) {
     for (auto j = layer.begin(); j != layer.end();) {
       if ((*j)->alive()) {
-        (*j)->render(ctx);
+        (*j)->render(*renderingContext);
         ++j;
       } else {
         j = layer.erase(j);
       }
     }
   }
+}
+
+RenderingContext &RenderManager::getRenderingContext() const {
+  assert(renderingContext);
+  return *renderingContext;
 }

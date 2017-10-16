@@ -10,21 +10,34 @@
 
 #include "camera.hpp"
 #include "nanovg.hpp"
+#include "layer names.hpp"
 #include "entity manager.hpp"
+#include "render manager.hpp"
 #include "render component.hpp"
 #include "rendering context.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-void RenderingSystem::init(RenderingContext &newRenderer) {
-  assert(!renderer);
-  renderer = &newRenderer;
-  camera.windowSize.attachWindow(renderer->getWindow());
+void RenderingSystem::init(RenderManager &newRenderMan) {
+  assert(!renderMan);
+  renderMan = &newRenderMan;
+  RenderingContext &context = renderMan->getRenderingContext();
+  camera.windowSize.attachWindow(context.getWindow());
+  const size_t numLayers = getNumLayers();
+  layers.reserve(numLayers);
+  for (size_t l = 0; l != numLayers; ++l) {
+    layers.push_back(std::make_shared<Layer>(camera));
+    renderMan->addJob(l, layers.back());
+  }
 }
 
 void RenderingSystem::quit() {
-  assert(renderer);
+  assert(renderMan);
+  for (auto &layer : layers) {
+    layer->dead = true;
+  }
+  layers.clear();
   camera.windowSize.detachWindow();
-  renderer = nullptr;
+  renderMan = nullptr;
 }
 
 void RenderingSystem::add(
@@ -32,18 +45,18 @@ void RenderingSystem::add(
   const CompPtr comp,
   const YAML::Node &node
 ) {
-  assert(renderer);
+  assert(renderMan);
   const size_t layer = comp->getLayer();
-  while (layers.size() <= layer) {
-    layers.emplace_back();
+  if (layer >= layers.size()) {
+    throw std::range_error("Layer index out of range");
   }
-  layers[layer].emplace(id, comp);
-  comp->init(*renderer, node);
+  layers[layer]->comps.emplace(id, comp);
+  comp->init(renderMan->getRenderingContext(), node);
 }
 
 void RenderingSystem::rem(const EntityID id) {
   for (auto &layer : layers) {
-    layer.erase(id);
+    layer->comps.erase(id);
   }
 }
 
@@ -51,28 +64,12 @@ void RenderingSystem::update(const float delta) {
   camera.update(delta);
 }
 
-void RenderingSystem::render() {
-  PROFILE(RenderingSystem::render);
-
-  NVGcontext *const ctx = renderer->getContext();
-  for (auto &layer : layers) {
-    for (auto &pair : layer) {
-      pair.second->preRender();
-      if (camera.transform.visibleMeters(pair.second->getAABB())) {
-        nvgSave(ctx);
-        pair.second->render(ctx);
-        nvgRestore(ctx);
-      }
-    }
-  }
-}
-
 void RenderingSystem::cameraDebugRender() {
-  camera.debugRender(renderer->getContext());
+  camera.debugRender(renderMan->getRenderingContext().getContext());
 }
 
 void RenderingSystem::startMotionTrack(const EntityID id) {
-  CompPtr comp = findComp(id);
+  const CompPtr comp = findComp(id);
   if (comp == nullptr) {
     throw std::runtime_error("Cannot track entity that doesn't exist");
   }
@@ -84,7 +81,7 @@ void RenderingSystem::stopMotionTrack() {
 }
 
 void RenderingSystem::startZoomTrack(const EntityID id) {
-  CompPtr comp = findComp(id);
+  const CompPtr comp = findComp(id);
   if (comp == nullptr) {
     throw std::runtime_error("Cannot track entity that doesn't exist");
   }
@@ -99,10 +96,32 @@ Camera &RenderingSystem::getCamera() {
   return camera;
 }
 
+RenderingSystem::Layer::Layer(const Camera &camera)
+  : camera(&camera) {}
+
+void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
+  PROFILE(RenderingSystem::Layer::render);
+  
+  assert(camera);
+  NVGcontext *const ctx = renderingContext.getContext();
+  for (auto &pair : comps) {
+    pair.second->preRender();
+    if (camera->transform.visibleMeters(pair.second->getAABB())) {
+      nvgSave(ctx);
+      pair.second->render(ctx);
+      nvgRestore(ctx);
+    }
+  }
+}
+
+bool RenderingSystem::Layer::alive() const {
+  return !dead;
+}
+
 RenderingSystem::CompPtr RenderingSystem::findComp(const EntityID id) {
   for (auto &layer : layers) {
-    auto iter = layer.find(id);
-    if (iter != layer.end()) {
+    auto iter = layer->comps.find(id);
+    if (iter != layer->comps.end()) {
       return iter->second;
     }
   }

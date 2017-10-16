@@ -47,15 +47,16 @@ bool AppImpl::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
+  renderManager.init(renderingContext);
+  
+  renderingSystem.init(renderManager);
+  particleSystem.init();
   
   physicsSystem.init();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.attachRenderer(renderingContext.getContext());
   }
   registerCollisionListeners(physicsSystem.getContactListener());
-  
-  renderingSystem.init(renderingContext);
-  particleSystem.init();
   
   entityManager.init();
   spawnSystem.init(entityManager);
@@ -74,16 +75,17 @@ void AppImpl::quit() {
   renderingSystem.stopMotionTrack();
   
   spawnSystem.quit();
-
   entityManager.quit();
-  particleSystem.quit();
-  renderingSystem.quit();
   
-  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+ if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     physicsSystem.detachRenderer();
   }
   physicsSystem.quit();
   
+  particleSystem.quit();
+  renderingSystem.quit();
+  
+  renderManager.quit();
   renderingContext.quit();
   window.reset();
   windowLibrary = std::experimental::nullopt;
@@ -144,7 +146,7 @@ void AppImpl::render(const float delta) {
   }
   if constexpr (ENABLE_GAME_RENDER) {
     PROFILE(Game Render);
-    renderingSystem.render();
+    renderManager.render();
   }
   if constexpr (ENABLE_PARTICLE_RENDER) {
     PROFILE(Particle Render);

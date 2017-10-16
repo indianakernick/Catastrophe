@@ -13,10 +13,11 @@
 #include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
+#include "render job.hpp"
 #include <yaml-cpp/yaml.h>
 
 class RenderComponent;
-class RenderingContext;
+class RenderManager;
 
 class RenderingSystem {
 public:
@@ -25,14 +26,13 @@ public:
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
-  void init(RenderingContext &);
+  void init(RenderManager &);
   void quit();
   
   void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
   
   void update(float);
-  void render();
   void cameraDebugRender();
   
   void startMotionTrack(EntityID);
@@ -44,11 +44,22 @@ public:
   Camera &getCamera();
 
 private:
-  RenderingContext *renderer = nullptr;
+  RenderManager *renderMan = nullptr;
   Camera camera;
   
-  using IDtoCompPtr = std::unordered_map<EntityID, CompPtr>;
-  std::vector<IDtoCompPtr> layers;
+  class Layer final : public RenderJob {
+  public:
+    explicit Layer(const Camera &);
+  
+    void render(RenderingContext &) override;
+    bool alive() const override;
+    
+    std::unordered_map<EntityID, CompPtr> comps;
+    const Camera *camera = nullptr;
+    bool dead = false;
+  };
+  
+  std::vector<std::shared_ptr<Layer>> layers;
   
   CompPtr findComp(EntityID);
 };
