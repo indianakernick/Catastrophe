@@ -20,6 +20,6 @@ particle:
   exhaust pos: [-0.5, 0]
   color: [0.5, 0.5, 0.5, 0.5]
   spread: 0.05
-  size: 0.05
+  size: 0.1
   ticks per second: 60
-  particles per tick: 32
+  particles per tick: 16

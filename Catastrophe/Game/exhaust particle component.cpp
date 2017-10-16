@@ -21,7 +21,7 @@ void ExhaustParticleComponent::init(const YAML::Node &node, Particle *begin) {
   getOptional(size, node, "size");
   float ticksPerSecond = 60.0f;
   getOptional(ticksPerSecond, node, "ticks per second");
-  freqLimiter.setDuration(1.0f / ticksPerSecond);
+  freqLimiter.setFrequency(ticksPerSecond);
   getOptional(particlesPerTick, node, "particles per tick");
   usedGroupSize = GROUP_SIZE - GROUP_SIZE % particlesPerTick;
   
@@ -35,7 +35,7 @@ void ExhaustParticleComponent::move(const float delta, Particle *begin) {
   static std::mt19937 gen;
   
   freqLimiter.advance(delta);
-  decltype(freqLimiter)::CountType numTicks = freqLimiter.canDoMultipleOverlap();
+  auto numTicks = freqLimiter.canDoMultipleOverlap();
   
   while (numTicks--) {
     begin += currentIndex;

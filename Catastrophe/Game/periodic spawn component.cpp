@@ -13,7 +13,7 @@
 void PeriodicSpawnComponent::init(const YAML::Node &node) {
   float spawnTime = 1.0f;
   getOptional(spawnTime, node, "spawn time");
-  frequency.setDuration(spawnTime);
+  frequency.setPeriod(spawnTime);
   if (const YAML::Node &entity = node["entity"]) {
     getOptional(entityFile, entity, "file");
     levelNode = entity;
