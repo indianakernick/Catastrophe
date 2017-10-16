@@ -11,6 +11,7 @@
 
 #include <experimental/string_view>
 
+size_t getNumLayers();
 size_t getLayerIndex(std::experimental::string_view);
 
 #endif

@@ -18,9 +18,12 @@ const std::experimental::string_view LAYER_GROUPS[] = {
   "over player 1",
   "over player 2",
   "over player 3",
-  "over player 4",
-  "particles"
+  "over player 4"
 };
+
+size_t getNumLayers() {
+  return std::cend(LAYER_GROUPS) - std::cbegin(LAYER_GROUPS);
+}
 
 size_t getLayerIndex(const std::experimental::string_view name) {
   const auto begin = std::cbegin(LAYER_GROUPS);
