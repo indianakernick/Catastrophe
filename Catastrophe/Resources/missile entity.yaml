@@ -14,3 +14,10 @@ animation:
 rendering:
   name: MissileRenderComponent
   layer: over player 1
+
+particle:
+  name: ExhaustParticleComponent
+  exhaust pos: [-0.5, 0]
+  color: [0.5, 0.5, 0.5, 0.5]
+  spread: 0.05
+  size: 0.01

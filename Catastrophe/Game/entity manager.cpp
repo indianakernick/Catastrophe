@@ -78,6 +78,7 @@ void EntityManager::createImpl(
 }
 
 void EntityManager::destroyComponents(const EntityID id) const {
+  Systems::particle->rem(id);
   Systems::rendering->rem(id);
   Systems::animation->rem(id);
   Systems::physics->rem(id);

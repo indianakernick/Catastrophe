@@ -10,9 +10,10 @@
 #define particle_component_list_hpp
 
 #include <Simpleton/Utils/type list.hpp>
+#include "exhaust particle component.hpp"
 
 using ParticleComps = Utils::TypeList<
-
+  ExhaustParticleComponent
 >;
 
 #endif

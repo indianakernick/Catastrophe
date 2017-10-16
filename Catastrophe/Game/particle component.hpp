@@ -12,19 +12,21 @@
 #include "particle.hpp"
 #include "component.hpp"
 #include <yaml-cpp/yaml.h>
+#include "particle group size.hpp"
 
 extern "C" struct NVGcontext;
 
 class ParticleComponent : public Component {
 public:
   using ComponentBase = ParticleComponent;
+  static constexpr size_t GROUP_SIZE = PARTICLE_GROUP_SIZE;
 
   ParticleComponent() = default;
   virtual ~ParticleComponent() = default;
   
-  virtual void init(const YAML::Node &, Particle *, Particle *) = 0;
-  virtual void move(float, Particle *, Particle *) = 0;
-  virtual void render(NVGcontext *, const Particle *, const Particle *) = 0;
+  virtual void init(const YAML::Node &, Particle *) = 0;
+  virtual void move(float, Particle *) = 0;
+  virtual void render(NVGcontext *, const Particle *) = 0;
 };
 
 #endif

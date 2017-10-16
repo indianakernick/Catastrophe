@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <yaml-cpp/yaml.h>
 #include <experimental/optional>
+#include "particle group size.hpp"
 #include <Simpleton/Memory/block allocator.hpp>
 
 extern "C" struct NVGcontext;
@@ -22,7 +23,7 @@ class ParticleComponent;
 class ParticleSystem {
 public:
   static constexpr size_t NUM_GROUPS = 64;
-  static constexpr size_t GROUP_SIZE = 128;
+  static constexpr size_t GROUP_SIZE = PARTICLE_GROUP_SIZE;
 
   using CompPtr = std::shared_ptr<ParticleComponent>;
 

@@ -28,7 +28,7 @@ void ParticleSystem::add(
     particles->alloc()
   };
   components.emplace(id, compData);
-  comp->init(node, compData.firstParticle, compData.firstParticle + GROUP_SIZE);
+  comp->init(node, compData.firstParticle);
 }
 
 void ParticleSystem::rem(const EntityID id) {
@@ -42,7 +42,7 @@ void ParticleSystem::rem(const EntityID id) {
 void ParticleSystem::render(NVGcontext *const ctx, const float delta) {
   for (auto &c : components) {
     Particle *const firstParticle = c.second.firstParticle;
-    c.second.comp->move(delta, firstParticle, firstParticle + GROUP_SIZE);
-    c.second.comp->render(ctx, firstParticle, firstParticle + GROUP_SIZE);
+    c.second.comp->move(delta, firstParticle);
+    c.second.comp->render(ctx, firstParticle);
   }
 }
