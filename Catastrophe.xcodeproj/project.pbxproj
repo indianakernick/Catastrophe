@@ -234,6 +234,7 @@
 		451CC0F51F9468760000E424 /* render manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "render manager.hpp"; sourceTree = "<group>"; };
 		451CC0F71F9471880000E424 /* render job.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "render job.cpp"; sourceTree = "<group>"; };
 		451CC0F81F9471880000E424 /* render job.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "render job.hpp"; sourceTree = "<group>"; };
+		451CC0FA1F949D940000E424 /* global flags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "global flags.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
 				4541162D1F526DDB00C2865B /* physics constants.hpp */,
 				45DE9FB71F6E1B0C00B1DA72 /* camera debug render constants.hpp */,
+				451CC0FA1F949D940000E424 /* global flags.hpp */,
 			);
 			name = constants;
 			sourceTree = "<group>";

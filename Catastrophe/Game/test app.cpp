@@ -11,7 +11,7 @@
 #include "debug input.hpp"
 #include "vector file.hpp"
 #include <yaml-cpp/yaml.h>
-#include "vector render.hpp"
+#include "global flags.hpp"
 #include "window constants.hpp"
 #include "framebuffer to png.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>

@@ -9,6 +9,7 @@
 #include "app impl.hpp"
 
 #include "debug input.hpp"
+#include "global flags.hpp"
 #include "player constants.hpp"
 #include "systems registry.hpp"
 #include <Simpleton/Utils/profiler.hpp>
@@ -144,10 +145,7 @@ void AppImpl::render(const float delta) {
     PROFILE(Debug Physics Render);
     physicsSystem.debugRender();
   }
-  if constexpr (ENABLE_GAME_RENDER) {
-    PROFILE(Game Render);
-    renderManager.render();
-  }
+  renderManager.render();
   if constexpr (ENABLE_PARTICLE_RENDER) {
     PROFILE(Particle Render);
     particleSystem.render(renderingContext.getContext(), delta);
