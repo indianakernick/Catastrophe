@@ -14,6 +14,7 @@
 #include "spawn component.hpp"
 #include "render component.hpp"
 #include "physics component.hpp"
+#include "particle component.hpp"
 #include "animation component.hpp"
 
 #endif

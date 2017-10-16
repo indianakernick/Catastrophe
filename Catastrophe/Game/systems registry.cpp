@@ -13,5 +13,6 @@ SpawnSystem *Systems::spawn = nullptr;
 PhysicsSystem *Systems::physics = nullptr;
 AnimationSystem *Systems::animation = nullptr;
 RenderingSystem *Systems::rendering = nullptr;
+ParticleSystem *Systems::particle = nullptr;
 EntityManager *Systems::entities = nullptr;
 RenderingContext *Systems::renderer = nullptr;

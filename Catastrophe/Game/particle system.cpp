@@ -8,37 +8,41 @@
 
 #include "particle system.hpp"
 
-ParticleSystem::ParticleSystem()
-  : particles(GROUPS) {}
+#include "particle component.hpp"
 
-void ParticleSystem::draw(NVGcontext *const context, const float delta) {
-  effects.remove_if([this, delta] (const EffectData &effect) {
-    effect.effect->move(delta, effect.firstParticle, effect.firstParticle + GROUP_SIZE);
-    if (!effect.effect->alive()) {
-      particles.free(effect.firstParticle);
-      return true;
-    } else {
-      return false;
-    }
-  });
-  
-  for (auto &e : effects) {
-    e.effect->draw(context, e.firstParticle, e.firstParticle + GROUP_SIZE);
+void ParticleSystem::init() {
+  particles.emplace(NUM_GROUPS);
+}
+
+void ParticleSystem::quit() {
+  particles = std::experimental::nullopt;
+}
+
+void ParticleSystem::add(
+  const EntityID id,
+  const CompPtr comp,
+  const YAML::Node &node
+) {
+  const CompData compData = {
+    comp,
+    particles->alloc()
+  };
+  components.emplace(id, compData);
+  comp->init(node, compData.firstParticle, compData.firstParticle + GROUP_SIZE);
+}
+
+void ParticleSystem::rem(const EntityID id) {
+  const auto iter = components.find(id);
+  if (iter != components.end()) {
+    particles->free(iter->second.firstParticle);
+    components.erase(iter);
   }
 }
 
-bool ParticleSystem::createEffect(std::unique_ptr<ParticleEffect> &&effect) {
-  Particle *particleGroup;
-  try {
-    particleGroup = particles.alloc();
-  } catch (std::bad_alloc &) {
-    return false;
-  }
-  effect->init(particleGroup, particleGroup + GROUP_SIZE);
-  if (effect->alive()) {
-    effects.push_front({std::move(effect), particleGroup});
-    return true;
-  } else {
-    return false;
+void ParticleSystem::render(NVGcontext *const ctx, const float delta) {
+  for (auto &c : components) {
+    Particle *const firstParticle = c.second.firstParticle;
+    c.second.comp->move(delta, firstParticle, firstParticle + GROUP_SIZE);
+    c.second.comp->render(ctx, firstParticle, firstParticle + GROUP_SIZE);
   }
 }

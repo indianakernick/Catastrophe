@@ -40,6 +40,7 @@ bool AppImpl::init() {
   Systems::physics = &physicsSystem;
   Systems::animation = &animationSystem;
   Systems::rendering = &renderingSystem;
+  Systems::particle = &particleSystem;
   Systems::entities = &entityManager;
   Systems::renderer = &renderingContext;
 
@@ -54,12 +55,12 @@ bool AppImpl::init() {
   registerCollisionListeners(physicsSystem.getContactListener());
   
   renderingSystem.init(renderingContext);
+  particleSystem.init();
   
   entityManager.init();
-  entityManager.loadLevel("level 0.yaml");
-  
   spawnSystem.init(entityManager);
   
+  entityManager.loadLevel("level 0.yaml");
   renderingSystem.startMotionTrack(PLAYER_ID);
   renderingSystem.startZoomTrack(PLAYER_ID);
   
@@ -75,6 +76,7 @@ void AppImpl::quit() {
   spawnSystem.quit();
 
   entityManager.quit();
+  particleSystem.quit();
   renderingSystem.quit();
   
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
@@ -88,6 +90,7 @@ void AppImpl::quit() {
   
   Systems::renderer = nullptr;
   Systems::entities = nullptr;
+  Systems::particle = nullptr;
   Systems::rendering = nullptr;
   Systems::animation = nullptr;
   Systems::physics = nullptr;
@@ -142,6 +145,10 @@ void AppImpl::render(const float delta) {
   if constexpr (ENABLE_GAME_RENDER) {
     PROFILE(Game Render);
     renderingSystem.render();
+  }
+  if constexpr (ENABLE_PARTICLE_RENDER) {
+    PROFILE(Particle Render);
+    particleSystem.render(renderingContext.getContext(), delta);
   }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     PROFILE(Debug Camera Render);

@@ -14,6 +14,7 @@
 #include "spawn system.hpp"
 #include "physics system.hpp"
 #include "entity manager.hpp"
+#include "particle system.hpp"
 #include "rendering system.hpp"
 #include "animation system.hpp"
 #include "rendering context.hpp"
@@ -31,6 +32,8 @@ private:
   std::experimental::optional<Platform::WindowLibrary> windowLibrary;
   Platform::Window window;
   RenderingContext renderingContext;
+  //I don't remember why I ordered the members this way
+  ParticleSystem particleSystem;
   RenderingSystem renderingSystem;
   AnimationSystem animationSystem;
   PhysicsSystem physicsSystem;

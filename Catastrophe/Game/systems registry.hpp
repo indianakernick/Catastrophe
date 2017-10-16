@@ -13,6 +13,7 @@
 #include "spawn system.hpp"
 #include "physics system.hpp"
 #include "entity manager.hpp"
+#include "particle system.hpp"
 #include "animation system.hpp"
 #include "rendering system.hpp"
 #include "rendering context.hpp"
@@ -23,6 +24,7 @@ struct Systems {
   static PhysicsSystem *physics;
   static AnimationSystem *animation;
   static RenderingSystem *rendering;
+  static ParticleSystem *particle;
   static EntityManager *entities;
   static RenderingContext *renderer;
 };

@@ -27,6 +27,7 @@
 		451CC0D41F90836B0000E424 /* camera transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0D21F90836B0000E424 /* camera transform.cpp */; };
 		451CC0D71F91D6F60000E424 /* turret physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0D51F91D6F60000E424 /* turret physics component.cpp */; };
 		451CC0DC1F91DEA60000E424 /* turret animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0DA1F91DEA60000E424 /* turret animation component.cpp */; };
+		451CC0E61F941B940000E424 /* particle component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0E41F941B940000E424 /* particle component.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -218,6 +219,10 @@
 		451CC0DA1F91DEA60000E424 /* turret animation component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "turret animation component.cpp"; sourceTree = "<group>"; };
 		451CC0DB1F91DEA60000E424 /* turret animation component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "turret animation component.hpp"; sourceTree = "<group>"; };
 		451CC0DD1F91EF350000E424 /* components fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "components fwd.hpp"; sourceTree = "<group>"; };
+		451CC0E31F941A520000E424 /* particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = particle.hpp; sourceTree = "<group>"; };
+		451CC0E41F941B940000E424 /* particle component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "particle component.cpp"; sourceTree = "<group>"; };
+		451CC0E51F941B940000E424 /* particle component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "particle component.hpp"; sourceTree = "<group>"; };
+		451CC0E71F94267F0000E424 /* particle component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "particle component list.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -945,6 +950,7 @@
 				4545DEC01F8EFDD5000A54AA /* animation component list.hpp */,
 				4545DEC11F8EFDF3000A54AA /* rendering component list.hpp */,
 				45C546011F8F19F400217406 /* spawn component list.hpp */,
+				451CC0E71F94267F0000E424 /* particle component list.hpp */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -952,8 +958,11 @@
 		457619ED1F8611D200A6A792 /* particles */ = {
 			isa = PBXGroup;
 			children = (
+				451CC0E41F941B940000E424 /* particle component.cpp */,
+				451CC0E51F941B940000E424 /* particle component.hpp */,
 				45DEA0451F83364400B1DA72 /* particle system.cpp */,
 				45DEA0461F83364400B1DA72 /* particle system.hpp */,
+				451CC0E31F941A520000E424 /* particle.hpp */,
 			);
 			name = particles;
 			sourceTree = "<group>";
@@ -1394,6 +1403,7 @@
 				4545DEAA1F8DD260000A54AA /* ground drone render component.cpp in Sources */,
 				4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */,
 				45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */,
+				451CC0E61F941B940000E424 /* particle component.cpp in Sources */,
 				452FFA8C1F6BC50D003A98B1 /* b2MouseJoint.cpp in Sources */,
 				452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */,
 				452FFA931F6BC50D003A98B1 /* b2Rope.cpp in Sources */,

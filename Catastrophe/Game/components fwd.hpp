@@ -17,7 +17,8 @@
   COMPONENT(Spawn)                                                              \
   COMPONENT(Physics)                                                            \
   COMPONENT(Animation)                                                          \
-  LAST_COMPONENT(Render)
+  COMPONENT(Render)                                                             \
+  LAST_COMPONENT(Particle)
 
 #define COMPONENT(NAME) class NAME##Component;
 #define LAST_COMPONENT(NAME) COMPONENT(NAME)
