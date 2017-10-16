@@ -12,6 +12,7 @@
 #include "nanovg.hpp"
 #include <glm/vec2.hpp>
 #include "particle component.hpp"
+#include <Simpleton/Time/freq limiter.hpp>
 
 class ExhaustParticleComponent final : public ParticleComponent {
 public:
@@ -23,16 +24,15 @@ public:
   void render(NVGcontext *, const Particle *) override;
 
 private:
+  Time::DeltaFreqLimiter<float> freqLimiter;
   NVGcolor color = {{{0.5f, 0.5f, 0.5f, 0.5f}}};
   glm::vec2 relPos = {0.0f, 0.0f};
+  size_t particlesPerTick = 32;
+  size_t usedGroupSize;
   float spread = 1.0f;
   float size = 0.1f;
   
   size_t currentIndex = 0;
-  
-  static constexpr size_t TICKS_PER_GROUP = 128;
-  static constexpr size_t PARTICLES_PER_TICK = GROUP_SIZE / TICKS_PER_GROUP;
-  static_assert(GROUP_SIZE % TICKS_PER_GROUP == 0, "TICKS_PER_GROUP must be a factor of GROUP_SIZE");
 };
 
 #endif

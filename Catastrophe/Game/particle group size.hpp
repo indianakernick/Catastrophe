@@ -11,6 +11,6 @@
 
 #include <cstddef>
 
-constexpr size_t PARTICLE_GROUP_SIZE = 1024 * 16;
+constexpr size_t PARTICLE_GROUP_SIZE = 1024;
 
 #endif
