@@ -22,6 +22,7 @@ public:
   void init(const YAML::Node &, Particle *) override;
   void move(float, Particle *) override;
   void render(NVGcontext *, const Particle *) override;
+  size_t getLayer() const override;
 
 private:
   Time::DeltaFreqLimiter<float> freqLimiter;
@@ -31,6 +32,7 @@ private:
   size_t usedGroupSize;
   float spread = 1.0f;
   float size = 0.1f;
+  size_t layer = 0;
   
   size_t currentIndex = 0;
 };

@@ -12,6 +12,7 @@
 #include "particle.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
+#include "render job.hpp"
 #include <yaml-cpp/yaml.h>
 #include <experimental/optional>
 #include "particle group size.hpp"
@@ -19,6 +20,7 @@
 
 extern "C" struct NVGcontext;
 class ParticleComponent;
+class RenderManager;
 
 class ParticleSystem {
 public:
@@ -30,13 +32,13 @@ public:
   ParticleSystem() = default;
   ~ParticleSystem() = default;
   
-  void init();
+  void init(RenderManager &);
   void quit();
   
   void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
   
-  void render(NVGcontext *, float);
+  void update(float);
   
 private:
   struct CompData {
@@ -46,8 +48,20 @@ private:
 
   using ParticleAllocator = Memory::BlockAllocator<Particle, GROUP_SIZE>;
   std::experimental::optional<ParticleAllocator> particles;
+  RenderManager *renderMan = nullptr;
   
-  std::unordered_map<EntityID, CompData> components;
+  class Layer final : public RenderJob {
+  public:
+    Layer() = default;
+    
+    void render(RenderingContext &) override;
+    bool alive() const override;
+    
+    std::unordered_map<EntityID, CompData> comps;
+    bool dead = false;
+  };
+  
+  std::vector<std::shared_ptr<Layer>> layers;
 };
 
 #endif

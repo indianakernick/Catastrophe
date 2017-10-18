@@ -11,6 +11,7 @@
 #include <random>
 #include "nanovg.hpp"
 #include "matrix mul.hpp"
+#include "layer names.hpp"
 #include "yaml helper.hpp"
 #include "animation component.hpp"
 
@@ -24,6 +25,9 @@ void ExhaustParticleComponent::init(const YAML::Node &node, Particle *begin) {
   freqLimiter.setFrequency(ticksPerSecond);
   getOptional(particlesPerTick, node, "particles per tick");
   usedGroupSize = GROUP_SIZE - GROUP_SIZE % particlesPerTick;
+  if (const YAML::Node &layerNode = node["layer"]) {
+    layer = getLayerIndex(layerNode.Scalar());
+  }
   
   Particle *const end = begin + GROUP_SIZE;
   for (; begin != end; ++begin) {
@@ -66,4 +70,8 @@ void ExhaustParticleComponent::render(NVGcontext *const ctx, const Particle *beg
   }
   
   nvgFill(ctx);
+}
+
+size_t ExhaustParticleComponent::getLayer() const {
+  return layer;
 }

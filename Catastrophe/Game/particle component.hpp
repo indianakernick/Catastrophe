@@ -27,6 +27,7 @@ public:
   virtual void init(const YAML::Node &, Particle *) = 0;
   virtual void move(float, Particle *) = 0;
   virtual void render(NVGcontext *, const Particle *) = 0;
+  virtual size_t getLayer() const = 0;
 };
 
 #endif

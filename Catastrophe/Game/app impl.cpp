@@ -51,7 +51,7 @@ bool AppImpl::init() {
   renderManager.init(renderingContext);
   
   renderingSystem.init(renderManager);
-  particleSystem.init();
+  particleSystem.init(renderManager);
   
   physicsSystem.init();
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
@@ -135,6 +135,7 @@ void AppImpl::render(const float delta) {
     PROFILE(Anim);
     animationSystem.update(delta);
     renderingSystem.update(delta);
+    particleSystem.update(delta);
   }
   {
     PROFILE(Pre Render);
@@ -146,10 +147,6 @@ void AppImpl::render(const float delta) {
     physicsSystem.debugRender();
   }
   renderManager.render();
-  if constexpr (ENABLE_PARTICLE_RENDER) {
-    PROFILE(Particle Render);
-    particleSystem.render(renderingContext.getContext(), delta);
-  }
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     PROFILE(Debug Camera Render);
     renderingSystem.cameraDebugRender();
