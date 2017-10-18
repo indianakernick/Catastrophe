@@ -18,7 +18,7 @@
 
 namespace {
   YAML::Node copyNode(const YAML::Node node) {
-    PROFILE(copyNode);
+    //PROFILE(copyNode);
     //YAML::Nodes hole boost::shared_ptrs
     //That's so weird!
     //Why would you hide the fact that I'm dealing with a shared_ptr
@@ -45,7 +45,7 @@ namespace {
     //I just can't figure out why.
     //I'm thinking about wrapping libYAML because I don't really like yaml-cpp
     
-    PROFILE(merge);
+    //PROFILE(merge);
     
     //level overrides entity
     //With std::experimental::map::merge I can just do this
@@ -54,14 +54,14 @@ namespace {
     YAML::Node out = copyNode(level);
     YAML::Node inserted(YAML::NodeType::Map);
     for (auto n : entity) {
-      PROFILE(Entity iter);
+      //PROFILE(Entity iter);
       const YAML::Node node = level[n.first];
       if (!node) {
         inserted.force_insert(n.first, copyNode(n.second));
       }
     }
     for (auto n : inserted) {
-      PROFILE(Inserted iter);
+      //PROFILE(Inserted iter);
       out.force_insert(n.first, n.second);
     }
     return out;
@@ -77,7 +77,7 @@ namespace {
     const std::string &name = getChild(compNode, "name").Scalar();
     entity->set(makeComp<Comp>(name));
     entity->get<Comp>()->setEntity(entity);
-    PROFILE(Add to system);
+    //PROFILE(Add to system);
     system->add(
       entity->getID(),
       entity->get<Comp>(),
@@ -96,27 +96,27 @@ void loadEntity(
   checkType(root, YAML::NodeType::Map);
   
   if (const YAML::Node &input = root["input"]) {
-    PROFILE(read input comp);
+    //PROFILE(read input comp);
     readComp<InputComponent>(input, levelArgs, entity, Systems::input);
   }
   if (const YAML::Node &spawn = root["spawn"]) {
-    PROFILE(read spawn comp);
+    //PROFILE(read spawn comp);
     readComp<SpawnComponent>(spawn, levelArgs, entity, Systems::spawn);
   }
   if (const YAML::Node &physics = root["physics"]) {
-    PROFILE(read physics comp);
+    //PROFILE(read physics comp);
     readComp<PhysicsComponent>(physics, levelArgs, entity, Systems::physics);
   }
   if (const YAML::Node &anim = root["animation"]) {
-    PROFILE(read anim comp);
+    //PROFILE(read anim comp);
     readComp<AnimationComponent>(anim, levelArgs, entity, Systems::animation);
   }
   if (const YAML::Node &render = root["rendering"]) {
-    PROFILE(read render comp);
+    //PROFILE(read render comp);
     readComp<RenderComponent>(render, levelArgs, entity, Systems::rendering);
   }
   if (const YAML::Node &particle = root["particle"]) {
-    PROFILE(read particle comp);
+    //PROFILE(read particle comp);
     readComp<ParticleComponent>(particle, levelArgs, entity, Systems::particle);
   }
 }
