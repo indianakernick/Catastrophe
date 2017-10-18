@@ -30,9 +30,10 @@ private:
   glm::vec2 relPos = {0.0f, 0.0f};
   size_t particlesPerTick = 32;
   size_t usedGroupSize;
+  size_t layer = 0;
   float spread = 1.0f;
   float size = 0.1f;
-  size_t layer = 0;
+  float lifetime = 1.0f;
   
   size_t currentIndex = 0;
 };
