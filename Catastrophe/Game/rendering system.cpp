@@ -11,6 +11,7 @@
 #include "camera.hpp"
 #include "nanovg.hpp"
 #include "layer names.hpp"
+#include "global flags.hpp"
 #include "entity manager.hpp"
 #include "render manager.hpp"
 #include "render component.hpp"
@@ -100,16 +101,18 @@ RenderingSystem::Layer::Layer(const Camera &camera)
   : camera(&camera) {}
 
 void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
-  PROFILE(RenderingSystem::Layer::render);
+  if constexpr (ENABLE_GAME_RENDER) {
+    PROFILE(RenderingSystem::Layer::render);
   
-  assert(camera);
-  NVGcontext *const ctx = renderingContext.getContext();
-  for (auto &pair : comps) {
-    pair.second->preRender();
-    if (camera->transform.visibleMeters(pair.second->getAABB())) {
-      nvgSave(ctx);
-      pair.second->render(ctx);
-      nvgRestore(ctx);
+    assert(camera);
+    NVGcontext *const ctx = renderingContext.getContext();
+    for (auto &pair : comps) {
+      pair.second->preRender();
+      if (camera->transform.visibleMeters(pair.second->getAABB())) {
+        nvgSave(ctx);
+        pair.second->render(ctx);
+        nvgRestore(ctx);
+      }
     }
   }
 }

@@ -9,6 +9,7 @@
 #include "particle system.hpp"
 
 #include "layer names.hpp"
+#include "global flags.hpp"
 #include "render manager.hpp"
 #include "rendering context.hpp"
 #include "particle component.hpp"
@@ -77,11 +78,13 @@ void ParticleSystem::update(const float delta) {
 }
 
 void ParticleSystem::Layer::render(RenderingContext &renderer) {
-  PROFILE(ParticleSystem::Layer::render);
-  NVGcontext *const ctx = renderer.getContext();
-  for (auto &pair : comps) {
-    Particle *const firstParticle = pair.second.firstParticle;
-    pair.second.comp->render(ctx, firstParticle);
+  if constexpr (ENABLE_PARTICLE_RENDER) {
+    PROFILE(ParticleSystem::Layer::render);
+    NVGcontext *const ctx = renderer.getContext();
+    for (auto &pair : comps) {
+      Particle *const firstParticle = pair.second.firstParticle;
+      pair.second.comp->render(ctx, firstParticle);
+    }
   }
 }
 
