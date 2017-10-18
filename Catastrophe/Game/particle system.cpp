@@ -12,6 +12,7 @@
 #include "render manager.hpp"
 #include "rendering context.hpp"
 #include "particle component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void ParticleSystem::init(RenderManager &newRenderMan) {
   assert(renderMan == nullptr);
@@ -28,6 +29,9 @@ void ParticleSystem::init(RenderManager &newRenderMan) {
 void ParticleSystem::quit() {
   assert(renderMan);
   for (auto &layer : layers) {
+    for (auto &pair : layer->comps) {
+      particles->free(pair.second.firstParticle);
+    }
     layer->dead = true;
   }
   layers.clear();
@@ -73,6 +77,7 @@ void ParticleSystem::update(const float delta) {
 }
 
 void ParticleSystem::Layer::render(RenderingContext &renderer) {
+  PROFILE(ParticleSystem::Layer::render);
   NVGcontext *const ctx = renderer.getContext();
   for (auto &pair : comps) {
     Particle *const firstParticle = pair.second.firstParticle;
