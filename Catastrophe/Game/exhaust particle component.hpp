@@ -28,14 +28,15 @@ private:
   Time::DeltaFreqLimiter<float> freqLimiter;
   NVGcolor color = {{{0.5f, 0.5f, 0.5f, 0.5f}}};
   glm::vec2 relPos = {0.0f, 0.0f};
-  size_t particlesPerTick = 32;
-  size_t usedGroupSize;
+  size_t subGroupSize = 32;
+  size_t groupSize;
+  size_t oldestSubGroupIndex = 0;
   size_t layer = 0;
   float spread = 1.0f;
   float size = 0.1f;
   float lifetime = 1.0f;
   
-  size_t currentIndex = 0;
+  void updateTick(Particle *);
 };
 
 #endif

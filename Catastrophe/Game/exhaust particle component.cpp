@@ -23,8 +23,8 @@ void ExhaustParticleComponent::init(const YAML::Node &node, Particle *begin) {
   float ticksPerSecond = 60.0f;
   getOptional(ticksPerSecond, node, "ticks per second");
   freqLimiter.setFrequency(ticksPerSecond);
-  getOptional(particlesPerTick, node, "particles per tick");
-  usedGroupSize = GROUP_SIZE - GROUP_SIZE % particlesPerTick;
+  getOptional(subGroupSize, node, "particles per tick");
+  groupSize = GROUP_SIZE - GROUP_SIZE % subGroupSize;
   if (const YAML::Node &layerNode = node["layer"]) {
     layer = getLayerIndex(layerNode.Scalar());
   }
@@ -36,52 +36,56 @@ void ExhaustParticleComponent::init(const YAML::Node &node, Particle *begin) {
   }
 }
 
-void ExhaustParticleComponent::move(const float delta, Particle *const begin) {
-  //@TODO tidy this up
-  
-  static std::mt19937 gen;
-  
+void ExhaustParticleComponent::move(const float delta, Particle *begin) {
   freqLimiter.advance(delta);
   auto numTicks = freqLimiter.canDoMultipleOverlap();
-  
-  for (Particle *p = begin + currentIndex; numTicks--; p += particlesPerTick) {
-    currentIndex = (currentIndex + particlesPerTick) % usedGroupSize;
-    Particle *const end = p + particlesPerTick;
-    
-    const glm::mat3 modelMat = getExpectedComp<AnimationComponent>()->getModelMat();
-    const glm::vec2 absPos = mulPos(modelMat, relPos);
-    
-    std::normal_distribution<float> distX(absPos.x, spread);
-    std::normal_distribution<float> distY(absPos.y, spread);
-    
-    for (Particle *q = p; q != end; ++q) {
-      q->pos.x = distX(gen);
-      q->pos.y = distY(gen);
-      q->data.f[0] = lifetime;
-    }
+  while (numTicks--) {
+    updateTick(begin);
   }
-  
-  for (Particle *p = begin; p != begin + usedGroupSize; ++p) {
-    p->data.f[0] = std::max(0.0f, p->data.f[0] - delta);
+  Particle *const end = begin + groupSize;
+  for (; begin != end; begin += subGroupSize) {
+    //the first particle in each sub group stores the lifetime
+    begin->data.f[0] = std::max(0.0f, begin->data.f[0] - delta);
   }
 }
 
 void ExhaustParticleComponent::render(NVGcontext *const ctx, const Particle *begin) {
-  const Particle *const end = begin + usedGroupSize;
-  
-  //@TODO
-  //All circles that were created during the same tick will have the same color
-  //So many circles can be filled at once
-  for (; begin != end; ++begin) {
+  const Particle *const end = begin + groupSize;
+  while (begin != end) {
     nvgBeginPath(ctx);
-    NVGcolor thisColor = color;
-    thisColor.a *= begin->data.f[0];
-    nvgFillColor(ctx, thisColor);
-    nvgCircle(ctx, begin->pos.x, begin->pos.y, size);
+    NVGcolor groupColor = color;
+    //the first particle in each sub group stores the lifetime
+    groupColor.a *= begin->data.f[0];
+    nvgFillColor(ctx, groupColor);
+    const Particle *const groupEnd = begin + subGroupSize;
+    for (; begin != groupEnd; ++begin) {
+      nvgCircle(ctx, begin->pos.x, begin->pos.y, size);
+    }
     nvgFill(ctx);
   }
 }
 
 size_t ExhaustParticleComponent::getLayer() const {
   return layer;
+}
+
+void ExhaustParticleComponent::updateTick(Particle *const begin) {
+  static std::mt19937 gen;
+  
+  Particle *const subGroupBegin = begin + oldestSubGroupIndex;
+  oldestSubGroupIndex = (oldestSubGroupIndex + subGroupSize) % groupSize;
+  Particle *const subGroupEnd = subGroupBegin + subGroupSize;
+
+  const glm::mat3 modelMat = getExpectedComp<AnimationComponent>()->getModelMat();
+  const glm::vec2 absPos = mulPos(modelMat, relPos);
+
+  std::normal_distribution<float> distX(absPos.x, spread);
+  std::normal_distribution<float> distY(absPos.y, spread);
+
+  //All particles in a subgroup have the same lifetime
+  subGroupBegin->data.f[0] = lifetime;
+  for (Particle *p = subGroupBegin; p != subGroupEnd; ++p) {
+    p->pos.x = distX(gen);
+    p->pos.y = distY(gen);
+  }
 }

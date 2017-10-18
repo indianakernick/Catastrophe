@@ -24,4 +24,4 @@ particle:
   size: 0.1
   ticks per second: 60
   particles per tick: 16
-  lifetime: 0.8
+  lifetime: 1.0
