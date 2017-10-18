@@ -11,6 +11,6 @@
 
 #include <glm/vec2.hpp>
 
-void framebufferToPNG(const char *path, glm::ivec2, const uint8_t *);
+void framebufferToPNG(const char *path, glm::ivec2, uint8_t *);
 
 #endif
