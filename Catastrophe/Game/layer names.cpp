@@ -10,6 +10,7 @@
 
 const std::experimental::string_view LAYER_GROUPS[] = {
   "background",
+  "debug physics",
   "under player -4",
   "under player -3",
   "under player -2",
@@ -18,7 +19,8 @@ const std::experimental::string_view LAYER_GROUPS[] = {
   "over player 1",
   "over player 2",
   "over player 3",
-  "over player 4"
+  "over player 4",
+  "debug camera"
 };
 
 size_t getNumLayers() {

@@ -34,7 +34,7 @@ void RenderManager::addJob(const size_t layer, const std::shared_ptr<RenderJob> 
   if (!job->alive()) {
     return;
   }
-  layers[layer].push_back(job);
+  layers.at(layer).push_back(job);
 }
 
 void RenderManager::render() {

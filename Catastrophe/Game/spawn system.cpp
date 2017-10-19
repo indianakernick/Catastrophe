@@ -27,8 +27,8 @@ void SpawnSystem::add(
   const CompPtr comp,
   const YAML::Node &node
 ) {
-  components.emplace(id, comp);
   comp->init(node);
+  components.emplace(id, comp);
 }
 
 void SpawnSystem::rem(const EntityID id) {

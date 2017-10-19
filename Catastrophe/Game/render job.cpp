@@ -7,3 +7,11 @@
 //
 
 #include "render job.hpp"
+
+bool RenderJob::alive() const {
+  return isAlive;
+}
+
+void RenderJob::kill() {
+  isAlive = false;
+}

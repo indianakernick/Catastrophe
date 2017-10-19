@@ -55,10 +55,8 @@ private:
     Layer() = default;
     
     void render(RenderingContext &) override;
-    bool alive() const override;
     
     std::unordered_map<EntityID, CompData> comps;
-    bool dead = false;
   };
   
   std::vector<std::shared_ptr<Layer>> layers;

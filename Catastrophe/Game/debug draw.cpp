@@ -9,8 +9,8 @@
 #include "debug draw.hpp"
 
 #include <cmath>
-#include <glm/vec2.hpp>
 #include "nanovg.hpp"
+#include <glm/vec2.hpp>
 #include "physics constants.hpp"
 
 namespace {
@@ -41,53 +41,53 @@ DebugDraw::DebugDraw()
 }
 
 void DebugDraw::DrawPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
-  if (renderer) {
+  if (ctx) {
     if (numVerts == 0) {
       return;
     }
     
-    nvgBeginPath(renderer);
-    nvgStrokeColor(renderer, castColor(color));
-    nvgStrokeWidth(renderer, DEBUG_DRAW_STROKE_WIDTH);
-    nvgMoveTo(renderer, verts[0].x, verts[0].y);
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, castColor(color));
+    nvgStrokeWidth(ctx, DEBUG_DRAW_STROKE_WIDTH);
+    nvgMoveTo(ctx, verts[0].x, verts[0].y);
     
     const b2Vec2 *const endVerts = verts + numVerts;
     for (const b2Vec2 *v = verts + 1; v != endVerts; ++v) {
-      nvgLineTo(renderer, v->x, v->y);
+      nvgLineTo(ctx, v->x, v->y);
     }
-    nvgLineTo(renderer, verts[0].x, verts[0].y);
+    nvgLineTo(ctx, verts[0].x, verts[0].y);
     
-    nvgStroke(renderer);
+    nvgStroke(ctx);
   }
 }
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2 *verts, const int32 numVerts, const b2Color &color) {
-  if (renderer) {
+  if (ctx) {
     if (numVerts == 0) {
       return;
     }
     
-    nvgBeginPath(renderer);
-    nvgFillColor(renderer, castColor(color));
-    nvgMoveTo(renderer, verts[0].x, verts[0].y);
+    nvgBeginPath(ctx);
+    nvgFillColor(ctx, castColor(color));
+    nvgMoveTo(ctx, verts[0].x, verts[0].y);
     
     const b2Vec2 *const endVerts = verts + numVerts;
     for (const b2Vec2 *v = verts + 1; v != endVerts; ++v) {
-      nvgLineTo(renderer, v->x, v->y);
+      nvgLineTo(ctx, v->x, v->y);
     }
-    nvgLineTo(renderer, verts[0].x, verts[0].y);
+    nvgLineTo(ctx, verts[0].x, verts[0].y);
     
-    nvgFill(renderer);
+    nvgFill(ctx);
   }
 }
 
 void DebugDraw::DrawCircle(const b2Vec2 &center, const float32 radius, const b2Color &color) {
-  if (renderer) {
-    nvgBeginPath(renderer);
-    nvgStrokeColor(renderer, castColor(color));
-    nvgStrokeWidth(renderer, DEBUG_DRAW_STROKE_WIDTH);
-    nvgCircle(renderer, center.x, center.y, radius);
-    nvgStroke(renderer);
+  if (ctx) {
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, castColor(color));
+    nvgStrokeWidth(ctx, DEBUG_DRAW_STROKE_WIDTH);
+    nvgCircle(ctx, center.x, center.y, radius);
+    nvgStroke(ctx);
   }
 }
 
@@ -97,13 +97,13 @@ void DebugDraw::DrawSolidCircle(const b2Vec2 &center, const float32 radius, cons
 }
 
 void DebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
-  if (renderer) {
-    nvgBeginPath(renderer);
-    nvgStrokeColor(renderer, castColor(color));
-    nvgStrokeWidth(renderer, DEBUG_DRAW_STROKE_WIDTH);
-    nvgMoveTo(renderer, p1.x, p1.y);
-    nvgLineTo(renderer, p2.x, p2.y);
-    nvgStroke(renderer);
+  if (ctx) {
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, castColor(color));
+    nvgStrokeWidth(ctx, DEBUG_DRAW_STROKE_WIDTH);
+    nvgMoveTo(ctx, p1.x, p1.y);
+    nvgLineTo(ctx, p2.x, p2.y);
+    nvgStroke(ctx);
   }
 }
 
@@ -112,18 +112,14 @@ void DebugDraw::DrawTransform(const b2Transform &) {
 }
 
 void DebugDraw::DrawPoint(const b2Vec2 &p, const float32 size, const b2Color &color) {
-  if (renderer) {
-    nvgBeginPath(renderer);
-    nvgFillColor(renderer, castColor(color));
-    nvgCircle(renderer, p.x, p.y, size);
-    nvgFill(renderer);
+  if (ctx) {
+    nvgBeginPath(ctx);
+    nvgFillColor(ctx, castColor(color));
+    nvgCircle(ctx, p.x, p.y, size);
+    nvgFill(ctx);
   }
 }
 
-void DebugDraw::attachRenderer(NVGcontext *newRenderer) {
-  renderer = newRenderer;
-}
-
-void DebugDraw::detachRenderer() {
-  renderer = nullptr;
+void DebugDraw::setContext(NVGcontext *const newCtx) {
+  ctx = newCtx;
 }

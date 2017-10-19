@@ -17,7 +17,12 @@ public:
   virtual ~RenderJob() = default;
   
   virtual void render(RenderingContext &) = 0;
-  virtual bool alive() const = 0;
+  
+  bool alive() const;
+  void kill();
+
+private:
+  bool isAlive = true;
 };
 
 #endif

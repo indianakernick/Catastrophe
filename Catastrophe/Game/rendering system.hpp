@@ -52,11 +52,9 @@ private:
     explicit Layer(const Camera &);
   
     void render(RenderingContext &) override;
-    bool alive() const override;
-    
+
     std::unordered_map<EntityID, CompPtr> comps;
     const Camera *camera = nullptr;
-    bool dead = false;
   };
   
   std::vector<std::shared_ptr<Layer>> layers;

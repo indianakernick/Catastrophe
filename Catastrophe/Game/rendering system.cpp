@@ -34,7 +34,7 @@ void RenderingSystem::init(RenderManager &newRenderMan) {
 void RenderingSystem::quit() {
   assert(renderMan);
   for (auto &layer : layers) {
-    layer->dead = true;
+    layer->kill();
   }
   layers.clear();
   camera.windowSize.detachWindow();
@@ -47,12 +47,12 @@ void RenderingSystem::add(
   const YAML::Node &node
 ) {
   assert(renderMan);
+  comp->init(renderMan->getRenderingContext(), node);
   const size_t layer = comp->getLayer();
   if (layer >= layers.size()) {
     throw std::range_error("Layer index out of range");
   }
   layers[layer]->comps.emplace(id, comp);
-  comp->init(renderMan->getRenderingContext(), node);
 }
 
 void RenderingSystem::rem(const EntityID id) {
@@ -115,10 +115,6 @@ void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
       }
     }
   }
-}
-
-bool RenderingSystem::Layer::alive() const {
-  return !dead;
 }
 
 RenderingSystem::CompPtr RenderingSystem::findComp(const EntityID id) {

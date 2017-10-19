@@ -25,11 +25,10 @@ public:
   void DrawTransform(const b2Transform &) override;
   void DrawPoint(const b2Vec2 &, float32, const b2Color &) override;
 
-  void attachRenderer(NVGcontext *);
-  void detachRenderer();
+  void setContext(NVGcontext *);
 
 private:
-  NVGcontext *renderer = nullptr;
+  NVGcontext *ctx = nullptr;
 };
 
 #endif

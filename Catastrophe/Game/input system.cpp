@@ -12,8 +12,8 @@
 #include "input component.hpp"
 
 void InputSystem::add(const EntityID id, const CompPtr comp, const YAML::Node &node) {
-  components.emplace(id, comp);
   comp->init(node);
+  components.emplace(id, comp);
 }
 
 void InputSystem::rem(const EntityID id) {

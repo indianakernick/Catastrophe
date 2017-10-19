@@ -53,10 +53,7 @@ bool AppImpl::init() {
   renderingSystem.init(renderManager);
   particleSystem.init(renderManager);
   
-  physicsSystem.init();
-  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    physicsSystem.attachRenderer(renderingContext.getContext());
-  }
+  physicsSystem.init(renderManager);
   registerCollisionListeners(physicsSystem.getContactListener());
   
   entityManager.init();
@@ -78,9 +75,6 @@ void AppImpl::quit() {
   spawnSystem.quit();
   entityManager.quit();
   
- if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    physicsSystem.detachRenderer();
-  }
   physicsSystem.quit();
   
   particleSystem.quit();
@@ -142,10 +136,6 @@ void AppImpl::render(const float delta) {
     renderingContext.preRender(renderingSystem.getCamera().transform.toPixels());
   }
   
-  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    PROFILE(Debug Physics Render);
-    physicsSystem.debugRender();
-  }
   renderManager.render();
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     PROFILE(Debug Camera Render);

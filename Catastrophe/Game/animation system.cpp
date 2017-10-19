@@ -16,8 +16,8 @@ void AnimationSystem::add(
   const CompPtr comp,
   const YAML::Node &node
 ) {
-  components.emplace(entityID, comp);
   comp->init(node);
+  components.emplace(entityID, comp);
 }
 
 void AnimationSystem::rem(const EntityID entityID) {

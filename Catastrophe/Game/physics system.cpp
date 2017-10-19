@@ -8,24 +8,37 @@
 
 #include "physics system.hpp"
 
+#include "layer names.hpp"
+#include "global flags.hpp"
 #include "entity manager.hpp"
+#include "render manager.hpp"
 #include "physics constants.hpp"
 #include "physics component.hpp"
+#include "rendering context.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-void PhysicsSystem::init() {
+#include <iostream>
+
+void PhysicsSystem::init(RenderManager &renderMan) {
   world.emplace(GRAVITY);
-  draw.emplace();
   contactListener.emplace();
-  world->SetDebugDraw(&(*draw));
   world->SetContactListener(&(*contactListener));
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    draw.emplace();
+    debugRenderJob = std::make_shared<DebugRenderJob>(*world, *draw);
+    renderMan.addJob(getLayerIndex("debug physics"), debugRenderJob);
+    world->SetDebugDraw(&(*draw));
+  }
 }
 
 void PhysicsSystem::quit() {
+  if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
+    debugRenderJob->kill();
+    world->SetDebugDraw(nullptr);
+    draw = std::experimental::nullopt;
+  }
   world->SetContactListener(nullptr);
-  world->SetDebugDraw(nullptr);
   contactListener = std::experimental::nullopt;
-  draw = std::experimental::nullopt;
   world = std::experimental::nullopt;
 }
 
@@ -39,8 +52,8 @@ void PhysicsSystem::add(
   const YAML::Node &node
 ) {
   assert(world);
-  components.emplace(entityID, comp);
   comp->init(*world, node);
+  components.emplace(entityID, comp);
 }
 
 void PhysicsSystem::rem(const EntityID entityID) {
@@ -75,18 +88,15 @@ void PhysicsSystem::update(const float delta) {
   }
 }
 
-void PhysicsSystem::debugRender() {
-  world->DrawDebugData();
-}
-
-void PhysicsSystem::attachRenderer(NVGcontext *newRenderer) {
-  draw->attachRenderer(newRenderer);
-}
-
-void PhysicsSystem::detachRenderer() {
-  draw->detachRenderer();
-}
-
 ContactListener &PhysicsSystem::getContactListener() {
   return *contactListener;
+}
+
+PhysicsSystem::DebugRenderJob::DebugRenderJob(b2World &world, DebugDraw &debugDraw)
+  : world(world), debugDraw(debugDraw) {}
+
+void PhysicsSystem::DebugRenderJob::render(RenderingContext &context) {
+  PROFILE(Debug physics render);
+  debugDraw.setContext(context.getContext());
+  world.DrawDebugData();
 }

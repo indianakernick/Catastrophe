@@ -33,7 +33,7 @@ void ParticleSystem::quit() {
     for (auto &pair : layer->comps) {
       particles->free(pair.second.firstParticle);
     }
-    layer->dead = true;
+    layer->kill();
   }
   layers.clear();
   particles = std::experimental::nullopt;
@@ -45,16 +45,16 @@ void ParticleSystem::add(
   const CompPtr comp,
   const YAML::Node &node
 ) {
-  const size_t layer = comp->getLayer();
-  if (layer >= layers.size()) {
-    throw std::range_error("Layer index out of range");
-  }
   const CompData compData = {
     comp,
     particles->alloc()
   };
-  layers[layer]->comps.emplace(id, compData);
   comp->init(node, compData.firstParticle);
+  const size_t layer = comp->getLayer();
+  if (layer >= layers.size()) {
+    throw std::range_error("Layer index out of range");
+  }
+  layers[layer]->comps.emplace(id, compData);
 }
 
 void ParticleSystem::rem(const EntityID id) {
@@ -86,8 +86,4 @@ void ParticleSystem::Layer::render(RenderingContext &renderer) {
       pair.second.comp->render(ctx, firstParticle);
     }
   }
-}
-
-bool ParticleSystem::Layer::alive() const {
-  return !dead;
 }
