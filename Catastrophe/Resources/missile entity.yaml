@@ -4,7 +4,7 @@ spawn:
 physics:
   name: MissilePhysicsComponent
   body: missile body.yaml
-  move force: 10
+  move force: 8
   scale: &scale [1.0, 0.0625]
 
 animation:
