@@ -11,7 +11,7 @@
 #include "camera pos.hpp"
 #include "camera props.hpp"
 #include "camera constants.hpp"
-#include "camera debug render constants.hpp"
+#include "camera debug rendering constants.hpp"
 
 CameraMotionTrack::CameraMotionTrack()
   : target(),

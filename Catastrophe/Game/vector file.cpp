@@ -199,7 +199,7 @@ namespace {
     return anims;
   }
   
-  ImageHandle readImage(const YAML::Node &imageNode, RenderResMan &resMan) {
+  ImageHandle readImage(const YAML::Node &imageNode, RenderingResources &resMan) {
     checkType(imageNode, YAML::NodeType::Map);
     const std::string &path = getChild(imageNode, "path").Scalar();
     int flags = 0;
@@ -219,7 +219,7 @@ namespace {
     return resMan.getImage(path, flags);
   }
   
-  Images readImages(const YAML::Node &imagesNode, RenderResMan &resMan) {
+  Images readImages(const YAML::Node &imagesNode, RenderingResources &resMan) {
     if (!imagesNode) {
       return {};
     }
@@ -246,7 +246,7 @@ namespace {
   }
 }
 
-Sprite loadSprite(const std::string &fileName, RenderResMan &resMan) {
+Sprite loadSprite(const std::string &fileName, RenderingResources &resMan) {
   const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   

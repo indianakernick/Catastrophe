@@ -1,17 +1,17 @@
 //
-//  ground drone render component.cpp
+//  ground drone rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 11/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "ground drone render component.hpp"
+#include "ground drone rendering component.hpp"
 
-const NVGcolor GroundDroneRenderComponent::OUTLINE = nvgRGBf(1.0f, 0.0f, 0.0f);
-const NVGcolor GroundDroneRenderComponent::FILL = nvgRGBf(0.1f, 0.1f, 0.5f);
+const NVGcolor GroundDroneRenderingComponent::OUTLINE = nvgRGBf(1.0f, 0.0f, 0.0f);
+const NVGcolor GroundDroneRenderingComponent::FILL = nvgRGBf(0.1f, 0.1f, 0.5f);
 
-void GroundDroneRenderComponent::render(NVGcontext *const ctx) {
+void GroundDroneRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   nvgBeginPath(ctx);

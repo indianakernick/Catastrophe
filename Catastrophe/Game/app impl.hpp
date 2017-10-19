@@ -14,10 +14,10 @@
 #include "spawn system.hpp"
 #include "physics system.hpp"
 #include "entity manager.hpp"
-#include "render manager.hpp"
 #include "particle system.hpp"
 #include "rendering system.hpp"
 #include "animation system.hpp"
+#include "rendering manager.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
 #include <Simpleton/Application/app.hpp>
@@ -33,7 +33,7 @@ private:
   std::experimental::optional<Platform::WindowLibrary> windowLibrary;
   Platform::Window window;
   RenderingContext renderingContext;
-  RenderManager renderManager;
+  RenderingManager renderingManager;
   InputSystem inputSystem;
   SpawnSystem spawnSystem;
   PhysicsSystem physicsSystem;

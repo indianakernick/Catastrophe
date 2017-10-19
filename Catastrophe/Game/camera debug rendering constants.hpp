@@ -1,13 +1,13 @@
 //
-//  camera debug render constants.hpp
+//  camera debug rendering constants.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 17/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef camera_debug_render_constants_hpp
-#define camera_debug_render_constants_hpp
+#ifndef camera_debug_rendering_constants_hpp
+#define camera_debug_rendering_constants_hpp
 
 #include "nanovg.hpp"
 

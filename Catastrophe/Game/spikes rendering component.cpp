@@ -1,14 +1,14 @@
 //
-//  spikes render component.cpp
+//  spikes rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "spikes render component.hpp"
+#include "spikes rendering component.hpp"
 
-void SpikesRenderComponent::render(NVGcontext *const ctx) {
+void SpikesRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   const NVGpaint gradient = nvgLinearGradient(ctx,

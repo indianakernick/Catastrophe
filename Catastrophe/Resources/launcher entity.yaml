@@ -6,5 +6,5 @@ animation:
   name: LauncherAnimationComponent
 
 rendering:
-  name: LauncherRenderComponent
+  name: LauncherRenderingComponent
   layer: over player 1

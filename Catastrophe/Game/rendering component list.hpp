@@ -9,29 +9,29 @@
 #ifndef rendering_component_list_hpp
 #define rendering_component_list_hpp
 
-#include "spikes render component.hpp"
-#include "player render component.hpp"
-#include "polygon render component.hpp"
-#include "missile render component.hpp"
-#include "launcher render component.hpp"
-#include "platform render component.hpp"
 #include <Simpleton/Utils/type list.hpp>
-#include "ground drone render component.hpp"
-#include "vector sprite render component.hpp"
-#include "spinning blade render component.hpp"
-#include "missile spawner render component.hpp"
+#include "spikes rendering component.hpp"
+#include "player rendering component.hpp"
+#include "polygon rendering component.hpp"
+#include "missile rendering component.hpp"
+#include "launcher rendering component.hpp"
+#include "platform rendering component.hpp"
+#include "ground drone rendering component.hpp"
+#include "vector sprite rendering component.hpp"
+#include "spinning blade rendering component.hpp"
+#include "missile spawner rendering component.hpp"
 
-using RenderComps = Utils::TypeList<
-  PolygonRenderComponent,
-  LauncherRenderComponent,
-  SpikesRenderComponent,
-  PlatformRenderComponent,
-  SpinningBladeRenderComponent,
-  PlayerRenderComponent,
-  VectorSpriteRenderComponent,
-  GroundDroneRenderComponent,
-  MissileRenderComponent,
-  MissileSpawnerRenderComponent
+using RenderingComps = Utils::TypeList<
+  PolygonRenderingComponent,
+  LauncherRenderingComponent,
+  SpikesRenderingComponent,
+  PlatformRenderingComponent,
+  SpinningBladeRenderingComponent,
+  PlayerRenderingComponent,
+  VectorSpriteRenderingComponent,
+  GroundDroneRenderingComponent,
+  MissileRenderingComponent,
+  MissileSpawnerRenderingComponent
 >;
 
 #endif

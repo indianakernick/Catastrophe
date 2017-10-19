@@ -12,7 +12,7 @@ animation:
   scale: *scale
 
 rendering:
-  name: MissileRenderComponent
+  name: MissileRenderingComponent
   layer: over player 1
 
 particle:

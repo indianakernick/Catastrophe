@@ -48,12 +48,12 @@ bool AppImpl::init() {
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
-  renderManager.init(renderingContext);
+  renderingManager.init(renderingContext);
   
-  renderingSystem.init(renderManager);
-  particleSystem.init(renderManager);
+  renderingSystem.init(renderingManager);
+  particleSystem.init(renderingManager);
   
-  physicsSystem.init(renderManager);
+  physicsSystem.init(renderingManager);
   registerCollisionListeners(physicsSystem.getContactListener());
   
   entityManager.init();
@@ -80,7 +80,7 @@ void AppImpl::quit() {
   particleSystem.quit();
   renderingSystem.quit();
   
-  renderManager.quit();
+  renderingManager.quit();
   renderingContext.quit();
   window.reset();
   windowLibrary = std::experimental::nullopt;
@@ -136,7 +136,7 @@ void AppImpl::render(const float delta) {
     renderingContext.preRender(renderingSystem.getCamera().transform.toPixels());
   }
   
-  renderManager.render();
+  renderingManager.render();
   if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
     PROFILE(Debug Camera Render);
     renderingSystem.cameraDebugRender();

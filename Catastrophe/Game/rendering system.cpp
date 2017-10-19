@@ -13,32 +13,32 @@
 #include "layer names.hpp"
 #include "global flags.hpp"
 #include "entity manager.hpp"
-#include "render manager.hpp"
-#include "render component.hpp"
 #include "rendering context.hpp"
+#include "rendering manager.hpp"
+#include "rendering component.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-void RenderingSystem::init(RenderManager &newRenderMan) {
-  assert(!renderMan);
-  renderMan = &newRenderMan;
-  RenderingContext &context = renderMan->getRenderingContext();
+void RenderingSystem::init(RenderingManager &newRenderingMan) {
+  assert(!renderingMan);
+  renderingMan = &newRenderingMan;
+  RenderingContext &context = renderingMan->getRenderingContext();
   camera.windowSize.attachWindow(context.getWindow());
   const size_t numLayers = getNumLayers();
   layers.reserve(numLayers);
   for (size_t l = 0; l != numLayers; ++l) {
     layers.push_back(std::make_shared<Layer>(camera));
-    renderMan->addJob(l, layers.back());
+    renderingMan->addJob(l, layers.back());
   }
 }
 
 void RenderingSystem::quit() {
-  assert(renderMan);
+  assert(renderingMan);
   for (auto &layer : layers) {
     layer->kill();
   }
   layers.clear();
   camera.windowSize.detachWindow();
-  renderMan = nullptr;
+  renderingMan = nullptr;
 }
 
 void RenderingSystem::add(
@@ -46,8 +46,8 @@ void RenderingSystem::add(
   const CompPtr comp,
   const YAML::Node &node
 ) {
-  assert(renderMan);
-  comp->init(renderMan->getRenderingContext(), node);
+  assert(renderingMan);
+  comp->init(renderingMan->getRenderingContext(), node);
   const size_t layer = comp->getLayer();
   if (layer >= layers.size()) {
     throw std::range_error("Layer index out of range");
@@ -66,7 +66,7 @@ void RenderingSystem::update(const float delta) {
 }
 
 void RenderingSystem::cameraDebugRender() {
-  camera.debugRender(renderMan->getRenderingContext().getContext());
+  camera.debugRender(renderingMan->getRenderingContext().getContext());
 }
 
 void RenderingSystem::startMotionTrack(const EntityID id) {

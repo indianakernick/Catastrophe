@@ -9,5 +9,5 @@ animation:
   scale: [1, 1]
 
 rendering:
-  name: MissileSpawnerRenderComponent
+  name: MissileSpawnerRenderingComponent
   layer: over player 2

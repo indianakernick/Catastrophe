@@ -1,20 +1,20 @@
 //
-//  polygon render component.hpp
+//  polygon rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef polygon_render_component_hpp
-#define polygon_render_component_hpp
+#ifndef polygon_rendering_component_hpp
+#define polygon_rendering_component_hpp
 
 #include "nanovg.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class PolygonRenderComponent final : public BasicRenderComponent {
+class PolygonRenderingComponent final : public BasicRenderingComponent {
 public:
-  PolygonRenderComponent() = default;
+  PolygonRenderingComponent() = default;
   
   void init(RenderingContext &, const YAML::Node &) override;
   void render(NVGcontext *) override;

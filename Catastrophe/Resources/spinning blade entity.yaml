@@ -7,5 +7,5 @@ animation:
   duration: 1.0
 
 rendering:
-  name: SpinningBladeRenderComponent
+  name: SpinningBladeRenderingComponent
   layer: over player 1

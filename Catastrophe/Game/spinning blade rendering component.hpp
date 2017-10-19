@@ -1,20 +1,20 @@
 //
-//  spinning blade render component.hpp
+//  spinning blade rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef spinning_blade_render_component_hpp
-#define spinning_blade_render_component_hpp
+#ifndef spinning_blade_rendering_component_hpp
+#define spinning_blade_rendering_component_hpp
 
 #include "nanovg.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class SpinningBladeRenderComponent final : public BasicRenderComponent {
+class SpinningBladeRenderingComponent final : public BasicRenderingComponent {
 public:
-  SpinningBladeRenderComponent() = default;
+  SpinningBladeRenderingComponent() = default;
   
   void render(NVGcontext *) override;
 

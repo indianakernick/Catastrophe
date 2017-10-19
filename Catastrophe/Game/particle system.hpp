@@ -12,15 +12,15 @@
 #include "particle.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
-#include "render job.hpp"
 #include <yaml-cpp/yaml.h>
+#include "rendering job.hpp"
 #include <experimental/optional>
 #include "particle group size.hpp"
 #include <Simpleton/Memory/block allocator.hpp>
 
 extern "C" struct NVGcontext;
 class ParticleComponent;
-class RenderManager;
+class RenderingManager;
 
 class ParticleSystem {
 public:
@@ -32,7 +32,7 @@ public:
   ParticleSystem() = default;
   ~ParticleSystem() = default;
   
-  void init(RenderManager &);
+  void init(RenderingManager &);
   void quit();
   
   void add(EntityID, CompPtr, const YAML::Node &);
@@ -48,9 +48,9 @@ private:
 
   using ParticleAllocator = Memory::BlockAllocator<Particle, GROUP_SIZE>;
   std::experimental::optional<ParticleAllocator> particles;
-  RenderManager *renderMan = nullptr;
+  RenderingManager *renderingMan = nullptr;
   
-  class Layer final : public RenderJob {
+  class Layer final : public RenderingJob {
   public:
     Layer() = default;
     

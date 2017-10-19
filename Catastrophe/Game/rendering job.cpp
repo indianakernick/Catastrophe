@@ -1,17 +1,17 @@
 //
-//  render job.cpp
+//  rendering job.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 16/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "render job.hpp"
+#include "rendering job.hpp"
 
-bool RenderJob::alive() const {
+bool RenderingJob::alive() const {
   return isAlive;
 }
 
-void RenderJob::kill() {
+void RenderingJob::kill() {
   isAlive = false;
 }

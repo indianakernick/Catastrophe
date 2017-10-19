@@ -6,5 +6,5 @@ animation:
   name: SimpleAnimationComponent
 
 rendering:
-  name: PlatformRenderComponent
+  name: PlatformRenderingComponent
   layer: over player 2

@@ -12,14 +12,14 @@
 #include "entity id.hpp"
 #include <unordered_map>
 #include "debug draw.hpp"
-#include "render job.hpp"
 #include <yaml-cpp/yaml.h>
+#include "rendering job.hpp"
 #include "contact listener.hpp"
 #include <experimental/optional>
 #include "../Libraries/Box2D/Box2D.h"
 
 class PhysicsComponent;
-class RenderManager;
+class RenderingManager;
 
 class PhysicsSystem {
 public:
@@ -28,7 +28,7 @@ public:
   PhysicsSystem() = default;
   ~PhysicsSystem() = default;
   
-  void init(RenderManager &);
+  void init(RenderingManager &);
   void quit();
   
   b2World *getWorld();
@@ -48,9 +48,9 @@ private:
 
   std::unordered_map<EntityID, CompPtr> components;
   
-  class DebugRenderJob : public RenderJob {
+  class DebugRenderingJob : public RenderingJob {
   public:
-    DebugRenderJob(b2World &, DebugDraw &);
+    DebugRenderingJob(b2World &, DebugDraw &);
 
     void render(RenderingContext &context) override;
 
@@ -59,7 +59,7 @@ private:
     DebugDraw &debugDraw;
   };
   
-  std::shared_ptr<DebugRenderJob> debugRenderJob;
+  std::shared_ptr<DebugRenderingJob> debugRenderingJob;
 };
 
 #endif

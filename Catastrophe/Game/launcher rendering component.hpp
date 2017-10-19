@@ -1,20 +1,20 @@
 //
-//  launcher render component.hpp
+//  launcher rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef launcher_render_component_hpp
-#define launcher_render_component_hpp
+#ifndef launcher_rendering_component_hpp
+#define launcher_rendering_component_hpp
 
 #include "nanovg.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class LauncherRenderComponent final : public BasicRenderComponent {
+class LauncherRenderingComponent final : public BasicRenderingComponent {
 public:
-  LauncherRenderComponent() = default;
+  LauncherRenderingComponent() = default;
   
   void render(NVGcontext *) override;
 

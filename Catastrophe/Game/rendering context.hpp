@@ -26,13 +26,13 @@ public:
   void preRender(glm::mat3);
   void postRender(bool, uint8_t * = nullptr, size_t = 0);
   
-  RenderResMan &getResources();
+  RenderingResources &getResources();
   NVGcontext *getContext() const;
   SDL_Window *getWindow() const;
   glm::ivec2 getFramebufferSize() const;
   
 private:
-  RenderResMan renderResMan;
+  RenderingResources renderingResources;
   SDL_Window *window = nullptr;
   //SDL_GLContext
   void *sdlGLContext = nullptr;

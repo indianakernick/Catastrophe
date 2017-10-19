@@ -1,12 +1,12 @@
 //
-//  player render component.cpp
+//  player rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 9/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "player render component.hpp"
+#include "player rendering component.hpp"
 
 #include <vector>
 #include "entity.hpp"
@@ -275,7 +275,7 @@ struct Graphics::Interpolator<Pose> {
 
 using LerpPose = Graphics::Interpolator<Pose>;
 
-void PlayerRenderComponent::render(NVGcontext *const ctx) {
+void PlayerRenderingComponent::render(NVGcontext *const ctx) {
   const auto animComp = getExpectedCompImpl<PlayerAnimationComponent>();
   
   static Pose standGroundJump;

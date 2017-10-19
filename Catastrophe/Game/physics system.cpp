@@ -11,29 +11,27 @@
 #include "layer names.hpp"
 #include "global flags.hpp"
 #include "entity manager.hpp"
-#include "render manager.hpp"
+#include "rendering manager.hpp"
 #include "physics constants.hpp"
 #include "physics component.hpp"
 #include "rendering context.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-#include <iostream>
-
-void PhysicsSystem::init(RenderManager &renderMan) {
+void PhysicsSystem::init(RenderingManager &renderingMan) {
   world.emplace(GRAVITY);
   contactListener.emplace();
   world->SetContactListener(&(*contactListener));
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
     draw.emplace();
-    debugRenderJob = std::make_shared<DebugRenderJob>(*world, *draw);
-    renderMan.addJob(getLayerIndex("debug physics"), debugRenderJob);
+    debugRenderingJob = std::make_shared<DebugRenderingJob>(*world, *draw);
+    renderingMan.addJob(getLayerIndex("debug physics"), debugRenderingJob);
     world->SetDebugDraw(&(*draw));
   }
 }
 
 void PhysicsSystem::quit() {
   if constexpr (ENABLE_DEBUG_PHYSICS_RENDER) {
-    debugRenderJob->kill();
+    debugRenderingJob->kill();
     world->SetDebugDraw(nullptr);
     draw = std::experimental::nullopt;
   }
@@ -92,10 +90,10 @@ ContactListener &PhysicsSystem::getContactListener() {
   return *contactListener;
 }
 
-PhysicsSystem::DebugRenderJob::DebugRenderJob(b2World &world, DebugDraw &debugDraw)
+PhysicsSystem::DebugRenderingJob::DebugRenderingJob(b2World &world, DebugDraw &debugDraw)
   : world(world), debugDraw(debugDraw) {}
 
-void PhysicsSystem::DebugRenderJob::render(RenderingContext &context) {
+void PhysicsSystem::DebugRenderingJob::render(RenderingContext &context) {
   PROFILE(Debug physics render);
   debugDraw.setContext(context.getContext());
   world.DrawDebugData();

@@ -1,12 +1,12 @@
 //
-//  missile spawner render component.cpp
+//  missile spawner rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 12/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "missile spawner render component.hpp"
+#include "missile spawner rendering component.hpp"
 
 #include "entity.hpp"
 #include "nanovg.hpp"
@@ -17,7 +17,7 @@ namespace {
   const NVGcolor BASE = nvgRGBf(0.2f, 0.2f, 0.2f);
 }
 
-void MissileSpawnerRenderComponent::render(NVGcontext *const ctx) {
+void MissileSpawnerRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   nvgBeginPath(ctx);
@@ -32,7 +32,7 @@ void MissileSpawnerRenderComponent::render(NVGcontext *const ctx) {
   nvgFill(ctx);
 }
 
-AABB MissileSpawnerRenderComponent::getAABB() const {
+AABB MissileSpawnerRenderingComponent::getAABB() const {
   const glm::mat3 modelMat = getExpectedComp<AnimationComponent>()->getModelMat();
   return {
     modelMat * glm::vec3(-1.0f, -1.0f, 1.0f),

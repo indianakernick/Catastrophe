@@ -11,8 +11,8 @@
 
 #include "vector sprite.hpp"
 
-class RenderResMan;
+class RenderingResources;
 
-Sprite loadSprite(const std::string &, RenderResMan &);
+Sprite loadSprite(const std::string &, RenderingResources &);
 
 #endif

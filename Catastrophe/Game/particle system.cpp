@@ -10,25 +10,25 @@
 
 #include "layer names.hpp"
 #include "global flags.hpp"
-#include "render manager.hpp"
+#include "rendering manager.hpp"
 #include "rendering context.hpp"
 #include "particle component.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-void ParticleSystem::init(RenderManager &newRenderMan) {
-  assert(renderMan == nullptr);
-  renderMan = &newRenderMan;
+void ParticleSystem::init(RenderingManager &newRenderingMan) {
+  assert(renderingMan == nullptr);
+  renderingMan = &newRenderingMan;
   particles.emplace(NUM_GROUPS);
   const size_t numLayers = getNumLayers();
   layers.reserve(numLayers);
   for (size_t l = 0; l != numLayers; ++l) {
     layers.push_back(std::make_shared<Layer>());
-    renderMan->addJob(l, layers.back());
+    renderingMan->addJob(l, layers.back());
   }
 }
 
 void ParticleSystem::quit() {
-  assert(renderMan);
+  assert(renderingMan);
   for (auto &layer : layers) {
     for (auto &pair : layer->comps) {
       particles->free(pair.second.firstParticle);
@@ -37,7 +37,7 @@ void ParticleSystem::quit() {
   }
   layers.clear();
   particles = std::experimental::nullopt;
-  renderMan = nullptr;
+  renderingMan = nullptr;
 }
 
 void ParticleSystem::add(

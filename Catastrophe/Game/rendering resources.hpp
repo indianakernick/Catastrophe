@@ -39,9 +39,9 @@ using FontHandle = std::shared_ptr<Font>;
 extern "C" struct NVGcontext;
 
 ///Rendering Resource Manager
-class RenderResMan {
+class RenderingResources {
 public:
-  RenderResMan() = default;
+  RenderingResources() = default;
   
   void init(NVGcontext *);
   void quit();

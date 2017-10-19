@@ -29,7 +29,7 @@ bool Screenshot::handleEvent(const SDL_Event &e) {
   }
 }
 
-void Screenshot::postRender(RenderingContext &renderer, const bool fpsRender) {
+void Screenshot::postRender(RenderingContext &renderer, const bool renderFPS) {
   if (takeScreenshot) {
     takeScreenshot = false;
     renderer.postRender(
@@ -53,6 +53,6 @@ void Screenshot::postRender(RenderingContext &renderer, const bool fpsRender) {
       );
     }
   } else {
-    renderer.postRender(fpsRender);
+    renderer.postRender(renderFPS);
   }
 }

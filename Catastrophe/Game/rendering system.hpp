@@ -13,20 +13,20 @@
 #include "camera.hpp"
 #include "entity id.hpp"
 #include <unordered_map>
-#include "render job.hpp"
 #include <yaml-cpp/yaml.h>
+#include "rendering job.hpp"
 
-class RenderComponent;
-class RenderManager;
+class RenderingComponent;
+class RenderingManager;
 
 class RenderingSystem {
 public:
-  using CompPtr = std::shared_ptr<RenderComponent>;
+  using CompPtr = std::shared_ptr<RenderingComponent>;
   
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
-  void init(RenderManager &);
+  void init(RenderingManager &);
   void quit();
   
   void add(EntityID, CompPtr, const YAML::Node &);
@@ -44,10 +44,10 @@ public:
   Camera &getCamera();
 
 private:
-  RenderManager *renderMan = nullptr;
+  RenderingManager *renderingMan = nullptr;
   Camera camera;
   
-  class Layer final : public RenderJob {
+  class Layer final : public RenderingJob {
   public:
     explicit Layer(const Camera &);
   

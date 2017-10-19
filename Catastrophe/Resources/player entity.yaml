@@ -21,7 +21,6 @@ animation:
   run duration: 1
 
 rendering:
-  name: PlayerRenderComponent
-  sprite: player sprite.yaml
+  name: PlayerRenderingComponent
   scale: *scale
   layer: player

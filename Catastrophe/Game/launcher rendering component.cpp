@@ -1,17 +1,17 @@
 //
-//  launcher render component.cpp
+//  launcher rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "launcher render component.hpp"
+#include "launcher rendering component.hpp"
 
 #include "entity.hpp"
 #include "launcher animation component.hpp"
 
-void LauncherRenderComponent::render(NVGcontext *const ctx) {
+void LauncherRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   const auto animComp = getExpectedCompImpl<LauncherAnimationComponent>();

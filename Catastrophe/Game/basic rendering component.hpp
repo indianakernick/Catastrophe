@@ -1,20 +1,20 @@
 //
-//  basic render component.hpp
+//  basic rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 3/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef basic_render_component_hpp
-#define basic_render_component_hpp
+#ifndef basic_rendering_component_hpp
+#define basic_rendering_component_hpp
 
 #include <yaml-cpp/node/node.h>
-#include "render component.hpp"
+#include "rendering component.hpp"
 
-class BasicRenderComponent : public RenderComponent {
+class BasicRenderingComponent : public RenderingComponent {
 public:
-  BasicRenderComponent() = default;
+  BasicRenderingComponent() = default;
   
   void init(RenderingContext &, const YAML::Node &) override;
   void preRender() override;

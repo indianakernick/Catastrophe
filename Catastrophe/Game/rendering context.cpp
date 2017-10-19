@@ -76,8 +76,8 @@ void RenderingContext::init(SDL_Window *newWindow) {
     throw std::runtime_error("NanoVG init failed");
   }
   
-  renderResMan.init(context);
-  fpsFontHandle = renderResMan.getFont("Consolas.ttf");
+  renderingResources.init(context);
+  fpsFontHandle = renderingResources.getFont("Consolas.ttf");
   
   fpsCounter.init();
 }
@@ -85,7 +85,7 @@ void RenderingContext::init(SDL_Window *newWindow) {
 void RenderingContext::quit() {
   PROFILE(RenderingContext quit);
 
-  renderResMan.quit();
+  renderingResources.quit();
   nvgDeleteGL3(context);
   context = nullptr;
   SDL_GL_DeleteContext(sdlGLContext);
@@ -136,8 +136,8 @@ void RenderingContext::postRender(
   SDL_GL_SwapWindow(window);
 }
 
-RenderResMan &RenderingContext::getResources() {
-  return renderResMan;
+RenderingResources &RenderingContext::getResources() {
+  return renderingResources;
 }
 
 NVGcontext *RenderingContext::getContext() const {

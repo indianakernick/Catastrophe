@@ -11,17 +11,17 @@
 #include "nanovg.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
-void RenderResMan::init(NVGcontext *newContext) {
+void RenderingResources::init(NVGcontext *newContext) {
   context = newContext;
 }
 
-void RenderResMan::quit() {
+void RenderingResources::quit() {
   unloadImages();
   unloadFonts();
   context = nullptr;
 }
 
-void RenderResMan::unloadImages() {
+void RenderingResources::unloadImages() {
   for (auto i = images.cbegin(); i != images.cend();) {
     nvgDeleteImage(context, i->second->id);
     if (i->second.use_count() == 1) {
@@ -33,7 +33,7 @@ void RenderResMan::unloadImages() {
   }
 }
 
-void RenderResMan::unloadFonts() {
+void RenderingResources::unloadFonts() {
   for (auto f = fonts.cbegin(); f != fonts.cend();) {
     if (f->second.use_count() == 1) {
       f = fonts.erase(f);
@@ -44,7 +44,7 @@ void RenderResMan::unloadFonts() {
   }
 }
 
-ImageHandle RenderResMan::getImage(const std::string &name) {
+ImageHandle RenderingResources::getImage(const std::string &name) {
   auto [begin, end] = images.equal_range(name);
   for (; begin != end; ++begin) {
     if (begin->second->id != 0) {
@@ -59,7 +59,7 @@ ImageHandle RenderResMan::getImage(const std::string &name) {
   }
 }
 
-ImageHandle RenderResMan::getImage(const std::string &name, const int flags) {
+ImageHandle RenderingResources::getImage(const std::string &name, const int flags) {
   auto [begin, end] = images.equal_range(name);
   for (; begin != end; ++begin) {
     if (begin->second->getFlags() == flags) {
@@ -72,7 +72,7 @@ ImageHandle RenderResMan::getImage(const std::string &name, const int flags) {
   return loadImage(name, flags);
 }
 
-FontHandle RenderResMan::getFont(const std::string &name) {
+FontHandle RenderingResources::getFont(const std::string &name) {
   auto iter = fonts.find(name);
   if (iter == fonts.end()) {
     return loadFont(name);
@@ -84,7 +84,7 @@ FontHandle RenderResMan::getFont(const std::string &name) {
   }
 }
 
-int RenderResMan::createImage(const std::string &name, const int flags) const {
+int RenderingResources::createImage(const std::string &name, const int flags) const {
   const std::string path = Platform::getResDir() + name;
   const int id = nvgCreateImage(context, path.c_str(), flags);
   if (id == 0) {
@@ -93,7 +93,7 @@ int RenderResMan::createImage(const std::string &name, const int flags) const {
   return id;
 }
 
-int RenderResMan::createFont(const std::string &name) const {
+int RenderingResources::createFont(const std::string &name) const {
   const std::string path = Platform::getResDir() + name;
   const int id = nvgCreateFont(context, name.c_str(), path.c_str());
   if (id == -1) {
@@ -102,13 +102,13 @@ int RenderResMan::createFont(const std::string &name) const {
   return id;
 }
 
-ImageHandle RenderResMan::loadImage(const std::string &name, const int flags) {
+ImageHandle RenderingResources::loadImage(const std::string &name, const int flags) {
   const ImageHandle handle = std::make_shared<Image>(createImage(name, flags), flags);
   images.emplace(name, handle);
   return handle;
 }
 
-FontHandle RenderResMan::loadFont(const std::string &name) {
+FontHandle RenderingResources::loadFont(const std::string &name) {
   const FontHandle handle = std::make_shared<Font>(createFont(name));
   fonts.emplace(name, handle);
   return handle;

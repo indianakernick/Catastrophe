@@ -1,21 +1,21 @@
 //
-//  missile render component.cpp
+//  missile rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 12/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "missile render component.hpp"
+#include "missile rendering component.hpp"
 
 #include "nanovg.hpp"
 
-const NVGcolor MissileRenderComponent::INNER_BODY = nvgRGBf(0.6f, 0.6f, 0.6f);
-const NVGcolor MissileRenderComponent::OUTER_BODY = nvgRGBf(0.3f, 0.3f, 0.3f);
-const NVGcolor MissileRenderComponent::STRIPES = nvgRGBf(1.0f, 0.0f, 0.0f);
-const NVGcolor MissileRenderComponent::EXHAUST = nvgRGBf(1.0f, 0.51f, 0.0f);
+const NVGcolor MissileRenderingComponent::INNER_BODY = nvgRGBf(0.6f, 0.6f, 0.6f);
+const NVGcolor MissileRenderingComponent::OUTER_BODY = nvgRGBf(0.3f, 0.3f, 0.3f);
+const NVGcolor MissileRenderingComponent::STRIPES = nvgRGBf(1.0f, 0.0f, 0.0f);
+const NVGcolor MissileRenderingComponent::EXHAUST = nvgRGBf(1.0f, 0.51f, 0.0f);
 
-void MissileRenderComponent::leftBody(NVGcontext *const ctx) {
+void MissileRenderingComponent::leftBody(NVGcontext *const ctx) {
   const NVGpaint gradient = nvgLinearGradient(ctx,
     0.0f, 0.0f,
     0.0f, 0.4f,
@@ -34,7 +34,7 @@ void MissileRenderComponent::leftBody(NVGcontext *const ctx) {
   nvgFill(ctx);
 }
 
-void MissileRenderComponent::body(NVGcontext *const ctx) {
+void MissileRenderingComponent::body(NVGcontext *const ctx) {
   leftBody(ctx);
   nvgScale(ctx, 1.0f, -1.0f);
   leftBody(ctx);
@@ -42,7 +42,7 @@ void MissileRenderComponent::body(NVGcontext *const ctx) {
   nvgResetScissor(ctx);
 }
 
-void MissileRenderComponent::fins(NVGcontext *const ctx) {
+void MissileRenderingComponent::fins(NVGcontext *const ctx) {
   nvgBeginPath(ctx);
   nvgFillColor(ctx, OUTER_BODY);
   
@@ -64,7 +64,7 @@ void MissileRenderComponent::fins(NVGcontext *const ctx) {
   nvgFill(ctx);
 }
 
-void MissileRenderComponent::stripes(NVGcontext *const ctx) {
+void MissileRenderingComponent::stripes(NVGcontext *const ctx) {
   nvgBeginPath(ctx);
   nvgStrokeColor(ctx, STRIPES);
   nvgStrokeWidth(ctx, 0.05f);
@@ -84,7 +84,7 @@ void MissileRenderComponent::stripes(NVGcontext *const ctx) {
   nvgStroke(ctx);
 }
 
-void MissileRenderComponent::exhaust(NVGcontext *const ctx) {
+void MissileRenderingComponent::exhaust(NVGcontext *const ctx) {
   nvgBeginPath(ctx);
   
   const NVGpaint gradient = nvgRadialGradient(ctx,
@@ -101,7 +101,7 @@ void MissileRenderComponent::exhaust(NVGcontext *const ctx) {
   nvgFill(ctx);
 }
 
-void MissileRenderComponent::render(NVGcontext *const ctx) {
+void MissileRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   fins(ctx);

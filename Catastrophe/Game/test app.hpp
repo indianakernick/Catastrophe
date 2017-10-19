@@ -13,8 +13,8 @@
 #include "vector sprite.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
-#include "player render component.hpp"
 #include <Simpleton/Application/app.hpp>
+#include "player rendering component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
 #include <Simpleton/Platform/window library.hpp>
 
@@ -27,7 +27,7 @@ private:
   Platform::Window window;
   RenderingContext renderingContext;
   Screenshot screenshot;
-  PlayerRenderComponent renderComp;
+  PlayerRenderingComponent renderingComp;
   
   Sprite sprite;
   Time::SimpleAnim<float> anim;

@@ -1,20 +1,20 @@
 //
-//  missile render component.hpp
+//  missile rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 12/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef missile_render_component_hpp
-#define missile_render_component_hpp
+#ifndef missile_rendering_component_hpp
+#define missile_rendering_component_hpp
 
 #include "nanovg.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class MissileRenderComponent final : public BasicRenderComponent {
+class MissileRenderingComponent final : public BasicRenderingComponent {
 public:
-  MissileRenderComponent() = default;
+  MissileRenderingComponent() = default;
   
   void render(NVGcontext *) override;
 

@@ -113,7 +113,7 @@ void loadEntity(
   }
   if (const YAML::Node &render = root["rendering"]) {
     //PROFILE(read render comp);
-    readComp<RenderComponent>(render, levelArgs, entity, Systems::rendering);
+    readComp<RenderingComponent>(render, levelArgs, entity, Systems::rendering);
   }
   if (const YAML::Node &particle = root["particle"]) {
     //PROFILE(read particle comp);

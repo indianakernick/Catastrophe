@@ -1,17 +1,17 @@
 //
-//  render manager.cpp
+//  rendering manager.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 16/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "render manager.hpp"
+#include "rendering manager.hpp"
 
 #include <cassert>
 #include "layer names.hpp"
 
-RenderManager::RenderManager()
+RenderingManager::RenderingManager()
   : layers(getNumLayers()) {
   for (auto &layer : layers) {
     //RenderingSystem and ParticleSystem both create a single job
@@ -20,24 +20,24 @@ RenderManager::RenderManager()
   }
 }
 
-void RenderManager::init(RenderingContext &newRenderingContext) {
+void RenderingManager::init(RenderingContext &newRenderingContext) {
   assert(renderingContext == nullptr);
   renderingContext = &newRenderingContext;
 }
 
-void RenderManager::quit() {
+void RenderingManager::quit() {
   assert(renderingContext != nullptr);
   renderingContext = nullptr;
 }
 
-void RenderManager::addJob(const size_t layer, const std::shared_ptr<RenderJob> job) {
+void RenderingManager::addJob(const size_t layer, const std::shared_ptr<RenderingJob> job) {
   if (!job->alive()) {
     return;
   }
   layers.at(layer).push_back(job);
 }
 
-void RenderManager::render() {
+void RenderingManager::render() {
   for (auto &layer : layers) {
     for (auto j = layer.begin(); j != layer.end();) {
       if ((*j)->alive()) {
@@ -50,7 +50,7 @@ void RenderManager::render() {
   }
 }
 
-RenderingContext &RenderManager::getRenderingContext() const {
+RenderingContext &RenderingManager::getRenderingContext() const {
   assert(renderingContext);
   return *renderingContext;
 }

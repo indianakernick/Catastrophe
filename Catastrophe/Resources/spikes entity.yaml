@@ -6,5 +6,5 @@ animation:
   name: SimpleAnimationComponent
 
 rendering:
-  name: SpikesRenderComponent
+  name: SpikesRenderingComponent
   layer: over player 1

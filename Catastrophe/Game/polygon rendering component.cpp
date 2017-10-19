@@ -1,12 +1,12 @@
 //
-//  polygon render component.cpp
+//  polygon rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "polygon render component.hpp"
+#include "polygon rendering component.hpp"
 
 #include "entity.hpp"
 #include "nvg helper.hpp"
@@ -14,15 +14,15 @@
 #include "animation component.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-void PolygonRenderComponent::init(RenderingContext &renderer, const YAML::Node &node) {
-  BasicRenderComponent::init(renderer, node);
+void PolygonRenderingComponent::init(RenderingContext &renderer, const YAML::Node &node) {
+  BasicRenderingComponent::init(renderer, node);
   getOptional(numSides, node, "sides");
   getOptional(color, node, "color");
   getOptional(rotPerSecond, node, "rotations per second");
   getOptional(rotationOffset, node, "rotation");
 }
 
-void PolygonRenderComponent::render(NVGcontext *const ctx) {
+void PolygonRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   if (rotPerSecond != 0.0f) {
@@ -44,6 +44,6 @@ void PolygonRenderComponent::render(NVGcontext *const ctx) {
   nvgFill(ctx);
 }
 
-glm::vec2 PolygonRenderComponent::getCirclePoint(const float turn) const {
+glm::vec2 PolygonRenderingComponent::getCirclePoint(const float turn) const {
   return Math::angleMag((turn + rotation + rotationOffset) * NVG_PI * 2.0f, 0.5f);
 }

@@ -1,18 +1,18 @@
 //
-//  spinning blade render component.cpp
+//  spinning blade rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "spinning blade render component.hpp"
+#include "spinning blade rendering component.hpp"
 
 #include "entity.hpp"
 #include "animation component.hpp"
 #include <Simpleton/Math/vectors.hpp>
 
-void SpinningBladeRenderComponent::render(NVGcontext *const ctx) {
+void SpinningBladeRenderingComponent::render(NVGcontext *const ctx) {
   setModelTransform(ctx);
   
   const float prog = getExpectedCompImpl<AnimationComponent>()->getProgress();

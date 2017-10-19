@@ -1,20 +1,20 @@
 //
-//  spikes render component.hpp
+//  spikes rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef spikes_render_component_hpp
-#define spikes_render_component_hpp
+#ifndef spikes_rendering_component_hpp
+#define spikes_rendering_component_hpp
 
 #include "nanovg.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class SpikesRenderComponent final : public BasicRenderComponent {
+class SpikesRenderingComponent final : public BasicRenderingComponent {
 public:
-  SpikesRenderComponent() = default;
+  SpikesRenderingComponent() = default;
   
   void render(NVGcontext *) override;
   

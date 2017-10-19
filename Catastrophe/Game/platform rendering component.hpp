@@ -1,21 +1,21 @@
 //
-//  platform render component.hpp
+//  platform rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 8/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef platform_render_component_hpp
-#define platform_render_component_hpp
+#ifndef platform_rendering_component_hpp
+#define platform_rendering_component_hpp
 
 #include "nanovg.hpp"
 #include "rendering resources.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class PlatformRenderComponent final : public BasicRenderComponent {
+class PlatformRenderingComponent final : public BasicRenderingComponent {
 public:
-  PlatformRenderComponent() = default;
+  PlatformRenderingComponent() = default;
   
   void init(RenderingContext &, const YAML::Node &) override;
   void render(NVGcontext *) override;

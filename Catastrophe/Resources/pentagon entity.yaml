@@ -6,7 +6,7 @@ animation:
   name: SimpleAnimationComponent
 
 rendering:
-  name: PolygonRenderComponent
+  name: PolygonRenderingComponent
   layer: under player -1
   sides: 5
   color: [1, 0, 0.5]

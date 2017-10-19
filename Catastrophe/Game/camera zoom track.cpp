@@ -12,7 +12,7 @@
 #include "camera props.hpp"
 #include "camera constants.hpp"
 #include <Simpleton/Math/vectors.hpp>
-#include "camera debug render constants.hpp"
+#include "camera debug rendering constants.hpp"
 
 CameraZoomTrack::CameraZoomTrack()
   : target(),

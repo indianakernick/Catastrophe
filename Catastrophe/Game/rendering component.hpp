@@ -1,13 +1,13 @@
 //
-//  render component.hpp
+//  rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 28/7/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef render_component_hpp
-#define render_component_hpp
+#ifndef rendering_component_hpp
+#define rendering_component_hpp
 
 #include "aabb.hpp"
 #include "component.hpp"
@@ -18,12 +18,12 @@
 class RenderingContext;
 extern "C" struct NVGcontext;
 
-class RenderComponent : public Component {
+class RenderingComponent : public Component {
 public:
-  using ComponentBase = RenderComponent;
+  using ComponentBase = RenderingComponent;
 
-  RenderComponent() = default;
-  virtual ~RenderComponent() = default;
+  RenderingComponent() = default;
+  virtual ~RenderingComponent() = default;
 
   virtual void init(RenderingContext &, const YAML::Node &) = 0;
   virtual void preRender() = 0;

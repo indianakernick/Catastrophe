@@ -1,12 +1,12 @@
 //
-//  basic render component.cpp
+//  basic rendering component.cpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 3/9/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
 #include "entity.hpp"
 #include "nvg helper.hpp"
@@ -15,7 +15,7 @@
 #include "physics component.hpp"
 #include "animation component.hpp"
 
-void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
+void BasicRenderingComponent::init(RenderingContext &, const YAML::Node &node) {
   glm::vec2 scale = {1.0f, 1.0f};
   getOptional(scale, node, "scale");
   layer = 0;
@@ -26,21 +26,21 @@ void BasicRenderComponent::init(RenderingContext &, const YAML::Node &node) {
   size = makeZoomTarget(scale);
 }
 
-void BasicRenderComponent::preRender() {
+void BasicRenderingComponent::preRender() {
   const AABB aabb = getAABB();
   *rect = static_cast<CameraMotionTarget>(aabb);
   *size = aabb.size();
 }
 
-CameraMotionTargetCPtr BasicRenderComponent::getMotionTarget() const {
+CameraMotionTargetCPtr BasicRenderingComponent::getMotionTarget() const {
   return rect;
 }
 
-CameraZoomTargetCPtr BasicRenderComponent::getZoomTarget() const {
+CameraZoomTargetCPtr BasicRenderingComponent::getZoomTarget() const {
   return size;
 }
 
-AABB BasicRenderComponent::getAABB() const {
+AABB BasicRenderingComponent::getAABB() const {
   if (const auto physicsComp = getComp<PhysicsComponent>()) {
     return physicsComp->getAABB();
   } else if (const auto animComp = getComp<AnimationComponent>()) {
@@ -54,10 +54,10 @@ AABB BasicRenderComponent::getAABB() const {
   }
 }
 
-size_t BasicRenderComponent::getLayer() const {
+size_t BasicRenderingComponent::getLayer() const {
   return layer;
 }
 
-void BasicRenderComponent::setModelTransform(NVGcontext *const ctx) {
+void BasicRenderingComponent::setModelTransform(NVGcontext *const ctx) {
   nvgTransform(ctx, getExpectedComp<AnimationComponent>()->getModelMat());
 }

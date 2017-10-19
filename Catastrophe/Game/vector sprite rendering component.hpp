@@ -1,20 +1,20 @@
 //
-//  vector sprite render component.hpp
+//  vector sprite rendering component.hpp
 //  Catastrophe
 //
 //  Created by Indi Kernick on 9/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef vector_sprite_render_component_hpp
-#define vector_sprite_render_component_hpp
+#ifndef vector_sprite_rendering_component_hpp
+#define vector_sprite_rendering_component_hpp
 
 #include "vector sprite.hpp"
-#include "basic render component.hpp"
+#include "basic rendering component.hpp"
 
-class VectorSpriteRenderComponent final : public BasicRenderComponent {
+class VectorSpriteRenderingComponent final : public BasicRenderingComponent {
 public:
-  VectorSpriteRenderComponent() = default;
+  VectorSpriteRenderingComponent() = default;
   
   void init(RenderingContext &, const YAML::Node &) override;
   void render(NVGcontext *) override;
