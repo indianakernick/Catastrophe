@@ -15,5 +15,4 @@
 
 void loadEntity(Entity *, const std::string &, const YAML::Node &);
 
-
 #endif

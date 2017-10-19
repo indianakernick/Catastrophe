@@ -10,24 +10,17 @@
 #define components_fwd_hpp
 
 #include <memory>
+#include "component names.hpp"
 #include <Simpleton/Utils/type list.hpp>
 
-#define COMPONENTS                                                              \
-  COMPONENT(Input)                                                              \
-  COMPONENT(Spawn)                                                              \
-  COMPONENT(Physics)                                                            \
-  COMPONENT(Animation)                                                          \
-  COMPONENT(Rendering)                                                          \
-  LAST_COMPONENT(Particle)
-
-#define COMPONENT(NAME) class NAME##Component;
-#define LAST_COMPONENT(NAME) COMPONENT(NAME)
+#define COMPONENT(NAME, I) class NAME##Component;
+#define LAST_COMPONENT(NAME, I) COMPONENT(NAME, I)
 COMPONENTS
 #undef LAST_COMPONENT
 #undef COMPONENT
 
-#define COMPONENT(NAME) NAME##Component,
-#define LAST_COMPONENT(NAME) NAME##Component
+#define COMPONENT(NAME, I) NAME##Component,
+#define LAST_COMPONENT(NAME, I) NAME##Component
 using ComponentList = Utils::TypeList<
   COMPONENTS
 >;

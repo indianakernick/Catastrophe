@@ -16,8 +16,8 @@
 #include "animation component list.hpp"
 #include "rendering component list.hpp"
 
-#define COMPONENT(NAME) NAME##Comps,
-#define LAST_COMPONENT(NAME) NAME##Comps
+#define COMPONENT(NAME, I) NAME##Comps,
+#define LAST_COMPONENT(NAME, I) NAME##Comps
 using AllComps = Utils::TypeList<
   COMPONENTS
 >;
@@ -43,9 +43,9 @@ std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
   >(name);
 }
 
-#define COMPONENT(NAME)                                                         \
+#define COMPONENT(NAME, I)                                                         \
   template std::shared_ptr<NAME##Component> makeComp(std::experimental::string_view);
-#define LAST_COMPONENT(NAME) COMPONENT(NAME)
+#define LAST_COMPONENT(NAME, I) COMPONENT(NAME, I)
 COMPONENTS
 #undef LAST_COMPONENT
 #undef COMPONENT

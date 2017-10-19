@@ -8,10 +8,10 @@
 
 #include "joint physics component.hpp"
 
+#include "systems.hpp"
 #include "b2 helper.hpp"
 #include "yaml helper.hpp"
 #include "physics file.hpp"
-#include "systems registry.hpp"
 #include "body physics component.hpp"
 
 namespace {

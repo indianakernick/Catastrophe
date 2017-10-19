@@ -8,10 +8,10 @@
 
 #include "entity file.hpp"
 
+#include "systems.hpp"
 #include "components.hpp"
 #include "yaml helper.hpp"
 #include "make component.hpp"
-#include "systems registry.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 #include <Simpleton/Platform/system info.hpp>
@@ -95,28 +95,12 @@ void loadEntity(
   const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
   
-  if (const YAML::Node &input = root["input"]) {
-    //PROFILE(read input comp);
-    readComp<InputComponent>(input, levelArgs, entity, Systems::input);
-  }
-  if (const YAML::Node &spawn = root["spawn"]) {
-    //PROFILE(read spawn comp);
-    readComp<SpawnComponent>(spawn, levelArgs, entity, Systems::spawn);
-  }
-  if (const YAML::Node &physics = root["physics"]) {
-    //PROFILE(read physics comp);
-    readComp<PhysicsComponent>(physics, levelArgs, entity, Systems::physics);
-  }
-  if (const YAML::Node &anim = root["animation"]) {
-    //PROFILE(read anim comp);
-    readComp<AnimationComponent>(anim, levelArgs, entity, Systems::animation);
-  }
-  if (const YAML::Node &render = root["rendering"]) {
-    //PROFILE(read render comp);
-    readComp<RenderingComponent>(render, levelArgs, entity, Systems::rendering);
-  }
-  if (const YAML::Node &particle = root["particle"]) {
-    //PROFILE(read particle comp);
-    readComp<ParticleComponent>(particle, levelArgs, entity, Systems::particle);
-  }
+  #define COMPONENT(NAME, ID_NAME)                                              \
+    if (const YAML::Node &node = root[#ID_NAME]) {                              \
+      readComp<NAME##Component>(node, levelArgs, entity, Systems::ID_NAME);     \
+    }
+  #define LAST_COMPONENT(NAME, ID_NAME) COMPONENT(NAME, ID_NAME)
+  COMPONENTS
+  #undef LAST_COMPONENT
+  #undef COMPONENT
 }

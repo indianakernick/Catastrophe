@@ -8,10 +8,10 @@
 
 #include "entity manager.hpp"
 
+#include "systems.hpp"
 #include "level file.hpp"
 #include "entity file.hpp"
 #include "player constants.hpp"
-#include "systems registry.hpp"
 
 void EntityManager::init() {}
 
@@ -78,10 +78,10 @@ void EntityManager::createImpl(
 }
 
 void EntityManager::destroyComponents(const EntityID id) const {
-  Systems::particle->rem(id);
-  Systems::rendering->rem(id);
-  Systems::animation->rem(id);
-  Systems::physics->rem(id);
-  Systems::spawn->rem(id);
-  Systems::input->rem(id);
+  //The components aren't removed in reverse order but I don't think that matters
+  #define COMPONENT(N, ID_NAME) Systems::ID_NAME->rem(id);
+  #define LAST_COMPONENT(N, ID_NAME)
+  COMPONENTS
+  #undef LAST_COMPONENT
+  #undef COMPONENT
 }

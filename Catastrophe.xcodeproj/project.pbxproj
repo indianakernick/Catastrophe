@@ -31,6 +31,7 @@
 		451CC0EB1F942EF90000E424 /* exhaust particle component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0E91F942EF90000E424 /* exhaust particle component.cpp */; };
 		451CC0F61F9468760000E424 /* rendering manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0F41F9468760000E424 /* rendering manager.cpp */; };
 		451CC0F91F9471880000E424 /* rendering job.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0F71F9471880000E424 /* rendering job.cpp */; };
+		451CC0FE1F9882660000E424 /* systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0FD1F9882660000E424 /* systems.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -173,7 +174,6 @@
 		45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */; };
 		45DEA06D1F8589CB00B1DA72 /* launcher joint.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */; };
 		45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */; };
-		45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0711F85915B00B1DA72 /* systems registry.cpp */; };
 		45DEA0751F859D3100B1DA72 /* button body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0741F859D3100B1DA72 /* button body.yaml */; };
 		45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0761F859F7200B1DA72 /* button physics component.cpp */; };
 		45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */; };
@@ -235,6 +235,10 @@
 		451CC0F71F9471880000E424 /* rendering job.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering job.cpp"; sourceTree = "<group>"; };
 		451CC0F81F9471880000E424 /* rendering job.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "rendering job.hpp"; sourceTree = "<group>"; };
 		451CC0FA1F949D940000E424 /* global flags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "global flags.hpp"; sourceTree = "<group>"; };
+		451CC0FB1F987E770000E424 /* systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = systems.hpp; sourceTree = "<group>"; };
+		451CC0FC1F987EAB0000E424 /* component names.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "component names.hpp"; sourceTree = "<group>"; };
+		451CC0FD1F9882660000E424 /* systems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = systems.cpp; sourceTree = "<group>"; };
+		451CC0FF1F9882720000E424 /* systems fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "systems fwd.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -511,8 +515,6 @@
 		45DEA0661F84A40900B1DA72 /* launcher platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher platform entity.yaml"; sourceTree = "<group>"; };
 		45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher joint.yaml"; sourceTree = "<group>"; };
 		45DEA06E1F858B0900B1DA72 /* launcher entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher entity.yaml"; sourceTree = "<group>"; };
-		45DEA0711F85915B00B1DA72 /* systems registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "systems registry.cpp"; sourceTree = "<group>"; };
-		45DEA0721F85915B00B1DA72 /* systems registry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "systems registry.hpp"; sourceTree = "<group>"; };
 		45DEA0741F859D3100B1DA72 /* button body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "button body.yaml"; sourceTree = "<group>"; };
 		45DEA0761F859F7200B1DA72 /* button physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "button physics component.cpp"; sourceTree = "<group>"; };
 		45DEA0771F859F7200B1DA72 /* button physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "button physics component.hpp"; sourceTree = "<group>"; };
@@ -966,8 +968,12 @@
 		4545DEBD1F8EFD19000A54AA /* components */ = {
 			isa = PBXGroup;
 			children = (
+				451CC0FC1F987EAB0000E424 /* component names.hpp */,
 				4545DEB81F8EF4F0000A54AA /* components.hpp */,
 				451CC0DD1F91EF350000E424 /* components fwd.hpp */,
+				451CC0FD1F9882660000E424 /* systems.cpp */,
+				451CC0FB1F987E770000E424 /* systems.hpp */,
+				451CC0FF1F9882720000E424 /* systems fwd.hpp */,
 				4545DEBA1F8EFBAD000A54AA /* make component.cpp */,
 				4545DEBB1F8EFBAD000A54AA /* make component.hpp */,
 				45DE9FC41F70894C00B1DA72 /* component.cpp */,
@@ -1034,7 +1040,6 @@
 				452FF9F71F6BB83E003A98B1 /* test app.cpp */,
 				452FF9F81F6BB83E003A98B1 /* test app.hpp */,
 				45C999251F8C406900EF5DF0 /* libraries */,
-				45DEA0701F85912B00B1DA72 /* registries */,
 				452FF9C01F63D007003A98B1 /* constants */,
 				45103F411F2432D2001B24E2 /* utils */,
 				453892F71F2C4061007EBB5A /* input */,
@@ -1168,15 +1173,6 @@
 				45DEA06C1F8589CB00B1DA72 /* launcher joint.yaml */,
 			);
 			name = Joints;
-			sourceTree = "<group>";
-		};
-		45DEA0701F85912B00B1DA72 /* registries */ = {
-			isa = PBXGroup;
-			children = (
-				45DEA0711F85915B00B1DA72 /* systems registry.cpp */,
-				45DEA0721F85915B00B1DA72 /* systems registry.hpp */,
-			);
-			name = registries;
 			sourceTree = "<group>";
 		};
 		45FA99121F3309F800F8C639 /* physics components */ = {
@@ -1385,7 +1381,6 @@
 				4568D3231F8A010F0037268B /* spinning blade rendering component.cpp in Sources */,
 				45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */,
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
-				45DEA0731F85915B00B1DA72 /* systems registry.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
 				45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */,
@@ -1416,6 +1411,7 @@
 				45DEA0631F84941F00B1DA72 /* joint physics component.cpp in Sources */,
 				454116351F5622D700C2865B /* camera zoom track.cpp in Sources */,
 				452FFA001F6BBF41003A98B1 /* stb_image_write.c in Sources */,
+				451CC0FE1F9882660000E424 /* systems.cpp in Sources */,
 				45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */,
 				45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */,
 				4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */,

@@ -8,10 +8,10 @@
 
 #include "app impl.hpp"
 
+#include "systems.hpp"
 #include "debug input.hpp"
 #include "global flags.hpp"
 #include "player constants.hpp"
-#include "systems registry.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 #include "register collision listeners.hpp"
 
@@ -36,14 +36,11 @@ Main character hired to steal the pink pentagon back
 bool AppImpl::init() {
   PROFILE(Init);
 
-  Systems::input = &inputSystem;
-  Systems::spawn = &spawnSystem;
-  Systems::physics = &physicsSystem;
-  Systems::animation = &animationSystem;
-  Systems::rendering = &renderingSystem;
-  Systems::particle = &particleSystem;
-  Systems::entities = &entityManager;
-  Systems::renderer = &renderingContext;
+  #define COMPONENT(N, ID_NAME) Systems::ID_NAME = &ID_NAME##System;
+  #define LAST_COMPONENT(N, ID_NAME) COMPONENT(N, ID_NAME)
+  COMPONENTS
+  #undef LAST_COMPONENT
+  #undef COMPONENT
 
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
@@ -85,14 +82,11 @@ void AppImpl::quit() {
   window.reset();
   windowLibrary = std::experimental::nullopt;
   
-  Systems::renderer = nullptr;
-  Systems::entities = nullptr;
-  Systems::particle = nullptr;
-  Systems::rendering = nullptr;
-  Systems::animation = nullptr;
-  Systems::physics = nullptr;
-  Systems::spawn = nullptr;
-  Systems::input = nullptr;
+  #define COMPONENT(N, ID_NAME) Systems::ID_NAME = nullptr;
+  #define LAST_COMPONENT(N, ID_NAME) COMPONENT(N, ID_NAME)
+  COMPONENTS
+  #undef LAST_COMPONENT
+  #undef COMPONENT
 }
 
 bool AppImpl::input(float) {

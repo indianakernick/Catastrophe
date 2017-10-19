@@ -9,10 +9,10 @@
 #include "simple animation component.hpp"
 
 #include "entity.hpp"
+#include "systems.hpp"
 #include "yaml helper.hpp"
 #include "vector file.hpp"
 #include "vector render.hpp"
-#include "systems registry.hpp"
 #include "body physics component.hpp"
 
 void SimpleAnimationComponent::init(const YAML::Node &node) {
