@@ -16,6 +16,7 @@
 #include "rendering manager.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
+#include "camera debug render.hpp"
 #include <Simpleton/Application/app.hpp>
 #include <Simpleton/Platform/window library.hpp>
 
@@ -31,6 +32,7 @@ private:
   RenderingContext renderingContext;
   RenderingManager renderingManager;
   Camera camera;
+  std::shared_ptr<CameraDebugRenderingJob> cameraDebugRenderer;
   InputSystem inputSystem;
   SpawnSystem spawnSystem;
   PhysicsSystem physicsSystem;

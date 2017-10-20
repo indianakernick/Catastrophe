@@ -9,6 +9,7 @@
 #include "app impl.hpp"
 
 #include "systems.hpp"
+#include "layer names.hpp"
 #include "debug input.hpp"
 #include "global flags.hpp"
 #include "player constants.hpp"
@@ -47,6 +48,11 @@ bool AppImpl::init() {
   renderingContext.init(window.get());
   renderingManager.init(renderingContext);
   
+  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    cameraDebugRenderer = std::make_shared<CameraDebugRenderingJob>(camera);
+    renderingManager.addJob(getLayerIndex("debug camera"), cameraDebugRenderer);
+  }
+  
   renderingSystem.init(renderingManager, camera);
   particleSystem.init(renderingManager);
   trackingSystem.init(camera);
@@ -74,9 +80,13 @@ void AppImpl::quit() {
   physicsSystem.quit();
   
   trackingSystem.quit();
-  
   particleSystem.quit();
   renderingSystem.quit();
+  
+  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
+    cameraDebugRenderer->kill();
+    cameraDebugRenderer.reset();
+  }
   
   renderingManager.quit();
   renderingContext.quit();

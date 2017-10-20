@@ -136,6 +136,7 @@
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF541F99A209000998D7 /* simple tracking component.cpp */; };
+		45B6EF591F99B1EB000998D7 /* camera debug render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF571F99B1EB000998D7 /* camera debug render.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -452,6 +453,8 @@
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
 		45B6EF541F99A209000998D7 /* simple tracking component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "simple tracking component.cpp"; sourceTree = "<group>"; };
 		45B6EF551F99A209000998D7 /* simple tracking component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "simple tracking component.hpp"; sourceTree = "<group>"; };
+		45B6EF571F99B1EB000998D7 /* camera debug render.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "camera debug render.cpp"; sourceTree = "<group>"; };
+		45B6EF581F99B1EB000998D7 /* camera debug render.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera debug render.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 				454116341F5622D700C2865B /* camera zoom track.hpp */,
 				451CC0D21F90836B0000E424 /* camera transform.cpp */,
 				451CC0D31F90836B0000E424 /* camera transform.hpp */,
+				45B6EF571F99B1EB000998D7 /* camera debug render.cpp */,
+				45B6EF581F99B1EB000998D7 /* camera debug render.hpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -1472,6 +1477,7 @@
 				452FFA6E1F6BC50D003A98B1 /* b2ChainShape.cpp in Sources */,
 				45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
+				45B6EF591F99B1EB000998D7 /* camera debug render.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
 				45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */,
 				45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */,

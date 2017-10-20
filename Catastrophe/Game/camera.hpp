@@ -25,7 +25,7 @@ public:
   CameraZoomTrack zoomTrack;
 
   void update(glm::ivec2, float);
-  void debugRender(NVGcontext *);
+  void debugRender(NVGcontext *) const;
 
 private:
   CameraPos pos;
