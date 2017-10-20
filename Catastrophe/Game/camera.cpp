@@ -8,8 +8,8 @@
 
 #include "camera.hpp"
 
-void Camera::update(const float delta) {
-  props.windowSize = windowSize.get();
+void Camera::update(const glm::ivec2 windowSize, const float delta) {
+  props.windowSize = windowSize;
 
   const glm::vec2 motionTarget = motionTrack.calcMotionTarget(props);
   const glm::vec2 newCenter = pos.calcCenter(props, motionTarget, delta);

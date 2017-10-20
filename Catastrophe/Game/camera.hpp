@@ -14,7 +14,6 @@
 #include "camera props.hpp"
 #include "camera transform.hpp"
 #include "camera zoom track.hpp"
-#include "camera window size.hpp"
 #include "camera motion track.hpp"
 
 class Camera {
@@ -24,9 +23,8 @@ public:
   CameraTransform transform;
   CameraMotionTrack motionTrack;
   CameraZoomTrack zoomTrack;
-  CameraWindowSize windowSize;
 
-  void update(float);
+  void update(glm::ivec2, float);
   void debugRender(NVGcontext *);
 
 private:

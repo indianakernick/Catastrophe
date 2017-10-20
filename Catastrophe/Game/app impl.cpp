@@ -122,7 +122,7 @@ void AppImpl::render(const float delta) {
   
   {
     PROFILE(Anim);
-    camera.update(delta);
+    camera.update(window.size(), delta);
     animationSystem.update(delta);
     trackingSystem.update(delta);
     particleSystem.update(delta);

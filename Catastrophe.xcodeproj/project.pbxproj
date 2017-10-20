@@ -109,7 +109,6 @@
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
 		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
-		4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116281F5255CD00C2865B /* camera window size.cpp */; };
 		454116301F5405FD00C2865B /* camera props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541162E1F5405FD00C2865B /* camera props.cpp */; };
 		454116351F5622D700C2865B /* camera zoom track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116331F5622D600C2865B /* camera zoom track.cpp */; };
 		4545DE9C1F8C76CC000A54AA /* missile body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4545DE9B1F8C76CC000A54AA /* missile body.yaml */; };
@@ -398,8 +397,6 @@
 		4541161C1F523D8200C2865B /* camera zoom.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera zoom.hpp"; sourceTree = "<group>"; };
 		4541161E1F523DA400C2865B /* camera motion track.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera motion track.cpp"; sourceTree = "<group>"; };
 		4541161F1F523DA400C2865B /* camera motion track.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera motion track.hpp"; sourceTree = "<group>"; };
-		454116281F5255CD00C2865B /* camera window size.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera window size.cpp"; sourceTree = "<group>"; };
-		454116291F5255CD00C2865B /* camera window size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera window size.hpp"; sourceTree = "<group>"; };
 		4541162D1F526DDB00C2865B /* physics constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "physics constants.hpp"; sourceTree = "<group>"; };
 		4541162E1F5405FD00C2865B /* camera props.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera props.cpp"; sourceTree = "<group>"; };
 		4541162F1F5405FD00C2865B /* camera props.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera props.hpp"; sourceTree = "<group>"; };
@@ -988,8 +985,6 @@
 				4541161C1F523D8200C2865B /* camera zoom.hpp */,
 				454116331F5622D600C2865B /* camera zoom track.cpp */,
 				454116341F5622D700C2865B /* camera zoom track.hpp */,
-				454116281F5255CD00C2865B /* camera window size.cpp */,
-				454116291F5255CD00C2865B /* camera window size.hpp */,
 				451CC0D21F90836B0000E424 /* camera transform.cpp */,
 				451CC0D31F90836B0000E424 /* camera transform.hpp */,
 			);
@@ -1476,7 +1471,6 @@
 				452FFA881F6BC50D003A98B1 /* b2FrictionJoint.cpp in Sources */,
 				452FFA6E1F6BC50D003A98B1 /* b2ChainShape.cpp in Sources */,
 				45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */,
-				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
 				45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */,

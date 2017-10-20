@@ -23,7 +23,6 @@ void RenderingSystem::init(RenderingManager &newRenderingMan, Camera &newCamera)
   assert(!camera);
   renderingMan = &newRenderingMan;
   camera = &newCamera;
-  RenderingContext &context = renderingMan->getRenderingContext();
   const size_t numLayers = getNumLayers();
   layers.reserve(numLayers);
   for (size_t l = 0; l != numLayers; ++l) {
