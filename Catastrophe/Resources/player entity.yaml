@@ -12,6 +12,9 @@ physics:
   jump force: 120
   max jump duration: 0.3
 
+tracking:
+  name: SimpleTrackingComponent
+
 animation:
   name: PlayerAnimationComponent
   scale: *scale

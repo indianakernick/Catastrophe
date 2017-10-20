@@ -14,13 +14,14 @@ NoWindowAttached::NoWindowAttached()
   : std::logic_error("Tried to get the size of the window but the window was not attached") {}
 
 glm::ivec2 CameraWindowSize::get() const {
-  if (window == nullptr) {
+  return {1280, 720};
+  /*if (window == nullptr) {
     throw NoWindowAttached();
   } else {
     glm::ivec2 size;
     SDL_GetWindowSize(window, &size.x, &size.y);
     return size;
-  }
+  }*/
 }
 
 void CameraWindowSize::attachWindow(SDL_Window *newWindow) {

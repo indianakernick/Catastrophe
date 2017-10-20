@@ -13,6 +13,7 @@
 #include "spawn component list.hpp"
 #include "physics component list.hpp"
 #include "particle component list.hpp"
+#include "tracking component list.hpp"
 #include "animation component list.hpp"
 #include "rendering component list.hpp"
 

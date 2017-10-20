@@ -47,8 +47,9 @@ bool AppImpl::init() {
   renderingContext.init(window.get());
   renderingManager.init(renderingContext);
   
-  renderingSystem.init(renderingManager);
+  renderingSystem.init(renderingManager, camera);
   particleSystem.init(renderingManager);
+  trackingSystem.init(camera);
   
   physicsSystem.init(renderingManager);
   registerCollisionListeners(physicsSystem.getContactListener());
@@ -57,8 +58,7 @@ bool AppImpl::init() {
   spawnSystem.init(entityManager);
   
   entityManager.loadLevel("level 0.yaml");
-  renderingSystem.startMotionTrack(PLAYER_ID);
-  renderingSystem.startZoomTrack(PLAYER_ID);
+  trackingSystem.startTracking(PLAYER_ID);
   
   return true;
 }
@@ -66,13 +66,14 @@ bool AppImpl::init() {
 void AppImpl::quit() {
   PROFILE(Quit);
 
-  renderingSystem.stopZoomTrack();
-  renderingSystem.stopMotionTrack();
+  trackingSystem.stopTracking();
   
   spawnSystem.quit();
   entityManager.quit();
   
   physicsSystem.quit();
+  
+  trackingSystem.quit();
   
   particleSystem.quit();
   renderingSystem.quit();
@@ -121,20 +122,17 @@ void AppImpl::render(const float delta) {
   
   {
     PROFILE(Anim);
+    camera.update(delta);
     animationSystem.update(delta);
-    renderingSystem.update(delta);
+    trackingSystem.update(delta);
     particleSystem.update(delta);
   }
   {
     PROFILE(Pre Render);
-    renderingContext.preRender(renderingSystem.getCamera().transform.toPixels());
+    renderingContext.preRender(camera.transform.toPixels());
   }
   
   renderingManager.render();
-  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    PROFILE(Debug Camera Render);
-    renderingSystem.cameraDebugRender();
-  }
   
   {
     PROFILE(Post Render);

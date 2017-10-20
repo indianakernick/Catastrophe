@@ -14,6 +14,7 @@
 #include "physics system.hpp"
 #include "component names.hpp"
 #include "particle system.hpp"
+#include "tracking system.hpp"
 #include "animation system.hpp"
 #include "rendering system.hpp"
 

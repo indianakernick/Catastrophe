@@ -32,6 +32,8 @@
 		451CC0F61F9468760000E424 /* rendering manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0F41F9468760000E424 /* rendering manager.cpp */; };
 		451CC0F91F9471880000E424 /* rendering job.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0F71F9471880000E424 /* rendering job.cpp */; };
 		451CC0FE1F9882660000E424 /* systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0FD1F9882660000E424 /* systems.cpp */; };
+		451CC1041F988DF70000E424 /* tracking system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC1021F988DF60000E424 /* tracking system.cpp */; };
+		451CC1081F988E1B0000E424 /* tracking component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC1061F988E1B0000E424 /* tracking component.cpp */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -134,6 +136,7 @@
 		45761A001F8851F100A6A792 /* player sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FF1F8851F100A6A792 /* player sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
+		45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF541F99A209000998D7 /* simple tracking component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -239,6 +242,11 @@
 		451CC0FC1F987EAB0000E424 /* component names.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "component names.hpp"; sourceTree = "<group>"; };
 		451CC0FD1F9882660000E424 /* systems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = systems.cpp; sourceTree = "<group>"; };
 		451CC0FF1F9882720000E424 /* systems fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "systems fwd.hpp"; sourceTree = "<group>"; };
+		451CC1011F988BF10000E424 /* tracking component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "tracking component list.hpp"; sourceTree = "<group>"; };
+		451CC1021F988DF60000E424 /* tracking system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "tracking system.cpp"; sourceTree = "<group>"; };
+		451CC1031F988DF60000E424 /* tracking system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "tracking system.hpp"; sourceTree = "<group>"; };
+		451CC1061F988E1B0000E424 /* tracking component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "tracking component.cpp"; sourceTree = "<group>"; };
+		451CC1071F988E1B0000E424 /* tracking component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "tracking component.hpp"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -445,6 +453,8 @@
 		4592BAE31F11B51400D1640D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSimpleton Engine.dylib"; path = "../../../../../../../usr/local/lib/libSimpleton Engine.dylib"; sourceTree = "<group>"; };
+		45B6EF541F99A209000998D7 /* simple tracking component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "simple tracking component.cpp"; sourceTree = "<group>"; };
+		45B6EF551F99A209000998D7 /* simple tracking component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "simple tracking component.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -648,6 +658,27 @@
 				451CC0EA1F942EF90000E424 /* exhaust particle component.hpp */,
 			);
 			name = "particle components";
+			sourceTree = "<group>";
+		};
+		451CC1001F988BA50000E424 /* tracking */ = {
+			isa = PBXGroup;
+			children = (
+				451CC1051F988DFD0000E424 /* tracking components */,
+				451CC1061F988E1B0000E424 /* tracking component.cpp */,
+				451CC1071F988E1B0000E424 /* tracking component.hpp */,
+				451CC1021F988DF60000E424 /* tracking system.cpp */,
+				451CC1031F988DF60000E424 /* tracking system.hpp */,
+			);
+			name = tracking;
+			sourceTree = "<group>";
+		};
+		451CC1051F988DFD0000E424 /* tracking components */ = {
+			isa = PBXGroup;
+			children = (
+				45B6EF541F99A209000998D7 /* simple tracking component.cpp */,
+				45B6EF551F99A209000998D7 /* simple tracking component.hpp */,
+			);
+			name = "tracking components";
 			sourceTree = "<group>";
 		};
 		451FA2851F1499CC00C43BE9 /* Resources */ = {
@@ -984,6 +1015,7 @@
 				4545DEC11F8EFDF3000A54AA /* rendering component list.hpp */,
 				45C546011F8F19F400217406 /* spawn component list.hpp */,
 				451CC0E71F94267F0000E424 /* particle component list.hpp */,
+				451CC1011F988BF10000E424 /* tracking component list.hpp */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -1046,6 +1078,7 @@
 				45C545F61F8F0D9B00217406 /* spawn */,
 				453892F61F2C4053007EBB5A /* physics */,
 				452FF9C11F63D018003A98B1 /* animation */,
+				451CC1001F988BA50000E424 /* tracking */,
 				45103F591F2497CD001B24E2 /* rendering */,
 				457619ED1F8611D200A6A792 /* particles */,
 				45FA99461F36C9F000F8C639 /* entity */,
@@ -1356,6 +1389,7 @@
 				452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */,
 				453A0AB11F8AF1E70042B23B /* player rendering component.cpp in Sources */,
 				452FFA911F6BC50D003A98B1 /* b2WeldJoint.cpp in Sources */,
+				451CC1041F988DF70000E424 /* tracking system.cpp in Sources */,
 				4545DEB61F8EEE64000A54AA /* missile spawner rendering component.cpp in Sources */,
 				45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */,
 				45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */,
@@ -1445,8 +1479,10 @@
 				4541162A1F5255CD00C2865B /* camera window size.cpp in Sources */,
 				453892E81F2C1A06007EBB5A /* player input component.cpp in Sources */,
 				452FFA761F6BC50D003A98B1 /* b2StackAllocator.cpp in Sources */,
+				45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */,
 				45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */,
 				45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */,
+				451CC1081F988E1B0000E424 /* tracking component.cpp in Sources */,
 				4545DEB11F8EE4D1000A54AA /* missile rendering component.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
 				4568D3201F89FB150037268B /* platform rendering component.cpp in Sources */,

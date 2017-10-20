@@ -9,14 +9,10 @@
 #ifndef game_app_impl_hpp
 #define game_app_impl_hpp
 
+#include "camera.hpp"
+#include "systems.hpp"
 #include "screenshot.hpp"
-#include "input system.hpp"
-#include "spawn system.hpp"
-#include "physics system.hpp"
 #include "entity manager.hpp"
-#include "particle system.hpp"
-#include "rendering system.hpp"
-#include "animation system.hpp"
 #include "rendering manager.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
@@ -34,9 +30,11 @@ private:
   Platform::Window window;
   RenderingContext renderingContext;
   RenderingManager renderingManager;
+  Camera camera;
   InputSystem inputSystem;
   SpawnSystem spawnSystem;
   PhysicsSystem physicsSystem;
+  TrackingSystem trackingSystem;
   AnimationSystem animationSystem;
   RenderingSystem renderingSystem;
   ParticleSystem particleSystem;

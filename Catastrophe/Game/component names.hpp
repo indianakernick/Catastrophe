@@ -13,6 +13,7 @@
   COMPONENT(Input, input)                                                       \
   COMPONENT(Spawn, spawn)                                                       \
   COMPONENT(Physics, physics)                                                   \
+  COMPONENT(Tracking, tracking)                                                 \
   COMPONENT(Animation, animation)                                               \
   COMPONENT(Rendering, rendering)                                               \
   LAST_COMPONENT(Particle, particle)

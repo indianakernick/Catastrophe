@@ -26,30 +26,19 @@ public:
   RenderingSystem() = default;
   ~RenderingSystem() = default;
   
-  void init(RenderingManager &);
+  void init(RenderingManager &, Camera &);
   void quit();
   
   void add(EntityID, CompPtr, const YAML::Node &);
   void rem(EntityID);
-  
-  void update(float);
-  void cameraDebugRender();
-  
-  void startMotionTrack(EntityID);
-  void stopMotionTrack();
-  
-  void startZoomTrack(EntityID);
-  void stopZoomTrack();
-  
-  Camera &getCamera();
 
 private:
   RenderingManager *renderingMan = nullptr;
-  Camera camera;
+  Camera *camera = nullptr;
   
   class Layer final : public RenderingJob {
   public:
-    explicit Layer(const Camera &);
+    explicit Layer(const Camera *);
   
     void render(RenderingContext &) override;
 
@@ -58,8 +47,6 @@ private:
   };
   
   std::vector<std::shared_ptr<Layer>> layers;
-  
-  CompPtr findComp(EntityID);
 };
 
 #endif

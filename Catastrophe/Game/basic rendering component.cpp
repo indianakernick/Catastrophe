@@ -10,34 +10,15 @@
 
 #include "entity.hpp"
 #include "nvg helper.hpp"
-#include "yaml helper.hpp"
 #include "layer names.hpp"
 #include "physics component.hpp"
 #include "animation component.hpp"
 
 void BasicRenderingComponent::init(RenderingContext &, const YAML::Node &node) {
-  glm::vec2 scale = {1.0f, 1.0f};
-  getOptional(scale, node, "scale");
   layer = 0;
   if (const YAML::Node &layerNode = node["layer"]) {
     layer = getLayerIndex(layerNode.Scalar());
   }
-  rect = makeMotionTarget(glm::vec2(), scale);
-  size = makeZoomTarget(scale);
-}
-
-void BasicRenderingComponent::preRender() {
-  const AABB aabb = getAABB();
-  *rect = static_cast<CameraMotionTarget>(aabb);
-  *size = aabb.size();
-}
-
-CameraMotionTargetCPtr BasicRenderingComponent::getMotionTarget() const {
-  return rect;
-}
-
-CameraZoomTargetCPtr BasicRenderingComponent::getZoomTarget() const {
-  return size;
 }
 
 AABB BasicRenderingComponent::getAABB() const {

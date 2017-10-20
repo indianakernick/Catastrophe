@@ -18,11 +18,12 @@
 #include "rendering component.hpp"
 #include <Simpleton/Utils/profiler.hpp>
 
-void RenderingSystem::init(RenderingManager &newRenderingMan) {
+void RenderingSystem::init(RenderingManager &newRenderingMan, Camera &newCamera) {
   assert(!renderingMan);
+  assert(!camera);
   renderingMan = &newRenderingMan;
+  camera = &newCamera;
   RenderingContext &context = renderingMan->getRenderingContext();
-  camera.windowSize.attachWindow(context.getWindow());
   const size_t numLayers = getNumLayers();
   layers.reserve(numLayers);
   for (size_t l = 0; l != numLayers; ++l) {
@@ -33,11 +34,12 @@ void RenderingSystem::init(RenderingManager &newRenderingMan) {
 
 void RenderingSystem::quit() {
   assert(renderingMan);
+  assert(camera);
   for (auto &layer : layers) {
     layer->kill();
   }
   layers.clear();
-  camera.windowSize.detachWindow();
+  camera = nullptr;
   renderingMan = nullptr;
 }
 
@@ -61,44 +63,8 @@ void RenderingSystem::rem(const EntityID id) {
   }
 }
 
-void RenderingSystem::update(const float delta) {
-  camera.update(delta);
-}
-
-void RenderingSystem::cameraDebugRender() {
-  camera.debugRender(renderingMan->getRenderingContext().getContext());
-}
-
-void RenderingSystem::startMotionTrack(const EntityID id) {
-  const CompPtr comp = findComp(id);
-  if (comp == nullptr) {
-    throw std::runtime_error("Cannot track entity that doesn't exist");
-  }
-  camera.motionTrack.start(comp->getMotionTarget());
-}
-
-void RenderingSystem::stopMotionTrack() {
-  camera.motionTrack.stop();
-}
-
-void RenderingSystem::startZoomTrack(const EntityID id) {
-  const CompPtr comp = findComp(id);
-  if (comp == nullptr) {
-    throw std::runtime_error("Cannot track entity that doesn't exist");
-  }
-  camera.zoomTrack.start(comp->getZoomTarget());
-}
-
-void RenderingSystem::stopZoomTrack() {
-  camera.zoomTrack.stop();
-}
-
-Camera &RenderingSystem::getCamera() {
-  return camera;
-}
-
-RenderingSystem::Layer::Layer(const Camera &camera)
-  : camera(&camera) {}
+RenderingSystem::Layer::Layer(const Camera *camera)
+  : camera(camera) {}
 
 void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
   if constexpr (ENABLE_GAME_RENDER) {
@@ -115,14 +81,4 @@ void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
       }
     }
   }
-}
-
-RenderingSystem::CompPtr RenderingSystem::findComp(const EntityID id) {
-  for (auto &layer : layers) {
-    auto iter = layer->comps.find(id);
-    if (iter != layer->comps.end()) {
-      return iter->second;
-    }
-  }
-  return nullptr;
 }

@@ -12,8 +12,6 @@
 #include "aabb.hpp"
 #include "component.hpp"
 #include <yaml-cpp/yaml.h>
-#include "camera zoom track.hpp"
-#include "camera motion track.hpp"
 
 class RenderingContext;
 extern "C" struct NVGcontext;
@@ -28,8 +26,6 @@ public:
   virtual void init(RenderingContext &, const YAML::Node &) = 0;
   virtual void preRender() = 0;
   virtual void render(NVGcontext *) = 0;
-  virtual CameraMotionTargetCPtr getMotionTarget() const = 0;
-  virtual CameraZoomTargetCPtr getZoomTarget() const = 0;
   virtual AABB getAABB() const = 0;
   virtual size_t getLayer() const = 0;
 };
