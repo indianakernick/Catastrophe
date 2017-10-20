@@ -28,6 +28,10 @@ extern "C" struct NVGcontext;
 //bounds are in relative to the size of the window
 class CameraZoomTrack {
 public:
+  struct RenderingData {
+    float relSize;
+  };
+
   CameraZoomTrack();
   
   void start(CameraZoomTargetCPtr);
@@ -41,7 +45,7 @@ public:
   
   float calcZoomTarget(CameraProps) const;
   
-  void debugRender(NVGcontext *, CameraProps) const;
+  RenderingData getRenderingData() const;
 
 private:
   std::weak_ptr<const CameraZoomTarget> target;

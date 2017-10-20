@@ -23,7 +23,6 @@ void Camera::update(const glm::ivec2 windowSize, const float delta) {
   transform.updateMatricies(props);
 }
 
-void Camera::debugRender(NVGcontext *const context) const {
-  motionTrack.debugRender(context, props);
-  zoomTrack.debugRender(context, props);
+CameraProps Camera::getProps() const {
+  return props;
 }

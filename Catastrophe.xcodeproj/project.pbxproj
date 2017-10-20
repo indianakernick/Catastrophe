@@ -468,7 +468,6 @@
 		45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.yaml"; sourceTree = "<group>"; };
 		45DE9FB41F6E02AF00B1DA72 /* simple animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple animation component.cpp"; sourceTree = "<group>"; };
 		45DE9FB51F6E02AF00B1DA72 /* simple animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple animation component.hpp"; sourceTree = "<group>"; };
-		45DE9FB71F6E1B0C00B1DA72 /* camera debug rendering constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera debug rendering constants.hpp"; sourceTree = "<group>"; };
 		45DE9FB81F6E394900B1DA72 /* player entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player entity.yaml"; sourceTree = "<group>"; };
 		45DE9FBA1F6E467300B1DA72 /* tinyfiledialogs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinyfiledialogs.c; sourceTree = "<group>"; };
 		45DE9FBB1F6E467300B1DA72 /* tinyfiledialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyfiledialogs.h; sourceTree = "<group>"; };
@@ -704,7 +703,6 @@
 				453892EC1F2C2117007EBB5A /* player constants.hpp */,
 				45FA99471F36CD3500F8C639 /* camera constants.hpp */,
 				4541162D1F526DDB00C2865B /* physics constants.hpp */,
-				45DE9FB71F6E1B0C00B1DA72 /* camera debug rendering constants.hpp */,
 				451CC0FA1F949D940000E424 /* global flags.hpp */,
 			);
 			name = constants;

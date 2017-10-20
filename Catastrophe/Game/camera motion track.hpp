@@ -10,9 +10,10 @@
 #define camera_motion_track_hpp
 
 #include <memory>
+#include <experimental/optional>
 #include <Simpleton/Math/rect.hpp>
 
-using CameraMotionTarget = Math::RectCS<float, Math::Dir::RIGHT, Math::Dir::UP>;
+using CameraMotionTarget = Math::RectCS<float>;
 using CameraMotionTargetPtr = std::shared_ptr<CameraMotionTarget>;
 using CameraMotionTargetCPtr = std::shared_ptr<const CameraMotionTarget>;
 
@@ -29,6 +30,11 @@ extern "C" struct NVGcontext;
 
 class CameraMotionTrack {
 public:
+  struct RenderingData {
+    Math::RectCS<float> bounds;
+    std::experimental::optional<CameraMotionTarget> target;
+  };
+
   CameraMotionTrack();
   
   void start(CameraMotionTargetCPtr);
@@ -42,7 +48,7 @@ public:
   
   glm::vec2 calcMotionTarget(CameraProps) const;
   
-  void debugRender(NVGcontext *, CameraProps) const;
+  RenderingData getRenderingData() const;
   
 private:
   std::weak_ptr<const CameraMotionTarget> target;

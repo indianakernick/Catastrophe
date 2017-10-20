@@ -11,7 +11,6 @@
 #include "camera pos.hpp"
 #include "camera props.hpp"
 #include "camera constants.hpp"
-#include "camera debug rendering constants.hpp"
 
 CameraMotionTrack::CameraMotionTrack()
   : target(),
@@ -83,31 +82,15 @@ glm::vec2 CameraMotionTrack::calcMotionTarget(const CameraProps props) const {
   return props.center + motion;
 }
 
-void CameraMotionTrack::debugRender(NVGcontext *context, const CameraProps props) const {
-  const glm::vec2 corner = center - size / 2.0f;
-  
-  nvgSave(context);
-    nvgResetTransform(context);
-    nvgScale(context, props.windowSize.x, -props.windowSize.y);
-    nvgTranslate(context, 0.5f, -0.5f);
-    
-    nvgBeginPath(context);
-    nvgFillColor(context, CAMERA_TRACK_COLOR);
-    nvgRect(context, corner.x, corner.y, size.x, size.y);
-  
-    nvgFill(context);
-  nvgRestore(context);
-  
+CameraMotionTrack::RenderingData CameraMotionTrack::getRenderingData() const {
+  RenderingData renderingData;
+  renderingData.bounds.center = center;
+  renderingData.bounds.halfSize = size / 2.0f;
   const auto targetShared = target.lock();
-  
   if (targetShared) {
-    const auto targetRect = static_cast<Math::RectPS<float>>(*targetShared);
-  
-    nvgBeginPath(context);
-    nvgFillColor(context, CAMERA_TARGET_COLOR);
-    nvgRect(context, targetRect.p.x, targetRect.p.y, targetRect.s.x, targetRect.s.y);
-    nvgFill(context);
+    renderingData.target.emplace(*targetShared);
   }
+  return renderingData;
 }
 
 glm::vec2 CameraMotionTrack::centerToMeters(const CameraProps props, const glm::vec2 center) const {

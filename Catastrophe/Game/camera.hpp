@@ -15,6 +15,7 @@
 #include "camera transform.hpp"
 #include "camera zoom track.hpp"
 #include "camera motion track.hpp"
+#include "camera debug render.hpp"
 
 class Camera {
 public:
@@ -23,9 +24,10 @@ public:
   CameraTransform transform;
   CameraMotionTrack motionTrack;
   CameraZoomTrack zoomTrack;
+  CameraDebugRenderer debugRenderer;
 
   void update(glm::ivec2, float);
-  void debugRender(NVGcontext *) const;
+  CameraProps getProps() const;
 
 private:
   CameraPos pos;
