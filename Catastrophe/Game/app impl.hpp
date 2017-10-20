@@ -32,7 +32,7 @@ private:
   RenderingContext renderingContext;
   RenderingManager renderingManager;
   Camera camera;
-  std::shared_ptr<CameraDebugRenderingJob> cameraDebugRenderer;
+  CameraDebugRenderer cameraDebugRenderer;
   InputSystem inputSystem;
   SpawnSystem spawnSystem;
   PhysicsSystem physicsSystem;

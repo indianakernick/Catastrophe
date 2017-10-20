@@ -48,10 +48,7 @@ bool AppImpl::init() {
   renderingContext.init(window.get());
   renderingManager.init(renderingContext);
   
-  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    cameraDebugRenderer = std::make_shared<CameraDebugRenderingJob>(camera);
-    renderingManager.addJob(getLayerIndex("debug camera"), cameraDebugRenderer);
-  }
+  cameraDebugRenderer.init(camera, renderingManager);
   
   renderingSystem.init(renderingManager, camera);
   particleSystem.init(renderingManager);
@@ -83,10 +80,7 @@ void AppImpl::quit() {
   particleSystem.quit();
   renderingSystem.quit();
   
-  if constexpr (ENABLE_DEBUG_CAMERA_RENDER) {
-    cameraDebugRenderer->kill();
-    cameraDebugRenderer.reset();
-  }
+  cameraDebugRenderer.quit();
   
   renderingManager.quit();
   renderingContext.quit();
