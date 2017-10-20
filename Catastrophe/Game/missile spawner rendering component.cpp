@@ -10,6 +10,7 @@
 
 #include "entity.hpp"
 #include "nanovg.hpp"
+#include "matrix mul.hpp"
 #include "animation component.hpp"
 
 namespace {
@@ -35,7 +36,7 @@ void MissileSpawnerRenderingComponent::render(NVGcontext *const ctx) {
 AABB MissileSpawnerRenderingComponent::getAABB() const {
   const glm::mat3 modelMat = getExpectedComp<AnimationComponent>()->getModelMat();
   return {
-    modelMat * glm::vec3(-1.0f, -1.0f, 1.0f),
-    modelMat * glm::vec3(1.0f, 1.0f, 1.0f)
+    mulPos(modelMat, {-1.0f, -1.0f}),
+    mulPos(modelMat, {1.0f, 1.0f})
   };
 }

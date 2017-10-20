@@ -8,14 +8,9 @@
 
 #include "camera transform.hpp"
 
+#include "matrix mul.hpp"
 #include "camera props.hpp"
 #include <glm/gtx/matrix_transform_2d.hpp>
-
-namespace {
-  glm::vec3 posToVec3(const glm::ivec2 v) {
-    return glm::vec3(v.x, v.y, 1.0f);
-  }
-}
 
 glm::mat3 CameraTransform::toPixels() const {
   return toPixelsMat;
@@ -41,6 +36,6 @@ void CameraTransform::updateMatricies(const CameraProps props) {
     -props.center
   );
   toMetersMat = glm::inverse(toPixelsMat);
-  windowBounds.setPoint(toMetersMat * glm::vec3(0.0f, 0.0f, 1.0f));
-  windowBounds.extendToEnclose(toMetersMat * posToVec3(props.windowSize));
+  windowBounds.setPoint(mulPos(toMetersMat, {0.0f, 0.0f}));
+  windowBounds.extendToEnclose(mulPos(toMetersMat, props.windowSize));
 }
