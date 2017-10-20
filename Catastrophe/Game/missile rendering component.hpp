@@ -19,12 +19,6 @@ public:
   void render(NVGcontext *) override;
 
 private:
-  static const NVGcolor INNER_BODY;
-  static const NVGcolor OUTER_BODY;
-  static const NVGcolor STRIPES;
-  static const NVGcolor EXHAUST;
-  
-  static void leftBody(NVGcontext *);
   static void body(NVGcontext *);
   static void fins(NVGcontext *);
   static void stripes(NVGcontext *);
