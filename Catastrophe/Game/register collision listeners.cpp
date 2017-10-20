@@ -69,7 +69,7 @@ void handleMissileBegin(b2Fixture *fixtureA, b2Fixture *fixtureB) {
   } else if (fixtureA->GetUserData() != missile) {
     return;
   }
-  //fixtureA is now FragileDeadly
+  //fixtureA is now Missile
   auto *missileComp = getComponent<MissilePhysicsComponent>(fixtureA);
   if (missileComp == nullptr) {
     return;

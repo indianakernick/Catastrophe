@@ -80,7 +80,7 @@ void EntityManager::createImpl(
 void EntityManager::destroyComponents(const EntityID id) const {
   //The components aren't removed in reverse order but I don't think that matters
   #define COMPONENT(N, ID_NAME) Systems::ID_NAME->rem(id);
-  #define LAST_COMPONENT(N, ID_NAME)
+  #define LAST_COMPONENT(N, ID_NAME) COMPONENT(N, ID_NAME)
   COMPONENTS
   #undef LAST_COMPONENT
   #undef COMPONENT

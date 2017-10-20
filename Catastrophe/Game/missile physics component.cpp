@@ -55,8 +55,7 @@ void MissilePhysicsComponent::preStep(float) {
 
 void MissilePhysicsComponent::postStep() {
   if (contacted) {
-    const auto spawnComp = getExpectedCompImpl<DestroyableSpawnComponent>();
-    spawnComp->kill();
+    getExpectedCompImpl<DestroyableSpawnComponent>()->kill();
   }
 }
 
