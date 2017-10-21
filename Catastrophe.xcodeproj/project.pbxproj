@@ -148,6 +148,7 @@
 		45BA38571F9B002000BAEA1E /* ground 0 droid ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38551F9B002000BAEA1E /* ground 0 droid ai component.cpp */; };
 		45BA385A1F9B1E9800BAEA1E /* ground contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38581F9B1E9800BAEA1E /* ground contact.cpp */; };
 		45BA38601F9B255500BAEA1E /* limit velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA385E1F9B255500BAEA1E /* limit velocity.cpp */; };
+		45BA387F1F9C034E00BAEA1E /* ground droid ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA387D1F9C034E00BAEA1E /* ground droid ai component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -487,6 +488,8 @@
 		45BA38591F9B1E9800BAEA1E /* ground contact.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground contact.hpp"; sourceTree = "<group>"; };
 		45BA385E1F9B255500BAEA1E /* limit velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "limit velocity.cpp"; sourceTree = "<group>"; };
 		45BA385F1F9B255500BAEA1E /* limit velocity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "limit velocity.hpp"; sourceTree = "<group>"; };
+		45BA387D1F9C034E00BAEA1E /* ground droid ai component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground droid ai component.cpp"; sourceTree = "<group>"; };
+		45BA387E1F9C034E00BAEA1E /* ground droid ai component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground droid ai component.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -1027,6 +1030,8 @@
 		453C8C491F9AF67C002D0C0C /* ai components */ = {
 			isa = PBXGroup;
 			children = (
+				45BA387D1F9C034E00BAEA1E /* ground droid ai component.cpp */,
+				45BA387E1F9C034E00BAEA1E /* ground droid ai component.hpp */,
 				45BA38551F9B002000BAEA1E /* ground 0 droid ai component.cpp */,
 				45BA38561F9B002000BAEA1E /* ground 0 droid ai component.hpp */,
 			);
@@ -1496,6 +1501,7 @@
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
+				45BA387F1F9C034E00BAEA1E /* ground droid ai component.cpp in Sources */,
 				45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */,
 				45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,

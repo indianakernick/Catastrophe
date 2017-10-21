@@ -14,7 +14,7 @@
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include <Simpleton/Math/scale.hpp>
-#include "ground 0 droid ai component.hpp"
+#include "ground droid ai component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
 namespace {
@@ -57,7 +57,7 @@ void GroundDroidPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 }
 
 void GroundDroidPhysicsComponent::preStep(float) {
-  const auto aiComp = getExpectedCompImpl<Ground0DroidAIComponent>();
+  const auto aiComp = getExpectedCompImpl<GroundDroidAIComponent>();
   fast = aiComp->shouldMoveFast();
   if (aiComp->shouldMoveLeft()) {
     applyMoveForce(-1.0f);

@@ -9,18 +9,18 @@
 #ifndef ground_0_droid_ai_component_hpp
 #define ground_0_droid_ai_component_hpp
 
-#include "ai component.hpp"
+#include "ground droid ai component.hpp"
 
-class Ground0DroidAIComponent final : public AIComponent {
+class Ground0DroidAIComponent final : public GroundDroidAIComponent {
 public:
   Ground0DroidAIComponent() = default;
   
   void init(const YAML::Node &) override;
   void update(float) override;
   
-  bool shouldMoveLeft() const;
-  bool shouldMoveRight() const;
-  bool shouldMoveFast() const;
+  bool shouldMoveLeft() const override;
+  bool shouldMoveRight() const override;
+  bool shouldMoveFast() const override;
 
 private:
   //The x coordinate of the first patrol point
