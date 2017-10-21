@@ -11,6 +11,7 @@
 
 #include "ground contact.hpp"
 #include "body physics component.hpp"
+#include "../Libraries/Box2D/Common/b2Math.h"
 
 class GroundDroidPhysicsComponent final : public BodyPhysicsComponent {
 public:
@@ -30,11 +31,13 @@ public:
 
 private:
   GroundContact groundContact;
-  glm::vec2 playerPos;
+  b2Vec2 playerPos;
   float moveForce = 100.0f;
-  float maxMoveSpeed = 10.0f;
+  float slowMoveSpeed = 2.0f;
+  float fastMoveSpeed = 3.0f;
   float maxViewDistance = 4.0f;
   bool seePlayer = false;
+  bool fast = false;
   
   void applyMoveForce(float);
   auto getPlayer() const;

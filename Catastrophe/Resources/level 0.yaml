@@ -73,3 +73,5 @@ entities:
 - id: 12
   file: level 0 ground droid entity.yaml
   pos: [-20, 1.0]
+  first patrol point: -25
+  second patrol point: -15

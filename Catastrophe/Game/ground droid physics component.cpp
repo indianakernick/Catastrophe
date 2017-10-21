@@ -13,6 +13,7 @@
 #include "object types.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
+#include <Simpleton/Math/scale.hpp>
 #include "ground 0 droid ai component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Body.h"
 
@@ -50,12 +51,14 @@ namespace {
 void GroundDroidPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   BodyPhysicsComponent::init(world, node);
   getOptional(moveForce, node, "move force");
-  getOptional(maxMoveSpeed, node, "max move speed");
   getOptional(maxViewDistance, node, "max view distance");
+  getOptional(slowMoveSpeed, node, "slow move speed");
+  getOptional(fastMoveSpeed, node, "fast move speed");
 }
 
 void GroundDroidPhysicsComponent::preStep(float) {
   const auto aiComp = getExpectedCompImpl<Ground0DroidAIComponent>();
+  fast = aiComp->shouldMoveFast();
   if (aiComp->shouldMoveLeft()) {
     applyMoveForce(-1.0f);
   } else if (aiComp->shouldMoveRight()) {
@@ -73,7 +76,7 @@ bool GroundDroidPhysicsComponent::canSeePlayer() const {
 }
 
 glm::vec2 GroundDroidPhysicsComponent::getPlayerPos() const {
-  return playerPos;
+  return castToGLM(playerPos);
 }
 
 glm::vec2 GroundDroidPhysicsComponent::getRelVel() const {
@@ -111,14 +114,16 @@ auto GroundDroidPhysicsComponent::getPlayer() const {
 }
 
 void GroundDroidPhysicsComponent::lookForPlayer() {
+  b2World *const world = Systems::physics.getWorld();
   const auto bodyComp = getExpectedCompImpl<BodyPhysicsComponent>();
   const auto playerComp = getPlayer();
-  playerPos = playerComp->getPos();
-  
-  b2World *const world = Systems::physics.getWorld();
   const b2Vec2 droidPos = bodyComp->getBody()->GetPosition();
-  const b2Vec2 playerPos = playerComp->getBody()->GetPosition();
-  if ((playerPos - droidPos).LengthSquared() > maxViewDistance*maxViewDistance) {
+  playerPos = playerComp->getBody()->GetPosition();
+  const float playerDroidDist = (playerPos - droidPos).LengthSquared();
+  
+  if (Math::sign(playerPos.x - droidPos.x) != Math::sign(getRelVel().x)) {
+    seePlayer = false;
+  } else if (playerDroidDist > maxViewDistance*maxViewDistance) {
     seePlayer = false;
   } else {
     RayCastCallback raycast;
@@ -134,7 +139,7 @@ void GroundDroidPhysicsComponent::lookForPlayer() {
 void GroundDroidPhysicsComponent::limitSpeed() {
   const b2Vec2 vel = body->GetLinearVelocity();
   body->SetLinearVelocity({
-    Math::clampMag(vel.x, maxMoveSpeed),
+    Math::clampMag(vel.x, fast ? fastMoveSpeed : slowMoveSpeed),
     vel.y
   });
 }

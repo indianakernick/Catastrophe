@@ -20,6 +20,7 @@ public:
   
   bool shouldMoveLeft() const;
   bool shouldMoveRight() const;
+  bool shouldMoveFast() const;
 
 private:
   //The x coordinate of the first patrol point
@@ -29,8 +30,12 @@ private:
   //The maximum distance from the patrol point the droid will chase
   //the player
   float maxDistFromPatrol = 2.0f;
-  bool moveLeft = false;
   bool moveRight = false;
+  bool toSecond = true;
+  bool chasing = false;
+  
+  void patrol(float);
+  void chase(float, float);
 };
 
 #endif

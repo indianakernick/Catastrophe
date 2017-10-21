@@ -1,12 +1,14 @@
 ai:
   name: Ground0DroidAIComponent
+  max distance from patrol: 4
 
 physics:
   name: GroundDroidPhysicsComponent
   body: ground droid body.yaml
-  move force: 50
-  max move speed: 2
-  max view distance: 8
+  move force: 40
+  slow move speed: 1
+  fast move speed: 3
+  max view distance: 12
 
 animation:
   name: GroundDroidAnimationComponent
