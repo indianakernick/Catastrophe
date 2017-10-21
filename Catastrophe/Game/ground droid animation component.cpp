@@ -9,23 +9,20 @@
 #include "ground droid animation component.hpp"
 
 #include "yaml helper.hpp"
-#include "body physics component.hpp"
-#include "../Libraries/Box2D/Dynamics/b2Body.h"
+#include "ground droid physics component.hpp"
 
 void GroundDroidAnimationComponent::init(const YAML::Node &node) {
   transform = node.as<Transform>();
+  getOptional(bopSpeed, node, "bop speed");
 }
 
 void GroundDroidAnimationComponent::update(const float delta) {
-  const auto bodyComp = getExpectedCompImpl<const BodyPhysicsComponent>();
-  const b2Body *const body = bodyComp->getBody();
-  //I don't think there's any point in getting the velocity relative to the
-  //ground like PlayerPhysicsComponent does.
-  const float velX = body->GetLinearVelocity().x;
-  progress += velX * 0.1f * delta;
+  const auto physicsComp = getExpectedCompImpl<const GroundDroidPhysicsComponent>();
+  const float velX = physicsComp->getVelX();
+  progress += velX * bopSpeed * delta;
   progress = std::fmod(progress, 1.0f);
   
-  transform.pos = bodyComp->getPos();
+  transform.pos = physicsComp->getPos();
   mat = transform.getMat3();
   dirX.getDir(velX);
 }

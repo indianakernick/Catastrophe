@@ -108,6 +108,7 @@
 		453A0ABC1F8B5F450042B23B /* vector sprite rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453A0ABA1F8B5F450042B23B /* vector sprite rendering component.cpp */; };
 		453C8C3B1F9ADBCB002D0C0C /* ground droid animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453C8C391F9ADBCB002D0C0C /* ground droid animation component.cpp */; };
 		453C8C3E1F9AE0C2002D0C0C /* velocity direction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453C8C3C1F9AE0C2002D0C0C /* velocity direction.cpp */; };
+		453C8C411F9AEF17002D0C0C /* ground droid physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453C8C3F1F9AEF17002D0C0C /* ground droid physics component.cpp */; };
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
 		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
@@ -401,6 +402,8 @@
 		453C8C3A1F9ADBCB002D0C0C /* ground droid animation component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground droid animation component.hpp"; sourceTree = "<group>"; };
 		453C8C3C1F9AE0C2002D0C0C /* velocity direction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "velocity direction.cpp"; sourceTree = "<group>"; };
 		453C8C3D1F9AE0C2002D0C0C /* velocity direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "velocity direction.hpp"; sourceTree = "<group>"; };
+		453C8C3F1F9AEF17002D0C0C /* ground droid physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground droid physics component.cpp"; sourceTree = "<group>"; };
+		453C8C401F9AEF17002D0C0C /* ground droid physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground droid physics component.hpp"; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
 		454116191F523D7400C2865B /* camera pos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera pos.hpp"; sourceTree = "<group>"; };
 		4541161B1F523D8200C2865B /* camera zoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom.cpp"; sourceTree = "<group>"; };
@@ -1254,6 +1257,8 @@
 				4545DE9E1F8C787D000A54AA /* missile physics component.hpp */,
 				451CC0D51F91D6F60000E424 /* turret physics component.cpp */,
 				451CC0D61F91D6F60000E424 /* turret physics component.hpp */,
+				453C8C3F1F9AEF17002D0C0C /* ground droid physics component.cpp */,
+				453C8C401F9AEF17002D0C0C /* ground droid physics component.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -1500,6 +1505,7 @@
 				452FFA8C1F6BC50D003A98B1 /* b2MouseJoint.cpp in Sources */,
 				452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */,
 				452FFA931F6BC50D003A98B1 /* b2Rope.cpp in Sources */,
+				453C8C411F9AEF17002D0C0C /* ground droid physics component.cpp in Sources */,
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4509F8E61F5CE20000927A19 /* rendering context.cpp in Sources */,
 				45DE9FD71F71063400B1DA72 /* transform.cpp in Sources */,

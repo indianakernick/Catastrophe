@@ -17,6 +17,7 @@
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
+#include "ground droid physics component.hpp"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
@@ -26,7 +27,8 @@ using PhysicsComps = Utils::TypeList<
   ButtonPhysicsComponent,
   LauncherPhysicsComponent,
   MissilePhysicsComponent,
-  TurretPhysicsComponent
+  TurretPhysicsComponent,
+  GroundDroidPhysicsComponent
 >;
 
 #endif

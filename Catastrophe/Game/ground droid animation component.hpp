@@ -29,6 +29,7 @@ private:
   glm::mat3 mat;
   float progress = 0.0f;
   VelDir1 dirX;
+  float bopSpeed = 1.0f;
 };
 
 #endif

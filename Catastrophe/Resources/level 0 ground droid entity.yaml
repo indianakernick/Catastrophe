@@ -1,9 +1,10 @@
 physics:
-  name: BodyPhysicsComponent
+  name: GroundDroidPhysicsComponent
   body: droid body.yaml
 
 animation:
   name: GroundDroidAnimationComponent
+  bop speed: 0.8
 
 rendering:
   name: Ground0DroidRenderingComponent
