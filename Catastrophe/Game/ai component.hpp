@@ -14,6 +14,8 @@
 
 class AIComponent : public Component {
 public:
+  using ComponentBase = AIComponent;
+
   AIComponent() = default;
   virtual ~AIComponent() = default;
   

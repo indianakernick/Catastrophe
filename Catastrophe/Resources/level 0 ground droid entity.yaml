@@ -1,6 +1,11 @@
+ai:
+  name: Ground0DroidAIComponent
+
 physics:
   name: GroundDroidPhysicsComponent
-  body: droid body.yaml
+  body: ground droid body.yaml
+  move force: 50
+  max move speed: 2
 
 animation:
   name: GroundDroidAnimationComponent

@@ -15,7 +15,21 @@ class GroundDroidPhysicsComponent final : public BodyPhysicsComponent {
 public:
   GroundDroidPhysicsComponent() = default;
   
+  void init(b2World &, const YAML::Node &) override;
+  void preStep(float) override;
+  void postStep() override;
+  
   float getVelX() const;
+  bool canSeePlayer() const;
+  glm::vec2 getPlayerPos() const;
+
+private:
+  float moveForce = 100.0f;
+  float maxMoveSpeed = 10.0f;
+  glm::vec2 playerPos;
+  bool seePlayer = false;
+  
+  void applyMoveForce(float);
 };
 
 #endif

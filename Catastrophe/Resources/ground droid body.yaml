@@ -19,6 +19,11 @@ shapes:
     pos: [0.0, -0.375]
     radius: 0.125
 
+  foot:
+    type: circle
+    pos: [0.0, 0.4]
+    radius: 0.1
+
 fixtures:
 - shape: body
   density: 10.0
@@ -32,3 +37,8 @@ fixtures:
 - shape: head
   density: 10.0
   user data: Deadly
+
+- shape: foot
+  density: 0
+  friction: 0
+  user data: GroundDroidFoot

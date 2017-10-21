@@ -40,6 +40,7 @@ std::pair<void *, void *> getUserData() {
   SYMBOL(Pentagon)                                                              \
   SYMBOL(Deadly)                                                                \
   SYMBOL(Missile)                                                               \
+  SYMBOL(GroundDroidFoot)                                                       \
   LAST_SYMBOL(TouchSensor)
 
 namespace Symbol {

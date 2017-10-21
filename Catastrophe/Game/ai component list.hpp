@@ -10,9 +10,10 @@
 #define ai_component_list_hpp
 
 #include <Simpleton/Utils/type list.hpp>
+#include "ground 0 droid ai component.hpp"
 
 using AIComps = Utils::TypeList<
-
+  Ground0DroidAIComponent
 >;
 
 #endif
