@@ -21,7 +21,7 @@ shapes:
 
   foot:
     type: circle
-    pos: [0.0, 0.4]
+    pos: [0.0, -0.4]
     radius: 0.1
 
 fixtures:
@@ -39,6 +39,6 @@ fixtures:
   user data: Deadly
 
 - shape: foot
+  is sensor: YES
   density: 0
-  friction: 0
   user data: GroundDroidFoot

@@ -68,12 +68,6 @@ void GroundDroidPhysicsComponent::postStep() {
   limitSpeed();
 }
 
-float GroundDroidPhysicsComponent::getVelX() const {
-  //I don't think there's any point in getting the velocity relative to the
-  //ground like PlayerPhysicsComponent does.
-  return body->GetLinearVelocity().x;
-}
-
 bool GroundDroidPhysicsComponent::canSeePlayer() const {
   return seePlayer;
 }
@@ -82,8 +76,26 @@ glm::vec2 GroundDroidPhysicsComponent::getPlayerPos() const {
   return playerPos;
 }
 
+glm::vec2 GroundDroidPhysicsComponent::getRelVel() const {
+  return castToGLM(body->GetLinearVelocity() - groundContact.getGroundVel());
+}
+
+bool GroundDroidPhysicsComponent::onGround() const {
+  return groundContact.onGround();
+}
+
+void GroundDroidPhysicsComponent::beginContactingGround(b2Body *const body) {
+  groundContact.beginContactingGround(body);
+}
+
+void GroundDroidPhysicsComponent::endContactingGround(b2Body *const body) {
+  groundContact.endContactingGround(body);
+}
+
 void GroundDroidPhysicsComponent::applyMoveForce(const float moveDir) {
-  body->ApplyForceToCenter({moveForce * moveDir, 0.0f}, true);
+  if (onGround()) {
+    body->ApplyForceToCenter({moveForce * moveDir, 0.0f}, true);
+  }
 }
 
 auto GroundDroidPhysicsComponent::getPlayer() const {
