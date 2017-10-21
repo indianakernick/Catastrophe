@@ -10,6 +10,7 @@
 
 #include "camera.hpp"
 #include "tracking component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void TrackingSystem::init(Camera &newCamera) {
   assert(!camera);
@@ -35,6 +36,8 @@ void TrackingSystem::rem(const EntityID id) {
 }
 
 void TrackingSystem::update(const float delta) {
+  PROFILE(TrackingSystem update);
+  
   for (auto &pair : comps) {
     pair.second->update(delta);
   }

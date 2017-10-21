@@ -9,6 +9,7 @@
 #include "ai system.hpp"
 
 #include "ai component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void AISystem::add(
   const EntityID id,
@@ -24,6 +25,8 @@ void AISystem::rem(const EntityID id) {
 }
 
 void AISystem::update(const float delta) {
+  PROFILE(AISystem update);
+  
   for (auto &pair : components) {
     pair.second->update(delta);
   }

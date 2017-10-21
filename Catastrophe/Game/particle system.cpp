@@ -69,6 +69,8 @@ void ParticleSystem::rem(const EntityID id) {
 }
 
 void ParticleSystem::update(const float delta) {
+  PROFILE(ParticleSystem update);
+  
   for (auto &layer : layers) {
     for (auto &pair : layer->comps) {
       Particle *const firstParticle = pair.second.firstParticle;
@@ -79,7 +81,8 @@ void ParticleSystem::update(const float delta) {
 
 void ParticleSystem::Layer::render(RenderingContext &renderer) {
   if constexpr (ENABLE_PARTICLE_RENDER) {
-    PROFILE(ParticleSystem::Layer::render);
+    PROFILE(ParticleSystem render);
+    
     NVGcontext *const ctx = renderer.getContext();
     for (auto &pair : comps) {
       Particle *const firstParticle = pair.second.firstParticle;

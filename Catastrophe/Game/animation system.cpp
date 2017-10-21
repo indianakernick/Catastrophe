@@ -25,7 +25,7 @@ void AnimationSystem::rem(const EntityID entityID) {
 }
 
 void AnimationSystem::update(const float delta) {
-  PROFILE(AnimationSystem::update);
+  PROFILE(AnimationSystem update);
  
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     c->second->update(delta);

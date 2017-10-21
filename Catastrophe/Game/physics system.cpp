@@ -73,7 +73,7 @@ std::weak_ptr<PhysicsComponent> PhysicsSystem::get(const EntityID entityID) {
 }
 
 void PhysicsSystem::update(const float delta) {
-  PROFILE(PhysicsSystem::update);
+  PROFILE(PhysicsSystem update);
   
   for (auto c = components.cbegin(); c != components.cend(); ++c) {
     c->second->preStep(delta);
@@ -94,7 +94,8 @@ PhysicsSystem::DebugRenderingJob::DebugRenderingJob(b2World &world, DebugDraw &d
   : world(world), debugDraw(debugDraw) {}
 
 void PhysicsSystem::DebugRenderingJob::render(RenderingContext &context) {
-  PROFILE(Debug physics render);
+  PROFILE(PhysicsSystem render);
+  
   debugDraw.setContext(context.getContext());
   world.DrawDebugData();
 }

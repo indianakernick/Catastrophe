@@ -34,7 +34,7 @@ Main character hired to steal the pink pentagon back
 */
 
 bool AppImpl::init() {
-  PROFILE(Init);
+  PROFILE(AppImpl init);
 
   windowLibrary.emplace(SDL_INIT_EVENTS);
   window = Platform::makeWindow(WINDOW_DESC);
@@ -60,7 +60,7 @@ bool AppImpl::init() {
 }
 
 void AppImpl::quit() {
-  PROFILE(Quit);
+  PROFILE(AppImpl quit);
 
   Systems::tracking.stopTracking();
   
@@ -82,11 +82,11 @@ void AppImpl::quit() {
 }
 
 bool AppImpl::input(float) {
-  PROFILE(Input);
+  PROFILE(AppImpl input);
 
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
-    PROFILE(Input event loop);
+    PROFILE(Event loop);
     if constexpr (ENABLE_DEBUG_INPUT_LOG) {
       printEvent(e);
     }
@@ -101,7 +101,7 @@ bool AppImpl::input(float) {
 }
 
 bool AppImpl::update(const float delta) {
-  PROFILE(Update);
+  PROFILE(AppImpl update);
   
   Systems::ai.update(delta);
   Systems::spawn.update(delta);
@@ -110,7 +110,7 @@ bool AppImpl::update(const float delta) {
 }
 
 void AppImpl::render(const float delta) {
-  PROFILE(Render);
+  PROFILE(AppImpl render);
   
   {
     PROFILE(Anim);

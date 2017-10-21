@@ -67,7 +67,7 @@ RenderingSystem::Layer::Layer(const Camera *camera)
 
 void RenderingSystem::Layer::render(RenderingContext &renderingContext) {
   if constexpr (ENABLE_GAME_RENDER) {
-    PROFILE(RenderingSystem::Layer::render);
+    PROFILE(RenderingSystem render);
   
     assert(camera);
     NVGcontext *const ctx = renderingContext.getContext();

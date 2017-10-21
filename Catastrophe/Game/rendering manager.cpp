@@ -10,6 +10,7 @@
 
 #include <cassert>
 #include "layer names.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 RenderingManager::RenderingManager()
   : layers(getNumLayers()) {
@@ -38,6 +39,8 @@ void RenderingManager::addJob(const size_t layer, const std::shared_ptr<Renderin
 }
 
 void RenderingManager::render() {
+  PROFILE(RenderingManager render);
+  
   for (auto &layer : layers) {
     for (auto j = layer.begin(); j != layer.end();) {
       if ((*j)->alive()) {

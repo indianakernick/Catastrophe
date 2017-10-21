@@ -10,6 +10,7 @@
 
 #include <SDL2/SDL_events.h>
 #include "input component.hpp"
+#include <Simpleton/Utils/profiler.hpp>
 
 void InputSystem::add(const EntityID id, const CompPtr comp, const YAML::Node &node) {
   comp->init(node);
@@ -21,6 +22,8 @@ void InputSystem::rem(const EntityID id) {
 }
 
 void InputSystem::handleEvent(const SDL_Event event) {
+  PROFILE(InputSystem handleEvent);
+  
   if (dispatcher.dispatch(event)) {
     return;
   }

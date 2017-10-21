@@ -36,7 +36,7 @@ void SpawnSystem::rem(const EntityID id) {
 }
 
 void SpawnSystem::update(const float delta) {
-  PROFILE(SpawnSystem::update);
+  PROFILE(SpawnSystem update);
   
   assert(entityMan);
   
