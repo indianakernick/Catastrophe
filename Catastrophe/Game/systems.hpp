@@ -19,7 +19,7 @@
 #include "animation system.hpp"
 #include "rendering system.hpp"
 
-#define COMPONENT(NAME, ID_NAME) static NAME##System *ID_NAME;
+#define COMPONENT(NAME, ID_NAME) static NAME##System ID_NAME;
 #define LAST_COMPONENT(NAME, ID_NAME) COMPONENT(NAME, ID_NAME)
 struct Systems {
   COMPONENTS

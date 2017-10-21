@@ -10,7 +10,6 @@
 #define game_app_impl_hpp
 
 #include "camera.hpp"
-#include "systems.hpp"
 #include "screenshot.hpp"
 #include "entity manager.hpp"
 #include "rendering manager.hpp"
@@ -33,14 +32,6 @@ private:
   RenderingManager renderingManager;
   Camera camera;
   CameraDebugRenderer cameraDebugRenderer;
-  InputSystem inputSystem;
-  AISystem aiSystem;
-  SpawnSystem spawnSystem;
-  PhysicsSystem physicsSystem;
-  TrackingSystem trackingSystem;
-  AnimationSystem animationSystem;
-  RenderingSystem renderingSystem;
-  ParticleSystem particleSystem;
   Screenshot screenshot;
 
   bool init() override;

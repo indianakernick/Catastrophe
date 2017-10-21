@@ -27,7 +27,7 @@ void LauncherPhysicsComponent::init(b2World &world, const YAML::Node &node) {
 }
 
 void LauncherPhysicsComponent::preStep(float) {
-  std::shared_ptr<PhysicsComponent> comp = Systems::physics->get(trigger).lock();
+  std::shared_ptr<PhysicsComponent> comp = Systems::physics.get(trigger).lock();
   if (!comp) {
     throw std::runtime_error("Invalid trigger entity ID");
   }

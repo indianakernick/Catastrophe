@@ -17,7 +17,7 @@
 namespace {
   std::shared_ptr<BodyPhysicsComponent> getBodyComp(const YAML::Node &node) {
     const EntityID id = node.as<EntityID>();
-    auto comp = Systems::physics->get(id).lock();
+    auto comp = Systems::physics.get(id).lock();
     if (!comp) {
       throw std::runtime_error(
         "Invalid entity ID at line "

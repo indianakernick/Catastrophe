@@ -72,13 +72,13 @@ namespace {
     const YAML::Node &compNode,
     const YAML::Node &levelNode,
     Entity *const entity,
-    System *system
+    System &system
   ) {
     const std::string &name = getChild(compNode, "name").Scalar();
     entity->set(makeComp<Comp>(name));
     entity->get<Comp>()->setEntity(entity);
     //PROFILE(Add to system);
-    system->add(
+    system.add(
       entity->getID(),
       entity->get<Comp>(),
       merge(levelNode, compNode)

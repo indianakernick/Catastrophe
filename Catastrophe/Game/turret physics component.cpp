@@ -25,7 +25,7 @@ void TurretPhysicsComponent::init(b2World &, const YAML::Node &node) {
 }
 
 void TurretPhysicsComponent::preStep(float) {
-  const auto comp = Systems::physics->get(PLAYER_ID).lock();
+  const auto comp = Systems::physics.get(PLAYER_ID).lock();
   if (!comp) {
     return;
   }

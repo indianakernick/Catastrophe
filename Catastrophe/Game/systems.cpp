@@ -8,7 +8,7 @@
 
 #include "systems.hpp"
 
-#define COMPONENT(NAME, ID_NAME) NAME##System *Systems::ID_NAME = nullptr;
+#define COMPONENT(NAME, ID_NAME) NAME##System Systems::ID_NAME;
 #define LAST_COMPONENT(NAME, ID_NAME) COMPONENT(NAME, ID_NAME)
 COMPONENTS
 #undef LAST_COMPONENT
