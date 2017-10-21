@@ -9,6 +9,7 @@
 #ifndef systems_hpp
 #define systems_hpp
 
+#include "ai system.hpp"
 #include "input system.hpp"
 #include "spawn system.hpp"
 #include "physics system.hpp"

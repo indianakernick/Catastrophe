@@ -34,6 +34,7 @@ private:
   Camera camera;
   CameraDebugRenderer cameraDebugRenderer;
   InputSystem inputSystem;
+  AISystem aiSystem;
   SpawnSystem spawnSystem;
   PhysicsSystem physicsSystem;
   TrackingSystem trackingSystem;

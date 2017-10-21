@@ -9,6 +9,7 @@
 #include "make component.hpp"
 
 #include "components.hpp"
+#include "ai component list.hpp"
 #include "input component list.hpp"
 #include "spawn component list.hpp"
 #include "physics component list.hpp"

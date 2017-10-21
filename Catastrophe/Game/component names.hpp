@@ -11,6 +11,7 @@
 
 #define COMPONENTS                                                              \
   COMPONENT(Input, input)                                                       \
+  COMPONENT(AI, ai)                                                             \
   COMPONENT(Spawn, spawn)                                                       \
   COMPONENT(Physics, physics)                                                   \
   COMPONENT(Tracking, tracking)                                                 \

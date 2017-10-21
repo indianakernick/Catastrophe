@@ -9,6 +9,7 @@
 #ifndef components_hpp
 #define components_hpp
 
+#include "ai component.hpp"
 #include "components fwd.hpp"
 #include "input component.hpp"
 #include "spawn component.hpp"
