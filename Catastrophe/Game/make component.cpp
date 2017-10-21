@@ -12,6 +12,7 @@
 #include "ai component list.hpp"
 #include "input component list.hpp"
 #include "spawn component list.hpp"
+#include <Simpleton/Utils/tuple.hpp>
 #include "physics component list.hpp"
 #include "particle component list.hpp"
 #include "tracking component list.hpp"
@@ -51,3 +52,27 @@ std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
 COMPONENTS
 #undef LAST_COMPONENT
 #undef COMPONENT
+
+namespace {
+  int checkComponents() {
+    Utils::forEachIndex<Utils::listSize<AllComps>>([] (auto i) {
+      constexpr size_t index = UTILS_VALUE(i);
+      using BaseComp = Utils::AtIndex<ComponentList, index>;
+      static_assert(std::is_same_v<BaseComp, typename BaseComp::ComponentBase>);
+      static_assert(std::is_abstract_v<BaseComp>);
+      static_assert(std::is_base_of_v<Component, BaseComp>);
+      static_assert(Utils::indexOf<ComponentList, BaseComp> == index);
+      
+      using CompList = Utils::AtIndex<AllComps, index>;
+      Utils::forEach<CompList>([] (auto t) {
+        using Comp = UTILS_TYPE(t);
+        static_assert(std::is_base_of_v<BaseComp, Comp>);
+        static_assert(!std::is_abstract_v<Comp>);//not necessarily final
+      });
+    });
+    
+    return 0;
+  }
+  
+  const int dummy = checkComponents();
+}
