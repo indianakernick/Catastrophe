@@ -9,7 +9,7 @@
 #ifndef player_physics_component_hpp
 #define player_physics_component_hpp
 
-#include <forward_list>
+#include "ground contact.hpp"
 #include "body physics component.hpp"
 
 class PlayerPhysicsComponent final : public BodyPhysicsComponent {
@@ -27,7 +27,7 @@ public:
   bool onGround() const;
 
 private:
-  std::forward_list<b2Body *> groundBodies;
+  GroundContact groundContact;
   float timeTillFinishJump = 0.0f;
   float moveForce;
   float airMoveForce;

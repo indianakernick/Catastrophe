@@ -146,6 +146,8 @@
 		45B6EF5D1F9AD1A9000998D7 /* level 0 ground droid entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45B6EF5C1F9AD1A9000998D7 /* level 0 ground droid entity.yaml */; };
 		45B6EF611F9AD6FE000998D7 /* ground 0 droid rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF5F1F9AD6FE000998D7 /* ground 0 droid rendering component.cpp */; };
 		45BA38571F9B002000BAEA1E /* ground 0 droid ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38551F9B002000BAEA1E /* ground 0 droid ai component.cpp */; };
+		45BA385A1F9B1E9800BAEA1E /* ground contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38581F9B1E9800BAEA1E /* ground contact.cpp */; };
+		45BA38601F9B255500BAEA1E /* limit velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA385E1F9B255500BAEA1E /* limit velocity.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -481,6 +483,10 @@
 		45B6EF601F9AD6FE000998D7 /* ground 0 droid rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground 0 droid rendering component.hpp"; sourceTree = "<group>"; };
 		45BA38551F9B002000BAEA1E /* ground 0 droid ai component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground 0 droid ai component.cpp"; sourceTree = "<group>"; };
 		45BA38561F9B002000BAEA1E /* ground 0 droid ai component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground 0 droid ai component.hpp"; sourceTree = "<group>"; };
+		45BA38581F9B1E9800BAEA1E /* ground contact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground contact.cpp"; sourceTree = "<group>"; };
+		45BA38591F9B1E9800BAEA1E /* ground contact.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground contact.hpp"; sourceTree = "<group>"; };
+		45BA385E1F9B255500BAEA1E /* limit velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "limit velocity.cpp"; sourceTree = "<group>"; };
+		45BA385F1F9B255500BAEA1E /* limit velocity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "limit velocity.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -950,6 +956,10 @@
 				453893081F2D6F21007EBB5A /* debug draw.hpp */,
 				45DE9FA21F6CADA400B1DA72 /* physics file.cpp */,
 				45DE9FA31F6CADA400B1DA72 /* physics file.hpp */,
+				45BA38581F9B1E9800BAEA1E /* ground contact.cpp */,
+				45BA38591F9B1E9800BAEA1E /* ground contact.hpp */,
+				45BA385E1F9B255500BAEA1E /* limit velocity.cpp */,
+				45BA385F1F9B255500BAEA1E /* limit velocity.hpp */,
 			);
 			name = physics;
 			sourceTree = "<group>";
@@ -1482,6 +1492,7 @@
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
 				4568D3231F8A010F0037268B /* spinning blade rendering component.cpp in Sources */,
 				45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */,
+				45BA385A1F9B1E9800BAEA1E /* ground contact.cpp in Sources */,
 				45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */,
 				452FFA921F6BC50D003A98B1 /* b2WheelJoint.cpp in Sources */,
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
@@ -1538,6 +1549,7 @@
 				452FFA8C1F6BC50D003A98B1 /* b2MouseJoint.cpp in Sources */,
 				452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */,
 				452FFA931F6BC50D003A98B1 /* b2Rope.cpp in Sources */,
+				45BA38601F9B255500BAEA1E /* limit velocity.cpp in Sources */,
 				453C8C411F9AEF17002D0C0C /* ground droid physics component.cpp in Sources */,
 				453892D61F2B0074007EBB5A /* entity.cpp in Sources */,
 				4509F8E61F5CE20000927A19 /* rendering context.cpp in Sources */,

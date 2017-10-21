@@ -12,6 +12,7 @@
 #include "entity.hpp"
 #include "yaml helper.hpp"
 #include "b2 glm cast.hpp"
+#include "limit velocity.hpp"
 #include "player constants.hpp"
 #include <Simpleton/Math/clamp.hpp>
 #include "player input component.hpp"
@@ -42,35 +43,25 @@ void PlayerPhysicsComponent::preStep(const float delta) {
 }
 
 void PlayerPhysicsComponent::postStep() {
-  const b2Vec2 groundVel = groundBodies.empty()
-                         ? b2Vec2(0.0f, 0.0f)
-                         : groundBodies.front()->GetLinearVelocity();
-  const b2Vec2 relVel = body->GetLinearVelocity() - groundVel;
-  body->SetLinearVelocity({
-    Math::clampMag(relVel.x, maxMoveSpeed) + groundVel.x,
-    relVel.y + groundVel.y
-  });
+  body->SetLinearVelocity(
+    limitVelX(body->GetLinearVelocity(), groundContact.getGroundVel(), maxMoveSpeed)
+  );
 }
 
 void PlayerPhysicsComponent::beginContactingGround(b2Body *groundBody) {
-  groundBodies.push_front(groundBody);
+  groundContact.beginContactingGround(groundBody);
 }
 
 void PlayerPhysicsComponent::endContactingGround(b2Body *groundBody) {
-  groundBodies.remove(groundBody);
+  groundContact.endContactingGround(groundBody);
 }
 
 glm::vec2 PlayerPhysicsComponent::getRelVel() const {
-  if (groundBodies.empty()) {
-    return castToGLM(body->GetLinearVelocity());
-  } else {
-    const b2Vec2 groundVel = groundBodies.front()->GetLinearVelocity();
-    return castToGLM(body->GetLinearVelocity() - groundVel);
-  }
+  return castToGLM(body->GetLinearVelocity() - groundContact.getGroundVel());
 }
 
 bool PlayerPhysicsComponent::onGround() const {
-  return !groundBodies.empty();
+  return groundContact.onGround();
 }
 
 void PlayerPhysicsComponent::applyMoveForce(const float moveForceDir) {

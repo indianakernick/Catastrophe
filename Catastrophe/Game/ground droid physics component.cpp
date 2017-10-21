@@ -27,11 +27,14 @@ namespace {
       const b2Vec2 &,
       float32
     ) {
+      if (fixture->IsSensor()) {
+        return -1.0f;
+      }
       if (fixture->GetUserData() != getUserData<Symbol::PlayerBody>()) {
         hitPlayer = false;
         return 0.0f;
       } else {
-        return 1.0f;
+        return -1.0f;
       }
     }
     
