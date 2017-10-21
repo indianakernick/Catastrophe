@@ -31,7 +31,7 @@ void PlayerAnimationComponent::update(const float delta) {
   handleJump(onGround, delta);
   
   transform.pos = playerPhysics->getPos();
-  transform.scale.x = std::abs(transform.scale.x) * calcHoriScale(horiVel);
+  transform.scale.x = std::abs(transform.scale.x) * dirX.getDir(horiVel);
   model = transform.getMat3();
 }
 
@@ -57,16 +57,6 @@ float PlayerAnimationComponent::getStandRunProg() const {
 
 float PlayerAnimationComponent::getRunningProg() const {
   return runningAnim.getProgressTime();
-}
-
-float PlayerAnimationComponent::calcHoriScale(const float horiVel) {
-  if (std::abs(horiVel) < 0.01f) {
-    return lastDir;
-  } else if (horiVel < 0.0f) {
-    return lastDir = -1.0f;
-  } else {
-    return lastDir = 1.0f;
-  }
 }
 
 float PlayerAnimationComponent::calcRunAdvance(const float horiVel, const float delta) const {

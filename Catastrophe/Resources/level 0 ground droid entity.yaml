@@ -1,3 +1,10 @@
 physics:
   name: BodyPhysicsComponent
   body: droid body.yaml
+
+animation:
+  name: GroundDroidAnimationComponent
+
+rendering:
+  name: Ground0DroidRenderingComponent
+  layer: over player 1

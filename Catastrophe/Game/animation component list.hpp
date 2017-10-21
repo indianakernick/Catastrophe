@@ -14,12 +14,14 @@
 #include "simple animation component.hpp"
 #include "turret animation component.hpp"
 #include "launcher animation component.hpp"
+#include "ground droid animation component.hpp"
 
 using AnimationComps = Utils::TypeList<
   PlayerAnimationComponent,
   SimpleAnimationComponent,
   LauncherAnimationComponent,
-  TurretAnimationComponent
+  TurretAnimationComponent,
+  GroundDroidAnimationComponent
 >;
 
 #endif

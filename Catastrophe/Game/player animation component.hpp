@@ -10,7 +10,7 @@
 #define player_animation_component_hpp
 
 #include "transform.hpp"
-#include <yaml-cpp/node/node.h>
+#include "velocity direction.hpp"
 #include "animation component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
 
@@ -34,7 +34,7 @@ private:
   Time::SimpleAnim<float> runningAnim;
   Time::SimpleAnim<float> standRunAnim;
   Time::SimpleAnim<float> groundJumpAnim;
-  float lastDir = 1.0f;
+  VelDir1 dirX;
   float footSpeed = 0.0f;
   bool rightLeg = false;
   
@@ -52,7 +52,6 @@ private:
     START_GROUND
   } jumpState = JumpState::GROUNDED;
   
-  float calcHoriScale(float);
   float calcLegOffset(bool);
   float calcRunAdvance(float, float) const;
   

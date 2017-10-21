@@ -106,6 +106,8 @@
 		4538930C1F2D6F5D007EBB5A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4538930A1F2D6F5D007EBB5A /* camera.cpp */; };
 		453A0AB11F8AF1E70042B23B /* player rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453A0AAF1F8AF1E70042B23B /* player rendering component.cpp */; };
 		453A0ABC1F8B5F450042B23B /* vector sprite rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453A0ABA1F8B5F450042B23B /* vector sprite rendering component.cpp */; };
+		453C8C3B1F9ADBCB002D0C0C /* ground droid animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453C8C391F9ADBCB002D0C0C /* ground droid animation component.cpp */; };
+		453C8C3E1F9AE0C2002D0C0C /* velocity direction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 453C8C3C1F9AE0C2002D0C0C /* velocity direction.cpp */; };
 		4541161A1F523D7400C2865B /* camera pos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454116181F523D7400C2865B /* camera pos.cpp */; };
 		4541161D1F523D8200C2865B /* camera zoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161B1F523D8200C2865B /* camera zoom.cpp */; };
 		454116201F523DA500C2865B /* camera motion track.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4541161E1F523DA400C2865B /* camera motion track.cpp */; };
@@ -139,6 +141,7 @@
 		45B6EF591F99B1EB000998D7 /* camera debug render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF571F99B1EB000998D7 /* camera debug render.cpp */; };
 		45B6EF5B1F9ACEE8000998D7 /* droid body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45B6EF5A1F9ACEE8000998D7 /* droid body.yaml */; };
 		45B6EF5D1F9AD1A9000998D7 /* level 0 ground droid entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45B6EF5C1F9AD1A9000998D7 /* level 0 ground droid entity.yaml */; };
+		45B6EF611F9AD6FE000998D7 /* ground 0 droid rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF5F1F9AD6FE000998D7 /* ground 0 droid rendering component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -394,6 +397,10 @@
 		453A0AB01F8AF1E70042B23B /* player rendering component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player rendering component.hpp"; sourceTree = "<group>"; };
 		453A0ABA1F8B5F450042B23B /* vector sprite rendering component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector sprite rendering component.cpp"; sourceTree = "<group>"; };
 		453A0ABB1F8B5F450042B23B /* vector sprite rendering component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector sprite rendering component.hpp"; sourceTree = "<group>"; };
+		453C8C391F9ADBCB002D0C0C /* ground droid animation component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground droid animation component.cpp"; sourceTree = "<group>"; };
+		453C8C3A1F9ADBCB002D0C0C /* ground droid animation component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground droid animation component.hpp"; sourceTree = "<group>"; };
+		453C8C3C1F9AE0C2002D0C0C /* velocity direction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "velocity direction.cpp"; sourceTree = "<group>"; };
+		453C8C3D1F9AE0C2002D0C0C /* velocity direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "velocity direction.hpp"; sourceTree = "<group>"; };
 		454116181F523D7400C2865B /* camera pos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera pos.cpp"; sourceTree = "<group>"; };
 		454116191F523D7400C2865B /* camera pos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "camera pos.hpp"; sourceTree = "<group>"; };
 		4541161B1F523D8200C2865B /* camera zoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "camera zoom.cpp"; sourceTree = "<group>"; };
@@ -459,6 +466,8 @@
 		45B6EF581F99B1EB000998D7 /* camera debug render.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "camera debug render.hpp"; sourceTree = "<group>"; };
 		45B6EF5A1F9ACEE8000998D7 /* droid body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "droid body.yaml"; sourceTree = "<group>"; };
 		45B6EF5C1F9AD1A9000998D7 /* level 0 ground droid entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "level 0 ground droid entity.yaml"; sourceTree = "<group>"; };
+		45B6EF5F1F9AD6FE000998D7 /* ground 0 droid rendering component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground 0 droid rendering component.cpp"; sourceTree = "<group>"; };
+		45B6EF601F9AD6FE000998D7 /* ground 0 droid rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground 0 droid rendering component.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -720,6 +729,8 @@
 				452FF9C31F63D053003A98B1 /* animation component.hpp */,
 				452FF9C51F63D05D003A98B1 /* animation system.cpp */,
 				452FF9C61F63D05D003A98B1 /* animation system.hpp */,
+				453C8C3C1F9AE0C2002D0C0C /* velocity direction.cpp */,
+				453C8C3D1F9AE0C2002D0C0C /* velocity direction.hpp */,
 			);
 			name = animation;
 			sourceTree = "<group>";
@@ -735,6 +746,8 @@
 				45DEA0811F85DD4900B1DA72 /* launcher animation component.hpp */,
 				451CC0DA1F91DEA60000E424 /* turret animation component.cpp */,
 				451CC0DB1F91DEA60000E424 /* turret animation component.hpp */,
+				453C8C391F9ADBCB002D0C0C /* ground droid animation component.cpp */,
+				453C8C3A1F9ADBCB002D0C0C /* ground droid animation component.hpp */,
 			);
 			name = "animation components";
 			sourceTree = "<group>";
@@ -949,6 +962,7 @@
 		453892F81F2C417F007EBB5A /* rendering components */ = {
 			isa = PBXGroup;
 			children = (
+				45B6EF5E1F9AD6BD000998D7 /* droid */,
 				4509F8E01F5BB23600927A19 /* basic rendering component.cpp */,
 				4509F8E11F5BB23600927A19 /* basic rendering component.hpp */,
 				4568D3151F89EAA00037268B /* polygon rendering component.cpp */,
@@ -1104,6 +1118,15 @@
 				4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45B6EF5E1F9AD6BD000998D7 /* droid */ = {
+			isa = PBXGroup;
+			children = (
+				45B6EF5F1F9AD6FE000998D7 /* ground 0 droid rendering component.cpp */,
+				45B6EF601F9AD6FE000998D7 /* ground 0 droid rendering component.hpp */,
+			);
+			name = droid;
 			sourceTree = "<group>";
 		};
 		45C545F61F8F0D9B00217406 /* spawn */ = {
@@ -1416,6 +1439,7 @@
 				4541161A1F523D7400C2865B /* camera pos.cpp in Sources */,
 				452FFA661F6BC50D003A98B1 /* b2BroadPhase.cpp in Sources */,
 				452FFA781F6BC50D003A98B1 /* b2Body.cpp in Sources */,
+				453C8C3E1F9AE0C2002D0C0C /* velocity direction.cpp in Sources */,
 				451CC0CB1F8F21C90000E424 /* destroyable spawn component.cpp in Sources */,
 				4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */,
 				4568D3231F8A010F0037268B /* spinning blade rendering component.cpp in Sources */,
@@ -1454,6 +1478,7 @@
 				451CC0FE1F9882660000E424 /* systems.cpp in Sources */,
 				45DE9FD41F71051D00B1DA72 /* entity file.cpp in Sources */,
 				45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */,
+				453C8C3B1F9ADBCB002D0C0C /* ground droid animation component.cpp in Sources */,
 				4509F9021F5E816F00927A19 /* yaml helper.cpp in Sources */,
 				45DEA0821F85DD4900B1DA72 /* launcher animation component.cpp in Sources */,
 				452FFA801F6BC50D003A98B1 /* b2CircleContact.cpp in Sources */,
@@ -1511,6 +1536,7 @@
 				452FFA701F6BC50D003A98B1 /* b2EdgeShape.cpp in Sources */,
 				453479561F1F0E6D0083743E /* main.cpp in Sources */,
 				452FFA811F6BC50D003A98B1 /* b2Contact.cpp in Sources */,
+				45B6EF611F9AD6FE000998D7 /* ground 0 droid rendering component.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
