@@ -26,10 +26,14 @@ public:
 private:
   float moveForce = 100.0f;
   float maxMoveSpeed = 10.0f;
+  float maxViewDistance = 4.0f;
   glm::vec2 playerPos;
   bool seePlayer = false;
   
   void applyMoveForce(float);
+  auto getPlayer() const;
+  void lookForPlayer();
+  void limitSpeed();
 };
 
 #endif

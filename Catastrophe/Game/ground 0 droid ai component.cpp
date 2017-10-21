@@ -15,7 +15,6 @@ void Ground0DroidAIComponent::init(const YAML::Node &node) {
   getOptional(patrolFirst, node, "first patrol point");
   getOptional(patrolSecond, node, "second patrol point");
   getOptional(maxDistFromPatrol, node, "max distance from patrol");
-  getOptional(maxViewDistance, node, "max view distance");
 }
 
 void Ground0DroidAIComponent::update(float) {

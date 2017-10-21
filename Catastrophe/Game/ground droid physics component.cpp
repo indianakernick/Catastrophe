@@ -48,6 +48,7 @@ void GroundDroidPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   BodyPhysicsComponent::init(world, node);
   getOptional(moveForce, node, "move force");
   getOptional(maxMoveSpeed, node, "max move speed");
+  getOptional(maxViewDistance, node, "max view distance");
 }
 
 void GroundDroidPhysicsComponent::preStep(float) {
@@ -60,31 +61,8 @@ void GroundDroidPhysicsComponent::preStep(float) {
 }
 
 void GroundDroidPhysicsComponent::postStep() {
-  const auto bodyComp = getExpectedCompImpl<BodyPhysicsComponent>();
-  const auto physicsComp = Systems::physics.get(PLAYER_ID).lock();
-  if (!physicsComp) {
-    return;
-  }
-  const auto playerComp = std::dynamic_pointer_cast<BodyPhysicsComponent>(physicsComp);
-  if (!playerComp || !playerComp->getBody()) {
-    return;
-  }
-  playerPos = playerComp->getPos();
-  
-  b2World *const world = Systems::physics.getWorld();
-  RayCastCallback raycast;
-  world->RayCast(
-    &raycast,
-    bodyComp->getBody()->GetPosition(),
-    playerComp->getBody()->GetPosition()
-  );
-  seePlayer = raycast.hasHitPlayer();
-  
-  const b2Vec2 vel = body->GetLinearVelocity();
-  body->SetLinearVelocity({
-    Math::clampMag(vel.x, maxMoveSpeed),
-    vel.y
-  });
+  lookForPlayer();
+  limitSpeed();
 }
 
 float GroundDroidPhysicsComponent::getVelX() const {
@@ -103,4 +81,45 @@ glm::vec2 GroundDroidPhysicsComponent::getPlayerPos() const {
 
 void GroundDroidPhysicsComponent::applyMoveForce(const float moveDir) {
   body->ApplyForceToCenter({moveForce * moveDir, 0.0f}, true);
+}
+
+auto GroundDroidPhysicsComponent::getPlayer() const {
+  const auto physicsComp = Systems::physics.get(PLAYER_ID).lock();
+  if (!physicsComp) {
+    throw std::runtime_error("Expected player to have a physics component");
+  }
+  const auto playerComp = std::dynamic_pointer_cast<BodyPhysicsComponent>(physicsComp);
+  if (!playerComp || !playerComp->getBody()) {
+    throw std::runtime_error("Expected player to have an initialized physics body");
+  }
+  return playerComp;
+}
+
+void GroundDroidPhysicsComponent::lookForPlayer() {
+  const auto bodyComp = getExpectedCompImpl<BodyPhysicsComponent>();
+  const auto playerComp = getPlayer();
+  playerPos = playerComp->getPos();
+  
+  b2World *const world = Systems::physics.getWorld();
+  const b2Vec2 droidPos = bodyComp->getBody()->GetPosition();
+  const b2Vec2 playerPos = playerComp->getBody()->GetPosition();
+  if ((playerPos - droidPos).LengthSquared() > maxViewDistance*maxViewDistance) {
+    seePlayer = false;
+  } else {
+    RayCastCallback raycast;
+    world->RayCast(
+      &raycast,
+      droidPos,
+      playerPos
+    );
+    seePlayer = raycast.hasHitPlayer();
+  }
+}
+
+void GroundDroidPhysicsComponent::limitSpeed() {
+  const b2Vec2 vel = body->GetLinearVelocity();
+  body->SetLinearVelocity({
+    Math::clampMag(vel.x, maxMoveSpeed),
+    vel.y
+  });
 }

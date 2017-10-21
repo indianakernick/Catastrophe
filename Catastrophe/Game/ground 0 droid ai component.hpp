@@ -29,9 +29,6 @@ private:
   //The maximum distance from the patrol point the droid will chase
   //the player
   float maxDistFromPatrol = 2.0f;
-  //The maximum distance between the droid and the player that the
-  //droid will chase the player
-  float maxViewDistance = 3.0f;
   bool moveLeft = false;
   bool moveRight = false;
 };

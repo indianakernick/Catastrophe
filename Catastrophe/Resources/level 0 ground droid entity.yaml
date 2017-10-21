@@ -6,6 +6,7 @@ physics:
   body: ground droid body.yaml
   move force: 50
   max move speed: 2
+  max view distance: 8
 
 animation:
   name: GroundDroidAnimationComponent
