@@ -1,0 +1,34 @@
+body:
+  type: dynamic
+  fixed rotation: true
+  linear damping: 0.8
+
+shapes:
+  body:
+    type: polygon
+    half width: 0.124  #1/8 - 0.001
+    half height: 0.376 #3/8 + 0.001
+
+  leg:
+    type: circle
+    pos: [0.0, 0.375]
+    radius: 0.125
+
+  head:
+    type: circle
+    pos: [0.0, -0.375]
+    radius: 0.125
+
+fixtures:
+- shape: body
+  density: 10.0
+  user data: Deadly
+
+- shape: leg
+  friction: 0.1
+  density: 10.0
+  user data: Deadly
+
+- shape: head
+  density: 10.0
+  user data: Deadly

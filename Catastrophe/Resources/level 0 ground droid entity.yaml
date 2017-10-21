@@ -1,0 +1,3 @@
+physics:
+  name: BodyPhysicsComponent
+  body: droid body.yaml
