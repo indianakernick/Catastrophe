@@ -57,95 +57,6 @@ bool TestApp::update(const float) {
   return true;
 }
 
-const NVGcolor light = nvgRGBf(0.6f, 0.6f, 0.6f);
-const NVGcolor dark = nvgRGBf(0.3f, 0.3f, 0.3f);
-const NVGcolor stripe = nvgRGBf(1.0f, 0.0f, 0.0f);
-const NVGcolor orange = nvgRGBf(1.0f, 0.51f, 0.0f);
-
-void leftBody(NVGcontext *const ctx) {
-  const NVGpaint gradient = nvgLinearGradient(ctx,
-    0.0f, 0.0f,
-    0.0f, 0.4f,
-    light,
-    dark
-  );
-  
-  nvgScissor(ctx, -0.5f, 0.0f, 1.0f, 8.0f);
-  
-  nvgBeginPath(ctx);
-  nvgFillPaint(ctx, gradient);
-  nvgRect(ctx, -0.5f, 0.0f, 0.8f, 0.5f);
-  nvgEllipse(ctx, 0.3f, 0.0f, 0.2f, 0.5f);
-  nvgFill(ctx);
-}
-
-void body(NVGcontext *const ctx) {
-  leftBody(ctx);
-  nvgScale(ctx, 1.0f, -1.0f);
-  leftBody(ctx);
-  nvgScale(ctx, 1.0f, -1.0f);
-  nvgResetScissor(ctx);
-}
-
-void fins(NVGcontext *const ctx) {
-  nvgBeginPath(ctx);
-  nvgFillColor(ctx, dark);
-  
-  //back left
-  nvgMoveTo(ctx, -0.4f, 0.0f);
-  nvgLineTo(ctx, -0.5f, 2.0f);
-  nvgLineTo(ctx, -0.4f, 2.0f);
-  nvgLineTo(ctx, -0.25f, 0.0f);
-  //back right
-  nvgLineTo(ctx, -0.4f, -2.0f);
-  nvgLineTo(ctx, -0.5f, -2.0f);
-  nvgLineTo(ctx, -0.4f, 0.0f);
-  
-  //front
-  nvgMoveTo(ctx, 0.2f, 1.25f);
-  nvgLineTo(ctx, 0.3f, 0.0f);
-  nvgLineTo(ctx, 0.2f, -1.25f);
-  nvgClosePath(ctx);
-  nvgFill(ctx);
-}
-
-void stripes(NVGcontext *const ctx) {
-  nvgBeginPath(ctx);
-  nvgStrokeColor(ctx, stripe);
-  nvgStrokeWidth(ctx, 0.05f);
-  
-  nvgMoveTo(ctx, -0.3f, -0.5f);
-  nvgLineTo(ctx, -0.3f, 0.5f);
-  
-  nvgMoveTo(ctx, -0.1f, -0.5f);
-  nvgLineTo(ctx, -0.1f, 0.5f);
-  
-  nvgMoveTo(ctx, 0.1f, -0.5f);
-  nvgLineTo(ctx, 0.1f, 0.5f);
-  
-  nvgMoveTo(ctx, 0.3f, -0.5f);
-  nvgLineTo(ctx, 0.3f, 0.5f);
-  
-  nvgStroke(ctx);
-}
-
-void exhaust(NVGcontext *const ctx) {
-  nvgBeginPath(ctx);
-  
-  const NVGpaint gradient = nvgRadialGradient(ctx,
-    -0.5f, 0.0f,
-    0.1f,
-    0.2f,
-    orange,
-    nvgTransRGBAf(orange, 0.25f)
-  );
-  
-  nvgBeginPath(ctx);
-  nvgFillPaint(ctx, gradient);
-  nvgEllipse(ctx, -0.55f, 0.0f, 0.125f, 0.5f);
-  nvgFill(ctx);
-}
-
 void TestApp::render(const float delta) {
   glm::mat3 mat = glm::translate(
     glm::scale(
@@ -161,9 +72,9 @@ void TestApp::render(const float delta) {
     {0.5f, 0.5f}
   );
   
-  mat = glm::scale(mat, {1.0f, 1.0f/16.0f});
+  //mat = glm::scale(mat, {1.0f, 1.0f/16.0f});
   //mat = glm::scale(mat, {0.875f, 0.875f});
-  mat = glm::scale(mat, {0.1f, 0.1f});
+  //mat = glm::scale(mat, {0.1f, 0.1f});
   //mat = glm::scale(mat, {0.5f, 0.5f});
   
   renderingContext.preRender(mat);
@@ -175,12 +86,55 @@ void TestApp::render(const float delta) {
   }*/
   NVGcontext *ctx = renderingContext.getContext();
   
-  anim.advance(delta * 0.0625);
+  anim.advance(delta * 1.0f);
   
-  fins(ctx);
-  exhaust(ctx);
-  body(ctx);
-  stripes(ctx);
+  nvgScale(ctx, 0.0625f, 0.0625f);
+  
+  nvgBeginPath(ctx);
+  nvgStrokeColor(ctx, nvgRGBf(0.3f, 0.3f, 0.3f));
+  nvgStrokeWidth(ctx, 1.0f);
+  nvgMoveTo(ctx, 0.0f, -2.0f);
+  nvgLineTo(ctx, 0.0f, -7.0f);
+  nvgStroke(ctx);
+  
+  NVGpaint paint = nvgLinearGradient(ctx,
+    -2.0f, 0.0f,
+    2.0f, 0.0f,
+    nvgRGBf(1.0f, 0.125f, 0.125f),
+    nvgRGBf(0.5f, 0.0f, 0.0f)
+  );
+  
+  nvgSave(ctx);
+  nvgTranslate(ctx,
+    0.0f,
+    (std::sin(anim.getProgress<float>() * 2.0f * NVG_PI) - 1.0f) * 0.5f
+  );
+  
+  nvgBeginPath(ctx);
+  nvgFillPaint(ctx, paint);
+  nvgCircle(ctx, 0.0f, 6.0f, 2.0f);
+  nvgCircle(ctx, 0.0f, -2.0f, 2.0f);
+  nvgRect(ctx, -2.0f, -2.0f, 4.0f, 8.0f);
+  nvgFill(ctx);
+  
+  nvgBeginPath(ctx);
+  nvgStrokeColor(ctx, nvgRGBf(0.0f, 0.0f, 0.5f));
+  nvgLineCap(ctx, NVG_BUTT);
+  nvgStrokeWidth(ctx, 0.5f);
+  nvgMoveTo(ctx, -2.0f, 3.0f);
+  nvgLineTo(ctx, -0.5f, 3.0f);
+  nvgStroke(ctx);
+  
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, nvgRGBf(0.0f, 0.0f, 0.5f));
+  nvgCircle(ctx, -1.0f, 5.0f, 0.25f);
+  nvgFill(ctx);
+  nvgRestore(ctx);
+  
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, nvgRGBf(0.1f, 0.1f, 0.1f));
+  nvgCircle(ctx, 0.0f, -7.0f, 1.0f);
+  nvgFill(ctx);
   
   screenshot.postRender(renderingContext, ENABLE_FPS_RENDER);
 }

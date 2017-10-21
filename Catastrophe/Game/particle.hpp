@@ -39,5 +39,6 @@ struct Particle {
 };
 
 static_assert(std::is_pod<Particle>::value);
+static_assert(sizeof(Particle) == 48);
 
 #endif

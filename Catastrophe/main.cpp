@@ -15,7 +15,7 @@ int main(int, char **) {
   const float timeStep = 1.0f / 60.0f;
   const uint32_t maxSteps = 1;
 
-  //#define TESTING
+  #define TESTING
 
 #ifndef TESTING
 
