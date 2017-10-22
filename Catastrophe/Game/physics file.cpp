@@ -11,6 +11,7 @@
 #include "b2 glm cast.hpp"
 #include "yaml helper.hpp"
 #include "object types.hpp"
+#include "collision categories.hpp"
 #include <Simpleton/Platform/system info.hpp>
 
 namespace {
@@ -194,10 +195,28 @@ namespace {
     }
   }
   
+  uint16_t getCategoryBits(const YAML::Node &node) {
+    if (node.IsSequence()) {
+      uint16_t bits = 0;
+      for (auto c = node.begin(); c != node.end(); ++c) {
+        bits |= getCategoryBit(c->Scalar());
+      }
+      return bits;
+    } else {
+      return getCategoryBit(node.Scalar());
+    }
+  }
+  
   b2Filter readFilter(const YAML::Node &filterNode) {
     b2Filter filter;
-    getOptional(filter.categoryBits, filterNode, "category");
-    getOptional(filter.maskBits, filterNode, "mask");
+    if (const YAML::Node &categoryNode = filterNode["category"]) {
+      filter.categoryBits = getCategoryBits(categoryNode);
+    }
+    if (const YAML::Node &maskNode = filterNode["collide with"]) {
+      filter.maskBits = getCategoryBits(maskNode);
+    } else if (const YAML::Node &maskNode = filterNode["no collide with"]) {
+      filter.maskBits = ~getCategoryBits(maskNode);
+    }
     getOptional(filter.groupIndex, filterNode, "group");
     return filter;
   }

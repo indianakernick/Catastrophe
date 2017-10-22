@@ -514,6 +514,7 @@
 		45BA38991F9C608100BAEA1E /* droid bullet rendering component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "droid bullet rendering component.cpp"; sourceTree = "<group>"; };
 		45BA389A1F9C608100BAEA1E /* droid bullet rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "droid bullet rendering component.hpp"; sourceTree = "<group>"; };
 		45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "droid bullet body.yaml"; sourceTree = "<group>"; };
+		45BA389E1F9C6A1E00BAEA1E /* collision categories.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "collision categories.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -987,6 +988,7 @@
 				45BA38591F9B1E9800BAEA1E /* ground contact.hpp */,
 				45BA385E1F9B255500BAEA1E /* limit velocity.cpp */,
 				45BA385F1F9B255500BAEA1E /* limit velocity.hpp */,
+				45BA389E1F9C6A1E00BAEA1E /* collision categories.hpp */,
 			);
 			name = physics;
 			sourceTree = "<group>";

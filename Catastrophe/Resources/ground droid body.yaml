@@ -28,19 +28,24 @@ fixtures:
 - shape: body
   density: 20.0
   user data: GroundDroidBody
+  filter: &filter
+    category: DroidBody
+    no collide with:
+    - DroidBullet
+    - DroidBody
 
 - shape: leg
   friction: 0.0
   density: 20.0
   user data: GroundDroidBody
+  filter: *filter
 
 - shape: head
   density: 20.0
   user data: GroundDroidBody
+  filter: *filter
 
 - shape: foot
   is sensor: YES
   density: 0
   user data: GroundDroidFoot
-  filter:
-    group: -1

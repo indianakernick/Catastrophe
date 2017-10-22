@@ -66,7 +66,7 @@ using Symbols = Utils::TypeList<
 inline void *getUserData(const std::string &symbolName) {
   try {
     return Utils::getValueByName<void *, Symbols>("Symbol::" + symbolName, [] (auto t) {
-      return getUserData<typename decltype(t)::type>();
+      return getUserData<UTILS_TYPE(t)>();
     });
   } catch (Utils::TypeNotFound &) {
     throw std::runtime_error("Invalid symbol name");

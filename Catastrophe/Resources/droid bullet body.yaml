@@ -13,4 +13,5 @@ fixtures:
 - shape: main
   user data: DroidBullet
   filter:
-    group: -1
+    category: DroidBullet
+    no collide with: DroidBody
