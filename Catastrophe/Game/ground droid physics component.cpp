@@ -50,25 +50,26 @@ namespace {
 
 void GroundDroidPhysicsComponent::init(b2World &world, const YAML::Node &node) {
   BodyPhysicsComponent::init(world, node);
-  getOptional(moveForce, node, "move force");
+  getOptional(maxMoveForce, node, "max move force");
   getOptional(maxViewDistance, node, "max view distance");
   getOptional(slowMoveSpeed, node, "slow move speed");
   getOptional(fastMoveSpeed, node, "fast move speed");
 }
 
-void GroundDroidPhysicsComponent::preStep(float) {
+void GroundDroidPhysicsComponent::preStep(const float delta) {
   const auto aiComp = getExpectedCompImpl<GroundDroidAIComponent>();
-  fast = aiComp->shouldMoveFast();
-  if (aiComp->shouldMoveLeft()) {
-    applyMoveForce(-1.0f);
-  } else if (aiComp->shouldMoveRight()) {
-    applyMoveForce(1.0f);
-  }
+  facingDir = aiComp->getMoveDir();
+  const float dir = calcMoveDir(facingDir);
+  const float speed = calcMoveSpeed(aiComp->getMoveSpeed());
+  const float targetVel = dir * speed;
+  const float actualVel = body->GetLinearVelocity().x;
+  //The force needed to accelerate the body to the target velocity in one frame
+  const float force = (targetVel - actualVel) / delta * body->GetMass();
+  applyMoveForce(force);
 }
 
 void GroundDroidPhysicsComponent::postStep() {
   lookForPlayer();
-  limitSpeed();
 }
 
 bool GroundDroidPhysicsComponent::canSeePlayer() const {
@@ -87,6 +88,10 @@ bool GroundDroidPhysicsComponent::onGround() const {
   return groundContact.onGround();
 }
 
+float GroundDroidPhysicsComponent::getDir() const {
+  return calcMoveDir(facingDir);
+}
+
 void GroundDroidPhysicsComponent::beginContactingGround(b2Body *const body) {
   groundContact.beginContactingGround(body);
 }
@@ -95,9 +100,23 @@ void GroundDroidPhysicsComponent::endContactingGround(b2Body *const body) {
   groundContact.endContactingGround(body);
 }
 
-void GroundDroidPhysicsComponent::applyMoveForce(const float moveDir) {
+float GroundDroidPhysicsComponent::calcMoveDir(const MoveDir dir) const {
+  return dir == MoveDir::RIGHT ? 1.0f : -1.0f;
+}
+
+float GroundDroidPhysicsComponent::calcMoveSpeed(const MoveSpeed speed) const {
+  if (speed == MoveSpeed::STOP) {
+    return 0.0f;
+  } else if (speed == MoveSpeed::SLOW) {
+    return slowMoveSpeed;
+  } else {
+    return fastMoveSpeed;
+  }
+}
+
+void GroundDroidPhysicsComponent::applyMoveForce(const float force) {
   if (onGround()) {
-    body->ApplyForceToCenter({moveForce * moveDir, 0.0f}, true);
+    body->ApplyForceToCenter({Math::clampMag(force, maxMoveForce), 0.0f}, true);
   }
 }
 
@@ -134,12 +153,4 @@ void GroundDroidPhysicsComponent::lookForPlayer() {
     );
     seePlayer = raycast.hasHitPlayer();
   }
-}
-
-void GroundDroidPhysicsComponent::limitSpeed() {
-  const b2Vec2 vel = body->GetLinearVelocity();
-  body->SetLinearVelocity({
-    Math::clampMag(vel.x, fast ? fastMoveSpeed : slowMoveSpeed),
-    vel.y
-  });
 }

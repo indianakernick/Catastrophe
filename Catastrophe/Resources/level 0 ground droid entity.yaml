@@ -5,7 +5,7 @@ ai:
 physics:
   name: GroundDroidPhysicsComponent
   body: ground droid body.yaml
-  move force: 40
+  max move force: 60
   slow move speed: 1
   fast move speed: 3
   max view distance: 12

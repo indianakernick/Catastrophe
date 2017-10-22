@@ -18,9 +18,8 @@ public:
   void init(const YAML::Node &) override;
   void update(float) override;
   
-  bool shouldMoveLeft() const override;
-  bool shouldMoveRight() const override;
-  bool shouldMoveFast() const override;
+  MoveDir getMoveDir() const override;
+  MoveSpeed getMoveSpeed() const override;
 
 private:
   //The x coordinate of the first patrol point

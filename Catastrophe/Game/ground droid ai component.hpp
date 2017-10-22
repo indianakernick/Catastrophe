@@ -13,11 +13,20 @@
 
 class GroundDroidAIComponent : public AIComponent {
 public:
+  enum class MoveSpeed {
+    STOP,
+    SLOW,
+    FAST
+  };
+  enum class MoveDir {
+    LEFT,
+    RIGHT
+  };
+
   GroundDroidAIComponent() = default;
   
-  virtual bool shouldMoveLeft() const = 0;
-  virtual bool shouldMoveRight() const = 0;
-  virtual bool shouldMoveFast() const = 0;
+  virtual MoveDir getMoveDir() const = 0;
+  virtual MoveSpeed getMoveSpeed() const = 0;
   virtual bool shouldShoot() const;
 };
 

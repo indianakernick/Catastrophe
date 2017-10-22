@@ -11,6 +11,7 @@
 
 #include "ground contact.hpp"
 #include "body physics component.hpp"
+#include "ground droid ai component.hpp"
 #include "../Libraries/Box2D/Common/b2Math.h"
 
 class GroundDroidPhysicsComponent final : public BodyPhysicsComponent {
@@ -25,24 +26,29 @@ public:
   glm::vec2 getPlayerPos() const;
   glm::vec2 getRelVel() const;
   bool onGround() const;
+  float getDir() const;
   
   void beginContactingGround(b2Body *);
   void endContactingGround(b2Body *);
 
 private:
+  using MoveDir = GroundDroidAIComponent::MoveDir;
+  using MoveSpeed = GroundDroidAIComponent::MoveSpeed;
+
   GroundContact groundContact;
   b2Vec2 playerPos;
-  float moveForce = 100.0f;
+  float maxMoveForce = 100.0f;
   float slowMoveSpeed = 2.0f;
   float fastMoveSpeed = 3.0f;
   float maxViewDistance = 4.0f;
+  MoveDir facingDir = MoveDir::RIGHT;
   bool seePlayer = false;
-  bool fast = false;
   
+  float calcMoveDir(MoveDir) const;
+  float calcMoveSpeed(MoveSpeed) const;
   void applyMoveForce(float);
   auto getPlayer() const;
   void lookForPlayer();
-  void limitSpeed();
 };
 
 #endif

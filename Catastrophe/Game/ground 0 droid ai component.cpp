@@ -36,16 +36,12 @@ void Ground0DroidAIComponent::update(float) {
   }
 }
 
-bool Ground0DroidAIComponent::shouldMoveLeft() const {
-  return !moveRight;
+GroundDroidAIComponent::MoveDir Ground0DroidAIComponent::getMoveDir() const {
+  return moveRight ? MoveDir::RIGHT : MoveDir::LEFT;
 }
 
-bool Ground0DroidAIComponent::shouldMoveRight() const {
-  return moveRight;
-}
-
-bool Ground0DroidAIComponent::shouldMoveFast() const {
-  return chasing;
+GroundDroidAIComponent::MoveSpeed Ground0DroidAIComponent::getMoveSpeed() const {
+  return chasing ? MoveSpeed::FAST : MoveSpeed::SLOW;
 }
 
 void Ground0DroidAIComponent::patrol(const float droidX) {

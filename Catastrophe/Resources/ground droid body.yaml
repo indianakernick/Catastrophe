@@ -1,7 +1,7 @@
 body:
   type: dynamic
   fixed rotation: true
-  linear damping: 0.8
+  linear damping: 0.0
 
 shapes:
   body:
@@ -26,16 +26,16 @@ shapes:
 
 fixtures:
 - shape: body
-  density: 10.0
+  density: 20.0
   user data: Deadly
 
 - shape: leg
-  friction: 0.1
-  density: 10.0
+  friction: 0.0
+  density: 20.0
   user data: Deadly
 
 - shape: head
-  density: 10.0
+  density: 20.0
   user data: Deadly
 
 - shape: foot
