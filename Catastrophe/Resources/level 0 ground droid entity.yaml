@@ -16,4 +16,4 @@ animation:
 
 rendering:
   name: Ground0DroidRenderingComponent
-  layer: over player 1
+  layer: over player 2

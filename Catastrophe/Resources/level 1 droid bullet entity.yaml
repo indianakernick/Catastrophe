@@ -1,0 +1,16 @@
+spawn:
+  name: DestroyableSpawnComponent
+
+physics:
+  name: DroidBulletPhysicsComponent
+  body: droid bullet body.yaml
+  scale: &scale [0.125, 0.125]
+  speed: 5
+
+animation:
+  name: SimpleAnimationComponent
+  scale: *scale
+
+rendering:
+  name: DroidBulletRenderingComponent
+  layer: over player 1

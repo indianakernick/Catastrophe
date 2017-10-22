@@ -18,6 +18,7 @@
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
 #include "ground droid physics component.hpp"
+#include "droid bullet physics component.hpp"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
@@ -28,7 +29,8 @@ using PhysicsComps = Utils::TypeList<
   LauncherPhysicsComponent,
   MissilePhysicsComponent,
   TurretPhysicsComponent,
-  GroundDroidPhysicsComponent
+  GroundDroidPhysicsComponent,
+  DroidBulletPhysicsComponent
 >;
 
 #endif

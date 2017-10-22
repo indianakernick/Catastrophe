@@ -24,16 +24,18 @@ void DroidShootSpawnComponent::init(const YAML::Node &node) {
 
 void DroidShootSpawnComponent::update(const float delta) {
   const auto aiComp = getExpectedCompImpl<GroundDroidAIComponent>();
-  const auto physicsComp = getExpectedCompImpl<BodyPhysicsComponent>();
   
   frequency.advance(delta);
   if (aiComp->shouldShoot()) {
     willSpawn = frequency.canDo();
     if (willSpawn) {
+      const auto physicsComp = getExpectedCompImpl<BodyPhysicsComponent>();
       const glm::vec2 pos = physicsComp->getPos();
       YAML::Node posNode = levelNode["pos"];
       posNode[0] = pos.x;
       posNode[1] = pos.y;
+      YAML::Node angleNode = levelNode["rotation"];
+      angleNode = -glm::degrees(aiComp->getGunAngle());
     }
   } else {
     willSpawn = false;

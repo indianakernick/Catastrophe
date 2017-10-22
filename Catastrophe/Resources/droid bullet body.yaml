@@ -1,0 +1,16 @@
+body:
+  type: dynamic
+  gravity scale: 0
+  linear damping: 0
+
+shapes:
+  main:
+    type: circle
+    pos: [0, 0]
+    radius: 0.5
+
+fixtures:
+- shape: main
+  user data: DroidBullet
+  filter:
+    group: -1

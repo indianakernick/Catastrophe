@@ -17,6 +17,7 @@
 #include "launcher rendering component.hpp"
 #include "platform rendering component.hpp"
 #include "ground drone rendering component.hpp"
+#include "droid bullet rendering component.hpp"
 #include "vector sprite rendering component.hpp"
 #include "spinning blade rendering component.hpp"
 #include "ground 0 droid rendering component.hpp"
@@ -35,7 +36,8 @@ using RenderingComps = Utils::TypeList<
   MissileRenderingComponent,
   MissileSpawnerRenderingComponent,
   Ground0DroidRenderingComponent,
-  Ground1DroidRenderingComponent
+  Ground1DroidRenderingComponent,
+  DroidBulletRenderingComponent
 >;
 
 #endif

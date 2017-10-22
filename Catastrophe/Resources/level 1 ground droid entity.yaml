@@ -7,7 +7,7 @@ spawn:
   name: DroidShootSpawnComponent
   rof: 1
   entity:
-    file: missile entity.yaml
+    file: level 1 droid bullet entity.yaml
 
 physics:
   name: GroundDroidPhysicsComponent
@@ -23,4 +23,4 @@ animation:
 
 rendering:
   name: Ground1DroidRenderingComponent
-  layer: over player 1
+  layer: over player 2

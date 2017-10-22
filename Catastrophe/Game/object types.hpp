@@ -41,6 +41,8 @@ std::pair<void *, void *> getUserData() {
   SYMBOL(Deadly)                                                                \
   SYMBOL(Missile)                                                               \
   SYMBOL(GroundDroidFoot)                                                       \
+  SYMBOL(GroundDroidBody)                                                       \
+  SYMBOL(DroidBullet)                                                           \
   LAST_SYMBOL(TouchSensor)
 
 namespace Symbol {

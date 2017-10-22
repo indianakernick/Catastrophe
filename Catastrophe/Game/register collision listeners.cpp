@@ -14,6 +14,7 @@
 #include "button physics component.hpp"
 #include "missile physics component.hpp"
 #include "ground droid physics component.hpp"
+#include "droid bullet physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
 namespace {
@@ -97,6 +98,27 @@ namespace {
       droidComp->endContactingGround(platform->GetBody());
     }
   }
+  
+  void handleDroidBulletBegin(b2Fixture *fixtureA, b2Fixture *fixtureB) {
+    void *const bullet = getUserData<Symbol::DroidBullet>();
+    if (fixtureA->GetUserData() == fixtureB->GetUserData()) {
+      return;
+    } else if (fixtureB->GetUserData() == bullet) {
+      std::swap(fixtureA, fixtureB);
+    } else if (fixtureA->GetUserData() != bullet) {
+      return;
+    }
+    //fixtureA is now DroidBullet
+    if (fixtureB->GetUserData() == getUserData<Symbol::GroundDroidBody>()) {
+      return;
+    }
+    auto *bulletComp = getComponent<DroidBulletPhysicsComponent>(fixtureA);
+    if (bulletComp) {
+      bulletComp->beginContact();
+    }
+  }
+  
+  void handleDroidBulletEnd(b2Fixture *, b2Fixture *) {}
 }
 
 void registerCollisionListeners(ContactListener &contactListener) {
@@ -125,4 +147,8 @@ void registerCollisionListeners(ContactListener &contactListener) {
       &handleDroidFootPlatformEnd
     }
   );
+  contactListener.addGenericListener({
+    &handleDroidBulletBegin,
+    &handleDroidBulletEnd
+  });
 }

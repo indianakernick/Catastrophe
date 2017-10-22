@@ -154,6 +154,10 @@
 		45BA388A1F9C2CDA00BAEA1E /* common droid rendering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38881F9C2CDA00BAEA1E /* common droid rendering.cpp */; };
 		45BA38901F9C3F0700BAEA1E /* ground 1 droid rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA388E1F9C3F0700BAEA1E /* ground 1 droid rendering component.cpp */; };
 		45BA38931F9C4E3700BAEA1E /* droid shoot spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38911F9C4E3700BAEA1E /* droid shoot spawn component.cpp */; };
+		45BA38951F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45BA38941F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml */; };
+		45BA38981F9C5D2A00BAEA1E /* droid bullet physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38961F9C5D2A00BAEA1E /* droid bullet physics component.cpp */; };
+		45BA389B1F9C608100BAEA1E /* droid bullet rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38991F9C608100BAEA1E /* droid bullet rendering component.cpp */; };
+		45BA389D1F9C61DF00BAEA1E /* droid bullet body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -504,6 +508,12 @@
 		45BA388F1F9C3F0700BAEA1E /* ground 1 droid rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground 1 droid rendering component.hpp"; sourceTree = "<group>"; };
 		45BA38911F9C4E3700BAEA1E /* droid shoot spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "droid shoot spawn component.cpp"; sourceTree = "<group>"; };
 		45BA38921F9C4E3700BAEA1E /* droid shoot spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "droid shoot spawn component.hpp"; sourceTree = "<group>"; };
+		45BA38941F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "level 1 droid bullet entity.yaml"; sourceTree = "<group>"; };
+		45BA38961F9C5D2A00BAEA1E /* droid bullet physics component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "droid bullet physics component.cpp"; sourceTree = "<group>"; };
+		45BA38971F9C5D2A00BAEA1E /* droid bullet physics component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "droid bullet physics component.hpp"; sourceTree = "<group>"; };
+		45BA38991F9C608100BAEA1E /* droid bullet rendering component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "droid bullet rendering component.cpp"; sourceTree = "<group>"; };
+		45BA389A1F9C608100BAEA1E /* droid bullet rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "droid bullet rendering component.hpp"; sourceTree = "<group>"; };
+		45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "droid bullet body.yaml"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -1196,6 +1206,8 @@
 				45B6EF601F9AD6FE000998D7 /* ground 0 droid rendering component.hpp */,
 				45BA388E1F9C3F0700BAEA1E /* ground 1 droid rendering component.cpp */,
 				45BA388F1F9C3F0700BAEA1E /* ground 1 droid rendering component.hpp */,
+				45BA38991F9C608100BAEA1E /* droid bullet rendering component.cpp */,
+				45BA389A1F9C608100BAEA1E /* droid bullet rendering component.hpp */,
 			);
 			name = droid;
 			sourceTree = "<group>";
@@ -1252,6 +1264,7 @@
 				4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */,
 				45B6EF5C1F9AD1A9000998D7 /* level 0 ground droid entity.yaml */,
 				45BA38831F9C0D4100BAEA1E /* level 1 ground droid entity.yaml */,
+				45BA38941F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1289,6 +1302,7 @@
 				4545DE9B1F8C76CC000A54AA /* missile body.yaml */,
 				4545DEAD1F8DD3B6000A54AA /* ground drone body.yaml */,
 				45B6EF5A1F9ACEE8000998D7 /* ground droid body.yaml */,
+				45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */,
 			);
 			name = Bodies;
 			sourceTree = "<group>";
@@ -1330,6 +1344,8 @@
 				451CC0D61F91D6F60000E424 /* turret physics component.hpp */,
 				453C8C3F1F9AEF17002D0C0C /* ground droid physics component.cpp */,
 				453C8C401F9AEF17002D0C0C /* ground droid physics component.hpp */,
+				45BA38961F9C5D2A00BAEA1E /* droid bullet physics component.cpp */,
+				45BA38971F9C5D2A00BAEA1E /* droid bullet physics component.hpp */,
 			);
 			name = "physics components";
 			sourceTree = "<group>";
@@ -1428,6 +1444,7 @@
 				452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */,
 				4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */,
 				45DEA00D1F76453F00B1DA72 /* pentagon sprite.yaml in Resources */,
+				45BA38951F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml in Resources */,
 				45B6EF5B1F9ACEE8000998D7 /* ground droid body.yaml in Resources */,
 				457619FC1F884A2500A6A792 /* platform sprite.lua in Resources */,
 				45761A001F8851F100A6A792 /* player sprite.lua in Resources */,
@@ -1441,6 +1458,7 @@
 				45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */,
 				45DE9FC31F6F8C7900B1DA72 /* level 0.yaml in Resources */,
 				45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */,
+				45BA389D1F9C61DF00BAEA1E /* droid bullet body.yaml in Resources */,
 				45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */,
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
@@ -1529,6 +1547,7 @@
 				4534A6111F51289B00F3AC06 /* debug input.cpp in Sources */,
 				45BA387F1F9C034E00BAEA1E /* ground droid ai component.cpp in Sources */,
 				45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */,
+				45BA38981F9C5D2A00BAEA1E /* droid bullet physics component.cpp in Sources */,
 				45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */,
 				454116201F523DA500C2865B /* camera motion track.cpp in Sources */,
 				453893091F2D6F21007EBB5A /* debug draw.cpp in Sources */,
@@ -1542,6 +1561,7 @@
 				452FFA741F6BC50D003A98B1 /* b2Math.cpp in Sources */,
 				4545DE9F1F8C787D000A54AA /* missile physics component.cpp in Sources */,
 				452FFA7C1F6BC50D003A98B1 /* b2World.cpp in Sources */,
+				45BA389B1F9C608100BAEA1E /* droid bullet rendering component.cpp in Sources */,
 				4545DEA41F8DAA62000A54AA /* body physics component.cpp in Sources */,
 				451CC0DC1F91DEA60000E424 /* turret animation component.cpp in Sources */,
 				451CC0F91F9471880000E424 /* rendering job.cpp in Sources */,

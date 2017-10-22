@@ -18,7 +18,7 @@ namespace {
 }
 
 void Ground1DroidRenderingComponent::render(NVGcontext *const ctx) {
-  const auto animComp = getExpectedCompImpl<GroundDroidAnimationComponent>();
+  const auto animComp = getExpectedCompImpl<const GroundDroidAnimationComponent>();
   
   setModelTransform(ctx);
   
