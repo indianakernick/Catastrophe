@@ -1,11 +1,12 @@
 ai:
   name: Ground1DroidAIComponent
-  looking duration: 1
+  looking duration: 0.1
   gun rotation speed: 0.5
 
 spawn:
   name: DroidShootSpawnComponent
   rof: 1
+  bullet spread: 4
   entity:
     file: level 1 droid bullet entity.yaml
 

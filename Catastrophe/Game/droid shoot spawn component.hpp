@@ -28,6 +28,7 @@ private:
   std::string entityFile;
   YAML::Node levelNode;
   Time::DeltaFreqLimiter<float> frequency;
+  float bulletSpread = 0.0f;
   bool willSpawn = false;
 };
 

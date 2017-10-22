@@ -8,6 +8,7 @@
 
 #include "droid shoot spawn component.hpp"
 
+#include <random>
 #include "yaml helper.hpp"
 #include "body physics component.hpp"
 #include "ground droid ai component.hpp"
@@ -20,9 +21,12 @@ void DroidShootSpawnComponent::init(const YAML::Node &node) {
     getOptional(entityFile, entity, "file");
     levelNode = entity;
   }
+  getOptional(bulletSpread, node, "bullet spread");
 }
 
 void DroidShootSpawnComponent::update(const float delta) {
+  static std::mt19937 gen;
+
   const auto aiComp = getExpectedCompImpl<GroundDroidAIComponent>();
   
   frequency.advance(delta);
@@ -34,8 +38,10 @@ void DroidShootSpawnComponent::update(const float delta) {
       YAML::Node posNode = levelNode["pos"];
       posNode[0] = pos.x;
       posNode[1] = pos.y;
+      const float gunAngle = -glm::degrees(aiComp->getGunAngle());
+      std::normal_distribution<float> dist(gunAngle, bulletSpread);
       YAML::Node angleNode = levelNode["rotation"];
-      angleNode = -glm::degrees(aiComp->getGunAngle());
+      angleNode = dist(gen);
     }
   } else {
     willSpawn = false;

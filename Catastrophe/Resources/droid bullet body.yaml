@@ -2,6 +2,7 @@ body:
   type: dynamic
   gravity scale: 0
   linear damping: 0
+  bullet: YES
 
 shapes:
   main:
