@@ -18,12 +18,7 @@ public:
   void init(const YAML::Node &) override;
   void update(float) override;
   
-  bool shouldDestroySelf() override;
-  EntityID shouldSpawnEntities() override;
-  void setFirstID(EntityID) override;
-  
-  std::string getEntityFile(EntityID) override;
-  YAML::Node getLevelNode(EntityID) override;
+  bool shouldDestroySelf() const override;
 
   void kill();
   

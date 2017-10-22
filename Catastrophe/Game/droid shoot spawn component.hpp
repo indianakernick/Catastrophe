@@ -1,21 +1,21 @@
 //
-//  periodic spawn component.hpp
+//  droid shoot spawn component.hpp
 //  Catastrophe
 //
-//  Created by Indi Kernick on 12/10/17.
+//  Created by Indi Kernick on 22/10/17.
 //  Copyright © 2017 Indi Kernick. All rights reserved.
 //
 
-#ifndef periodic_spawn_component_hpp
-#define periodic_spawn_component_hpp
+#ifndef droid_shoot_spawn_component_hpp
+#define droid_shoot_spawn_component_hpp
 
 #include "spawn component.hpp"
 #include <Simpleton/Time/freq limiter.hpp>
 
-class PeriodicSpawnComponent final : public SpawnComponent {
+class DroidShootSpawnComponent final : public SpawnComponent {
 public:
-  PeriodicSpawnComponent() = default;
-  
+  DroidShootSpawnComponent() = default;
+
   void init(const YAML::Node &) override;
   void update(float) override;
   
@@ -23,12 +23,12 @@ public:
   
   std::string getEntityFile(EntityID) const override;
   YAML::Node getLevelNode(EntityID) const override;
-  
+
 private:
   std::string entityFile;
   YAML::Node levelNode;
   Time::DeltaFreqLimiter<float> frequency;
-  EntityID numEntitiesToSpawn = 0;
+  bool willSpawn = false;
 };
 
 #endif

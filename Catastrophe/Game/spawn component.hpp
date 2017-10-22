@@ -23,12 +23,12 @@ public:
   virtual void init(const YAML::Node &) = 0;
   virtual void update(float) = 0;
   
-  virtual bool shouldDestroySelf() = 0;
-  virtual EntityID shouldSpawnEntities() = 0;
-  virtual void setFirstID(EntityID) = 0;
+  virtual bool shouldDestroySelf() const;
+  virtual EntityID shouldSpawnEntities() const;
+  virtual void setFirstID(EntityID);
   
-  virtual std::string getEntityFile(EntityID) = 0;
-  virtual YAML::Node getLevelNode(EntityID) = 0;
+  virtual std::string getEntityFile(EntityID) const;
+  virtual YAML::Node getLevelNode(EntityID) const;
 };
 
 #endif

@@ -7,3 +7,21 @@
 //
 
 #include "spawn component.hpp"
+
+bool SpawnComponent::shouldDestroySelf() const {
+  return false;
+}
+
+EntityID SpawnComponent::shouldSpawnEntities() const {
+  return 0;
+}
+
+void SpawnComponent::setFirstID(EntityID) {}
+
+std::string SpawnComponent::getEntityFile(EntityID) const {
+  return {};
+}
+
+YAML::Node SpawnComponent::getLevelNode(EntityID) const {
+  return {};
+}

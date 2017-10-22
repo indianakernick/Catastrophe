@@ -3,6 +3,12 @@ ai:
   looking duration: 1
   gun rotation speed: 0.5
 
+spawn:
+  name: DroidShootSpawnComponent
+  rof: 1
+  entity:
+    file: missile entity.yaml
+
 physics:
   name: GroundDroidPhysicsComponent
   body: ground droid body.yaml

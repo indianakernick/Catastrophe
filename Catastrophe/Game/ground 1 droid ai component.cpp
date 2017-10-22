@@ -32,10 +32,13 @@ void Ground1DroidAIComponent::update(const float delta) {
       timeSinceLook = 0.0f;
     } else {
       lookingRight = playerPos.x > droidPos.x;
+      
+      //@FIXME this ain't right
       const glm::vec2 toPlayer = glm::normalize(playerPos - droidPos);
       const float playerAngle = std::atan2(toPlayer.y, toPlayer.x);
-      const float deltaAngle = playerAngle - gunAngle;
-      gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
+      gunAngle = playerAngle;
+      //const float deltaAngle = playerAngle - gunAngle;
+      //gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
     }
   } else {
     if (seePlayer) {

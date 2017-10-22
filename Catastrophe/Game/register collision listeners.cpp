@@ -71,6 +71,9 @@ namespace {
     } else if (fixtureA->GetUserData() != missile) {
       return;
     }
+    if (fixtureB->GetUserData() == getUserData<Symbol::Deadly>()) {
+      return;
+    }
     //fixtureA is now Missile
     auto *missileComp = getComponent<MissilePhysicsComponent>(fixtureA);
     if (missileComp) {

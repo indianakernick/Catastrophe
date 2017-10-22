@@ -22,22 +22,17 @@ void PeriodicSpawnComponent::init(const YAML::Node &node) {
 
 void PeriodicSpawnComponent::update(const float delta) {
   frequency.advance(delta);
+  numEntitiesToSpawn = frequency.canDoMultipleOverlap();
 }
 
-bool PeriodicSpawnComponent::shouldDestroySelf() {
-  return false;
+EntityID PeriodicSpawnComponent::shouldSpawnEntities() const {
+  return numEntitiesToSpawn;
 }
 
-EntityID PeriodicSpawnComponent::shouldSpawnEntities() {
-  return frequency.canDoMultipleOverlap();
-}
-
-void PeriodicSpawnComponent::setFirstID(EntityID) {}
-
-std::string PeriodicSpawnComponent::getEntityFile(EntityID) {
+std::string PeriodicSpawnComponent::getEntityFile(EntityID) const {
   return entityFile;
 }
 
-YAML::Node PeriodicSpawnComponent::getLevelNode(EntityID) {
+YAML::Node PeriodicSpawnComponent::getLevelNode(EntityID) const {
   return levelNode;
 }
