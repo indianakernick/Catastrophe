@@ -16,12 +16,6 @@ public:
   Ground0DroidRenderingComponent() = default;
   
   void render(NVGcontext *) override;
-
-private:
-  static void renderLeg(NVGcontext *);
-  static void renderWheel(NVGcontext *);
-  static void renderBody(NVGcontext *);
-  static void renderFace(NVGcontext *, float);
 };
 
 #endif
