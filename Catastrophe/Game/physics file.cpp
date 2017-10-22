@@ -194,6 +194,14 @@ namespace {
     }
   }
   
+  b2Filter readFilter(const YAML::Node &filterNode) {
+    b2Filter filter;
+    getOptional(filter.categoryBits, filterNode, "category");
+    getOptional(filter.maskBits, filterNode, "mask");
+    getOptional(filter.groupIndex, filterNode, "group");
+    return filter;
+  }
+  
   void readFixture(
     b2Body *body,
     const YAML::Node &shapesNode,
@@ -215,6 +223,9 @@ namespace {
     
     if (const YAML::Node &userData = fixtureNode["user data"]) {
       fixtureDef.userData = getUserData(userData.Scalar());
+    }
+    if (const YAML::Node &filter = fixtureNode["filter"]) {
+      fixtureDef.filter = readFilter(filter);
     }
     
     body->CreateFixture(&fixtureDef);
