@@ -1,0 +1,19 @@
+ai:
+  name: Ground1DroidAIComponent
+  looking duration: 1
+
+physics:
+  name: GroundDroidPhysicsComponent
+  body: ground droid body.yaml
+  max move force: 80
+  slow move speed: 1
+  fast move speed: 3
+  max view distance: 18
+
+animation:
+  name: GroundDroidAnimationComponent
+  bop speed: 0.8
+
+rendering:
+  name: Ground0DroidRenderingComponent
+  layer: over player 1

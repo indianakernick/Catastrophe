@@ -149,6 +149,8 @@
 		45BA385A1F9B1E9800BAEA1E /* ground contact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38581F9B1E9800BAEA1E /* ground contact.cpp */; };
 		45BA38601F9B255500BAEA1E /* limit velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA385E1F9B255500BAEA1E /* limit velocity.cpp */; };
 		45BA387F1F9C034E00BAEA1E /* ground droid ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA387D1F9C034E00BAEA1E /* ground droid ai component.cpp */; };
+		45BA38841F9C0D4100BAEA1E /* level 1 ground droid entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45BA38831F9C0D4100BAEA1E /* level 1 ground droid entity.yaml */; };
+		45BA38871F9C0D9A00BAEA1E /* ground 1 droid ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38851F9C0D9A00BAEA1E /* ground 1 droid ai component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -490,6 +492,9 @@
 		45BA385F1F9B255500BAEA1E /* limit velocity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "limit velocity.hpp"; sourceTree = "<group>"; };
 		45BA387D1F9C034E00BAEA1E /* ground droid ai component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground droid ai component.cpp"; sourceTree = "<group>"; };
 		45BA387E1F9C034E00BAEA1E /* ground droid ai component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground droid ai component.hpp"; sourceTree = "<group>"; };
+		45BA38831F9C0D4100BAEA1E /* level 1 ground droid entity.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "level 1 ground droid entity.yaml"; sourceTree = "<group>"; };
+		45BA38851F9C0D9A00BAEA1E /* ground 1 droid ai component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ground 1 droid ai component.cpp"; sourceTree = "<group>"; };
+		45BA38861F9C0D9A00BAEA1E /* ground 1 droid ai component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "ground 1 droid ai component.hpp"; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -1034,6 +1039,8 @@
 				45BA387E1F9C034E00BAEA1E /* ground droid ai component.hpp */,
 				45BA38551F9B002000BAEA1E /* ground 0 droid ai component.cpp */,
 				45BA38561F9B002000BAEA1E /* ground 0 droid ai component.hpp */,
+				45BA38851F9C0D9A00BAEA1E /* ground 1 droid ai component.cpp */,
+				45BA38861F9C0D9A00BAEA1E /* ground 1 droid ai component.hpp */,
 			);
 			name = "ai components";
 			sourceTree = "<group>";
@@ -1229,6 +1236,7 @@
 				4545DEAB1F8DD355000A54AA /* ground drone entity.yaml */,
 				4545DEB21F8EEDCC000A54AA /* missile spawner entity.yaml */,
 				45B6EF5C1F9AD1A9000998D7 /* level 0 ground droid entity.yaml */,
+				45BA38831F9C0D4100BAEA1E /* level 1 ground droid entity.yaml */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1413,6 +1421,7 @@
 				45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */,
 				45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */,
 				45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */,
+				45BA38841F9C0D4100BAEA1E /* level 1 ground droid entity.yaml in Resources */,
 				45DEA0651F84A39600B1DA72 /* launcher platform body.yaml in Resources */,
 				45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */,
 				45DE9FC31F6F8C7900B1DA72 /* level 0.yaml in Resources */,
@@ -1539,6 +1548,7 @@
 				452FFA801F6BC50D003A98B1 /* b2CircleContact.cpp in Sources */,
 				452FFA7E1F6BC50D003A98B1 /* b2ChainAndCircleContact.cpp in Sources */,
 				454116301F5405FD00C2865B /* camera props.cpp in Sources */,
+				45BA38871F9C0D9A00BAEA1E /* ground 1 droid ai component.cpp in Sources */,
 				45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */,
 				45DE9FBC1F6E467400B1DA72 /* tinyfiledialogs.c in Sources */,
 				45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */,

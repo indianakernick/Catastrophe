@@ -140,7 +140,7 @@ void GroundDroidPhysicsComponent::lookForPlayer() {
   playerPos = playerComp->getBody()->GetPosition();
   const float playerDroidDist = (playerPos - droidPos).LengthSquared();
   
-  if (Math::sign(playerPos.x - droidPos.x) != Math::sign(getRelVel().x)) {
+  if (Math::sign(playerPos.x - droidPos.x) != Math::sign(getDir())) {
     seePlayer = false;
   } else if (playerDroidDist > maxViewDistance*maxViewDistance) {
     seePlayer = false;

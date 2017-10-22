@@ -22,6 +22,8 @@ public:
   MoveSpeed getMoveSpeed() const override;
 
 private:
+  //@TODO this really should be implemented using the state design pattern
+
   //The x coordinate of the first patrol point
   float patrolFirst = 0.0f;
   //The x coordinate of the second patrol point

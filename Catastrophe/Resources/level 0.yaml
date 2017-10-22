@@ -18,9 +18,9 @@ entities:
 - id: 3
   file: oscillating platform entity.yaml
   scale: [4, 0.25]
-  first: [-10, 4]
+  first: [-30, 4]
   second: [10, 4]
-  start: 0.5
+  start: 0.75
   vel: 1
 
 - id: 4
@@ -72,6 +72,15 @@ entities:
 
 - id: 12
   file: level 0 ground droid entity.yaml
-  pos: [-20, 1.0]
+  pos: [-20, 1]
   first patrol point: -25
   second patrol point: -15
+
+- id: 13
+  file: platform entity.yaml
+  pos: [-40, 0]
+  scale: [20, 1]
+
+- id: 14
+  file: level 1 ground droid entity.yaml
+  pos: [-40, 1]

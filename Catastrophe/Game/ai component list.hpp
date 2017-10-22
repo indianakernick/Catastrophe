@@ -11,9 +11,11 @@
 
 #include <Simpleton/Utils/type list.hpp>
 #include "ground 0 droid ai component.hpp"
+#include "ground 1 droid ai component.hpp"
 
 using AIComps = Utils::TypeList<
-  Ground0DroidAIComponent
+  Ground0DroidAIComponent,
+  Ground1DroidAIComponent
 >;
 
 #endif
