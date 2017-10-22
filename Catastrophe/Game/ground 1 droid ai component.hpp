@@ -20,6 +20,7 @@ public:
   
   MoveDir getMoveDir() const override;
   MoveSpeed getMoveSpeed() const override;
+  float getGunAngle() const override;
   bool shouldShoot() const override;
 
 private:
@@ -27,6 +28,8 @@ private:
 
   float lookingDuration = 1.0f;
   float timeSinceLook = 0.0f;
+  float gunRotateSpeed = 1.0f;
+  float gunAngle = 0.0f;
   bool lookingRight = true;
   bool chasing = false;
 };

@@ -9,10 +9,13 @@
 #include "ground 1 droid ai component.hpp"
 
 #include "yaml helper.hpp"
+#include <glm/gtc/constants.hpp>
+#include <Simpleton/Math/clamp.hpp>
 #include "ground droid physics component.hpp"
 
 void Ground1DroidAIComponent::init(const YAML::Node &node) {
   getOptional(lookingDuration, node, "looking duration");
+  getOptional(gunRotateSpeed, node, "gun rotate speed");
 }
 
 void Ground1DroidAIComponent::update(const float delta) {
@@ -29,6 +32,10 @@ void Ground1DroidAIComponent::update(const float delta) {
       timeSinceLook = 0.0f;
     } else {
       lookingRight = playerPos.x > droidPos.x;
+      const glm::vec2 toPlayer = glm::normalize(playerPos - droidPos);
+      const float playerAngle = std::atan2(toPlayer.y, toPlayer.x);
+      const float deltaAngle = playerAngle - gunAngle;
+      gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
     }
   } else {
     if (seePlayer) {
@@ -49,6 +56,10 @@ GroundDroidAIComponent::MoveDir Ground1DroidAIComponent::getMoveDir() const {
 
 GroundDroidAIComponent::MoveSpeed Ground1DroidAIComponent::getMoveSpeed() const {
   return chasing ? MoveSpeed::FAST : MoveSpeed::STOP;
+}
+
+float Ground1DroidAIComponent::getGunAngle() const {
+  return gunAngle;
 }
 
 bool Ground1DroidAIComponent::shouldShoot() const {

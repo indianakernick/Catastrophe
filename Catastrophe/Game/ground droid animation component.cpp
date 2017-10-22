@@ -18,7 +18,9 @@ void GroundDroidAnimationComponent::init(const YAML::Node &node) {
 
 void GroundDroidAnimationComponent::update(const float delta) {
   const auto physicsComp = getExpectedCompImpl<const GroundDroidPhysicsComponent>();
+  const auto aiComp = getExpectedCompImpl<const GroundDroidAIComponent>();
   dir = physicsComp->getDir();
+  gunAngle = aiComp->getGunAngle();
   const float velX = physicsComp->getRelVel().x;
   progress += velX * bopSpeed * delta;
   progress = std::fmod(progress, 1.0f);
@@ -36,4 +38,8 @@ glm::mat3 GroundDroidAnimationComponent::getModelMat() const {
 
 float GroundDroidAnimationComponent::getDir() const {
   return dir;
+}
+
+float GroundDroidAnimationComponent::getGunAngle() const {
+  return gunAngle;
 }

@@ -23,6 +23,7 @@ public:
   glm::mat3 getModelMat() const override;
   
   float getDir() const;
+  float getGunAngle() const;
 
 private:
   Transform transform;
@@ -30,6 +31,7 @@ private:
   float progress = 0.0f;
   float bopSpeed = 1.0f;
   float dir = 1.0f;
+  float gunAngle = 0.0f;
 };
 
 #endif

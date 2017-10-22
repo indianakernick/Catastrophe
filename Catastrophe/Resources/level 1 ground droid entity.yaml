@@ -1,6 +1,7 @@
 ai:
   name: Ground1DroidAIComponent
   looking duration: 1
+  gun rotation speed: 0.5
 
 physics:
   name: GroundDroidPhysicsComponent
@@ -15,5 +16,5 @@ animation:
   bop speed: 0.8
 
 rendering:
-  name: Ground0DroidRenderingComponent
+  name: Ground1DroidRenderingComponent
   layer: over player 1

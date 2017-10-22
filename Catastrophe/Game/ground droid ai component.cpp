@@ -8,6 +8,10 @@
 
 #include "ground droid ai component.hpp"
 
+float GroundDroidAIComponent::getGunAngle() const {
+  return 0.0f;
+}
+
 bool GroundDroidAIComponent::shouldShoot() const {
   return false;
 }

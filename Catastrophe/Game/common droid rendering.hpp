@@ -16,9 +16,10 @@ const NVGcolor DEFAULT_GROUND_DROID_WHEEL_COLOR = nvgRGBf(0.1f, 0.1f, 0.1f);
 
 void droidScale(NVGcontext *);
 void groundDroidBopTranslate(NVGcontext *, float);
-void renderGroundDroidLeg(NVGcontext *, NVGcolor);
-void renderGroundDroidWheel(NVGcontext *, NVGcolor);
+void renderGroundDroidLeg(NVGcontext *, NVGcolor = DEFAULT_GROUND_DROID_LEG_COLOR);
+void renderGroundDroidWheel(NVGcontext *, NVGcolor = DEFAULT_GROUND_DROID_WHEEL_COLOR);
 void renderGroundDroidBody(NVGcontext *, NVGcolor);
 void renderGroundDroidFace(NVGcontext *, NVGcolor, float);
+void renderGroundDroidGun(NVGcontext *, NVGcolor, float);
 
 #endif

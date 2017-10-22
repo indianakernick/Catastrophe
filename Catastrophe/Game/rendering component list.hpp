@@ -20,6 +20,7 @@
 #include "vector sprite rendering component.hpp"
 #include "spinning blade rendering component.hpp"
 #include "ground 0 droid rendering component.hpp"
+#include "ground 1 droid rendering component.hpp"
 #include "missile spawner rendering component.hpp"
 
 using RenderingComps = Utils::TypeList<
@@ -33,7 +34,8 @@ using RenderingComps = Utils::TypeList<
   GroundDroneRenderingComponent,
   MissileRenderingComponent,
   MissileSpawnerRenderingComponent,
-  Ground0DroidRenderingComponent
+  Ground0DroidRenderingComponent,
+  Ground1DroidRenderingComponent
 >;
 
 #endif

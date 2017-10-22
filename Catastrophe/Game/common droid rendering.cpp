@@ -98,3 +98,16 @@ void renderGroundDroidFace(NVGcontext *const ctx, const NVGcolor color, const fl
   //revert scale
   nvgScale(ctx, dir, 1.0f);
 }
+
+void renderGroundDroidGun(NVGcontext *const ctx, const NVGcolor color, const float angle) {
+  nvgRotate(ctx, angle);
+  
+  nvgBeginPath(ctx);
+  nvgFillColor(ctx, color);
+  nvgCircle(ctx, 0.0f, 0.0f, 1.0f);
+  nvgRect(ctx, 0.0f, -1.0f, 6.0f, 2.0f);
+  nvgFill(ctx);
+  
+  //revert angle
+  nvgRotate(ctx, -angle);
+}

@@ -27,6 +27,7 @@ public:
   
   virtual MoveDir getMoveDir() const = 0;
   virtual MoveSpeed getMoveSpeed() const = 0;
+  virtual float getGunAngle() const;
   virtual bool shouldShoot() const;
 };
 
