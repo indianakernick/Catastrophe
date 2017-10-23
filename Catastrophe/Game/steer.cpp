@@ -12,11 +12,12 @@
 #include <algorithm>
 #include <glm/gtx/norm.hpp>
 
-PosVel applyAcc(const PosVelAcc in, const float delta) {
-  PosVel out;
-  out.vel = in.vel + in.acc * delta;
-  out.pos = in.pos + out.vel * delta;
-  return out;
+glm::vec2 applyAcc(const glm::vec2 acc, const glm::vec2 vel, const float delta) {
+  return acc * delta + vel;
+}
+
+glm::vec2 applySteer(const glm::vec2 agent, const glm::vec2 desired, const float time) {
+  return (desired - agent) / time;
 }
 
 glm::vec2 clampLength(const glm::vec2 vec, const float maxLength) {
@@ -26,24 +27,19 @@ glm::vec2 clampLength(const glm::vec2 vec, const float maxLength) {
 
 glm::vec2 arrive(
   const ArriveConst c,
-  const PosVel agent,
+  const glm::vec2 pos,
   const glm::vec2 target
 ) {
-  const glm::vec2 targetDir = target - agent.pos;
+  const glm::vec2 targetDir = target - pos;
   const float targetDist = glm::length(targetDir);
-  
   const float desiredSpeed = std::min(targetDist, c.slowDist) / c.slowDist * c.maxSpeed;
-  const glm::vec2 desiredVel = targetDir / targetDist * desiredSpeed;
-  
-  return (desiredVel - agent.vel) / c.timeToAcc;
+  return targetDir / targetDist * desiredSpeed;
 }
 
 glm::vec2 seek(
   const SeekConst c,
-  const PosVel agent,
+  const glm::vec2 pos,
   const glm::vec2 target
 ) {
-  const glm::vec2 targetDir = target - agent.pos;
-  const glm::vec2 desiredVel = glm::normalize(targetDir) * c.maxSpeed;
-  return (desiredVel - agent.vel) / c.timeToAcc;
+  return glm::normalize(target - pos) * c.maxSpeed;
 }

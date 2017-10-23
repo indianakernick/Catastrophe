@@ -16,10 +16,10 @@
 
 void MissileAIComponent::init(const YAML::Node &node) {
   constants.maxSpeed = 1.0f;
-  constants.timeToAcc = 1.0f;
+  timeToAcc = 1.0f;
   maxAcc = 1.0f;
   getOptional(constants.maxSpeed, node, "max speed");
-  getOptional(constants.timeToAcc, node, "acceleration time");
+  getOptional(timeToAcc, node, "acceleration time");
   getOptional(maxAcc, node, "max acceleration");
 }
 
@@ -35,11 +35,12 @@ void MissileAIComponent::update(float) {
   
   const glm::vec2 target = playerBody->getPos();
   const auto missileComp = getExpectedCompImpl<MissilePhysicsComponent>();
-  PosVel agent;
-  agent.pos = missileComp->getPos();
-  agent.vel = missileComp->getVel();
+  const glm::vec2 missilePos = missileComp->getPos();
+  const glm::vec2 missileVel = missileComp->getVel();
   
-  acc = clampLength(seek(constants, agent, target), maxAcc);
+  const glm::vec2 steer = seek(constants, missilePos, target);
+  acc = applySteer(missileVel, steer, timeToAcc);
+  acc = clampLength(acc, maxAcc);
 }
 
 glm::vec2 MissileAIComponent::getAcc() const {

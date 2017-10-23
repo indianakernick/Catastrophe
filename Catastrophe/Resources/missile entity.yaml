@@ -1,6 +1,6 @@
 ai:
   name: MissileAIComponent
-  max speed: 10
+  max speed: 15
   max acceleration: 5
   acceleration time: 0.1
 

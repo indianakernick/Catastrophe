@@ -23,6 +23,7 @@ public:
 
 private:
   SeekConst constants;
+  float timeToAcc;
   float maxAcc;
   glm::vec2 acc;
 };

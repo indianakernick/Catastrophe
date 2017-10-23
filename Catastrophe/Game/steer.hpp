@@ -22,7 +22,8 @@ struct PosVelAcc {
   glm::vec2 acc;
 };
 
-PosVel applyAcc(PosVelAcc, float);
+glm::vec2 applyAcc(glm::vec2, glm::vec2, float);
+glm::vec2 applySteer(glm::vec2, glm::vec2, float);
 glm::vec2 clampLength(glm::vec2, float);
 
 struct ArriveConst {
@@ -30,19 +31,15 @@ struct ArriveConst {
   float slowDist;
   ///The maximum speed the agent will reach while traveling
   float maxSpeed;
-  ///The amount of time it takes to accelerate to the desired velocity
-  float timeToAcc;
 };
 
-glm::vec2 arrive(ArriveConst, PosVel, glm::vec2);
+glm::vec2 arrive(ArriveConst, glm::vec2, glm::vec2);
 
 struct SeekConst {
   ///The maximum speed the agent will reach while traveling
   float maxSpeed;
-  ///The amount of time it takes to accelerate to the desired velocity
-  float timeToAcc;
 };
 
-glm::vec2 seek(SeekConst, PosVel, glm::vec2);
+glm::vec2 seek(SeekConst, glm::vec2, glm::vec2);
 
 #endif
