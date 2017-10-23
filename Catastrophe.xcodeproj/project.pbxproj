@@ -158,6 +158,7 @@
 		45BA38981F9C5D2A00BAEA1E /* droid bullet physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38961F9C5D2A00BAEA1E /* droid bullet physics component.cpp */; };
 		45BA389B1F9C608100BAEA1E /* droid bullet rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38991F9C608100BAEA1E /* droid bullet rendering component.cpp */; };
 		45BA389D1F9C61DF00BAEA1E /* droid bullet body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */; };
+		45BA38A11F9DB1AE00BAEA1E /* steer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA389F1F9DB1AE00BAEA1E /* steer.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
@@ -515,6 +516,8 @@
 		45BA389A1F9C608100BAEA1E /* droid bullet rendering component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "droid bullet rendering component.hpp"; sourceTree = "<group>"; };
 		45BA389C1F9C61DF00BAEA1E /* droid bullet body.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "droid bullet body.yaml"; sourceTree = "<group>"; };
 		45BA389E1F9C6A1E00BAEA1E /* collision categories.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "collision categories.hpp"; sourceTree = "<group>"; };
+		45BA389F1F9DB1AE00BAEA1E /* steer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = steer.cpp; sourceTree = "<group>"; };
+		45BA38A01F9DB1AE00BAEA1E /* steer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = steer.hpp; sourceTree = "<group>"; };
 		45C545F71F8F0DCD00217406 /* spawn system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn system.cpp"; sourceTree = "<group>"; };
 		45C545F81F8F0DCD00217406 /* spawn system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn system.hpp"; sourceTree = "<group>"; };
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
@@ -1049,6 +1052,8 @@
 				453C8C471F9AF588002D0C0C /* ai component.hpp */,
 				453C8C431F9AF32C002D0C0C /* ai system.cpp */,
 				453C8C441F9AF32C002D0C0C /* ai system.hpp */,
+				45BA389F1F9DB1AE00BAEA1E /* steer.cpp */,
+				45BA38A01F9DB1AE00BAEA1E /* steer.hpp */,
 			);
 			name = ai;
 			sourceTree = "<group>";
@@ -1622,6 +1627,7 @@
 				451CC1081F988E1B0000E424 /* tracking component.cpp in Sources */,
 				4545DEB11F8EE4D1000A54AA /* missile rendering component.cpp in Sources */,
 				453892D01F2AF7FE007EBB5A /* physics component.cpp in Sources */,
+				45BA38A11F9DB1AE00BAEA1E /* steer.cpp in Sources */,
 				4568D3201F89FB150037268B /* platform rendering component.cpp in Sources */,
 				452FFA791F6BC50D003A98B1 /* b2ContactManager.cpp in Sources */,
 				45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */,
