@@ -21,7 +21,7 @@ entities:
   first: [-30, 4]
   second: [10, 4]
   start: 0.75
-  vel: 3
+  vel: 1
 
 - id: 4
   file: pentagon entity.yaml

@@ -9,13 +9,15 @@
 #ifndef ai_component_list_hpp
 #define ai_component_list_hpp
 
+#include "missile ai component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "ground 0 droid ai component.hpp"
 #include "ground 1 droid ai component.hpp"
 
 using AIComps = Utils::TypeList<
   Ground0DroidAIComponent,
-  Ground1DroidAIComponent
+  Ground1DroidAIComponent,
+  MissileAIComponent
 >;
 
 #endif

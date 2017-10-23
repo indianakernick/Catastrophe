@@ -15,17 +15,12 @@ class MissilePhysicsComponent final : public BodyPhysicsComponent {
 public:
   MissilePhysicsComponent() = default;
   
-  void init(b2World &, const YAML::Node &) override;
   void preStep(float) override;
   void postStep() override;
   
   void beginContact();
 
 private:
-  static constexpr float TOP_SPEED = 20.0f;
-
-  float moveForce = 10.0f;
-  float turnTorque = 1.0f;
   bool contacted = false;
 };
 

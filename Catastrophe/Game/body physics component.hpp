@@ -25,6 +25,7 @@ public:
   AABB getAABB() const override final;
 
   glm::vec2 getPos() const;
+  glm::vec2 getVel() const;
   float getAngle() const;
   b2Body *getBody();
   const b2Body *getBody() const;

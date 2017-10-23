@@ -38,6 +38,11 @@ glm::vec2 BodyPhysicsComponent::getPos() const {
   return castToGLM(body->GetPosition());
 }
 
+glm::vec2 BodyPhysicsComponent::getVel() const {
+  assert(body);
+  return castToGLM(body->GetLinearVelocity());
+}
+
 float BodyPhysicsComponent::getAngle() const {
   assert(body);
   return body->GetAngle();

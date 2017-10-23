@@ -1,10 +1,15 @@
+ai:
+  name: MissileAIComponent
+  max speed: 10
+  max acceleration: 5
+  acceleration time: 0.1
+
 spawn:
   name: DestroyableSpawnComponent
 
 physics:
   name: MissilePhysicsComponent
   body: missile body.yaml
-  move force: 8
   scale: &scale [1.0, 0.0625]
 
 animation:
