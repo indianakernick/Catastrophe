@@ -22,11 +22,15 @@ public:
   bool shouldMoveLeft() const;
   bool shouldMoveRight() const;
   bool shouldJump() const;
+  bool shouldShoot() const;
+  glm::vec2 getGunTarget() const;
   
 private:
   SDL_Scancode leftKey = SDL_SCANCODE_A;
   SDL_Scancode rightKey = SDL_SCANCODE_D;
   SDL_Scancode jumpKey = SDL_SCANCODE_W;
+  glm::vec2 gunTarget = {0.0f, 0.0f};
+  bool shoot = false;
   bool leftButton = false;
   bool rightButton = false;
   bool jumpButton = false;
