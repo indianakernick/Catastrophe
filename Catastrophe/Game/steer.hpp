@@ -11,20 +11,8 @@
 
 #include <glm/vec2.hpp>
 
-struct PosVel {
-  glm::vec2 pos;
-  glm::vec2 vel;
-};
-
-struct PosVelAcc {
-  glm::vec2 pos;
-  glm::vec2 vel;
-  glm::vec2 acc;
-};
-
 glm::vec2 applyAcc(glm::vec2, glm::vec2, float);
 glm::vec2 applySteer(glm::vec2, glm::vec2, float);
-glm::vec2 clampLength(glm::vec2, float);
 
 struct ArriveConst {
   ///The distance from the target that the agent will start slowing down
@@ -41,5 +29,9 @@ struct SeekConst {
 };
 
 glm::vec2 seek(SeekConst, glm::vec2, glm::vec2);
+
+using FleeConst = SeekConst;
+
+glm::vec2 flee(FleeConst, glm::vec2, glm::vec2);
 
 #endif

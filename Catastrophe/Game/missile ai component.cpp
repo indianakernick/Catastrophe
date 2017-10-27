@@ -12,6 +12,7 @@
 #include "yaml helper.hpp"
 #include "player constants.hpp"
 #include "body physics component.hpp"
+#include <Simpleton/Math/vectors.hpp>
 #include "missile physics component.hpp"
 
 void MissileAIComponent::init(const YAML::Node &node) {
@@ -40,7 +41,7 @@ void MissileAIComponent::update(float) {
   
   const glm::vec2 steer = seek(constants, missilePos, target);
   acc = applySteer(missileVel, steer, timeToAcc);
-  acc = clampLength(acc, maxAcc);
+  acc = Math::clampLength(acc, maxAcc);
 }
 
 glm::vec2 MissileAIComponent::getAcc() const {

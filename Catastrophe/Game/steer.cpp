@@ -27,10 +27,10 @@ glm::vec2 clampLength(const glm::vec2 vec, const float maxLength) {
 
 glm::vec2 arrive(
   const ArriveConst c,
-  const glm::vec2 pos,
+  const glm::vec2 agent,
   const glm::vec2 target
 ) {
-  const glm::vec2 targetDir = target - pos;
+  const glm::vec2 targetDir = target - agent;
   const float targetDist = glm::length(targetDir);
   const float desiredSpeed = std::min(targetDist, c.slowDist) / c.slowDist * c.maxSpeed;
   return targetDir / targetDist * desiredSpeed;
@@ -38,8 +38,16 @@ glm::vec2 arrive(
 
 glm::vec2 seek(
   const SeekConst c,
-  const glm::vec2 pos,
+  const glm::vec2 agent,
   const glm::vec2 target
 ) {
-  return glm::normalize(target - pos) * c.maxSpeed;
+  return glm::normalize(target - agent) * c.maxSpeed;
+}
+
+glm::vec2 flee(
+  const FleeConst c,
+  const glm::vec2 agent,
+  const glm::vec2 target
+) {
+  return glm::normalize(agent - target) * c.maxSpeed;
 }
