@@ -22,6 +22,7 @@ void DroidShootSpawnComponent::init(const YAML::Node &node) {
     levelNode = entity;
   }
   getOptional(bulletSpread, node, "bullet spread");
+  bulletSpread = std::abs(angleFromFile(bulletSpread));
 }
 
 void DroidShootSpawnComponent::update(const float delta) {
@@ -33,15 +34,9 @@ void DroidShootSpawnComponent::update(const float delta) {
   if (aiComp->shouldShoot()) {
     willSpawn = frequency.canDo();
     if (willSpawn) {
-      const auto physicsComp = getExpectedCompImpl<BodyPhysicsComponent>();
-      const glm::vec2 pos = physicsComp->getPos();
-      YAML::Node posNode = levelNode["pos"];
-      posNode[0] = pos.x;
-      posNode[1] = pos.y;
-      const float gunAngle = -glm::degrees(aiComp->getGunAngle());
-      std::normal_distribution<float> dist(gunAngle, bulletSpread);
-      YAML::Node angleNode = levelNode["rotation"];
-      angleNode = dist(gen);
+      levelNode["pos"] = getExpectedCompImpl<BodyPhysicsComponent>()->getPos();
+      std::normal_distribution<float> dist(aiComp->getGunAngle(), bulletSpread);
+      levelNode["rotation"] = angleToFile(dist(gen));
     }
   } else {
     willSpawn = false;

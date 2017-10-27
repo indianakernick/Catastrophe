@@ -1727,7 +1727,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
@@ -1742,7 +1741,6 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
-					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
@@ -1769,7 +1767,6 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/include/NumDisplay/,
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
@@ -1784,7 +1781,6 @@
 					"/usr/local/Cellar/sdl2/**",
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
-					"/usr/local/Cellar/sdl2_gfx/**",
 					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (

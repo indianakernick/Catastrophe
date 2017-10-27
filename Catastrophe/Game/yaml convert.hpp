@@ -53,13 +53,21 @@ struct YAML::convert<b2Vec2> {
   }
 };
 
+inline float angleToFile(const float angle) {
+  return -glm::degrees(angle);
+}
+
+inline float angleFromFile(const float angle) {
+  return -glm::radians(angle);
+}
+
 template <>
 struct YAML::convert<Transform> {
   static YAML::Node encode(const Transform transform) {
     Node node(YAML::NodeType::Map);
     node.force_insert("pos", transform.pos);
     node.force_insert("scale", transform.scale);
-    node.force_insert("rotation", transform.rotation);
+    node.force_insert("rotation", angleToFile(transform.rotation));
     return node;
   }
 
@@ -78,7 +86,7 @@ struct YAML::convert<Transform> {
       }
     }
     if (const YAML::Node &rotationNode = node["rotation"]) {
-      transform.rotation = -glm::radians(rotationNode.as<float>());
+      transform.rotation = angleFromFile(rotationNode.as<float>());
     }
     return true;
   }
