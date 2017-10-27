@@ -24,32 +24,10 @@ void Ground1DroidAIComponent::update(const float delta) {
   const glm::vec2 playerPos = physicsComp->getPlayerPos();
   const glm::vec2 droidPos = physicsComp->getPos();
   
-  //@TODO STATE DESIGN PATTERN NOW!!!
-  
   if (chasing) {
-    if (!seePlayer) {
-      chasing = false;
-      timeSinceLook = 0.0f;
-    } else {
-      lookingRight = playerPos.x > droidPos.x;
-      
-      //@FIXME this ain't right
-      const glm::vec2 toPlayer = glm::normalize(playerPos - droidPos);
-      const float playerAngle = std::atan2(toPlayer.y, toPlayer.x);
-      gunAngle = playerAngle;
-      //const float deltaAngle = playerAngle - gunAngle;
-      //gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
-    }
+    chase(droidPos, playerPos, seePlayer);
   } else {
-    if (seePlayer) {
-      chasing = true;
-    } else {
-      timeSinceLook += delta;
-      if (timeSinceLook >= lookingDuration) {
-        timeSinceLook = 0.0f;
-        lookingRight = !lookingRight;
-      }
-    }
+    stand(delta, seePlayer);
   }
 }
 
@@ -67,4 +45,39 @@ float Ground1DroidAIComponent::getGunAngle() const {
 
 bool Ground1DroidAIComponent::shouldShoot() const {
   return chasing;
+}
+
+void Ground1DroidAIComponent::chase(
+  const glm::vec2 droid,
+  const glm::vec2 player,
+  const bool seePlayer
+) {
+  if (!seePlayer) {
+    chasing = false;
+    timeSinceLook = 0.0f;
+  } else {
+    lookingRight = player.x > droid.x;
+    
+    //@FIXME this ain't right
+    const glm::vec2 toPlayer = glm::normalize(player - droid);
+    const float playerAngle = std::atan2(toPlayer.y, toPlayer.x);
+    gunAngle = playerAngle;
+    //const float deltaAngle = playerAngle - gunAngle;
+    //gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
+  }
+}
+
+void Ground1DroidAIComponent::stand(
+  const float delta,
+  const bool seePlayer
+) {
+  if (seePlayer) {
+    chasing = true;
+  } else {
+    timeSinceLook += delta;
+    if (timeSinceLook >= lookingDuration) {
+      timeSinceLook = 0.0f;
+      lookingRight = !lookingRight;
+    }
+  }
 }
