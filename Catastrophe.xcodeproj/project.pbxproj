@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4509F8CF1F5A395100927A19 /* vector sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8CD1F5A395100927A19 /* vector sprite.cpp */; };
 		4509F8D21F5A414800927A19 /* vector file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8D01F5A414800927A19 /* vector file.cpp */; };
-		4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 4509F8D31F5A429800927A19 /* player sprite.yaml */; };
 		4509F8E21F5BB23600927A19 /* basic rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E01F5BB23600927A19 /* basic rendering component.cpp */; };
 		4509F8E61F5CE20000927A19 /* rendering context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4509F8E41F5CE20000927A19 /* rendering context.cpp */; };
 		4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4509F8E71F5CE2AE00927A19 /* libnanovg.a */; };
@@ -38,8 +37,6 @@
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
 		452FF9E11F64D219003A98B1 /* player animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9DF1F64D219003A98B1 /* player animation component.cpp */; };
-		452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F31F6A70DC003A98B1 /* rect.yaml */; };
-		452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */; };
 		452FF9F91F6BB83E003A98B1 /* test app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9F71F6BB83E003A98B1 /* test app.cpp */; };
 		452FF9FE1F6BBF26003A98B1 /* framebuffer to png.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9FC1F6BBF26003A98B1 /* framebuffer to png.cpp */; };
 		452FFA001F6BBF41003A98B1 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9FF1F6BBF41003A98B1 /* stb_image_write.c */; settings = {COMPILER_FLAGS = "-Wno-everything"; }; };
@@ -132,12 +129,6 @@
 		4568D31D1F89F7E80037268B /* spikes rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31B1F89F7E80037268B /* spikes rendering component.cpp */; };
 		4568D3201F89FB150037268B /* platform rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D31E1F89FB150037268B /* platform rendering component.cpp */; };
 		4568D3231F8A010F0037268B /* spinning blade rendering component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4568D3211F8A010F0037268B /* spinning blade rendering component.cpp */; };
-		457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F51F875CAD00A6A792 /* pentagon sprite.lua */; };
-		457619F81F87605700A6A792 /* launcher sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F71F87605700A6A792 /* launcher sprite.lua */; };
-		457619FA1F876C8600A6A792 /* spikes sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619F91F876C8600A6A792 /* spikes sprite.lua */; };
-		457619FC1F884A2500A6A792 /* platform sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FB1F884A2500A6A792 /* platform sprite.lua */; };
-		457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FD1F884E2100A6A792 /* spinning blade sprite.lua */; };
-		45761A001F8851F100A6A792 /* player sprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 457619FF1F8851F100A6A792 /* player sprite.lua */; };
 		4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4592BAD81F11B48F00D1640D /* Assets.xcassets */; };
 		4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF51F11D71600D1640D /* libSDL2-2.0.0.dylib */; };
 		45B6EF561F99A209000998D7 /* simple tracking component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF541F99A209000998D7 /* simple tracking component.cpp */; };
@@ -165,7 +156,6 @@
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
 		45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FA21F6CADA400B1DA72 /* physics file.cpp */; };
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
-		45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */; };
 		45DE9FB61F6E02AF00B1DA72 /* simple animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FB41F6E02AF00B1DA72 /* simple animation component.cpp */; };
 		45DE9FB91F6E394900B1DA72 /* player entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FB81F6E394900B1DA72 /* player entity.yaml */; };
 		45DE9FBC1F6E467400B1DA72 /* tinyfiledialogs.c in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FBA1F6E467300B1DA72 /* tinyfiledialogs.c */; settings = {COMPILER_FLAGS = "-Wno-everything"; }; };
@@ -177,7 +167,6 @@
 		45DE9FDA1F71189D00B1DA72 /* level file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FD81F71189D00B1DA72 /* level file.cpp */; };
 		45DEA0051F75F47900B1DA72 /* oscillating physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */; };
 		45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */; };
-		45DEA00D1F76453F00B1DA72 /* pentagon sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */; };
 		45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */; };
 		45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */; };
 		45DEA0141F7767D400B1DA72 /* command compiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0121F7767D400B1DA72 /* command compiler.cpp */; };
@@ -187,11 +176,9 @@
 		45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0281F7CDF6800B1DA72 /* command literals.cpp */; };
 		45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0391F80CBE400B1DA72 /* platform image.png */; };
 		45DEA03D1F80D34C00B1DA72 /* rendering resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA03B1F80D34C00B1DA72 /* rendering resources.cpp */; };
-		45DEA03F1F82FCBA00B1DA72 /* spikes sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */; };
 		45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */; };
 		45DEA0431F82FF2D00B1DA72 /* spikes entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */; };
 		45DEA0471F83364400B1DA72 /* particle system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0451F83364400B1DA72 /* particle system.cpp */; };
-		45DEA04A1F8343CB00B1DA72 /* spinning blade sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */; };
 		45DEA04C1F83525700B1DA72 /* spinning blade body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */; };
 		45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */; };
 		45DEA0541F8461DC00B1DA72 /* input file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0521F8461DC00B1DA72 /* input file.cpp */; };
@@ -204,7 +191,6 @@
 		45DEA0781F859F7200B1DA72 /* button physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0761F859F7200B1DA72 /* button physics component.cpp */; };
 		45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */; };
 		45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */; };
-		45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */; };
 		45DEA0821F85DD4900B1DA72 /* launcher animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */; };
 		45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0831F85F87600B1DA72 /* layer names.cpp */; };
 		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
@@ -218,7 +204,6 @@
 		4509F8CE1F5A395100927A19 /* vector sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector sprite.hpp"; sourceTree = "<group>"; };
 		4509F8D01F5A414800927A19 /* vector file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector file.cpp"; sourceTree = "<group>"; };
 		4509F8D11F5A414800927A19 /* vector file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector file.hpp"; sourceTree = "<group>"; };
-		4509F8D31F5A429800927A19 /* player sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.yaml"; sourceTree = "<group>"; };
 		4509F8E01F5BB23600927A19 /* basic rendering component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "basic rendering component.cpp"; sourceTree = "<group>"; };
 		4509F8E11F5BB23600927A19 /* basic rendering component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "basic rendering component.hpp"; sourceTree = "<group>"; };
 		4509F8E41F5CE20000927A19 /* rendering context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering context.cpp"; sourceTree = "<group>"; };
@@ -278,8 +263,6 @@
 		452FF9DF1F64D219003A98B1 /* player animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "player animation component.cpp"; sourceTree = "<group>"; };
 		452FF9E01F64D219003A98B1 /* player animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "player animation component.hpp"; sourceTree = "<group>"; };
 		452FF9E81F64DC19003A98B1 /* b2 glm cast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "b2 glm cast.hpp"; sourceTree = "<group>"; };
-		452FF9F31F6A70DC003A98B1 /* rect.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rect.yaml; sourceTree = "<group>"; };
-		452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rect 2.yaml"; sourceTree = "<group>"; };
 		452FF9F71F6BB83E003A98B1 /* test app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test app.cpp"; sourceTree = "<group>"; };
 		452FF9F81F6BB83E003A98B1 /* test app.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "test app.hpp"; sourceTree = "<group>"; };
 		452FF9FB1F6BBEFA003A98B1 /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
@@ -473,12 +456,6 @@
 		4568D3211F8A010F0037268B /* spinning blade rendering component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spinning blade rendering component.cpp"; sourceTree = "<group>"; };
 		4568D3221F8A010F0037268B /* spinning blade rendering component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "spinning blade rendering component.hpp"; sourceTree = "<group>"; };
 		457619EE1F86FA9B00A6A792 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../../../../../usr/local/lib/liblua.a; sourceTree = "<group>"; };
-		457619F51F875CAD00A6A792 /* pentagon sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
-		457619F71F87605700A6A792 /* launcher sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
-		457619F91F876C8600A6A792 /* spikes sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
-		457619FB1F884A2500A6A792 /* platform sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
-		457619FD1F884E2100A6A792 /* spinning blade sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
-		457619FF1F8851F100A6A792 /* player sprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player sprite.lua"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
 		4592BAD11F11B48F00D1640D /* Catastrophe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catastrophe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592BAD81F11B48F00D1640D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4592BADD1F11B48F00D1640D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -531,7 +508,6 @@
 		45DE9FA21F6CADA400B1DA72 /* physics file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics file.cpp"; sourceTree = "<group>"; };
 		45DE9FA31F6CADA400B1DA72 /* physics file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "physics file.hpp"; sourceTree = "<group>"; };
 		45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform body.yaml"; sourceTree = "<group>"; };
-		45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "platform sprite.yaml"; sourceTree = "<group>"; };
 		45DE9FB41F6E02AF00B1DA72 /* simple animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "simple animation component.cpp"; sourceTree = "<group>"; };
 		45DE9FB51F6E02AF00B1DA72 /* simple animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "simple animation component.hpp"; sourceTree = "<group>"; };
 		45DE9FB81F6E394900B1DA72 /* player entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player entity.yaml"; sourceTree = "<group>"; };
@@ -550,7 +526,6 @@
 		45DEA0031F75F47900B1DA72 /* oscillating physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "oscillating physics component.cpp"; sourceTree = "<group>"; };
 		45DEA0041F75F47900B1DA72 /* oscillating physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "oscillating physics component.hpp"; sourceTree = "<group>"; };
 		45DEA0061F7602E900B1DA72 /* oscillating platform entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "oscillating platform entity.yaml"; sourceTree = "<group>"; };
-		45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon sprite.yaml"; sourceTree = "<group>"; };
 		45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon body.yaml"; sourceTree = "<group>"; };
 		45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pentagon entity.yaml"; sourceTree = "<group>"; };
 		45DEA0121F7767D400B1DA72 /* command compiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "command compiler.cpp"; sourceTree = "<group>"; };
@@ -573,12 +548,10 @@
 		45DEA0391F80CBE400B1DA72 /* platform image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "platform image.png"; sourceTree = "<group>"; };
 		45DEA03B1F80D34C00B1DA72 /* rendering resources.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "rendering resources.cpp"; sourceTree = "<group>"; };
 		45DEA03C1F80D34C00B1DA72 /* rendering resources.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "rendering resources.hpp"; sourceTree = "<group>"; };
-		45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes sprite.yaml"; sourceTree = "<group>"; };
 		45DEA0401F82FE0A00B1DA72 /* spikes body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes body.yaml"; sourceTree = "<group>"; };
 		45DEA0421F82FF2D00B1DA72 /* spikes entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spikes entity.yaml"; sourceTree = "<group>"; };
 		45DEA0451F83364400B1DA72 /* particle system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "particle system.cpp"; sourceTree = "<group>"; };
 		45DEA0461F83364400B1DA72 /* particle system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "particle system.hpp"; sourceTree = "<group>"; };
-		45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade sprite.yaml"; sourceTree = "<group>"; };
 		45DEA04B1F83525700B1DA72 /* spinning blade body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade body.yaml"; sourceTree = "<group>"; };
 		45DEA04D1F8352C100B1DA72 /* spinning blade entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "spinning blade entity.yaml"; sourceTree = "<group>"; };
 		45DEA0521F8461DC00B1DA72 /* input file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "input file.cpp"; sourceTree = "<group>"; };
@@ -596,7 +569,6 @@
 		45DEA0791F85A73100B1DA72 /* invisible button entity.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invisible button entity.yaml"; sourceTree = "<group>"; };
 		45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher physics component.cpp"; sourceTree = "<group>"; };
 		45DEA07C1F85A82C00B1DA72 /* launcher physics component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher physics component.hpp"; sourceTree = "<group>"; };
-		45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "launcher sprite.yaml"; sourceTree = "<group>"; };
 		45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "launcher animation component.cpp"; sourceTree = "<group>"; };
 		45DEA0811F85DD4900B1DA72 /* launcher animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "launcher animation component.hpp"; sourceTree = "<group>"; };
 		45DEA0831F85F87600B1DA72 /* layer names.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "layer names.cpp"; sourceTree = "<group>"; };
@@ -749,8 +721,6 @@
 		451FA2851F1499CC00C43BE9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				452FF9F31F6A70DC003A98B1 /* rect.yaml */,
-				452FF9F51F6BAE5C003A98B1 /* rect 2.yaml */,
 				452FF9BB1F639922003A98B1 /* Consolas.ttf */,
 				45DEA0091F76030F00B1DA72 /* Sprites */,
 				45DEA00A1F76032100B1DA72 /* Bodies */,
@@ -1285,18 +1255,6 @@
 			isa = PBXGroup;
 			children = (
 				45DEA0391F80CBE400B1DA72 /* platform image.png */,
-				4509F8D31F5A429800927A19 /* player sprite.yaml */,
-				45DE9FB21F6DFCD300B1DA72 /* platform sprite.yaml */,
-				45DEA00C1F76453F00B1DA72 /* pentagon sprite.yaml */,
-				45DEA03E1F82FCB900B1DA72 /* spikes sprite.yaml */,
-				45DEA0491F8343CB00B1DA72 /* spinning blade sprite.yaml */,
-				45DEA07E1F85C8F100B1DA72 /* launcher sprite.yaml */,
-				457619F51F875CAD00A6A792 /* pentagon sprite.lua */,
-				457619F71F87605700A6A792 /* launcher sprite.lua */,
-				457619F91F876C8600A6A792 /* spikes sprite.lua */,
-				457619FB1F884A2500A6A792 /* platform sprite.lua */,
-				457619FD1F884E2100A6A792 /* spinning blade sprite.lua */,
-				457619FF1F8851F100A6A792 /* player sprite.lua */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -1438,31 +1396,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457619F61F875CAD00A6A792 /* pentagon sprite.lua in Resources */,
 				45DEA0071F7602E900B1DA72 /* oscillating platform entity.yaml in Resources */,
-				45DEA04A1F8343CB00B1DA72 /* spinning blade sprite.yaml in Resources */,
 				4545DEAC1F8DD355000A54AA /* ground drone entity.yaml in Resources */,
 				45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */,
 				45DEA0431F82FF2D00B1DA72 /* spikes entity.yaml in Resources */,
-				452FF9F61F6BAE5C003A98B1 /* rect 2.yaml in Resources */,
 				4545DEB31F8EEDCC000A54AA /* missile spawner entity.yaml in Resources */,
-				45DE9FB31F6DFCD300B1DA72 /* platform sprite.yaml in Resources */,
 				45B6EF5D1F9AD1A9000998D7 /* level 0 ground droid entity.yaml in Resources */,
-				457619FA1F876C8600A6A792 /* spikes sprite.lua in Resources */,
 				4545DE9C1F8C76CC000A54AA /* missile body.yaml in Resources */,
-				45DEA03F1F82FCBA00B1DA72 /* spikes sprite.yaml in Resources */,
 				45DEA06D1F8589CB00B1DA72 /* launcher joint.yaml in Resources */,
 				45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */,
-				452FF9F41F6A70DC003A98B1 /* rect.yaml in Resources */,
-				4509F8D41F5A429800927A19 /* player sprite.yaml in Resources */,
-				45DEA00D1F76453F00B1DA72 /* pentagon sprite.yaml in Resources */,
 				45BA38951F9C5BB200BAEA1E /* level 1 droid bullet entity.yaml in Resources */,
 				45B6EF5B1F9ACEE8000998D7 /* ground droid body.yaml in Resources */,
-				457619FC1F884A2500A6A792 /* platform sprite.lua in Resources */,
-				45761A001F8851F100A6A792 /* player sprite.lua in Resources */,
 				452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */,
 				4545DEA11F8C81DB000A54AA /* missile entity.yaml in Resources */,
-				45DEA07F1F85C8F100B1DA72 /* launcher sprite.yaml in Resources */,
 				45DEA0411F82FE0A00B1DA72 /* spikes body.yaml in Resources */,
 				45DEA0671F84A40900B1DA72 /* launcher platform entity.yaml in Resources */,
 				45BA38841F9C0D4100BAEA1E /* level 1 ground droid entity.yaml in Resources */,
@@ -1474,7 +1420,6 @@
 				45DEA04E1F8352C100B1DA72 /* spinning blade entity.yaml in Resources */,
 				45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */,
 				4592BAD91F11B48F00D1640D /* Assets.xcassets in Resources */,
-				457619FE1F884E2100A6A792 /* spinning blade sprite.lua in Resources */,
 				4545DEAE1F8DD3B6000A54AA /* ground drone body.yaml in Resources */,
 				45DEA03A1F80CBE500B1DA72 /* platform image.png in Resources */,
 				45DEA07A1F85A73100B1DA72 /* invisible button entity.yaml in Resources */,
@@ -1482,7 +1427,6 @@
 				45DEA06F1F858B0900B1DA72 /* launcher entity.yaml in Resources */,
 				45DE9FC11F6F8C6600B1DA72 /* platform entity.yaml in Resources */,
 				45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */,
-				457619F81F87605700A6A792 /* launcher sprite.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
