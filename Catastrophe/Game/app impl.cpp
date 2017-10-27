@@ -94,7 +94,7 @@ bool AppImpl::input(float) {
     if (e.type == SDL_QUIT) {
       return false;
     } else if (!screenshot.handleEvent(e)) {
-      Systems::input.handleEvent(e);
+      Systems::input.handleEvent(e, camera.transform.toMeters());
     }
   }
   return true;

@@ -17,7 +17,7 @@ public:
   PlayerInputComponent() = default;
   
   void init(const YAML::Node &) override;
-  bool handleEvent(SDL_Event) override;
+  bool handleEvent(SDL_Event, glm::mat3) override;
   
   bool shouldMoveLeft() const;
   bool shouldMoveRight() const;

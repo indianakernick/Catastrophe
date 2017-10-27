@@ -28,7 +28,7 @@ void PlayerInputComponent::init(const YAML::Node &node) {
   getOptional(jumpKey, bindings, "jump");
 }
 
-bool PlayerInputComponent::handleEvent(const SDL_Event event) {
+bool PlayerInputComponent::handleEvent(const SDL_Event event, glm::mat3) {
   if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
     return handleKey(event.key.keysym.scancode, true);
   } else if (event.type == SDL_KEYUP) {
