@@ -27,7 +27,6 @@ public:
 private:
   float lookingDuration = 1.0f;
   float timeSinceLook = 0.0f;
-  float gunRotateSpeed = 1.0f;
   float gunAngle = 0.0f;
   bool lookingRight = true;
   bool chasing = false;

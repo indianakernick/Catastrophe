@@ -1,7 +1,6 @@
 ai:
   name: Ground1DroidAIComponent
-  looking duration: 0.1
-  gun rotation speed: 0.5
+  looking duration: 1.0
 
 spawn:
   name: DroidShootSpawnComponent

@@ -15,7 +15,6 @@
 
 void Ground1DroidAIComponent::init(const YAML::Node &node) {
   getOptional(lookingDuration, node, "looking duration");
-  getOptional(gunRotateSpeed, node, "gun rotate speed");
 }
 
 void Ground1DroidAIComponent::update(const float delta) {
@@ -54,16 +53,11 @@ void Ground1DroidAIComponent::chase(
 ) {
   if (!seePlayer) {
     chasing = false;
+    lookingRight = !lookingRight;
     timeSinceLook = 0.0f;
   } else {
     lookingRight = player.x > droid.x;
-    
-    //@FIXME this ain't right
-    const glm::vec2 toPlayer = glm::normalize(player - droid);
-    const float playerAngle = std::atan2(toPlayer.y, toPlayer.x);
-    gunAngle = playerAngle;
-    //const float deltaAngle = playerAngle - gunAngle;
-    //gunAngle += Math::clampMag(deltaAngle / delta, gunRotateSpeed) * delta;
+    gunAngle = std::atan2(player.y - droid.y, player.x - droid.x);
   }
 }
 
