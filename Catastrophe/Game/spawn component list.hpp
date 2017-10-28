@@ -13,11 +13,13 @@
 #include <Simpleton/Utils/type list.hpp>
 #include "destroyable spawn component.hpp"
 #include "droid shoot spawn component.hpp"
+#include "player shoot spawn component.hpp"
 
 using SpawnComps = Utils::TypeList<
   DestroyableSpawnComponent,
   PeriodicSpawnComponent,
-  DroidShootSpawnComponent
+  DroidShootSpawnComponent,
+  PlayerShootSpawnComponent
 >;
 
 #endif

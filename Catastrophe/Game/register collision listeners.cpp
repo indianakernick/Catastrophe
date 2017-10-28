@@ -14,7 +14,7 @@
 #include "button physics component.hpp"
 #include "missile physics component.hpp"
 #include "ground droid physics component.hpp"
-#include "droid bullet physics component.hpp"
+#include "bullet physics component.hpp"
 #include "../Libraries/Box2D/Dynamics/b2Fixture.h"
 
 namespace {
@@ -100,7 +100,7 @@ namespace {
   }
   
   void handleDroidBulletBegin(b2Fixture *fixtureA, b2Fixture *fixtureB) {
-    void *const bullet = getUserData<Symbol::DroidBullet>();
+    void *const bullet = getUserData<Symbol::Bullet>();
     if (fixtureA->GetUserData() == fixtureB->GetUserData()) {
       return;
     } else if (fixtureB->GetUserData() == bullet) {
@@ -108,11 +108,8 @@ namespace {
     } else if (fixtureA->GetUserData() != bullet) {
       return;
     }
-    //fixtureA is now DroidBullet
-    if (fixtureB->GetUserData() == getUserData<Symbol::GroundDroidBody>()) {
-      return;
-    }
-    auto *bulletComp = getComponent<DroidBulletPhysicsComponent>(fixtureA);
+    //fixtureA is now Bullet
+    auto *bulletComp = getComponent<BulletPhysicsComponent>(fixtureA);
     if (bulletComp) {
       bulletComp->beginContact();
     }

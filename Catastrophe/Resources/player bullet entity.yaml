@@ -4,7 +4,7 @@ spawn:
 
 physics:
   name: BulletPhysicsComponent
-  body: droid bullet body.yaml
+  body: player bullet body.yaml
   scale: &scale [0.125, 0.125]
   speed: 20
 
@@ -13,5 +13,5 @@ animation:
   scale: *scale
 
 rendering:
-  name: DroidBulletRenderingComponent
+  name: PlayerBulletRenderingComponent
   layer: over player 1

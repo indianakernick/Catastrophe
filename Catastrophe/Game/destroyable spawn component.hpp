@@ -23,6 +23,7 @@ public:
   void kill();
   
 private:
+  float timeLeft;
   bool dead = false;
 };
 

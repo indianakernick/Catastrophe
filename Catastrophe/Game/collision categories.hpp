@@ -14,6 +14,8 @@
 
 #define CATEGORIES                                                              \
   CAT(Default)                                                                  \
+  CAT(PlayerBody)                                                               \
+  CAT(PlayerBullet)                                                             \
   CAT(DroidBody)                                                                \
   LAST_CAT(DroidBullet)
 

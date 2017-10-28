@@ -2,6 +2,13 @@ input:
   name: PlayerInputComponent
   keys: key bindings.txt
 
+spawn:
+  name: PlayerShootSpawnComponent
+  rof: 1
+  bullet spread: 3
+  entity:
+    file: player bullet entity.yaml
+
 physics:
   name: PlayerPhysicsComponent
   body: player body.yaml

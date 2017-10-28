@@ -28,7 +28,7 @@ void DroidShootSpawnComponent::init(const YAML::Node &node) {
 void DroidShootSpawnComponent::update(const float delta) {
   static std::mt19937 gen;
 
-  const auto aiComp = getExpectedCompImpl<GroundDroidAIComponent>();
+  const auto aiComp = getExpectedCompImpl<const GroundDroidAIComponent>();
   
   frequency.advance(delta);
   if (aiComp->shouldShoot()) {

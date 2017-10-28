@@ -13,12 +13,12 @@
 #include "player physics component.hpp"
 #include "button physics component.hpp"
 #include "turret physics component.hpp"
+#include "bullet physics component.hpp"
 #include "missile physics component.hpp"
 #include <Simpleton/Utils/type list.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
 #include "ground droid physics component.hpp"
-#include "droid bullet physics component.hpp"
 
 using PhysicsComps = Utils::TypeList<
   PlayerPhysicsComponent,
@@ -30,7 +30,7 @@ using PhysicsComps = Utils::TypeList<
   MissilePhysicsComponent,
   TurretPhysicsComponent,
   GroundDroidPhysicsComponent,
-  DroidBulletPhysicsComponent
+  BulletPhysicsComponent
 >;
 
 #endif

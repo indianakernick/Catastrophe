@@ -15,5 +15,5 @@ fixtures:
   density: 60
   user data: Bullet
   filter:
-    category: DroidBullet
-    no collide with: DroidBody
+    category: PlayerBullet
+    no collide with: PlayerBody

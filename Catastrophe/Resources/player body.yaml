@@ -28,16 +28,21 @@ fixtures:
 - shape: body
   density: 6.0
   user data: PlayerBody
+  filter: &filter
+    category: PlayerBody
+    no collide with: PlayerBullet
 
 - shape: leg
   friction: 0.1
   density: 6.0
   user data: PlayerBody
+  filter: *filter
 
 - shape: head
   friction: 0.0
   density: 6.0
   user data: PlayerBody
+  filter: *filter
 
 - shape: foot
   density: 0.0
