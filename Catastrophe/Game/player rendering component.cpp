@@ -12,10 +12,10 @@
 #include "entity.hpp"
 #include "nvg helper.hpp"
 #include <glm/trigonometric.hpp>
+#include "keyframe animation.hpp"
 #include <Simpleton/Math/vectors.hpp>
 #include <Simpleton/Math/interpolate.hpp>
 #include "player animation component.hpp"
-#include <Simpleton/Graphics/keyframe animation.hpp>
 
 namespace {
   struct PivotJoint;

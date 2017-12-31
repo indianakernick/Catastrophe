@@ -204,6 +204,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		450759801FF87ABF0009B360 /* keyframe animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "keyframe animation.hpp"; sourceTree = "<group>"; };
 		4509F8CD1F5A395100927A19 /* vector sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector sprite.cpp"; sourceTree = "<group>"; };
 		4509F8CE1F5A395100927A19 /* vector sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "vector sprite.hpp"; sourceTree = "<group>"; };
 		4509F8D01F5A414800927A19 /* vector file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "vector file.cpp"; sourceTree = "<group>"; };
@@ -1025,6 +1026,7 @@
 				4545DEB51F8EEE64000A54AA /* missile spawner rendering component.hpp */,
 				4583ED461FA4244B00AED27D /* player bullet rendering component.cpp */,
 				4583ED471FA4244B00AED27D /* player bullet rendering component.hpp */,
+				450759801FF87ABF0009B360 /* keyframe animation.hpp */,
 			);
 			name = "rendering components";
 			sourceTree = "<group>";

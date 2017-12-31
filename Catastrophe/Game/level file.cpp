@@ -11,7 +11,7 @@
 #include "yaml helper.hpp"
 #include "entity file.hpp"
 #include "entity manager.hpp"
-#include <Simpleton/Platform/system info.hpp>
+#include <Simpleton/SDL/paths.hpp>
 
 namespace {
   void readPlayer(const YAML::Node &entityNode, EntityManager &entityMan) {
@@ -35,7 +35,7 @@ namespace {
 }
 
 void loadLevel(const std::string &fileName, EntityManager &entityMan) {
-  const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
+  const YAML::Node root = YAML::LoadFile(SDL::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
   readPlayer(getChild(root, "player"), entityMan);
   readEntities(getChild(root, "entities"), entityMan);

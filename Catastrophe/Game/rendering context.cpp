@@ -21,8 +21,8 @@
 
 #include "nvg helper.hpp"
 #include "window constants.hpp"
+#include <Simpleton/SDL/error.hpp>
 #include <Simpleton/Utils/profiler.hpp>
-#include <Simpleton/Platform/sdl error.hpp>
 
 constexpr int DEPTH_BITS = 16;
 constexpr int STENCIL_BITS = 8;

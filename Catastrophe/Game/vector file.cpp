@@ -14,7 +14,7 @@
 #include "command errors.hpp"
 #include "command compiler.hpp"
 #include "rendering resources.hpp"
-#include <Simpleton/Platform/system info.hpp>
+#include <Simpleton/SDL/paths.hpp>
 
 namespace {
   template <typename Tag>
@@ -247,7 +247,7 @@ namespace {
 }
 
 Sprite loadSprite(const std::string &fileName, RenderingResources &resMan) {
-  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
+  const YAML::Node rootNode = YAML::LoadFile(SDL::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   FrameSize frameSize;

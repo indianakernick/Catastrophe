@@ -79,7 +79,7 @@ private:
     } else {
       throw std::runtime_error(
         "Expected entity to contain "
-        + Utils::typeName<std::remove_cv_t<Comp>>().to_string()
+        + std::string(Utils::typeName<std::remove_cv_t<Comp>>())
       );
     }
   }

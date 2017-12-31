@@ -16,8 +16,8 @@
 #include "rendering context.hpp"
 #include <experimental/optional>
 #include "camera debug render.hpp"
+#include <Simpleton/SDL/library.hpp>
 #include <Simpleton/Application/app.hpp>
-#include <Simpleton/Platform/window library.hpp>
 
 class AppImpl : public Game::App<std::chrono::duration<float>> {
 public:
@@ -26,8 +26,8 @@ public:
   EntityManager entityManager;
 
 private:
-  std::experimental::optional<Platform::WindowLibrary> windowLibrary;
-  Platform::Window window;
+  SDL::Library windowLibrary;
+  SDL::Window window;
   RenderingContext renderingContext;
   RenderingManager renderingManager;
   Camera camera;

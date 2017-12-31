@@ -13,13 +13,13 @@
 #include "yaml helper.hpp"
 #include "make component.hpp"
 #include "player constants.hpp"
+#include <Simpleton/SDL/paths.hpp>
 #include <Simpleton/Utils/profiler.hpp>
-#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   YAML::Node copyNode(const YAML::Node node) {
     //PROFILE(copyNode);
-    //YAML::Nodes hole boost::shared_ptrs
+    //YAML::Nodes hold boost::shared_ptrs
     //That's so weird!
     //Why would you hide the fact that I'm dealing with a shared_ptr
     //in the implementation of a node.
@@ -92,7 +92,7 @@ void loadEntity(
   const YAML::Node &levelArgs
 ) {
   PROFILE(loadEntity);
-  const YAML::Node root = YAML::LoadFile(Platform::getResDir() + fileName);
+  const YAML::Node root = YAML::LoadFile(SDL::getResDir() + fileName);
   checkType(root, YAML::NodeType::Map);
   
   #define COMPONENT(NAME, ID_NAME)                                              \

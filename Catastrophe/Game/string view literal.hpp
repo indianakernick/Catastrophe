@@ -9,9 +9,9 @@
 #ifndef string_view_literal_hpp
 #define string_view_literal_hpp
 
-#include <experimental/string_view>
+#include <string_view>
 
-constexpr std::experimental::string_view operator""_sv(
+constexpr std::string_view operator""_sv(
   const char *data,
   const size_t size
 ) {

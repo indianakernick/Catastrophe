@@ -13,18 +13,18 @@
 #include "vector sprite.hpp"
 #include "rendering context.hpp"
 #include <experimental/optional>
+#include <Simpleton/SDL/library.hpp>
 #include <Simpleton/Application/app.hpp>
 #include "player rendering component.hpp"
 #include <Simpleton/Time/simple anim.hpp>
-#include <Simpleton/Platform/window library.hpp>
 
 class TestApp : public Game::App<std::chrono::duration<float>> {
 public:
   TestApp(const char *, const char *);
   
 private:
-  std::experimental::optional<Platform::WindowLibrary> windowLibrary;
-  Platform::Window window;
+  SDL::Library windowLibrary;
+  SDL::Window window;
   RenderingContext renderingContext;
   Screenshot screenshot;
   PlayerRenderingComponent renderingComp;

@@ -14,15 +14,15 @@
 #include "global flags.hpp"
 #include "window constants.hpp"
 #include "framebuffer to png.hpp"
+#include <Simpleton/SDL/paths.hpp>
 #include <glm/gtx/matrix_transform_2d.hpp>
-#include <Simpleton/Platform/system info.hpp>
 
 TestApp::TestApp(const char *spriteFile, const char *animName)
   : renderingComp(), spriteFile(spriteFile), animName(animName) {}
 
 bool TestApp::init() {
-  windowLibrary.emplace(SDL_INIT_EVENTS);
-  window = Platform::makeWindow(WINDOW_DESC);
+  windowLibrary = SDL::makeLibrary(SDL_INIT_EVENTS);
+  window = SDL::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   
   //sprite = loadSprite("player sprite.yaml", renderingContext.getResources());
@@ -34,7 +34,7 @@ bool TestApp::init() {
 void TestApp::quit() {
   renderingContext.quit();
   window.reset();
-  windowLibrary = std::experimental::nullopt;
+  windowLibrary.reset();
 }
 
 bool TestApp::input(float) {

@@ -36,8 +36,8 @@ Main character hired to steal the pink pentagon back
 bool AppImpl::init() {
   PROFILE(AppImpl init);
 
-  windowLibrary.emplace(SDL_INIT_EVENTS);
-  window = Platform::makeWindow(WINDOW_DESC);
+  windowLibrary = SDL::makeLibrary(SDL_INIT_EVENTS);
+  window = SDL::makeWindow(WINDOW_DESC);
   renderingContext.init(window.get());
   renderingManager.init(renderingContext);
   
@@ -78,7 +78,7 @@ void AppImpl::quit() {
   renderingManager.quit();
   renderingContext.quit();
   window.reset();
-  windowLibrary = std::experimental::nullopt;
+  windowLibrary.reset();
 }
 
 bool AppImpl::input(float) {

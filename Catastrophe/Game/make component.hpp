@@ -9,9 +9,9 @@
 #ifndef make_component_hpp
 #define make_component_hpp
 
-#include <experimental/string_view>
+#include <string_view>
 
 template <typename Comp>
-std::shared_ptr<Comp> makeComp(std::experimental::string_view);
+std::shared_ptr<Comp> makeComp(std::string_view);
 
 #endif

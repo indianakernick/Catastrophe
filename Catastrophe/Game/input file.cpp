@@ -10,8 +10,8 @@
 
 #include "file constants.hpp"
 #include "string to scancode.hpp"
+#include <Simpleton/SDL/paths.hpp>
 #include <Simpleton/Memory/file io.hpp>
-#include <Simpleton/Platform/system info.hpp>
 
 InputFileError::InputFileError(
   const std::string &fileName,
@@ -26,7 +26,7 @@ InputFileError::InputFileError(
     ) {}
 
 KeyBindings loadInputs(const std::string &fileName) {
-  const std::string path = Platform::getSaveDir(APP_AUTHOR, APP_NAME) + fileName;
+  const std::string path = SDL::getSaveDir(APP_AUTHOR, APP_NAME) + fileName;
   const Memory::Buffer file = Memory::readFile(path);
   Utils::ParseString parseStr(file.cdata<char>(), file.size());
   KeyBindings bindings;

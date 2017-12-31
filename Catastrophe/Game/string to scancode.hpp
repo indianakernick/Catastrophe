@@ -9,14 +9,14 @@
 #ifndef string_to_scancode_hpp
 #define string_to_scancode_hpp
 
+#include <string_view>
 #include <SDL2/SDL_scancode.h>
-#include <experimental/string_view>
 
 class KeyNotFound final : std::runtime_error {
 public:
-  explicit KeyNotFound(std::experimental::string_view);
+  explicit KeyNotFound(std::string_view);
 };
 
-SDL_Scancode strToScancode(std::experimental::string_view);
+SDL_Scancode strToScancode(std::string_view);
 
 #endif

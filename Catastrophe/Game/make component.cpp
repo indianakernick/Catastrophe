@@ -28,7 +28,7 @@ using AllComps = Utils::TypeList<
 #undef COMPONENT
 
 template <typename List, typename Comp>
-std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
+std::shared_ptr<Comp> makeComp(const std::string_view name) {
   try {
     return Utils::getValueByName<std::shared_ptr<Comp>, List>(name, [](auto t) {
       return std::make_shared<UTILS_TYPE(t)>();
@@ -39,7 +39,7 @@ std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
 }
 
 template <typename Comp>
-std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
+std::shared_ptr<Comp> makeComp(const std::string_view name) {
   return makeComp<
     Utils::AtIndex<AllComps, COMPONENT_ID<Comp>>,
     Comp
@@ -47,7 +47,7 @@ std::shared_ptr<Comp> makeComp(const std::experimental::string_view name) {
 }
 
 #define COMPONENT(NAME, I)                                                         \
-  template std::shared_ptr<NAME##Component> makeComp(std::experimental::string_view);
+  template std::shared_ptr<NAME##Component> makeComp(std::string_view);
 #define LAST_COMPONENT(NAME, I) COMPONENT(NAME, I)
 COMPONENTS
 #undef LAST_COMPONENT

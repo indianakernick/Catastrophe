@@ -11,8 +11,8 @@
 #include "b2 glm cast.hpp"
 #include "yaml helper.hpp"
 #include "object types.hpp"
+#include <Simpleton/SDL/paths.hpp>
 #include "collision categories.hpp"
-#include <Simpleton/Platform/system info.hpp>
 
 namespace {
   b2Vec2 readVec(const YAML::Node &vecNode, const glm::vec2 scale = {1.0f, 1.0f}) {
@@ -270,7 +270,7 @@ b2Body *loadBody(
   b2World &world,
   const Transform transform
 ) {
-  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
+  const YAML::Node rootNode = YAML::LoadFile(SDL::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &bodyNode = getChild(rootNode, "body");
@@ -428,7 +428,7 @@ void readJoint(b2JointDef *def, const YAML::Node &node) {
 #undef JOINTS
 
 b2JointDef *loadJoint(const std::string &fileName) {
-  const YAML::Node rootNode = YAML::LoadFile(Platform::getResDir() + fileName);
+  const YAML::Node rootNode = YAML::LoadFile(SDL::getResDir() + fileName);
   checkType(rootNode, YAML::NodeType::Map);
   
   const YAML::Node &typeNode = getChild(rootNode, "type");

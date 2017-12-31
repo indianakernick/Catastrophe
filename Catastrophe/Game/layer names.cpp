@@ -8,7 +8,7 @@
 
 #include "layer names.hpp"
 
-const std::experimental::string_view LAYER_GROUPS[] = {
+const std::string_view LAYER_GROUPS[] = {
   "background",
   "debug physics",
   "under player -4",
@@ -27,7 +27,7 @@ size_t getNumLayers() {
   return std::cend(LAYER_GROUPS) - std::cbegin(LAYER_GROUPS);
 }
 
-size_t getLayerIndex(const std::experimental::string_view name) {
+size_t getLayerIndex(const std::string_view name) {
   const auto begin = std::cbegin(LAYER_GROUPS);
   const auto end = std::cend(LAYER_GROUPS);
   const auto iter = std::find(begin, end, name);

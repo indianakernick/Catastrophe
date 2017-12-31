@@ -9,7 +9,7 @@
 #include "rendering resources.hpp"
 
 #include "nanovg.hpp"
-#include <Simpleton/Platform/system info.hpp>
+#include <Simpleton/SDL/paths.hpp>
 
 void RenderingResources::init(NVGcontext *newContext) {
   context = newContext;
@@ -85,7 +85,7 @@ FontHandle RenderingResources::getFont(const std::string &name) {
 }
 
 int RenderingResources::createImage(const std::string &name, const int flags) const {
-  const std::string path = Platform::getResDir() + name;
+  const std::string path = SDL::getResDir() + name;
   const int id = nvgCreateImage(context, path.c_str(), flags);
   if (id == 0) {
     throw std::runtime_error("Failed to load image");
@@ -94,7 +94,7 @@ int RenderingResources::createImage(const std::string &name, const int flags) co
 }
 
 int RenderingResources::createFont(const std::string &name) const {
-  const std::string path = Platform::getResDir() + name;
+  const std::string path = SDL::getResDir() + name;
   const int id = nvgCreateFont(context, name.c_str(), path.c_str());
   if (id == -1) {
     throw std::runtime_error("Failed to load font");
