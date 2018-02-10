@@ -157,6 +157,7 @@
 		45BA38A41F9DC4A400BAEA1E /* missile ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38A21F9DC4A400BAEA1E /* missile ai component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
+		45C918F1202E838800AC4608 /* libyaml-cpp.0.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C918F0202E838800AC4608 /* libyaml-cpp.0.6.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
 		45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FA21F6CADA400B1DA72 /* physics file.cpp */; };
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
@@ -174,7 +175,6 @@
 		45DEA00F1F765E6A00B1DA72 /* pentagon body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA00E1F765E6A00B1DA72 /* pentagon body.yaml */; };
 		45DEA0111F765EF200B1DA72 /* pentagon entity.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DEA0101F765EF200B1DA72 /* pentagon entity.yaml */; };
 		45DEA0141F7767D400B1DA72 /* command compiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0121F7767D400B1DA72 /* command compiler.cpp */; };
-		45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4592BAF91F11D75200D1640D /* libSimpleton Engine.dylib */; };
 		45DEA01D1F7A43A500B1DA72 /* screenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA01B1F7A43A500B1DA72 /* screenshot.cpp */; };
 		45DEA0251F7CDDA500B1DA72 /* command errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0231F7CDDA500B1DA72 /* command errors.cpp */; };
 		45DEA02A1F7CDF6800B1DA72 /* command literals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0281F7CDF6800B1DA72 /* command literals.cpp */; };
@@ -197,7 +197,6 @@
 		45DEA07D1F85A82C00B1DA72 /* launcher physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA07B1F85A82C00B1DA72 /* launcher physics component.cpp */; };
 		45DEA0821F85DD4900B1DA72 /* launcher animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0801F85DD4900B1DA72 /* launcher animation component.cpp */; };
 		45DEA0851F85F87600B1DA72 /* layer names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DEA0831F85F87600B1DA72 /* layer names.cpp */; };
-		45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3DB441F160B710058D36B /* libyaml-cpp.0.5.3.dylib */; };
 		45FA99151F330A1E00F8C639 /* player physics component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99131F330A1E00F8C639 /* player physics component.cpp */; };
 		45FA993F1F35476400F8C639 /* contact listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA993D1F35476400F8C639 /* contact listener.cpp */; };
 		45FA99451F36A12A00F8C639 /* register collision listeners.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45FA99431F36A12A00F8C639 /* register collision listeners.cpp */; };
@@ -514,6 +513,7 @@
 		45C545FA1F8F11E500217406 /* spawn component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "spawn component.cpp"; sourceTree = "<group>"; };
 		45C545FB1F8F11E500217406 /* spawn component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn component.hpp"; sourceTree = "<group>"; };
 		45C546011F8F19F400217406 /* spawn component list.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "spawn component list.hpp"; sourceTree = "<group>"; };
+		45C918F0202E838800AC4608 /* libyaml-cpp.0.6.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.6.0.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.6.1/lib/libyaml-cpp.0.6.0.dylib"; sourceTree = "<group>"; };
 		45C999261F8C438800EF5DF0 /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
 		45DE9FA01F6CAD4300B1DA72 /* player body.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "player body.yaml"; sourceTree = "<group>"; };
 		45DE9FA21F6CADA400B1DA72 /* physics file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "physics file.cpp"; sourceTree = "<group>"; };
@@ -600,7 +600,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45DEA01A1F7A335B00B1DA72 /* libSimpleton Engine.dylib in Frameworks */,
+				45C918F1202E838800AC4608 /* libyaml-cpp.0.6.0.dylib in Frameworks */,
 				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
 				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
 				4509F8EE1F5D247D00927A19 /* IOKit.framework in Frameworks */,
@@ -608,7 +608,6 @@
 				4509F8EA1F5D247100927A19 /* CoreVideo.framework in Frameworks */,
 				4509F8E81F5CE2AE00927A19 /* libnanovg.a in Frameworks */,
 				4592BAF61F11D71600D1640D /* libSDL2-2.0.0.dylib in Frameworks */,
-				45F3DB451F160B710058D36B /* libyaml-cpp.0.5.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1179,6 +1178,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45C918F0202E838800AC4608 /* libyaml-cpp.0.6.0.dylib */,
 				457619EE1F86FA9B00A6A792 /* liblua.a */,
 				4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */,
 				4509F8EF1F5D248500927A19 /* OpenGL.framework */,
@@ -1764,6 +1764,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					/usr/local/Cellar/glew/2.1.0/lib,
+					"/usr/local/Cellar/yaml-cpp/0.6.1/lib",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -1804,6 +1805,7 @@
 					"/usr/local/Cellar/sdl2_ttf/**",
 					"/usr/local/Cellar/yaml-cpp/**",
 					/usr/local/Cellar/glew/2.1.0/lib,
+					"/usr/local/Cellar/yaml-cpp/0.6.1/lib",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
