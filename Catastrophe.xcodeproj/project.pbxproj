@@ -33,6 +33,7 @@
 		451CC0FE1F9882660000E424 /* systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC0FD1F9882660000E424 /* systems.cpp */; };
 		451CC1041F988DF70000E424 /* tracking system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC1021F988DF60000E424 /* tracking system.cpp */; };
 		451CC1081F988E1B0000E424 /* tracking component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 451CC1061F988E1B0000E424 /* tracking component.cpp */; };
+		452B93A520954F0100B33561 /* libyaml-cpp.0.6.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B93A420954F0100B33561 /* libyaml-cpp.0.6.2.dylib */; };
 		452FF9BC1F639922003A98B1 /* Consolas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452FF9BB1F639922003A98B1 /* Consolas.ttf */; };
 		452FF9DC1F64C104003A98B1 /* animation component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C21F63D053003A98B1 /* animation component.cpp */; };
 		452FF9DD1F64C104003A98B1 /* animation system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 452FF9C51F63D05D003A98B1 /* animation system.cpp */; };
@@ -157,7 +158,6 @@
 		45BA38A41F9DC4A400BAEA1E /* missile ai component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45BA38A21F9DC4A400BAEA1E /* missile ai component.cpp */; };
 		45C545F91F8F0DCD00217406 /* spawn system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545F71F8F0DCD00217406 /* spawn system.cpp */; };
 		45C545FC1F8F11E500217406 /* spawn component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C545FA1F8F11E500217406 /* spawn component.cpp */; };
-		45C918F1202E838800AC4608 /* libyaml-cpp.0.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C918F0202E838800AC4608 /* libyaml-cpp.0.6.0.dylib */; };
 		45DE9FA11F6CAD4300B1DA72 /* player body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA01F6CAD4300B1DA72 /* player body.yaml */; };
 		45DE9FA41F6CADA400B1DA72 /* physics file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45DE9FA21F6CADA400B1DA72 /* physics file.cpp */; };
 		45DE9FA91F6D02EF00B1DA72 /* platform body.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 45DE9FA81F6D02EF00B1DA72 /* platform body.yaml */; };
@@ -259,6 +259,7 @@
 		451CC1031F988DF60000E424 /* tracking system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "tracking system.hpp"; sourceTree = "<group>"; };
 		451CC1061F988E1B0000E424 /* tracking component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "tracking component.cpp"; sourceTree = "<group>"; };
 		451CC1071F988E1B0000E424 /* tracking component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "tracking component.hpp"; sourceTree = "<group>"; };
+		452B93A420954F0100B33561 /* libyaml-cpp.0.6.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libyaml-cpp.0.6.2.dylib"; path = "../../../../../../../usr/local/Cellar/yaml-cpp/0.6.2/lib/libyaml-cpp.0.6.2.dylib"; sourceTree = "<group>"; };
 		452FF9BB1F639922003A98B1 /* Consolas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Consolas.ttf; sourceTree = "<group>"; };
 		452FF9C21F63D053003A98B1 /* animation component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "animation component.cpp"; sourceTree = "<group>"; };
 		452FF9C31F63D053003A98B1 /* animation component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "animation component.hpp"; sourceTree = "<group>"; };
@@ -600,7 +601,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45C918F1202E838800AC4608 /* libyaml-cpp.0.6.0.dylib in Frameworks */,
+				452B93A520954F0100B33561 /* libyaml-cpp.0.6.2.dylib in Frameworks */,
 				4509F8F31F5D326A00927A19 /* libGLEW.2.1.0.dylib in Frameworks */,
 				4509F8F01F5D248500927A19 /* OpenGL.framework in Frameworks */,
 				4509F8EE1F5D247D00927A19 /* IOKit.framework in Frameworks */,
@@ -1178,6 +1179,7 @@
 		4592BAF41F11D71500D1640D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				452B93A420954F0100B33561 /* libyaml-cpp.0.6.2.dylib */,
 				45C918F0202E838800AC4608 /* libyaml-cpp.0.6.0.dylib */,
 				457619EE1F86FA9B00A6A792 /* liblua.a */,
 				4509F8F21F5D326A00927A19 /* libGLEW.2.1.0.dylib */,
@@ -1382,7 +1384,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Indi Kernick";
 				TargetAttributes = {
 					4592BAD01F11B48F00D1640D = {
@@ -1645,6 +1647,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1652,6 +1655,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1701,6 +1705,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1708,6 +1713,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1749,23 +1755,11 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					/usr/local/include/NumDisplay/,
-					"/usr/local/Cellar/sdl2/**",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/include/Simpleton/**",
-					"/usr/local/Cellar/glew/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"/usr/local/Cellar/sdl2/**",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/yaml-cpp/**",
-					/usr/local/Cellar/glew/2.1.0/lib,
-					"/usr/local/Cellar/yaml-cpp/0.6.1/lib",
-				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-Wall",
@@ -1790,23 +1784,11 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					/usr/local/include/NumDisplay/,
-					"/usr/local/Cellar/sdl2/**",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/yaml-cpp/**",
 					"/usr/local/include/Simpleton/**",
-					"/usr/local/Cellar/glew/**",
 				);
 				INFOPLIST_FILE = Catastrophe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"/usr/local/Cellar/sdl2/**",
-					"/usr/local/Cellar/sdl2_ttf/**",
-					"/usr/local/Cellar/yaml-cpp/**",
-					/usr/local/Cellar/glew/2.1.0/lib,
-					"/usr/local/Cellar/yaml-cpp/0.6.1/lib",
-				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-Wall",
