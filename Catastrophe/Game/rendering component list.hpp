@@ -9,7 +9,7 @@
 #ifndef rendering_component_list_hpp
 #define rendering_component_list_hpp
 
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 #include "spikes rendering component.hpp"
 #include "player rendering component.hpp"
 #include "polygon rendering component.hpp"
@@ -25,7 +25,7 @@
 #include "ground 1 droid rendering component.hpp"
 #include "missile spawner rendering component.hpp"
 
-using RenderingComps = Utils::TypeList<
+using RenderingComps = List::Type<
   PolygonRenderingComponent,
   LauncherRenderingComponent,
   SpikesRenderingComponent,

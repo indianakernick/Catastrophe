@@ -15,12 +15,12 @@
 #include "turret physics component.hpp"
 #include "bullet physics component.hpp"
 #include "missile physics component.hpp"
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 #include "launcher physics component.hpp"
 #include "oscillating physics component.hpp"
 #include "ground droid physics component.hpp"
 
-using PhysicsComps = Utils::TypeList<
+using PhysicsComps = List::Type<
   PlayerPhysicsComponent,
   BodyPhysicsComponent,
   OscillatingPhysicsComponent,

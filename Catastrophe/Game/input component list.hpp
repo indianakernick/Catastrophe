@@ -10,9 +10,9 @@
 #define input_component_list_hpp
 
 #include "player input component.hpp"
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 
-using InputComps = Utils::TypeList<
+using InputComps = List::Type<
   PlayerInputComponent
 >;
 

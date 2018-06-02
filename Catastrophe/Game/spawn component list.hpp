@@ -10,12 +10,12 @@
 #define spawn_component_list_hpp
 
 #include "periodic spawn component.hpp"
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 #include "destroyable spawn component.hpp"
 #include "droid shoot spawn component.hpp"
 #include "player shoot spawn component.hpp"
 
-using SpawnComps = Utils::TypeList<
+using SpawnComps = List::Type<
   DestroyableSpawnComponent,
   PeriodicSpawnComponent,
   DroidShootSpawnComponent,

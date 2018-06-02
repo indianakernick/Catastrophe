@@ -10,7 +10,7 @@
 #define object_types_hpp
 
 #include <utility>
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/get.hpp>
 #include <Simpleton/Utils/instance limiter.hpp>
 
 template <typename Symbol>
@@ -53,7 +53,7 @@ namespace Symbol {
   #undef SYMBOL
 };
 
-using Symbols = Utils::TypeList<
+using Symbols = List::Type<
   #define SYMBOL(NAME) Symbol::NAME,
   #define LAST_SYMBOL(NAME) Symbol::NAME
   SYMBOLS
@@ -65,10 +65,10 @@ using Symbols = Utils::TypeList<
 
 inline void *getUserData(const std::string &symbolName) {
   try {
-    return Utils::getValueByName<void *, Symbols>("Symbol::" + symbolName, [] (auto t) {
-      return getUserData<UTILS_TYPE(t)>();
+    return List::getValueByName<void *, Symbols>("Symbol::" + symbolName, [] (auto t) {
+      return getUserData<LIST_TYPE(t)>();
     });
-  } catch (Utils::TypeNotFound &) {
+  } catch (List::TypeNotFound &) {
     throw std::runtime_error("Invalid symbol name");
   }
 }

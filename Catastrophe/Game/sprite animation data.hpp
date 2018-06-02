@@ -12,6 +12,7 @@
 #include <array>
 #include <vector>
 #include "animation data types.hpp"
+#include <Simpleton/Type List/pack.hpp>
 
 template <typename Tag>
 using Objects = std::vector<typename Tag::type>;
@@ -25,8 +26,8 @@ using Index = uint32_t;
 using Indicies = std::vector<Index>;
 constexpr Index NULL_INDEX = std::numeric_limits<Index>::max();
 
-using Frame = Utils::ListToTuple<Utils::TransformList<AnimDataTypes, GetObjects>>;
+using Frame = List::ToTuple<List::Transform<AnimDataTypes, GetObjects>>;
 
-using FrameSize = std::array<Index, Utils::listSize<AnimDataTypes>>;
+using FrameSize = std::array<Index, List::Size<AnimDataTypes>>;
 
 #endif

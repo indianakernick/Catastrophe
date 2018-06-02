@@ -10,6 +10,7 @@
 #define entity_hpp
 
 #include <memory>
+#include <string>
 #include "entity id.hpp"
 #include "components fwd.hpp"
 #include <Simpleton/Utils/type name.hpp>

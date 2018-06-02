@@ -12,6 +12,7 @@
 #include <string>
 #include <unordered_map>
 #include "sprite animation data.hpp"
+#include <Simpleton/Type List/pack.hpp>
 
 using TimeSec = float;
 
@@ -31,7 +32,7 @@ struct GetKeyframes {
 
 using MetaData = std::unordered_map<std::string, float>;
 
-using KeyframeGroups = Utils::ListToTuple<Utils::TransformList<AnimDataTypes, GetKeyframes>>;
+using KeyframeGroups = List::ToTuple<List::Transform<AnimDataTypes, GetKeyframes>>;
 
 struct Animation {
   TimeSec durationSec;

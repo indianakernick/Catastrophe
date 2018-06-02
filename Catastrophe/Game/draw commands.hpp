@@ -21,14 +21,14 @@ template <typename FunctionPtr, FunctionPtr FUNCTION, typename Types>
 class DrawCommandImpl final : public DrawCommand {
 public:
   void load(Utils::ParseString &string, const FrameSize frame, const Index numImages, Index &numPaints) override {
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &string, frame, numImages, &numPaints] (const auto i) mutable {
+    Utils::forEachIndex<List::Size<Types>>([this, &string, frame, numImages, &numPaints] (const auto i) mutable {
       string.skipWhitespace();
       if (string.empty()) {
         throw DrawCommandError("Not enough arguments");
       }
       
       constexpr size_t index = UTILS_VALUE(i);
-      using Type = Utils::AtIndex<Types, index>;
+      using Type = List::AtIndex<Types, index>;
       
       if constexpr (isTag<Type>) {
         if (isLiteral(string)) {
@@ -54,9 +54,9 @@ public:
   }
   
   void draw(NVGcontext *context, const Frame &frame, const Images &images, Paints &paints) override {
-    Utils::forEachIndex<Utils::listSize<Types>>([this, &frame, &images, &paints] (const auto i) {
+    Utils::forEachIndex<List::Size<Types>>([this, &frame, &images, &paints] (const auto i) {
       constexpr size_t index = UTILS_VALUE(i);
-      using Type = Utils::AtIndex<Types, index>;
+      using Type = List::AtIndex<Types, index>;
       
       if constexpr (std::is_same<Type, ImageType>::value) {
         std::get<index>(args) = images[indicies[index]]->id;
@@ -83,16 +83,16 @@ public:
       std::make_tuple(context),
       Utils::flatten(args)
     );
-    if constexpr (Utils::listContains<Types, PaintMakeType>) {
-      paints[indicies[Utils::indexOf<Types, PaintMakeType>]] = std::experimental::apply(FUNCTION, functionArgs);
+    if constexpr (List::Contains<Types, PaintMakeType>) {
+      paints[indicies[List::IndexOf<Types, PaintMakeType>]] = std::experimental::apply(FUNCTION, functionArgs);
     } else {
       std::experimental::apply(FUNCTION, functionArgs);
     }
   }
 
 private:
-  std::array<Index, Utils::listSize<Types>> indicies;
-  Utils::ListToTuple<Utils::TransformList<Types, GetArgType>> args;
+  std::array<Index, List::Size<Types>> indicies;
+  List::ToTuple<List::Transform<Types, GetArgType>> args;
 };
 
 class RepeatCommand : public NestedDrawCommand {
@@ -120,10 +120,10 @@ private:
 };
 
 #define COMMAND(NAME, FUN, ...)                                                 \
-  using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, Utils::TypeList<__VA_ARGS__>>
+  using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, List::Type<__VA_ARGS__>>
 
 #define COMMAND_NO_ARGS(NAME, FUN)                                              \
-  using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, Utils::EmptyList>
+  using NAME##Command = DrawCommandImpl<decltype(&FUN), &FUN, List::EmptyType>
 
 //render styles
 

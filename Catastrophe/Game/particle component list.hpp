@@ -9,10 +9,10 @@
 #ifndef particle_component_list_hpp
 #define particle_component_list_hpp
 
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 #include "exhaust particle component.hpp"
 
-using ParticleComps = Utils::TypeList<
+using ParticleComps = List::Type<
   ExhaustParticleComponent
 >;
 

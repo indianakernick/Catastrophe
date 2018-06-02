@@ -11,7 +11,9 @@
 
 #include <memory>
 #include "component names.hpp"
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/pack.hpp>
+#include <Simpleton/Type List/index.hpp>
+#include <Simpleton/Type List/transform.hpp>
 
 #define COMPONENT(NAME, I) class NAME##Component;
 #define LAST_COMPONENT(NAME, I) COMPONENT(NAME, I)
@@ -21,7 +23,7 @@ COMPONENTS
 
 #define COMPONENT(NAME, I) NAME##Component,
 #define LAST_COMPONENT(NAME, I) NAME##Component
-using ComponentList = Utils::TypeList<
+using ComponentList = List::Type<
   COMPONENTS
 >;
 #undef LAST_COMPONENT
@@ -32,9 +34,9 @@ struct SmartPointer {
   using type = std::shared_ptr<Comp>;
 };
 
-using ComponentTuple = Utils::ListToTuple<Utils::TransformList<ComponentList, SmartPointer>>;
+using ComponentTuple = List::ToTuple<List::Transform<ComponentList, SmartPointer>>;
 
 template <typename Comp>
-constexpr size_t COMPONENT_ID = Utils::indexOf<ComponentList, Comp>;
+constexpr size_t COMPONENT_ID = List::IndexOf<ComponentList, Comp>;
 
 #endif

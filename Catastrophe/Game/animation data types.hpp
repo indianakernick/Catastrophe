@@ -11,7 +11,9 @@
 
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
+#include <Simpleton/Type List/index.hpp>
+#include <Simpleton/Type List/transform.hpp>
 
 struct PointType {
   using type = glm::vec2;
@@ -23,18 +25,18 @@ struct ColorType {
   using type = glm::vec4;
 };
 
-using AnimDataTypes = Utils::TypeList<
+using AnimDataTypes = List::Type<
   PointType,
   ScalarType,
   ColorType
 >;
 
 template <typename Tag>
-constexpr size_t tagIndex = Utils::indexOf<AnimDataTypes, Tag>;
+constexpr size_t tagIndex = List::IndexOf<AnimDataTypes, Tag>;
 
 template <typename Tag>
-constexpr bool isTag = Utils::listContains<AnimDataTypes, Tag>;
+constexpr bool isTag = List::Contains<AnimDataTypes, Tag>;
 
-constexpr size_t numTags = Utils::listSize<AnimDataTypes>;
+constexpr size_t numTags = List::Size<AnimDataTypes>;
 
 #endif

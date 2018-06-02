@@ -16,24 +16,25 @@
 #include "physics component list.hpp"
 #include "particle component list.hpp"
 #include "tracking component list.hpp"
+#include <Simpleton/Type List/get.hpp>
 #include "animation component list.hpp"
 #include "rendering component list.hpp"
 
 #define COMPONENT(NAME, I) NAME##Comps,
 #define LAST_COMPONENT(NAME, I) NAME##Comps
-using AllComps = Utils::TypeList<
+using AllComps = List::Type<
   COMPONENTS
 >;
 #undef LAST_COMPONENT
 #undef COMPONENT
 
-template <typename List, typename Comp>
+template <typename CompList, typename Comp>
 std::shared_ptr<Comp> makeComp(const std::string_view name) {
   try {
-    return Utils::getValueByName<std::shared_ptr<Comp>, List>(name, [](auto t) {
-      return std::make_shared<UTILS_TYPE(t)>();
+    return List::getValueByName<std::shared_ptr<Comp>, CompList>(name, [](auto t) {
+      return std::make_shared<LIST_TYPE(t)>();
     });
-  } catch (Utils::TypeNotFound &) {
+  } catch (List::TypeNotFound &) {
     throw std::runtime_error("Invalid component name");
   }
 }
@@ -41,7 +42,7 @@ std::shared_ptr<Comp> makeComp(const std::string_view name) {
 template <typename Comp>
 std::shared_ptr<Comp> makeComp(const std::string_view name) {
   return makeComp<
-    Utils::AtIndex<AllComps, COMPONENT_ID<Comp>>,
+    List::AtIndex<AllComps, COMPONENT_ID<Comp>>,
     Comp
   >(name);
 }
@@ -55,17 +56,17 @@ COMPONENTS
 
 namespace {
   int checkComponents() {
-    Utils::forEachIndex<Utils::listSize<AllComps>>([] (auto i) {
+    Utils::forEachIndex<List::Size<AllComps>>([] (auto i) {
       constexpr size_t index = UTILS_VALUE(i);
-      using BaseComp = Utils::AtIndex<ComponentList, index>;
+      using BaseComp = List::AtIndex<ComponentList, index>;
       static_assert(std::is_same_v<BaseComp, typename BaseComp::ComponentBase>);
       static_assert(std::is_abstract_v<BaseComp>);
       static_assert(std::is_base_of_v<Component, BaseComp>);
-      static_assert(Utils::indexOf<ComponentList, BaseComp> == index);
+      static_assert(List::IndexOf<ComponentList, BaseComp> == index);
       
-      using CompList = Utils::AtIndex<AllComps, index>;
-      Utils::forEach<CompList>([] (auto t) {
-        using Comp = UTILS_TYPE(t);
+      using CompList = List::AtIndex<AllComps, index>;
+      List::forEach<CompList>([] (auto t) {
+        using Comp = LIST_TYPE(t);
         static_assert(std::is_base_of_v<BaseComp, Comp>);
         static_assert(!std::is_abstract_v<Comp>);//not necessarily final
       });

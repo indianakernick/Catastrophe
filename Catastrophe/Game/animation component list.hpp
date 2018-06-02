@@ -9,14 +9,14 @@
 #ifndef animation_component_list_hpp
 #define animation_component_list_hpp
 
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/type.hpp>
 #include "player animation component.hpp"
 #include "simple animation component.hpp"
 #include "turret animation component.hpp"
 #include "launcher animation component.hpp"
 #include "ground droid animation component.hpp"
 
-using AnimationComps = Utils::TypeList<
+using AnimationComps = List::Type<
   PlayerAnimationComponent,
   SimpleAnimationComponent,
   LauncherAnimationComponent,

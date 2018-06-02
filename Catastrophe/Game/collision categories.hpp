@@ -9,7 +9,8 @@
 #ifndef collision_categories_hpp
 #define collision_categories_hpp
 
-#include <Simpleton/Utils/type list.hpp>
+#include <Simpleton/Type List/get.hpp>
+#include <Simpleton/Type List/index.hpp>
 #include <Simpleton/Utils/instance limiter.hpp>
 
 #define CATEGORIES                                                              \
@@ -27,7 +28,7 @@ namespace Category {
   #undef CAT
 }
 
-using Categories = Utils::TypeList<
+using Categories = List::Type<
   #define CAT(NAME) Category::NAME,
   #define LAST_CAT(NAME) Category::NAME
   CATEGORIES
@@ -37,14 +38,14 @@ using Categories = Utils::TypeList<
 
 #undef CATEGORIES
 
-static_assert(Utils::listSize<Categories> <= 16);
+static_assert(List::Size<Categories> <= 16);
 
 inline uint16_t getCategoryBit(const std::string &categoryName) {
   try {
-    return Utils::getValueByName<uint16_t, Categories>("Category::" + categoryName, [] (auto t) {
-      return 1 << Utils::indexOf<Categories, UTILS_TYPE(t)>;
+    return List::getValueByName<uint16_t, Categories>("Category::" + categoryName, [] (auto t) {
+      return 1 << List::IndexOf<Categories, LIST_TYPE(t)>;
     });
-  } catch (Utils::TypeNotFound &) {
+  } catch (List::TypeNotFound &) {
     throw std::runtime_error("Invalid category name");
   }
 }
