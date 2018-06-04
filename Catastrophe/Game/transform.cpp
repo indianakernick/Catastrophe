@@ -8,6 +8,7 @@
 
 #include "transform.hpp"
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/matrix_transform_2d.hpp>
 
 Transform::Transform()
@@ -24,10 +25,18 @@ Transform::Transform(
     scale(scale),
     rotation(rotation) {}
 
+namespace {
+  constexpr glm::mat3 I {
+    {1, 0, 0},
+    {0, 1, 0},
+    {0, 0, 1}
+  };
+}
+
 glm::mat2 Transform::getMat2() const {
-  return glm::scale(glm::rotate(glm::mat3(), rotation), scale);
+  return glm::scale(glm::rotate(I, rotation), scale);
 }
 
 glm::mat3 Transform::getMat3() const {
-  return glm::scale(glm::rotate(glm::translate({}, pos), rotation), scale);
+  return glm::scale(glm::rotate(glm::translate(I, pos), rotation), scale);
 }

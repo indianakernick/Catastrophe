@@ -10,6 +10,7 @@
 
 #include <cmath>
 #include <algorithm>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/norm.hpp>
 
 glm::vec2 applyAcc(const glm::vec2 acc, const glm::vec2 vel, const float delta) {

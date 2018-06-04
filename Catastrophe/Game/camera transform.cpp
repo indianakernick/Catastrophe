@@ -10,6 +10,7 @@
 
 #include "matrix mul.hpp"
 #include "camera props.hpp"
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/matrix_transform_2d.hpp>
 
 glm::mat3 CameraTransform::toPixels() const {
@@ -25,10 +26,15 @@ bool CameraTransform::visibleMeters(const AABB aabbMeters) const {
 }
 
 void CameraTransform::updateMatricies(const CameraProps props) {
+  static constexpr glm::mat3 I {
+    {1, 0, 0},
+    {0, 1, 0},
+    {0, 0, 1}
+  };
   toPixelsMat = glm::translate(
     glm::scale(
       glm::translate(
-        {},
+        I,
         static_cast<glm::vec2>(props.windowSize) / 2.0f
       ),
       {props.pixelsPerMeter, -props.pixelsPerMeter}

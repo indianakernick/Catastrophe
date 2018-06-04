@@ -9,6 +9,7 @@
 #include "camera pos.hpp"
 
 #include "camera props.hpp"
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/norm.hpp>
 #include "camera constants.hpp"
 #include <Simpleton/Math/scale.hpp>

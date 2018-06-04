@@ -15,6 +15,7 @@
 #include "window constants.hpp"
 #include "framebuffer to png.hpp"
 #include <Simpleton/SDL/paths.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/matrix_transform_2d.hpp>
 
 TestApp::TestApp(const char *spriteFile, const char *animName)
