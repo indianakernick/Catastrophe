@@ -62,7 +62,7 @@ void TestApp::render(const float delta) {
   glm::mat3 mat = glm::translate(
     glm::scale(
       glm::translate(
-        {},
+        {1,0,0,0,1,0,0,0,1},
         glm::vec2(0.0f, DEFAULT_WINDOW_PIXEL_SIZE.y)
       ),
       glm::vec2(
