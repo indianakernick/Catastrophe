@@ -232,12 +232,12 @@ namespace {
     return images;
   }
   
-  std::pair<std::string, Utils::ParseString::LineCol> readCommands(const YAML::Node &commandsNode) {
+  std::pair<std::string, Utils::LineCol<>> readCommands(const YAML::Node &commandsNode) {
     if (!commandsNode) {
       return {};
     }
     
-    Utils::ParseString::LineCol commandStrStart;
+    Utils::LineCol<> commandStrStart;
     const YAML::Mark mark = commandsNode.Mark();
     commandStrStart.moveTo(mark.line, mark.column);
     //Assumes commandsNode is a block string and is indented by 2 spaces

@@ -19,7 +19,7 @@ using KeyBindings = std::unordered_map<std::string, SDL_Scancode>;
 
 class InputFileError final : std::runtime_error {
 public:
-  InputFileError(const std::string &, Utils::ParseString::LineCol, const char *);
+  InputFileError(const std::string &, Utils::LineCol<>, const char *);
 };
 
 KeyBindings loadInputs(const std::string &);

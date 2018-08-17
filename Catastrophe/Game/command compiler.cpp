@@ -90,7 +90,7 @@ std::unique_ptr<RootDrawCommand> compileDrawCommands(
   const FrameSize frameSize,
   const Index numImages,
   Index &numPaints,
-  const Utils::ParseString::LineCol startPos
+  const Utils::LineCol<> startPos
 ) {
   auto root = std::make_unique<RootDrawCommand>();
   Utils::ParseString parseStr(string);

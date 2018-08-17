@@ -15,7 +15,7 @@
 
 InputFileError::InputFileError(
   const std::string &fileName,
-  const Utils::ParseString::LineCol lineCol,
+  const Utils::LineCol<> lineCol,
   const char *message
 ) : std::runtime_error(
       fileName
@@ -40,7 +40,7 @@ KeyBindings loadInputs(const std::string &fileName) {
       break;
     }
     
-    const Utils::ParseString::LineCol lineColBeforeKey = parseStr.lineCol();
+    const Utils::LineCol<> lineColBeforeKey = parseStr.lineCol();
     size_t keySize = parseStr.copyUntil(key.data<char>(), key.size(), ':');
     if (keySize == key.size()) {
       throw InputFileError(fileName, lineColBeforeKey, "Name string is too long");
@@ -56,7 +56,7 @@ KeyBindings loadInputs(const std::string &fileName) {
     }
     
     parseStr.skipWhitespace();
-    const Utils::ParseString::LineCol lineColBeforeVal = parseStr.lineCol();
+    const Utils::LineCol<> lineColBeforeVal = parseStr.lineCol();
     const size_t valSize = parseStr.copyUntilWhitespace(val.data<char>(), val.size());
     if (valSize == val.size()) {
       throw InputFileError(fileName, lineColBeforeVal, "Scancode string is too long");
