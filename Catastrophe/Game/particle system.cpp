@@ -31,7 +31,7 @@ void ParticleSystem::quit() {
   assert(renderingMan);
   for (auto &layer : layers) {
     for (auto &pair : layer->comps) {
-      particles->free(pair.second.firstParticle);
+      particles->dealloc(pair.second.firstParticle);
     }
     layer->kill();
   }
@@ -62,7 +62,7 @@ void ParticleSystem::rem(const EntityID id) {
     auto &comps = layer->comps;
     auto iter = comps.find(id);
     if (iter != comps.end()) {
-      particles->free(iter->second.firstParticle);
+      particles->dealloc(iter->second.firstParticle);
       comps.erase(iter);
     }
   }

@@ -26,7 +26,7 @@ bool CameraTransform::visibleMeters(const AABB aabbMeters) const {
 }
 
 void CameraTransform::updateMatricies(const CameraProps props) {
-  static constexpr glm::mat3 I {
+  static const glm::mat3 I {
     {1, 0, 0},
     {0, 1, 0},
     {0, 0, 1}

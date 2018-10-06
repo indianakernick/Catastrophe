@@ -1749,6 +1749,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					GLM_FORCE_SILENT_WARNINGS,
 					"DEBUG=1",
 					"$(inherited)",
 					ENABLE_PROFILER,
@@ -1782,6 +1783,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = GLM_FORCE_SILENT_WARNINGS;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					"/usr/local/include/Simpleton/**",
